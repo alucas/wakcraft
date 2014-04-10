@@ -1,5 +1,6 @@
 package heero.wakcraft.block;
 
+import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.reference.References;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import net.minecraft.block.Block;
@@ -7,7 +8,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockEnchantmentTable;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

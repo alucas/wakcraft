@@ -1,5 +1,6 @@
 package heero.wakcraft.block;
 
+import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.reference.References;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
 
@@ -9,7 +10,6 @@ import java.util.Random;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

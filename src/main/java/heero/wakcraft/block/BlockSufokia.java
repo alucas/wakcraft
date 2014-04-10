@@ -1,5 +1,6 @@
 package heero.wakcraft.block;
 
+import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.reference.References;
 import heero.wakcraft.renderer.RenderPillarBlock;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
@@ -12,7 +13,6 @@ import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
