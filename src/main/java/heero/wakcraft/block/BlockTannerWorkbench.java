@@ -4,9 +4,7 @@ import heero.wakcraft.Wakcraft;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockTannerWorkbench extends Block {

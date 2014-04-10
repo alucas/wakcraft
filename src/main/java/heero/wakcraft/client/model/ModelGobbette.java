@@ -8,7 +8,6 @@ package heero.wakcraft.client.model;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 
 public class ModelGobbette extends ModelGobball {
 	ModelRenderer bunchesLeft1;

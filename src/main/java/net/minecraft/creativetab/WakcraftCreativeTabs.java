@@ -1,6 +1,5 @@
 package net.minecraft.creativetab;
 
-import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

@@ -1,10 +1,10 @@
 package heero.wakcraft;
 
-import heero.wakcraft.entity.monster.Gobbette;
-import heero.wakcraft.entity.monster.WhiteGobbly;
 import heero.wakcraft.entity.monster.BlackGobbly;
 import heero.wakcraft.entity.monster.Gobball;
 import heero.wakcraft.entity.monster.GobballWC;
+import heero.wakcraft.entity.monster.Gobbette;
+import heero.wakcraft.entity.monster.WhiteGobbly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;

@@ -12,3 +12,7 @@ item.WoollyKey.name=Woolly Key
 tile.tanner_workbench.name=Tanner Workbench
 tile.dragoexpress.name=Drago-Express
 tile.phoenix.name=Phoenix
+tile.Sufokia.Sun.name=Sufokia Sun Block
+tile.Sufokia.Wave1.name=Sufokia Wave 1 Block
+tile.Sufokia.Wave2.name=Sufokia Wave 2 Block
+tile.Sufokia.Base.name=Sufokia Block
