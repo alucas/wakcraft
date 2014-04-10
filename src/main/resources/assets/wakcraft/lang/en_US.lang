@@ -1,10 +1,14 @@
-entity.Bouftou.name=Gobball
-entity.Bouffette.name=Gobbette
-entity.BouftonBlanc.name=White Gobbly
-entity.BouftonNoir.name=Black Gobbly
-entity.BouftouChefDeGuerre.name=Gobball War Chief
+entity.Gobball.name=Gobball
+entity.Gobbette.name=Gobbette
+entity.WhiteGobbly.name=White Gobbly
+entity.BlackGobbly.name=Black Gobbly
+entity.GobballWarChief.name=Gobball War Chief
 
-item.LaineDeBouftou.name=Gobball Wool
-item.CuirDeBouftou.name=Gobball Skin
-item.CorneDeBouftou.name=Gobball Horn
-item.ClefLaineuse.name=Woolly Key
+item.GobballWool.name=Gobball Wool
+item.GobballSkin.name=Gobball Skin
+item.GobballHorn.name=Gobball Horn
+item.WoollyKey.name=Woolly Key
+
+tile.tanner_workbench.name=Tanner Workbench
+tile.dragoexpress.name=Drago-Express
+tile.phoenix.name=Phoenix

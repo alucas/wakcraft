@@ -1,16 +1,22 @@
 package heero.wakcraft;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import heero.wakcraft.entity.item.ClefLaineuse;
-import heero.wakcraft.entity.item.CorneDeBouftou;
-import heero.wakcraft.entity.item.CuirDeBouftou;
-import heero.wakcraft.entity.item.LaineDeBouftou;
 import heero.wakcraft.reference.References;
+import net.minecraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class WakcraftItems extends Items {
-	public final static Item LaineDeBouftou = (Item) Item.itemRegistry.getObject(References.MODID.toLowerCase() + ":LaineDebouftou");
-	public final static Item CuirDeBouftou = (Item) Item.itemRegistry.getObject(References.MODID.toLowerCase() + ":CuirDeBouftou");
-	public final static Item CorneDeBouftou = (Item) Item.itemRegistry.getObject(References.MODID.toLowerCase() + ":CorneDeBouftou");
-	public final static Item ClefLaineuse = (Item) Item.itemRegistry.getObject(References.MODID.toLowerCase() + ":ClefLaineuse");
+	public final static Item gobballWool = (Item) Item.itemRegistry.getObject(References.MODID.toLowerCase() + ":GobballWool");
+	public final static Item gobballSkin = (Item) Item.itemRegistry.getObject(References.MODID.toLowerCase() + ":GobballSkin");
+	public final static Item gobballHorn = (Item) Item.itemRegistry.getObject(References.MODID.toLowerCase() + ":GobballHorn");
+	public final static Item woollyKey = (Item) Item.itemRegistry.getObject(References.MODID.toLowerCase() + ":WoollyKey");
+	
+	public static void registerItems() {
+		GameRegistry.registerItem((new Item()).setCreativeTab(WakcraftCreativeTabs.tabMisc).setUnlocalizedName("GobballWool").setTextureName(References.MODID.toLowerCase() + ":gobballwool"), "GobballWool");
+		GameRegistry.registerItem((new Item()).setCreativeTab(WakcraftCreativeTabs.tabMisc).setUnlocalizedName("GobballSkin").setTextureName(References.MODID.toLowerCase() + ":gobballskin"), "GobballSkin");
+		GameRegistry.registerItem((new Item()).setCreativeTab(WakcraftCreativeTabs.tabMisc).setUnlocalizedName("GobballHorn").setTextureName(References.MODID.toLowerCase() + ":gobballhorn"), "GobballHorn");
+		GameRegistry.registerItem(new ClefLaineuse(), "WoollyKey");
+	}
 }

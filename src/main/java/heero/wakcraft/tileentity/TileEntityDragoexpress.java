@@ -1,0 +1,26 @@
+package heero.wakcraft.tileentity;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class TileEntityDragoexpress extends TileEntity {
+    /**
+     * Return an {@link AxisAlignedBB} that controls the visible scope of a {@link TileEntitySpecialRenderer} associated with this {@link TileEntity}
+     * Defaults to the collision bounding box {@link Block#getCollisionBoundingBoxFromPool(World, int, int, int)} associated with the block
+     * at this location.
+     *
+     * @return an appropriately size {@link AxisAlignedBB} for the {@link TileEntity}
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getRenderBoundingBox()
+    {
+    	return AxisAlignedBB.getAABBPool().getAABB(xCoord - 6, yCoord, zCoord - 6, xCoord + 6, yCoord + 2, zCoord + 6);
+    }
+}
