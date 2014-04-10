@@ -44,8 +44,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
 public class BlackGobbly extends Gobball {
-	private static final String __OBFID = "CL_00001648";
-
 	public BlackGobbly(World par1World) {
 		super(par1World);
 	}
@@ -57,7 +55,7 @@ public class BlackGobbly extends Gobball {
 	@SideOnly(Side.CLIENT)
 	public static class RenderBouftonNoir extends RenderLiving {
 		private static final ResourceLocation bouftonNoir = new ResourceLocation(
-				References.MODID, "/textures/mobs/bouftonnoir.png");
+				References.MODID, "textures/mobs/bouftonnoir.png");
 
 		public RenderBouftonNoir(ModelBase par1ModelBase, float par2) {
 			super(par1ModelBase, par2);

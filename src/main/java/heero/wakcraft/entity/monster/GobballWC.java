@@ -44,8 +44,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
 public class GobballWC extends Gobball {
-	private static final String __OBFID = "CL_00001648";
-
 	public GobballWC(World par1World) {
 		super(par1World);
 	}
@@ -57,7 +55,7 @@ public class GobballWC extends Gobball {
 	@SideOnly(Side.CLIENT)
 	public static class RenderBouftouCG extends RenderLiving {
 		private static final ResourceLocation bouftouCG = new ResourceLocation(
-				References.MODID, "/textures/mobs/bouftoucg.png");
+				References.MODID, "textures/mobs/bouftoucg.png");
 
 		public RenderBouftouCG(ModelBase par1ModelBase, float par2) {
 			super(par1ModelBase, par2);
