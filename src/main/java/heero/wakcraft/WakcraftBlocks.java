@@ -10,12 +10,12 @@ import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class WakcraftBlocks extends Blocks {
-	public static final Block tannerWorkbench = (Block) Block.blockRegistry.getObject("tanner_workbench");
+	public static Block tannerWorkbench, dragoexpress, phoenix, sufokia;
 
 	public static void registerBlocks() {
-		GameRegistry.registerBlock(new BlockTannerWorkbench().setHardness(2.5F).setBlockName("tanner_workbench").setBlockTextureName("crafting_table"),	"tanner_workbench");
-		GameRegistry.registerBlock(new BlockDragoexpress(), "dragoexpress");
-		GameRegistry.registerBlock(new BlockPhoenix(), "phoenix");
-		GameRegistry.registerBlock(new BlockSufokia(), ItemBlockSufokia.class, "sufokia");
+		GameRegistry.registerBlock(tannerWorkbench = (new BlockTannerWorkbench().setHardness(2.5F).setBlockName("tanner_workbench").setBlockTextureName("crafting_table")),	"tanner_workbench");
+		GameRegistry.registerBlock(dragoexpress = (new BlockDragoexpress()), "dragoexpress");
+		GameRegistry.registerBlock(phoenix = (new BlockPhoenix()), "phoenix");
+		GameRegistry.registerBlock(sufokia = (new BlockSufokia()), ItemBlockSufokia.class, "sufokia");
 	}
 }
