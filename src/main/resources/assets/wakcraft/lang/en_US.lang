@@ -9,7 +9,7 @@ item.GobballSkin.name=Gobball Skin
 item.GobballHorn.name=Gobball Horn
 item.WoollyKey.name=Woolly Key
 
-tile.tanner_workbench.name=Tanner Workbench
+tile.tannerWorkbench.name=Tanner Workbench
 tile.dragoexpress.name=Drago-Express
 tile.phoenix.name=Phoenix
 tile.Sufokia.Sun.name=Sufokia Sun Block
