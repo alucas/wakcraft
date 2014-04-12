@@ -10,6 +10,7 @@ import heero.wakcraft.entity.monster.GobballWC;
 import heero.wakcraft.entity.monster.Gobbette;
 import heero.wakcraft.entity.monster.WhiteGobbly;
 import heero.wakcraft.renderer.RenderDragoexpress;
+import heero.wakcraft.renderer.RenderOreLvl1;
 import heero.wakcraft.renderer.RenderPhoenix;
 import heero.wakcraft.renderer.RenderPillarBlock;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
@@ -31,6 +32,7 @@ public class CombinedClientProxy extends CommonProxy{
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RenderPhoenix());
     	
     	RenderingRegistry.registerBlockHandler(new RenderPillarBlock(RenderingRegistry.getNextAvailableRenderId()));
+    	RenderingRegistry.registerBlockHandler(new RenderOreLvl1(RenderingRegistry.getNextAvailableRenderId()));
     }
 
 }

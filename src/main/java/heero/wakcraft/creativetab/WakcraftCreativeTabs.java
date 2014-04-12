@@ -27,6 +27,14 @@ public class WakcraftCreativeTabs {
 			return Item.getItemFromBlock(WakcraftBlocks.dragoexpress);
 		}
 	};
+	public static final CreativeTabs tabOreBlock = new CreativeTabs(
+			"oreBlocks") {
+		@Override
+		@SideOnly(Side.CLIENT)
+		public Item getTabIconItem() {
+			return Item.getItemFromBlock(WakcraftBlocks.oreLvl1);
+		}
+	};
 	public static final CreativeTabs tabResource = new CreativeTabs("resources") {
 		@SideOnly(Side.CLIENT)
 		@Override
