@@ -31,7 +31,7 @@ public class BlockPhoenix extends BlockContainer {
 		
 		setBlockTextureName(References.MODID.toLowerCase() + ":phoenix");
 		
-		setCreativeTab(WakcraftCreativeTabs.tabMisc);
+		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 		setBlockName("phoenix");
 		setLightOpacity(0);
 	}

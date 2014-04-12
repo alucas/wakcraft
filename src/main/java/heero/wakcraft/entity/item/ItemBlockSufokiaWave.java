@@ -4,9 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockSufokia extends ItemBlock {
+public class ItemBlockSufokiaWave extends ItemBlock {
 
-	public ItemBlockSufokia(Block block) {
+	public ItemBlockSufokiaWave(Block block) {
 		super(block);
 		setHasSubtypes(true);
 	}
@@ -14,14 +14,10 @@ public class ItemBlockSufokia extends ItemBlock {
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		switch(itemstack.getItemDamage()){
-		case 2:
-			return getUnlocalizedName() + ".Sun";
 		case 4:
-			return getUnlocalizedName() + ".Wave1";
-		case 8:
-			return getUnlocalizedName() + ".Wave2";
+			return getUnlocalizedName() + "2";
 		default:
-			return getUnlocalizedName() + ".Base";
+			return getUnlocalizedName() + "1";
 		}
 	}
 
@@ -32,6 +28,4 @@ public class ItemBlockSufokia extends ItemBlock {
 	public int getMetadata(int damageValue) {
 		return damageValue;
 	}
-	
-	
 }

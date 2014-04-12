@@ -8,7 +8,7 @@ public class ClefLaineuse extends Item {
 	public ClefLaineuse() {
 		super();
 
-		setCreativeTab(WakcraftCreativeTabs.tabMisc);
+		setCreativeTab(WakcraftCreativeTabs.tabResource);
 		setUnlocalizedName("WoollyKey");
 		setTextureName(References.MODID.toLowerCase() + ":woollykey");
 	}

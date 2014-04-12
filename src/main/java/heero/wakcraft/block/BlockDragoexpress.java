@@ -18,7 +18,7 @@ public class BlockDragoexpress extends BlockContainer {
 		super(Material.wood);
 		
 		setBlockTextureName(References.MODID.toLowerCase() + ":dragoexpress");
-		setCreativeTab(WakcraftCreativeTabs.tabMisc);
+		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 		setBlockName("dragoexpress");
 		setLightOpacity(0);
 	}

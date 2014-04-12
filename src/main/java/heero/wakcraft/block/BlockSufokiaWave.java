@@ -16,20 +16,17 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSufokia extends BlockPillar {
-	protected IIcon blockIcon1;
-	protected IIcon blockIcon2;
-	protected IIcon blockIconSun;
+public class BlockSufokiaWave extends BlockPillar {
 	protected IIcon blockIconWave1;
 	protected IIcon blockIconWave2;
 	
-	public BlockSufokia() {
+	public BlockSufokiaWave() {
 		super(Material.sand);
 		
-		setBlockTextureName(References.MODID.toLowerCase() + ":sufokia2");
+		setBlockTextureName(References.MODID.toLowerCase() + ":sufokiaWave1");
 		
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
-		setBlockName("Sufokia");
+		setBlockName("SufokiaWave");
 	}
 	
     /**
@@ -40,20 +37,15 @@ public class BlockSufokia extends BlockPillar {
     public void getSubBlocks(Item item, CreativeTabs tab, List subItems)
     {
         subItems.add(new ItemStack(item, 1, 0));
-        subItems.add(new ItemStack(item, 1, 2));
         subItems.add(new ItemStack(item, 1, 4));
-        subItems.add(new ItemStack(item, 1, 8));
     }
 	
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister registerer)
     {
-        this.blockIcon1 = registerer.registerIcon(References.MODID.toLowerCase() + ":sufokia1");
-        this.blockIcon2 = registerer.registerIcon(References.MODID.toLowerCase() + ":sufokia2");
         this.blockIconWave1 = registerer.registerIcon(References.MODID.toLowerCase() + ":sufokiaWave1");
         this.blockIconWave2 = registerer.registerIcon(References.MODID.toLowerCase() + ":sufokiaWave2");
-        this.blockIconSun = registerer.registerIcon(References.MODID.toLowerCase() + ":sufokiaSun");
     }
     
     /**
@@ -63,22 +55,10 @@ public class BlockSufokia extends BlockPillar {
     @Override
     public IIcon getIcon(int side, int meta)
     {
-    	if (meta == 0) return blockIcon1;
-    	else if (meta == 1) return blockIcon2;
-    	else if (meta == 2) return blockIconSun;
-    	else if ((meta & 12) == 4) return blockIconWave1; // 4, 5, 6, 7
-    	else if ((meta & 12) == 8) return blockIconWave2; // 8, 9, 10, 11
+    	if ((meta & 12) == 0) return blockIconWave1; // 0, 1, 2, 3
+    	else if ((meta & 12) == 4) return blockIconWave2; // 4, 5, 6, 7
     	
-        return blockIcon1;
-    }
-    
-    /**
-     * Determines the damage on the item the block drops. Used in cloth and wood.
-     */
-    @Override
-    public int damageDropped(int metadata)
-    {
-        return metadata;
+        return blockIconWave1;
     }
     
 	/**
@@ -89,18 +69,10 @@ public class BlockSufokia extends BlockPillar {
     {
 		int metadata = itemBlock.getItemDamage();
 		
-		if (metadata == 0) {
-			world.setBlockMetadataWithNotify(x, y, z, (int) (Math.random() * 2), 2);
-			return;
-		} else if (metadata == 2) {
-			world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
-			return;
-		} else if ((metadata & 12) == 4) { // 4, 5, 6, 7
-			world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
-		} else if ((metadata & 12) == 8) { // 8, 9, 10, 11
-			world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
+		if ((metadata & 12) == 4) { // 4, 5, 6, 7
+			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
 		}
 		
-		setOrientationFromYaw(world, x, y, z, player.rotationYaw);
+		super.onBlockPlacedBy(world, x, y, z, player, itemBlock);
 	}
 }

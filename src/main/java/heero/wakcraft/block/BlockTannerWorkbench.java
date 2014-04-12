@@ -11,7 +11,7 @@ public class BlockTannerWorkbench extends Block {
 
 	public BlockTannerWorkbench() {
 		super(Material.wood);
-        setCreativeTab(WakcraftCreativeTabs.tabMisc);
+        setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 	}
 
 	public boolean onBlockActivated(World worldObj, int blockXPos,

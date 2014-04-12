@@ -3,6 +3,8 @@ package heero.wakcraft.block;
 import heero.wakcraft.renderer.RenderPillarBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -29,6 +31,26 @@ public abstract class BlockPillar extends Block {
     {
         return RenderPillarBlock.renderId;
     }
+    
+    /**
+     * Determines the damage on the item the block drops. Used in cloth and wood.
+     */
+    @Override
+    public int damageDropped(int metadata)
+    {
+        return metadata & 12;
+    }
+    
+	/**
+     * Called when the block is placed in the world.
+     */
+	@Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemBlock)
+    {
+		super.onBlockPlacedBy(world, x, y, z, player, itemBlock);
+		
+		setOrientationFromYaw(world, x, y, z, player.rotationYaw);
+	}
     
     public static void setOrientationFromYaw(World world, int x, int y, int z, float yaw){
         int l = MathHelper.floor_double((double)(yaw * 4.0F / 360.0F) + 0.5D) & 3;
