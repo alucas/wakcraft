@@ -17,6 +17,14 @@ tile.SufokiaStair.name=Sufokia Stair Block
 tile.SufokiaWave1.name=Sufokia Wave 1 Block
 tile.SufokiaWave2.name=Sufokia Wave 2 Block
 tile.SufokiaColor.name=Sufokia Block
+tile.OrePrimitiveIron.name=Primitive Iron
+tile.OreFlatTin.name=Flat Tin
+tile.OreFinestSeaSalt.name=Finest Sea Salt
+tile.OreClassicCoal.name=Classic Coal
+tile.OreBrightCopper.name=Bright Copper
+tile.OreShadowyCobalt.name=Shadowy Cobalt
+tile.OreBronzeNugget.name=Bronze Nugget
+tile.OreShardOfFlint.name=Shard Of Flint
 
 itemGroup.specialBlocks=Special Blocks
 itemGroup.resources=Resources
