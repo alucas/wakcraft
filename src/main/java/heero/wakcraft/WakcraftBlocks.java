@@ -24,7 +24,7 @@ public class WakcraftBlocks extends Blocks {
 		GameRegistry.registerBlock(sufokiaColor = (new BlockSufokiaColor()), "blockSufokiaColor");
 		GameRegistry.registerBlock(sufokiaSun = (new BlockSufokiaSun()), "blockSufokiaSunBlock");
 		GameRegistry.registerBlock(sufokiaWave = (new BlockSufokiaWave()), ItemBlockSufokiaWave.class, "blockSufokiaWaveBlock");
-		GameRegistry.registerBlock(sufokiaStair = ((new BlockStairs2(sufokiaColor, 0)).setBlockName("sufokiaStair")), "blockSufokiaStair");
+		GameRegistry.registerBlock(sufokiaStair = ((new BlockStairs2(sufokiaColor, 0)).setBlockName("SufokiaStair")), "blockSufokiaStair");
 		GameRegistry.registerBlock(oreLvl1 = (new BlockOreLvl1()), ItemBlockOreLvl1.class, "oreLvl1Block");
 		
 		// Special blocks
