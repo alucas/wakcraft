@@ -51,15 +51,20 @@ public class BlockSufokiaWave extends BlockPillar {
     /**
      * Gets the block's texture. Args: side, meta
      */
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIcon(int side, int meta)
-    {
-    	if ((meta & 12) == 0) return blockIconWave1; // 0, 1, 2, 3
-    	else if ((meta & 12) == 4) return blockIconWave2; // 4, 5, 6, 7
-    	
-        return blockIconWave1;
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public IIcon getTopIcon(int side, int metadata) {
+		if ((metadata & 12) == 0) return blockIconWave1; // 0, 1, 2, 3
+		else if ((metadata & 12) == 4) return blockIconWave2; // 4, 5, 6, 7
+
+		return blockIconWave1;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public IIcon getSideIcon(int side, int metadata) {
+		return getTopIcon(side, metadata);
+	}
     
 	/**
      * Called when the block is placed in the world.

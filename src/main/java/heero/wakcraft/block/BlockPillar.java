@@ -1,10 +1,13 @@
 package heero.wakcraft.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import heero.wakcraft.renderer.RenderPillarBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -39,6 +42,33 @@ public abstract class BlockPillar extends Block {
     public int damageDropped(int metadata)
     {
         return metadata & 12;
+    }
+    
+    /**
+     * Gets the block's texture. Args: side, meta
+     */
+    @SideOnly(Side.CLIENT)
+    @Override
+    public IIcon getIcon(int side, int metadata)
+    {
+        switch(side) {
+        case 0:
+        case 1:
+        	return getTopIcon(side, metadata);
+        default:
+        	return getSideIcon(side, metadata);
+        }
+    }
+    
+	@SideOnly(Side.CLIENT)
+    public abstract IIcon getTopIcon(int side, int metadata);
+    
+	@SideOnly(Side.CLIENT)
+    public abstract IIcon getSideIcon(int side, int metadata);
+    
+	@SideOnly(Side.CLIENT)
+    public IIcon getCornerIcon(int side, int metadata) {
+    	return getTopIcon(side, metadata);
     }
     
 	/**
