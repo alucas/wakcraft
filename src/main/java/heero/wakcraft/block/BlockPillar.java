@@ -70,6 +70,21 @@ public abstract class BlockPillar extends Block {
     public IIcon getCornerIcon(int side, int metadata) {
     	return getTopIcon(side, metadata);
     }
+	
+	@SideOnly(Side.CLIENT)
+	public boolean useCornerIcon() {
+		return false;
+	}
+	
+	@SideOnly(Side.CLIENT)
+    public IIcon getCenterIcon(int side, int metadata) {
+    	return getTopIcon(side, metadata);
+    }
+	
+	@SideOnly(Side.CLIENT)
+	public boolean useCenterIcon() {
+		return false;
+	}
     
 	/**
      * Called when the block is placed in the world.
