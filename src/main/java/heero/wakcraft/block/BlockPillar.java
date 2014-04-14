@@ -97,14 +97,14 @@ public abstract class BlockPillar extends Block {
 		boolean t3 = Block.getIdFromBlock(world.getBlock(x - 1, y, z)) == blockId;
 		boolean t4 = Block.getIdFromBlock(world.getBlock(x, y, z - 1)) == blockId;
 
-		int neighbor = (t1 ? 0b1 : 0) + (t2 ? 0b10 : 0) + (t3 ? 0b100 : 0)
-				+ (t4 ? 0b1000 : 0);
+		int neighbor = (t1 ? 1 : 0) + (t2 ? 2 : 0) + (t3 ? 4 : 0)
+				+ (t4 ? 8 : 0);
 
-		if (neighbor == 0b1111) {
+		if (neighbor == 15) {
 			isCenter = true;
 			isCorner = false;
-		} else if (neighbor == 0b1100 || neighbor == 0b1001
-				|| neighbor == 0b0011 || neighbor == 0b0110) {
+		} else if (neighbor == 12 || neighbor == 9
+				|| neighbor == 03 || neighbor == 6) {
 			isCenter = false;
 			isCorner = true;
 		} else {
