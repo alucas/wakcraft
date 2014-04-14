@@ -20,6 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockOre1 extends Block {
 	public static IIcon iconTop, iconBottom;
+	protected float[][] colors = new float[][]{{0.63F, 0.66F, 0.70F}, {0.63F, 0.66F, 0.70F}, {0.92F, 0.95F, 0.94F}, {0.2F, 0.2F, 0.2F}, {0.93F, 0.78F, 0.27F}, {0.55F, 0.65F, 0.65F}, {0.88F, 0.8F, 0.56F}, {0.88F, 0.8F, 0.56F}};
 	
 	public BlockOre1() {
 		super(Material.rock);
@@ -31,23 +32,21 @@ public class BlockOre1 extends Block {
 		setBlockName("Ore");
 	}
 	
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void getSubBlocks(Item item, CreativeTabs tab, List subItems)
-    {
-    	for (int i = 0; i < 16; i += 2)
-    	{
-    		subItems.add(new ItemStack(item, 1, i));
-    	}
-    }
+	/**
+	 * returns a list of blocks with the same ID, but different meta (eg: wood
+	 * returns 4 blocks)
+	 */
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tab, List subItems) {
+		for (int i = 0; i < colors.length; i++) {
+			subItems.add(new ItemStack(item, 1, i * 2));
+		}
+	}
     
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerBlockIcons(IIconRegister registerer)
-    {
+    public void registerBlockIcons(IIconRegister registerer) {
     	iconBottom = registerer.registerIcon(References.MODID.toLowerCase() + ":oreBottom");
         iconTop = registerer.registerIcon(References.MODID.toLowerCase() + ":oreTop");
     }
@@ -57,26 +56,28 @@ public class BlockOre1 extends Block {
      */
     @SideOnly(Side.CLIENT)
     @Override
-    public IIcon getIcon(int side, int meta)
-    {
+    public IIcon getIcon(int side, int meta) {
         return iconBottom;
     }
+    
+	@SideOnly(Side.CLIENT)
+	public float[] getColor(int metadata) {
+		return colors[(metadata / 2) % colors.length];
+	}
     
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
     @Override
-    public int damageDropped(int metadata)
-    {
-        return metadata & 14;
+    public int damageDropped(int metadata) {
+        return (metadata % (colors.length * 2)) & 14;
     }
     
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
     @Override
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
     
@@ -84,8 +85,7 @@ public class BlockOre1 extends Block {
      * The type of render function that is called for this block
      */
     @Override
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return RenderBlockOre1.renderId;
     }
     
@@ -94,8 +94,7 @@ public class BlockOre1 extends Block {
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
 	@Override
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
     
@@ -103,8 +102,7 @@ public class BlockOre1 extends Block {
      * Called when the block is placed in the world.
      */
 	@Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemBlock)
-    {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemBlock) {
 		int metadata = itemBlock.getItemDamage();
 		
 		world.setBlockMetadataWithNotify(x, y, z, metadata & 14, 2);

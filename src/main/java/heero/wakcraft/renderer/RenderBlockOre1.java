@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
 public class RenderBlockOre1 extends RenderBlockGeneric {
-	private static final float[][] colors = new float[][]{{0.63F, 0.66F, 0.70F}, {0.63F, 0.66F, 0.70F}, {0.92F, 0.95F, 0.94F}, {0.2F, 0.2F, 0.2F}, {0.93F, 0.78F, 0.27F}, {0.55F, 0.65F, 0.65F}, {0.88F, 0.8F, 0.56F}, {0.88F, 0.8F, 0.56F}};
 	public static int renderId;
 	
 	public RenderBlockOre1(int renderId) {
@@ -26,7 +25,7 @@ public class RenderBlockOre1 extends RenderBlockGeneric {
 		
 		if ((metadata & 1) == 0) {
 			renderer.setOverrideBlockTexture(BlockOre1.iconTop);
-			renderOre(x, y, z, block, renderer, colors[metadata / 2]);
+			renderOre(x, y, z, block, renderer, ((BlockOre1)block).getColor(metadata));
 			renderer.clearOverrideBlockTexture();
 		}
 
