@@ -1,7 +1,7 @@
 package heero.wakcraft.client.gui.inventory;
 
+import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.inventory.ContainerTannerWorkbench;
-import heero.wakcraft.reference.References;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiTannerWorkbench extends GuiContainer {
 	private static final ResourceLocation craftingTableGuiTextures = new ResourceLocation(
-			References.MODID.toLowerCase(),
+			WakcraftInfo.MODID.toLowerCase(),
 			"/textures/gui/container/crafting_table.png");
 
 	public GuiTannerWorkbench(InventoryPlayer player_inventory, World world) {

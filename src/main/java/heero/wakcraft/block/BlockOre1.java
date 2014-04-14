@@ -1,7 +1,7 @@
 package heero.wakcraft.block;
 
+import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.reference.References;
 import heero.wakcraft.renderer.RenderBlockOre1;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class BlockOre1 extends Block {
 		
 		setCreativeTab(WakcraftCreativeTabs.tabOreBlock);
 		
-		setBlockTextureName(References.MODID.toLowerCase() + ":ore");
+		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":ore");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
 		setBlockName("Ore");
 	}
@@ -47,8 +47,8 @@ public class BlockOre1 extends Block {
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister registerer) {
-    	iconBottom = registerer.registerIcon(References.MODID.toLowerCase() + ":oreBottom");
-        iconTop = registerer.registerIcon(References.MODID.toLowerCase() + ":oreTop");
+    	iconBottom = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":oreBottom");
+        iconTop = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":oreTop");
     }
     
     /**

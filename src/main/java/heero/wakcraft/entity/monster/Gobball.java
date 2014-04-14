@@ -1,7 +1,7 @@
 package heero.wakcraft.entity.monster;
 
+import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.WakcraftItems;
-import heero.wakcraft.reference.References;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -194,7 +194,7 @@ public class Gobball extends EntityAnimal {
 	@SideOnly(Side.CLIENT)
 	public static class RenderBouftou extends RenderLiving {
 		private static final ResourceLocation bouftou = new ResourceLocation(
-				References.MODID.toLowerCase(), "textures/mobs/bouftou.png");
+				WakcraftInfo.MODID.toLowerCase(), "textures/mobs/bouftou.png");
 
 		public RenderBouftou(ModelBase par1ModelBase, float par2) {
 			super(par1ModelBase, par2);

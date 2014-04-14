@@ -1,7 +1,7 @@
 package heero.wakcraft.block;
 
+import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.reference.References;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -15,7 +15,7 @@ public class BlockPalisade extends BlockYOrientation {
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		setBlockName("Palisade");
 
-		setBlockTextureName(References.MODID.toLowerCase() + ":" + "palisade");
+		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":" + "palisade");
 	}
 
 	/**

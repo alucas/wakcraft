@@ -1,7 +1,7 @@
 package heero.wakcraft.block;
 
+import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.reference.References;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class BlockPhoenix extends BlockContainer {
 	public BlockPhoenix() {
 		super(Material.wood);
 		
-		setBlockTextureName(References.MODID.toLowerCase() + ":phoenix");
+		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":phoenix");
 		
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 		setBlockName("phoenix");

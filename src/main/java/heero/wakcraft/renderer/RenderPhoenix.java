@@ -1,8 +1,8 @@
 package heero.wakcraft.renderer;
 
+import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.block.BlockPhoenix;
 import heero.wakcraft.client.model.ModelPhoenix;
-import heero.wakcraft.reference.References;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
@@ -13,7 +13,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 public class RenderPhoenix extends TileEntitySpecialRenderer {
-	private static final ResourceLocation texture = new ResourceLocation(References.MODID.toLowerCase(), "textures/entity/phoenix.png");
+	private static final ResourceLocation texture = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/entity/phoenix.png");
     private ModelPhoenix model = new ModelPhoenix();
 	
     public void renderTileEntityAt(TileEntityPhoenix entity, double tileX, double tileY, double tileZ, float p_147539_8_)

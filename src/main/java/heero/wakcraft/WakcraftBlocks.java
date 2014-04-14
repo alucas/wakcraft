@@ -20,7 +20,6 @@ import heero.wakcraft.entity.item.ItemBlockOre3;
 import heero.wakcraft.entity.item.ItemBlockOre4;
 import heero.wakcraft.entity.item.ItemBlockSufokiaGround;
 import heero.wakcraft.entity.item.ItemBlockSufokiaWave;
-import heero.wakcraft.reference.References;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -44,7 +43,7 @@ public class WakcraftBlocks extends Blocks {
 		GameRegistry.registerBlock(carpet1 = (new BlockPalisade()), "blockPalisade");
 		
 		// Special blocks
-		GameRegistry.registerBlock(tannerWorkbench = (new BlockTannerWorkbench().setHardness(2.5F).setBlockName("tannerWorkbench").setBlockTextureName(References.MODID.toLowerCase() + ":tannerWorkbench")),	"tannerWorkbench");
+		GameRegistry.registerBlock(tannerWorkbench = (new BlockTannerWorkbench().setHardness(2.5F).setBlockName("tannerWorkbench").setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":tannerWorkbench")),	"tannerWorkbench");
 		GameRegistry.registerBlock(dragoexpress = (new BlockDragoexpress()), "dragoexpressBlock");
 		GameRegistry.registerBlock(phoenix = (new BlockPhoenix()), "phoenixBlock");
 	}

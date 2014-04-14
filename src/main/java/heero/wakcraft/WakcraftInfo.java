@@ -1,6 +1,6 @@
-package heero.wakcraft.reference;
+package heero.wakcraft;
 
-public class References {
+public class WakcraftInfo {
 	public static final String MODID = "wakcraft";
 	public static final String VERSION = "1.7.2-1.2";
 	public static final String READABLE_NAME = "Wakcraft";

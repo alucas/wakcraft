@@ -2,8 +2,8 @@ package heero.wakcraft.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.reference.References;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,7 +18,7 @@ public class BlockSufokiaColor extends Block {
 	public BlockSufokiaColor() {
 		super(Material.sand);
 
-		setBlockTextureName(References.MODID.toLowerCase() + ":sufokiaColor1");
+		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":sufokiaColor1");
 		setBlockName("SufokiaColor");
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
@@ -28,8 +28,8 @@ public class BlockSufokiaColor extends Block {
     @Override
     public void registerBlockIcons(IIconRegister registerer)
     {
-        this.blockIconColor1 = registerer.registerIcon(References.MODID.toLowerCase() + ":sufokiaColor1");
-        this.blockIconColor2 = registerer.registerIcon(References.MODID.toLowerCase() + ":sufokiaColor2");
+        this.blockIconColor1 = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":sufokiaColor1");
+        this.blockIconColor2 = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":sufokiaColor2");
     }
     
     /**

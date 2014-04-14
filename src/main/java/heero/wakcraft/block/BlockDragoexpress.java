@@ -1,7 +1,7 @@
 package heero.wakcraft.block;
 
+import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.reference.References;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -17,7 +17,7 @@ public class BlockDragoexpress extends BlockContainer {
 	public BlockDragoexpress() {
 		super(Material.wood);
 		
-		setBlockTextureName(References.MODID.toLowerCase() + ":dragoexpress");
+		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":dragoexpress");
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 		setBlockName("dragoexpress");
 		setLightOpacity(0);

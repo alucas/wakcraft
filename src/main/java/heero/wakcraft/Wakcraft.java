@@ -2,7 +2,6 @@ package heero.wakcraft;
 
 import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.proxy.CommonProxy;
-import heero.wakcraft.reference.References;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
 import cpw.mods.fml.common.Mod;
@@ -15,14 +14,14 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = References.MODID, name = References.READABLE_NAME, version = References.VERSION)
+@Mod(modid = WakcraftInfo.MODID, name = WakcraftInfo.READABLE_NAME, version = WakcraftInfo.VERSION)
 public class Wakcraft {
 	// The instance of your mod that Forge uses.
-	@Instance(value = References.MODID)
+	@Instance(value = WakcraftInfo.MODID)
 	public static Wakcraft instance;
 
 	// Says where the client and server 'proxy' code is loaded.
-	@SidedProxy(clientSide = References.PROXY_CLIENT_PATH, serverSide = References.PROXY_SERVER_PATH)
+	@SidedProxy(clientSide = WakcraftInfo.PROXY_CLIENT_PATH, serverSide = WakcraftInfo.PROXY_SERVER_PATH)
 	public static CommonProxy proxy;
 
 	private GuiHandler guiHandler = new GuiHandler();

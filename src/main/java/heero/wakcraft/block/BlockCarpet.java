@@ -1,7 +1,7 @@
 package heero.wakcraft.block;
 
+import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.reference.References;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
@@ -14,7 +14,7 @@ public class BlockCarpet extends BlockYOrientation {
 	public BlockCarpet() {
 		super(Material.cloth);
 
-		setBlockTextureName(References.MODID.toLowerCase() + ":carpet1");
+		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":carpet1");
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		setBlockName("Carpet1");
@@ -25,9 +25,9 @@ public class BlockCarpet extends BlockYOrientation {
 	public void registerBlockIcons(IIconRegister registerer) {
 		super.registerBlockIcons(registerer);
 
-		iconCarpet1 = registerer.registerIcon(References.MODID.toLowerCase() + ":carpet1");
-		iconCarpet1Corner = registerer.registerIcon(References.MODID.toLowerCase() + ":carpet1Corner");
-		iconCarpet1Center = registerer.registerIcon(References.MODID.toLowerCase() + ":carpet1Center");
+		iconCarpet1 = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":carpet1");
+		iconCarpet1Corner = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":carpet1Corner");
+		iconCarpet1Center = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":carpet1Center");
 	}
 
 	@Override
