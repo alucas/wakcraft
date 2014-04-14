@@ -1,7 +1,5 @@
 package heero.wakcraft.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import heero.wakcraft.renderer.RenderPillarBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -9,10 +7,16 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class BlockPillar extends Block {
+	protected boolean isCorner = false;
+	protected boolean isCenter = false;
+	
 	public BlockPillar(Material material) {
 		super(material);
 	}
@@ -49,16 +53,21 @@ public abstract class BlockPillar extends Block {
      */
     @SideOnly(Side.CLIENT)
     @Override
-    public IIcon getIcon(int side, int metadata)
-    {
-        switch(side) {
-        case 0:
-        case 1:
-        	return getTopIcon(side, metadata);
-        default:
-        	return getSideIcon(side, metadata);
-        }
-    }
+	public IIcon getIcon(int side, int metadata) {
+		switch (side) {
+		case 0:
+		case 1:
+			if (isCenter) {
+				return getCenterIcon(side, metadata);
+			} else if (isCorner) {
+				return getCornerIcon(side, metadata);
+			}
+
+			return getTopIcon(side, metadata);
+		default:
+			return getSideIcon(side, metadata);
+		}
+	}
     
 	@SideOnly(Side.CLIENT)
     public abstract IIcon getTopIcon(int side, int metadata);
@@ -72,18 +81,36 @@ public abstract class BlockPillar extends Block {
     }
 	
 	@SideOnly(Side.CLIENT)
-	public boolean useCornerIcon() {
-		return false;
-	}
-	
-	@SideOnly(Side.CLIENT)
     public IIcon getCenterIcon(int side, int metadata) {
     	return getTopIcon(side, metadata);
     }
 	
-	@SideOnly(Side.CLIENT)
-	public boolean useCenterIcon() {
-		return false;
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y,
+			int z) {
+		super.setBlockBoundsBasedOnState(world, x, y, z);
+
+		BlockPillar pillarBlock = (BlockPillar) world.getBlock(x, y, z);
+		int blockId = Block.getIdFromBlock(pillarBlock);
+		boolean t1 = Block.getIdFromBlock(world.getBlock(x + 1, y, z)) == blockId;
+		boolean t2 = Block.getIdFromBlock(world.getBlock(x, y, z + 1)) == blockId;
+		boolean t3 = Block.getIdFromBlock(world.getBlock(x - 1, y, z)) == blockId;
+		boolean t4 = Block.getIdFromBlock(world.getBlock(x, y, z - 1)) == blockId;
+
+		int neighbor = (t1 ? 0b1 : 0) + (t2 ? 0b10 : 0) + (t3 ? 0b100 : 0)
+				+ (t4 ? 0b1000 : 0);
+
+		if (neighbor == 0b1111) {
+			isCenter = true;
+			isCorner = false;
+		} else if (neighbor == 0b1100 || neighbor == 0b1001
+				|| neighbor == 0b0011 || neighbor == 0b0110) {
+			isCenter = false;
+			isCorner = true;
+		} else {
+			isCorner = false;
+			isCenter = false;
+		}
 	}
     
 	/**

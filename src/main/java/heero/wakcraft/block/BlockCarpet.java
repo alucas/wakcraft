@@ -53,16 +53,4 @@ public class BlockCarpet extends BlockPillar {
 	public IIcon getCenterIcon(int side, int metadata) {
 		return iconCarpet1Center;
 	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean useCornerIcon() {
-		return true;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean useCenterIcon() {
-		return true;
-	}
 }
