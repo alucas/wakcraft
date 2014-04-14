@@ -2,7 +2,7 @@ package heero.wakcraft;
 
 import heero.wakcraft.block.BlockCarpet;
 import heero.wakcraft.block.BlockDragoexpress;
-import heero.wakcraft.block.BlockOreLvl1;
+import heero.wakcraft.block.BlockOre1;
 import heero.wakcraft.block.BlockPalisade;
 import heero.wakcraft.block.BlockPhoenix;
 import heero.wakcraft.block.BlockStairs2;
@@ -11,7 +11,7 @@ import heero.wakcraft.block.BlockSufokiaGround;
 import heero.wakcraft.block.BlockSufokiaSun;
 import heero.wakcraft.block.BlockSufokiaWave;
 import heero.wakcraft.block.BlockTannerWorkbench;
-import heero.wakcraft.entity.item.ItemBlockOreLvl1;
+import heero.wakcraft.entity.item.ItemBlockOre1;
 import heero.wakcraft.entity.item.ItemBlockSufokiaGround;
 import heero.wakcraft.entity.item.ItemBlockSufokiaWave;
 import heero.wakcraft.reference.References;
@@ -30,7 +30,7 @@ public class WakcraftBlocks extends Blocks {
 		GameRegistry.registerBlock(sufokiaWave = (new BlockSufokiaWave()), ItemBlockSufokiaWave.class, "blockSufokiaWaveBlock");
 		GameRegistry.registerBlock(sufokiaStair = ((new BlockStairs2(sufokiaColor, 0)).setBlockName("SufokiaStair")), "blockSufokiaStair");
 		GameRegistry.registerBlock(sufokiaGround = (new BlockSufokiaGround()), ItemBlockSufokiaGround.class, "sufokiaGroundBlock");
-		GameRegistry.registerBlock(oreLvl1 = (new BlockOreLvl1()), ItemBlockOreLvl1.class, "oreLvl1Block");
+		GameRegistry.registerBlock(oreLvl1 = (new BlockOre1()), ItemBlockOre1.class, "oreLvl1Block");
 		GameRegistry.registerBlock(carpet1 = (new BlockCarpet()), "carpet1Block");
 		GameRegistry.registerBlock(carpet1 = (new BlockPalisade()), "blockPalisade");
 		

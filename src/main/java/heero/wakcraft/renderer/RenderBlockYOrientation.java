@@ -4,10 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
-public class RenderPillarBlock extends RenderStandardBlock {
+public class RenderBlockYOrientation extends RenderBlockGeneric {
 	public static int renderId;
 	
-	public RenderPillarBlock(int renderId) {
+	public RenderBlockYOrientation(int renderId) {
 		this.renderId = renderId;
 	}
 	

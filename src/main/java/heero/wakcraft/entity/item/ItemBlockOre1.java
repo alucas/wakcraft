@@ -4,10 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockOreLvl1 extends ItemBlock {
+public class ItemBlockOre1 extends ItemBlock {
 	private static final String[] names = new String[] {"PrimitiveIron", "FlatTin", "FinestSeaSalt", "ClassicCoal", "BrightCopper", "ShadowyCobalt", "BronzeNugget", "ShardOfFlint"};
 	
-	public ItemBlockOreLvl1(Block block) {
+	public ItemBlockOre1(Block block) {
 		super(block);
 		setHasSubtypes(true);
 	}

@@ -2,7 +2,7 @@ package heero.wakcraft.block;
 
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.reference.References;
-import heero.wakcraft.renderer.RenderOreLvl1;
+import heero.wakcraft.renderer.RenderBlockOre1;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPalisade extends BlockPillar {
+public class BlockPalisade extends BlockYOrientation {
 	public BlockPalisade() {
 		super(Material.wood);
 

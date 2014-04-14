@@ -8,8 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
-public abstract class RenderStandardBlock implements ISimpleBlockRenderingHandler {
-	public RenderStandardBlock() {};
+public abstract class RenderBlockGeneric implements ISimpleBlockRenderingHandler {
+	public RenderBlockGeneric() {};
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,

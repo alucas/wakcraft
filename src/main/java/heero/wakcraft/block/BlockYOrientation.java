@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.renderer.RenderPillarBlock;
+import heero.wakcraft.renderer.RenderBlockYOrientation;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,11 +13,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class BlockPillar extends Block {
+public abstract class BlockYOrientation extends Block {
 	protected boolean isCorner = false;
 	protected boolean isCenter = false;
 	
-	public BlockPillar(Material material) {
+	public BlockYOrientation(Material material) {
 		super(material);
 	}
 	
@@ -36,7 +36,7 @@ public abstract class BlockPillar extends Block {
     @Override
     public int getRenderType()
     {
-        return RenderPillarBlock.renderId;
+        return RenderBlockYOrientation.renderId;
     }
     
     /**
@@ -90,7 +90,7 @@ public abstract class BlockPillar extends Block {
 			int z) {
 		super.setBlockBoundsBasedOnState(world, x, y, z);
 
-		BlockPillar pillarBlock = (BlockPillar) world.getBlock(x, y, z);
+		BlockYOrientation pillarBlock = (BlockYOrientation) world.getBlock(x, y, z);
 		int blockId = Block.getIdFromBlock(pillarBlock);
 		boolean t1 = Block.getIdFromBlock(world.getBlock(x + 1, y, z)) == blockId;
 		boolean t2 = Block.getIdFromBlock(world.getBlock(x, y, z + 1)) == blockId;
