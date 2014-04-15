@@ -47,6 +47,7 @@ public abstract class BlockYRotation extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+		int metadata = world.getBlockMetadata(x, y, z);
 		switch (side) {
 		case 0:
 		case 1:
@@ -60,15 +61,15 @@ public abstract class BlockYRotation extends Block {
 					+ (t4 ? 8 : 0);
 
 			if (neighbor == 15) {
-				return getCenterIcon(side, 0);
+				return getCenterIcon(side, metadata);
 			} else if (neighbor == 12 || neighbor == 9 || neighbor == 03
 					|| neighbor == 6) {
-				return getCornerIcon(side, 0);
+				return getCornerIcon(side, metadata);
 			}
 
-			return getTopIcon(side, 0);
+			return getTopIcon(side, metadata);
 		default:
-			return getSideIcon(side, 0);
+			return getSideIcon(side, metadata);
 		}
 	}
 

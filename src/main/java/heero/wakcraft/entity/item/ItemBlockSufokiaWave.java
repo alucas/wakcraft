@@ -13,12 +13,7 @@ public class ItemBlockSufokiaWave extends ItemBlock {
 	
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
-		switch(itemstack.getItemDamage()){
-		case 4:
-			return getUnlocalizedName() + "2";
-		default:
-			return getUnlocalizedName() + "1";
-		}
+		return getUnlocalizedName() + ((itemstack.getItemDamage() >> 2) + 1);
 	}
 
     /**
