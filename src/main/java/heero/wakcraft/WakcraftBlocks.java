@@ -15,6 +15,7 @@ import heero.wakcraft.block.BlockSufokiaGround;
 import heero.wakcraft.block.BlockSufokiaSun;
 import heero.wakcraft.block.BlockSufokiaWave;
 import heero.wakcraft.block.BlockTannerWorkbench;
+import heero.wakcraft.block.BlockWood;
 import heero.wakcraft.entity.item.ItemBlockOre1;
 import heero.wakcraft.entity.item.ItemBlockOre2;
 import heero.wakcraft.entity.item.ItemBlockOre3;
@@ -29,7 +30,7 @@ public class WakcraftBlocks extends Blocks {
 
 	public static Block tannerWorkbench, dragoexpress, phoenix, sufokiaColor,
 			sufokiaSun, sufokiaWave, sufokiaStair, ore1, ore2, ore3, ore4,
-			carpet1, sufokiaGround, palisade, pillar;
+			carpet1, sufokiaGround, palisade, pillar, wood;
 
 	public static void registerBlocks() {
 		// Basic blocks
@@ -45,6 +46,7 @@ public class WakcraftBlocks extends Blocks {
 		GameRegistry.registerBlock(carpet1 = (new BlockCarpet()), "carpet1Block");
 		GameRegistry.registerBlock(palisade = (new BlockPalisade()), "blockPalisade");
 		GameRegistry.registerBlock(pillar = (new BlockPillar()), "blockPillar");
+		GameRegistry.registerBlock(wood = (new BlockWood()), "blockWood");
 		
 		// Special blocks
 		GameRegistry.registerBlock(tannerWorkbench = (new BlockTannerWorkbench().setHardness(2.5F).setBlockName("tannerWorkbench").setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":tannerWorkbench")),	"tannerWorkbench");
