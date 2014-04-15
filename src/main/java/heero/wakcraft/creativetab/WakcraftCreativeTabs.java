@@ -32,7 +32,7 @@ public class WakcraftCreativeTabs {
 		@Override
 		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem() {
-			return Item.getItemFromBlock(WakcraftBlocks.oreLvl1);
+			return Item.getItemFromBlock(WakcraftBlocks.ore1);
 		}
 	};
 	public static final CreativeTabs tabResource = new CreativeTabs("resources") {
