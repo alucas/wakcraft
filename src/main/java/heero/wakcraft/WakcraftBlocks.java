@@ -2,6 +2,7 @@ package heero.wakcraft;
 
 import heero.wakcraft.block.BlockCarpet;
 import heero.wakcraft.block.BlockDragoexpress;
+import heero.wakcraft.block.BlockGrass;
 import heero.wakcraft.block.BlockHBStand;
 import heero.wakcraft.block.BlockOre1;
 import heero.wakcraft.block.BlockOre2;
@@ -17,6 +18,7 @@ import heero.wakcraft.block.BlockSufokiaSun;
 import heero.wakcraft.block.BlockSufokiaWave;
 import heero.wakcraft.block.BlockTannerWorkbench;
 import heero.wakcraft.block.BlockWood;
+import heero.wakcraft.entity.item.ItemBlockGrass;
 import heero.wakcraft.entity.item.ItemBlockOre1;
 import heero.wakcraft.entity.item.ItemBlockOre2;
 import heero.wakcraft.entity.item.ItemBlockOre3;
@@ -31,7 +33,7 @@ public class WakcraftBlocks extends Blocks {
 
 	public static Block tannerWorkbench, dragoexpress, phoenix, sufokiaColor,
 			sufokiaSun, sufokiaWave, sufokiaStair, ore1, ore2, ore3, ore4,
-			carpet1, sufokiaGround, palisade, pillar, wood, hbstand;
+			carpet1, sufokiaGround, palisade, pillar, wood, hbstand, grass;
 
 	public static void registerBlocks() {
 		// Basic blocks
@@ -49,6 +51,7 @@ public class WakcraftBlocks extends Blocks {
 		GameRegistry.registerBlock(pillar = (new BlockPillar()), "blockPillar");
 		GameRegistry.registerBlock(wood = (new BlockWood()), "blockWood");
 		GameRegistry.registerBlock(hbstand = (new BlockHBStand()), "blockHBStand");
+		GameRegistry.registerBlock(grass = (new BlockGrass()), ItemBlockGrass.class, "blockGrass");
 		
 		// Special blocks
 		GameRegistry.registerBlock(tannerWorkbench = (new BlockTannerWorkbench().setHardness(2.5F).setBlockName("tannerWorkbench").setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":tannerWorkbench")),	"tannerWorkbench");
