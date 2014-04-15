@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSufokiaWave extends BlockYOrientation {
+public class BlockSufokiaWave extends BlockYRotation {
 	protected IIcon blockIconWave1;
 	protected IIcon blockIconWave2;
 	

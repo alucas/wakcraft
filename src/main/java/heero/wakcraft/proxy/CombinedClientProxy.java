@@ -13,7 +13,7 @@ import heero.wakcraft.renderer.RenderBlockPalisade;
 import heero.wakcraft.renderer.RenderDragoexpress;
 import heero.wakcraft.renderer.RenderBlockOre1;
 import heero.wakcraft.renderer.RenderPhoenix;
-import heero.wakcraft.renderer.RenderBlockYOrientation;
+import heero.wakcraft.renderer.RenderBlockYRotation;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -32,7 +32,7 @@ public class CombinedClientProxy extends CommonProxy{
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RenderDragoexpress());
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RenderPhoenix());
     	
-		RenderingRegistry.registerBlockHandler(new RenderBlockYOrientation(RenderingRegistry.getNextAvailableRenderId()));
+		RenderingRegistry.registerBlockHandler(new RenderBlockYRotation(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RenderBlockOre1(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RenderBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
     }

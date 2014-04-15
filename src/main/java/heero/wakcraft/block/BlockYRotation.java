@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.renderer.RenderBlockYOrientation;
+import heero.wakcraft.renderer.RenderBlockYRotation;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,8 +13,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class BlockYOrientation extends Block {
-	public BlockYOrientation(Material material) {
+public abstract class BlockYRotation extends Block {
+	public BlockYRotation(Material material) {
 		super(material);
 	}
 
@@ -32,7 +32,7 @@ public abstract class BlockYOrientation extends Block {
 	 */
 	@Override
 	public int getRenderType() {
-		return RenderBlockYOrientation.renderId;
+		return RenderBlockYRotation.renderId;
 	}
 
 	/**

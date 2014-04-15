@@ -8,7 +8,7 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCarpet extends BlockYOrientation {
+public class BlockCarpet extends BlockYRotation {
 	private IIcon iconCarpet1, iconCarpet1Corner, iconCarpet1Center;
 
 	public BlockCarpet() {
