@@ -17,6 +17,15 @@ public class RenderBlockPalisade extends RenderBlockGeneric {
 	}
 
 	@Override
+	protected void renderInventoryStandardBlock(Block block, int metadata,
+			RenderBlocks renderer, float colorR, float colorG, float colorB) {
+		renderer.setRenderBounds(0.8125f, 0, 0, 1, 1, 1);
+
+		super.renderInventoryStandardBlock(block, metadata, renderer, colorR,
+				colorG, colorB);
+	}
+
+	@Override
 	public boolean renderWorldBlock(IBlockAccess blockAccess, int x, int y,
 			int z, Block block, int modelId, RenderBlocks renderer) {
 		int m = blockAccess.getBlockMetadata(x, y, z) & 0x3;
