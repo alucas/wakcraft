@@ -23,6 +23,14 @@ public class BlockPalisade extends Block {
 	}
 
 	/**
+	 * If this block doesn't render as an ordinary block it will return False
+	 * (examples: signs, buttons, stairs, etc)
+	 */
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	/**
 	 * The type of render function that is called for this block
 	 */
 	@Override
