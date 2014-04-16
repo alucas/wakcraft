@@ -23,6 +23,7 @@ import heero.wakcraft.entity.item.ItemBlockOre1;
 import heero.wakcraft.entity.item.ItemBlockOre2;
 import heero.wakcraft.entity.item.ItemBlockOre3;
 import heero.wakcraft.entity.item.ItemBlockOre4;
+import heero.wakcraft.entity.item.ItemBlockPalisade;
 import heero.wakcraft.entity.item.ItemBlockSufokiaGround;
 import heero.wakcraft.entity.item.ItemBlockSufokiaWave;
 import net.minecraft.block.Block;
@@ -47,7 +48,7 @@ public class WakcraftBlocks extends Blocks {
 		GameRegistry.registerBlock(ore3 = (new BlockOre3()), ItemBlockOre3.class, "blockOre3");
 		GameRegistry.registerBlock(ore4 = (new BlockOre4()), ItemBlockOre4.class, "blockOre4");
 		GameRegistry.registerBlock(carpet1 = (new BlockCarpet()), "carpet1Block");
-		GameRegistry.registerBlock(palisade = (new BlockPalisade()), "blockPalisade");
+		GameRegistry.registerBlock(palisade = (new BlockPalisade()), ItemBlockPalisade.class, "blockPalisade");
 		GameRegistry.registerBlock(pillar = (new BlockPillar()), "blockPillar");
 		GameRegistry.registerBlock(wood = (new BlockWood()), "blockWood");
 		GameRegistry.registerBlock(hbstand = (new BlockHBStand()), "blockHBStand");

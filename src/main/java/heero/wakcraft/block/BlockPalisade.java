@@ -4,29 +4,64 @@ import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.renderer.RenderBlockPalisade;
 import heero.wakcraft.util.RotationUtil;
+
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPalisade extends Block {
+	private static String[] names = new String[] { "palisade1", "palisade2" };
+	private static IIcon[] icons = new IIcon[4];
+
 	public BlockPalisade() {
 		super(Material.wood);
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		setBlockName("Palisade");
+	}
 
-		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":" + "palisade");
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+		for (int i = 0; i < names.length; i++) {
+			list.add(new ItemStack(item, 1, i << 2));
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister registerer) {
+		for (int i = 0; i < names.length; i++) {
+			icons[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase()
+					+ ":" + names[i]);
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int metadata) {
+		int index = (metadata >> 2) % names.length;
+
+		return icons[index];
 	}
 
 	/**
 	 * If this block doesn't render as an ordinary block it will return False
 	 * (examples: signs, buttons, stairs, etc)
 	 */
+	@Override
+	@SideOnly(Side.CLIENT)
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
@@ -35,6 +70,7 @@ public class BlockPalisade extends Block {
 	 * The type of render function that is called for this block
 	 */
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int getRenderType() {
 		return RenderBlockPalisade.renderId;
 	}
@@ -49,6 +85,7 @@ public class BlockPalisade extends Block {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public boolean isOpaqueCube() {
 		return false;
 	}
