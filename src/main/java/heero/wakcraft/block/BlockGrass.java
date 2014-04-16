@@ -10,6 +10,6 @@ public class BlockGrass extends BlockSlab {
 		names = new String[] { "grass", "dirt" };
 
 		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":grassTop");
-		setBlockName(getUnlocalizedName() + "Grass");
+		setBlockName("SlabGrass");
 	}
 }

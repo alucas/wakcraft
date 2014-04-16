@@ -16,7 +16,7 @@ public class WakcraftCreativeTabs {
 		@SideOnly(Side.CLIENT)
 		@Override
 		public Item getTabIconItem() {
-			return Item.getItemFromBlock(Blocks.brick_block);
+			return Item.getItemFromBlock(WakcraftBlocks.sufokiaWave);
 		}
 	};
 	public static final CreativeTabs tabSpecialBlock = new CreativeTabs(

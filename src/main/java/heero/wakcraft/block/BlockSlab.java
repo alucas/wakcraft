@@ -27,7 +27,6 @@ public abstract class BlockSlab extends Block {
 		super(material);
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
-		setBlockName("Slab");
 	}
 
 	@Override
