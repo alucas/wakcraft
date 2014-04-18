@@ -9,10 +9,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -79,6 +82,19 @@ public abstract class BlockSlab extends Block {
 	@Override
 	public void setBlockBoundsForItemRender() {
 		setBlockBounds(0, 0, 0, 1, 0.5f, 1);
+	}
+
+	/**
+	 * Adds all intersecting collision boxes to a list. (Be sure to only add
+	 * boxes to the list if they intersect the mask.) Parameters: World, X, Y,
+	 * Z, mask, list, colliding entity
+	 */
+	@Override
+	public void addCollisionBoxesToList(World world, int x, int y, int z,
+			AxisAlignedBB mask, List list, Entity entity) {
+		setBlockBoundsBasedOnState(world, x, y, z);
+
+		super.addCollisionBoxesToList(world, x, y, z, mask, list, entity);
 	}
 
 	/**
