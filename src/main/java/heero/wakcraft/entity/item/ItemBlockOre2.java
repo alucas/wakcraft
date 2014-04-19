@@ -2,7 +2,7 @@ package heero.wakcraft.entity.item;
 
 import net.minecraft.block.Block;
 
-public class ItemBlockOre2 extends ItemBlockOre1 {
+public class ItemBlockOre2 extends ItemBlockOre {
 	public ItemBlockOre2(Block block) {
 		super(block);
 		
