@@ -1,14 +1,14 @@
 package heero.wakcraft.renderer;
 
-import heero.wakcraft.block.BlockOre1;
+import heero.wakcraft.block.BlockOre;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
-public class RenderBlockOre1 extends RenderBlockGeneric {
+public class RenderBlockOre extends RenderBlockGeneric {
 	public static int renderId;
 	
-	public RenderBlockOre1(int renderId) {
+	public RenderBlockOre(int renderId) {
 		this.renderId = renderId;
 	}
 	
@@ -21,9 +21,9 @@ public class RenderBlockOre1 extends RenderBlockGeneric {
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
 		if ((metadata & 1) == 0) {
-			float[] color = ((BlockOre1)block).getColor(metadata);
+			float[] color = ((BlockOre)block).getColor(metadata);
 			
-			renderer.setOverrideBlockTexture(BlockOre1.iconTop);
+			renderer.setOverrideBlockTexture(BlockOre.iconTop);
 			
 			renderer.setRenderBounds(0.125, 0.75, 0.125, 0.5, 0.875, 0.5);
 			renderInventoryStandardBlock(block, metadata, renderer, color[0], color[1], color[2]);
@@ -48,9 +48,9 @@ public class RenderBlockOre1 extends RenderBlockGeneric {
 		int metadata = blockAccess.getBlockMetadata(x, y, z);
 		
 		if ((metadata & 1) == 0) {
-			float[] color = ((BlockOre1)block).getColor(metadata);
+			float[] color = ((BlockOre)block).getColor(metadata);
 			
-			renderer.setOverrideBlockTexture(BlockOre1.iconTop);
+			renderer.setOverrideBlockTexture(BlockOre.iconTop);
 			renderer.renderAllFaces = true;
 			
 			renderer.setRenderBounds(0.125, 0.75, 0.125, 0.5, 0.875, 0.5);

@@ -1,7 +1,7 @@
 package heero.wakcraft.block;
 
 
-public class BlockOre3 extends BlockOre1 {
+public class BlockOre3 extends BlockOre {
 	public BlockOre3() {
 		super();
 		
