@@ -126,7 +126,7 @@ public abstract class BlockOre extends Block {
 	 */
 	@Override
 	public int quantityDropped(Random random) {
-		return 2;
+		return 3;
 	}
     
 	/**
@@ -171,7 +171,7 @@ public abstract class BlockOre extends Block {
 		world.setBlockMetadataWithNotify(x, y, z, (metadata & 14) + 1, 2);
 		world.scheduleBlockUpdate(x, y, z, this, 6000); // 5 min
 
-		dropBlockAsItem(world, x, y, z, metadata, 0);
+		dropBlockAsItemWithChance(world, x, y, z, metadata, 0.5f, 0);
 
 		return false;
 	}
