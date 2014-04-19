@@ -20,11 +20,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class BlockSlab extends Block {
-	protected String[] names;
+	protected String[] iconNames;
 
 	protected IIcon[] blockIconTop = new IIcon[4];
 	protected IIcon[] blockIconSide = new IIcon[4];
 	protected IIcon[] blockIconDemiSide = new IIcon[4];
+	protected IIcon[] blockIconBottom = new IIcon[4];
 
 	public BlockSlab(Material material) {
 		super(material);
@@ -35,7 +36,7 @@ public abstract class BlockSlab extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-		for (int i = 0; i < names.length; i++) {
+		for (int i = 0; i < iconNames.length; i++) {
 			list.add(new ItemStack(item, 1, i));
 		}
 	}
@@ -43,20 +44,23 @@ public abstract class BlockSlab extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer) {
-		for (int i = 0; i < names.length; i++) {
-			blockIconTop[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":" + names[i] + "Top");
-			blockIconSide[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":" + names[i] + "Side");
-			blockIconDemiSide[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":" + names[i] + "DemiSide");
+		for (int i = 0; i < iconNames.length; i++) {
+			blockIconTop[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Top");
+			blockIconSide[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Side");
+			blockIconDemiSide[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":" + iconNames[i] + "DemiSide");
+			blockIconBottom[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Bottom");
 		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int metadata) {
-		int type = metadata % names.length;
+		int type = metadata % iconNames.length;
 
 		if (side == 1) {
 			return blockIconTop[type];
+		} else if (side == 0) {
+			return blockIconBottom[type];
 		}
 
 		if (metadata == 0) {
