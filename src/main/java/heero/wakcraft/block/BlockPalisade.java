@@ -11,9 +11,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -136,5 +138,18 @@ public class BlockPalisade extends Block {
 		super.onBlockPlacedBy(world, x, y, z, player, itemBlock);
 
 		RotationUtil.setOrientationFromYaw(world, x, y, z, player.rotationYaw);
+	}
+
+	/**
+	 * Adds all intersecting collision boxes to a list. (Be sure to only add
+	 * boxes to the list if they intersect the mask.) Parameters: World, X, Y,
+	 * Z, mask, list, colliding entity
+	 */
+	@Override
+	public void addCollisionBoxesToList(World world, int x, int y, int z,
+			AxisAlignedBB mask, List list, Entity entity) {
+		setBlockBoundsBasedOnState(world, x, y, z);
+
+		super.addCollisionBoxesToList(world, x, y, z, mask, list, entity);
 	}
 }
