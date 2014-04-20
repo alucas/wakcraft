@@ -7,7 +7,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class PlayerEventHandler {
 	@SubscribeEvent
-	public void playerLoggedIn(EntityConstructing event) {
+	public void onEntityConstructing(EntityConstructing event) {
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
 			player.registerExtendedProperties(XpProfessionProperty.IDENTIFIER, new XpProfessionProperty());
