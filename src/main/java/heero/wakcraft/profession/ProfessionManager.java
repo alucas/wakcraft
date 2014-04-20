@@ -138,6 +138,15 @@ public class ProfessionManager {
 
 		return -1;
 	}
+	
+	public static int getLevel(EntityPlayer player, PROFESSION profession) {
+		int xp = getXp(player, profession);
+		if (xp == -1) {
+			return -1;
+		}
+		
+		return getLevelFromXp(xp);
+	}
 
 	private static int getLevelFromXp(int xp) {
 		return (int) Math.floor(Math.sqrt(xp / 100));
