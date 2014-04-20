@@ -1,6 +1,6 @@
 package heero.wakcraft.eventhandler;
 
-import heero.wakcraft.entity.property.XpCraftingProperty;
+import heero.wakcraft.entity.property.XpProfessionProperty;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -10,7 +10,7 @@ public class PlayerEventHandler {
 	public void playerLoggedIn(EntityConstructing event) {
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
-			player.registerExtendedProperties(XpCraftingProperty.IDENTIFIER, new XpCraftingProperty());
+			player.registerExtendedProperties(XpProfessionProperty.IDENTIFIER, new XpProfessionProperty());
 		}
 	}
 }

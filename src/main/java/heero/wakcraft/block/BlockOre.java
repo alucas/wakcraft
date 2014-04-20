@@ -2,7 +2,8 @@ package heero.wakcraft.block;
 
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.entity.property.XpCraftingProperty;
+import heero.wakcraft.profession.ProfessionManager;
+import heero.wakcraft.profession.ProfessionManager.PROFESSION;
 import heero.wakcraft.renderer.RenderBlockOre;
 
 import java.util.List;
@@ -174,10 +175,7 @@ public abstract class BlockOre extends Block {
 
 		dropBlockAsItemWithChance(world, x, y, z, metadata, 0.5f, 0);
 
-		XpCraftingProperty properties = (XpCraftingProperty) player.getExtendedProperties(XpCraftingProperty.IDENTIFIER);
-		if (properties != null) {
-			properties.addXpMiner(100);
-		}
+		ProfessionManager.addXpFromBlock(player, PROFESSION.MINER, world.getBlock(x, y, z));
 
 		return false;
 	}
