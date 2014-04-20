@@ -188,7 +188,7 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 		}
 
 		world.setBlockMetadataWithNotify(x, y, z, (metadata & 14) + 1, 2);
-		world.scheduleBlockUpdate(x, y, z, this, 60); // 5 min
+		world.scheduleBlockUpdate(x, y, z, this, 1200); // 1 min
 
 		dropBlockAsItemWithChance(world, x, y, z, metadata, 0.5f, 0);
 
