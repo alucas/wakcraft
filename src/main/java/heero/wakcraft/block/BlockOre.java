@@ -83,6 +83,17 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 		return levels[(metadata / 2) % levels.length];
 	}
 
+	/**
+	 * Gathers how much experience this block drops when broken.
+	 * 
+	 * @param metadata
+	 * @return Amount of XP from breaking this block.
+	 */
+	@Override
+	public int getProfessionExp(int metadata) {
+		return 100;
+	}
+
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
@@ -177,11 +188,13 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 		}
 
 		world.setBlockMetadataWithNotify(x, y, z, (metadata & 14) + 1, 2);
-		world.scheduleBlockUpdate(x, y, z, this, 6000); // 5 min
+		world.scheduleBlockUpdate(x, y, z, this, 60); // 5 min
 
 		dropBlockAsItemWithChance(world, x, y, z, metadata, 0.5f, 0);
 
-		ProfessionManager.addXpFromBlock(player, PROFESSION.MINER, world.getBlock(x, y, z));
+		if (!world.isRemote) {
+			ProfessionManager.addXpFromBlock(player, world, x, y, z, PROFESSION.MINER);
+		}
 
 		return false;
 	}

@@ -1,17 +1,37 @@
 package heero.wakcraft.profession;
 
+import heero.wakcraft.block.ILevelBlock;
 import heero.wakcraft.entity.property.XpProfessionProperty;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 
 public class ProfessionManager {
-	public enum PROFESSION {
+	public static enum PROFESSION {
 		HERBALIST, LUMBERJACK, MINER, FARMER, FISHERMAN, TRAPPER, CHEF, BAKER, LEATHER_DEALER, HANDYMAN, CLOSE_COMBAT, LONG_DISTANCE, AREA_OF_EFFECT, TAILOR, ARMORER, JEWELER,
 	}
 
-	public static void addXpFromBlock(EntityPlayer player,
-			PROFESSION profession, Block block) {
-		addXp(player, profession, 100);
+	private static final float[] xpFactor = new float[] { 0.99f, 0.98f, 0.95f,
+			0.90f, 0.85f, 0.79f, 0.73f, 0.65f, 0.58f, 0.50f, 0.42f, 0.35f,
+			0.27f, 0.21f, 0.15f, 0.10f, 0.05f, 0.02f, 0.01f };
+
+	public static int addXpFromBlock(EntityPlayer player, World world, int x,
+			int y, int z, PROFESSION profession) {
+		Block block = world.getBlock(x, y, z);
+		if (!(block instanceof ILevelBlock)) {
+			return 0;
+		}
+
+		int metadata = world.getBlockMetadata(x, y, z);
+		int blockLevel = ((ILevelBlock) block).getLevel(metadata);
+		int blockProfessionXp = ((ILevelBlock) block).getProfessionExp(metadata);
+
+		int playerProfessionLevel = getLevelFromXp(getXp(player, profession));
+		int ponderedXp = getPonderedXp(playerProfessionLevel, blockLevel, blockProfessionXp);
+
+		addXp(player, profession, ponderedXp);
+
+		return ponderedXp;
 	}
 
 	public static void addXp(EntityPlayer player, PROFESSION profession,
@@ -117,5 +137,16 @@ public class ProfessionManager {
 		}
 
 		return -1;
+	}
+
+	private static int getLevelFromXp(int xp) {
+		return (int) Math.floor(Math.sqrt(xp / 100));
+	}
+
+	private static int getPonderedXp(int professionLvl, int recipeLvl,
+			int recipeXp) {
+		return (int) ((professionLvl <= recipeLvl + 10) ? recipeXp
+				: (professionLvl >= recipeLvl + 30) ? 0
+						: recipeXp * xpFactor[professionLvl - (recipeLvl + 11)]);
 	}
 }
