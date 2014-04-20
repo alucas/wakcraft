@@ -1,5 +1,6 @@
 package heero.wakcraft;
 
+import heero.wakcraft.eventhandler.WakcraftEventHandler;
 import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.proxy.CommonProxy;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
@@ -30,6 +31,7 @@ public class Wakcraft {
 	public void preInit(FMLPreInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
 
+		WakcraftEventHandler.registerEvents();
 		WakcraftItems.registerItems();
 		WakcraftBlocks.registerBlocks();
 		WakcraftEntities.registerEntities();
@@ -41,7 +43,6 @@ public class Wakcraft {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
-
 	}
 
 	@EventHandler
