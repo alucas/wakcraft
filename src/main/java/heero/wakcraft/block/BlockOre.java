@@ -23,9 +23,10 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class BlockOre extends Block {
+public abstract class BlockOre extends Block implements ILevelBlock {
 	public static IIcon iconTop, iconBottom;
 	protected float[][] colors;
+	protected int[]levels;
 	
 	/**
 	 * Wakfu Ore block.
@@ -76,7 +77,12 @@ public abstract class BlockOre extends Block {
 	public float[] getColor(int metadata) {
 		return colors[(metadata / 2) % colors.length];
 	}
-    
+
+	@Override
+	public int getLevel(int metadata) {
+		return levels[(metadata / 2) % levels.length];
+	}
+
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
