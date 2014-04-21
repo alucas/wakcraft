@@ -2,6 +2,7 @@ package heero.wakcraft.block;
 
 import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.block.material.AventureMaterial;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.network.packet.ProfessionPacket;
 import heero.wakcraft.profession.ProfessionManager;
@@ -13,7 +14,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.resources.I18n;
@@ -40,7 +40,7 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 	 * - Bit 2, 3, 4 : Mineral type
 	 */
 	public BlockOre() {
-		super(new Material(MapColor.brownColor));
+		super(new AventureMaterial(MapColor.brownColor));
 		
 		setCreativeTab(WakcraftCreativeTabs.tabOreBlock);
 		
