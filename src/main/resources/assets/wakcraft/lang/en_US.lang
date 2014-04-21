@@ -91,4 +91,4 @@ itemGroup.specialBlocks=Special Blocks
 itemGroup.resources=Resources
 itemGroup.oreBlocks=Ore Blocks
 
-message.blockOre.insufficientLevel=Vous n'avez pas le niveau sufisant pour ce minerai : %1d
+message.blockOre.insufficientLevel=Niveau insuffisant pour miner : %s (niv. %d)

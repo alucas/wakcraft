@@ -23,6 +23,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -230,7 +231,11 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 		if (world.isRemote) {
 			int blockLevel = getLevel(world.getBlockMetadata(x, y, z));
 			if (ProfessionManager.getLevel(player, PROFESSION.MINER) < blockLevel) {
-				Minecraft.getMinecraft().thePlayer.sendChatMessage(I18n.format("message.blockOre.insufficientLevel", blockLevel));
+				int metadata = world.getBlockMetadata(x, y, z);
+				Item item = getItemDropped(metadata, world.rand, 0);
+				ItemStack itemStack = new ItemStack(item, 1, damageDropped(metadata));
+				String itemName = item.getItemStackDisplayName(itemStack);
+				player.addChatMessage(new ChatComponentText(I18n.format("message.blockOre.insufficientLevel", itemName, blockLevel)));
 			}
 		}
 	}
