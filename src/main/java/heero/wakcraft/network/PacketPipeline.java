@@ -13,6 +13,9 @@ import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -35,7 +38,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 @ChannelHandler.Sharable
 public class PacketPipeline extends
 		MessageToMessageCodec<FMLProxyPacket, IPacket> {
-
+	
+	private static final Logger logger = LogManager.getLogger();
 	private EnumMap<Side, FMLEmbeddedChannel> channels;
 	private LinkedList<Class<? extends IPacket>> packets = new LinkedList<Class<? extends IPacket>>();
 	private boolean isPostInitialised = false;
@@ -51,17 +55,17 @@ public class PacketPipeline extends
 	 */
 	public boolean registerPacket(Class<? extends IPacket> packetClass) {
 		if (this.packets.size() > 256) {
-			// You should log here!!
+			logger.debug("Can't register packet, too many packet already registered");
 			return false;
 		}
 
 		if (this.packets.contains(packetClass)) {
-			// You should log here!!
+			logger.debug("The packet class " + packetClass.getSimpleName() + " is already registered");
 			return false;
 		}
 
 		if (this.isPostInitialised) {
-			// You should log here!!
+			logger.debug("The " + PacketPipeline.class.getSimpleName() + " Class is already post initialised");
 			return false;
 		}
 
