@@ -4,39 +4,59 @@ import heero.wakcraft.profession.ProfessionManager;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ProfessionPacket implements IPacket {
-	private int xp;
-	private PROFESSION profession;
+	private Map<PROFESSION, Integer> xps;
 
 	public ProfessionPacket() {
+		xps = new HashMap<PROFESSION, Integer>();
 	}
 
-	public ProfessionPacket(PROFESSION profession, int xp) {
-		this.profession = profession;
-		this.xp = xp;
+	public ProfessionPacket(EntityPlayer player) {
+		xps = new HashMap<PROFESSION, Integer>();
+		
+		for (PROFESSION profession : PROFESSION.values()) {
+			xps.put(profession, ProfessionManager.getXp(player, profession));
+		}
+	}
+
+	public ProfessionPacket(EntityPlayer player, PROFESSION profession) {
+		xps = new HashMap<PROFESSION, Integer>();
+		xps.put(profession, ProfessionManager.getXp(player, profession));
 	}
 
 	@Override
 	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
-		buffer.writeInt(profession.getValue());
-		buffer.writeInt(xp);
+		buffer.writeByte(xps.size());
+		for (PROFESSION profession : xps.keySet()) {
+			buffer.writeByte(profession.getValue());
+			buffer.writeInt(xps.get(profession));
+		}
 	}
 
 	@Override
 	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
-		profession = PROFESSION.getProfession(buffer.readInt());
-		xp = buffer.readInt();
+		int nbProfession = buffer.readByte();
+		for (int i = 0; i < nbProfession; i++) {
+			PROFESSION profession = PROFESSION.getProfession(buffer.readByte());
+			int xp = buffer.readInt();
+
+			xps.put(profession, xp);
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void handleClientSide(EntityPlayer player) {
-		if (profession != null) {
-			ProfessionManager.setXp(player, profession, xp);
+		for (PROFESSION profession : xps.keySet()) {
+			ProfessionManager.setXp(player, profession, xps.get(profession));
 		}
 	}
 

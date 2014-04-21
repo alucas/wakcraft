@@ -201,8 +201,8 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 
 		if (!world.isRemote) {
 			int xp = ProfessionManager.addXpFromBlock(player, world, x, y, z, PROFESSION.MINER);
-			if (xp > 0) {
-				Wakcraft.packetPipeline.sendTo(new ProfessionPacket(PROFESSION.MINER, ProfessionManager.getXp(player, PROFESSION.MINER)), (EntityPlayerMP)player);
+			if (xp > 0 && player instanceof EntityPlayerMP) {
+				Wakcraft.packetPipeline.sendTo(new ProfessionPacket(player, PROFESSION.MINER), (EntityPlayerMP)player);
 			}
 		}
 
