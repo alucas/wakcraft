@@ -14,7 +14,9 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -135,8 +137,10 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 	 */
 	@Override
 	public float getBlockHardness(World world, int x, int y, int z) {
-		// If ore is not extractable
-		if ((world.getBlockMetadata(x, y, z) & 1) == 1) {
+		int metadata = world.getBlockMetadata(x, y, z);
+		if ((metadata & 1) == 1) {
+			return -1;
+		} else if (ProfessionManager.getLevel(Minecraft.getMinecraft().thePlayer, PROFESSION.MINER) < getLevel(metadata)) {
 			return -1;
 		}
 
@@ -216,5 +220,18 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 		}
 
 		world.setBlockMetadataWithNotify(x, y, z, (metadata & 14) + 0, 2);
+	}
+
+	/**
+	 * Called when a player hits the block. Args: world, x, y, z, player
+	 */
+	public void onBlockClicked(World world, int x,
+			int y, int z, EntityPlayer player) {
+		if (world.isRemote) {
+			int blockLevel = getLevel(world.getBlockMetadata(x, y, z));
+			if (ProfessionManager.getLevel(player, PROFESSION.MINER) < blockLevel) {
+				Minecraft.getMinecraft().thePlayer.sendChatMessage(I18n.format("message.test", blockLevel));
+			}
+		}
 	}
 }

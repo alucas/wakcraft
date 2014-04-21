@@ -90,3 +90,5 @@ tile.SlabGrassDirt.name=Dirt Slab
 itemGroup.specialBlocks=Special Blocks
 itemGroup.resources=Resources
 itemGroup.oreBlocks=Ore Blocks
+
+message.test=Vous n'avez pas le niveau sufisant pour ce minerai : %1d
