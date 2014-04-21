@@ -230,7 +230,7 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 		if (world.isRemote) {
 			int blockLevel = getLevel(world.getBlockMetadata(x, y, z));
 			if (ProfessionManager.getLevel(player, PROFESSION.MINER) < blockLevel) {
-				Minecraft.getMinecraft().thePlayer.sendChatMessage(I18n.format("message.test", blockLevel));
+				Minecraft.getMinecraft().thePlayer.sendChatMessage(I18n.format("message.blockOre.insufficientLevel", blockLevel));
 			}
 		}
 	}
