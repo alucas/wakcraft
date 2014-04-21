@@ -2,6 +2,8 @@ package heero.wakcraft;
 
 import heero.wakcraft.eventhandler.WakcraftEventHandler;
 import heero.wakcraft.network.GuiHandler;
+import heero.wakcraft.network.PacketPipeline;
+import heero.wakcraft.network.packet.ProfessionPacket;
 import heero.wakcraft.proxy.CommonProxy;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
@@ -27,6 +29,8 @@ public class Wakcraft {
 
 	private GuiHandler guiHandler = new GuiHandler();
 
+	public static final PacketPipeline packetPipeline = new PacketPipeline();
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
@@ -38,15 +42,18 @@ public class Wakcraft {
 
 		GameRegistry.registerTileEntity(TileEntityDragoexpress.class, "tile_entity_dragoexpress");
 		GameRegistry.registerTileEntity(TileEntityPhoenix.class, "tile_entity_phoenix");
-	}
 
-	@EventHandler
-	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
 	}
 
 	@EventHandler
+	public void load(FMLInitializationEvent event) {
+		packetPipeline.initialise();
+		packetPipeline.registerPacket(ProfessionPacket.class);
+	}
+
+	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		// Stub Method
+		packetPipeline.postInitialise();
 	}
 }

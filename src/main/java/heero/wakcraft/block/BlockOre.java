@@ -1,7 +1,9 @@
 package heero.wakcraft.block;
 
+import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.wakcraft.network.packet.ProfessionPacket;
 import heero.wakcraft.profession.ProfessionManager;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
 import heero.wakcraft.renderer.RenderBlockOre;
@@ -16,6 +18,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -193,7 +196,10 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 		dropBlockAsItemWithChance(world, x, y, z, metadata, 0.5f, 0);
 
 		if (!world.isRemote) {
-			ProfessionManager.addXpFromBlock(player, world, x, y, z, PROFESSION.MINER);
+			int xp = ProfessionManager.addXpFromBlock(player, world, x, y, z, PROFESSION.MINER);
+			if (xp > 0) {
+				Wakcraft.packetPipeline.sendTo(new ProfessionPacket(PROFESSION.MINER, ProfessionManager.getXp(player, PROFESSION.MINER)), (EntityPlayerMP)player);
+			}
 		}
 
 		return false;

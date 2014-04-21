@@ -1,5 +1,7 @@
 package heero.wakcraft.profession;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import heero.wakcraft.block.ILevelBlock;
 import heero.wakcraft.entity.property.XpProfessionProperty;
 import net.minecraft.block.Block;
@@ -8,7 +10,30 @@ import net.minecraft.world.World;
 
 public class ProfessionManager {
 	public static enum PROFESSION {
-		HERBALIST, LUMBERJACK, MINER, FARMER, FISHERMAN, TRAPPER, CHEF, BAKER, LEATHER_DEALER, HANDYMAN, CLOSE_COMBAT, LONG_DISTANCE, AREA_OF_EFFECT, TAILOR, ARMORER, JEWELER,
+		HERBALIST(0), LUMBERJACK(1), MINER(2), FARMER(3), FISHERMAN(4), TRAPPER(
+				5), CHEF(6), BAKER(7), LEATHER_DEALER(8), HANDYMAN(9), CLOSE_COMBAT(
+				10), LONG_DISTANCE(11), AREA_OF_EFFECT(12), TAILOR(13), ARMORER(
+				14), JEWELER(15);
+
+		private final int value;
+
+		private PROFESSION(final int value) {
+			this.value = value;
+		}
+
+		public int getValue() {
+			return this.value;
+		}
+
+		public static PROFESSION getProfession(int value) {
+			for (PROFESSION profession : PROFESSION.values()) {
+				if (profession.getValue() == value) {
+					return profession;
+				}
+			}
+
+			return null;
+		}
 	}
 
 	private static final float[] xpFactor = new float[] { 0.99f, 0.98f, 0.95f,
@@ -87,6 +112,67 @@ public class ProfessionManager {
 				break;
 			case JEWELER:
 				properties.xpJeweler += xpValue;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static void setXp(EntityPlayer player, PROFESSION profession,
+			int xpValue) {
+		XpProfessionProperty properties = (XpProfessionProperty) player
+				.getExtendedProperties(XpProfessionProperty.IDENTIFIER);
+		if (properties != null) {
+			switch (profession) {
+			case HERBALIST:
+				properties.xpHerbalist = xpValue;
+				break;
+			case LUMBERJACK:
+				properties.xpLumberjack = xpValue;
+				break;
+			case MINER:
+				properties.xpMiner = xpValue;
+				break;
+			case FARMER:
+				properties.xpFarmer = xpValue;
+				break;
+			case FISHERMAN:
+				properties.xpFisherman = xpValue;
+				break;
+			case TRAPPER:
+				properties.xpTrapper = xpValue;
+				break;
+			case CHEF:
+				properties.xpChef = xpValue;
+				break;
+			case BAKER:
+				properties.xpBaker = xpValue;
+				break;
+			case LEATHER_DEALER:
+				properties.xpLeatherDealer = xpValue;
+				break;
+			case HANDYMAN:
+				properties.xpHandyman = xpValue;
+				break;
+			case CLOSE_COMBAT:
+				properties.xpCloseCombat = xpValue;
+				break;
+			case LONG_DISTANCE:
+				properties.xpLongDistance = xpValue;
+				break;
+			case AREA_OF_EFFECT:
+				properties.xpAreaOfEffect = xpValue;
+				break;
+			case TAILOR:
+				properties.xpTailor = xpValue;
+				break;
+			case ARMORER:
+				properties.xpArmorer = xpValue;
+				break;
+			case JEWELER:
+				properties.xpJeweler = xpValue;
 				break;
 			default:
 				break;
