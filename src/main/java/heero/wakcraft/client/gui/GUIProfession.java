@@ -31,7 +31,6 @@ public class GUIProfession extends GuiScreen {
 	 */
 	protected int guiTop;
 	protected EntityPlayer player;
-	protected int minerLevel;
 
 	public GUIProfession(EntityPlayer player) {
 		super();
@@ -47,8 +46,6 @@ public class GUIProfession extends GuiScreen {
 		guiLeft = (width - xSize) / 2;
 		guiTop = (height - ySize) / 2;
 
-		minerLevel = ProfessionManager.getLevel(player, PROFESSION.MINER);
-
 		super.initGui();
 	}
 
@@ -59,8 +56,14 @@ public class GUIProfession extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float renderPartialTicks) {
 		mc.getTextureManager().bindTexture(professionBackground);
 
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, 200, 200);
-		fontRendererObj.drawString("Lvl : " + minerLevel, guiLeft + 40,
-				guiTop + 20, 421075);
+		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+
+		int xp = ProfessionManager.getXp(player, PROFESSION.MINER);
+		int level = ProfessionManager.getLevelFromXp(xp);
+		int xpLevel = ProfessionManager.getXpFromLevel(level);
+		int xpNextLevel = ProfessionManager.getXpFromLevel(level + 1);
+
+		drawTexturedModalRect(guiLeft, guiTop + 84, 0, ySize + 1, (int) (xSize - (170 * (1 - (xp - xpLevel) / (float) (xpNextLevel - xpLevel)))), 6);
+		drawCenteredString(fontRendererObj, Integer.toString(level), guiLeft + 80, guiTop + 75, 0xFFFFFF);
 	}
 }

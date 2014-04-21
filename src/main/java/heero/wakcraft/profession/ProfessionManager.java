@@ -1,12 +1,12 @@
 package heero.wakcraft.profession;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import heero.wakcraft.block.ILevelBlock;
 import heero.wakcraft.entity.property.XpProfessionProperty;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ProfessionManager {
 	public static enum PROFESSION {
@@ -51,7 +51,7 @@ public class ProfessionManager {
 		int blockLevel = ((ILevelBlock) block).getLevel(metadata);
 		int blockProfessionXp = ((ILevelBlock) block).getProfessionExp(metadata);
 
-		int playerProfessionLevel = getLevelFromXp(getXp(player, profession));
+		int playerProfessionLevel = getLevel(player, profession);
 		int ponderedXp = getPonderedXp(playerProfessionLevel, blockLevel, blockProfessionXp);
 
 		addXp(player, profession, ponderedXp);
@@ -222,19 +222,18 @@ public class ProfessionManager {
 			}
 		}
 
-		return -1;
+		return 0;
 	}
 	
 	public static int getLevel(EntityPlayer player, PROFESSION profession) {
-		int xp = getXp(player, profession);
-		if (xp == -1) {
-			return -1;
-		}
-		
-		return getLevelFromXp(xp);
+		return getLevelFromXp(getXp(player, profession));
 	}
 
-	private static int getLevelFromXp(int xp) {
+	public static int getXpFromLevel(int level) {
+		return (level * level) * 100;
+	}
+
+	public static int getLevelFromXp(int xp) {
 		return (int) Math.floor(Math.sqrt(xp / 100));
 	}
 
