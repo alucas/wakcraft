@@ -4,6 +4,7 @@ import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.block.material.AventureMaterial;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.wakcraft.entity.misc.EntityTextPopup;
 import heero.wakcraft.network.packet.ProfessionPacket;
 import heero.wakcraft.profession.ProfessionManager;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
@@ -200,10 +201,12 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 
 		dropBlockAsItemWithChance(world, x, y, z, metadata, 0.5f, 0);
 
-		if (!world.isRemote) {
-			int xp = ProfessionManager.addXpFromBlock(player, world, x, y, z, PROFESSION.MINER);
-			if (xp > 0 && player instanceof EntityPlayerMP) {
-				Wakcraft.packetPipeline.sendTo(new ProfessionPacket(player, PROFESSION.MINER), (EntityPlayerMP)player);
+		int xp = ProfessionManager.addXpFromBlock(player, world, x, y, z, PROFESSION.MINER);
+		if (xp > 0) {
+			if (world.isRemote) {
+				world.spawnEntityInWorld(new EntityTextPopup(world, "+" + xp + "xp", x, y + 1, z));
+			} else if (player instanceof EntityPlayerMP) {
+				Wakcraft.packetPipeline.sendTo(new ProfessionPacket(player, PROFESSION.MINER), (EntityPlayerMP) player);
 			}
 		}
 
