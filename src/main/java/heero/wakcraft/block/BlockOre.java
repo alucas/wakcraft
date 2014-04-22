@@ -201,10 +201,18 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 
 		dropBlockAsItemWithChance(world, x, y, z, metadata, 0.5f, 0);
 
+		int currentLevel = ProfessionManager.getLevel(player, PROFESSION.MINER);
 		int xp = ProfessionManager.addXpFromBlock(player, world, x, y, z, PROFESSION.MINER);
 		if (xp > 0) {
 			if (world.isRemote) {
-				world.spawnEntityInWorld(new EntityTextPopup(world, "+" + xp + "xp", x, y + 1, z));
+				int levelDiff = ProfessionManager.getLevel(player, PROFESSION.MINER) - currentLevel;
+				if (levelDiff > 0) {
+					world.spawnEntityInWorld(new EntityTextPopup(world, "+" + levelDiff + " niveau", x, y + 1, z, 1.0F, 0.21F, 0.21F));
+					world.playRecord("random.levelup", x, y, z);
+				} else {
+					world.spawnEntityInWorld(new EntityTextPopup(world, "+" + xp + "xp", x, y + 1, z, 0.21F, 0.21F, 1.0F));
+					world.playRecord("random.orb", x, y, z);
+				}
 			} else if (player instanceof EntityPlayerMP) {
 				Wakcraft.packetPipeline.sendTo(new ProfessionPacket(player, PROFESSION.MINER), (EntityPlayerMP) player);
 			}

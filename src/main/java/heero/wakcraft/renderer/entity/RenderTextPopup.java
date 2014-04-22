@@ -59,7 +59,7 @@ public class RenderTextPopup extends Render {
 
 			GL11.glPushMatrix();
 			GL11.glRotatef(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-			GL11.glColor4f(0.21f, 0.21f, 1.0f, 1.0F);
+			GL11.glColor4f(entityText.colorRed, entityText.colorGreen, entityText.colorBlue, 1.0F);
 			tessellator.startDrawingQuads();
 			tessellator.setNormal(0.0F, 1.0F, 0.0F);
 			tessellator.addVertexWithUV((double) (0.0F - offsetX), 0.0D - offsetY, 0.0D, (double) minU, (double) maxV);

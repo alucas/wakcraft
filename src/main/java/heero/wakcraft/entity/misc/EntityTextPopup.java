@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 
 public class EntityTextPopup extends Entity {
 	public String text;
+	public float colorRed, colorGreen, colorBlue;
 	private int age;
 
 	public EntityTextPopup(World world, String text) {
@@ -14,12 +15,13 @@ public class EntityTextPopup extends Entity {
 		this.text = text;
 	}
 
-	public EntityTextPopup(World world, String text, int x, int y, int z) {
+	public EntityTextPopup(World world, String text, int x, int y, int z, float colorRed, float colorGreen, float colorBlue) {
 		super(world);
 
 		this.text = text;
 		this.setSize(1, 1);
 		this.setPosition(x, y, z);
+		this.setColor(colorRed, colorGreen, colorBlue);
 	}
 
 	@Override
@@ -46,5 +48,11 @@ public class EntityTextPopup extends Entity {
 		} else {
 			posY += 0.04;
 		}
+	}
+
+	protected void setColor(float colorRed, float colorGreen, float colorBlue) {
+		this.colorRed = colorRed;
+		this.colorGreen = colorGreen;
+		this.colorBlue = colorBlue;
 	}
 }
