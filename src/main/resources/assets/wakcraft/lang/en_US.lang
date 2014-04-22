@@ -91,4 +91,24 @@ itemGroup.specialBlocks=Special Blocks
 itemGroup.resources=Resources
 itemGroup.oreBlocks=Ore Blocks
 
-message.blockOre.insufficientLevel=Niveau insuffisant pour miner : %s (niv. %d)
+message.blockOre.insufficientLevel=Insuffisant level to mine : %s (niv. %d)
+
+profession.crafting=Crafting
+profession.harvesting=Harvesting
+profession.herbalist=Herbalist
+profession.lumberjack=Lumberjack
+profession.miner=Miner
+profession.farmer=Farmer
+profession.fisherman=Fisherman
+profession.trapper=Trapper
+profession.chef=Chef
+profession.baker=Baker
+profession.leather_dealer=Leather Dealer
+profession.handyman=Handyman
+profession.close_combat=Close Combat Weapons Masters
+profession.long_distance=Long Distance Weapons Masters
+profession.area_of_effect=Area of Effect Weapons Masters
+profession.tailor=Tailor
+profession.armorer=Armorer
+profession.jeweler=Jeweler
+profession.kama_minter=Kama Minter

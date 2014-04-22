@@ -13,9 +13,16 @@ public class ProfessionManager {
 		HERBALIST(0), LUMBERJACK(1), MINER(2), FARMER(3), FISHERMAN(4), TRAPPER(
 				5), CHEF(6), BAKER(7), LEATHER_DEALER(8), HANDYMAN(9), CLOSE_COMBAT(
 				10), LONG_DISTANCE(11), AREA_OF_EFFECT(12), TAILOR(13), ARMORER(
-				14), JEWELER(15);
+				14), JEWELER(15), KAMA_MINTER(16);
 
 		private final int value;
+
+		public static final PROFESSION craftings[] = new PROFESSION[] { CHEF,
+				BAKER, LEATHER_DEALER, HANDYMAN, CLOSE_COMBAT, LONG_DISTANCE,
+				AREA_OF_EFFECT, TAILOR, ARMORER, JEWELER, KAMA_MINTER };
+
+		public static final PROFESSION harvestings[] = new PROFESSION[] {
+				HERBALIST, LUMBERJACK, MINER, FARMER, FISHERMAN, TRAPPER };
 
 		private PROFESSION(final int value) {
 			this.value = value;
