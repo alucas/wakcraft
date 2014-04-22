@@ -2,7 +2,7 @@ package heero.wakcraft.block;
 
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.renderer.RenderBlockOre;
+import heero.wakcraft.renderer.block.RenderBlockOre;
 
 import java.util.List;
 

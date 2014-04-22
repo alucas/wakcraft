@@ -2,7 +2,7 @@ package heero.wakcraft.block;
 
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.renderer.RenderBlockPalisade;
+import heero.wakcraft.renderer.block.RenderBlockPalisade;
 import heero.wakcraft.util.RotationUtil;
 
 import java.util.List;

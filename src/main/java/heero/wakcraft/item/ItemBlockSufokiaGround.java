@@ -1,19 +1,18 @@
-package heero.wakcraft.entity.item;
+package heero.wakcraft.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockSufokiaWave extends ItemBlock {
-
-	public ItemBlockSufokiaWave(Block block) {
+public class ItemBlockSufokiaGround extends ItemBlock {
+	public ItemBlockSufokiaGround(Block block) {
 		super(block);
 		setHasSubtypes(true);
 	}
 	
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
-		return getUnlocalizedName() + ((itemstack.getItemDamage() >> 2) + 1);
+		return getUnlocalizedName() + itemstack.getItemDamage();
 	}
 
     /**

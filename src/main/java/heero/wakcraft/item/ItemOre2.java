@@ -1,4 +1,4 @@
-package heero.wakcraft.entity.item;
+package heero.wakcraft.item;
 
 public class ItemOre2 extends ItemOre {
 	public ItemOre2() {

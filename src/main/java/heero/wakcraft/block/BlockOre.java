@@ -8,7 +8,7 @@ import heero.wakcraft.entity.misc.EntityTextPopup;
 import heero.wakcraft.network.packet.ProfessionPacket;
 import heero.wakcraft.profession.ProfessionManager;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
-import heero.wakcraft.renderer.RenderBlockOre;
+import heero.wakcraft.renderer.block.RenderBlockOre;
 
 import java.util.List;
 import java.util.Random;

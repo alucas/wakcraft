@@ -1,4 +1,4 @@
-package heero.wakcraft.renderer;
+package heero.wakcraft.renderer.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;

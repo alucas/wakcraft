@@ -1,4 +1,4 @@
-package heero.wakcraft.entity.item;
+package heero.wakcraft.item;
 
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;

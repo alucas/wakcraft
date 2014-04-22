@@ -1,20 +1,20 @@
-package heero.wakcraft.entity.item;
+package heero.wakcraft.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockPalisade extends ItemBlock {
-	private static String[] names = new String[] { "Wood1", "Wood2" };
-	
-	public ItemBlockPalisade(Block block) {
+public class ItemBlockGrass extends ItemBlockSlab {
+	public ItemBlockGrass(Block block) {
 		super(block);
+
+		names = new String[] { "Grass", "Dirt" };
+
 		setHasSubtypes(true);
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
-		return getUnlocalizedName()	+ names[(itemstack.getItemDamage() >> 2) % names.length];
+		return getUnlocalizedName()	+ names[itemstack.getItemDamage() % names.length];
 	}
 
 	/**

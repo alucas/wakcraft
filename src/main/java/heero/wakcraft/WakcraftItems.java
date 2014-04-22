@@ -1,9 +1,9 @@
 package heero.wakcraft;
 
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.entity.item.ClefLaineuse;
-import heero.wakcraft.entity.item.ItemOre1;
-import heero.wakcraft.entity.item.ItemOre2;
+import heero.wakcraft.item.ClefLaineuse;
+import heero.wakcraft.item.ItemOre1;
+import heero.wakcraft.item.ItemOre2;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.registry.GameRegistry;
