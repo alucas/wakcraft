@@ -91,7 +91,7 @@ itemGroup.specialBlocks=Special Blocks
 itemGroup.resources=Resources
 itemGroup.oreBlocks=Ore Blocks
 
-message.blockOre.insufficientLevel=Insuffisant level to mine : %s (niv. %d)
+message.blockOre.insufficientLevel=Insuffisant level to mine : %s (lvl. %d)
 
 profession.crafting=Crafting
 profession.harvesting=Harvesting
