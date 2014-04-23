@@ -1,6 +1,5 @@
 package heero.wakcraft;
 
-import heero.wakcraft.eventhandler.WakcraftEventHandler;
 import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.network.PacketPipeline;
 import heero.wakcraft.network.packet.ProfessionPacket;
@@ -35,15 +34,12 @@ public class Wakcraft {
 	public void preInit(FMLPreInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
 
-		WakcraftEventHandler.registerEvents();
-		WakcraftItems.registerItems();
-		WakcraftBlocks.registerBlocks();
-		WakcraftEntities.registerEntities();
-
-		GameRegistry.registerTileEntity(TileEntityDragoexpress.class, "tile_entity_dragoexpress");
-		GameRegistry.registerTileEntity(TileEntityPhoenix.class, "tile_entity_phoenix");
-
+		proxy.registerBlocks();
+		proxy.registerItems();
+		proxy.registerEntities();
+		proxy.registerTileEntities();
 		proxy.registerRenderers();
+		proxy.registerEvents();
 	}
 
 	@EventHandler

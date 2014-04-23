@@ -15,7 +15,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -132,21 +131,22 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 	@Override
     public boolean isOpaqueCube() {
         return false;
-    }
+	}
 
 	/**
-	 * Returns the block hardness at a location. Args: world, x, y, z
+	 * Gets the hardness of block at the given coordinates in the given world,
+	 * relative to the ability of the given EntityPlayer.
 	 */
 	@Override
-	public float getBlockHardness(World world, int x, int y, int z) {
+	public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, int x, int y, int z) {
 		int metadata = world.getBlockMetadata(x, y, z);
 		if ((metadata & 1) == 1) {
-			return -1;
-		} else if (ProfessionManager.getLevel(Minecraft.getMinecraft().thePlayer, PROFESSION.MINER) < getLevel(metadata)) {
-			return -1;
+			return 0;
+		} else if (ProfessionManager.getLevel(player, PROFESSION.MINER) < getLevel(metadata)) {
+			return 0;
 		}
 
-		return this.blockHardness;
+		return super.getPlayerRelativeBlockHardness(player, world, x, y, z);
 	}
 
 	/**

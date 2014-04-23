@@ -29,10 +29,9 @@ import heero.wakcraft.item.ItemBlockSufokiaGround;
 import heero.wakcraft.item.ItemBlockSufokiaWave;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class WakcraftBlocks extends Blocks {
+public class WakcraftBlocks {
 
 	public static Block tannerWorkbench, dragoexpress, phoenix, sufokiaColor,
 			sufokiaSun, sufokiaWave, sufokiaStair, ore1, ore2, ore3, ore4,

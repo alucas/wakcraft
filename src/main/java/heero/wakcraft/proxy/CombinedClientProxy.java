@@ -1,5 +1,6 @@
 package heero.wakcraft.proxy;
 
+import net.minecraftforge.common.MinecraftForge;
 import heero.wakcraft.client.model.ModelGobball;
 import heero.wakcraft.client.model.ModelGobballWC;
 import heero.wakcraft.client.model.ModelGobbette;
@@ -10,6 +11,7 @@ import heero.wakcraft.entity.monster.Gobball;
 import heero.wakcraft.entity.monster.GobballWC;
 import heero.wakcraft.entity.monster.Gobbette;
 import heero.wakcraft.entity.monster.WhiteGobbly;
+import heero.wakcraft.eventhandler.GUIEventHandler;
 import heero.wakcraft.renderer.block.RenderBlockOre;
 import heero.wakcraft.renderer.block.RenderBlockPalisade;
 import heero.wakcraft.renderer.block.RenderBlockYRotation;
@@ -38,5 +40,12 @@ public class CombinedClientProxy extends CommonProxy{
 		RenderingRegistry.registerBlockHandler(new RenderBlockYRotation(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RenderBlockOre(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RenderBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
-    }
+	}
+
+	@Override
+	public void registerEvents() {
+		super.registerEvents();
+
+		MinecraftForge.EVENT_BUS.register(new GUIEventHandler());
+	}
 }
