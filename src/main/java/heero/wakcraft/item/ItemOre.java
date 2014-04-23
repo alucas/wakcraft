@@ -11,11 +11,12 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemOre extends Item {
+public class ItemOre extends ItemWithLevel {
 	protected String[] names;
+	protected int[] levels;
 
 	public ItemOre() {
-		super();
+		super(0);
 
 		setCreativeTab(WakcraftCreativeTabs.tabResource);
 		setUnlocalizedName("Ore");
