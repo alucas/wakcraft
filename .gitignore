@@ -10,7 +10,7 @@ gradle/
 .project
 build.gradle
 CREDITS-fml.txt
-forge-1.7.2-10.12.0.1024-changelog.txt
+forge-*-changelog.txt
 gradlew
 gradlew.bat
 LICENSE-fml.txt
