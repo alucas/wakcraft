@@ -1,7 +1,7 @@
 package heero.wakcraft;
 
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.item.ClefLaineuse;
+import heero.wakcraft.item.ItemWoollyKey;
 import heero.wakcraft.item.ItemOre1;
 import heero.wakcraft.item.ItemOre2;
 import heero.wakcraft.item.ItemWithLevel;
@@ -19,7 +19,7 @@ public class WakcraftItems extends Items {
 		GameRegistry.registerItem(gobballWool = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GobballWool").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gobballwool")), "GobballWool");
 		GameRegistry.registerItem(gobballSkin = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GobballSkin").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gobballskin")), "GobballSkin");
 		GameRegistry.registerItem(gobballHorn = ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GobballHorn").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gobballhorn")), "GobballHorn");
-		GameRegistry.registerItem(woollyKey = (new ClefLaineuse()), "WoollyKey");
+		GameRegistry.registerItem(woollyKey = (new ItemWoollyKey()), "WoollyKey");
 		GameRegistry.registerItem(itemOre1 = (new ItemOre1()), "ItemOre1");
 		GameRegistry.registerItem(itemOre2 = (new ItemOre2()), "ItemOre2");
 		GameRegistry.registerItem(canoonPowder = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("CanoonPowder").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":canoonpowder")), "ItemCanoonPowder");
