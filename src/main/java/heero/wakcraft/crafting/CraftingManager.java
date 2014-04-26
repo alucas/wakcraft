@@ -58,7 +58,6 @@ public class CraftingManager {
 	public ItemStack findMatchingRecipe(InventoryCrafting inventory, World world) {
 		for (int i = 0; i < recipes.size(); ++i) {
 			IRecipe irecipe = (IRecipe) recipes.get(i);
-
 			if (irecipe.matches(inventory, world)) {
 				return irecipe.getCraftingResult(inventory);
 			}

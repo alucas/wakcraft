@@ -14,15 +14,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ContainerPolisher extends Container {
-	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 1, 1);
+	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 5, 1);
 	public IInventory craftResult = new InventoryCraftResult();
 	private World worldObj;
 
 	public ContainerPolisher(InventoryPlayer inventory, World world, PROFESSION profession) {
 		this.worldObj = world;
 
-		this.addSlotToContainer(new SlotCrafting(inventory.player, this.craftMatrix, this.craftResult, 0, 124, 35));
-		this.addSlotToContainer(new Slot(this.craftMatrix, 0, 48, 35));
+		this.addSlotToContainer(new SlotCrafting(inventory.player, this.craftMatrix, this.craftResult, 0, 135, 42));
+
+		for (int i = 0; i < 5; ++i) {
+			this.addSlotToContainer(new Slot(this.craftMatrix, i, 25 + 20 * i, 42));
+		}
 
 		bindPlayerInventory(inventory);
 	}
@@ -57,7 +60,7 @@ public class ContainerPolisher extends Container {
 		super.onContainerClosed(player);
 
 		if (!this.worldObj.isRemote) {
-			for (int i = 0; i < 1; ++i) {
+			for (int i = 0; i < this.craftMatrix.getSizeInventory(); ++i) {
 				ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
 
 				if (itemstack != null) {
@@ -106,6 +109,23 @@ public class ContainerPolisher extends Container {
 			}
 
 			slot_object.onPickupFromSlot(player, stack_in_slot);
+		}
+
+		return stack;
+	}
+
+	@Override
+	/**
+	 * @param slotId Index of the slot
+	 * @buttonId 0 = left click, 1 = right click, 2 = wheel click
+	 * @specialKey 3 = pick block
+	 * @return
+	 */
+	public ItemStack slotClick(int slotId, int buttonId, int specialKey, EntityPlayer player) {
+		ItemStack stack = super.slotClick(slotId, buttonId, specialKey, player);
+
+		if (buttonId == 1) {
+			onCraftMatrixChanged(this.craftMatrix);
 		}
 
 		return stack;

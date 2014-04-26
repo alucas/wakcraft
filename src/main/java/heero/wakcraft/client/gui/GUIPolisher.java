@@ -56,7 +56,7 @@ public class GUIPolisher extends GuiContainer {
 
 			RecipeWithLevel recipe = (RecipeWithLevel) recipes.get(scrollIndex + i);
 
-			fontRendererObj.drawString(I18n.format("message.itemAndLevel", recipe.getRecipeOutput().getDisplayName(), recipe.level), xSize + 11, i * 40 - 5, 0xffffff);
+			fontRendererObj.drawString(I18n.format("message.itemAndLevel", recipe.getRecipeOutput().getDisplayName(), recipe.recipeLevel), xSize + 11, i * 40 - 5, 0xffffff);
 			fontRendererObj.drawString("=", xSize + 31, 15 + i * 40 - 5, 0xffffff);
 
 			for (int j = 0; j < recipe.recipeItems.size(); j++) {
