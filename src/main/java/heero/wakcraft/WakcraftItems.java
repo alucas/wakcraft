@@ -32,6 +32,7 @@ public class WakcraftItems extends Items {
 		GameRegistry.registerItem(fossil = ((new ItemWithLevel(5)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("Fossil").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":fossil")), "ItemFossil");
 		GameRegistry.registerItem(shamPearl = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("ShamPearl").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":shampearl")), "ItemShamPearl");
 		GameRegistry.registerItem(verbalasalt = ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("VerbalaSalt").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":verbalasalt")), "ItemVerbalaSalt");
+		GameRegistry.registerItem(gumgum= ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GumGum").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gumgum")), "ItemGumGum");
 		GameRegistry.registerItem(polishedmoonstone = ((new ItemWithLevel(20)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("PolishedMoonstone").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":polishedmoonstone")), "ItemPolishedMoonstone");
 		GameRegistry.registerItem(shadowyBlue = ((new ItemWithLevel(25)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("ShadowyBlue").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":shadowyblue")), "ItemShadowyBlue");
 	}

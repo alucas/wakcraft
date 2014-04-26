@@ -12,12 +12,12 @@ import heero.wakcraft.block.BlockOre4;
 import heero.wakcraft.block.BlockPalisade;
 import heero.wakcraft.block.BlockPhoenix;
 import heero.wakcraft.block.BlockPillar;
+import heero.wakcraft.block.BlockPolisher;
 import heero.wakcraft.block.BlockStairs2;
 import heero.wakcraft.block.BlockSufokiaColor;
 import heero.wakcraft.block.BlockSufokiaGround;
 import heero.wakcraft.block.BlockSufokiaSun;
 import heero.wakcraft.block.BlockSufokiaWave;
-import heero.wakcraft.block.BlockTannerWorkbench;
 import heero.wakcraft.block.BlockWood;
 import heero.wakcraft.item.ItemBlockGrass;
 import heero.wakcraft.item.ItemBlockOre1;
@@ -58,7 +58,7 @@ public class WakcraftBlocks {
 		GameRegistry.registerBlock(fence = (new BlockFence1(WakcraftInfo.MODID.toLowerCase() + ":palisade1", Material.wood)), "blockFence");
 		
 		// Special blocks
-		GameRegistry.registerBlock(tannerWorkbench = (new BlockTannerWorkbench().setHardness(2.5F).setBlockName("tannerWorkbench").setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":tannerWorkbench")),	"tannerWorkbench");
+		GameRegistry.registerBlock(tannerWorkbench = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":polisher")), "BlockPolisher");
 		GameRegistry.registerBlock(dragoexpress = (new BlockDragoexpress()), "dragoexpressBlock");
 		GameRegistry.registerBlock(phoenix = (new BlockPhoenix()), "phoenixBlock");
 	}

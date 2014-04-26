@@ -46,6 +46,7 @@ item.Moonstone.name=Moonstone
 item.Bomb.name=Bomb
 item.Fossil.name=Fossil
 item.ShamPearl.name=Sham Pearl
+item.GumGum.name=Gum Gum
 item.VerbalaSalt.name=Verbala Salt
 item.PolishedMoonstone.name=Polished Moonstone
 item.ShadowyBlue.name=Shadowy Blue
@@ -104,6 +105,7 @@ itemGroup.resources=Resources
 itemGroup.oreBlocks=Ore Blocks
 
 message.blockOre.insufficientLevel=Insuffisant level to mine : %s (lvl. %d)
+message.itemAndLevel=%s, lvl. %d
 
 profession.crafting=Crafting
 profession.harvesting=Harvesting

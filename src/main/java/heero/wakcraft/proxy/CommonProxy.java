@@ -1,5 +1,6 @@
 package heero.wakcraft.proxy;
 
+import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftItems;
 import heero.wakcraft.entity.misc.EntityTextPopup;
@@ -9,6 +10,7 @@ import heero.wakcraft.entity.monster.GobballWC;
 import heero.wakcraft.entity.monster.Gobbette;
 import heero.wakcraft.entity.monster.WhiteGobbly;
 import heero.wakcraft.eventhandler.PlayerEventHandler;
+import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
 import net.minecraft.entity.Entity;
@@ -16,6 +18,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -60,5 +63,9 @@ public class CommonProxy {
 		EntityRegistry.registerGlobalEntityID(entityClass, entityName, id);
 		EntityList.entityEggs.put(Integer.valueOf(id), new EntityEggInfo(id,
 				bkEggColor, fgEggColor));
+	}
+
+	public void registerGui(Wakcraft wc) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(wc, new GuiHandler());
 	}
 }

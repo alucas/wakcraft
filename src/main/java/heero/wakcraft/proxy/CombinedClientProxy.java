@@ -1,6 +1,6 @@
 package heero.wakcraft.proxy;
 
-import net.minecraftforge.common.MinecraftForge;
+import heero.wakcraft.Wakcraft;
 import heero.wakcraft.client.model.ModelGobball;
 import heero.wakcraft.client.model.ModelGobballWC;
 import heero.wakcraft.client.model.ModelGobbette;
@@ -12,6 +12,7 @@ import heero.wakcraft.entity.monster.GobballWC;
 import heero.wakcraft.entity.monster.Gobbette;
 import heero.wakcraft.entity.monster.WhiteGobbly;
 import heero.wakcraft.eventhandler.GUIEventHandler;
+import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.renderer.block.RenderBlockOre;
 import heero.wakcraft.renderer.block.RenderBlockPalisade;
 import heero.wakcraft.renderer.block.RenderBlockYRotation;
@@ -20,8 +21,10 @@ import heero.wakcraft.renderer.tileentity.RenderDragoexpress;
 import heero.wakcraft.renderer.tileentity.RenderPhoenix;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 public class CombinedClientProxy extends CommonProxy{
 
