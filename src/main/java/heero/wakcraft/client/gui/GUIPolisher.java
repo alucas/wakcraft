@@ -2,6 +2,7 @@ package heero.wakcraft.client.gui;
 
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.crafting.CraftingManager;
+import heero.wakcraft.crafting.RecipeWithLevel;
 import heero.wakcraft.profession.ProfessionManager;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
 
@@ -12,7 +13,6 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -54,9 +54,9 @@ public class GUIPolisher extends GuiContainer {
 			if (scrollIndex + i >= recipes.size())
 				break;
 
-			ShapelessRecipes recipe = (ShapelessRecipes) recipes.get(scrollIndex + i);
+			RecipeWithLevel recipe = (RecipeWithLevel) recipes.get(scrollIndex + i);
 
-			fontRendererObj.drawString(I18n.format("message.itemAndLevel", recipe.getRecipeOutput().getDisplayName(), 0), xSize + 11, i * 40 - 5, 0xffffff);
+			fontRendererObj.drawString(I18n.format("message.itemAndLevel", recipe.getRecipeOutput().getDisplayName(), recipe.level), xSize + 11, i * 40 - 5, 0xffffff);
 			fontRendererObj.drawString("=", xSize + 31, 15 + i * 40 - 5, 0xffffff);
 
 			for (int j = 0; j < recipe.recipeItems.size(); j++) {
@@ -98,7 +98,7 @@ public class GUIPolisher extends GuiContainer {
 
 			drawTexturedModalRect(guiLeft + xSize + 5, guiTop - 10 + i * 40, 0, ySize + 39, 140, 35);
 
-			ShapelessRecipes recipe = (ShapelessRecipes) recipes.get(scrollIndex + i);
+			RecipeWithLevel recipe = (RecipeWithLevel) recipes.get(scrollIndex + i);
 
 			drawTexturedModalRect(guiLeft + xSize + 11, guiTop + 4 + i * 40, 0, ySize + 23, 16, 16);
 
@@ -113,7 +113,7 @@ public class GUIPolisher extends GuiContainer {
 			if (scrollIndex + i >= recipes.size())
 				break;
 
-			ShapelessRecipes recipe = (ShapelessRecipes) recipes.get(scrollIndex + i);
+			RecipeWithLevel recipe = (RecipeWithLevel) recipes.get(scrollIndex + i);
 
 			drawTexturedModelRectFromIcon(guiLeft + xSize + 11, guiTop + 4 + i * 40, recipe.getRecipeOutput().getItem().getIcon(recipe.getRecipeOutput(), 0), 16, 16);
 

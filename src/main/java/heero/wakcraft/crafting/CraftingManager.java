@@ -35,24 +35,24 @@ public class CraftingManager {
 	}
 
 	public void addRecipe(PROFESSION prefession, int level, ItemStack result, Object... recipe) {
-		ArrayList arraylist = new ArrayList();
+		ArrayList recipeList = new ArrayList();
 
 		int nbIngredients = recipe.length;
 		for (int i = 0; i < nbIngredients; i++) {
 			Object ingredient = recipe[i];
 
 			if (ingredient instanceof ItemStack) {
-				arraylist.add(((ItemStack) ingredient).copy());
+				recipeList.add(((ItemStack) ingredient).copy());
 			} else if (ingredient instanceof Item) {
-				arraylist.add(new ItemStack((Item) ingredient));
+				recipeList.add(new ItemStack((Item) ingredient));
 			} else if (ingredient instanceof Block) {
-				arraylist.add(new ItemStack((Block) ingredient));
+				recipeList.add(new ItemStack((Block) ingredient));
 			} else {
 				throw new RuntimeException("Invalid shapeless recipy!");
 			}
 		}
 
-		recipes.add(new ShapelessRecipes(result, arraylist));
+		recipes.add(new RecipeWithLevel(result, recipeList, level));
 	}
 
 	public ItemStack findMatchingRecipe(InventoryCrafting inventory, World world) {
