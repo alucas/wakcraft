@@ -20,7 +20,7 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-public class GUIPolisher extends GuiContainer {
+public class GUIWorkbench extends GuiContainer {
 
 	int scrollIndex;
 
@@ -28,7 +28,7 @@ public class GUIPolisher extends GuiContainer {
 
 	private static final ResourceLocation textures = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/gui/workbench.png");
 
-	public GUIPolisher(Container container, PROFESSION profession) {
+	public GUIWorkbench(Container container, PROFESSION profession) {
 		super(container);
 
 		this.profession = profession;

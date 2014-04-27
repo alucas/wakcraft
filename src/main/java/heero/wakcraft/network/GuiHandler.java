@@ -1,7 +1,7 @@
 package heero.wakcraft.network;
 
-import heero.wakcraft.client.gui.GUIPolisher;
-import heero.wakcraft.inventory.ContainerPolisher;
+import heero.wakcraft.client.gui.GUIWorkbench;
+import heero.wakcraft.inventory.ContainerWorkbench;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -15,7 +15,7 @@ public class GuiHandler implements IGuiHandler {
 			int x, int y, int z) {
 		switch (id) {
 		case GUI_POLISHER:
-			return new ContainerPolisher(player.inventory, world, PROFESSION.MINER);
+			return new ContainerWorkbench(player.inventory, world, PROFESSION.MINER);
 		}
 
 		return null;
@@ -26,7 +26,7 @@ public class GuiHandler implements IGuiHandler {
 			int x, int y, int z) {
 		switch (id) {
 		case GUI_POLISHER:
-			return new GUIPolisher(new ContainerPolisher(player.inventory, world, PROFESSION.MINER), PROFESSION.MINER);
+			return new GUIWorkbench(new ContainerWorkbench(player.inventory, world, PROFESSION.MINER), PROFESSION.MINER);
 		}
 
 		return null;

@@ -13,13 +13,13 @@ import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ContainerPolisher extends Container {
+public class ContainerWorkbench extends Container {
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 5, 1);
 	public IInventory craftResult = new InventoryCraftResult();
 	private PROFESSION profession;
 	private World worldObj;
 
-	public ContainerPolisher(InventoryPlayer inventory, World world, PROFESSION profession) {
+	public ContainerWorkbench(InventoryPlayer inventory, World world, PROFESSION profession) {
 		this.worldObj = world;
 		this.profession = profession;
 
