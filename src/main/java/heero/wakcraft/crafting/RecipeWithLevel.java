@@ -9,15 +9,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
-public class RecipeWithLevel implements IRecipe {
+public class RecipeWithLevel implements IExtendedRecipe {
 	public int recipeLevel;
 	public ItemStack recipeResult;
-	public List recipeItems;
+	public List<ItemStack> recipeComponents;
 
-	public RecipeWithLevel(ItemStack result, List recipe, int level) {
+	public RecipeWithLevel(ItemStack result, List<ItemStack> components, int level) {
 		this.recipeLevel = level;
 		this.recipeResult = result;
-		this.recipeItems = recipe;
+		this.recipeComponents = components;
 	}
 
 	/**
@@ -25,13 +25,13 @@ public class RecipeWithLevel implements IRecipe {
 	 */
 	@Override
 	public boolean matches(InventoryCrafting inventory, World world) {
-		ArrayList arraylist = new ArrayList(recipeItems);
+		ArrayList<ItemStack> components = new ArrayList<ItemStack>(recipeComponents);
 
 		for (int i = 0; i < inventory.getSizeInventory(); ++i) {
 			ItemStack itemstack = inventory.getStackInSlot(i);
 			if (itemstack != null) {
 				boolean flag = false;
-				Iterator iterator = arraylist.iterator();
+				Iterator iterator = components.iterator();
 
 				while (iterator.hasNext()) {
 					ItemStack itemstack1 = (ItemStack) iterator.next();
@@ -40,7 +40,7 @@ public class RecipeWithLevel implements IRecipe {
 							&& itemstack.getItemDamage() == itemstack1.getItemDamage()
 							&& itemstack.stackSize >= itemstack1.stackSize) {
 						flag = true;
-						arraylist.remove(itemstack1);
+						components.remove(itemstack1);
 						break;
 					}
 				}
@@ -51,15 +51,14 @@ public class RecipeWithLevel implements IRecipe {
 			}
 		}
 
-		return arraylist.isEmpty();
+		return components.isEmpty();
 	}
 
 	/**
 	 * Returns an Item that is the result of this recipe
 	 */
 	@Override
-	public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting)
-    {
+	public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
         return recipeResult.copy();
     }
 
@@ -69,11 +68,16 @@ public class RecipeWithLevel implements IRecipe {
     @Override
     public int getRecipeSize()
     {
-        return recipeItems.size();
+        return recipeComponents.size();
     }
 
 	@Override
 	public ItemStack getRecipeOutput() {
 		return recipeResult;
+	}
+
+	@Override
+	public List<ItemStack> getRecipeComponents() {
+		return recipeComponents;
 	}
 }

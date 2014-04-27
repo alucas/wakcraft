@@ -10,14 +10,12 @@ import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
 
 public class CraftingManager {
     private static final CraftingManager instance = new CraftingManager();
     
-    private List recipes = new ArrayList();
+    private List<IExtendedRecipe> recipes = new ArrayList();
 
 
 	private CraftingManager() {
@@ -56,17 +54,26 @@ public class CraftingManager {
 	}
 
 	public ItemStack findMatchingRecipe(InventoryCrafting inventory, World world) {
+		IExtendedRecipe recipe = getMatchingRecipe(inventory, world);
+		if (recipe != null) {
+			return recipe.getCraftingResult(inventory);
+		}
+
+		return null;
+	}
+
+	public IExtendedRecipe getMatchingRecipe(InventoryCrafting inventory, World world) {
 		for (int i = 0; i < recipes.size(); ++i) {
-			IRecipe irecipe = (IRecipe) recipes.get(i);
-			if (irecipe.matches(inventory, world)) {
-				return irecipe.getCraftingResult(inventory);
+			IExtendedRecipe IExtendedRecipe = (IExtendedRecipe) recipes.get(i);
+			if (IExtendedRecipe.matches(inventory, world)) {
+				return IExtendedRecipe;
 			}
 		}
 
 		return null;
 	}
 
-	public List getRecipeList(PROFESSION profession) {
+	public List<IExtendedRecipe> getRecipeList(PROFESSION profession) {
 		return recipes;
 	}
 }

@@ -2,6 +2,7 @@ package heero.wakcraft.client.gui;
 
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.crafting.CraftingManager;
+import heero.wakcraft.crafting.IExtendedRecipe;
 import heero.wakcraft.crafting.RecipeWithLevel;
 import heero.wakcraft.profession.ProfessionManager;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
@@ -48,19 +49,19 @@ public class GUIPolisher extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		fontRendererObj.drawString(StatCollector.translateToLocal("profession.miner"), 34, 10, 0xffffff);
 
-		List recipes = CraftingManager.getInstance().getRecipeList(profession);
+		List<IExtendedRecipe> recipes = CraftingManager.getInstance().getRecipeList(profession);
 
 		for (int i = 0; i < 5; i++) {
 			if (scrollIndex + i >= recipes.size())
 				break;
 
-			RecipeWithLevel recipe = (RecipeWithLevel) recipes.get(scrollIndex + i);
+			IExtendedRecipe recipe = recipes.get(scrollIndex + i);
 
-			fontRendererObj.drawString(I18n.format("message.itemAndLevel", recipe.getRecipeOutput().getDisplayName(), recipe.recipeLevel), xSize + 11, i * 40 - 5, 0xffffff);
+			fontRendererObj.drawString(I18n.format("message.itemAndLevel", recipe.getRecipeOutput().getDisplayName(), ((RecipeWithLevel) recipe).recipeLevel), xSize + 11, i * 40 - 5, 0xffffff);
 			fontRendererObj.drawString("=", xSize + 31, 15 + i * 40 - 5, 0xffffff);
 
-			for (int j = 0; j < recipe.recipeItems.size(); j++) {
-				ItemStack itemStack = (ItemStack) recipe.recipeItems.get(j);
+			for (int j = 0; j < recipe.getRecipeComponents().size(); j++) {
+				ItemStack itemStack = (ItemStack) recipe.getRecipeComponents().get(j);
 				int quantity = 0;
 
 				for (ItemStack inventoryItem : mc.thePlayer.inventory.mainInventory) {
@@ -87,7 +88,7 @@ public class GUIPolisher extends GuiContainer {
 		drawTexturedModalRect(guiLeft + 27, guiTop + 20, 0, ySize + 1, (int) (147 * factor), 6);
 		drawTexturedModalRect(guiLeft + 10, guiTop + 10, 0, ySize + 7, 16, 16);
 
-		List recipes = CraftingManager.getInstance().getRecipeList(profession);
+		List<IExtendedRecipe> recipes = CraftingManager.getInstance().getRecipeList(profession);
 		int nbRecipes = recipes.size();
 
 		GL11.glEnable(GL11.GL_BLEND);
@@ -98,11 +99,11 @@ public class GUIPolisher extends GuiContainer {
 
 			drawTexturedModalRect(guiLeft + xSize + 5, guiTop - 10 + i * 40, 0, ySize + 39, 140, 35);
 
-			RecipeWithLevel recipe = (RecipeWithLevel) recipes.get(scrollIndex + i);
+			IExtendedRecipe recipe = recipes.get(scrollIndex + i);
 
 			drawTexturedModalRect(guiLeft + xSize + 11, guiTop + 4 + i * 40, 0, ySize + 23, 16, 16);
 
-			for (int j = 0; j < recipe.recipeItems.size(); j++) {
+			for (int j = 0; j < recipe.getRecipeComponents().size(); j++) {
 				drawTexturedModalRect(guiLeft + xSize + 40 + j * 20, guiTop + 4 + i * 40, 0, ySize + 23, 16, 16);
 			}
 		}
@@ -117,8 +118,8 @@ public class GUIPolisher extends GuiContainer {
 
 			drawTexturedModelRectFromIcon(guiLeft + xSize + 11, guiTop + 4 + i * 40, recipe.getRecipeOutput().getItem().getIcon(recipe.getRecipeOutput(), 0), 16, 16);
 
-			for (int j = 0; j < recipe.recipeItems.size(); j++) {
-				ItemStack itemStack = (ItemStack) recipe.recipeItems.get(j);
+			for (int j = 0; j < recipe.getRecipeComponents().size(); j++) {
+				ItemStack itemStack = (ItemStack) recipe.getRecipeComponents().get(j);
 				drawTexturedModelRectFromIcon(guiLeft + xSize + 40 + j * 20, guiTop + 4 + i * 40, itemStack.getItem().getIcon(itemStack, 0), 16, 16);
 			}
 		}

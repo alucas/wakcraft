@@ -21,7 +21,7 @@ public class ContainerPolisher extends Container {
 	public ContainerPolisher(InventoryPlayer inventory, World world, PROFESSION profession) {
 		this.worldObj = world;
 
-		this.addSlotToContainer(new SlotCrafting(inventory.player, this.craftMatrix, this.craftResult, 0, 135, 42));
+		this.addSlotToContainer(new SlotComplexCrafting(inventory.player, world, craftMatrix, craftResult, 0, 135, 42));
 
 		for (int i = 0; i < 5; ++i) {
 			this.addSlotToContainer(new Slot(this.craftMatrix, i, 25 + 20 * i, 42));
@@ -80,21 +80,16 @@ public class ContainerPolisher extends Container {
 			stack = stack_in_slot.copy();
 
 			if (slot_index == 0) {
-				if (!this.mergeItemStack(stack_in_slot, 2, 28, true)) {
+				if (!this.mergeItemStack(stack_in_slot, 6, 42, true)) {
 					return null;
 				}
 
 				slot_object.onSlotChange(stack_in_slot, stack);
-
-			} else if (slot_index >= 2 && slot_index < 28) {
-				if (!this.mergeItemStack(stack_in_slot, 29, 38, false)) {
+			} else if (slot_index >= 6 && slot_index < 42) {
+				if (!this.mergeItemStack(stack_in_slot, 1, 6, false)) {
 					return null;
 				}
-			} else if (slot_index >= 29 && slot_index < 38) {
-				if (!this.mergeItemStack(stack_in_slot, 2, 28, false)) {
-					return null;
-				}
-			} else if (!this.mergeItemStack(stack_in_slot, 2, 28, false)) {
+			} else if (!this.mergeItemStack(stack_in_slot, 6, 42, false)) {
 				return null;
 			}
 
@@ -118,15 +113,13 @@ public class ContainerPolisher extends Container {
 	/**
 	 * @param slotId Index of the slot
 	 * @buttonId 0 = left click, 1 = right click, 2 = wheel click
-	 * @specialKey 3 = pick block
+	 * @specialKey 3 = pick block, 1 = shift key
 	 * @return
 	 */
 	public ItemStack slotClick(int slotId, int buttonId, int specialKey, EntityPlayer player) {
 		ItemStack stack = super.slotClick(slotId, buttonId, specialKey, player);
 
-		if (buttonId == 1) {
-			onCraftMatrixChanged(this.craftMatrix);
-		}
+		onCraftMatrixChanged(this.craftMatrix);
 
 		return stack;
 	}
