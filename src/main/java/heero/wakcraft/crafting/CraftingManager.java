@@ -4,7 +4,9 @@ import heero.wakcraft.WakcraftItems;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
@@ -15,10 +17,14 @@ import net.minecraft.world.World;
 public class CraftingManager {
     private static final CraftingManager instance = new CraftingManager();
     
-    private List<IExtendedRecipe> recipes = new ArrayList();
+    private Map<PROFESSION, List<IExtendedRecipe>> recipes = new HashMap<PROFESSION, List<IExtendedRecipe>>();
 
 
 	private CraftingManager() {
+		for (PROFESSION profession : PROFESSION.values()) {
+			recipes.put(profession, new ArrayList<IExtendedRecipe>());
+		}
+
 		addRecipe(PROFESSION.MINER, 0, new ItemStack(WakcraftItems.bomb), new ItemStack(WakcraftItems.canoonPowder), new ItemStack(WakcraftItems.clay, 3), new ItemStack(WakcraftItems.itemOre1, 3));
 		addRecipe(PROFESSION.MINER, 0, new ItemStack(WakcraftItems.fossil), new ItemStack(WakcraftItems.waterBucket, 2), new ItemStack(WakcraftItems.driedDung, 3));
 		addRecipe(PROFESSION.MINER, 10, new ItemStack(WakcraftItems.shamPearl), new ItemStack(WakcraftItems.pearl, 3), new ItemStack(WakcraftItems.waterBucket, 2));
@@ -32,7 +38,7 @@ public class CraftingManager {
 		return instance;
 	}
 
-	public void addRecipe(PROFESSION prefession, int level, ItemStack result, Object... recipe) {
+	public void addRecipe(PROFESSION profession, int level, ItemStack result, Object... recipe) {
 		ArrayList recipeList = new ArrayList();
 
 		int nbIngredients = recipe.length;
@@ -50,11 +56,11 @@ public class CraftingManager {
 			}
 		}
 
-		recipes.add(new RecipeWithLevel(result, recipeList, level));
+		recipes.get(profession).add(new RecipeWithLevel(result, recipeList, level));
 	}
 
-	public ItemStack findMatchingRecipe(InventoryCrafting inventory, World world) {
-		IExtendedRecipe recipe = getMatchingRecipe(inventory, world);
+	public ItemStack findMatchingRecipe(PROFESSION profession, InventoryCrafting inventory, World world) {
+		IExtendedRecipe recipe = getMatchingRecipe(profession, inventory, world);
 		if (recipe != null) {
 			return recipe.getCraftingResult(inventory);
 		}
@@ -62,9 +68,10 @@ public class CraftingManager {
 		return null;
 	}
 
-	public IExtendedRecipe getMatchingRecipe(InventoryCrafting inventory, World world) {
-		for (int i = 0; i < recipes.size(); ++i) {
-			IExtendedRecipe IExtendedRecipe = (IExtendedRecipe) recipes.get(i);
+	public IExtendedRecipe getMatchingRecipe(PROFESSION profession, InventoryCrafting inventory, World world) {
+		List<IExtendedRecipe> professionRecipes = getRecipeList(profession);
+		for (int i = 0; i < professionRecipes.size(); ++i) {
+			IExtendedRecipe IExtendedRecipe = (IExtendedRecipe) professionRecipes.get(i);
 			if (IExtendedRecipe.matches(inventory, world)) {
 				return IExtendedRecipe;
 			}
@@ -74,6 +81,6 @@ public class CraftingManager {
 	}
 
 	public List<IExtendedRecipe> getRecipeList(PROFESSION profession) {
-		return recipes;
+		return recipes.get(profession);
 	}
 }

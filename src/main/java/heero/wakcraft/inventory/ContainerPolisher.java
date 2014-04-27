@@ -16,12 +16,14 @@ import net.minecraft.world.World;
 public class ContainerPolisher extends Container {
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 5, 1);
 	public IInventory craftResult = new InventoryCraftResult();
+	private PROFESSION profession;
 	private World worldObj;
 
 	public ContainerPolisher(InventoryPlayer inventory, World world, PROFESSION profession) {
 		this.worldObj = world;
+		this.profession = profession;
 
-		this.addSlotToContainer(new SlotComplexCrafting(inventory.player, world, craftMatrix, craftResult, 0, 135, 42));
+		this.addSlotToContainer(new SlotComplexCrafting(inventory.player, world, profession, craftMatrix, craftResult, 0, 135, 42));
 
 		for (int i = 0; i < 5; ++i) {
 			this.addSlotToContainer(new Slot(this.craftMatrix, i, 25 + 20 * i, 42));
@@ -50,7 +52,7 @@ public class ContainerPolisher extends Container {
 	}
 
 	public void onCraftMatrixChanged(IInventory par1IInventory) {
-		this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, this.worldObj));
+		this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(profession, craftMatrix, worldObj));
 	}
 
 	/**

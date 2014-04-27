@@ -2,6 +2,7 @@ package heero.wakcraft.inventory;
 
 import heero.wakcraft.crafting.CraftingManager;
 import heero.wakcraft.crafting.IExtendedRecipe;
+import heero.wakcraft.profession.ProfessionManager.PROFESSION;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
@@ -13,12 +14,14 @@ import cpw.mods.fml.common.FMLCommonHandler;
 public class SlotComplexCrafting extends SlotCrafting {
 	private InventoryCrafting inventoryCrafting;
 	private World world;
+	private PROFESSION profession;
 
-	public SlotComplexCrafting(EntityPlayer player, World world, InventoryCrafting inventoryCrafting, IInventory inventory, int slotId, int x, int y) {
+	public SlotComplexCrafting(EntityPlayer player, World world, PROFESSION profession, InventoryCrafting inventoryCrafting, IInventory inventory, int slotId, int x, int y) {
 		super(player, inventoryCrafting, inventory, slotId, x, y);
 
 		this.inventoryCrafting = inventoryCrafting;
 		this.world = world;
+		this.profession = profession;
 	}
 
 	@Override
@@ -26,7 +29,7 @@ public class SlotComplexCrafting extends SlotCrafting {
 		FMLCommonHandler.instance().firePlayerCraftingEvent(player, stack, inventoryCrafting);
 		this.onCrafting(stack);
 
-		IExtendedRecipe recipe = CraftingManager.getInstance().getMatchingRecipe(inventoryCrafting, world);
+		IExtendedRecipe recipe = CraftingManager.getInstance().getMatchingRecipe(profession, inventoryCrafting, world);
 		if (recipe == null) {
 			// Something is not right !
 			return;
