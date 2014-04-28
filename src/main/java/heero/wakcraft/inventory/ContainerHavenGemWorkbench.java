@@ -43,39 +43,35 @@ public class ContainerHavenGemWorkbench extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slot_index) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
 		ItemStack stack = null;
 
-		Slot slot_object = (Slot) this.inventorySlots.get(slot_index);
-		if (slot_object != null && slot_object.getHasStack()) {
-			ItemStack stack_in_slot = slot_object.getStack();
+		Slot slot = (Slot) this.inventorySlots.get(slotId);
+		if (slot != null && slot.getHasStack()) {
+			ItemStack stack_in_slot = slot.getStack();
 			stack = stack_in_slot.copy();
 
-			if (slot_index == 0) {
-				if (!this.mergeItemStack(stack_in_slot, 6, 42, true)) {
+			if (slotId >= 9 && slotId < 36) {
+				if (!this.mergeItemStack(stack_in_slot, 36, 45, false)) {
 					return null;
 				}
-
-				slot_object.onSlotChange(stack_in_slot, stack);
-			} else if (slot_index >= 6 && slot_index < 42) {
-				if (!this.mergeItemStack(stack_in_slot, 1, 6, false)) {
+			} else {
+				if (!this.mergeItemStack(stack_in_slot, 9, 36, false)) {
 					return null;
 				}
-			} else if (!this.mergeItemStack(stack_in_slot, 6, 42, false)) {
-				return null;
 			}
 
 			if (stack_in_slot.stackSize == 0) {
-				slot_object.putStack((ItemStack) null);
+				slot.putStack((ItemStack) null);
 			} else {
-				slot_object.onSlotChanged();
+				slot.onSlotChanged();
 			}
 
 			if (stack_in_slot.stackSize == stack.stackSize) {
 				return null;
 			}
 
-			slot_object.onPickupFromSlot(player, stack_in_slot);
+			slot.onPickupFromSlot(player, stack_in_slot);
 		}
 
 		return stack;
