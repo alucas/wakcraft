@@ -13,7 +13,8 @@ public class WakcraftItems extends Items {
 	public static Item gobballWool, gobballSkin, gobballHorn, woollyKey,
 			itemOre1, itemOre2, canoonPowder, clay, waterBucket, driedDung,
 			pearl, moonstone, bomb, fossil, shamPearl, verbalasalt, gumgum,
-			polishedmoonstone, shadowyBlue;
+			polishedmoonstone, shadowyBlue, merchantHG, decoHG, craftHG,
+			gardenHG;
 
 	public static void registerItems() {
 		GameRegistry.registerItem(gobballWool = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GobballWool").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gobballwool")), "GobballWool");
@@ -35,5 +36,9 @@ public class WakcraftItems extends Items {
 		GameRegistry.registerItem(gumgum= ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GumGum").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gumgum")), "ItemGumGum");
 		GameRegistry.registerItem(polishedmoonstone = ((new ItemWithLevel(20)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("PolishedMoonstone").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":polishedmoonstone")), "ItemPolishedMoonstone");
 		GameRegistry.registerItem(shadowyBlue = ((new ItemWithLevel(25)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("ShadowyBlue").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":shadowyblue")), "ItemShadowyBlue");
+		GameRegistry.registerItem(merchantHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("MerchantHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":merchanthg")), "ItemMerchantHG");
+		GameRegistry.registerItem(decoHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("DecoHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":decohg")), "ItemDecoHG");
+		GameRegistry.registerItem(craftHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("CraftHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":crafthg")), "ItemCraftHG");
+		GameRegistry.registerItem(gardenHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GardenHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gardenhg")), "ItemGardenHG");
 	}
 }
