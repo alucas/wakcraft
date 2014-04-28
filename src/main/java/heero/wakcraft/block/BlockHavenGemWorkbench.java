@@ -1,0 +1,42 @@
+package heero.wakcraft.block;
+
+import heero.wakcraft.Wakcraft;
+import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.wakcraft.network.GuiHandler;
+import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
+public class BlockHavenGemWorkbench extends BlockContainer {
+
+	public BlockHavenGemWorkbench() {
+		super(Material.wood);
+		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
+		setBlockName("HavenGemWorkbench");
+		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":havengemworkbench");
+	}
+
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+
+		if (world.isRemote) {
+			return true;
+		}
+
+		player.openGui(Wakcraft.instance, GuiHandler.GUI_HAVEN_GEM_WORKBENCH, world, x, y, z);
+
+		return true;
+	}
+
+	/**
+	 * Returns a new instance of a block's tile entity class. Called on placing
+	 * the block.
+	 */
+	@Override
+	public TileEntity createNewTileEntity(World world, int var2) {
+		return new TileEntityHavenGemWorkbench();
+	}
+}
