@@ -48,12 +48,10 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 
 		NBTTagList nbttaglist = new NBTTagList();
 
-		System.err.println("write items :");
 		for (int i = 0; i < havenGems.getSizeInventory(); ++i) {
 			ItemStack stack = havenGems.getStackInSlot(i);
 
 			if (stack != null) {
-				System.err.println(stack.getDisplayName());
 				int itemId = Item.getIdFromItem(stack.getItem());
 				if (itemId == Item.getIdFromItem(WakcraftItems.decoHG)
 						|| itemId == Item.getIdFromItem(WakcraftItems.merchantHG)
