@@ -93,7 +93,11 @@ public class ContainerHavenGemWorkbench extends Container {
 			}
 
 			int itemId = Item.getIdFromItem(stack.getItem());
-			if (itemId == Item.getIdFromItem(WakcraftItems.decoHG)
+			if (slotNumber == 0) {
+				if (itemId == Item.getIdFromItem(WakcraftItems.merchantHG)) {
+					return true;
+				}
+			} else if (itemId == Item.getIdFromItem(WakcraftItems.decoHG)
 					|| itemId == Item.getIdFromItem(WakcraftItems.merchantHG)
 					|| itemId == Item.getIdFromItem(WakcraftItems.craftHG)
 					|| itemId == Item.getIdFromItem(WakcraftItems.gardenHG)) {
@@ -108,7 +112,7 @@ public class ContainerHavenGemWorkbench extends Container {
 		 * getInventoryStackLimit(), but 1 in the case of armor slots)
 		 */
 		public int getSlotStackLimit() {
-			return 2;
+			return (slotNumber == 0) ? 1 : 2;
 		}
 	}
 }
