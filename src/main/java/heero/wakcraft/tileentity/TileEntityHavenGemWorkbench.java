@@ -1,14 +1,16 @@
 package heero.wakcraft.tileentity;
 
 import heero.wakcraft.WakcraftItems;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityHavenGemWorkbench extends TileEntity {
+public class TileEntityHavenGemWorkbench extends TileEntity implements IInventory {
 	private static final String ID_GEMS = "gems";
 
 	protected IInventory havenGems = new InventoryBasic("HGContainer", false, 9);
@@ -16,28 +18,27 @@ public class TileEntityHavenGemWorkbench extends TileEntity {
 	public void readFromNBT(NBTTagCompound reader) {
 		super.readFromNBT(reader);
 
-		int[] gemIds = reader.getIntArray("gems");
-		if (gemIds.length != 18) {
-			System.err.println("Wrong haven gem NBT array size");
+		NBTTagList nbttaglist = reader.getTagList("Gems", 10);
 
-			return;
-		}
+		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+			NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
 
-		for (int i = 0; i < gemIds.length; i += 2) {
-			if (gemIds[i] == Item.getIdFromItem(WakcraftItems.decoHG)) {
-				havenGems.setInventorySlotContents(i % 2, new ItemStack(WakcraftItems.decoHG, 0, gemIds[i + 1]));
-			} else if (gemIds[i] == Item.getIdFromItem(WakcraftItems.merchantHG)) {
-				havenGems.setInventorySlotContents(i % 2, new ItemStack(WakcraftItems.merchantHG, 0, gemIds[i + 1]));
-			} else if (gemIds[i] == Item.getIdFromItem(WakcraftItems.gardenHG)) {
-				havenGems.setInventorySlotContents(i % 2, new ItemStack(WakcraftItems.gardenHG, 0, gemIds[i + 1]));
-			} else if (gemIds[i] == Item.getIdFromItem(WakcraftItems.craftHG)) {
-				havenGems.setInventorySlotContents(i % 2, new ItemStack(WakcraftItems.craftHG, 0, gemIds[i + 1]));
-			} else if (gemIds[i] == 0) {
-				continue;
-			} else {
-				System.err.println("Unknow haven gem identifier");
+			int slotId = nbttagcompound.getByte("Slot") & 255;
 
-				continue;
+			if (slotId >= 0 && slotId < havenGems.getSizeInventory()) {
+				ItemStack stack = ItemStack.loadItemStackFromNBT(nbttagcompound);
+
+				int itemId = Item.getIdFromItem(stack.getItem());
+				if (itemId == Item.getIdFromItem(WakcraftItems.decoHG)
+						|| itemId == Item.getIdFromItem(WakcraftItems.merchantHG)
+						|| itemId == Item.getIdFromItem(WakcraftItems.craftHG)
+						|| itemId == Item.getIdFromItem(WakcraftItems.gardenHG)) {
+					havenGems.setInventorySlotContents(slotId, stack);
+				} else {
+					System.err.println("This item is not a haven gem identifier");
+
+					continue;
+				}
 			}
 		}
 	}
@@ -45,21 +46,93 @@ public class TileEntityHavenGemWorkbench extends TileEntity {
 	public void writeToNBT(NBTTagCompound writer) {
 		super.writeToNBT(writer);
 
-		int[] gemIds = new int[18];
-		for (int i = 0; i < gemIds.length; i += 2) {
-			ItemStack stack = havenGems.getStackInSlot(i % 2);
-			if (stack == null) {
-				continue;
-			}
+		NBTTagList nbttaglist = new NBTTagList();
 
-			gemIds[i] = Item.getIdFromItem(stack.getItem());
-			gemIds[i + 1] = stack.stackSize;
+		System.err.println("write items :");
+		for (int i = 0; i < havenGems.getSizeInventory(); ++i) {
+			ItemStack stack = havenGems.getStackInSlot(i);
+
+			if (stack != null) {
+				System.err.println(stack.getDisplayName());
+				int itemId = Item.getIdFromItem(stack.getItem());
+				if (itemId == Item.getIdFromItem(WakcraftItems.decoHG)
+						|| itemId == Item.getIdFromItem(WakcraftItems.merchantHG)
+						|| itemId == Item.getIdFromItem(WakcraftItems.craftHG)
+						|| itemId == Item.getIdFromItem(WakcraftItems.gardenHG)) {
+					NBTTagCompound nbttagcompound = new NBTTagCompound();
+					nbttagcompound.setByte("Slot", (byte) i);
+
+					stack.writeToNBT(nbttagcompound);
+
+					nbttaglist.appendTag(nbttagcompound);
+				} else {
+					System.err.println("This item is not a haven gem identifier");
+
+					continue;
+				}
+			}
 		}
 
-		writer.setIntArray("gems", gemIds);
+		writer.setTag("Gems", nbttaglist);
 	}
 
-	public IInventory getInventory() {
-		return havenGems;
+	@Override
+	public int getSizeInventory() {
+		return havenGems.getSizeInventory();
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int slotId) {
+		return havenGems.getStackInSlot(slotId);
+	}
+
+	@Override
+	public ItemStack decrStackSize(int slotId, int quantity) {
+		return havenGems.decrStackSize(slotId, quantity);
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slotId) {
+		return havenGems.getStackInSlotOnClosing(slotId);
+	}
+
+	@Override
+	public void setInventorySlotContents(int slotId, ItemStack stack) {
+		havenGems.setInventorySlotContents(slotId, stack);
+	}
+
+	@Override
+	public String getInventoryName() {
+		return havenGems.getInventoryName();
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return havenGems.hasCustomInventoryName();
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		return havenGems.getInventoryStackLimit();
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer player) {
+		return havenGems.isUseableByPlayer(player);
+	}
+
+	@Override
+	public void openInventory() {
+		havenGems.openInventory();
+	}
+
+	@Override
+	public void closeInventory() {
+		havenGems.closeInventory();
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int slotId, ItemStack stack) {
+		return havenGems.isItemValidForSlot(slotId, stack);
 	}
 }

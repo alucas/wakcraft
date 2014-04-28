@@ -1,28 +1,25 @@
 package heero.wakcraft.inventory;
 
-import heero.wakcraft.crafting.CraftingManager;
-import heero.wakcraft.profession.ProfessionManager.PROFESSION;
+import heero.wakcraft.WakcraftItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.inventory.InventoryCraftResult;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ContainerHavenGemWorkbench extends Container {
-	public IInventory hgContainer = new InventoryBasic("HGContainer", false, 9);
+	public IInventory hgContainer;
 	private World worldObj;
 
-	public ContainerHavenGemWorkbench(InventoryPlayer inventory, World world) {
+	public ContainerHavenGemWorkbench(InventoryPlayer inventory, World world, IInventory hgContainer) {
 		this.worldObj = world;
+		this.hgContainer = hgContainer;
 
 		for (int i = 0; i < 9; ++i) {
-			this.addSlotToContainer(new Slot(this.hgContainer, i, 60 + 20 * (i % 3), 15 + 20 * (i / 3)));
+			this.addSlotToContainer(new HGSlot(this.hgContainer, i, 60 + 20 * (i % 3), 15 + 20 * (i / 3)));
 		}
 
 		bindPlayerInventory(inventory);
@@ -82,5 +79,40 @@ public class ContainerHavenGemWorkbench extends Container {
 		}
 
 		return stack;
+	}
+
+	public class HGSlot extends Slot {
+		public HGSlot(IInventory inventory, int slotId, int x, int y) {
+			super(inventory, slotId, x, y);
+		}
+
+		/**
+		 * Check if the stack is a valid item for this slot. Always true beside
+		 * for the armor slots.
+		 */
+		@Override
+		public boolean isItemValid(ItemStack stack) {
+			if (stack == null) {
+				return false;
+			}
+
+			int itemId = Item.getIdFromItem(stack.getItem());
+			if (itemId == Item.getIdFromItem(WakcraftItems.decoHG)
+					|| itemId == Item.getIdFromItem(WakcraftItems.merchantHG)
+					|| itemId == Item.getIdFromItem(WakcraftItems.craftHG)
+					|| itemId == Item.getIdFromItem(WakcraftItems.gardenHG)) {
+				return true;
+			}
+
+			return false;
+		}
+
+		/**
+		 * Returns the maximum stack size for a given slot (usually the same as
+		 * getInventoryStackLimit(), but 1 in the case of armor slots)
+		 */
+		public int getSlotStackLimit() {
+			return 2;
+		}
 	}
 }

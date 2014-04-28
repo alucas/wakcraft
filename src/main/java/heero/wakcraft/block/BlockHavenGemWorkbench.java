@@ -26,6 +26,11 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 			return true;
 		}
 
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if (tile == null && !(tile instanceof TileEntityHavenGemWorkbench)) {
+			return true;
+		}
+
 		player.openGui(Wakcraft.instance, GuiHandler.GUI_HAVEN_GEM_WORKBENCH, world, x, y, z);
 
 		return true;

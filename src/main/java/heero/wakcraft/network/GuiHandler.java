@@ -5,6 +5,7 @@ import heero.wakcraft.client.gui.GUIWorkbench;
 import heero.wakcraft.inventory.ContainerHavenGemWorkbench;
 import heero.wakcraft.inventory.ContainerWorkbench;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
+import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -20,7 +21,8 @@ public class GuiHandler implements IGuiHandler {
 		case GUI_POLISHER:
 			return new ContainerWorkbench(player.inventory, world, PROFESSION.MINER);
 		case GUI_HAVEN_GEM_WORKBENCH:
-			return new ContainerHavenGemWorkbench(player.inventory, world);
+			TileEntityHavenGemWorkbench tile = (TileEntityHavenGemWorkbench)world.getTileEntity(x, y, z);
+			return new ContainerHavenGemWorkbench(player.inventory, world, tile);
 		}
 
 		return null;
@@ -33,7 +35,8 @@ public class GuiHandler implements IGuiHandler {
 		case GUI_POLISHER:
 			return new GUIWorkbench(new ContainerWorkbench(player.inventory, world, PROFESSION.MINER), PROFESSION.MINER);
 		case GUI_HAVEN_GEM_WORKBENCH:
-			return new GUIHavenGemWorkbench(new ContainerHavenGemWorkbench(player.inventory, world));
+			TileEntityHavenGemWorkbench tile = (TileEntityHavenGemWorkbench)world.getTileEntity(x, y, z);
+			return new GUIHavenGemWorkbench(new ContainerHavenGemWorkbench(player.inventory, world, tile));
 		}
 
 		return null;
