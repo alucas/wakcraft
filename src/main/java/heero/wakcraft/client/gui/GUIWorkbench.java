@@ -73,6 +73,27 @@ public class GUIWorkbench extends GuiContainer {
 				fontRendererObj.drawStringWithShadow(Integer.toString(itemStack.stackSize), xSize + 50 + j * 20, 13 + i * 40, (quantity < itemStack.stackSize) ? 0xff0000 : 0xffffff);
 			}
 		}
+
+		for (int i = 0; i < 5; i++) {
+			if (scrollIndex + i >= recipes.size())
+				break;
+
+			IExtendedRecipe recipe = recipes.get(scrollIndex + i);
+			int x = guiLeft + xSize + 11;
+			int y = guiTop + 5 + i * 40;
+			if (mouseX >= x && mouseX < x + 16 && mouseY >= y && mouseY < y + 16) {
+				ItemStack itemStack = recipe.getRecipeOutput();
+				renderToolTip(itemStack, mouseX - guiLeft, mouseY - guiTop);
+			}
+
+			for (int j = 0; j < recipe.getRecipeComponents().size(); j++) {
+				x = guiLeft + xSize + 40 + j * 20;
+				if (mouseX >= x && mouseX < x + 16 && mouseY >= y && mouseY < y + 16) {
+					ItemStack itemStack = (ItemStack) recipe.getRecipeComponents().get(j);
+					renderToolTip(itemStack, mouseX - guiLeft, mouseY - guiTop);
+				}
+			}
+		}
 	}
 
 	@Override
