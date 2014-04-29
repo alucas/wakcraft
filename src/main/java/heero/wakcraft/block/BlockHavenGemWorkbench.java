@@ -9,9 +9,11 @@ import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 public class BlockHavenGemWorkbench extends BlockContainer {
@@ -49,6 +51,15 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+		if (x < 100000 || x % 30 != 0 || z % 30 != 0 || y % 10 != 0) {
+			if (world.isRemote) {
+				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("For safety reason, this block can only be placed farther than x = 100 000, and only at spécifics locations (x%30, y%10, z%30)"));
+				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("x = " + x + ", y = " + y + ", z = " + z));
+			}
+
+			return false;
+		}
+
 		return super.canPlaceBlockAt(world, x, y, z);
 	}
 
