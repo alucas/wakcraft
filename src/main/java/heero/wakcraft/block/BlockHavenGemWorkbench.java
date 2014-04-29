@@ -83,29 +83,25 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int metadata) {
-		fillAir(world, x - 5, y - 1, z - 1, 4);
+		fillAir(world, x - 5, y - 1, z - 1);
 
 		super.breakBlock(world, x, y, z, block, metadata);
 	}
 
 	private void fillWalls(World world, int x, int y, int z, int nbLayer, Block block, int metadata) {
 		for (int i = 0; i < 21; i++) {
-		for (int j = 0; j < 24; j++) {
+			for (int j = 0; j < 24; j++) {
 				if (world.getBlock(x + i, y, z + j) == Blocks.air) {
-					for (int k = 0; k < nbLayer; k++) {
-						world.setBlock(x + i, y + k, z + j, block, metadata, 2);
-					}
+					world.setBlock(x + i, y, z + j, block, metadata, 2);
 				}
 			}
 		}
 	}
 
-	private void fillAir(World world, int x, int y, int z, int nbLayer) {
+	private void fillAir(World world, int x, int y, int z) {
 		for (int i = 0; i < 21; i++) {
 			for (int j = 0; j < 24; j++) {
-				for (int k = 0; k < nbLayer; k++) {
-					world.setBlockToAir(x + i, y + k, z + j);
-				}
+				world.setBlockToAir(x + i, y, z + j);
 			}
 		}
 	}

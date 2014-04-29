@@ -1,12 +1,11 @@
 package heero.wakcraft.inventory;
 
-import heero.wakcraft.WakcraftItems;
+import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -19,15 +18,11 @@ public class ContainerHavenGemWorkbench extends Container {
 		this.hgContainer = hgContainer;
 
 		for (int i = 0; i < 9; ++i) {
-			this.addSlotToContainer(new HGSlot(this.hgContainer, i, 60 + 20 * (i % 3), 15 + 20 * (i / 3)));
+			this.addSlotToContainer(new HGSlot(hgContainer, i * 2 + 0, 55 + 25 * (i % 3), 05 + 25 * (i / 3)));
+			this.addSlotToContainer(new HGSlot(hgContainer, i * 2 + 1, 60 + 25 * (i % 3), 10 + 25 * (i / 3)));
 		}
 
 		bindPlayerInventory(inventory);
-	}
-
-	@Override
-	public boolean canInteractWith(EntityPlayer player) {
-		return true;
 	}
 
 	protected void bindPlayerInventory(InventoryPlayer inventory) {
@@ -43,6 +38,69 @@ public class ContainerHavenGemWorkbench extends Container {
 	}
 
 	@Override
+	public boolean canInteractWith(EntityPlayer player) {
+		return true;
+	}
+
+	public ItemStack slotClick(int slotId, int buttonId, int mode, EntityPlayer player) {
+		if (slotId >= 0 && slotId < inventorySlots.size()) {
+			Slot slot = (Slot) inventorySlots.get(slotId);
+			if (slot instanceof HGSlot) {
+				// left click
+				if (buttonId != 0 || mode != 0) {
+					return null;
+				}
+
+				ItemStack holdStack = player.inventory.getItemStack();
+				ItemStack stack = slot.getStack();
+				if (holdStack != null && stack != null) {
+					return null;
+				}
+
+				// can't interact with slot 0
+				if (slotId == 0) {
+					return null;
+				}
+
+				// Can't pick up a gem in the lower slot if the upper slot isn't empty
+				if (stack != null && slotId % 2 == 0 && ((Slot)inventorySlots.get(slotId + 1)).getHasStack()) {
+					return null;
+				}
+
+				if (holdStack != null && slotId % 2 == 1) {
+					Slot lowerSlot = (Slot)inventorySlots.get(slotId - 1);
+
+					// Can't put a gem in the upper slot if the lower slot isn't empty
+					if (!lowerSlot.getHasStack()) {
+						return null;
+					}
+
+					// can't put different gem in upper and lower slots
+					if (!lowerSlot.getStack().getItem().equals(holdStack.getItem())) {
+						return null;
+					}
+				}
+
+				if (holdStack == null) {
+					player.inventory.setItemStack(stack);
+					slot.putStack((ItemStack)null);
+
+					//slot.onPickupFromSlot(player, holdStack);
+				} else {
+					player.inventory.setItemStack((ItemStack)null);
+					slot.putStack(holdStack);
+				}
+
+				slot.onSlotChanged();
+
+				return stack;
+			}
+		}
+
+		return super.slotClick(slotId, buttonId, mode, player);
+    }
+
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
 		ItemStack stack = null;
 
@@ -51,12 +109,12 @@ public class ContainerHavenGemWorkbench extends Container {
 			ItemStack stack_in_slot = slot.getStack();
 			stack = stack_in_slot.copy();
 
-			if (slotId >= 9 && slotId < 36) {
-				if (!this.mergeItemStack(stack_in_slot, 36, 45, false)) {
+			if (slotId >= 18 && slotId < 45) {
+				if (!this.mergeItemStack(stack_in_slot, 45, 54, false)) {
 					return null;
 				}
 			} else {
-				if (!this.mergeItemStack(stack_in_slot, 9, 36, false)) {
+				if (!this.mergeItemStack(stack_in_slot, 18, 45, false)) {
 					return null;
 				}
 			}
@@ -82,37 +140,29 @@ public class ContainerHavenGemWorkbench extends Container {
 			super(inventory, slotId, x, y);
 		}
 
-		/**
-		 * Check if the stack is a valid item for this slot. Always true beside
-		 * for the armor slots.
-		 */
 		@Override
-		public boolean isItemValid(ItemStack stack) {
-			if (stack == null) {
-				return false;
-			}
+		public void onSlotChanged() {
+			super.onSlotChanged();
 
-			int itemId = Item.getIdFromItem(stack.getItem());
-			if (slotNumber == 0) {
-				if (itemId == Item.getIdFromItem(WakcraftItems.merchantHG)) {
-					return true;
-				}
-			} else if (itemId == Item.getIdFromItem(WakcraftItems.decoHG)
-					|| itemId == Item.getIdFromItem(WakcraftItems.merchantHG)
-					|| itemId == Item.getIdFromItem(WakcraftItems.craftHG)
-					|| itemId == Item.getIdFromItem(WakcraftItems.gardenHG)) {
-				return true;
+			if (inventory instanceof TileEntityHavenGemWorkbench) {
+				((TileEntityHavenGemWorkbench) inventory).onSlotChanged(getSlotIndex());
 			}
-
-			return false;
 		}
 
 		/**
-		 * Returns the maximum stack size for a given slot (usually the same as
-		 * getInventoryStackLimit(), but 1 in the case of armor slots)
+	     * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
+	     */
+		@Override
+	    public boolean isItemValid(ItemStack stack) {
+	        return inventory.isItemValidForSlot(getSlotIndex(), stack);
+	    }
+
+		/**
+		 * Return whether this slot's stack can be taken from this slot.
 		 */
-		public int getSlotStackLimit() {
-			return (slotNumber == 0) ? 1 : 2;
+		@Override
+		public boolean canTakeStack(EntityPlayer player) {
+			return true;
 		}
 	}
 }
