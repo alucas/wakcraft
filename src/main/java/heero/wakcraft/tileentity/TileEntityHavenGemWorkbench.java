@@ -17,6 +17,12 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 
 	protected IInventory havenGems = new InventoryBasic("HGContainer", false, 18);
 
+	public TileEntityHavenGemWorkbench() {
+		super();
+
+		havenGems.setInventorySlotContents(0, new ItemStack(WakcraftItems.merchantHG));
+	}
+
 	public void readFromNBT(NBTTagCompound reader) {
 		super.readFromNBT(reader);
 
