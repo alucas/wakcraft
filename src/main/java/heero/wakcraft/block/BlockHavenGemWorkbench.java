@@ -1,6 +1,7 @@
 package heero.wakcraft.block;
 
 import heero.wakcraft.Wakcraft;
+import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.network.GuiHandler;
@@ -76,7 +77,7 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 			}
 		}
 
-		fillWalls(world, x - 5, y - 1, z - 1, 4, Blocks.glass_pane, 0);
+		fillWalls(world, x - 5, y - 1, z - 1, 4, WakcraftBlocks.invisiblewall, 0);
 
 		super.onBlockAdded(world, x, y, z);
 	}
@@ -92,7 +93,9 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 		for (int i = 0; i < 21; i++) {
 			for (int j = 0; j < 24; j++) {
 				if (world.getBlock(x + i, y, z + j) == Blocks.air) {
-					world.setBlock(x + i, y, z + j, block, metadata, 2);
+					for (int k = 0; k < 4; k++) {
+						world.setBlock(x + i, y + k, z + j, block, metadata, 2);
+					}
 				}
 			}
 		}
@@ -101,7 +104,9 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 	private void fillAir(World world, int x, int y, int z) {
 		for (int i = 0; i < 21; i++) {
 			for (int j = 0; j < 24; j++) {
-				world.setBlockToAir(x + i, y, z + j);
+				for (int k = 0; k < 4; k++) {
+					world.setBlockToAir(x + i, y + k, z + j);
+				}
 			}
 		}
 	}
