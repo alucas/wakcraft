@@ -36,9 +36,9 @@ public class WakcraftItems extends Items {
 		GameRegistry.registerItem(gumgum= ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GumGum").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gumgum")), "ItemGumGum");
 		GameRegistry.registerItem(polishedmoonstone = ((new ItemWithLevel(20)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("PolishedMoonstone").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":polishedmoonstone")), "ItemPolishedMoonstone");
 		GameRegistry.registerItem(shadowyBlue = ((new ItemWithLevel(25)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("ShadowyBlue").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":shadowyblue")), "ItemShadowyBlue");
-		GameRegistry.registerItem(merchantHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("MerchantHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":merchanthg")), "ItemMerchantHG");
-		GameRegistry.registerItem(decoHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("DecoHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":decohg")), "ItemDecoHG");
-		GameRegistry.registerItem(craftHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("CraftHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":crafthg")), "ItemCraftHG");
-		GameRegistry.registerItem(gardenHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GardenHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gardenhg")), "ItemGardenHG");
+		GameRegistry.registerItem(merchantHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("MerchantHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":merchanthg").setMaxStackSize(1)), "ItemMerchantHG");
+		GameRegistry.registerItem(decoHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("DecoHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":decohg").setMaxStackSize(1)), "ItemDecoHG");
+		GameRegistry.registerItem(craftHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("CraftHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":crafthg").setMaxStackSize(1)), "ItemCraftHG");
+		GameRegistry.registerItem(gardenHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GardenHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gardenhg").setMaxStackSize(1)), "ItemGardenHG");
 	}
 }
