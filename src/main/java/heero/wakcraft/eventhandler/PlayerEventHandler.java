@@ -1,6 +1,7 @@
 package heero.wakcraft.eventhandler;
 
 import heero.wakcraft.Wakcraft;
+import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.entity.property.XpProfessionProperty;
 import heero.wakcraft.network.packet.ProfessionPacket;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +16,7 @@ public class PlayerEventHandler {
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
 			player.registerExtendedProperties(XpProfessionProperty.IDENTIFIER, new XpProfessionProperty());
+			player.registerExtendedProperties(HavenBagProperty.IDENTIFIER, new HavenBagProperty());
 		}
 	}
 

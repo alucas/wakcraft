@@ -5,6 +5,7 @@ import heero.wakcraft.block.BlockDragoexpress;
 import heero.wakcraft.block.BlockFence1;
 import heero.wakcraft.block.BlockGrass;
 import heero.wakcraft.block.BlockHBStand;
+import heero.wakcraft.block.BlockHavenBag;
 import heero.wakcraft.block.BlockHavenGemWorkbench;
 import heero.wakcraft.block.BlockInvisibleWall;
 import heero.wakcraft.block.BlockOre1;
@@ -38,7 +39,7 @@ public class WakcraftBlocks {
 	public static Block dragoexpress, phoenix, sufokiaColor, sufokiaSun,
 			sufokiaWave, sufokiaStair, ore1, ore2, ore3, ore4, carpet1,
 			sufokiaGround, palisade, pillar, wood, hbstand, grass, fence,
-			polisher, havenGemWorkbench, invisiblewall;
+			polisher, havenGemWorkbench, invisiblewall, havenbag;
 
 	public static void registerBlocks() {
 		// Basic blocks
@@ -59,6 +60,7 @@ public class WakcraftBlocks {
 		GameRegistry.registerBlock(grass = (new BlockGrass()), ItemBlockGrass.class, "blockGrass");
 		GameRegistry.registerBlock(fence = (new BlockFence1(WakcraftInfo.MODID.toLowerCase() + ":palisade1", Material.wood)), "blockFence");
 		GameRegistry.registerBlock(invisiblewall = (new BlockInvisibleWall()), "blockInvisibleWall");
+		GameRegistry.registerBlock(havenbag = (new BlockHavenBag()), "blockHavenBag");
 		
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":polisher")), "BlockPolisher");
