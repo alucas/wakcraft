@@ -66,6 +66,7 @@ public class HavenBagPacket implements IPacket {
 		TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tileEntity;
 		tileHavenBag.uid = properties.uid;
 		tileHavenBag.markDirty();
+		tileHavenBag.updateEntity();
 
 		int[] coords = HavenBagManager.getCoordFromUID(properties.uid);
 		player.setPosition(coords[0] + 0.5, coords[1], coords[2] + 0.5);
