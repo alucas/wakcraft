@@ -2,6 +2,7 @@ package heero.wakcraft.block;
 
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
 import net.minecraft.block.BlockContainer;
@@ -32,6 +33,16 @@ public class BlockHavenBag extends BlockContainer {
 					System.out.println("That haven bag is actualy locaked");
 					return true;
 				}
+
+				HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+				if (properties == null) {
+					System.err.println("Error while loading player properties");
+					return true;
+				}
+
+				properties.posX = player.posX;
+				properties.posY = player.posY;
+				properties.posZ = player.posZ;
 
 				int[] coords = HavenBagManager.getCoordFromUID(tileHavenBag.uid);
 				player.rotationYaw = -90;
