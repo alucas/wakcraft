@@ -53,4 +53,18 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 		posY = tagHavenBag.getDouble(TAG_POS_Y);
 		posZ = tagHavenBag.getDouble(TAG_POS_Z);
 	}
+
+	public void setEnterHavenBag(double posX, double posY, double posZ) {
+		this.posX = posX;
+		this.posY = posY;
+		this.posZ = posZ;
+		inHavenBag = true;
+	}
+
+	public void setLeaveHavenBag() {
+		posX = 0;
+		posY = 0;
+		posZ = 0;
+		inHavenBag = false;
+	}
 }

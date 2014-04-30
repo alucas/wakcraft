@@ -31,6 +31,20 @@ public class HavenBagPacket implements IPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
+		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+		if (properties == null) {
+			System.err.println("Error while loading player properties");
+			return;
+		}
+
+		if (properties.inHavenBag) {
+			player.setPositionAndUpdate(properties.posX, properties.posY, properties.posZ);
+
+			properties.setLeaveHavenBag();
+
+			return;
+		}
+
 		if (! player.onGround) {
 			return;
 		}
@@ -41,12 +55,6 @@ public class HavenBagPacket implements IPacket {
 
 		Block block = player.worldObj.getBlock(posX, posY - 1, posZ);
 		if (block == null || (block != null && !block.isOpaqueCube())) {
-			return;
-		}
-
-		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
-		if (properties == null) {
-			System.err.println("Error while loading the haven bag properties");
 			return;
 		}
 

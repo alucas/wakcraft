@@ -79,10 +79,7 @@ public class HavenBagManager {
 			return;
 		}
 
-		properties.posX = player.posX;
-		properties.posY = player.posY;
-		properties.posZ = player.posZ;
-		properties.inHavenBag = true;
+		properties.setEnterHavenBag(player.posX, player.posY, player.posZ);
 
 		int[] coords = HavenBagManager.getCoordFromUID(havenBagUID);
 		player.rotationYaw = -90;
