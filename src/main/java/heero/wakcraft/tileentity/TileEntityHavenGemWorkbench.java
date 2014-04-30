@@ -14,7 +14,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityHavenGemWorkbench extends TileEntity implements IInventory {
-	private static final String ID_GEMS = "gems";
+	private static final String TAG_GEMS = "Gems";
+	private static final String TAG_SLOT = "Slot";
 
 	protected IInventory havenGems = new InventoryBasic("HGContainer", false, 18);
 
@@ -24,20 +25,20 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 		havenGems.setInventorySlotContents(0, new ItemStack(WakcraftItems.merchantHG));
 	}
 
-	public void readFromNBT(NBTTagCompound reader) {
-		super.readFromNBT(reader);
+	public void readFromNBT(NBTTagCompound tagRoot) {
+		super.readFromNBT(tagRoot);
 
-		NBTTagList nbttaglist = reader.getTagList("Gems", 10);
+		NBTTagList tagGems = tagRoot.getTagList(TAG_GEMS, 10);
 
-		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-			NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
+		for (int i = 0; i < tagGems.tagCount(); ++i) {
+			NBTTagCompound tagGem = tagGems.getCompoundTagAt(i);
 
-			int slotId = nbttagcompound.getByte("Slot") & 255;
+			int slotId = tagGem.getByte(TAG_SLOT) & 255;
 
 			if (slotId == 0) {
 				havenGems.setInventorySlotContents(0, new ItemStack(WakcraftItems.merchantHG));
 			} else if (slotId > 0 && slotId < havenGems.getSizeInventory()) {
-				ItemStack stack = ItemStack.loadItemStackFromNBT(nbttagcompound);
+				ItemStack stack = ItemStack.loadItemStackFromNBT(tagGem);
 
 				int itemId = Item.getIdFromItem(stack.getItem());
 				if (itemId == Item.getIdFromItem(WakcraftItems.decoHG)
@@ -54,10 +55,10 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 		}
 	}
 
-	public void writeToNBT(NBTTagCompound writer) {
-		super.writeToNBT(writer);
+	public void writeToNBT(NBTTagCompound tagRoot) {
+		super.writeToNBT(tagRoot);
 
-		NBTTagList nbttaglist = new NBTTagList();
+		NBTTagList tagGems = new NBTTagList();
 
 		for (int i = 0; i < havenGems.getSizeInventory(); ++i) {
 			ItemStack stack = havenGems.getStackInSlot(i);
@@ -68,12 +69,12 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 						|| itemId == Item.getIdFromItem(WakcraftItems.merchantHG)
 						|| itemId == Item.getIdFromItem(WakcraftItems.craftHG)
 						|| itemId == Item.getIdFromItem(WakcraftItems.gardenHG)) {
-					NBTTagCompound nbttagcompound = new NBTTagCompound();
-					nbttagcompound.setByte("Slot", (byte) i);
+					NBTTagCompound tagGem = new NBTTagCompound();
+					tagGem.setByte(TAG_SLOT, (byte) i);
 
-					stack.writeToNBT(nbttagcompound);
+					stack.writeToNBT(tagGem);
 
-					nbttaglist.appendTag(nbttagcompound);
+					tagGems.appendTag(tagGem);
 				} else {
 					System.err.println("This item is not a haven gem identifier");
 
@@ -82,7 +83,7 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 			}
 		}
 
-		writer.setTag("Gems", nbttaglist);
+		tagRoot.setTag(TAG_GEMS, tagGems);
 	}
 
 	@Override
