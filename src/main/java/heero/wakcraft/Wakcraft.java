@@ -1,5 +1,8 @@
 package heero.wakcraft;
 
+import org.lwjgl.input.Keyboard;
+
+import net.minecraft.client.settings.KeyBinding;
 import heero.wakcraft.network.PacketPipeline;
 import heero.wakcraft.network.packet.ProfessionPacket;
 import heero.wakcraft.proxy.CommonProxy;
@@ -36,6 +39,8 @@ public class Wakcraft {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		proxy.registerKeyBindings();
+
 		packetPipeline.initialise();
 		packetPipeline.registerPacket(ProfessionPacket.class);
 	}

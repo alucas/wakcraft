@@ -72,4 +72,7 @@ public class CommonProxy {
 	public void registerGui(Wakcraft wc) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(wc, new GuiHandler());
 	}
+
+	public void registerKeyBindings() {
+	}
 }

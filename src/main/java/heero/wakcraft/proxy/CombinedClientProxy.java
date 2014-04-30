@@ -1,10 +1,10 @@
 package heero.wakcraft.proxy;
 
-import heero.wakcraft.Wakcraft;
 import heero.wakcraft.client.model.ModelGobball;
 import heero.wakcraft.client.model.ModelGobballWC;
 import heero.wakcraft.client.model.ModelGobbette;
 import heero.wakcraft.client.model.ModelGobbly;
+import heero.wakcraft.client.setting.KeyBindings;
 import heero.wakcraft.entity.misc.EntityTextPopup;
 import heero.wakcraft.entity.monster.BlackGobbly;
 import heero.wakcraft.entity.monster.Gobball;
@@ -12,7 +12,7 @@ import heero.wakcraft.entity.monster.GobballWC;
 import heero.wakcraft.entity.monster.Gobbette;
 import heero.wakcraft.entity.monster.WhiteGobbly;
 import heero.wakcraft.eventhandler.GUIEventHandler;
-import heero.wakcraft.network.GuiHandler;
+import heero.wakcraft.eventhandler.KeyInputHandler;
 import heero.wakcraft.renderer.block.RenderBlockOre;
 import heero.wakcraft.renderer.block.RenderBlockPalisade;
 import heero.wakcraft.renderer.block.RenderBlockYRotation;
@@ -24,7 +24,7 @@ import heero.wakcraft.tileentity.TileEntityPhoenix;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class CombinedClientProxy extends CommonProxy{
 
@@ -50,5 +50,14 @@ public class CombinedClientProxy extends CommonProxy{
 		super.registerEvents();
 
 		MinecraftForge.EVENT_BUS.register(new GUIEventHandler());
+	}
+
+	@Override
+	public void registerKeyBindings() {
+		super.registerKeyBindings();
+
+		KeyBindings.init();
+
+		FMLCommonHandler.instance().bus().register(new KeyInputHandler());
 	}
 }
