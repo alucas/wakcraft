@@ -1,10 +1,14 @@
 package heero.wakcraft.network.packet;
 
 import heero.wakcraft.WakcraftBlocks;
+import heero.wakcraft.entity.property.HavenBagProperty;
+import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.tileentity.TileEntityHavenBag;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 
 public class HavenBagPacket implements IPacket {
 	public HavenBagPacket() {
@@ -40,6 +44,30 @@ public class HavenBagPacket implements IPacket {
 			return;
 		}
 
+		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+		if (properties == null) {
+			System.err.println("Error while loading the haven bag properties");
+			return;
+		}
+
+		// Initialisation
+		if (properties.uid == 0) {
+			properties.uid = HavenBagManager.getNextAvailableUID(player.worldObj);
+
+			HavenBagManager.generateHavenBag(player.worldObj, properties.uid);
+		}
+
 		player.worldObj.setBlock(posX, posY, posZ, WakcraftBlocks.havenbag);
+		TileEntity tileEntity = player.worldObj.getTileEntity(posX, posY, posZ);
+		if (tileEntity == null) {
+			System.err.println("Error while loading the tile entity of the haven block");
+		}
+
+		TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tileEntity;
+		tileHavenBag.uid = properties.uid;
+		tileHavenBag.markDirty();
+
+		int[] coords = HavenBagManager.getCoordFromUID(properties.uid);
+		player.setPosition(coords[0], coords[1], coords[2]);
 	}
 }

@@ -7,8 +7,8 @@ public class TileEntityHavenBag extends TileEntity {
 	private static final String TAG_UID = "UID";
 	private static final String TAG_LOCKED = "Locked";
 
-	protected int uid;
-	protected boolean isLocked;
+	public int uid;
+	public boolean isLocked;
 
 	public void readFromNBT(NBTTagCompound tagRoot) {
 		super.readFromNBT(tagRoot);
