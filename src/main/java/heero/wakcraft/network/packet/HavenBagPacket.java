@@ -1,7 +1,9 @@
 package heero.wakcraft.network.packet;
 
+import heero.wakcraft.WakcraftBlocks;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class HavenBagPacket implements IPacket {
@@ -25,6 +27,19 @@ public class HavenBagPacket implements IPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		System.out.println("Enter haven bag.");
+		if (! player.onGround) {
+			return;
+		}
+
+		int posX = (int)Math.floor(player.posX);
+		int posY = (int)Math.floor(player.posY - 0.1) + 1;
+		int posZ = (int)Math.floor(player.posZ);
+
+		Block block = player.worldObj.getBlock(posX, posY - 1, posZ);
+		if (block == null || (block != null && !block.isOpaqueCube())) {
+			return;
+		}
+
+		player.worldObj.setBlock(posX, posY, posZ, WakcraftBlocks.havenbag);
 	}
 }
