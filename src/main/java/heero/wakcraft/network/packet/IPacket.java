@@ -3,8 +3,6 @@ package heero.wakcraft.network.packet;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public interface IPacket {
 
@@ -34,7 +32,6 @@ public interface IPacket {
 	 * 
 	 * @param player the player reference
 	 */
-	@SideOnly(Side.CLIENT)
 	public abstract void handleClientSide(EntityPlayer player);
 
 	/**
@@ -43,6 +40,5 @@ public interface IPacket {
 	 * 
 	 * @param player the player reference
 	 */
-	@SideOnly(Side.SERVER)
 	public abstract void handleServerSide(EntityPlayer player);
 }

@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ProfessionPacket implements IPacket {
 	private Map<PROFESSION, Integer> xps;
@@ -52,7 +50,6 @@ public class ProfessionPacket implements IPacket {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
 	public void handleClientSide(EntityPlayer player) {
 		for (PROFESSION profession : xps.keySet()) {
@@ -60,7 +57,6 @@ public class ProfessionPacket implements IPacket {
 		}
 	}
 
-	@SideOnly(Side.SERVER)
 	@Override
 	public void handleServerSide(EntityPlayer player) {
 	}
