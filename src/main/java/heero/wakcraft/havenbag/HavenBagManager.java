@@ -52,7 +52,10 @@ public class HavenBagManager {
 			}
 		}
 
-		fillWalls(world, x - 1, y - 1, z - 7, 4, WakcraftBlocks.wood, 0);
+		world.setBlock(x + 2, y, z - 3, Blocks.chest, 0, 2);
+		world.setBlock(x + 4, y, z - 6, WakcraftBlocks.havenGemWorkbench, 0, 2);
+
+		fillWalls(world, x - 1, y - 1, z - 7, 4, WakcraftBlocks.invisiblewall, 0);
 	}
 
 	private static void fillWalls(World world, int x, int y, int z, int nbLayer, Block block, int metadata) {
