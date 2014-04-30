@@ -5,8 +5,6 @@ import heero.wakcraft.entity.property.XpProfessionProperty;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ProfessionManager {
 	public static enum PROFESSION {
@@ -56,10 +54,12 @@ public class ProfessionManager {
 
 		int metadata = world.getBlockMetadata(x, y, z);
 		int blockLevel = ((ILevelBlock) block).getLevel(metadata);
-		int blockProfessionXp = ((ILevelBlock) block).getProfessionExp(metadata);
+		int blockProfessionXp = ((ILevelBlock) block)
+				.getProfessionExp(metadata);
 
 		int playerProfessionLevel = getLevel(player, profession);
-		int ponderedXp = getPonderedXp(playerProfessionLevel, blockLevel, blockProfessionXp);
+		int ponderedXp = getPonderedXp(playerProfessionLevel, blockLevel,
+				blockProfessionXp);
 
 		addXp(player, profession, ponderedXp);
 
@@ -68,170 +68,30 @@ public class ProfessionManager {
 
 	public static void addXp(EntityPlayer player, PROFESSION profession,
 			int xpValue) {
-		XpProfessionProperty properties = (XpProfessionProperty) player
-				.getExtendedProperties(XpProfessionProperty.IDENTIFIER);
-		if (properties != null) {
-			switch (profession) {
-			case HERBALIST:
-				properties.xpHerbalist += xpValue;
-				break;
-			case LUMBERJACK:
-				properties.xpLumberjack += xpValue;
-				break;
-			case MINER:
-				properties.xpMiner += xpValue;
-				break;
-			case FARMER:
-				properties.xpFarmer += xpValue;
-				break;
-			case FISHERMAN:
-				properties.xpFisherman += xpValue;
-				break;
-			case TRAPPER:
-				properties.xpTrapper += xpValue;
-				break;
-			case CHEF:
-				properties.xpChef += xpValue;
-				break;
-			case BAKER:
-				properties.xpBaker += xpValue;
-				break;
-			case LEATHER_DEALER:
-				properties.xpLeatherDealer += xpValue;
-				break;
-			case HANDYMAN:
-				properties.xpHandyman += xpValue;
-				break;
-			case CLOSE_COMBAT:
-				properties.xpCloseCombat += xpValue;
-				break;
-			case LONG_DISTANCE:
-				properties.xpLongDistance += xpValue;
-				break;
-			case AREA_OF_EFFECT:
-				properties.xpAreaOfEffect += xpValue;
-				break;
-			case TAILOR:
-				properties.xpTailor += xpValue;
-				break;
-			case ARMORER:
-				properties.xpArmorer += xpValue;
-				break;
-			case JEWELER:
-				properties.xpJeweler += xpValue;
-				break;
-			default:
-				break;
-			}
-		}
+		setXp(player, profession, getXp(player, profession) + xpValue);
 	}
 
-	@SideOnly(Side.CLIENT)
 	public static void setXp(EntityPlayer player, PROFESSION profession,
 			int xpValue) {
 		XpProfessionProperty properties = (XpProfessionProperty) player
 				.getExtendedProperties(XpProfessionProperty.IDENTIFIER);
+
 		if (properties != null) {
-			switch (profession) {
-			case HERBALIST:
-				properties.xpHerbalist = xpValue;
-				break;
-			case LUMBERJACK:
-				properties.xpLumberjack = xpValue;
-				break;
-			case MINER:
-				properties.xpMiner = xpValue;
-				break;
-			case FARMER:
-				properties.xpFarmer = xpValue;
-				break;
-			case FISHERMAN:
-				properties.xpFisherman = xpValue;
-				break;
-			case TRAPPER:
-				properties.xpTrapper = xpValue;
-				break;
-			case CHEF:
-				properties.xpChef = xpValue;
-				break;
-			case BAKER:
-				properties.xpBaker = xpValue;
-				break;
-			case LEATHER_DEALER:
-				properties.xpLeatherDealer = xpValue;
-				break;
-			case HANDYMAN:
-				properties.xpHandyman = xpValue;
-				break;
-			case CLOSE_COMBAT:
-				properties.xpCloseCombat = xpValue;
-				break;
-			case LONG_DISTANCE:
-				properties.xpLongDistance = xpValue;
-				break;
-			case AREA_OF_EFFECT:
-				properties.xpAreaOfEffect = xpValue;
-				break;
-			case TAILOR:
-				properties.xpTailor = xpValue;
-				break;
-			case ARMORER:
-				properties.xpArmorer = xpValue;
-				break;
-			case JEWELER:
-				properties.xpJeweler = xpValue;
-				break;
-			default:
-				break;
-			}
+			properties.setXp(profession, xpValue);
 		}
 	}
 
 	public static int getXp(EntityPlayer player, PROFESSION profession) {
 		XpProfessionProperty properties = (XpProfessionProperty) player
 				.getExtendedProperties(XpProfessionProperty.IDENTIFIER);
+
 		if (properties != null) {
-			switch (profession) {
-			case HERBALIST:
-				return properties.xpHerbalist;
-			case LUMBERJACK:
-				return properties.xpLumberjack;
-			case MINER:
-				return properties.xpMiner;
-			case FARMER:
-				return properties.xpFarmer;
-			case FISHERMAN:
-				return properties.xpFisherman;
-			case TRAPPER:
-				return properties.xpTrapper;
-			case CHEF:
-				return properties.xpChef;
-			case BAKER:
-				return properties.xpBaker;
-			case LEATHER_DEALER:
-				return properties.xpLeatherDealer;
-			case HANDYMAN:
-				return properties.xpHandyman;
-			case CLOSE_COMBAT:
-				return properties.xpCloseCombat;
-			case LONG_DISTANCE:
-				return properties.xpLongDistance;
-			case AREA_OF_EFFECT:
-				return properties.xpAreaOfEffect;
-			case TAILOR:
-				return properties.xpTailor;
-			case ARMORER:
-				return properties.xpArmorer;
-			case JEWELER:
-				return properties.xpJeweler;
-			default:
-				break;
-			}
+			return properties.getXp(profession);
 		}
 
 		return 0;
 	}
-	
+
 	public static int getLevel(EntityPlayer player, PROFESSION profession) {
 		return getLevelFromXp(getXp(player, profession));
 	}
@@ -247,7 +107,7 @@ public class ProfessionManager {
 	private static int getPonderedXp(int professionLvl, int recipeLvl,
 			int recipeXp) {
 		return (int) ((professionLvl <= recipeLvl + 10) ? recipeXp
-				: (professionLvl >= recipeLvl + 30) ? 0
-						: recipeXp * xpFactor[professionLvl - (recipeLvl + 11)]);
+				: (professionLvl >= recipeLvl + 30) ? 0 : recipeXp
+						* xpFactor[professionLvl - (recipeLvl + 11)]);
 	}
 }
