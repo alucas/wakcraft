@@ -4,6 +4,7 @@ import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.settings.KeyBinding;
 import heero.wakcraft.network.PacketPipeline;
+import heero.wakcraft.network.packet.HavenBagPacket;
 import heero.wakcraft.network.packet.ProfessionPacket;
 import heero.wakcraft.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
@@ -35,18 +36,19 @@ public class Wakcraft {
 		proxy.registerRenderers();
 		proxy.registerEvents();
 		proxy.registerGui(this);
+
+		packetPipeline.initialise();
+		packetPipeline.registerPacket(ProfessionPacket.class);
+		packetPipeline.registerPacket(HavenBagPacket.class);
+		packetPipeline.postInitialise();
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		proxy.registerKeyBindings();
-
-		packetPipeline.initialise();
-		packetPipeline.registerPacket(ProfessionPacket.class);
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		packetPipeline.postInitialise();
 	}
 }
