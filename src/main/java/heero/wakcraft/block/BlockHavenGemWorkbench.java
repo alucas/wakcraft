@@ -51,74 +51,10 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		if (x < 100000 || x % 30 != 0 || z % 30 != 0 || y % 10 != 0) {
-			if (world.isRemote) {
-				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("For safety reason, this block can only be placed farther than x = 100 000, and only at spécifics locations (x%30, y%10, z%30)"));
-				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("x = " + x + ", y = " + y + ", z = " + z));
-			}
-
-			return false;
+		if (world.isRemote) {
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Can't place this block manualy"));
 		}
 
-		return super.canPlaceBlockAt(world, x, y, z);
-	}
-
-	/**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
-	@Override
-    public void onBlockAdded(World world, int x, int y, int z) {
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				world.setBlock(x - 2 + i, y - 1, z + j, Blocks.stone);
-			}
-		}
-
-		for (int i = 0; i < 2; i++) {
-			world.setBlock(x - 1 + i, y - 1, z + 4, Blocks.stone_slab, 8, 2);
-		}
-
-		for (int i = 0; i < 2; i++) {
-			world.setBlock(x - 4 + i, y - 1, z + 7, Blocks.stone_slab, 8, 2);
-		}
-
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				world.setBlock(x - 2 + i, y - 1, z + 5 + j, Blocks.planks);
-			}
-		}
-
-		fillWalls(world, x - 5, y - 1, z - 1, 4, WakcraftBlocks.invisiblewall, 0);
-
-		super.onBlockAdded(world, x, y, z);
-	}
-
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int metadata) {
-		fillAir(world, x - 5, y - 1, z - 1);
-
-		super.breakBlock(world, x, y, z, block, metadata);
-	}
-
-	private void fillWalls(World world, int x, int y, int z, int nbLayer, Block block, int metadata) {
-		for (int i = 0; i < 21; i++) {
-			for (int j = 0; j < 24; j++) {
-				if (world.getBlock(x + i, y, z + j) == Blocks.air) {
-					for (int k = 0; k < 4; k++) {
-						world.setBlock(x + i, y + k, z + j, block, metadata, 2);
-					}
-				}
-			}
-		}
-	}
-
-	private void fillAir(World world, int x, int y, int z) {
-		for (int i = 0; i < 21; i++) {
-			for (int j = 0; j < 24; j++) {
-				for (int k = 0; k < 4; k++) {
-					world.setBlockToAir(x + i, y + k, z + j);
-				}
-			}
-		}
+		return false;
 	}
 }

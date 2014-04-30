@@ -1,18 +1,12 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.Wakcraft;
-import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
-import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
@@ -29,8 +23,10 @@ public class BlockHavenBag extends BlockContainer {
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		TileEntity tile = world.getTileEntity(x, y, z);
-		if (tile == null && !(tile instanceof TileEntityHavenBag)) {
-			return true;
+		if (tile != null && (tile instanceof TileEntityHavenBag)) {
+			TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tile;
+
+			System.out.println((world.isRemote ? "client" : "server") + " : " + tileHavenBag.uid);
 		}
 
 		return true;
