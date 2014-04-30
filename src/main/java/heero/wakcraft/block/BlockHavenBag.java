@@ -2,6 +2,7 @@ package heero.wakcraft.block;
 
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -22,11 +23,21 @@ public class BlockHavenBag extends BlockContainer {
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		TileEntity tile = world.getTileEntity(x, y, z);
-		if (tile != null && (tile instanceof TileEntityHavenBag)) {
-			TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tile;
+		if (!world.isRemote) {
+			TileEntity tile = world.getTileEntity(x, y, z);
+			if (tile != null && (tile instanceof TileEntityHavenBag)) {
+				TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tile;
 
-			System.out.println((world.isRemote ? "client" : "server") + " : " + tileHavenBag.uid);
+				if (tileHavenBag.isLocked) {
+					System.out.println("That haven bag is actualy locaked");
+					return true;
+				}
+
+				int[] coords = HavenBagManager.getCoordFromUID(tileHavenBag.uid);
+				player.rotationYaw = -90;
+				player.rotationPitch = 0;
+				player.setPositionAndUpdate(coords[0] + 0.5, coords[1], coords[2] + 0.5);
+			}
 		}
 
 		return true;
