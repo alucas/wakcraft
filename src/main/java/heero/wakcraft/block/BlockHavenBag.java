@@ -34,20 +34,7 @@ public class BlockHavenBag extends BlockContainer {
 					return true;
 				}
 
-				HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
-				if (properties == null) {
-					System.err.println("Error while loading player properties");
-					return true;
-				}
-
-				properties.posX = player.posX;
-				properties.posY = player.posY;
-				properties.posZ = player.posZ;
-
-				int[] coords = HavenBagManager.getCoordFromUID(tileHavenBag.uid);
-				player.rotationYaw = -90;
-				player.rotationPitch = 0;
-				player.setPositionAndUpdate(coords[0] + 0.5, coords[1], coords[2] + 0.5);
+				HavenBagManager.teleportPlayerToHavenBag(player, tileHavenBag.uid);
 			}
 		}
 

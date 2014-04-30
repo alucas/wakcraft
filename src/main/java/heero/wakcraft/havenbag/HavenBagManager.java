@@ -1,7 +1,9 @@
 package heero.wakcraft.havenbag;
 
 import heero.wakcraft.WakcraftBlocks;
+import heero.wakcraft.entity.property.HavenBagProperty;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
@@ -68,5 +70,23 @@ public class HavenBagManager {
 				}
 			}
 		}
+	}
+
+	public static void teleportPlayerToHavenBag(EntityPlayer player, int havenBagUID) {
+		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+		if (properties == null) {
+			System.err.println("Error while loading player properties");
+			return;
+		}
+
+		properties.posX = player.posX;
+		properties.posY = player.posY;
+		properties.posZ = player.posZ;
+		properties.inHavenBag = true;
+
+		int[] coords = HavenBagManager.getCoordFromUID(havenBagUID);
+		player.rotationYaw = -90;
+		player.rotationPitch = 0;
+		player.setPositionAndUpdate(coords[0] + 0.5, coords[1], coords[2] + 0.5);
 	}
 }

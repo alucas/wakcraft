@@ -10,17 +10,24 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 
 	private static final String TAG_HAVENBAG = "HavenBag";
 	private static final String TAG_UID = "UID";
+	private static final String TAG_IN_HAVENBAG = "InHavenBag";
 	private static final String TAG_POS_X = "PosX";
 	private static final String TAG_POS_Y = "PosY";
 	private static final String TAG_POS_Z = "PosZ";
 
 	public int uid;
+	public boolean inHavenBag;
 	public double posX;
 	public double posY;
 	public double posZ;
 
 	@Override
 	public void init(Entity entity, World world) {
+		uid = 0;
+		inHavenBag = false;
+		posX = 0;
+		posY = 0;
+		posZ = 0;
 	}
 
 	@Override
@@ -28,6 +35,7 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 		NBTTagCompound tagHavenBag = new NBTTagCompound();
 
 		tagHavenBag.setInteger(TAG_UID, uid);
+		tagHavenBag.setBoolean(TAG_IN_HAVENBAG, inHavenBag);
 		tagHavenBag.setDouble(TAG_POS_X, posX);
 		tagHavenBag.setDouble(TAG_POS_Y, posY);
 		tagHavenBag.setDouble(TAG_POS_Z, posZ);
@@ -40,6 +48,7 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 		NBTTagCompound tagHavenBag = tagRoot.getCompoundTag(TAG_HAVENBAG);
 
 		uid = tagHavenBag.getInteger(TAG_UID);
+		inHavenBag = tagHavenBag.getBoolean(TAG_IN_HAVENBAG);
 		posX = tagHavenBag.getDouble(TAG_POS_X);
 		posY = tagHavenBag.getDouble(TAG_POS_Y);
 		posZ = tagHavenBag.getDouble(TAG_POS_Z);
