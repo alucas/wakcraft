@@ -15,11 +15,11 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 	private static final String TAG_POS_Y = "PosY";
 	private static final String TAG_POS_Z = "PosZ";
 
-	/* Unique Identifier used to know which haven bag belong to the player (0 = no haven bag attributed yet) */
+	/** Unique Identifier used to know which haven bag belong to the player (0 = no haven bag attributed yet) */
 	public int uid;
-	/* The uid of the haven bag the player is currently in (0 = not in an haven bag) */
+	/** The uid of the haven bag the player is currently in (0 = not in an haven bag) */
 	public int havenbag;
-	/* Coordinates of the player before he was teleported to the haven bag */
+	/** Coordinates of the player before he was teleported to the haven bag */
 	public double posX;
 	public double posY;
 	public double posZ;
