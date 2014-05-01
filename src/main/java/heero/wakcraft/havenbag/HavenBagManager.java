@@ -25,6 +25,10 @@ public class HavenBagManager {
 		return new int[] { 100000 + (uid % 10) * 30, 20, (uid / 10) * 30 };
 	}
 
+	public static int getUIDFromCoord(int x, int y, int z) {
+		return ((z + 7) / 30) * 10 + ((x - 99999) / 30);
+	}
+
 	public static void generateHavenBag(World world, int uid) {
 		int[] coords = getCoordFromUID(uid);
 
