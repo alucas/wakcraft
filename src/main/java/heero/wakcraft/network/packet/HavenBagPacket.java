@@ -37,7 +37,7 @@ public class HavenBagPacket implements IPacket {
 			return;
 		}
 
-		if (properties.inHavenBag) {
+		if (properties.isInHavenBag()) {
 			player.setPositionAndUpdate(properties.posX, properties.posY, properties.posZ);
 
 			properties.setLeaveHavenBag();

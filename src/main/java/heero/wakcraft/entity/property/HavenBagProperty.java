@@ -15,8 +15,11 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 	private static final String TAG_POS_Y = "PosY";
 	private static final String TAG_POS_Z = "PosZ";
 
+	/* Unique Identifier used to know which haven bag belong to the player (0 = no haven bag attributed yet) */
 	public int uid;
-	public boolean inHavenBag;
+	/* The uid of the haven bag the player is currently in (0 = not in an haven bag) */
+	public int havenbag;
+	/* Coordinates of the player before he was teleported to the haven bag */
 	public double posX;
 	public double posY;
 	public double posZ;
@@ -24,7 +27,7 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 	@Override
 	public void init(Entity entity, World world) {
 		uid = 0;
-		inHavenBag = false;
+		havenbag = 0;
 		posX = 0;
 		posY = 0;
 		posZ = 0;
@@ -35,7 +38,7 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 		NBTTagCompound tagHavenBag = new NBTTagCompound();
 
 		tagHavenBag.setInteger(TAG_UID, uid);
-		tagHavenBag.setBoolean(TAG_IN_HAVENBAG, inHavenBag);
+		tagHavenBag.setInteger(TAG_IN_HAVENBAG, havenbag);
 		tagHavenBag.setDouble(TAG_POS_X, posX);
 		tagHavenBag.setDouble(TAG_POS_Y, posY);
 		tagHavenBag.setDouble(TAG_POS_Z, posZ);
@@ -48,23 +51,27 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 		NBTTagCompound tagHavenBag = tagRoot.getCompoundTag(TAG_HAVENBAG);
 
 		uid = tagHavenBag.getInteger(TAG_UID);
-		inHavenBag = tagHavenBag.getBoolean(TAG_IN_HAVENBAG);
+		havenbag = tagHavenBag.getInteger(TAG_IN_HAVENBAG);
 		posX = tagHavenBag.getDouble(TAG_POS_X);
 		posY = tagHavenBag.getDouble(TAG_POS_Y);
 		posZ = tagHavenBag.getDouble(TAG_POS_Z);
 	}
 
-	public void setEnterHavenBag(double posX, double posY, double posZ) {
+	public void setEnterHavenBag(double posX, double posY, double posZ, int havenbag) {
 		this.posX = posX;
 		this.posY = posY;
 		this.posZ = posZ;
-		inHavenBag = true;
+		this.havenbag = havenbag;
 	}
 
 	public void setLeaveHavenBag() {
 		posX = 0;
 		posY = 0;
 		posZ = 0;
-		inHavenBag = false;
+		havenbag = 0;
+	}
+
+	public boolean isInHavenBag() {
+		return havenbag != 0;
 	}
 }
