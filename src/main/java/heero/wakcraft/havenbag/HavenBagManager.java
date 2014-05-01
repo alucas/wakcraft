@@ -9,18 +9,16 @@ import net.minecraft.world.World;
 
 public class HavenBagManager {
 	public static int getNextAvailableUID(World world) {
-		int uid = 1;
+		int uid = 0;
 
 		while (true) {
-			int[] coords = getCoordFromUID(uid);
-			if (world.getBlock(coords[0], coords[1], coords[2]).equals(Blocks.air)) {
+			int[] coords = getCoordFromUID(++uid);
+			if (world.getBlock(coords[0], coords[1] - 1, coords[2]).equals(Blocks.air)) {
 				break;
 			}
-
-			uid++;
 		}
 
-		return uid + 1;
+		return uid;
 	}
 
 	public static int[] getCoordFromUID(int uid) {
