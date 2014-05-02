@@ -19,7 +19,9 @@ import heero.wakcraft.renderer.block.RenderBlockYRotation;
 import heero.wakcraft.renderer.entity.RenderTextPopup;
 import heero.wakcraft.renderer.tileentity.RenderDragoexpress;
 import heero.wakcraft.renderer.tileentity.RenderPhoenix;
+import heero.wakcraft.renderer.tileentity.RendererHavenBagChest;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
+import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -39,6 +41,7 @@ public class CombinedClientProxy extends CommonProxy{
     	
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RenderDragoexpress());
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RenderPhoenix());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHavenBagChest.class, new RendererHavenBagChest());
     	
 		RenderingRegistry.registerBlockHandler(new RenderBlockYRotation(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RenderBlockOre(RenderingRegistry.getNextAvailableRenderId()));

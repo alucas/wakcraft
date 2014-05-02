@@ -95,9 +95,17 @@ public class GUITabs extends GuiScreen {
 				if (relativeMouseX >= 0 && relativeMouseX < 29
 						&& relativeMouseY > i * 30
 						&& relativeMouseY < 30 + i * 30) {
-					selectedTab = i;
+					setSelectedTab(i);
 				}
 			}
 		}
+	}
+
+	protected void setSelectedTab(int tabId) {
+		if (tabId < 0 || tabId >= tabs.length) {
+			return;
+		}
+
+		selectedTab = tabId;
 	}
 }
