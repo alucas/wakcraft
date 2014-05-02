@@ -1,6 +1,8 @@
 package heero.wakcraft.block;
 
 import heero.wakcraft.Wakcraft;
+import heero.wakcraft.entity.property.HavenBagProperty;
+import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 
@@ -19,6 +21,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IExtendedEntityProperties;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -131,8 +135,22 @@ public class BlockHavenBagChest extends BlockContainer {
 			return true;
 		}
 
+		IExtendedEntityProperties properties = player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+		if (properties == null || !(properties instanceof HavenBagProperty)) {
+			FMLLog.warning("Error while loading the extended properties of %s", player.getDisplayName());
+
+			return true;
+		}
+
+		int havenBagUID = HavenBagManager.getUIDFromCoord(x, y, z);
+		if (((HavenBagProperty)properties).uid != havenBagUID) {
+			return false;
+		}
+
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if (tileEntity == null && !(tileEntity instanceof TileEntityHavenBagChest)) {
+			FMLLog.warning("Error while loading the haven bag chest tile entity (%d, %d, %d)", x, y, z);
+
 			return true;
 		}
 
