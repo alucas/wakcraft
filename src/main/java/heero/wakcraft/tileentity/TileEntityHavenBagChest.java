@@ -155,7 +155,11 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 	 */
 	@Override
 	public void setInventorySlotContents(int slotId, ItemStack stack) {
-		chestsContents.get(currentChest).put(slotId, stack);
+		if (stack == null) {
+			chestsContents.get(currentChest).remove(slotId);
+		} else {
+			chestsContents.get(currentChest).put(slotId, stack);
+		}
 
 		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
 			stack.stackSize = getInventoryStackLimit();
