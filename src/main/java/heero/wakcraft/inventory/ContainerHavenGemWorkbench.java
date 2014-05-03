@@ -135,6 +135,16 @@ public class ContainerHavenGemWorkbench extends Container {
 		return stack;
 	}
 
+	/**
+	 * Returns true if the player can "drag-spilt" items into this slot,.
+	 * returns true by default. Called to check if the slot can be added to a
+	 * list of Slots to split the held ItemStack across.
+	 */
+	@Override
+	public boolean canDragIntoSlot(Slot slot) {
+		return !(slot instanceof HGSlot);
+	}
+
 	public class HGSlot extends Slot {
 		public HGSlot(IInventory inventory, int slotId, int x, int y) {
 			super(inventory, slotId, x, y);
