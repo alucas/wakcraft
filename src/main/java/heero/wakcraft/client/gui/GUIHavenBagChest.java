@@ -29,6 +29,14 @@ public class GUIHavenBagChest extends GUIContainer {
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 	}
 
+	/**
+	 * Draws either a gradient over the background screen (when it exists) or a
+	 * flat gradient over background.png
+	 */
+	public void drawDefaultBackground() {
+		// no background
+	}
+
 	@Override
 	protected Slot getSlotAtPosition(int x, int y) {
 		for (int k = 0; k < this.inventorySlots.inventorySlots.size(); ++k) {

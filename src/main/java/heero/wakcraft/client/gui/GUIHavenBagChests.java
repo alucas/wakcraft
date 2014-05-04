@@ -12,11 +12,25 @@ public class GUIHavenBagChests extends GUITabs {
 	public GUIHavenBagChests(ContainerHavenBagChest container) {
 		super(new GuiScreen[] { new GUIHavenBagChest(container),
 				new GUIHavenBagChest(container),
+				new GUIHavenBagChest(container),
+				new GUIHavenBagChest(container),
+				new GUIHavenBagChest(container),
+				new GUIHavenBagChest(container),
 				new GUIHavenBagChest(container) });
 
 		this.container = container;
 
 		setSelectedTab(0);
+	}
+
+	/**
+	 * Adds the buttons (and other controls) to the screen in question.
+	 */
+	@Override
+	public void initGui() {
+		super.initGui();
+
+		tabButtonTop = height / 2 - 105;
 	}
 
 	@Override
