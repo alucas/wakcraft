@@ -1,19 +1,19 @@
 package heero.wakcraft.item;
 
-import cpw.mods.fml.common.FMLLog;
 import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import cpw.mods.fml.common.FMLLog;
 
 public class ItemIkiakit extends ItemWithLevel {
 	public ItemIkiakit(String name) {
@@ -60,6 +60,10 @@ public class ItemIkiakit extends ItemWithLevel {
 
 				tileEntityChest.unlockChest(chestId);
 				tileEntityChest.markDirty();
+
+				if (player instanceof EntityPlayerMP) {
+					((EntityPlayerMP) player).playerNetServerHandler.sendPacket(tileEntityChest.getDescriptionPacket());
+				}
 
 				if (world instanceof WorldServer) {
 					((WorldServer) world).func_147487_a("fireworksSpark", x + 0.5, y + 0.5, z + 0.5, 20, 0.5, 0.5, 0.5, 0);
