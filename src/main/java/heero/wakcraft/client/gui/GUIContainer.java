@@ -2,6 +2,7 @@ package heero.wakcraft.client.gui;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import net.minecraft.client.Minecraft;
@@ -114,30 +115,9 @@ public abstract class GUIContainer extends GuiScreen {
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) 240 / 1.0F, (float) 240 / 1.0F);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		hoveredSlot = null;
-		for (int i = 0; i < inventorySlots.inventorySlots.size(); ++i) {
-			Slot slot = (Slot) inventorySlots.inventorySlots.get(i);
-
-			drawSlot(slot);
-
-			if (isMouseOverSlot(slot, mouseX, mouseY) && slot.func_111238_b()) {
-				hoveredSlot = slot;
-
-				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glDisable(GL11.GL_DEPTH_TEST);
-
-				int slotX = slot.xDisplayPosition;
-				int slotY = slot.yDisplayPosition;
-
-				GL11.glColorMask(true, true, true, false);
-
-				drawGradientRect(slotX, slotY, slotX + 16, slotY + 16, -2130706433, -2130706433);
-
-				GL11.glColorMask(true, true, true, true);
-				GL11.glEnable(GL11.GL_LIGHTING);
-				GL11.glEnable(GL11.GL_DEPTH_TEST);
-			}
-		}
+		hoveredSlot = getHoveredSlot(mouseX, mouseY);
+		
+		drawSlots(inventorySlots.inventorySlots, (hoveredSlot == null) ? -1 : hoveredSlot.slotNumber);
 
 		// Forge: Force lighting to be disabled as there are some issue where
 		// lighting would
@@ -193,9 +173,6 @@ public abstract class GUIContainer extends GuiScreen {
 			this.renderToolTip(itemstack1, mouseX, mouseY);
 		}
 
-		mc.getTextureManager().bindTexture(inventoryBackground);
-		drawTexturedModalRect(20, 20, 45, 40, 20, 20);
-
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		RenderHelper.enableStandardItemLighting();
@@ -237,6 +214,18 @@ public abstract class GUIContainer extends GuiScreen {
 	 */
 	protected abstract void drawGuiContainerBackgroundLayer(
 			float renderPartialTicks, int mouseX, int mouseY);
+
+	protected void drawSlots(List slots, int hoveredSlotId) {
+		for (int i = 0; i < inventorySlots.inventorySlots.size(); ++i) {
+			Slot slot = (Slot) inventorySlots.inventorySlots.get(i);
+
+			drawSlot(slot);
+
+			if (slot.slotNumber == hoveredSlotId) {
+				drawSlotOverlay(slot);
+			}
+		}
+	}
 
 	/**
 	 * Render a slot
@@ -312,6 +301,22 @@ public abstract class GUIContainer extends GuiScreen {
 		this.zLevel = 0.0F;
 	}
 
+	protected void drawSlotOverlay(Slot slot) {
+		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+
+		int slotX = slot.xDisplayPosition;
+		int slotY = slot.yDisplayPosition;
+
+		GL11.glColorMask(true, true, true, false);
+
+		drawRect(slotX, slotY, slotX + 16, slotY + 16, 0x80FFFFFF);
+
+		GL11.glColorMask(true, true, true, true);
+		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+	}
+
 	protected void updateDragSplitting() {
 		ItemStack itemstack = this.mc.thePlayer.inventory.getItemStack();
 
@@ -345,6 +350,18 @@ public abstract class GUIContainer extends GuiScreen {
 			Slot slot = (Slot) this.inventorySlots.inventorySlots.get(k);
 
 			if (this.isMouseOverSlot(slot, x, y)) {
+				return slot;
+			}
+		}
+
+		return null;
+	}
+	
+	protected Slot getHoveredSlot(int mouseX, int mouseY) {
+		for (int i = 0; i < inventorySlots.inventorySlots.size(); ++i) {
+			Slot slot = (Slot) inventorySlots.inventorySlots.get(i);
+
+			if (isMouseOverSlot(slot, mouseX, mouseY) && slot.func_111238_b()) {
 				return slot;
 			}
 		}

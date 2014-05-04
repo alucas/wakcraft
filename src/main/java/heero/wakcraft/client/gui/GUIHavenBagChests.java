@@ -15,12 +15,14 @@ public class GUIHavenBagChests extends GUITabs {
 				new GUIHavenBagChest(container) });
 
 		this.container = container;
+
+		setSelectedTab(0);
 	}
 
 	@Override
 	protected void setSelectedTab(int tabId) {
 		super.setSelectedTab(tabId);
 
-		container.setCurrentChest(tabId);
+		container.updateHBSlots(tabId);
 	}
 }

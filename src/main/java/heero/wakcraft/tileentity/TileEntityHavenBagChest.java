@@ -29,7 +29,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 	private static final String TAG_CHEST_EMERALD = "ChestEmerald";
 	private static final String TAG_ITEMS = "Items";
 	private static final String TAG_SLOT = "Slot";
-	private static final String TAG_LOCKED = "Locked";
+	private static final String TAG_UNLOCKED = "Unlocked";
 
 	public static final int CHEST_NORMAL = 0;
 	public static final int CHEST_SMALL = 1;
@@ -49,8 +49,8 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 	private static final int[] CHESTS_SIZES = new int[] { 14, 14, 21, 21, 21,
 			28, 28 };
 
-	private Map<Integer, Map<Integer, ItemStack>> chestsContents;
-	private int currentChest;
+	private Map<Integer, ItemStack> chestContents;
+	private Map<Integer, Boolean> chestUnlocked;
 
 	/** The current angle of the lid (between 0 and 1) */
 	public float lidAngle;
@@ -70,27 +70,23 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 	@SideOnly(Side.CLIENT)
 	public TileEntityHavenBagChest(int chestType) {
 		cachedChestType = chestType;
-		currentChest = CHEST_NORMAL;
-		chestsContents = new HashMap<Integer, Map<Integer, ItemStack>>();
-		chestsContents.put(currentChest, new HashMap<Integer, ItemStack>());
-	}
-	
-	public void setCurrentChest(int chestId) {
-		if (chestId >= 0 && chestId <= 6) {
-			currentChest = chestId;
-		}
+		chestContents = new HashMap<Integer, ItemStack>();
+		chestUnlocked = new HashMap<Integer, Boolean>();
+		chestUnlocked.put(0, true);
 	}
 
-	/**
-	 * Returns the number of slots in the inventory.
-	 */
+	public int getSizeInventory(int chestId) {
+		return CHESTS_SIZES[chestId];
+	}
+
 	@Override
 	public int getSizeInventory() {
-		if (chestsContents.get(currentChest) == null) {
-			return 0;
+		int inventorySize = 0;
+		for (int size : CHESTS_SIZES) {
+			inventorySize += size;
 		}
-		
-		return CHESTS_SIZES[currentChest];
+
+		return inventorySize;
 	}
 
 	/**
@@ -98,7 +94,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 	 */
 	@Override
 	public ItemStack getStackInSlot(int slotId) {
-		return chestsContents.get(currentChest).get(slotId);
+		return chestContents.get(slotId);
 	}
 
 	/**
@@ -107,10 +103,10 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 	 */
 	@Override
 	public ItemStack decrStackSize(int slotId, int quantity) {
-		ItemStack currentStack = chestsContents.get(currentChest).get(slotId);
+		ItemStack currentStack = chestContents.get(slotId);
 		if (currentStack != null) {
 			if (currentStack.stackSize <= quantity) {
-				chestsContents.get(currentChest).remove(slotId);
+				chestContents.remove(slotId);
 				markDirty();
 
 				return currentStack;
@@ -118,7 +114,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 				ItemStack itemstack = currentStack.splitStack(quantity);
 
 				if (currentStack.stackSize == 0) {
-					chestsContents.get(currentChest).remove(slotId);
+					chestContents.remove(slotId);
 				}
 
 				markDirty();
@@ -137,9 +133,9 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 	 */
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slotId) {
-		ItemStack currentStack = chestsContents.get(currentChest).get(slotId);
+		ItemStack currentStack = chestContents.get(slotId);
 		if (currentStack != null) {
-			chestsContents.get(currentChest).remove(slotId);
+			chestContents.remove(slotId);
 
 			markDirty();
 
@@ -156,9 +152,9 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 	@Override
 	public void setInventorySlotContents(int slotId, ItemStack stack) {
 		if (stack == null) {
-			chestsContents.get(currentChest).remove(slotId);
+			chestContents.remove(slotId);
 		} else {
-			chestsContents.get(currentChest).put(slotId, stack);
+			chestContents.put(slotId, stack);
 		}
 
 		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
@@ -188,56 +184,52 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 	public void readFromNBT(NBTTagCompound tagRoot) {
 		super.readFromNBT(tagRoot);
 		
+		int inventorySize = 0;
 		for (int chestId : CHESTS) {
-			if (!tagRoot.hasKey(CHESTS_TAGS[chestId])) {
-				continue;
-			}
-
-			Map<Integer, ItemStack> chestContents = new HashMap<Integer, ItemStack>();
-			chestsContents.put(chestId, chestContents);
-
 			NBTTagCompound tagChest = tagRoot.getCompoundTag(CHESTS_TAGS[chestId]);
 			NBTTagList tagItems = tagChest.getTagList(TAG_ITEMS, 10);
 
-			for (int i = 0; i < tagItems.tagCount(); ++i) {
+			chestUnlocked.put(chestId, tagRoot.getBoolean(TAG_UNLOCKED));
+
+			for (int i = 0; i < tagItems.tagCount() && i < CHESTS_SIZES[chestId]; ++i) {
 				NBTTagCompound tagItem = tagItems.getCompoundTagAt(i);
 				int slotId = tagItem.getByte(TAG_SLOT) & 255;
 
 				if (slotId >= 0 && slotId < CHESTS_SIZES[chestId]) {
-					chestContents.put(slotId, ItemStack.loadItemStackFromNBT(tagItem));
+					chestContents.put(inventorySize + slotId, ItemStack.loadItemStackFromNBT(tagItem));
 				}
 			}
+
+			inventorySize += CHESTS_SIZES[chestId];
 		}
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tagRoot) {
 		super.writeToNBT(tagRoot);
-		
+
+		int inventorySize = 0;
 		for (int chestId : CHESTS) {
-			Map<Integer, ItemStack> chestContent = chestsContents.get(chestId);
-			if (chestContent == null) {
-				continue;
-			}
-			
 			NBTTagCompound tagChest = new NBTTagCompound();
 			NBTTagList tagItems = new NBTTagList();
 
-			for (int slotId : chestContent.keySet()) {
-				if (slotId < 0 || slotId >= CHESTS_SIZES[chestId]) {
-					System.err.println("Trying to save a stack in slot : " + slotId);
+			for (int slotId = 0; slotId < CHESTS_SIZES[chestId]; slotId++) {
+				ItemStack stack = chestContents.get(inventorySize + slotId);
+				if (stack == null) {
 					continue;
 				}
-				
+
 				NBTTagCompound tagItem = new NBTTagCompound();
 				tagItem.setByte(TAG_SLOT, (byte) slotId);
-				chestContent.get(slotId).writeToNBT(tagItem);
+				stack.writeToNBT(tagItem);
 
 				tagItems.appendTag(tagItem);
 			}
 
 			tagChest.setTag(TAG_ITEMS, tagItems);
 			tagRoot.setTag(CHESTS_TAGS[chestId], tagChest);
+
+			inventorySize += CHESTS_SIZES[chestId];
 		}
 	}
 
