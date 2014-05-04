@@ -7,7 +7,10 @@ import heero.wakcraft.inventory.ContainerHavenBagChest.HavenBagChestSlot;
 
 import java.util.List;
 
+import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -32,11 +35,28 @@ public class GUIHavenBagChest extends GUIContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTick,
 			int mouseX, int mouseY) {
-		if (((ContainerHavenBagChest) inventorySlots).isChestLocked(chestId)) {
-			mc.getTextureManager().bindTexture(textureBackground);
-		} else {
+		if (!((ContainerHavenBagChest) inventorySlots).isChestUnlocked(chestId)) {
 			mc.getTextureManager().bindTexture(textureBackground_locked);
+
+			drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+
+			ItemStack ikiakitStack = new ItemStack(HavenBagManager.getChestIkiakit(chestId));
+			Slot ikiakitSlot = new Slot(new InventoryBasic("", false, 1), 0, guiLeft + 26, guiTop + 60);
+			ikiakitSlot.putStack(ikiakitStack);
+
+			drawString(fontRendererObj, ikiakitStack.getDisplayName(), guiLeft + 50, guiTop + 50, 0xFFFFFF);
+
+			drawSlot(ikiakitSlot);
+			if (isMouseOverSlot(ikiakitSlot, mouseX + guiLeft, mouseY + guiTop)) {
+				drawSlotOverlay(ikiakitSlot);
+				renderToolTip(ikiakitStack, mouseX, mouseY);
+			}
+
+
+			return;
 		}
+
+		mc.getTextureManager().bindTexture(textureBackground);
 
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 

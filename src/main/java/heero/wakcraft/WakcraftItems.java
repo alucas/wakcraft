@@ -14,7 +14,8 @@ public class WakcraftItems extends Items {
 			itemOre1, itemOre2, canoonPowder, clay, waterBucket, driedDung,
 			pearl, moonstone, bomb, fossil, shamPearl, verbalasalt, gumgum,
 			polishedmoonstone, shadowyBlue, merchantHG, decoHG, craftHG,
-			gardenHG;
+			gardenHG, smallikiakit, goldenikiakit, kitikiakit,
+			adventurerikiakit, collectorikiakit, emeraldikiakit;
 
 	public static void registerItems() {
 		GameRegistry.registerItem(gobballWool = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GobballWool").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gobballwool")), "GobballWool");
@@ -40,5 +41,11 @@ public class WakcraftItems extends Items {
 		GameRegistry.registerItem(decoHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("DecoHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":decohg").setMaxStackSize(1)), "ItemDecoHG");
 		GameRegistry.registerItem(craftHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("CraftHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":crafthg").setMaxStackSize(1)), "ItemCraftHG");
 		GameRegistry.registerItem(gardenHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GardenHG").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":gardenhg").setMaxStackSize(1)), "ItemGardenHG");
+		GameRegistry.registerItem(smallikiakit = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("SmallIkiakit").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":smallikiakit").setMaxStackSize(1)), "ItemSmallIkiakit");
+		GameRegistry.registerItem(goldenikiakit = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GoldenIkiakit").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":goldenikiakit").setMaxStackSize(1)), "ItemGoldenIkiakit");
+		GameRegistry.registerItem(kitikiakit = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("KitIkiakit").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":kitikiakit").setMaxStackSize(1)), "ItemKitIkiakit");
+		GameRegistry.registerItem(adventurerikiakit = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("AdventurerIkiakit").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":adventurerikiakit").setMaxStackSize(1)), "ItemAdventurerIkiakit");
+		GameRegistry.registerItem(collectorikiakit = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("CollectorIkiakit").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":collectorikiakit").setMaxStackSize(1)), "ItemCollectorIkiakit");
+		GameRegistry.registerItem(emeraldikiakit = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("EmeraldIkiakit").setTextureName(WakcraftInfo.MODID.toLowerCase() + ":emeraldikiakit").setMaxStackSize(1)), "ItemEmeraldIkiakit");
 	}
 }

@@ -57,7 +57,7 @@ public class ContainerHavenBagChest extends Container {
 		}
 	}
 
-	public boolean isChestLocked(int chestId) {
+	public boolean isChestUnlocked(int chestId) {
 		return tileEntity.isChestUnlocked(chestId);
 	}
 
