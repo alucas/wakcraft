@@ -15,7 +15,7 @@ public class GUIHavenBagChests extends GUITabs {
 				new GUIHavenBagChest(container, HavenBagManager.CHEST_SMALL),
 				new GUIHavenBagChest(container, HavenBagManager.CHEST_ADVENTURER),
 				new GUIHavenBagChest(container, HavenBagManager.CHEST_KIT),
-				new GUIHavenBagChest(container, HavenBagManager.CHEST_ADVENTURER),
+				new GUIHavenBagChest(container, HavenBagManager.CHEST_COLLECTOR),
 				new GUIHavenBagChest(container, HavenBagManager.CHEST_GOLDEN),
 				new GUIHavenBagChest(container, HavenBagManager.CHEST_EMERALD) });
 
