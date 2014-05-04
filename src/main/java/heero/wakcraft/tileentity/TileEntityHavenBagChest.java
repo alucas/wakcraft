@@ -74,6 +74,10 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 		return chestUnlocked.get(chestId);
 	}
 
+	public void unlockChest(int chestId) {
+		chestUnlocked.put(chestId, true);
+	}
+
 	@Override
 	public int getSizeInventory() {
 		return inventorySize;

@@ -3,6 +3,10 @@ package heero.wakcraft.havenbag;
 import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftItems;
 import heero.wakcraft.entity.property.HavenBagProperty;
+import heero.wakcraft.item.ItemIkiakit;
+
+import java.util.Arrays;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -115,5 +119,13 @@ public class HavenBagManager {
 
 	public static Item getChestIkiakit(int chestId) {
 		return CHESTS_IKIAKIT[chestId];
+	}
+
+	public static int getChestIdFromIkiakit(Item ikiakit) {
+		if (ikiakit instanceof ItemIkiakit) {
+			return Arrays.asList(CHESTS_IKIAKIT).indexOf(ikiakit);
+		}
+
+		return 0;
 	}
 }
