@@ -76,7 +76,7 @@ public class HavenBagManager {
 			}
 		}
 
-		world.setBlock(x + 2, y, z - 3, Blocks.chest, 0, 2);
+		world.setBlock(x + 2, y, z - 3, WakcraftBlocks.havenbagchest, 0, 2);
 		world.setBlock(x + 4, y, z - 6, WakcraftBlocks.havenGemWorkbench, 0, 2);
 
 		fillWalls(world, x - 1, y - 1, z - 7, 4, WakcraftBlocks.invisiblewall, 0);
