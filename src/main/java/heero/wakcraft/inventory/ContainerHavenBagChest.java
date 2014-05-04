@@ -51,7 +51,7 @@ public class ContainerHavenBagChest extends Container {
 		for (int slotId = 0; slotId < inventorySlots.size(); slotId++) {
 			Slot slot = getSlot(slotId);
 			if (slot instanceof HavenBagChestSlot) {
-				((HavenBagChestSlot) slot).conceal = (((HavenBagChestSlot) slot).chestId != selectedChestId);
+				((HavenBagChestSlot) slot).conceal = (((HavenBagChestSlot) slot).chestId != selectedChestId || !tileEntity.isChestUnlocked(selectedChestId));
 			}
 		}
 	}
