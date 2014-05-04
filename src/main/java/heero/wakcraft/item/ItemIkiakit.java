@@ -59,6 +59,7 @@ public class ItemIkiakit extends ItemWithLevel {
 				}
 
 				tileEntityChest.unlockChest(chestId);
+				tileEntityChest.markDirty();
 
 				if (world instanceof WorldServer) {
 					((WorldServer) world).func_147487_a("fireworksSpark", x + 0.5, y + 0.5, z + 0.5, 20, 0.5, 0.5, 0.5, 0);
