@@ -2,12 +2,16 @@ package heero.wakcraft.client.gui;
 
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.inventory.ContainerHavenBagChest.HavenBagChestSlot;
+import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 
 import java.util.List;
 
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -15,10 +19,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GUIHavenBagChest extends GUIContainer {
 	private static final ResourceLocation textureBackground = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/gui/havenbagchest.png");
 
-	public GUIHavenBagChest(Container container) {
+	public int chestId;
+
+	public GUIHavenBagChest(Container container, int chestId) {
 		super(container);
 
-		ySize = 222;
+		this.chestId = chestId;
+		this.ySize = 222;
 	}
 
 	@Override
@@ -27,6 +34,14 @@ public class GUIHavenBagChest extends GUIContainer {
 		mc.getTextureManager().bindTexture(textureBackground);
 
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+
+		GL11.glEnable(GL11.GL_BLEND);
+
+		for (int i = TileEntityHavenBagChest.getSizeInventory(chestId); i < 54; i++) {
+			drawTexturedModalRect(guiLeft + 8 + (i % 9) * 18, guiTop + 18 + (i / 9) * 18, xSize, 0, 16, 16);
+		}
+
+		GL11.glDisable(GL11.GL_BLEND);
 	}
 
 	/**

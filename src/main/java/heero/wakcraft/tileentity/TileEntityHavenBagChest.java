@@ -78,7 +78,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 		}
 	}
 
-	public int getSizeInventory(int chestId) {
+	public static int getSizeInventory(int chestId) {
 		return CHESTS_SIZES[chestId];
 	}
 
