@@ -72,11 +72,20 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 		cachedChestType = chestType;
 		chestContents = new HashMap<Integer, ItemStack>();
 		chestUnlocked = new HashMap<Integer, Boolean>();
-		chestUnlocked.put(0, true);
+
+		for (int chestId : CHESTS) {
+			if (chestId == CHEST_NORMAL) {
+				chestUnlocked.put(0, true);
+			}
+		}
 	}
 
 	public int getSizeInventory(int chestId) {
 		return CHESTS_SIZES[chestId];
+	}
+
+	public boolean isChestUnlocked(int chestId) {
+		return chestUnlocked.get(chestId);
 	}
 
 	@Override
