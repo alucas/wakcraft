@@ -60,7 +60,7 @@ public class WakcraftBlocks {
 		GameRegistry.registerBlock(wood = (new BlockWood()), "blockWood");
 		GameRegistry.registerBlock(hbstand = (new BlockHBStand()), "blockHBStand");
 		GameRegistry.registerBlock(grass = (new BlockGrass()), ItemBlockGrass.class, "blockGrass");
-		GameRegistry.registerBlock(fence = (new BlockFence1(WakcraftInfo.MODID.toLowerCase() + ":palisade1", Material.wood)), "blockFence");
+		GameRegistry.registerBlock(fence = (new BlockFence1(WakcraftInfo.MODID.toLowerCase() + ":palisade1", Material.wood).setBlockName("Fence1")), "blockFence");
 		GameRegistry.registerBlock(invisiblewall = (new BlockInvisibleWall()), "blockInvisibleWall");
 		GameRegistry.registerBlock(havenbag = (new BlockHavenBag()), "blockHavenBag");
 		GameRegistry.registerBlock(havenbagchest = (new BlockHavenBagChest()), "blockHavenBagChest");
