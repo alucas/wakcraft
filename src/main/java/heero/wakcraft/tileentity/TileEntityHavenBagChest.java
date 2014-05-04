@@ -189,14 +189,17 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 			NBTTagCompound tagChest = tagRoot.getCompoundTag(CHESTS_TAGS[chestId]);
 			NBTTagList tagItems = tagChest.getTagList(TAG_ITEMS, 10);
 
-			chestUnlocked.put(chestId, tagRoot.getBoolean(TAG_UNLOCKED));
+			Boolean unlocked = tagRoot.getBoolean(TAG_UNLOCKED);
+			chestUnlocked.put(chestId, unlocked);
 
-			for (int i = 0; i < tagItems.tagCount() && i < CHESTS_SIZES[chestId]; ++i) {
-				NBTTagCompound tagItem = tagItems.getCompoundTagAt(i);
-				int slotId = tagItem.getByte(TAG_SLOT) & 255;
+			if (unlocked) {
+				for (int i = 0; i < tagItems.tagCount() && i < CHESTS_SIZES[chestId]; ++i) {
+					NBTTagCompound tagItem = tagItems.getCompoundTagAt(i);
+					int slotId = tagItem.getByte(TAG_SLOT) & 255;
 
-				if (slotId >= 0 && slotId < CHESTS_SIZES[chestId]) {
-					chestContents.put(inventorySize + slotId, ItemStack.loadItemStackFromNBT(tagItem));
+					if (slotId >= 0 && slotId < CHESTS_SIZES[chestId]) {
+						chestContents.put(inventorySize + slotId, ItemStack.loadItemStackFromNBT(tagItem));
+					}
 				}
 			}
 
@@ -210,23 +213,31 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 
 		int inventorySize = 0;
 		for (int chestId : CHESTS) {
+			Boolean unlocked = chestUnlocked.get(chestId);
+			if (unlocked == null) {
+				unlocked = false;
+			}
+
 			NBTTagCompound tagChest = new NBTTagCompound();
 			NBTTagList tagItems = new NBTTagList();
 
-			for (int slotId = 0; slotId < CHESTS_SIZES[chestId]; slotId++) {
-				ItemStack stack = chestContents.get(inventorySize + slotId);
-				if (stack == null) {
-					continue;
+			if (unlocked) {
+				for (int slotId = 0; slotId < CHESTS_SIZES[chestId]; slotId++) {
+					ItemStack stack = chestContents.get(inventorySize + slotId);
+					if (stack == null) {
+						continue;
+					}
+
+					NBTTagCompound tagItem = new NBTTagCompound();
+					tagItem.setByte(TAG_SLOT, (byte) slotId);
+					stack.writeToNBT(tagItem);
+
+					tagItems.appendTag(tagItem);
 				}
-
-				NBTTagCompound tagItem = new NBTTagCompound();
-				tagItem.setByte(TAG_SLOT, (byte) slotId);
-				stack.writeToNBT(tagItem);
-
-				tagItems.appendTag(tagItem);
 			}
 
 			tagChest.setTag(TAG_ITEMS, tagItems);
+			tagChest.setBoolean(TAG_UNLOCKED, unlocked);
 			tagRoot.setTag(CHESTS_TAGS[chestId], tagChest);
 
 			inventorySize += CHESTS_SIZES[chestId];
