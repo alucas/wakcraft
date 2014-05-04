@@ -8,6 +8,20 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 public class HavenBagManager {
+	public static final int CHEST_NORMAL = 0;
+	public static final int CHEST_SMALL = 1;
+	public static final int CHEST_ADVENTURER = 2;
+	public static final int CHEST_KIT = 3;
+	public static final int CHEST_COLLECTOR = 4;
+	public static final int CHEST_GOLDEN = 5;
+	public static final int CHEST_EMERALD = 6;
+
+	public static final int[] CHESTS = new int[] { CHEST_NORMAL, CHEST_SMALL,
+		CHEST_ADVENTURER, CHEST_KIT, CHEST_COLLECTOR, CHEST_GOLDEN,
+		CHEST_EMERALD };
+	private static final int[] CHESTS_SIZES = new int[] { 14, 14, 21, 21, 21,
+		28, 28 };
+
 	public static int getNextAvailableUID(World world) {
 		int uid = 0;
 
@@ -87,5 +101,9 @@ public class HavenBagManager {
 		player.rotationYaw = -90;
 		player.rotationPitch = 0;
 		player.setPositionAndUpdate(coords[0] + 0.5, coords[1], coords[2] + 0.5);
+	}
+
+	public static int getChestSize(int chestId) {
+		return CHESTS_SIZES[chestId];
 	}
 }

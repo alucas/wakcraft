@@ -1,13 +1,12 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.inventory.ContainerHavenBagChest;
 import heero.wakcraft.inventory.ContainerHavenBagChest.HavenBagChestSlot;
-import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 
 import java.util.List;
 
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 
@@ -43,7 +42,7 @@ public class GUIHavenBagChest extends GUIContainer {
 
 		GL11.glEnable(GL11.GL_BLEND);
 
-		for (int i = TileEntityHavenBagChest.getSizeInventory(chestId); i < 54; i++) {
+		for (int i = HavenBagManager.getChestSize(chestId); i < 54; i++) {
 			drawTexturedModalRect(guiLeft + 8 + (i % 9) * 18, guiTop + 18 + (i / 9) * 18, xSize, 0, 16, 16);
 		}
 

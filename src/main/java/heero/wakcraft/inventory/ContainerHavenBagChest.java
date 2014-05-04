@@ -1,5 +1,6 @@
 package heero.wakcraft.inventory;
 
+import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -21,8 +22,8 @@ public class ContainerHavenBagChest extends Container {
 		this.tileEntity = tileEntity;
 
 		int havenBagChestId = 0;
-		for (int chestId : TileEntityHavenBagChest.CHESTS) {
-			for (int i = 0; i < tileEntity.getSizeInventory(chestId); i++) {
+		for (int chestId : HavenBagManager.CHESTS) {
+			for (int i = 0; i < HavenBagManager.getChestSize(chestId); i++) {
 				this.addSlotToContainer(new HavenBagChestSlot(tileEntity, havenBagChestId++, chestId, 8 + (i % 9) * 18, 18 + (i / 9) * 18));
 			}
 		}
