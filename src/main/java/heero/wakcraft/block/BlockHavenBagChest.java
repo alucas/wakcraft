@@ -83,11 +83,11 @@ public class BlockHavenBagChest extends BlockContainer {
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int metadata) {
-		TileEntityHavenBagChest tileentitychest = (TileEntityHavenBagChest) world.getTileEntity(x, y, z);
-
-		if (tileentitychest != null) {
-			for (int i1 = 0; i1 < tileentitychest.getSizeInventory(); ++i1) {
-				ItemStack itemstack = tileentitychest.getStackInSlot(i1);
+		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		if (tileEntity != null && tileEntity instanceof TileEntityHavenBagChest) {
+			TileEntityHavenBagChest tileEntityChest = (TileEntityHavenBagChest) tileEntity;
+			for (int i1 = 0; i1 < tileEntityChest.getSizeInventory(); ++i1) {
+				ItemStack itemstack = tileEntityChest.getStackInSlot(i1);
 
 				if (itemstack != null) {
 					float f = this.rand.nextFloat() * 0.8F + 0.1F;
