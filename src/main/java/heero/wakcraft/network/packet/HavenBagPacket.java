@@ -8,6 +8,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 
 public class HavenBagPacket implements IPacket {
@@ -74,7 +75,10 @@ public class HavenBagPacket implements IPacket {
 		TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tileEntity;
 		tileHavenBag.uid = properties.uid;
 		tileHavenBag.markDirty();
-		tileHavenBag.updateEntity();
+
+		if (player instanceof EntityPlayerMP) {
+			((EntityPlayerMP) player).playerNetServerHandler.sendPacket(tileHavenBag.getDescriptionPacket());
+		}
 
 		HavenBagManager.teleportPlayerToHavenBag(player, properties.uid);
 	}
