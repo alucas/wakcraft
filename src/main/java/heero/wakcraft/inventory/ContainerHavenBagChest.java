@@ -56,6 +56,10 @@ public class ContainerHavenBagChest extends Container {
 		}
 	}
 
+	public boolean isChestLocked(int chestId) {
+		return tileEntity.isChestUnlocked(chestId);
+	}
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
 		ItemStack stack = null;

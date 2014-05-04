@@ -1,6 +1,7 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.inventory.ContainerHavenBagChest;
 import heero.wakcraft.inventory.ContainerHavenBagChest.HavenBagChestSlot;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 
@@ -18,10 +19,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GUIHavenBagChest extends GUIContainer {
 	private static final ResourceLocation textureBackground = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/gui/havenbagchest.png");
+	private static final ResourceLocation textureBackground_locked = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/gui/havenbagchest_locked.png");
 
 	public int chestId;
 
-	public GUIHavenBagChest(Container container, int chestId) {
+	public GUIHavenBagChest(ContainerHavenBagChest container, int chestId) {
 		super(container);
 
 		this.chestId = chestId;
@@ -31,7 +33,11 @@ public class GUIHavenBagChest extends GUIContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTick,
 			int mouseX, int mouseY) {
-		mc.getTextureManager().bindTexture(textureBackground);
+		if (((ContainerHavenBagChest) inventorySlots).isChestLocked(chestId)) {
+			mc.getTextureManager().bindTexture(textureBackground);
+		} else {
+			mc.getTextureManager().bindTexture(textureBackground_locked);
+		}
 
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
