@@ -240,7 +240,6 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 
 	@Override
 	public Packet getDescriptionPacket() {
-		System.out.println("get description");
 		NBTTagCompound nbtTag = new NBTTagCompound();
 
 		writeToNBT(nbtTag);

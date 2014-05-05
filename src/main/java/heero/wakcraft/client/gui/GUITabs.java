@@ -78,9 +78,9 @@ public class GUITabs extends GuiScreen {
 	 */
 	@Override
 	public void handleInput() {
-		tabs[selectedTab].handleInput();
-
 		super.handleInput();
+
+		tabs[selectedTab].handleInput();
 	}
 
 	/**
