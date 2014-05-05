@@ -1,5 +1,6 @@
 package heero.wakcraft.network.packet;
 
+import cpw.mods.fml.common.FMLLog;
 import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagManager;
@@ -10,6 +11,8 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 
 public class HavenBagPacket implements IPacket {
 	public HavenBagPacket() {
@@ -34,7 +37,7 @@ public class HavenBagPacket implements IPacket {
 	public void handleServerSide(EntityPlayer player) {
 		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 		if (properties == null) {
-			System.err.println("Error while loading player properties");
+			FMLLog.warning("Error while loading player (%s) properties", player.getDisplayName());
 			return;
 		}
 
@@ -56,6 +59,7 @@ public class HavenBagPacket implements IPacket {
 
 		Block block = player.worldObj.getBlock(posX, posY - 1, posZ);
 		if (block == null || (block != null && !block.isOpaqueCube())) {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.cantOpenHavenBagHere")));
 			return;
 		}
 
@@ -63,17 +67,22 @@ public class HavenBagPacket implements IPacket {
 		if (properties.uid == 0) {
 			properties.uid = HavenBagManager.getNextAvailableUID(player.worldObj);
 
+			FMLLog.info("New HavenBag atribution : %s, uid = %d", player.getDisplayName(), properties.uid);
+
 			HavenBagManager.generateHavenBag(player.worldObj, properties.uid);
 		}
 
 		player.worldObj.setBlock(posX, posY, posZ, WakcraftBlocks.havenbag);
+
 		TileEntity tileEntity = player.worldObj.getTileEntity(posX, posY, posZ);
-		if (tileEntity == null) {
-			System.err.println("Error while loading the tile entity of the haven block");
+		if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBag)) {
+			FMLLog.warning("Error while loading the tile entity (%d, %d, %d)", posX, posY, posZ);
+			return;
 		}
 
 		TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tileEntity;
 		tileHavenBag.uid = properties.uid;
+		tileHavenBag.isLocked = properties.locked;
 		tileHavenBag.markDirty();
 
 		if (player instanceof EntityPlayerMP) {

@@ -125,6 +125,8 @@ message.itemAndLevel=%s, lvl. %d
 message.chestAlreadyUnlocked=Chest already unlocked
 message.notYourBag=This is not your haven bag!
 message.canPlaceBlockManualy=Can't place this block manualy
+message.unlockHavenBag=Haven Bag Unlocked
+message.lockHavenBag=Haven Bag Locked
 
 profession.crafting=Crafting
 profession.harvesting=Harvesting

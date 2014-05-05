@@ -11,6 +11,7 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 	private static final String TAG_HAVENBAG = "HavenBag";
 	private static final String TAG_UID = "UID";
 	private static final String TAG_IN_HAVENBAG = "InHavenBag";
+	private static final String TAG_LOCKED = "Locked";
 	private static final String TAG_POS_X = "PosX";
 	private static final String TAG_POS_Y = "PosY";
 	private static final String TAG_POS_Z = "PosZ";
@@ -19,6 +20,8 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 	public int uid;
 	/** The uid of the haven bag the player is currently in (0 = not in an haven bag) */
 	public int havenbag;
+	/** Used to allow visitor to enter in your haven bag */
+	public boolean locked;
 	/** Coordinates of the player before he was teleported to the haven bag */
 	public double posX;
 	public double posY;
@@ -28,6 +31,7 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 	public void init(Entity entity, World world) {
 		uid = 0;
 		havenbag = 0;
+		locked = true;
 		posX = 0;
 		posY = 0;
 		posZ = 0;
@@ -39,6 +43,7 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 
 		tagHavenBag.setInteger(TAG_UID, uid);
 		tagHavenBag.setInteger(TAG_IN_HAVENBAG, havenbag);
+		tagHavenBag.setBoolean(TAG_LOCKED, locked);
 		tagHavenBag.setDouble(TAG_POS_X, posX);
 		tagHavenBag.setDouble(TAG_POS_Y, posY);
 		tagHavenBag.setDouble(TAG_POS_Z, posZ);
@@ -52,6 +57,7 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 
 		uid = tagHavenBag.getInteger(TAG_UID);
 		havenbag = tagHavenBag.getInteger(TAG_IN_HAVENBAG);
+		locked = tagHavenBag.getBoolean(TAG_LOCKED);
 		posX = tagHavenBag.getDouble(TAG_POS_X);
 		posY = tagHavenBag.getDouble(TAG_POS_Y);
 		posZ = tagHavenBag.getDouble(TAG_POS_Z);

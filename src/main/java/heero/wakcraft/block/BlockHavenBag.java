@@ -1,5 +1,6 @@
 package heero.wakcraft.block;
 
+import cpw.mods.fml.common.FMLLog;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
@@ -25,19 +26,23 @@ public class BlockHavenBag extends BlockContainer {
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			TileEntity tile = world.getTileEntity(x, y, z);
-			if (tile != null && (tile instanceof TileEntityHavenBag)) {
-				TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tile;
-
-				if (tileHavenBag.isLocked) {
-					System.out.println("That haven bag is actualy locaked");
-					return true;
-				}
-
-				HavenBagManager.teleportPlayerToHavenBag(player, tileHavenBag.uid);
-			}
+		if (world.isRemote) {
+			return true;
 		}
+	
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if (tile == null || !(tile instanceof TileEntityHavenBag)) {
+			FMLLog.warning("Error while loading the tile entity (%d, %d, %d)", x, y, z);
+			return true;
+		}
+
+		TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tile;
+		if (tileHavenBag.isLocked) {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.lockHavenBag")));
+			return true;
+		}
+
+		HavenBagManager.teleportPlayerToHavenBag(player, tileHavenBag.uid);
 
 		return true;
 	}
