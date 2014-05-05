@@ -113,6 +113,7 @@ tile.HavenBagChest.name=Haven Bag Chest
 tile.Polisher.name=Polisher
 tile.HavenGemWorkbench.name=Haven Gem Workbench
 tile.HavenBag.name=Haven Bag
+tile.HavenBagLock.name=Haven Bag Lock
 tile.Fence1.name=Sufokia Fence
 
 itemGroup.specialBlocks=Special Blocks
@@ -123,6 +124,7 @@ message.blockOre.insufficientLevel=Insuffisant level to mine : %s (lvl. %d)
 message.itemAndLevel=%s, lvl. %d
 message.chestAlreadyUnlocked=Chest already unlocked
 message.notYourBag=This is not your haven bag!
+message.canPlaceBlockManualy=Can't place this block manualy
 
 profession.crafting=Crafting
 profession.harvesting=Harvesting

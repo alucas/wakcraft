@@ -78,7 +78,7 @@ public class BlockHavenBagChest extends BlockContainer {
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		if (world.isRemote) {
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Can't place this block manualy"));
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
 		}
 
 		return false;

@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class BlockHavenBag extends BlockContainer {
@@ -53,7 +54,7 @@ public class BlockHavenBag extends BlockContainer {
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		if (world.isRemote) {
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Can't place this block manualy"));
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
 		}
 
 		return false;

@@ -7,7 +7,7 @@ import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -22,14 +22,14 @@ import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockHavenGemWorkbench extends BlockContainer {
+public class BlockHavenBagLock extends Block {
 	private IIcon iconSide;
 	private IIcon iconTop;
 
-	public BlockHavenGemWorkbench() {
+	public BlockHavenBagLock() {
 		super(Material.wood);
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
-		setBlockName("HavenGemWorkbench");
+		setBlockName("HavenGemLock");
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
@@ -48,24 +48,9 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 			return true;
 		}
 
-		TileEntity tile = world.getTileEntity(x, y, z);
-		if (tile == null && !(tile instanceof TileEntityHavenGemWorkbench)) {
-			FMLLog.warning("Error while loading the tile entity (%d, %d, %d)", x, y, z);
-			return true;
-		}
-
-		player.openGui(Wakcraft.instance, GuiHandler.GUI_HAVEN_GEM_WORKBENCH, world, x, y, z);
+		// lock / unlock
 
 		return true;
-	}
-
-	/**
-	 * Returns a new instance of a block's tile entity class. Called on placing
-	 * the block.
-	 */
-	@Override
-	public TileEntity createNewTileEntity(World world, int var2) {
-		return new TileEntityHavenGemWorkbench();
 	}
 
 	@Override
@@ -80,8 +65,8 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer) {
-		iconSide = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":havengemworkbench");
-		iconTop = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":havengemworkbench_top");
+		iconSide = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":havenbaglock");
+		iconTop = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":havenbaglock_top");
 	}
 
 	/**
