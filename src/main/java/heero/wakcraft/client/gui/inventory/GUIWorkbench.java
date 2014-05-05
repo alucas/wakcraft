@@ -1,4 +1,4 @@
-package heero.wakcraft.client.gui;
+package heero.wakcraft.client.gui.inventory;
 
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.crafting.CraftingManager;

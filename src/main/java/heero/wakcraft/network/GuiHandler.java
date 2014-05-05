@@ -1,8 +1,8 @@
 package heero.wakcraft.network;
 
 import heero.wakcraft.client.gui.GUIHavenBagChests;
-import heero.wakcraft.client.gui.GUIHavenGemWorkbench;
-import heero.wakcraft.client.gui.GUIWorkbench;
+import heero.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
+import heero.wakcraft.client.gui.inventory.GUIWorkbench;
 import heero.wakcraft.inventory.ContainerHavenBagChest;
 import heero.wakcraft.inventory.ContainerHavenGemWorkbench;
 import heero.wakcraft.inventory.ContainerWorkbench;

@@ -1,5 +1,6 @@
 package heero.wakcraft.client.gui;
 
+import heero.wakcraft.client.gui.inventory.GUIHavenBagChest;
 import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.inventory.ContainerHavenBagChest;
 import net.minecraft.client.gui.GuiScreen;

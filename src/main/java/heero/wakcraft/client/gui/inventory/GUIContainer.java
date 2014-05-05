@@ -1,4 +1,4 @@
-package heero.wakcraft.client.gui;
+package heero.wakcraft.client.gui.inventory;
 
 import java.util.HashSet;
 import java.util.Iterator;
