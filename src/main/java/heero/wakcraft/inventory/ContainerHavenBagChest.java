@@ -100,6 +100,16 @@ public class ContainerHavenBagChest extends Container {
 		return stack;
 	}
 
+	/**
+	 * Called when the container is closed.
+	 */
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+
+		tileEntity.closeInventory();
+	}
+
 	public class HavenBagChestSlot extends Slot {
 		public boolean conceal;
 		public int chestId;
@@ -110,15 +120,10 @@ public class ContainerHavenBagChest extends Container {
 			this.chestId = chestId;
 			this.conceal = true;
 		}
-	}
 
-	/**
-	 * Called when the container is closed.
-	 */
-	@Override
-	public void onContainerClosed(EntityPlayer player) {
-		super.onContainerClosed(player);
-
-		tileEntity.closeInventory();
+		@Override
+		public boolean isItemValid(ItemStack par1ItemStack) {
+			return true;//(!conceal);
+		}
 	}
 }

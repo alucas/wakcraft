@@ -74,13 +74,23 @@ public class GUITabs extends GuiScreen {
 	}
 
 	/**
-	 * Delegates mouse and keyboard input.
+	 * Handles mouse input.
 	 */
 	@Override
-	public void handleInput() {
-		super.handleInput();
+	public void handleMouseInput() {
+		tabs[selectedTab].handleMouseInput();
 
-		tabs[selectedTab].handleInput();
+		super.handleMouseInput();
+	}
+
+	/**
+	 * Handles keyboard input.
+	 */
+	@Override
+	public void handleKeyboardInput() {
+		tabs[selectedTab].handleKeyboardInput();
+
+		super.handleKeyboardInput();
 	}
 
 	/**
