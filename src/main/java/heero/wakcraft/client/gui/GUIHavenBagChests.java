@@ -40,4 +40,20 @@ public class GUIHavenBagChests extends GUITabs {
 
 		container.updateHBSlots(((GUIHavenBagChest)tabs[selectedTab]).chestId);
 	}
+
+	@Override
+	public boolean doesGuiPauseGame() {
+		return false;
+	}
+
+	/**
+	 * Called when the screen is unloaded. Used to disable keyboard repeat
+	 * events
+	 */
+	@Override
+	public void onGuiClosed() {
+		if (this.mc.thePlayer != null) {
+			container.onContainerClosed(this.mc.thePlayer);
+		}
+	}
 }

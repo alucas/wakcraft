@@ -33,6 +33,7 @@ public class GUITabs extends GuiScreen {
 	 * Causes the screen to lay out its subcomponents again. This is the
 	 * equivalent of the Java call Container.validate()
 	 */
+	@Override
 	public void setWorldAndResolution(Minecraft minecraft, int width, int height) {
 		super.setWorldAndResolution(minecraft, width, height);
 
@@ -73,21 +74,22 @@ public class GUITabs extends GuiScreen {
 	}
 
 	/**
-	 * Handles mouse input.
+	 * Delegates mouse and keyboard input.
 	 */
-	public void handleMouseInput() {
-		super.handleMouseInput();
+	@Override
+	public void handleInput() {
+		tabs[selectedTab].handleInput();
 
-		tabs[selectedTab].handleMouseInput();
+		super.handleInput();
 	}
 
 	/**
 	 * Called when the mouse is moved or a mouse button is released. Signature:
-	 * (mouseX, mouseY, which) which==-1 is mouseMove, which==0 or which==1 is
-	 * mouseUp
+	 * (mouseX, mouseY, releasedButton)
 	 */
-	protected void mouseMovedOrUp(int mouseX, int mouseY, int which) {
-		if (which == 0) {
+	@Override
+	protected void mouseMovedOrUp(int mouseX, int mouseY, int releasedButton) {
+		if (releasedButton == 0) {
 			int relativeMouseX = mouseX - tabButtonLeft;
 			int relativeMouseY = mouseY - tabButtonTop;
 

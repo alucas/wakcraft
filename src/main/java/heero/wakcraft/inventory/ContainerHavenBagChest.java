@@ -21,6 +21,8 @@ public class ContainerHavenBagChest extends Container {
 		this.inventory = inventory;
 		this.tileEntity = tileEntity;
 
+		tileEntity.openInventory();
+
 		int havenBagChestId = 0;
 		for (int chestId : HavenBagManager.CHESTS) {
 			for (int i = 0; i < HavenBagManager.getChestSize(chestId); i++) {
@@ -108,5 +110,15 @@ public class ContainerHavenBagChest extends Container {
 			this.chestId = chestId;
 			this.conceal = true;
 		}
+	}
+
+	/**
+	 * Called when the container is closed.
+	 */
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+
+		tileEntity.closeInventory();
 	}
 }
