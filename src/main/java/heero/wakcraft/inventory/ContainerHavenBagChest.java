@@ -72,15 +72,23 @@ public class ContainerHavenBagChest extends Container {
 			ItemStack stack_in_slot = slot.getStack();
 			stack = stack_in_slot.copy();
 
-			int chestSize = tileEntity.getSizeInventory();
-			if (slotId >= 0 && slotId < chestSize) {
-				if (!this.mergeItemStack(stack_in_slot, chestSize,
-						chestSize + 36, false)) {
+			int inventorySize = tileEntity.getSizeInventory();
+			if (slotId >= 0 && slotId < inventorySize) {
+				if (!this.mergeItemStack(stack_in_slot, inventorySize, inventorySize + 36, false)) {
 					return null;
 				}
 			} else {
-				if (!this.mergeItemStack(stack_in_slot, 0, chestSize, false)) {
-					return null;
+				int inventoryIndex = 0;
+				for (int chestId : HavenBagManager.CHESTS) {
+					int chestSize = HavenBagManager.getChestSize(chestId);
+
+					if (tileEntity.isChestUnlocked(chestId)) {
+						if (mergeItemStack(stack_in_slot, inventoryIndex, inventoryIndex + chestSize, false)) {
+							break;
+						}
+					}
+
+					inventoryIndex += chestSize;
 				}
 			}
 
@@ -119,11 +127,6 @@ public class ContainerHavenBagChest extends Container {
 
 			this.chestId = chestId;
 			this.conceal = true;
-		}
-
-		@Override
-		public boolean isItemValid(ItemStack par1ItemStack) {
-			return true;//(!conceal);
 		}
 	}
 }
