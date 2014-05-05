@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import cpw.mods.fml.common.FMLLog;
@@ -146,13 +147,13 @@ public class BlockHavenBagChest extends BlockContainer {
 
 		int havenBagUID = HavenBagManager.getUIDFromCoord(x, y, z);
 		if (((HavenBagProperty)properties).uid != havenBagUID) {
-			return false;
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
+			return true;
 		}
 
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if (tileEntity == null && !(tileEntity instanceof TileEntityHavenBagChest)) {
 			FMLLog.warning("Error while loading the haven bag chest tile entity (%d, %d, %d)", x, y, z);
-
 			return true;
 		}
 

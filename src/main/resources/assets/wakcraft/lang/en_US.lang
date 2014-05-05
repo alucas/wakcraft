@@ -122,6 +122,7 @@ itemGroup.oreBlocks=Ore Blocks
 message.blockOre.insufficientLevel=Insuffisant level to mine : %s (lvl. %d)
 message.itemAndLevel=%s, lvl. %d
 message.chestAlreadyUnlocked=Chest already unlocked
+message.notYourBag=This is not your haven bag!
 
 profession.crafting=Crafting
 profession.harvesting=Harvesting
