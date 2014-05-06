@@ -24,7 +24,9 @@ import heero.wakcraft.block.BlockSufokiaColor;
 import heero.wakcraft.block.BlockSufokiaGround;
 import heero.wakcraft.block.BlockSufokiaSun;
 import heero.wakcraft.block.BlockSufokiaWave;
+import heero.wakcraft.block.BlockTransparent;
 import heero.wakcraft.block.BlockWood;
+import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.item.ItemBlockGrass;
 import heero.wakcraft.item.ItemBlockOre1;
 import heero.wakcraft.item.ItemBlockOre2;
@@ -43,7 +45,7 @@ public class WakcraftBlocks {
 			sufokiaWave, sufokiaStair, ore1, ore2, ore3, ore4, carpet1,
 			sufokiaGround, palisade, pillar, wood, hbstand, grass, fence,
 			polisher, havenGemWorkbench, invisiblewall, havenbag,
-			havenbagchest, havenbaglock, havenbagproperties;
+			havenbagchest, havenbaglock, havenbagproperties, hbbridge;
 
 	public static void registerBlocks() {
 		// Basic blocks
@@ -68,6 +70,7 @@ public class WakcraftBlocks {
 		GameRegistry.registerBlock(havenbagchest = (new BlockHavenBagChest()), "blockHavenBagChest");
 		GameRegistry.registerBlock(havenbaglock = (new BlockHavenBagLock()), "blockHavenBagLock");
 		GameRegistry.registerBlock(havenbagproperties = (new BlockHavenBagProperties()), "blockHavenBagProperties");
+		GameRegistry.registerBlock(hbbridge = (new BlockTransparent(Material.iron).setBlockName("HBBridge").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbbridge")), "blockHBBridge");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":polisher")), "BlockPolisher");

@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class BlockHavenBagProperties extends BlockContainer {
 
 	public BlockHavenBagProperties() {
-		super(Material.clay);
+		super(Material.air);
 
 		setBlockName("HavenBagProperties");
 	}
