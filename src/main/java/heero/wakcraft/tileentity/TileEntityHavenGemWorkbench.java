@@ -198,7 +198,7 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 						for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
 							for (int i = 0; i < 5; i++) {
 								if (i == 1 || i == 2) {
-									setHBBBlock(- 2 + i + column * 6, - 1, 4 - j + row * 6, Blocks.stone_slab, 12);
+									setHBBBlock(- 2 + i + column * 6, - 1, 4 - j + row * 6, WakcraftBlocks.hbbridge, 12);
 								} else {
 									setHBBBlock(- 2 + i + column * 6, - 1, 4 - j + row * 6, WakcraftBlocks.invisiblewall, 0);
 								}
@@ -231,7 +231,7 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 						for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
 							for (int i = 0; i < 5; i++) {
 								if (i == 1 || i == 2) {
-									setHBBBlock(- 3 - j + column * 6, - 1, 5 + i + row * 6, Blocks.stone_slab, 12);
+									setHBBBlock(- 3 - j + column * 6, - 1, 5 + i + row * 6, WakcraftBlocks.hbbridge, 12);
 								} else {
 									setHBBBlock(- 3 - j + column * 6, - 1, 5 + i + row * 6, WakcraftBlocks.invisiblewall, 0);
 								}

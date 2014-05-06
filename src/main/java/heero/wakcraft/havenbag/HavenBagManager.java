@@ -70,11 +70,11 @@ public class HavenBagManager {
 		}
 
 		for (int i = 0; i < 2; i++) {
-			world.setBlock(x + 3 + i, y - 1, z - 2, Blocks.stone_slab, 8, 2);
+			world.setBlock(x + 3 + i, y - 1, z - 2, WakcraftBlocks.hbbridge, 8, 2);
 		}
 
 		for (int i = 0; i < 2; i++) {
-			world.setBlock(x + i, y - 1, z + 1, Blocks.stone_slab, 12, 2);
+			world.setBlock(x + i, y - 1, z + 1, Blocks.stone, 12, 2);
 		}
 
 		for (int i = 0; i < 4; i++) {
