@@ -6,23 +6,24 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityHavenBag extends TileEntity {
-	private static final String TAG_UID = "UID";
+public class TileEntityHavenBagProperties extends TileEntity {
+	private static final String TAG_LOCKED = "Locked";
 
-	public int uid;
+	/** Used to allow visitor to enter in your haven bag */
+	public boolean locked;
 
 	@Override
 	public void readFromNBT(NBTTagCompound tagRoot) {
 		super.readFromNBT(tagRoot);
 
-		uid = tagRoot.getInteger(TAG_UID);
+		locked = tagRoot.getBoolean(TAG_LOCKED);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tagRoot) {
 		super.writeToNBT(tagRoot);
 
-		tagRoot.setInteger(TAG_UID, uid);
+		tagRoot.setBoolean(TAG_LOCKED, locked);
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
+import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -36,13 +37,17 @@ public class BlockHavenBag extends BlockContainer {
 			return true;
 		}
 
-		TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tile;
-		if (tileHavenBag.isLocked) {
+		TileEntityHavenBagProperties havenBagProperties = HavenBagManager.getHavenBagProperties(player.worldObj, ((TileEntityHavenBag) tile).uid);
+		if (havenBagProperties == null) {
+			return true;
+		}
+
+		if (havenBagProperties.locked) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.lockHavenBag")));
 			return true;
 		}
 
-		HavenBagManager.teleportPlayerToHavenBag(player, tileHavenBag.uid);
+		HavenBagManager.teleportPlayerToHavenBag(player, ((TileEntityHavenBag) tile).uid);
 
 		return true;
 	}

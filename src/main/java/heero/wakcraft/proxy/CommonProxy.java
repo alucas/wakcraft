@@ -14,6 +14,7 @@ import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
+import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
 import net.minecraft.entity.Entity;
@@ -50,6 +51,7 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityHavenGemWorkbench.class, "tileEntityHavenGemWorkbench");
 		GameRegistry.registerTileEntity(TileEntityHavenBag.class, "tileEntityHavenBag");
 		GameRegistry.registerTileEntity(TileEntityHavenBagChest.class, "tileEntityHavenBagChest");
+		GameRegistry.registerTileEntity(TileEntityHavenBagProperties.class, "tileEntityHavenBagProperties");
 	}
 
 	public void registerEntities() {

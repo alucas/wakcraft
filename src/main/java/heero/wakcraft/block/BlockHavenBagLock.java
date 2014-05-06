@@ -6,12 +6,14 @@ import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.network.GuiHandler;
+import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
@@ -29,7 +31,7 @@ public class BlockHavenBagLock extends Block {
 	public BlockHavenBagLock() {
 		super(Material.wood);
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
-		setBlockName("HavenGemLock");
+		setBlockName("HavenBagLock");
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
@@ -49,9 +51,19 @@ public class BlockHavenBagLock extends Block {
 			return true;
 		}
 
-		propertiesHB.locked = !propertiesHB.locked;
+		TileEntityHavenBagProperties havenBagProperties = HavenBagManager.getHavenBagProperties(player.worldObj, propertiesHB.uid);
+		if (havenBagProperties == null) {
+			return true;
+		}
 
-		player.addChatMessage(new ChatComponentText(propertiesHB.locked ? StatCollector.translateToLocal("message.lockHavenBag") : StatCollector.translateToLocal("message.unlockHavenBag")));
+		havenBagProperties.locked = !havenBagProperties.locked;
+		havenBagProperties.markDirty();
+
+		if (player instanceof EntityPlayerMP) {
+			((EntityPlayerMP) player).playerNetServerHandler.sendPacket(havenBagProperties.getDescriptionPacket());
+		}
+
+		player.addChatMessage(new ChatComponentText(havenBagProperties.locked ? StatCollector.translateToLocal("message.lockHavenBag") : StatCollector.translateToLocal("message.unlockHavenBag")));
 
 		return true;
 	}

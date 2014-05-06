@@ -4,6 +4,7 @@ import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftItems;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.item.ItemIkiakit;
+import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 
 import java.util.Arrays;
 
@@ -11,7 +12,9 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLLog;
 
 public class HavenBagManager {
 	public static final int CHEST_NORMAL = 0;
@@ -37,7 +40,7 @@ public class HavenBagManager {
 
 		while (true) {
 			int[] coords = getCoordFromUID(++uid);
-			if (world.getBlock(coords[0], coords[1] - 1, coords[2]).equals(Blocks.air)) {
+			if (world.getBlock(coords[0], coords[1] - 1, coords[2] + 1).equals(Blocks.air)) {
 				break;
 			}
 		}
@@ -71,7 +74,7 @@ public class HavenBagManager {
 		}
 
 		for (int i = 0; i < 2; i++) {
-			world.setBlock(x + i, y - 1, z, Blocks.stone_slab, 12, 2);
+			world.setBlock(x + i, y - 1, z + 1, Blocks.stone_slab, 12, 2);
 		}
 
 		for (int i = 0; i < 4; i++) {
@@ -80,7 +83,9 @@ public class HavenBagManager {
 			}
 		}
 
+		world.setBlock(x, y, z - 1, WakcraftBlocks.havenbagproperties, 0, 2);
 		world.setBlock(x + 2, y, z - 3, WakcraftBlocks.havenbagchest, 0, 2);
+		world.setBlock(x + 2, y, z - 6, WakcraftBlocks.havenbaglock, 0, 2);
 		world.setBlock(x + 4, y, z - 6, WakcraftBlocks.havenGemWorkbench, 0, 2);
 
 		fillWalls(world, x - 1, y - 1, z - 7, 4, WakcraftBlocks.invisiblewall, 0);
@@ -98,10 +103,22 @@ public class HavenBagManager {
 		}
 	}
 
+	public static TileEntityHavenBagProperties getHavenBagProperties(World world, int uid) {
+		int[] coords = getCoordFromUID(uid);
+
+		TileEntity tileEntity = world.getTileEntity(coords[0], coords[1], coords[2] - 1);
+		if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagProperties)) {
+			FMLLog.warning("Error while loading tile entity haven bag properties (%d, %d, %d)", coords[0], coords[1], coords[2]);
+			return null;
+		}
+
+		return (TileEntityHavenBagProperties) tileEntity;
+	}
+
 	public static void teleportPlayerToHavenBag(EntityPlayer player, int havenBagUID) {
 		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 		if (properties == null) {
-			System.err.println("Error while loading player properties");
+			FMLLog.warning("Error while loading player (%s) properties", player.getDisplayName());
 			return;
 		}
 
@@ -110,7 +127,7 @@ public class HavenBagManager {
 		int[] coords = HavenBagManager.getCoordFromUID(havenBagUID);
 		player.rotationYaw = -90;
 		player.rotationPitch = 0;
-		player.setPositionAndUpdate(coords[0] + 0.5, coords[1], coords[2] + 0.5);
+		player.setPositionAndUpdate(coords[0] + 0.5, coords[1], coords[2] + 1.5);
 	}
 
 	public static int getChestSize(int chestId) {

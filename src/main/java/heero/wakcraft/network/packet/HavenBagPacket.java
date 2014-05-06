@@ -5,6 +5,7 @@ import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
+import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.block.Block;
@@ -82,7 +83,6 @@ public class HavenBagPacket implements IPacket {
 
 		TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tileEntity;
 		tileHavenBag.uid = properties.uid;
-		tileHavenBag.isLocked = properties.locked;
 		tileHavenBag.markDirty();
 
 		if (player instanceof EntityPlayerMP) {

@@ -127,6 +127,8 @@ message.notYourBag=This is not your haven bag!
 message.canPlaceBlockManualy=Can't place this block manualy
 message.unlockHavenBag=Haven Bag Unlocked
 message.lockHavenBag=Haven Bag Locked
+message.cantOpenHavenBagHere=You can't open your Haven Bag here
+message.cantOpenHavenBagInAir=You must be on ground to enter in your haven bag
 
 profession.crafting=Crafting
 profession.harvesting=Harvesting
