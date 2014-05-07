@@ -1,11 +1,9 @@
 package heero.wakcraft.network.packet;
 
-import cpw.mods.fml.common.FMLLog;
 import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagManager;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
-import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.block.Block;
@@ -14,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
+import cpw.mods.fml.common.FMLLog;
 
 public class HavenBagPacket implements IPacket {
 	public HavenBagPacket() {
@@ -38,7 +37,7 @@ public class HavenBagPacket implements IPacket {
 	public void handleServerSide(EntityPlayer player) {
 		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading player (%s) properties", player.getDisplayName());
+			FMLLog.warning("Error while loading player (%s) havenbag properties", player.getDisplayName());
 			return;
 		}
 
@@ -51,6 +50,7 @@ public class HavenBagPacket implements IPacket {
 		}
 
 		if (! player.onGround) {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.cantOpenHavenBagInAir")));
 			return;
 		}
 
