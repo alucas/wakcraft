@@ -2,13 +2,13 @@ package heero.wakcraft.network.packet;
 
 import heero.wakcraft.profession.ProfessionManager;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.PacketBuffer;
 
 public class PacketProfession implements IPacket {
 	private Map<PROFESSION, Integer> xps;
@@ -31,7 +31,7 @@ public class PacketProfession implements IPacket {
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
+	public void encodeInto(ChannelHandlerContext ctx, PacketBuffer buffer) {
 		buffer.writeByte(xps.size());
 		for (PROFESSION profession : xps.keySet()) {
 			buffer.writeByte(profession.getValue());
@@ -40,7 +40,7 @@ public class PacketProfession implements IPacket {
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
+	public void decodeInto(ChannelHandlerContext ctx, PacketBuffer buffer) {
 		int nbProfession = buffer.readByte();
 		for (int i = 0; i < nbProfession; i++) {
 			PROFESSION profession = PROFESSION.getProfession(buffer.readByte());

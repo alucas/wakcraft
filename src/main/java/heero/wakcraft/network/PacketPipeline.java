@@ -21,7 +21,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.network.PacketBuffer;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -55,17 +57,17 @@ public class PacketPipeline extends
 	 */
 	public boolean registerPacket(Class<? extends IPacket> packetClass) {
 		if (this.packets.size() > 256) {
-			logger.debug("Can't register packet, too many packet already registered");
+			FMLLog.warning("Can't register packet, too many packet already registered");
 			return false;
 		}
 
 		if (this.packets.contains(packetClass)) {
-			logger.debug("The packet class " + packetClass.getSimpleName() + " is already registered");
+			FMLLog.warning("The packet class " + packetClass.getSimpleName() + " is already registered");
 			return false;
 		}
 
 		if (this.isPostInitialised) {
-			logger.debug("The " + PacketPipeline.class.getSimpleName() + " Class is already post initialised");
+			FMLLog.warning("The " + PacketPipeline.class.getSimpleName() + " Class is already post initialised");
 			return false;
 		}
 
@@ -77,7 +79,7 @@ public class PacketPipeline extends
 	// In line encoding of the packet, including discriminator setting
 	@Override
 	protected void encode(ChannelHandlerContext ctx, IPacket msg, List<Object> out) throws Exception {
-		ByteBuf buffer = Unpooled.buffer();
+		PacketBuffer buffer = new PacketBuffer(Unpooled.buffer());
 		Class<? extends IPacket> packetClass = msg.getClass();
 		if (!this.packets.contains(msg.getClass())) {
 			throw new NullPointerException("No Packet Registered for: "	+ msg.getClass().getCanonicalName());
@@ -101,7 +103,7 @@ public class PacketPipeline extends
 		}
 
 		IPacket pkt = packetClass.newInstance();
-		pkt.decodeInto(ctx, payload.slice());
+		pkt.decodeInto(ctx, new PacketBuffer(payload.slice()));
 
 		EntityPlayer player;
 		switch (FMLCommonHandler.instance().getEffectiveSide()) {

@@ -5,16 +5,13 @@ import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagManager;
-import heero.wakcraft.network.GuiHandler;
-import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
-import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
+import heero.wakcraft.network.packet.PacketOpenWindow;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
@@ -51,7 +48,9 @@ public class BlockHavenBagVisitors extends Block {
 			return true;
 		}
 
-		// Gui
+		if (player instanceof EntityPlayerMP) {
+			Wakcraft.packetPipeline.sendTo(new PacketOpenWindow(PacketOpenWindow.WINDOW_HB_VISITORS), (EntityPlayerMP) player);
+		}
 
 		return true;
 	}

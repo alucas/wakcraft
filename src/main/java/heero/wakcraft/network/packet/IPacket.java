@@ -1,8 +1,11 @@
 package heero.wakcraft.network.packet;
 
+import java.io.IOException;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.PacketBuffer;
 
 public interface IPacket {
 
@@ -13,8 +16,9 @@ public interface IPacket {
 	 * 
 	 * @param ctx channel context
 	 * @param buffer the buffer to encode into
+	 * @throws IOException
 	 */
-	public abstract void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer);
+	public abstract void encodeInto(ChannelHandlerContext ctx, PacketBuffer buffer) throws IOException;
 
 	/**
 	 * Decode the packet data from the ByteBuf stream. Complex data sets may
@@ -23,8 +27,9 @@ public interface IPacket {
 	 * 
 	 * @param ctx channel context
 	 * @param buffer the buffer to decode from
+	 * @throws IOException
 	 */
-	public abstract void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer);
+	public abstract void decodeInto(ChannelHandlerContext ctx, PacketBuffer buffer) throws IOException;
 
 	/**
 	 * Handle a packet on the client side. Note this occurs after decoding has
