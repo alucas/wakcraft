@@ -4,8 +4,8 @@ import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.settings.KeyBinding;
 import heero.wakcraft.network.PacketPipeline;
-import heero.wakcraft.network.packet.HavenBagPacket;
-import heero.wakcraft.network.packet.ProfessionPacket;
+import heero.wakcraft.network.packet.PacketHavenBag;
+import heero.wakcraft.network.packet.PacketProfession;
 import heero.wakcraft.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -38,8 +38,8 @@ public class Wakcraft {
 		proxy.registerGui(this);
 
 		packetPipeline.initialise();
-		packetPipeline.registerPacket(ProfessionPacket.class);
-		packetPipeline.registerPacket(HavenBagPacket.class);
+		packetPipeline.registerPacket(PacketProfession.class);
+		packetPipeline.registerPacket(PacketHavenBag.class);
 		packetPipeline.postInitialise();
 	}
 

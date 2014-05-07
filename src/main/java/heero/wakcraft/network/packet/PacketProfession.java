@@ -10,14 +10,14 @@ import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-public class ProfessionPacket implements IPacket {
+public class PacketProfession implements IPacket {
 	private Map<PROFESSION, Integer> xps;
 
-	public ProfessionPacket() {
+	public PacketProfession() {
 		xps = new HashMap<PROFESSION, Integer>();
 	}
 
-	public ProfessionPacket(EntityPlayer player) {
+	public PacketProfession(EntityPlayer player) {
 		xps = new HashMap<PROFESSION, Integer>();
 		
 		for (PROFESSION profession : PROFESSION.values()) {
@@ -25,7 +25,7 @@ public class ProfessionPacket implements IPacket {
 		}
 	}
 
-	public ProfessionPacket(EntityPlayer player, PROFESSION profession) {
+	public PacketProfession(EntityPlayer player, PROFESSION profession) {
 		xps = new HashMap<PROFESSION, Integer>();
 		xps.put(profession, ProfessionManager.getXp(player, profession));
 	}

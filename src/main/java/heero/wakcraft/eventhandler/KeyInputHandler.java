@@ -2,7 +2,7 @@ package heero.wakcraft.eventhandler;
 
 import heero.wakcraft.Wakcraft;
 import heero.wakcraft.client.setting.KeyBindings;
-import heero.wakcraft.network.packet.HavenBagPacket;
+import heero.wakcraft.network.packet.PacketHavenBag;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -21,7 +21,7 @@ public class KeyInputHandler {
 				return;
 			}
 
-			Wakcraft.packetPipeline.sendToServer(new HavenBagPacket());
+			Wakcraft.packetPipeline.sendToServer(new PacketHavenBag());
 		}
 	}
 }

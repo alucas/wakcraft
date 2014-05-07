@@ -5,7 +5,7 @@ import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.block.material.AventureMaterial;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.misc.EntityTextPopup;
-import heero.wakcraft.network.packet.ProfessionPacket;
+import heero.wakcraft.network.packet.PacketProfession;
 import heero.wakcraft.profession.ProfessionManager;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
 import heero.wakcraft.renderer.block.RenderBlockOre;
@@ -214,7 +214,7 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 					world.playRecord("random.orb", x, y, z);
 				}
 			} else if (player instanceof EntityPlayerMP) {
-				Wakcraft.packetPipeline.sendTo(new ProfessionPacket(player, PROFESSION.MINER), (EntityPlayerMP) player);
+				Wakcraft.packetPipeline.sendTo(new PacketProfession(player, PROFESSION.MINER), (EntityPlayerMP) player);
 			}
 		}
 
