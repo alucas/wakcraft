@@ -4,15 +4,19 @@ import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftItems;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.item.ItemIkiakit;
+import heero.wakcraft.tileentity.TileEntityHavenBag;
 import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 
 import java.util.Arrays;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
 
@@ -86,6 +90,7 @@ public class HavenBagManager {
 		world.setBlock(x, y, z - 1, WakcraftBlocks.havenbagproperties, 0, 2);
 		world.setBlock(x + 2, y, z - 3, WakcraftBlocks.havenbagchest, 0, 2);
 		world.setBlock(x + 2, y, z - 6, WakcraftBlocks.havenbaglock, 0, 2);
+		world.setBlock(x + 3, y, z - 6, WakcraftBlocks.havenbagvisitors, 0, 2);
 		world.setBlock(x + 4, y, z - 6, WakcraftBlocks.havenGemWorkbench, 0, 2);
 
 		fillWalls(world, x - 1, y - 1, z - 7, 4, WakcraftBlocks.invisiblewall, 0);
@@ -144,5 +149,63 @@ public class HavenBagManager {
 		}
 
 		return 0;
+	}
+
+	public static void tryTeleportPlayerToHavenBag(EntityPlayer player) {
+		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+		if (properties == null) {
+			FMLLog.warning("Error while loading player (%s) havenbag properties", player.getDisplayName());
+			return;
+		}
+
+		if (properties.isInHavenBag()) {
+			player.setPositionAndUpdate(properties.posX, properties.posY, properties.posZ);
+
+			properties.setLeaveHavenBag();
+
+			return;
+		}
+
+		if (! player.onGround) {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.cantOpenHavenBagInAir")));
+			return;
+		}
+
+		int posX = (int)Math.floor(player.posX);
+		int posY = (int)Math.floor(player.posY - 0.1) + 1;
+		int posZ = (int)Math.floor(player.posZ);
+
+		Block block = player.worldObj.getBlock(posX, posY - 1, posZ);
+		if (block == null || (block != null && !block.isOpaqueCube())) {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.cantOpenHavenBagHere")));
+			return;
+		}
+
+		// Initialisation
+		if (properties.uid == 0) {
+			properties.uid = HavenBagManager.getNextAvailableUID(player.worldObj);
+
+			FMLLog.info("New HavenBag atribution : %s, uid = %d", player.getDisplayName(), properties.uid);
+
+			HavenBagManager.generateHavenBag(player.worldObj, properties.uid);
+		}
+
+		player.worldObj.setBlock(posX, posY, posZ, WakcraftBlocks.havenbag);
+
+		TileEntity tileEntity = player.worldObj.getTileEntity(posX, posY, posZ);
+		if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBag)) {
+			FMLLog.warning("Error while loading the tile entity (%d, %d, %d)", posX, posY, posZ);
+			return;
+		}
+
+		TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tileEntity;
+		tileHavenBag.uid = properties.uid;
+		tileHavenBag.markDirty();
+
+		if (player instanceof EntityPlayerMP) {
+			((EntityPlayerMP) player).playerNetServerHandler.sendPacket(tileHavenBag.getDescriptionPacket());
+		}
+
+		HavenBagManager.teleportPlayerToHavenBag(player, properties.uid);
 	}
 }
