@@ -59,7 +59,6 @@ public class PacketCloseWindow implements IPacket {
 			}
 
 			if (player instanceof EntityPlayerMP) {
-				System.out.println("update tile");
 				((EntityPlayerMP) player).playerNetServerHandler.sendPacket(tile.getDescriptionPacket());
 			}
 		} else {
