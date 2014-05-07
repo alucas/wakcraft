@@ -15,11 +15,10 @@ import net.minecraft.world.World;
 public class BlockInvisibleWall extends Block {
 
 	public BlockInvisibleWall() {
-		super(Material.clay);
+		super(Material.air);
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		setBlockName("InvisibleWall");
-		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":invisiblewall");
 	}
 
 	@Override
