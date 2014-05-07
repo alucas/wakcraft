@@ -13,9 +13,6 @@ import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -41,7 +38,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class PacketPipeline extends
 		MessageToMessageCodec<FMLProxyPacket, IPacket> {
 	
-	private static final Logger logger = LogManager.getLogger();
 	private EnumMap<Side, FMLEmbeddedChannel> channels;
 	private LinkedList<Class<? extends IPacket>> packets = new LinkedList<Class<? extends IPacket>>();
 	private boolean isPostInitialised = false;

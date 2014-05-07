@@ -1,11 +1,15 @@
 package heero.wakcraft.network.packet;
 
+import heero.wakcraft.entity.property.HavenBagProperty;
+import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
+import cpw.mods.fml.common.FMLLog;
 
 public class PacketHavenBagVisitors implements IPacket {
 	// Client -> Server
@@ -50,6 +54,33 @@ public class PacketHavenBagVisitors implements IPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		// update tile
+		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+		if (properties == null) {
+			FMLLog.warning("Error while loading player (%s) havenbag properties", player.getDisplayName());
+			return;
+		}
+
+		int havenBagUid = HavenBagManager.getUIDFromCoord((int)player.posX, (int)player.posY, (int)player.posZ);
+		if (properties.uid != havenBagUid) {
+			FMLLog.warning("Player (%s) tried to update the permission of havenbag %d", player.getDisplayName(), havenBagUid);
+			return;
+		}
+
+		TileEntityHavenBagProperties tile = HavenBagManager.getHavenBagProperties(player.worldObj, havenBagUid);
+		if (tile == null) {
+			return;
+		}
+
+		System.out.println(tile.acl.get(playerName));
+		if (action == ACTION_ADD) {
+			tile.acl.put(playerName, tile.acl.get(playerName) | right);
+			tile.markDirty();
+		} else if (action == ACTION_REMOVE) {
+			tile.acl.put(playerName, tile.acl.get(playerName) & ((~right) & 0xF));
+			tile.markDirty();
+		} else {
+			FMLLog.warning("Unknow action : %d", action);
+			return;
+		}
 	}
 }

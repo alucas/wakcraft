@@ -16,10 +16,21 @@ public class TileEntityHavenBagProperties extends TileEntity {
 	private static final String TAG_NAME = "Name";
 	private static final String TAG_RIGHT = "Right";
 
+	public static final String ACL_KEY_ALL = "@all";
+	public static final String ACL_KEY_GUILD = "@guild";
+
 	/** Used to allow visitor to enter in your haven bag */
 	public boolean locked;
 	/** Used to keep the acces permition of players */
-	public Map<String, Integer> acl = new HashMap<String, Integer>();
+	public Map<String, Integer> acl;
+
+	public TileEntityHavenBagProperties() {
+		super();
+
+		acl = new HashMap<String, Integer>();
+		acl.put(ACL_KEY_ALL, 0);
+		acl.put(ACL_KEY_GUILD, 0);
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound tagRoot) {

@@ -1,9 +1,7 @@
 package heero.wakcraft;
 
-import org.lwjgl.input.Keyboard;
-
-import net.minecraft.client.settings.KeyBinding;
 import heero.wakcraft.network.PacketPipeline;
+import heero.wakcraft.network.packet.PacketCloseWindow;
 import heero.wakcraft.network.packet.PacketHavenBag;
 import heero.wakcraft.network.packet.PacketHavenBagVisitors;
 import heero.wakcraft.network.packet.PacketOpenWindow;
@@ -41,6 +39,7 @@ public class Wakcraft {
 
 		packetPipeline.initialise();
 		packetPipeline.registerPacket(PacketOpenWindow.class);
+		packetPipeline.registerPacket(PacketCloseWindow.class);
 		packetPipeline.registerPacket(PacketProfession.class);
 		packetPipeline.registerPacket(PacketHavenBag.class);
 		packetPipeline.registerPacket(PacketHavenBagVisitors.class);
