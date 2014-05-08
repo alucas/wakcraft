@@ -71,7 +71,6 @@ public class PacketHavenBagVisitors implements IPacket {
 			return;
 		}
 
-		System.out.println(tile.acl.get(playerName));
 		if (action == ACTION_ADD) {
 			tile.acl.put(playerName, tile.acl.get(playerName) | right);
 			tile.markDirty();
