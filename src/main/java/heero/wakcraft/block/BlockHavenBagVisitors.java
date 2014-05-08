@@ -5,13 +5,11 @@ import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
-import heero.wakcraft.network.packet.PacketOpenWindow;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
@@ -32,7 +30,7 @@ public class BlockHavenBagVisitors extends Block {
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (world.isRemote) {
+		if (!world.isRemote) {
 			return true;
 		}
 
@@ -48,9 +46,7 @@ public class BlockHavenBagVisitors extends Block {
 			return true;
 		}
 
-		if (player instanceof EntityPlayerMP) {
-			Wakcraft.packetPipeline.sendTo(new PacketOpenWindow(PacketOpenWindow.WINDOW_HB_VISITORS), (EntityPlayerMP) player);
-		}
+		Wakcraft.proxy.openHBVisitorsGui(player);
 
 		return true;
 	}

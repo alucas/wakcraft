@@ -1,5 +1,6 @@
 package heero.wakcraft.proxy;
 
+import heero.wakcraft.client.gui.GUIHavenBagVisitors;
 import heero.wakcraft.client.model.ModelGobball;
 import heero.wakcraft.client.model.ModelGobballWC;
 import heero.wakcraft.client.model.ModelGobbette;
@@ -13,6 +14,7 @@ import heero.wakcraft.entity.monster.Gobbette;
 import heero.wakcraft.entity.monster.WhiteGobbly;
 import heero.wakcraft.eventhandler.GUIEventHandler;
 import heero.wakcraft.eventhandler.KeyInputHandler;
+import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.renderer.block.RenderBlockOre;
 import heero.wakcraft.renderer.block.RenderBlockPalisade;
 import heero.wakcraft.renderer.block.RenderBlockYRotation;
@@ -23,6 +25,8 @@ import heero.wakcraft.renderer.tileentity.RendererHavenBagChest;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -62,5 +66,11 @@ public class CombinedClientProxy extends CommonProxy{
 		KeyBindings.init();
 
 		FMLCommonHandler.instance().bus().register(new KeyInputHandler());
+	}
+
+	@Override
+	public void openHBVisitorsGui(EntityPlayer player) {
+		int uid = HavenBagHelper.getUIDFromCoord((int) player.posX, (int) player.posY, (int) player.posZ);
+		Minecraft.getMinecraft().displayGuiScreen(new GUIHavenBagVisitors(player.worldObj, uid));
 	}
 }

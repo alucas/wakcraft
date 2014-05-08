@@ -20,6 +20,7 @@ import heero.wakcraft.tileentity.TileEntityPhoenix;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -78,5 +79,8 @@ public class CommonProxy {
 	}
 
 	public void registerKeyBindings() {
+	}
+
+	public void openHBVisitorsGui(EntityPlayer player) {
 	}
 }
