@@ -1,7 +1,7 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.Wakcraft;
-import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.network.packet.PacketCloseWindow;
 import heero.wakcraft.network.packet.PacketHavenBagVisitors;
 import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
@@ -29,7 +29,7 @@ public class GUIHavenBagVisitors extends GuiScreen {
 	public void initGui() {
 		super.initGui();
 
-		TileEntityHavenBagProperties tile = HavenBagManager.getHavenBagProperties(world, uid);
+		TileEntityHavenBagProperties tile = HavenBagHelper.getHavenBagProperties(world, uid);
 		if (tile == null) {
 			return;
 		}

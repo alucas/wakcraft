@@ -1,6 +1,7 @@
 package heero.wakcraft.inventory;
 
-import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.havenbag.HavenBagChestHelper;
+import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -24,8 +25,8 @@ public class ContainerHavenBagChest extends Container {
 		tileEntity.openInventory();
 
 		int havenBagChestId = 0;
-		for (int chestId : HavenBagManager.CHESTS) {
-			for (int i = 0; i < HavenBagManager.getChestSize(chestId); i++) {
+		for (int chestId : HavenBagChestHelper.CHESTS) {
+			for (int i = 0; i < HavenBagChestHelper.getChestSize(chestId); i++) {
 				this.addSlotToContainer(new HavenBagChestSlot(tileEntity, havenBagChestId++, chestId, 8 + (i % 9) * 18, 18 + (i / 9) * 18));
 			}
 		}
@@ -79,8 +80,8 @@ public class ContainerHavenBagChest extends Container {
 				}
 			} else {
 				int inventoryIndex = 0;
-				for (int chestId : HavenBagManager.CHESTS) {
-					int chestSize = HavenBagManager.getChestSize(chestId);
+				for (int chestId : HavenBagChestHelper.CHESTS) {
+					int chestSize = HavenBagChestHelper.getChestSize(chestId);
 
 					if (tileEntity.isChestUnlocked(chestId)) {
 						if (mergeItemStack(stack_in_slot, inventoryIndex, inventoryIndex + chestSize, false)) {

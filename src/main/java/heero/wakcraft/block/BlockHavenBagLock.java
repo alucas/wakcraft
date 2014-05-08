@@ -4,7 +4,7 @@ import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
-import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
@@ -46,12 +46,12 @@ public class BlockHavenBagLock extends Block {
 		}
 
 		HavenBagProperty propertiesHB = (HavenBagProperty) properties;
-		if (propertiesHB.uid != HavenBagManager.getUIDFromCoord(x, y, z)) {
+		if (propertiesHB.uid != HavenBagHelper.getUIDFromCoord(x, y, z)) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
 			return true;
 		}
 
-		TileEntityHavenBagProperties havenBagProperties = HavenBagManager.getHavenBagProperties(player.worldObj, propertiesHB.uid);
+		TileEntityHavenBagProperties havenBagProperties = HavenBagHelper.getHavenBagProperties(player.worldObj, propertiesHB.uid);
 		if (havenBagProperties == null) {
 			return true;
 		}

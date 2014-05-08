@@ -1,7 +1,7 @@
 package heero.wakcraft.network.packet;
 
 import heero.wakcraft.client.gui.GUIHavenBagVisitors;
-import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.havenbag.HavenBagHelper;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class PacketOpenWindow implements IPacket {
 	public void handleClientSide(EntityPlayer player) {
 		if (windowId == WINDOW_HB_VISITORS) {
 			Minecraft mc = Minecraft.getMinecraft();
-			mc.displayGuiScreen(new GUIHavenBagVisitors(mc.theWorld, HavenBagManager.getUIDFromCoord((int) player.posX, (int) player.posY, (int) player.posZ)));
+			mc.displayGuiScreen(new GUIHavenBagVisitors(mc.theWorld, HavenBagHelper.getUIDFromCoord((int) player.posX, (int) player.posY, (int) player.posZ)));
 		} else {
 			FMLLog.warning("Unknow window ID : %d", windowId);
 		}

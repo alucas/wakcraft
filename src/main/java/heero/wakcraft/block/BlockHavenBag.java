@@ -4,7 +4,7 @@ import cpw.mods.fml.common.FMLLog;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
-import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
 import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import net.minecraft.block.BlockContainer;
@@ -37,7 +37,7 @@ public class BlockHavenBag extends BlockContainer {
 			return true;
 		}
 
-		TileEntityHavenBagProperties havenBagProperties = HavenBagManager.getHavenBagProperties(player.worldObj, ((TileEntityHavenBag) tile).uid);
+		TileEntityHavenBagProperties havenBagProperties = HavenBagHelper.getHavenBagProperties(player.worldObj, ((TileEntityHavenBag) tile).uid);
 		if (havenBagProperties == null) {
 			return true;
 		}
@@ -47,7 +47,7 @@ public class BlockHavenBag extends BlockContainer {
 			return true;
 		}
 
-		HavenBagManager.teleportPlayerToHavenBag(player, ((TileEntityHavenBag) tile).uid);
+		HavenBagHelper.teleportPlayerToHavenBag(player, ((TileEntityHavenBag) tile).uid);
 
 		return true;
 	}

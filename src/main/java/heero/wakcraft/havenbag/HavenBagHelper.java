@@ -20,25 +20,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
 
-public class HavenBagManager {
-	public static final int CHEST_NORMAL = 0;
-	public static final int CHEST_SMALL = 1;
-	public static final int CHEST_ADVENTURER = 2;
-	public static final int CHEST_KIT = 3;
-	public static final int CHEST_COLLECTOR = 4;
-	public static final int CHEST_GOLDEN = 5;
-	public static final int CHEST_EMERALD = 6;
-
-	public static final int[] CHESTS = new int[] { CHEST_NORMAL, CHEST_SMALL,
-			CHEST_ADVENTURER, CHEST_KIT, CHEST_COLLECTOR, CHEST_GOLDEN,
-			CHEST_EMERALD };
-	private static final int[] CHESTS_SIZES = new int[] { 14, 14, 21, 21, 21,
-			28, 28 };
-	private static final Item[] CHESTS_IKIAKIT = new Item[] { null,
-			WakcraftItems.smallikiakit, WakcraftItems.adventurerikiakit,
-			WakcraftItems.kitikiakit, WakcraftItems.collectorikiakit,
-			WakcraftItems.goldenikiakit, WakcraftItems.emeraldikiakit };
-
+public class HavenBagHelper {
 	public static int getNextAvailableUID(World world) {
 		int uid = 0;
 
@@ -58,54 +40,6 @@ public class HavenBagManager {
 
 	public static int getUIDFromCoord(int x, int y, int z) {
 		return ((z + 7) / 30) * 10 + ((x - 99999) / 30);
-	}
-
-	public static void generateHavenBag(World world, int uid) {
-		int[] coords = getCoordFromUID(uid);
-
-		int x = coords[0];
-		int y = coords[1];
-		int z = coords[2];
-
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				world.setBlock(x + 2 + i, y - 1, z - 6 + j, Blocks.stone);
-			}
-		}
-
-		for (int i = 0; i < 2; i++) {
-			world.setBlock(x + 3 + i, y - 1, z - 2, WakcraftBlocks.hbBridge, 8, 2);
-		}
-
-		for (int i = 0; i < 2; i++) {
-			world.setBlock(x + i, y - 1, z + 1, Blocks.stone, 12, 2);
-		}
-
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				world.setBlock(x + 2 + i, y - 1, z - 1 + j, Blocks.planks);
-			}
-		}
-
-		world.setBlock(x, y, z - 1, WakcraftBlocks.hbProperties, 0, 2);
-		world.setBlock(x + 2, y, z - 3, WakcraftBlocks.hbChest, 0, 2);
-		world.setBlock(x + 2, y, z - 6, WakcraftBlocks.hbLock, 0, 2);
-		world.setBlock(x + 3, y, z - 6, WakcraftBlocks.hbVisitors, 0, 2);
-		world.setBlock(x + 4, y, z - 6, WakcraftBlocks.havenGemWorkbench, 0, 2);
-
-		fillWalls(world, x - 1, y - 1, z - 7, 4, WakcraftBlocks.invisiblewall, 0);
-	}
-
-	private static void fillWalls(World world, int x, int y, int z, int nbLayer, Block block, int metadata) {
-		for (int i = 0; i < 21; i++) {
-			for (int j = 0; j < 24; j++) {
-				if (world.getBlock(x + i, y, z + j) == Blocks.air) {
-					for (int k = 0; k < 4; k++) {
-						world.setBlock(x + i, y + k, z + j, block, metadata, 2);
-					}
-				}
-			}
-		}
 	}
 
 	public static TileEntityHavenBagProperties getHavenBagProperties(World world, int uid) {
@@ -129,26 +63,10 @@ public class HavenBagManager {
 
 		properties.setEnterHavenBag(player.posX, player.posY, player.posZ, havenBagUID);
 
-		int[] coords = HavenBagManager.getCoordFromUID(havenBagUID);
+		int[] coords = HavenBagHelper.getCoordFromUID(havenBagUID);
 		player.rotationYaw = -90;
 		player.rotationPitch = 0;
 		player.setPositionAndUpdate(coords[0] + 0.5, coords[1], coords[2] + 1.5);
-	}
-
-	public static int getChestSize(int chestId) {
-		return CHESTS_SIZES[chestId];
-	}
-
-	public static Item getChestIkiakit(int chestId) {
-		return CHESTS_IKIAKIT[chestId];
-	}
-
-	public static int getChestIdFromIkiakit(Item ikiakit) {
-		if (ikiakit instanceof ItemIkiakit) {
-			return Arrays.asList(CHESTS_IKIAKIT).indexOf(ikiakit);
-		}
-
-		return 0;
 	}
 
 	public static void tryTeleportPlayerToHavenBag(EntityPlayer player) {
@@ -183,11 +101,11 @@ public class HavenBagManager {
 
 		// Initialisation
 		if (properties.uid == 0) {
-			properties.uid = HavenBagManager.getNextAvailableUID(player.worldObj);
+			properties.uid = HavenBagHelper.getNextAvailableUID(player.worldObj);
 
 			FMLLog.info("New HavenBag atribution : %s, uid = %d", player.getDisplayName(), properties.uid);
 
-			HavenBagManager.generateHavenBag(player.worldObj, properties.uid);
+			HavenBagGenerationHelper.generateHavenBag(player.worldObj, properties.uid);
 		}
 
 		player.worldObj.setBlock(posX, posY, posZ, WakcraftBlocks.havenbag);
@@ -206,6 +124,6 @@ public class HavenBagManager {
 			((EntityPlayerMP) player).playerNetServerHandler.sendPacket(tileHavenBag.getDescriptionPacket());
 		}
 
-		HavenBagManager.teleportPlayerToHavenBag(player, properties.uid);
+		HavenBagHelper.teleportPlayerToHavenBag(player, properties.uid);
 	}
 }

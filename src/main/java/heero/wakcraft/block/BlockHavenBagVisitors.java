@@ -4,7 +4,7 @@ import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
-import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.network.packet.PacketOpenWindow;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -43,7 +43,7 @@ public class BlockHavenBagVisitors extends Block {
 		}
 
 		HavenBagProperty propertiesHB = (HavenBagProperty) properties;
-		if (propertiesHB.uid != HavenBagManager.getUIDFromCoord(x, y, z)) {
+		if (propertiesHB.uid != HavenBagHelper.getUIDFromCoord(x, y, z)) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
 			return true;
 		}

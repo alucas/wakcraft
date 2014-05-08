@@ -1,7 +1,7 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.client.gui.inventory.GUIHavenBagChest;
-import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.havenbag.HavenBagChestHelper;
 import heero.wakcraft.inventory.ContainerHavenBagChest;
 import net.minecraft.client.gui.GuiScreen;
 import cpw.mods.fml.relauncher.Side;
@@ -12,13 +12,13 @@ public class GUIHavenBagChests extends GUITabs {
 	private ContainerHavenBagChest container;
 
 	public GUIHavenBagChests(ContainerHavenBagChest container) {
-		super(new GuiScreen[] { new GUIHavenBagChest(container, HavenBagManager.CHEST_NORMAL),
-				new GUIHavenBagChest(container, HavenBagManager.CHEST_SMALL),
-				new GUIHavenBagChest(container, HavenBagManager.CHEST_ADVENTURER),
-				new GUIHavenBagChest(container, HavenBagManager.CHEST_KIT),
-				new GUIHavenBagChest(container, HavenBagManager.CHEST_COLLECTOR),
-				new GUIHavenBagChest(container, HavenBagManager.CHEST_GOLDEN),
-				new GUIHavenBagChest(container, HavenBagManager.CHEST_EMERALD) });
+		super(new GuiScreen[] { new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_NORMAL),
+				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_SMALL),
+				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_ADVENTURER),
+				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_KIT),
+				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_COLLECTOR),
+				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_GOLDEN),
+				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_EMERALD) });
 
 		this.container = container;
 

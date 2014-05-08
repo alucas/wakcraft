@@ -3,7 +3,7 @@ package heero.wakcraft.item;
 import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.havenbag.HavenBagChestHelper;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -50,7 +50,7 @@ public class ItemIkiakit extends ItemWithLevel {
 				}
 
 				TileEntityHavenBagChest tileEntityChest = (TileEntityHavenBagChest) tileEntity;
-				int chestId = HavenBagManager.getChestIdFromIkiakit(this);
+				int chestId = HavenBagChestHelper.getChestIdFromIkiakit(this);
 
 				if (tileEntityChest.isChestUnlocked(chestId)) {
 					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.chestAlreadyUnlocked")));

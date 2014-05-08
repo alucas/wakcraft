@@ -1,6 +1,6 @@
 package heero.wakcraft.network.packet;
 
-import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.havenbag.HavenBagHelper;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
@@ -26,6 +26,6 @@ public class PacketHavenBag implements IPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		HavenBagManager.tryTeleportPlayerToHavenBag(player);
+		HavenBagHelper.tryTeleportPlayerToHavenBag(player);
 	}
 }

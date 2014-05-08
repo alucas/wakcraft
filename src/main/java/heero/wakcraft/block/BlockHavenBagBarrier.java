@@ -2,7 +2,7 @@ package heero.wakcraft.block;
 
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
-import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 
 import java.util.List;
@@ -65,7 +65,7 @@ public class BlockHavenBagBarrier extends Block {
 				return;
 			}
 
-			int havenBagUID = HavenBagManager.getUIDFromCoord((int)entity.posX, (int)entity.posY, (int)entity.posZ);
+			int havenBagUID = HavenBagHelper.getUIDFromCoord((int)entity.posX, (int)entity.posY, (int)entity.posZ);
 			IExtendedEntityProperties properties = entity.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 			if (properties == null || !(properties instanceof HavenBagProperty)) {
 				FMLLog.warning("Error while loading the player (%s) properties", ((EntityPlayer)entity).getDisplayName());

@@ -1,7 +1,7 @@
 package heero.wakcraft.network.packet;
 
 import heero.wakcraft.entity.property.HavenBagProperty;
-import heero.wakcraft.havenbag.HavenBagManager;
+import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -60,13 +60,13 @@ public class PacketHavenBagVisitors implements IPacket {
 			return;
 		}
 
-		int havenBagUid = HavenBagManager.getUIDFromCoord((int)player.posX, (int)player.posY, (int)player.posZ);
+		int havenBagUid = HavenBagHelper.getUIDFromCoord((int)player.posX, (int)player.posY, (int)player.posZ);
 		if (properties.uid != havenBagUid) {
 			FMLLog.warning("Player (%s) tried to update the permission of havenbag %d", player.getDisplayName(), havenBagUid);
 			return;
 		}
 
-		TileEntityHavenBagProperties tile = HavenBagManager.getHavenBagProperties(player.worldObj, havenBagUid);
+		TileEntityHavenBagProperties tile = HavenBagHelper.getHavenBagProperties(player.worldObj, havenBagUid);
 		if (tile == null) {
 			return;
 		}
