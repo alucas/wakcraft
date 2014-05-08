@@ -74,7 +74,7 @@ public class HavenBagManager {
 		}
 
 		for (int i = 0; i < 2; i++) {
-			world.setBlock(x + 3 + i, y - 1, z - 2, WakcraftBlocks.hbbridge, 8, 2);
+			world.setBlock(x + 3 + i, y - 1, z - 2, WakcraftBlocks.havenbagbridge, 8, 2);
 		}
 
 		for (int i = 0; i < 2; i++) {
