@@ -1,5 +1,6 @@
 package heero.wakcraft.network.packet;
 
+import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagGenerationHelper;
@@ -86,10 +87,11 @@ public class PacketHavenBagTeleportation implements IPacket {
 		tileHavenBag.uid = properties.uid;
 		tileHavenBag.markDirty();
 
+		HavenBagHelper.teleportPlayerToHavenBag(player, properties.uid);
+
 		if (player instanceof EntityPlayerMP) {
 			((EntityPlayerMP) player).playerNetServerHandler.sendPacket(tileHavenBag.getDescriptionPacket());
+			Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(player, HavenBagProperty.IDENTIFIER), (EntityPlayerMP) player);
 		}
-
-		HavenBagHelper.teleportPlayerToHavenBag(player, properties.uid);
 	}
 }

@@ -3,6 +3,7 @@ package heero.wakcraft.eventhandler;
 import heero.wakcraft.Wakcraft;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.entity.property.XpProfessionProperty;
+import heero.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.wakcraft.network.packet.PacketProfession;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -24,6 +25,7 @@ public class PlayerEventHandler {
 	public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
 		if (!event.player.worldObj.isRemote && event.player instanceof EntityPlayerMP) {
 			Wakcraft.packetPipeline.sendTo(new PacketProfession(event.player), (EntityPlayerMP) event.player);
+			Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(event.player, HavenBagProperty.IDENTIFIER), (EntityPlayerMP) event.player);
 		}
 	}
 }
