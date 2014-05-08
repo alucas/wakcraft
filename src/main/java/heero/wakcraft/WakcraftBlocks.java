@@ -21,6 +21,7 @@ import heero.wakcraft.block.BlockPalisade;
 import heero.wakcraft.block.BlockPhoenix;
 import heero.wakcraft.block.BlockPillar;
 import heero.wakcraft.block.BlockPolisher;
+import heero.wakcraft.block.BlockSimple;
 import heero.wakcraft.block.BlockStairs2;
 import heero.wakcraft.block.BlockSufokiaColor;
 import heero.wakcraft.block.BlockSufokiaGround;
@@ -47,7 +48,8 @@ public class WakcraftBlocks {
 			sufokiaWave, sufokiaStair, ore1, ore2, ore3, ore4, carpet1,
 			sufokiaGround, palisade, pillar, wood, hbstand, grass, fence,
 			polisher, havenGemWorkbench, invisiblewall, havenbag, hbChest,
-			hbLock, hbProperties, hbBridge, hbVisitors, hbBarrier;
+			hbLock, hbProperties, hbBridge, hbVisitors, hbBarrier, hbCraft,
+			hbGarden, hbDeco, hbMerchant;
 
 	public static void registerBlocks() {
 		// Basic blocks
@@ -73,6 +75,10 @@ public class WakcraftBlocks {
 		GameRegistry.registerBlock(hbLock = (new BlockHavenBagLock()), "blockHavenBagLock");
 		GameRegistry.registerBlock(hbProperties = (new BlockHavenBagProperties()), "blockHavenBagProperties");
 		GameRegistry.registerBlock(hbBridge = (new BlockTransparent(Material.iron).setBlockName("HBBridge").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbbridge")), "blockHBBridge");
+		GameRegistry.registerBlock(hbGarden = (new BlockSimple(Material.iron).setBlockName("HBGarden").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbgarden")), "blockHBGarden");
+		GameRegistry.registerBlock(hbDeco = (new BlockSimple(Material.iron).setBlockName("HBDeco").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbdeco")), "blockHBDeco");
+		GameRegistry.registerBlock(hbCraft = (new BlockSimple(Material.iron).setBlockName("HBCraft").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbcraft")), "blockHBCraft");
+		GameRegistry.registerBlock(hbMerchant = (new BlockSimple(Material.iron).setBlockName("HBMerchant").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbmerchant")), "blockHBMerchant");
 		GameRegistry.registerBlock(hbVisitors = (new BlockHavenBagVisitors()), "blockHavenBagVisitors");
 		GameRegistry.registerBlock(hbBarrier = (new BlockHavenBagBarrier()), "blockHavenBagBarrier");
 
