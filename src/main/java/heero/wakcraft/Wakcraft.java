@@ -2,7 +2,7 @@ package heero.wakcraft;
 
 import heero.wakcraft.network.PacketPipeline;
 import heero.wakcraft.network.packet.PacketCloseWindow;
-import heero.wakcraft.network.packet.PacketHavenBag;
+import heero.wakcraft.network.packet.PacketHavenBagTeleportation;
 import heero.wakcraft.network.packet.PacketHavenBagVisitors;
 import heero.wakcraft.network.packet.PacketOpenWindow;
 import heero.wakcraft.network.packet.PacketProfession;
@@ -41,7 +41,7 @@ public class Wakcraft {
 		packetPipeline.registerPacket(PacketOpenWindow.class);
 		packetPipeline.registerPacket(PacketCloseWindow.class);
 		packetPipeline.registerPacket(PacketProfession.class);
-		packetPipeline.registerPacket(PacketHavenBag.class);
+		packetPipeline.registerPacket(PacketHavenBagTeleportation.class);
 		packetPipeline.registerPacket(PacketHavenBagVisitors.class);
 		packetPipeline.postInitialise();
 	}

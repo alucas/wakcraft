@@ -5,11 +5,11 @@ import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 
-public class PacketHavenBag implements IPacket {
-	public PacketHavenBag() {
+public class PacketHavenBagTeleportation implements IPacket {
+	public PacketHavenBagTeleportation() {
 	}
 
-	public PacketHavenBag(EntityPlayer player) {
+	public PacketHavenBagTeleportation(EntityPlayer player) {
 	}
 
 	@Override
