@@ -9,6 +9,11 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
 
 public class HavenBagHelper {
+	public static final int R_GARDEN = 1;
+	public static final int R_CRAFT = 2;
+	public static final int R_DECO = 4;
+	public static final int R_MERCHANT = 8;
+
 	public static int getNextAvailableUID(World world) {
 		int uid = 0;
 

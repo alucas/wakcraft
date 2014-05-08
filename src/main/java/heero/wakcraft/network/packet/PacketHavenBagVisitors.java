@@ -16,11 +16,6 @@ public class PacketHavenBagVisitors implements IPacket {
 	public static final int ACTION_ADD = 1;
 	public static final int ACTION_REMOVE = 2;
 
-	public static final int R_GARDEN = 1;
-	public static final int R_CRAFT = 2;
-	public static final int R_DECO = 4;
-	public static final int R_MERCHANT = 8;
-
 	private int action;
 	private String playerName;
 	private int right;
