@@ -24,7 +24,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 public class BlockHavenBagBarrier extends Block {
 
 	public BlockHavenBagBarrier() {
-		super(Material.clay);
+		super(Material.air);
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		setBlockName("HavenBagBarrier");
