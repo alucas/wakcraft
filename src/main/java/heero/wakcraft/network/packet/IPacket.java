@@ -1,9 +1,9 @@
 package heero.wakcraft.network.packet;
 
+import io.netty.channel.ChannelHandlerContext;
+
 import java.io.IOException;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 
@@ -36,14 +36,16 @@ public interface IPacket {
 	 * completed.
 	 * 
 	 * @param player the player reference
+	 * @throws Exception 
 	 */
-	public abstract void handleClientSide(EntityPlayer player);
+	public abstract void handleClientSide(EntityPlayer player) throws Exception;
 
 	/**
 	 * Handle a packet on the server side. Note this occurs after decoding has
 	 * completed.
 	 * 
 	 * @param player the player reference
+	 * @throws Exception 
 	 */
-	public abstract void handleServerSide(EntityPlayer player);
+	public abstract void handleServerSide(EntityPlayer player) throws Exception;
 }

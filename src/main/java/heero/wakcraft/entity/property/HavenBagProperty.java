@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-public class HavenBagProperty implements IExtendedEntityProperties {
+public class HavenBagProperty implements IExtendedEntityProperties, ISynchProperties {
 	public static final String IDENTIFIER = "HavenBag";
 
 	private static final String TAG_HAVENBAG = "HavenBag";
@@ -56,6 +56,20 @@ public class HavenBagProperty implements IExtendedEntityProperties {
 		posX = tagHavenBag.getDouble(TAG_POS_X);
 		posY = tagHavenBag.getDouble(TAG_POS_Y);
 		posZ = tagHavenBag.getDouble(TAG_POS_Z);
+	}
+
+	@Override
+	public NBTTagCompound getClientPacket() {
+		NBTTagCompound tagRoot = new NBTTagCompound();
+
+		saveNBTData(tagRoot);
+
+		return tagRoot;
+	}
+
+	@Override
+	public void onClientPacket(NBTTagCompound tagRoot) {
+		loadNBTData(tagRoot);
 	}
 
 	public void setEnterHavenBag(double posX, double posY, double posZ, int havenbag) {
