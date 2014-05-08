@@ -1,5 +1,6 @@
 package heero.wakcraft.block;
 
+import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
@@ -65,10 +66,12 @@ public class BlockHavenBagBarrier extends Block {
 				return;
 			}
 
+			EntityPlayer player = (EntityPlayer) entity;
+
 			int havenBagUID = HavenBagHelper.getUIDFromCoord((int)entity.posX, (int)entity.posY, (int)entity.posZ);
 			IExtendedEntityProperties properties = entity.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 			if (properties == null || !(properties instanceof HavenBagProperty)) {
-				FMLLog.warning("Error while loading the player (%s) properties", ((EntityPlayer)entity).getDisplayName());
+				FMLLog.warning("Error while loading the player (%s) properties", player.getDisplayName());
 				break;
 			}
 
@@ -76,6 +79,42 @@ public class BlockHavenBagBarrier extends Block {
 			if (havenBagUID == havenBagProperties.uid) {
 				return;
 			}
+
+			TileEntityHavenBagProperties tile = HavenBagHelper.getHavenBagProperties(world, havenBagUID);
+			if (tile == null) {
+				break;
+			}
+
+			int rightAll = tile.acl.get(TileEntityHavenBagProperties.ACL_KEY_ALL);
+//			int rightGuild = tile.acl.get(TileEntityHavenBagProperties.ACL_KEY_GUILD);
+//			int right = tile.acl.get(player.getDisplayName());
+
+			Block block1 = world.getBlock(x, 19, z + 1);
+			Block block2 = world.getBlock(x, 19, z - 1);
+			Block block3 = world.getBlock(x + 1, 19, z);
+			Block block4 = world.getBlock(x - 1, 19, z);
+
+			if ((block1.equals(WakcraftBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
+					|| (block2.equals(WakcraftBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
+					|| (block3.equals(WakcraftBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
+					|| (block4.equals(WakcraftBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
+					|| (block1.equals(WakcraftBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
+					|| (block2.equals(WakcraftBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
+					|| (block3.equals(WakcraftBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
+					|| (block4.equals(WakcraftBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
+					|| (block1.equals(WakcraftBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
+					|| (block2.equals(WakcraftBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
+					|| (block3.equals(WakcraftBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
+					|| (block4.equals(WakcraftBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
+					|| (block1.equals(WakcraftBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
+					|| (block2.equals(WakcraftBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
+					|| (block3.equals(WakcraftBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
+					|| (block4.equals(WakcraftBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
+					) {
+				break;
+			}
+
+			return;
 		} while(false);
 
 		AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBoxFromPool(world, x, y, z);

@@ -2,6 +2,7 @@ package heero.wakcraft.havenbag;
 
 import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftItems;
+import heero.wakcraft.block.BlockSimple;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -40,7 +41,7 @@ public class HavenBagGenerationHelper {
 		// First gem ground
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				world.setBlock(x + 2 + i, y - 1, z + 5 + j, Blocks.planks);
+				world.setBlock(x + 2 + i, y - 1, z + 5 + j, WakcraftBlocks.hbMerchant);
 			}
 		}
 
@@ -176,10 +177,10 @@ public class HavenBagGenerationHelper {
 
 	private static Block getHBBlockFromStack(ItemStack stack) {
 		return (stack == null) ? WakcraftBlocks.invisiblewall
-				: (stack.getItem() == WakcraftItems.craftHG) ? Blocks.stone
-						: (stack.getItem() == WakcraftItems.merchantHG) ? Blocks.planks
-								: (stack.getItem() == WakcraftItems.decoHG) ? Blocks.log
-										: (stack.getItem() == WakcraftItems.gardenHG) ? Blocks.grass
+				: (stack.getItem() == WakcraftItems.craftHG) ? WakcraftBlocks.hbCraft
+						: (stack.getItem() == WakcraftItems.merchantHG) ? WakcraftBlocks.hbMerchant
+								: (stack.getItem() == WakcraftItems.decoHG) ? WakcraftBlocks.hbDeco
+										: (stack.getItem() == WakcraftItems.gardenHG) ? WakcraftBlocks.hbGarden
 												: Blocks.lapis_block;
 	}
 
