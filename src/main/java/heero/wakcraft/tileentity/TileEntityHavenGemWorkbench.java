@@ -1,10 +1,9 @@
 package heero.wakcraft.tileentity;
 
-import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftItems;
-import net.minecraft.block.Block;
+import heero.wakcraft.havenbag.HavenBagGenerationHelper;
+import heero.wakcraft.havenbag.HavenBagHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.Item;
@@ -164,127 +163,10 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 
 	public void onSlotChanged(int slotId) {
 		if (!worldObj.isRemote) {
-			ItemStack stack = getStackInSlot(slotId);
-			Block block = getHBBlock(stack);
+			int uid = HavenBagHelper.getUIDFromCoord(xCoord, yCoord, zCoord);
 
-			for (int i = 0; i < 5; i++) {
-				for (int j = 0; j < 5; j++) {
-					if ((slotId % 2 == 1) && (i == 4 || j == 4) || (slotId % 2 == 0 && i != 4 && j != 4)) {
-						setHBBBlock(- 2 + i + ((slotId / 2) % 3) * 6, - 1, 5 + j + (slotId / 6) * 6, block, 0);
-					}
-				}
-			}
-
-			for (int column = 2; column >= 0; --column) {
-				for (int row = 2; row >= 1; --row) {
-					ItemStack stack1Lower = getStackInSlot((row * 3 + column) * 2);
-					ItemStack stack1Upper = getStackInSlot((row * 3 + column) * 2 + 1);
-					ItemStack stack2Lower = getStackInSlot(((row - 1) * 3 + column) * 2);
-					ItemStack stack2Upper = getStackInSlot(((row - 1) * 3 + column) * 2 + 1);
-
-					if (stack1Upper != null && stack2Upper != null && stack1Upper.getItem().equals(stack2Upper.getItem())) {
-						block = getHBBlock(stack1Lower);
-						for (int i = 0; i < 5; i++) {
-							setHBBBlock(- 2 + i + column * 6, - 1, 4 + row * 6, block, 0);
-						}
-					} else if (stack1Lower == null || stack2Lower == null) {
-						block = getHBBlock(null);
-						for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
-							for (int i = 0; i < 5; i++) {
-								setHBBBlock(- 2 + i + column * 6, - 1, 4 - j + row * 6, block, 0);
-							}
-						}
-					} else {
-						for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
-							for (int i = 0; i < 5; i++) {
-								if (i == 1 || i == 2) {
-									setHBBBlock(- 2 + i + column * 6, - 1, 4 - j + row * 6, WakcraftBlocks.hbBridge, 0);
-								} else {
-									setHBBBlock(- 2 + i + column * 6, - 1, 4 - j + row * 6, WakcraftBlocks.invisiblewall, 0);
-								}
-							}
-						}
-					}
-				}
-			}
-
-			for (int column = 2; column >= 1; --column) {
-				for (int row = 2; row >= 0; --row) {
-					ItemStack stack1Lower = getStackInSlot((row * 3 + column) * 2);
-					ItemStack stack1Upper = getStackInSlot((row * 3 + column) * 2 + 1);
-					ItemStack stack2Lower = getStackInSlot((row * 3 + (column - 1)) * 2);
-					ItemStack stack2Upper = getStackInSlot((row * 3 + (column - 1)) * 2 + 1);
-
-					if (stack1Upper != null && stack2Upper != null && stack1Upper.getItem().equals(stack2Upper.getItem())) {
-						block = getHBBlock(stack1Lower);
-						for (int i = 0; i < 5; i++) {
-							setHBBBlock(- 3 + column * 6, - 1, 5 + i + row * 6, block, 0);
-						}
-					} else if (stack1Lower == null || stack2Lower == null) {
-						block = getHBBlock(null);
-						for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
-							for (int i = 0; i < 5; i++) {
-								setHBBBlock(- 3 - j + column * 6, - 1, 5 + i + row * 6, block, 0);
-							}
-						}
-					} else {
-						for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
-							for (int i = 0; i < 5; i++) {
-								if (i == 1 || i == 2) {
-									setHBBBlock(- 3 - j + column * 6, - 1, 5 + i + row * 6, WakcraftBlocks.hbBridge, 0);
-								} else {
-									setHBBBlock(- 3 - j + column * 6, - 1, 5 + i + row * 6, WakcraftBlocks.invisiblewall, 0);
-								}
-							}
-						}
-					}
-				}
-			}
-
-			for (int i = 0; i < 5; i++) {
-				if (i == 2) continue;
-
-				ItemStack stack1 = getStackInSlot(i * 2);
-				ItemStack stack2 = getStackInSlot((i + 1) * 2 + 1);
-				ItemStack stack3 = getStackInSlot((i + 3) * 2 + 1);
-				ItemStack stack4 = getStackInSlot((i + 4) * 2 + 1);
-				if (stack1 != null && stack2 != null && stack3 != null && stack4 != null && stack1.getItem().equals(stack2.getItem()) && stack1.getItem().equals(stack3.getItem()) && stack1.getItem().equals(stack4.getItem())) {
-					setHBBBlock(3 + (i % 3) * 6, - 1, 10 + (i / 3) * 6, getHBBlock(getStackInSlot(i * 2)), 0);
-				} else {
-					setHBBBlock(3 + (i % 3) * 6, - 1, 10 + (i / 3) * 6, WakcraftBlocks.invisiblewall, 0);
-				}
-			}
-		}
-
-		return;
-	}
-
-	private Block getHBBlock(ItemStack stack) {
-		return (stack == null) ? WakcraftBlocks.invisiblewall
-				: (stack.getItem() == WakcraftItems.craftHG) ? Blocks.stone
-						: (stack.getItem() == WakcraftItems.merchantHG) ? Blocks.planks
-								: (stack.getItem() == WakcraftItems.decoHG) ? Blocks.log
-										: (stack.getItem() == WakcraftItems.gardenHG) ? Blocks.grass
-												: Blocks.lapis_block;
-	}
-
-	private void setHBBBlock(int x, int y, int z, Block block, int metadata) {
-		if (block.equals(WakcraftBlocks.invisiblewall)) {
-			for (int i = 0; i < 4; i++) {
-				worldObj.setBlock(xCoord + x, yCoord + y + i, zCoord + z, block, 0, 2);
-			}
-		} else if (block.equals(WakcraftBlocks.hbBridge)) {
-			worldObj.setBlock(xCoord + x, yCoord + y, zCoord + z, WakcraftBlocks.hbBridge, 0, 2);
-
-			for (int i = 1; i < 4; i++) {
-				worldObj.setBlock(xCoord + x, yCoord + y + i, zCoord + z, WakcraftBlocks.hbBarrier, 0, 2);
-			}
-		} else {
-			worldObj.setBlock(xCoord + x, yCoord + y, zCoord + z, block, metadata, 2);
-
-			for (int i = 1; i < 4; i++) {
-				worldObj.setBlock(xCoord + x, yCoord + y + i, zCoord + z, Blocks.air, 0, 2);
-			}
+			HavenBagGenerationHelper.updateGem(worldObj, uid, getStackInSlot(slotId), slotId);
+			HavenBagGenerationHelper.updateBridge(worldObj, uid, havenGems);
 		}
 	}
 }
