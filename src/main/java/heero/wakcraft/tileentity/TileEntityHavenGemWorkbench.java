@@ -198,7 +198,7 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 						for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
 							for (int i = 0; i < 5; i++) {
 								if (i == 1 || i == 2) {
-									setHBBBlock(- 2 + i + column * 6, - 1, 4 - j + row * 6, WakcraftBlocks.havenbagbridge, 0);
+									setHBBBlock(- 2 + i + column * 6, - 1, 4 - j + row * 6, WakcraftBlocks.hbBridge, 0);
 								} else {
 									setHBBBlock(- 2 + i + column * 6, - 1, 4 - j + row * 6, WakcraftBlocks.invisiblewall, 0);
 								}
@@ -231,7 +231,7 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 						for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
 							for (int i = 0; i < 5; i++) {
 								if (i == 1 || i == 2) {
-									setHBBBlock(- 3 - j + column * 6, - 1, 5 + i + row * 6, WakcraftBlocks.havenbagbridge, 0);
+									setHBBBlock(- 3 - j + column * 6, - 1, 5 + i + row * 6, WakcraftBlocks.hbBridge, 0);
 								} else {
 									setHBBBlock(- 3 - j + column * 6, - 1, 5 + i + row * 6, WakcraftBlocks.invisiblewall, 0);
 								}
@@ -273,11 +273,11 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 			for (int i = 0; i < 4; i++) {
 				worldObj.setBlock(xCoord + x, yCoord + y + i, zCoord + z, block, 0, 2);
 			}
-		} else if (block.equals(WakcraftBlocks.havenbagbridge)) {
-			worldObj.setBlock(xCoord + x, yCoord + y, zCoord + z, WakcraftBlocks.havenbagbridge, 0, 2);
+		} else if (block.equals(WakcraftBlocks.hbBridge)) {
+			worldObj.setBlock(xCoord + x, yCoord + y, zCoord + z, WakcraftBlocks.hbBridge, 0, 2);
 
 			for (int i = 1; i < 4; i++) {
-				worldObj.setBlock(xCoord + x, yCoord + y + i, zCoord + z, WakcraftBlocks.havenbagbarrier, 0, 2);
+				worldObj.setBlock(xCoord + x, yCoord + y + i, zCoord + z, WakcraftBlocks.hbBarrier, 0, 2);
 			}
 		} else {
 			worldObj.setBlock(xCoord + x, yCoord + y, zCoord + z, block, metadata, 2);

@@ -74,7 +74,7 @@ public class HavenBagManager {
 		}
 
 		for (int i = 0; i < 2; i++) {
-			world.setBlock(x + 3 + i, y - 1, z - 2, WakcraftBlocks.havenbagbridge, 8, 2);
+			world.setBlock(x + 3 + i, y - 1, z - 2, WakcraftBlocks.hbBridge, 8, 2);
 		}
 
 		for (int i = 0; i < 2; i++) {
@@ -87,10 +87,10 @@ public class HavenBagManager {
 			}
 		}
 
-		world.setBlock(x, y, z - 1, WakcraftBlocks.havenbagproperties, 0, 2);
-		world.setBlock(x + 2, y, z - 3, WakcraftBlocks.havenbagchest, 0, 2);
-		world.setBlock(x + 2, y, z - 6, WakcraftBlocks.havenbaglock, 0, 2);
-		world.setBlock(x + 3, y, z - 6, WakcraftBlocks.havenbagvisitors, 0, 2);
+		world.setBlock(x, y, z - 1, WakcraftBlocks.hbProperties, 0, 2);
+		world.setBlock(x + 2, y, z - 3, WakcraftBlocks.hbChest, 0, 2);
+		world.setBlock(x + 2, y, z - 6, WakcraftBlocks.hbLock, 0, 2);
+		world.setBlock(x + 3, y, z - 6, WakcraftBlocks.hbVisitors, 0, 2);
 		world.setBlock(x + 4, y, z - 6, WakcraftBlocks.havenGemWorkbench, 0, 2);
 
 		fillWalls(world, x - 1, y - 1, z - 7, 4, WakcraftBlocks.invisiblewall, 0);

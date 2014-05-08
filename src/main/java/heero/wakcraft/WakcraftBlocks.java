@@ -46,9 +46,8 @@ public class WakcraftBlocks {
 	public static Block dragoexpress, phoenix, sufokiaColor, sufokiaSun,
 			sufokiaWave, sufokiaStair, ore1, ore2, ore3, ore4, carpet1,
 			sufokiaGround, palisade, pillar, wood, hbstand, grass, fence,
-			polisher, havenGemWorkbench, invisiblewall, havenbag,
-			havenbagchest, havenbaglock, havenbagproperties, havenbagbridge,
-			havenbagvisitors, havenbagbarrier;
+			polisher, havenGemWorkbench, invisiblewall, havenbag, hbChest,
+			hbLock, hbProperties, hbBridge, hbVisitors, hbBarrier;
 
 	public static void registerBlocks() {
 		// Basic blocks
@@ -70,12 +69,12 @@ public class WakcraftBlocks {
 		GameRegistry.registerBlock(fence = (new BlockFence1(WakcraftInfo.MODID.toLowerCase() + ":palisade1", Material.wood).setBlockName("Fence1")), "blockFence");
 		GameRegistry.registerBlock(invisiblewall = (new BlockInvisibleWall()), "blockInvisibleWall");
 		GameRegistry.registerBlock(havenbag = (new BlockHavenBag()), "blockHavenBag");
-		GameRegistry.registerBlock(havenbagchest = (new BlockHavenBagChest()), "blockHavenBagChest");
-		GameRegistry.registerBlock(havenbaglock = (new BlockHavenBagLock()), "blockHavenBagLock");
-		GameRegistry.registerBlock(havenbagproperties = (new BlockHavenBagProperties()), "blockHavenBagProperties");
-		GameRegistry.registerBlock(havenbagbridge = (new BlockTransparent(Material.iron).setBlockName("HBBridge").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbbridge")), "blockHBBridge");
-		GameRegistry.registerBlock(havenbagvisitors = (new BlockHavenBagVisitors()), "blockHavenBagVisitors");
-		GameRegistry.registerBlock(havenbagbarrier = (new BlockHavenBagBarrier()), "blockHavenBagBarrier");
+		GameRegistry.registerBlock(hbChest = (new BlockHavenBagChest()), "blockHavenBagChest");
+		GameRegistry.registerBlock(hbLock = (new BlockHavenBagLock()), "blockHavenBagLock");
+		GameRegistry.registerBlock(hbProperties = (new BlockHavenBagProperties()), "blockHavenBagProperties");
+		GameRegistry.registerBlock(hbBridge = (new BlockTransparent(Material.iron).setBlockName("HBBridge").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbbridge")), "blockHBBridge");
+		GameRegistry.registerBlock(hbVisitors = (new BlockHavenBagVisitors()), "blockHavenBagVisitors");
+		GameRegistry.registerBlock(hbBarrier = (new BlockHavenBagBarrier()), "blockHavenBagBarrier");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":polisher")), "BlockPolisher");

@@ -41,7 +41,7 @@ public class ItemIkiakit extends ItemWithLevel {
 			World world, int x, int y, int z, int side, float hitX, float hitY,
 			float hitZ) {
 		if (!world.isRemote) {
-			if (world.getBlock(x, y, z).equals(WakcraftBlocks.havenbagchest)) {
+			if (world.getBlock(x, y, z).equals(WakcraftBlocks.hbChest)) {
 				TileEntity tileEntity = world.getTileEntity(x, y, z);
 				if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagChest)) {
 					FMLLog.warning("Error while loading the TileEntityHavenBagChest (%d, %d, %d)", x, y, z);
