@@ -23,7 +23,6 @@ public class PacketExtendedEntityProperty implements IPacket {
 	}
 
 	public PacketExtendedEntityProperty(Entity entity, String identifier) {
-		System.out.println(entity.getEntityId());
 		this.entity = entity;
 		this.entityId = entity.getEntityId();
 		this.identifier = identifier;
