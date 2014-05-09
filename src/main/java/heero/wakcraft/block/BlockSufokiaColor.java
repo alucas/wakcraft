@@ -1,7 +1,5 @@
 package heero.wakcraft.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.block.Block;
@@ -11,6 +9,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSufokiaColor extends Block {
 	private IIcon blockIconColor1, blockIconColor2;

@@ -8,8 +8,6 @@ import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 
 import java.util.List;
 
-import cpw.mods.fml.common.FMLLog;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -20,6 +18,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import cpw.mods.fml.common.FMLLog;
 
 public class BlockHavenBagBarrier extends Block {
 

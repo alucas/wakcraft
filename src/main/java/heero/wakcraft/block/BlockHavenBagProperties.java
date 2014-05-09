@@ -1,18 +1,9 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
-import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
-
-import java.util.List;
-
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class BlockHavenBagProperties extends BlockContainer {

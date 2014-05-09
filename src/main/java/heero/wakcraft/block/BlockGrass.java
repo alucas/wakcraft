@@ -1,6 +1,5 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
 import net.minecraft.block.material.Material;
 
 public class BlockGrass extends BlockSlab {

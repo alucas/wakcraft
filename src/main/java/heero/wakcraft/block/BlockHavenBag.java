@@ -1,9 +1,7 @@
 package heero.wakcraft.block;
 
-import cpw.mods.fml.common.FMLLog;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
 import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
@@ -15,6 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLLog;
 
 public class BlockHavenBag extends BlockContainer {
 	public BlockHavenBag() {
