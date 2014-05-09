@@ -10,7 +10,6 @@ public class GUIEventHandler {
 	@SubscribeEvent
 	public void onGuiOpen(GuiOpenEvent event) {
 		if (event.gui != null && event.gui instanceof GuiInventory) {
-			GuiInventory gui = (GuiInventory) event.gui;
 			Minecraft mc = Minecraft.getMinecraft();
 
 			if (mc.playerController.isInCreativeMode()) {

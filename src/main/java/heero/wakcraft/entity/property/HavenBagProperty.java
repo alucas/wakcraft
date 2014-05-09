@@ -11,7 +11,6 @@ public class HavenBagProperty implements IExtendedEntityProperties, ISynchProper
 	private static final String TAG_HAVENBAG = "HavenBag";
 	private static final String TAG_UID = "UID";
 	private static final String TAG_IN_HAVENBAG = "InHavenBag";
-	private static final String TAG_LOCKED = "Locked";
 	private static final String TAG_POS_X = "PosX";
 	private static final String TAG_POS_Y = "PosY";
 	private static final String TAG_POS_Z = "PosZ";

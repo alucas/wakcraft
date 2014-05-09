@@ -46,6 +46,7 @@ public class GUIProfession extends GuiScreen {
 	/**
 	 * Adds the buttons (and other controls) to the screen in question.
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
 		guiLeft = (width - xSize) / 2;
@@ -118,7 +119,9 @@ public class GUIProfession extends GuiScreen {
 	}
 
 	protected void actionPerformed(GuiButton button) {
-		currentProfession = PROFESSION.getProfession(button.id);
+		if (button instanceof ProfessionButton) {
+			currentProfession = ((ProfessionButton) button).profession;
+		}
 	}
 
 	private class ProfessionButton extends GuiButton {

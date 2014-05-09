@@ -2,7 +2,6 @@ package heero.wakcraft.client.gui.inventory;
 
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.havenbag.HavenBagChestHelper;
-import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.inventory.ContainerHavenBagChest;
 import heero.wakcraft.inventory.ContainerHavenBagChest.HavenBagChestSlot;
 
@@ -104,7 +103,7 @@ public class GUIHavenBagChest extends GUIContainer {
 	}
 
 	@Override
-	protected void drawSlots(List slots, int hoveredSlotId) {
+	protected void drawSlots(List<Slot> slots, int hoveredSlotId) {
 		for (int i = 0; i < inventorySlots.inventorySlots.size(); ++i) {
 			Slot slot = (Slot) inventorySlots.inventorySlots.get(i);
 

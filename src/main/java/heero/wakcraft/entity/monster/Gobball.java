@@ -31,8 +31,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class Gobball extends EntityAnimal {
 	protected final AnimalChest inventory = new AnimalChest("Inventory", 10);
 	// private EntityAIEatGrass field_146087_bs = new EntityAIEatGrass(this);
-	private static final String __OBFID = "CL_00001648";
-	protected static final Map dropRate = new HashMap<Integer, Integer>();
+	protected static final Map<Integer, Integer> dropRate = new HashMap<Integer, Integer>();
 	static {
 		dropRate.put(Item.getIdFromItem(WakcraftItems.gobballWool), 50);
 		dropRate.put(Item.getIdFromItem(WakcraftItems.gobballSkin), 50);

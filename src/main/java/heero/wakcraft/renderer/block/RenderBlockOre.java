@@ -9,7 +9,7 @@ public class RenderBlockOre extends RenderBlockGeneric {
 	public static int renderId;
 	
 	public RenderBlockOre(int renderId) {
-		this.renderId = renderId;
+		RenderBlockOre.renderId = renderId;
 	}
 	
 	@Override

@@ -2,7 +2,6 @@ package heero.wakcraft.havenbag;
 
 import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftItems;
-import heero.wakcraft.block.BlockSimple;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;

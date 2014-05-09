@@ -39,7 +39,7 @@ public class CraftingManager {
 	}
 
 	public void addRecipe(PROFESSION profession, int level, ItemStack result, Object... recipe) {
-		ArrayList recipeList = new ArrayList();
+		ArrayList<ItemStack> recipeList = new ArrayList<ItemStack>();
 
 		int nbIngredients = recipe.length;
 		for (int i = 0; i < nbIngredients; i++) {

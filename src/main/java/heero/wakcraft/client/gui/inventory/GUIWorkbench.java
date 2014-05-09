@@ -110,7 +110,6 @@ public class GUIWorkbench extends GuiContainer {
 		drawTexturedModalRect(guiLeft + 10, guiTop + 10, 0, ySize + 7, 16, 16);
 
 		List<IExtendedRecipe> recipes = CraftingManager.getInstance().getRecipeList(profession);
-		int nbRecipes = recipes.size();
 
 		GL11.glEnable(GL11.GL_BLEND);
 

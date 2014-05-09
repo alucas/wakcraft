@@ -1,25 +1,11 @@
 package heero.wakcraft.client.gui.inventory;
 
 import heero.wakcraft.WakcraftInfo;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.achievement.GuiAchievements;
-import net.minecraft.client.gui.achievement.GuiStats;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

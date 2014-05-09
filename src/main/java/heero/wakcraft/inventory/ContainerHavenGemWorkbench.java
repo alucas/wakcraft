@@ -7,14 +7,11 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class ContainerHavenGemWorkbench extends Container {
 	public IInventory hgContainer;
-	private World worldObj;
 
-	public ContainerHavenGemWorkbench(InventoryPlayer inventory, World world, IInventory hgContainer) {
-		this.worldObj = world;
+	public ContainerHavenGemWorkbench(InventoryPlayer inventory, IInventory hgContainer) {
 		this.hgContainer = hgContainer;
 
 		for (int i = 0; i < 9; ++i) {

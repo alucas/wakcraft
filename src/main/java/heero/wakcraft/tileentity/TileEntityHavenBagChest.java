@@ -266,6 +266,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void updateEntity() {
 		super.updateEntity();
 		++this.ticksSinceSync;
@@ -300,7 +301,6 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 
 		this.prevLidAngle = this.lidAngle;
 		f = 0.1F;
-		double d2;
 
 		if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F) {
 			this.worldObj.playSoundEffect((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);

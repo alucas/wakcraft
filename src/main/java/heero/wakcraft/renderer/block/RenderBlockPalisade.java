@@ -8,7 +8,7 @@ public class RenderBlockPalisade extends RenderBlockGeneric {
 	public static int renderId;
 
 	public RenderBlockPalisade(int renderId) {
-		this.renderId = renderId;
+		RenderBlockPalisade.renderId = renderId;
 	}
 
 	@Override

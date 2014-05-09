@@ -65,6 +65,7 @@ public class CommonProxy {
 		EntityRegistry.registerGlobalEntityID(EntityTextPopup.class, "TextPopup", EntityRegistry.findGlobalUniqueEntityId());
 	}
 
+	@SuppressWarnings("unchecked")
 	private void registerEntity(Class<? extends Entity> entityClass,
 			String entityName, int bkEggColor, int fgEggColor) {
 		int id = EntityRegistry.findGlobalUniqueEntityId();

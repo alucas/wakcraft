@@ -61,7 +61,7 @@ public abstract class GUIContainer extends GuiScreen {
 	private Slot field_146985_D;
 	private long field_146986_E;
 
-	protected final Set dragSplittingSlots = new HashSet();
+	protected final Set<Slot> dragSplittingSlots = new HashSet<Slot>();
 	protected boolean dragSpitting;
 
 	private int dragSplittingLimit;
@@ -95,6 +95,7 @@ public abstract class GUIContainer extends GuiScreen {
 	 * Draws the screen and all the components in it. Args : mouseX, mouseY,
 	 * renderPartialTicks
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float renderPartialTicks) {
 		drawDefaultBackground();
@@ -215,7 +216,7 @@ public abstract class GUIContainer extends GuiScreen {
 	protected abstract void drawGuiContainerBackgroundLayer(
 			float renderPartialTicks, int mouseX, int mouseY);
 
-	protected void drawSlots(List slots, int hoveredSlotId) {
+	protected void drawSlots(List<Slot> slots, int hoveredSlotId) {
 		for (int i = 0; i < inventorySlots.inventorySlots.size(); ++i) {
 			Slot slot = (Slot) inventorySlots.inventorySlots.get(i);
 
@@ -325,7 +326,7 @@ public abstract class GUIContainer extends GuiScreen {
 			ItemStack itemstack1;
 			int i;
 
-			for (Iterator iterator = this.dragSplittingSlots.iterator(); iterator.hasNext(); this.dragSplittingRemnant -= itemstack1.stackSize - i) {
+			for (Iterator<Slot> iterator = this.dragSplittingSlots.iterator(); iterator.hasNext(); this.dragSplittingRemnant -= itemstack1.stackSize - i) {
 				Slot slot = (Slot) iterator.next();
 				itemstack1 = itemstack.copy();
 				i = slot.getStack() == null ? 0 : slot.getStack().stackSize;
@@ -492,6 +493,7 @@ public abstract class GUIContainer extends GuiScreen {
 	/**
 	 * Called when the mouse released. Args : mouseX, mouseY, releasedButton
 	 */
+	@SuppressWarnings("unchecked")
 	protected void mouseMovedOrUp(int mouseX, int mouseY, int releasedButton) {
 		Slot slot = this.getSlotAtPosition(mouseX, mouseY);
 
@@ -510,7 +512,7 @@ public abstract class GUIContainer extends GuiScreen {
 		}
 
 		Slot slot1;
-		Iterator iterator;
+		Iterator<Slot> iterator;
 
 		if (this.doubleClick && slot != null && releasedButton == 0 && this.inventorySlots.func_94530_a((ItemStack) null, slot)) {
 			// shift + double clic while holding item = transfert all item

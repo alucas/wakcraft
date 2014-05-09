@@ -28,6 +28,7 @@ public class ItemOre extends ItemWithLevel {
 	 * returns a list of items with the same ID, but different meta (eg: dye
 	 * returns 16 items)
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubItems(Item item, CreativeTabs tabs, List list) {

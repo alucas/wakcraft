@@ -6,7 +6,6 @@ import java.util.List;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
 public class RecipeWithLevel implements IExtendedRecipe {
@@ -31,7 +30,7 @@ public class RecipeWithLevel implements IExtendedRecipe {
 			ItemStack itemstack = inventory.getStackInSlot(i);
 			if (itemstack != null) {
 				boolean flag = false;
-				Iterator iterator = components.iterator();
+				Iterator<ItemStack> iterator = components.iterator();
 
 				while (iterator.hasNext()) {
 					ItemStack itemstack1 = (ItemStack) iterator.next();

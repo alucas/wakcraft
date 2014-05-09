@@ -3,7 +3,6 @@ package heero.wakcraft.creativetab;
 import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftItems;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;

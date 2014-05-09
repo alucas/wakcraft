@@ -1,24 +1,11 @@
 package heero.wakcraft.havenbag;
 
-import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.WakcraftItems;
-import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.item.ItemIkiakit;
-import heero.wakcraft.tileentity.TileEntityHavenBag;
-import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 
 import java.util.Arrays;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLLog;
 
 public class HavenBagChestHelper {
 	public static final int CHEST_NORMAL = 0;

@@ -8,7 +8,7 @@ public class RenderBlockYRotation extends RenderBlockGeneric {
 	public static int renderId;
 	
 	public RenderBlockYRotation(int renderId) {
-		this.renderId = renderId;
+		RenderBlockYRotation.renderId = renderId;
 	}
 	
 	@Override

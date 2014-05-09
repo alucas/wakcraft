@@ -1,7 +1,6 @@
 package heero.wakcraft.inventory;
 
 import heero.wakcraft.havenbag.HavenBagChestHelper;
-import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,17 +8,12 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class ContainerHavenBagChest extends Container {
-	private World worldObj;
-	private InventoryPlayer inventory;
 	private TileEntityHavenBagChest tileEntity;
 
-	public ContainerHavenBagChest(InventoryPlayer inventory, World world,
+	public ContainerHavenBagChest(InventoryPlayer inventory,
 			TileEntityHavenBagChest tileEntity) {
-		this.worldObj = world;
-		this.inventory = inventory;
 		this.tileEntity = tileEntity;
 
 		tileEntity.openInventory();

@@ -1,7 +1,6 @@
 package heero.wakcraft.client.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 
 public class GUICheck extends GuiButton {
@@ -31,7 +30,6 @@ public class GUICheck extends GuiButton {
 	 */
 	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
 		if (this.visible) {
-			FontRenderer fontrenderer = mc.fontRenderer;
             mc.getTextureManager().bindTexture(buttonTextures);
 
             drawTexturedModalRect(xPosition, yPosition, 208 + (state ? 0 : 16), 0, width, height);

@@ -25,6 +25,7 @@ public class GUIHavenBagVisitors extends GuiScreen {
 		this.uid = uid;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
 		super.initGui();
