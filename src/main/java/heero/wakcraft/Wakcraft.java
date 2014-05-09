@@ -30,6 +30,8 @@ public class Wakcraft {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		WakcraftConfig.loadConfig(event);
+
 		proxy.registerBlocks();
 		proxy.registerItems();
 		proxy.registerEntities();
