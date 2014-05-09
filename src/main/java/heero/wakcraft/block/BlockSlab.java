@@ -33,6 +33,7 @@ public abstract class BlockSlab extends Block {
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
@@ -93,6 +94,7 @@ public abstract class BlockSlab extends Block {
 	 * boxes to the list if they intersect the mask.) Parameters: World, X, Y,
 	 * Z, mask, list, colliding entity
 	 */
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void addCollisionBoxesToList(World world, int x, int y, int z,
 			AxisAlignedBB mask, List list, Entity entity) {

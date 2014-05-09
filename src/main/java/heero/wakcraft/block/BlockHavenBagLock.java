@@ -30,6 +30,7 @@ public class BlockHavenBagLock extends Block {
 		setBlockName("HavenBagLock");
 	}
 
+	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (world.isRemote) {
 			return true;

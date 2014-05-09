@@ -55,6 +55,7 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 	 * returns a list of blocks with the same ID, but different meta (eg: wood
 	 * returns 4 blocks)
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tab, List subItems) {
@@ -237,6 +238,7 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 	/**
 	 * Called when a player hits the block. Args: world, x, y, z, player
 	 */
+	@Override
 	public void onBlockClicked(World world, int x,
 			int y, int z, EntityPlayer player) {
 		if (world.isRemote) {

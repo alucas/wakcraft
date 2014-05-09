@@ -30,7 +30,8 @@ public class BlockSufokiaGround extends Block {
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    @SideOnly(Side.CLIENT)
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@SideOnly(Side.CLIENT)
     @Override
     public void getSubBlocks(Item item, CreativeTabs tab, List subItems) {
     	for (int i = 0; i < 2; i++) {

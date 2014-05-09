@@ -83,13 +83,14 @@ public class BlockPhoenix extends BlockContainer {
         return false;
     }
     
-    /**
-     * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
-     * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
-     */
-    @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB mask, List list, Entity entity)
-    {
+	/**
+	 * Adds all intersecting collision boxes to a list. (Be sure to only add
+	 * boxes to the list if they intersect the mask.) Parameters: World, X, Y,
+	 * Z, mask, list, colliding entity
+	 */
+	@SuppressWarnings("rawtypes")
+	@Override
+	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB mask, List list, Entity entity) {
     	setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.5F, 1.0F);
     	super.addCollisionBoxesToList(world, x, y, z, mask, list, entity);
     	setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);

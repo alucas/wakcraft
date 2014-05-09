@@ -58,6 +58,8 @@ public class BlockHavenBagBarrier extends Block {
 	 * boxes to the list if they intersect the mask.) Parameters: World, X, Y,
 	 * Z, mask, list, colliding entity
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
 	public void addCollisionBoxesToList(World world, int x, int y, int z,
 			AxisAlignedBB mask, List list, Entity entity) {
 		do {
