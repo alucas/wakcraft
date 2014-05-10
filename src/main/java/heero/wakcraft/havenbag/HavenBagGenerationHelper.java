@@ -44,8 +44,11 @@ public class HavenBagGenerationHelper {
 		}
 
 		// Start bridge
-		havenBagWorld.setBlock(x, y - 1, z + 7, WakcraftBlocks.hbCraft2);
+		havenBagWorld.setBlock(x + 0, y - 1, z + 7, WakcraftBlocks.hbCraft2);
 		havenBagWorld.setBlock(x + 1, y - 1, z + 7, WakcraftBlocks.hbCraft);
+		havenBagWorld.setBlock(x + 1, y + 0, z + 7, WakcraftBlocks.hbBarrier);
+		havenBagWorld.setBlock(x + 1, y + 1, z + 7, WakcraftBlocks.hbBarrier);
+		havenBagWorld.setBlock(x + 1, y + 2, z + 7, WakcraftBlocks.hbBarrier);
 
 		// First gem ground
 		for (int i = 0; i < 4; i++) {
