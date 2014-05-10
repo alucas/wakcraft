@@ -6,6 +6,7 @@ import heero.wakcraft.network.packet.PacketCloseWindow;
 import heero.wakcraft.network.packet.PacketHavenBagVisitors;
 import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.client.gui.GuiButton;
@@ -23,6 +24,7 @@ public class GUIHavenBagVisitors extends GuiScreen {
 
 		this.world = world;
 		this.uid = uid;
+		this.acl = new HashMap<String, Integer>();
 	}
 
 	@SuppressWarnings("unchecked")

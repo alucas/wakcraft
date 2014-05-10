@@ -2,6 +2,7 @@ package heero.wakcraft.proxy;
 
 import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WakcraftBlocks;
+import heero.wakcraft.WakcraftConfig;
 import heero.wakcraft.WakcraftItems;
 import heero.wakcraft.entity.misc.EntityTextPopup;
 import heero.wakcraft.entity.monster.BlackGobbly;
@@ -17,10 +18,13 @@ import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
+import heero.wakcraft.world.WorldProviderHaveBag;
+import heero.wakcraft.world.gen.WorldGenHavenBag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -83,5 +87,12 @@ public class CommonProxy {
 	}
 
 	public void openHBVisitorsGui(EntityPlayer player) {
+	}
+
+	public void registerDimensions() {
+		GameRegistry.registerWorldGenerator(new WorldGenHavenBag(), 0);
+
+		DimensionManager.registerProviderType(WakcraftConfig.havenBagDimensionId, WorldProviderHaveBag.class, false);
+		DimensionManager.registerDimension(WakcraftConfig.havenBagDimensionId, WakcraftConfig.havenBagDimensionId);
 	}
 }

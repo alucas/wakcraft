@@ -39,6 +39,7 @@ public class Wakcraft {
 		proxy.registerRenderers();
 		proxy.registerEvents();
 		proxy.registerGui(this);
+		proxy.registerDimensions();
 
 		packetPipeline.initialise();
 		packetPipeline.registerPacket(PacketOpenWindow.class);

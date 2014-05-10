@@ -48,7 +48,7 @@ public class BlockHavenBagLock extends Block {
 			return true;
 		}
 
-		TileEntityHavenBagProperties havenBagProperties = HavenBagHelper.getHavenBagProperties(player.worldObj, propertiesHB.uid);
+		TileEntityHavenBagProperties havenBagProperties = HavenBagHelper.getHavenBagProperties(world, propertiesHB.uid);
 		if (havenBagProperties == null) {
 			return true;
 		}

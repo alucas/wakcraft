@@ -1,19 +1,29 @@
 package heero.wakcraft.havenbag;
 
 import heero.wakcraft.WakcraftBlocks;
+import heero.wakcraft.WakcraftConfig;
 import heero.wakcraft.WakcraftItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLLog;
 
 public class HavenBagGenerationHelper {
 	protected static final int HB_HEIGHT = 4;
 	protected static final int HB_WIDTH = 21;
 	protected static final int HB_LENGTH = 24;
 
-	public static void generateHavenBag(World world, int uid) {
+	public static boolean generateHavenBag(int uid) {
+		World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId);
+		if (havenBagWorld == null) {
+			FMLLog.warning("Error while loading the havenbag world : %d", WakcraftConfig.havenBagDimensionId);
+
+			return false;
+		}
+
 		int[] coords = HavenBagHelper.getCoordFromUID(uid);
 
 		int x = coords[0];
@@ -23,35 +33,37 @@ public class HavenBagGenerationHelper {
 		// Console blocks ground
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				world.setBlock(x + 2 + i, y - 1, z + j, Blocks.stone);
+				havenBagWorld.setBlock(x + 2 + i, y - 1, z + j, Blocks.stone);
 			}
 		}
 
 		// Console blocks bridge
 		for (int i = 0; i < 2; i++) {
-			world.setBlock(x + 3 + i, y - 1, z + 4, WakcraftBlocks.hbBridge, 8, 2);
+			havenBagWorld.setBlock(x + 3 + i, y - 1, z + 4, WakcraftBlocks.hbBridge, 8, 2);
 		}
 
 		// Start bridge
 		for (int i = 0; i < 2; i++) {
-			world.setBlock(x + i, y - 1, z + 7, Blocks.stone);
+			havenBagWorld.setBlock(x + i, y - 1, z + 7, Blocks.stone);
 		}
 
 		// First gem ground
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				world.setBlock(x + 2 + i, y - 1, z + 5 + j, WakcraftBlocks.hbMerchant);
+				havenBagWorld.setBlock(x + 2 + i, y - 1, z + 5 + j, WakcraftBlocks.hbMerchant);
 			}
 		}
 
-		// Console blocks
-		world.setBlock(x, y, z, WakcraftBlocks.hbProperties);
-		world.setBlock(x + 2, y, z, WakcraftBlocks.hbLock);
-		world.setBlock(x + 3, y, z, WakcraftBlocks.hbVisitors);
-		world.setBlock(x + 4, y, z, WakcraftBlocks.havenGemWorkbench);
-		world.setBlock(x + 2, y, z + 3, WakcraftBlocks.hbChest);
+		generateWalls(havenBagWorld, x - 1, y - 1, z - 1, WakcraftBlocks.invisiblewall, 0);
 
-		generateWalls(world, x - 1, y - 1, z - 1, WakcraftBlocks.invisiblewall, 0);
+		// Console blocks
+		havenBagWorld.setBlock(x, y, z, WakcraftBlocks.hbProperties);
+		havenBagWorld.setBlock(x + 2, y, z, WakcraftBlocks.hbLock);
+		havenBagWorld.setBlock(x + 3, y, z, WakcraftBlocks.hbVisitors);
+		havenBagWorld.setBlock(x + 4, y, z, WakcraftBlocks.havenGemWorkbench);
+		havenBagWorld.setBlock(x + 2, y, z + 3, WakcraftBlocks.hbChest);
+
+		return true;
 	}
 
 	private static void generateWalls(World world, int x, int y, int z, Block block, int metadata) {
@@ -66,7 +78,19 @@ public class HavenBagGenerationHelper {
 		}
 	}
 
-	public static void updateGem(World world, int uid, ItemStack stack, int gemPosition) {
+	public static void updateHavenBag(int uid, IInventory slots, ItemStack stack, int gemPosition) {
+		World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId);
+		if (havenBagWorld == null) {
+			FMLLog.warning("Error while loading the havenbag world : %d", WakcraftConfig.havenBagDimensionId);
+
+			return;
+		}
+
+		updateGem(havenBagWorld, uid, stack, gemPosition);
+		updateBridge(havenBagWorld, uid, slots);
+	}
+
+	private static void updateGem(World world, int uid, ItemStack stack, int gemPosition) {
 		Block block = getHBBlockFromStack(stack);
 		int[] coords = HavenBagHelper.getCoordFromUID(uid);
 
@@ -83,7 +107,7 @@ public class HavenBagGenerationHelper {
 		}
 	}
 
-	public static void updateBridge(World world, int uid, IInventory slots) {
+	private static void updateBridge(World world, int uid, IInventory slots) {
 		int[] coords = HavenBagHelper.getCoordFromUID(uid);
 
 		int x = coords[0];

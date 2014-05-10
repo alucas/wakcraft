@@ -44,9 +44,9 @@ public class PacketHavenBagTeleportation implements IPacket {
 		}
 
 		if (properties.isInHavenBag()) {
-			player.setPositionAndUpdate(properties.posX, properties.posY, properties.posZ);
-
-			properties.setLeaveHavenBag();
+			if (player instanceof EntityPlayerMP) {
+				HavenBagHelper.leaveHavenBag((EntityPlayerMP) player);
+			}
 
 			return;
 		}
@@ -68,11 +68,23 @@ public class PacketHavenBagTeleportation implements IPacket {
 
 		// Initialisation
 		if (properties.uid == 0) {
-			properties.uid = HavenBagHelper.getNextAvailableUID(player.worldObj);
+			int uid = HavenBagHelper.getNextAvailableUID();
+			if (uid == 0) {
+				FMLLog.warning("Error while requesting an unique havenbag identifier");
+
+				return;
+			}
+
+			properties.uid = uid;
 
 			FMLLog.info("New HavenBag atribution : %s, uid = %d", player.getDisplayName(), properties.uid);
 
-			HavenBagGenerationHelper.generateHavenBag(player.worldObj, properties.uid);
+			boolean result = HavenBagGenerationHelper.generateHavenBag(properties.uid);
+			if (!result) {
+				FMLLog.warning("Error during the generation of the havenbag : %d", properties.uid);
+
+				return;
+			}
 		}
 
 		player.worldObj.setBlock(posX, posY, posZ, WakcraftBlocks.havenbag);
@@ -87,11 +99,14 @@ public class PacketHavenBagTeleportation implements IPacket {
 		tileHavenBag.uid = properties.uid;
 		tileHavenBag.markDirty();
 
-		HavenBagHelper.teleportPlayerToHavenBag(player, properties.uid);
 
 		if (player instanceof EntityPlayerMP) {
-			((EntityPlayerMP) player).playerNetServerHandler.sendPacket(tileHavenBag.getDescriptionPacket());
-			Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(player, HavenBagProperty.IDENTIFIER), (EntityPlayerMP) player);
+			EntityPlayerMP playerMP = (EntityPlayerMP) player;
+
+			HavenBagHelper.teleportPlayerToHavenBag(playerMP, properties.uid);
+
+			playerMP.playerNetServerHandler.sendPacket(tileHavenBag.getDescriptionPacket());
+			Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(playerMP, HavenBagProperty.IDENTIFIER), playerMP);
 		}
 	}
 }

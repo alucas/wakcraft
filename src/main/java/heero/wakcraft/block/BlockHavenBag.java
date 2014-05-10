@@ -1,5 +1,6 @@
 package heero.wakcraft.block;
 
+import heero.wakcraft.WakcraftConfig;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.havenbag.HavenBagHelper;
@@ -9,6 +10,8 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
@@ -37,7 +40,14 @@ public class BlockHavenBag extends BlockContainer {
 			return true;
 		}
 
-		TileEntityHavenBagProperties havenBagProperties = HavenBagHelper.getHavenBagProperties(player.worldObj, ((TileEntityHavenBag) tile).uid);
+		World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId);
+		if (havenBagWorld == null) {
+			FMLLog.warning("Error while loading the havenbag world : %d", WakcraftConfig.havenBagDimensionId);
+
+			return false;
+		}
+
+		TileEntityHavenBagProperties havenBagProperties = HavenBagHelper.getHavenBagProperties(havenBagWorld, ((TileEntityHavenBag) tile).uid);
 		if (havenBagProperties == null) {
 			return true;
 		}
@@ -47,7 +57,9 @@ public class BlockHavenBag extends BlockContainer {
 			return true;
 		}
 
-		HavenBagHelper.teleportPlayerToHavenBag(player, ((TileEntityHavenBag) tile).uid);
+		if (player instanceof EntityPlayerMP) {
+			HavenBagHelper.teleportPlayerToHavenBag((EntityPlayerMP) player, ((TileEntityHavenBag) tile).uid);
+		}
 
 		return true;
 	}
