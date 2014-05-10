@@ -30,9 +30,11 @@ public class HavenBagGenerationHelper {
 		int z = coords[2];
 
 		// Console blocks ground
+		ItemStack stack = new ItemStack(WakcraftItems.craftHG);
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				havenBagWorld.setBlock(x + 2 + i, y - 1, z + j, Blocks.stone);
+				Block block = getHBBlockFromStack(stack);
+				havenBagWorld.setBlock(x + 2 + i, y - 1, z + j, block);
 			}
 		}
 
@@ -42,9 +44,8 @@ public class HavenBagGenerationHelper {
 		}
 
 		// Start bridge
-		for (int i = 0; i < 2; i++) {
-			havenBagWorld.setBlock(x + i, y - 1, z + 7, Blocks.stone);
-		}
+		havenBagWorld.setBlock(x, y - 1, z + 7, WakcraftBlocks.hbCraft2);
+		havenBagWorld.setBlock(x + 1, y - 1, z + 7, WakcraftBlocks.hbCraft);
 
 		// First gem ground
 		for (int i = 0; i < 4; i++) {
@@ -84,7 +85,6 @@ public class HavenBagGenerationHelper {
 			return;
 		}
 
-		Block block = getHBBlockFromStack(stack);
 		int[] coords = HavenBagHelper.getCoordFromUID(uid);
 
 		int x = coords[0];
@@ -94,6 +94,7 @@ public class HavenBagGenerationHelper {
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				if ((gemPosition % 2 == 1) && (i == 4 || j == 4) || (gemPosition % 2 == 0 && i != 4 && j != 4)) {
+					Block block = getHBBlockFromStack(stack);
 					setHBBBlock(havenBagWorld, x + 2 + i + ((gemPosition / 2) % 3) * 6, y - 1, z + 5 + j + (gemPosition / 6) * 6, block, 0);
 				}
 			}
@@ -122,8 +123,8 @@ public class HavenBagGenerationHelper {
 				ItemStack stack2Upper = slots.getStackInSlot(((row - 1) * 3 + column) * 2 + 1);
 
 				if (stack1Upper != null && stack2Upper != null && stack1Upper.getItem().equals(stack2Upper.getItem())) {
-					Block block = getHBBlockFromStack(stack1Lower);
 					for (int i = 0; i < 5; i++) {
+						Block block = getHBBlockFromStack(stack1Lower);
 						setHBBBlock(havenBagWorld, x + 2 + i + column * 6, y - 1, z + 4 + row * 6, block, 0);
 					}
 				} else if (stack1Lower == null || stack2Lower == null) {
@@ -156,8 +157,8 @@ public class HavenBagGenerationHelper {
 				ItemStack stack2Upper = slots.getStackInSlot((row * 3 + (column - 1)) * 2 + 1);
 
 				if (stack1Upper != null && stack2Upper != null && stack1Upper.getItem().equals(stack2Upper.getItem())) {
-					Block block = getHBBlockFromStack(stack1Lower);
 					for (int i = 0; i < 5; i++) {
+						Block block = getHBBlockFromStack(stack1Lower);
 						setHBBBlock(havenBagWorld, x + 1 + column * 6, y - 1, z + 5 + i + row * 6, block, 0);
 					}
 				} else if (stack1Lower == null || stack2Lower == null) {
@@ -199,9 +200,9 @@ public class HavenBagGenerationHelper {
 
 	private static Block getHBBlockFromStack(ItemStack stack) {
 		return (stack == null) ? WakcraftBlocks.invisiblewall
-				: (stack.getItem() == WakcraftItems.craftHG) ? WakcraftBlocks.hbCraft
+				: (stack.getItem() == WakcraftItems.craftHG) ? ((int)(Math.random() * 2)) == 0 ? WakcraftBlocks.hbCraft : WakcraftBlocks.hbCraft2
 						: (stack.getItem() == WakcraftItems.merchantHG) ? WakcraftBlocks.hbMerchant
-								: (stack.getItem() == WakcraftItems.decoHG) ? WakcraftBlocks.hbDeco
+								: (stack.getItem() == WakcraftItems.decoHG) ? ((int)(Math.random() * 2)) == 0 ? WakcraftBlocks.hbDeco : WakcraftBlocks.hbDeco2
 										: (stack.getItem() == WakcraftItems.gardenHG) ? WakcraftBlocks.hbGarden
 												: Blocks.lapis_block;
 	}

@@ -70,7 +70,7 @@ public class PacketHavenBagTeleportation implements IPacket {
 		}
 
 		// Initialisation
-		if (properties.uid == 0) {
+		if (properties.uid != 10) {
 			World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId);
 			if (havenBagWorld == null) {
 				FMLLog.warning("Error while loading the havenbag world : %d", WakcraftConfig.havenBagDimensionId);

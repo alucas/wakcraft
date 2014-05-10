@@ -40,6 +40,7 @@ import heero.wakcraft.item.ItemBlockSufokiaGround;
 import heero.wakcraft.item.ItemBlockSufokiaWave;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class WakcraftBlocks {
@@ -49,7 +50,7 @@ public class WakcraftBlocks {
 			sufokiaGround, palisade, pillar, wood, hbstand, grass, fence,
 			polisher, havenGemWorkbench, invisiblewall, havenbag, hbChest,
 			hbLock, hbProperties, hbBridge, hbVisitors, hbBarrier, hbCraft,
-			hbGarden, hbDeco, hbMerchant;
+			hbCraft2, hbGarden, hbDeco, hbDeco2, hbMerchant;
 
 	public static void registerBlocks() {
 		// Basic blocks
@@ -75,10 +76,12 @@ public class WakcraftBlocks {
 		GameRegistry.registerBlock(hbLock = (new BlockHavenBagLock()), "blockHavenBagLock");
 		GameRegistry.registerBlock(hbProperties = (new BlockHavenBagProperties()), "blockHavenBagProperties");
 		GameRegistry.registerBlock(hbBridge = (new BlockTransparent(Material.iron).setBlockName("HBBridge").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbbridge")), "blockHBBridge");
-		GameRegistry.registerBlock(hbGarden = (new BlockSimple(Material.iron).setBlockName("HBGarden").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbgarden")), "blockHBGarden");
-		GameRegistry.registerBlock(hbDeco = (new BlockSimple(Material.iron).setBlockName("HBDeco").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbdeco")), "blockHBDeco");
-		GameRegistry.registerBlock(hbCraft = (new BlockSimple(Material.iron).setBlockName("HBCraft").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbcraft")), "blockHBCraft");
-		GameRegistry.registerBlock(hbMerchant = (new BlockSimple(Material.iron).setBlockName("HBMerchant").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbmerchant")), "blockHBMerchant");
+		GameRegistry.registerBlock(hbGarden = (new BlockSimple(Material.iron).setBlockTextureName(ForgeDirection.UP, "hbgarden_top").setBlockTextureName("hbgarden_side").setBlockName("HBGarden").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBGarden");
+		GameRegistry.registerBlock(hbDeco = (new BlockSimple(Material.iron).setBlockTextureName(ForgeDirection.UP, "hbdeco_top").setBlockTextureName("hbdeco_side").setBlockName("HBDeco").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBDeco");
+		GameRegistry.registerBlock(hbDeco2 = (new BlockSimple(Material.iron).setBlockTextureName(ForgeDirection.UP, "hbdeco2_top").setBlockTextureName("hbdeco_side").setBlockName("HBDeco2").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBDeco2");
+		GameRegistry.registerBlock(hbCraft = (new BlockSimple(Material.iron).setBlockTextureName(ForgeDirection.UP, "hbcraft_top").setBlockTextureName("hbcraft_side").setBlockName("HBCraft").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBCraft");
+		GameRegistry.registerBlock(hbCraft2 = (new BlockSimple(Material.iron).setBlockTextureName(ForgeDirection.UP, "hbcraft2_top").setBlockTextureName("hbcraft_side").setBlockName("HBCraft2").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBCraft2");
+		GameRegistry.registerBlock(hbMerchant = (new BlockSimple(Material.iron).setBlockTextureName(ForgeDirection.UP, "hbmerchant_top").setBlockTextureName("hbmerchant_side").setBlockName("HBMerchant").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBMerchant");
 		GameRegistry.registerBlock(hbVisitors = (new BlockHavenBagVisitors()), "blockHavenBagVisitors");
 		GameRegistry.registerBlock(hbBarrier = (new BlockHavenBagBarrier()), "blockHavenBagBarrier");
 
