@@ -2,6 +2,7 @@ package heero.wakcraft.network.packet;
 
 import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WakcraftBlocks;
+import heero.wakcraft.WakcraftConfig;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagGenerationHelper;
 import heero.wakcraft.havenbag.HavenBagHelper;
@@ -11,9 +12,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
 
 public class PacketHavenBagTeleportation implements IPacket {
@@ -68,7 +71,14 @@ public class PacketHavenBagTeleportation implements IPacket {
 
 		// Initialisation
 		if (properties.uid == 0) {
-			int uid = HavenBagHelper.getNextAvailableUID();
+			World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId);
+			if (havenBagWorld == null) {
+				FMLLog.warning("Error while loading the havenbag world : %d", WakcraftConfig.havenBagDimensionId);
+
+				return;
+			}
+
+			int uid = HavenBagHelper.getNextAvailableUID(havenBagWorld);
 			if (uid == 0) {
 				FMLLog.warning("Error while requesting an unique havenbag identifier");
 
@@ -79,7 +89,7 @@ public class PacketHavenBagTeleportation implements IPacket {
 
 			FMLLog.info("New HavenBag atribution : %s, uid = %d", player.getDisplayName(), properties.uid);
 
-			boolean result = HavenBagGenerationHelper.generateHavenBag(properties.uid);
+			boolean result = HavenBagGenerationHelper.generateHavenBag(havenBagWorld, properties.uid);
 			if (!result) {
 				FMLLog.warning("Error during the generation of the havenbag : %d", properties.uid);
 

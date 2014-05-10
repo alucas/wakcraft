@@ -18,10 +18,9 @@ public class HavenBagHelper {
 	public static final int R_DECO = 4;
 	public static final int R_MERCHANT = 8;
 
-	public static int getNextAvailableUID() {
-		World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId);
-		if (havenBagWorld == null) {
-			FMLLog.warning("Error while loading the havenbag world : %d", WakcraftConfig.havenBagDimensionId);
+	public static int getNextAvailableUID(World havenBagWorld) {
+		if (havenBagWorld.provider.dimensionId != WakcraftConfig.havenBagDimensionId) {
+			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHaveBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return 0;
 		}
@@ -47,7 +46,7 @@ public class HavenBagHelper {
 	}
 
 	public static TileEntityHavenBagProperties getHavenBagProperties(World havenBagWorld, int uid) {
-		if (!havenBagWorld.provider.getDimensionName().equals(WorldProviderHaveBag.NAME)) {
+		if (havenBagWorld.provider.dimensionId != WakcraftConfig.havenBagDimensionId) {
 			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHaveBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return null;
