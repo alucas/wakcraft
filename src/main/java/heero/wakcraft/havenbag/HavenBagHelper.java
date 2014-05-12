@@ -29,7 +29,7 @@ public class HavenBagHelper {
 		}
 
 		properties.setEnterHavenBag(player.posX, player.posY, player.posZ, havenBagUID);
-		
+
 		player.mcServer.getConfigurationManager().transferPlayerToDimension(player, WakcraftConfig.havenBagDimensionId, new TeleporterHavenBag(MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId), havenBagUID));
 
 		HavenBagsManager.sendProperties(player, properties.uid);

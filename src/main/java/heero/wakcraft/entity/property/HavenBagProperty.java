@@ -27,7 +27,7 @@ public class HavenBagProperty implements IExtendedEntityProperties, ISynchProper
 	@Override
 	public void init(Entity entity, World world) {
 		uid = -1;
-		havenbag = 0;
+		havenbag = -1;
 		posX = 0;
 		posY = 0;
 		posZ = 0;
@@ -82,10 +82,10 @@ public class HavenBagProperty implements IExtendedEntityProperties, ISynchProper
 		posX = 0;
 		posY = 0;
 		posZ = 0;
-		havenbag = 0;
+		havenbag = -1;
 	}
 
 	public boolean isInHavenBag() {
-		return havenbag != 0;
+		return havenbag != -1;
 	}
 }
