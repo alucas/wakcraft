@@ -42,7 +42,7 @@ public class BlockHavenBagVisitors extends Block {
 		}
 
 		HavenBagProperty propertiesHB = (HavenBagProperty) properties;
-		if (propertiesHB.uid != HavenBagHelper.getUIDFromCoord(x, y, z)) {
+		if (propertiesHB.getUID() != HavenBagHelper.getUIDFromCoord(x, y, z)) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
 			return true;
 		}

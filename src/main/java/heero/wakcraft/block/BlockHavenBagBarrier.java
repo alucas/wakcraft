@@ -78,7 +78,7 @@ public class BlockHavenBagBarrier extends Block {
 			}
 
 			HavenBagProperty havenBagProperties = (HavenBagProperty) properties;
-			if (havenBagUID == havenBagProperties.uid) {
+			if (havenBagUID == havenBagProperties.getUID()) {
 				return;
 			}
 

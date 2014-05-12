@@ -16,13 +16,13 @@ public class HavenBagProperty implements IExtendedEntityProperties, ISynchProper
 	private static final String TAG_POS_Z = "PosZ";
 
 	/** Unique Identifier used to know which haven bag belong to the player (0 = no haven bag attributed yet) */
-	public int uid;
+	private int uid;
 	/** The uid of the haven bag the player is currently in (0 = not in an haven bag) */
-	public int havenbag;
+	private int havenbag;
 	/** Coordinates of the player before he was teleported to the haven bag */
-	public double posX;
-	public double posY;
-	public double posZ;
+	private double posX;
+	private double posY;
+	private double posZ;
 
 	@Override
 	public void init(Entity entity, World world) {
@@ -85,7 +85,19 @@ public class HavenBagProperty implements IExtendedEntityProperties, ISynchProper
 		havenbag = -1;
 	}
 
+	public double[] getOldCoords() {
+		return new double[]{posX, posY, posZ};
+	}
+
 	public boolean isInHavenBag() {
 		return havenbag != -1;
+	}
+
+	public int getUID() {
+		return uid;
+	}
+
+	public void setUID(int uid) {
+		this.uid = uid;
 	}
 }

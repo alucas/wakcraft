@@ -145,7 +145,7 @@ public class BlockHavenBagChest extends BlockContainer {
 		}
 
 		int havenBagUID = HavenBagHelper.getUIDFromCoord(x, y, z);
-		if (((HavenBagProperty)properties).uid != havenBagUID) {
+		if (((HavenBagProperty)properties).getUID() != havenBagUID) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
 			return true;
 		}

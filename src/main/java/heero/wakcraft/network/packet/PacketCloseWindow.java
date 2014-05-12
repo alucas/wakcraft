@@ -47,7 +47,7 @@ public class PacketCloseWindow implements IPacket {
 			}
 
 			int havenBagUid = HavenBagHelper.getUIDFromCoord((int)player.posX, (int)player.posY, (int)player.posZ);
-			if (properties.uid != havenBagUid) {
+			if (properties.getUID() != havenBagUid) {
 				FMLLog.warning("Player (%s) requested to close a window that not belong to him", player.getDisplayName());
 				return;
 			}

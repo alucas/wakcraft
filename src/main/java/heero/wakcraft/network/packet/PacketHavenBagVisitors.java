@@ -57,7 +57,7 @@ public class PacketHavenBagVisitors implements IPacket {
 		}
 
 		int havenBagUid = HavenBagHelper.getUIDFromCoord((int)player.posX, (int)player.posY, (int)player.posZ);
-		if (properties.uid != havenBagUid) {
+		if (properties.getUID() != havenBagUid) {
 			FMLLog.warning("Player (%s) tried to update the permission of havenbag %d", player.getDisplayName(), havenBagUid);
 			return;
 		}

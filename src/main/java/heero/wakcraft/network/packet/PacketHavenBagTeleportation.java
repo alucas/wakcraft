@@ -70,7 +70,7 @@ public class PacketHavenBagTeleportation implements IPacket {
 		}
 
 		// Initialisation
-		if (properties.uid == -1) {
+		if (properties.getUID() == -1) {
 			World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId);
 			if (havenBagWorld == null) {
 				FMLLog.warning("Error while loading the havenbag world : %d", WakcraftConfig.havenBagDimensionId);
@@ -78,13 +78,13 @@ public class PacketHavenBagTeleportation implements IPacket {
 				return;
 			}
 
-			properties.uid = player.worldObj.getUniqueDataId("havenbag");
+			properties.setUID(player.worldObj.getUniqueDataId("havenbag"));
 
-			FMLLog.info("New HavenBag atribution : %s, uid = %d", player.getDisplayName(), properties.uid);
+			FMLLog.info("New HavenBag atribution : %s, uid = %d", player.getDisplayName(), properties.getUID());
 
-			boolean result = HavenBagGenerationHelper.generateHavenBag(havenBagWorld, properties.uid);
+			boolean result = HavenBagGenerationHelper.generateHavenBag(havenBagWorld, properties.getUID());
 			if (!result) {
-				FMLLog.warning("Error during the generation of the havenbag : %d", properties.uid);
+				FMLLog.warning("Error during the generation of the havenbag : %d", properties.getUID());
 
 				return;
 			}
@@ -99,14 +99,14 @@ public class PacketHavenBagTeleportation implements IPacket {
 		}
 
 		TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tileEntity;
-		tileHavenBag.uid = properties.uid;
+		tileHavenBag.uid = properties.getUID();
 		tileHavenBag.markDirty();
 
 
 		if (player instanceof EntityPlayerMP) {
 			EntityPlayerMP playerMP = (EntityPlayerMP) player;
 
-			HavenBagHelper.teleportPlayerToHavenBag(playerMP, properties.uid);
+			HavenBagHelper.teleportPlayerToHavenBag(playerMP, properties.getUID());
 
 			playerMP.playerNetServerHandler.sendPacket(tileHavenBag.getDescriptionPacket());
 			Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(playerMP, HavenBagProperty.IDENTIFIER), playerMP);
