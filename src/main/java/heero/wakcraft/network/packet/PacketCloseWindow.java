@@ -2,13 +2,12 @@ package heero.wakcraft.network.packet;
 
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
-import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
+import heero.wakcraft.havenbag.HavenBagsManager;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
 import cpw.mods.fml.common.FMLLog;
 
@@ -53,14 +52,7 @@ public class PacketCloseWindow implements IPacket {
 				return;
 			}
 
-			TileEntityHavenBagProperties tile = HavenBagHelper.getHavenBagProperties(player.worldObj, havenBagUid);
-			if (tile == null) {
-				return;
-			}
-
-			if (player instanceof EntityPlayerMP) {
-				((EntityPlayerMP) player).playerNetServerHandler.sendPacket(tile.getDescriptionPacket());
-			}
+			HavenBagsManager.sendProperties(player, havenBagUid);
 		} else {
 			FMLLog.warning("Unknow window ID : %d", windowId);
 		}

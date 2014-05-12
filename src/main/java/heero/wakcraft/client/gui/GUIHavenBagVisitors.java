@@ -1,10 +1,10 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.Wakcraft;
-import heero.wakcraft.havenbag.HavenBagHelper;
+import heero.wakcraft.havenbag.HavenBagProperties;
+import heero.wakcraft.havenbag.HavenBagsManager;
 import heero.wakcraft.network.packet.PacketCloseWindow;
 import heero.wakcraft.network.packet.PacketHavenBagVisitors;
-import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class GUIHavenBagVisitors extends GuiScreen {
 	public void initGui() {
 		super.initGui();
 
-		TileEntityHavenBagProperties tile = HavenBagHelper.getHavenBagProperties(world, uid);
+		HavenBagProperties tile = HavenBagsManager.getProperties(uid);
 		if (tile == null) {
 			return;
 		}
@@ -42,7 +42,7 @@ public class GUIHavenBagVisitors extends GuiScreen {
 		int aclIndex = 2;
 		for (String name : acl.keySet()) {
 			int right = acl.get(name);
-			if (name == TileEntityHavenBagProperties.ACL_KEY_ALL) {
+			if (name == HavenBagProperties.ACL_KEY_ALL) {
 				buttonList.add(new GUICheck(0, name, (right & 0x1) != 0, 100, 30));
 				buttonList.add(new GUICheck(1, name, (right & 0x2) != 0, 130, 30));
 				buttonList.add(new GUICheck(2, name, (right & 0x4) != 0, 160, 30));
@@ -51,7 +51,7 @@ public class GUIHavenBagVisitors extends GuiScreen {
 				continue;
 			}
 
-			if (name == TileEntityHavenBagProperties.ACL_KEY_GUILD) {
+			if (name == HavenBagProperties.ACL_KEY_GUILD) {
 				buttonList.add(new GUICheck(4, name, (right & 0x1) != 0, 100, 60));
 				buttonList.add(new GUICheck(5, name, (right & 0x2) != 0, 130, 60));
 				buttonList.add(new GUICheck(6, name, (right & 0x4) != 0, 160, 60));
@@ -75,12 +75,12 @@ public class GUIHavenBagVisitors extends GuiScreen {
 
 		int lineIndex = 0;
 		for (String name : acl.keySet()) {
-			if (name == TileEntityHavenBagProperties.ACL_KEY_ALL) {
+			if (name == HavenBagProperties.ACL_KEY_ALL) {
 				drawString(fontRendererObj, StatCollector.translateToLocal("key.all"), 20, 30, 0xFFFFFF);
 				continue;
 			}
 
-			if (name == TileEntityHavenBagProperties.ACL_KEY_GUILD) {
+			if (name == HavenBagProperties.ACL_KEY_GUILD) {
 				drawString(fontRendererObj, StatCollector.translateToLocal("key.guild"), 20, 60, 0xFFFFFF);
 				continue;
 			}

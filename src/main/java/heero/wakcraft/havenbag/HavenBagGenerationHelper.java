@@ -60,7 +60,6 @@ public class HavenBagGenerationHelper {
 		generateWalls(havenBagWorld, x - 1, y - 1, z - 1, WakcraftBlocks.invisiblewall, 0);
 
 		// Console blocks
-		havenBagWorld.setBlock(x, y, z, WakcraftBlocks.hbProperties);
 		havenBagWorld.setBlock(x + 2, y, z, WakcraftBlocks.hbLock);
 		havenBagWorld.setBlock(x + 3, y, z, WakcraftBlocks.hbVisitors);
 		havenBagWorld.setBlock(x + 4, y, z, WakcraftBlocks.havenGemWorkbench);

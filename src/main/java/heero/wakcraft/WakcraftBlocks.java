@@ -9,7 +9,6 @@ import heero.wakcraft.block.BlockHavenBag;
 import heero.wakcraft.block.BlockHavenBagBarrier;
 import heero.wakcraft.block.BlockHavenBagChest;
 import heero.wakcraft.block.BlockHavenBagLock;
-import heero.wakcraft.block.BlockHavenBagProperties;
 import heero.wakcraft.block.BlockHavenBagVisitors;
 import heero.wakcraft.block.BlockHavenGemWorkbench;
 import heero.wakcraft.block.BlockInvisibleWall;
@@ -49,7 +48,7 @@ public class WakcraftBlocks {
 			sufokiaWave, sufokiaStair, ore1, ore2, ore3, ore4, carpet1,
 			sufokiaGround, palisade, pillar, wood, hbstand, grass, fence,
 			polisher, havenGemWorkbench, invisiblewall, havenbag, hbChest,
-			hbLock, hbProperties, hbBridge, hbVisitors, hbBarrier, hbCraft,
+			hbLock, hbBridge, hbVisitors, hbBarrier, hbCraft,
 			hbCraft2, hbGarden, hbDeco, hbDeco2, hbMerchant;
 
 	public static void registerBlocks() {
@@ -74,7 +73,6 @@ public class WakcraftBlocks {
 		GameRegistry.registerBlock(havenbag = (new BlockHavenBag()), "blockHavenBag");
 		GameRegistry.registerBlock(hbChest = (new BlockHavenBagChest()), "blockHavenBagChest");
 		GameRegistry.registerBlock(hbLock = (new BlockHavenBagLock()), "blockHavenBagLock");
-		GameRegistry.registerBlock(hbProperties = (new BlockHavenBagProperties()), "blockHavenBagProperties");
 		GameRegistry.registerBlock(hbBridge = (new BlockTransparent(Material.iron).setBlockName("HBBridge").setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("hbbridge")), "blockHBBridge");
 		GameRegistry.registerBlock(hbGarden = (new BlockSimple(Material.iron).setBlockTextureName(ForgeDirection.UP, "hbgarden_top").setBlockTextureName("hbgarden_side").setBlockName("HBGarden").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBGarden");
 		GameRegistry.registerBlock(hbDeco = (new BlockSimple(Material.iron).setBlockTextureName(ForgeDirection.UP, "hbdeco_top").setBlockTextureName("hbdeco_side").setBlockName("HBDeco").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBDeco");

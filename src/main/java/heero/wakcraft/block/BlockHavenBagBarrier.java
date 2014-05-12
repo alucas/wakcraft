@@ -4,7 +4,8 @@ import heero.wakcraft.WakcraftBlocks;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
-import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
+import heero.wakcraft.havenbag.HavenBagProperties;
+import heero.wakcraft.havenbag.HavenBagsManager;
 
 import java.util.List;
 
@@ -81,12 +82,12 @@ public class BlockHavenBagBarrier extends Block {
 				return;
 			}
 
-			TileEntityHavenBagProperties tile = HavenBagHelper.getHavenBagProperties(world, havenBagUID);
-			if (tile == null) {
+			HavenBagProperties hbProperties = HavenBagsManager.getProperties(havenBagUID);
+			if (hbProperties == null) {
 				break;
 			}
 
-			int rightAll = tile.acl.get(TileEntityHavenBagProperties.ACL_KEY_ALL);
+			int rightAll = hbProperties.acl.get(HavenBagProperties.ACL_KEY_ALL);
 //			int rightGuild = tile.acl.get(TileEntityHavenBagProperties.ACL_KEY_GUILD);
 //			int right = tile.acl.get(player.getDisplayName());
 

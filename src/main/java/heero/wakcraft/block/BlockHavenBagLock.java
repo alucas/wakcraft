@@ -4,13 +4,13 @@ import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
-import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
+import heero.wakcraft.havenbag.HavenBagProperties;
+import heero.wakcraft.havenbag.HavenBagsManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
@@ -48,17 +48,14 @@ public class BlockHavenBagLock extends Block {
 			return true;
 		}
 
-		TileEntityHavenBagProperties havenBagProperties = HavenBagHelper.getHavenBagProperties(world, propertiesHB.uid);
+		HavenBagProperties havenBagProperties = HavenBagsManager.getProperties(propertiesHB.uid);
 		if (havenBagProperties == null) {
 			return true;
 		}
 
 		havenBagProperties.locked = !havenBagProperties.locked;
-		havenBagProperties.markDirty();
 
-		if (player instanceof EntityPlayerMP) {
-			((EntityPlayerMP) player).playerNetServerHandler.sendPacket(havenBagProperties.getDescriptionPacket());
-		}
+		HavenBagsManager.setProperties(propertiesHB.uid, havenBagProperties);
 
 		player.addChatMessage(new ChatComponentText(havenBagProperties.locked ? StatCollector.translateToLocal("message.lockHavenBag") : StatCollector.translateToLocal("message.unlockHavenBag")));
 

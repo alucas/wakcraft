@@ -11,11 +11,11 @@ import heero.wakcraft.entity.monster.GobballWC;
 import heero.wakcraft.entity.monster.Gobbette;
 import heero.wakcraft.entity.monster.WhiteGobbly;
 import heero.wakcraft.eventhandler.PlayerEventHandler;
+import heero.wakcraft.eventhandler.WorldEventHandler;
 import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
-import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
 import heero.wakcraft.world.WorldProviderHaveBag;
@@ -38,6 +38,7 @@ public class CommonProxy {
 
 	public void registerEvents() {
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
+		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 
 		FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
 	}
@@ -56,7 +57,6 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityHavenGemWorkbench.class, "tileEntityHavenGemWorkbench");
 		GameRegistry.registerTileEntity(TileEntityHavenBag.class, "tileEntityHavenBag");
 		GameRegistry.registerTileEntity(TileEntityHavenBagChest.class, "tileEntityHavenBagChest");
-		GameRegistry.registerTileEntity(TileEntityHavenBagProperties.class, "tileEntityHavenBagProperties");
 	}
 
 	public void registerEntities() {

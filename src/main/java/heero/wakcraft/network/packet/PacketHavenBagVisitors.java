@@ -2,7 +2,8 @@ package heero.wakcraft.network.packet;
 
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
-import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
+import heero.wakcraft.havenbag.HavenBagProperties;
+import heero.wakcraft.havenbag.HavenBagsManager;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
@@ -61,17 +62,17 @@ public class PacketHavenBagVisitors implements IPacket {
 			return;
 		}
 
-		TileEntityHavenBagProperties tile = HavenBagHelper.getHavenBagProperties(player.worldObj, havenBagUid);
-		if (tile == null) {
+		HavenBagProperties hbProperties = HavenBagsManager.getProperties(havenBagUid);
+		if (hbProperties == null) {
 			return;
 		}
 
 		if (action == ACTION_ADD) {
-			tile.acl.put(playerName, tile.acl.get(playerName) | right);
-			tile.markDirty();
+			hbProperties.acl.put(playerName, hbProperties.acl.get(playerName) | right);
+			HavenBagsManager.setProperties(havenBagUid, hbProperties);
 		} else if (action == ACTION_REMOVE) {
-			tile.acl.put(playerName, tile.acl.get(playerName) & ((~right) & 0xF));
-			tile.markDirty();
+			hbProperties.acl.put(playerName, hbProperties.acl.get(playerName) & ((~right) & 0xF));
+			HavenBagsManager.setProperties(havenBagUid, hbProperties);
 		} else {
 			FMLLog.warning("Unknow action : %d", action);
 			return;

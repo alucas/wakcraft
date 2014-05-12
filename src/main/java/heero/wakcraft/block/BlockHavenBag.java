@@ -4,8 +4,9 @@ import heero.wakcraft.WakcraftConfig;
 import heero.wakcraft.WakcraftInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.havenbag.HavenBagHelper;
+import heero.wakcraft.havenbag.HavenBagProperties;
+import heero.wakcraft.havenbag.HavenBagsManager;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
-import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -47,7 +48,7 @@ public class BlockHavenBag extends BlockContainer {
 			return false;
 		}
 
-		TileEntityHavenBagProperties havenBagProperties = HavenBagHelper.getHavenBagProperties(havenBagWorld, ((TileEntityHavenBag) tile).uid);
+		HavenBagProperties havenBagProperties = HavenBagsManager.getProperties(((TileEntityHavenBag) tile).uid);
 		if (havenBagProperties == null) {
 			return true;
 		}

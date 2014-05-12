@@ -2,13 +2,9 @@ package heero.wakcraft.havenbag;
 
 import heero.wakcraft.WakcraftConfig;
 import heero.wakcraft.entity.property.HavenBagProperty;
-import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import heero.wakcraft.world.TeleporterHavenBag;
-import heero.wakcraft.world.WorldProviderHaveBag;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
 
 public class HavenBagHelper {
@@ -25,24 +21,6 @@ public class HavenBagHelper {
 		return (z / 32) * 16 + (x / 32);
 	}
 
-	public static TileEntityHavenBagProperties getHavenBagProperties(World havenBagWorld, int uid) {
-		if (havenBagWorld.provider.dimensionId != WakcraftConfig.havenBagDimensionId) {
-			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHaveBag.NAME, havenBagWorld.provider.getDimensionName());
-
-			return null;
-		}
-
-		int[] coords = getCoordFromUID(uid);
-
-		TileEntity tileEntity = havenBagWorld.getTileEntity(coords[0], coords[1], coords[2]);
-		if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagProperties)) {
-			FMLLog.warning("Error while loading tile entity haven bag properties (%d, %d, %d)", coords[0], coords[1], coords[2]);
-			return null;
-		}
-
-		return (TileEntityHavenBagProperties) tileEntity;
-	}
-
 	public static void teleportPlayerToHavenBag(EntityPlayerMP player, int havenBagUID) {
 		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 		if (properties == null) {
@@ -53,6 +31,8 @@ public class HavenBagHelper {
 		properties.setEnterHavenBag(player.posX, player.posY, player.posZ, havenBagUID);
 		
 		player.mcServer.getConfigurationManager().transferPlayerToDimension(player, WakcraftConfig.havenBagDimensionId, new TeleporterHavenBag(MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId), havenBagUID));
+
+		HavenBagsManager.sendProperties(player, properties.uid);
 	}
 
 	public static void leaveHavenBag(EntityPlayerMP player) {
