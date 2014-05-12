@@ -33,9 +33,20 @@ public class HavenBagsManager extends WorldSavedData {
 	private Map<Integer, HavenBagProperties> havenbags;
 
 	// Static methods
+	public static void setup() {
+	}
+
+	public static void teardown() {
+		instance = null;
+	}
+
 	public static void init(World world) {
 		if (instance == null) {
-			world.mapStorage.setData("havenbags", instance = new HavenBagsManager("havenbags"));
+			instance = (HavenBagsManager) world.mapStorage.loadData(HavenBagsManager.class, "havenbags");
+
+			if (instance == null) {
+				world.mapStorage.setData("havenbags", new HavenBagsManager("havenbags"));
+			}
 		}
 	}
 
@@ -77,7 +88,7 @@ public class HavenBagsManager extends WorldSavedData {
 	}
 
 	// Instance methods
-	private HavenBagsManager(String name) {
+	public HavenBagsManager(String name) {
 		super(name);
 
 		havenbags = new HashMap<Integer, HavenBagProperties>();
@@ -119,7 +130,7 @@ public class HavenBagsManager extends WorldSavedData {
 		for (int havenBagId : havenbags.keySet()) {
 			NBTTagCompound tagHavenBag = new NBTTagCompound();
 
-			writeHavenBagToNBT(new NBTTagCompound(), havenBagId);
+			writeHavenBagToNBT(tagHavenBag, havenBagId);
 
 			tagHavenBags.appendTag(tagHavenBag);
 		}

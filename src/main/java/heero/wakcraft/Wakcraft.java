@@ -1,5 +1,6 @@
 package heero.wakcraft;
 
+import heero.wakcraft.havenbag.HavenBagsManager;
 import heero.wakcraft.network.PacketPipeline;
 import heero.wakcraft.network.packet.PacketCloseWindow;
 import heero.wakcraft.network.packet.PacketExtendedEntityProperty;
@@ -16,6 +17,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 
 @Mod(modid = WakcraftInfo.MODID, name = WakcraftInfo.READABLE_NAME, version = WakcraftInfo.VERSION)
 public class Wakcraft {
@@ -60,5 +63,15 @@ public class Wakcraft {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+	}
+
+	@EventHandler
+	public void onFMLServerStartedEvent(FMLServerStartedEvent event) {
+		HavenBagsManager.setup();
+	}
+
+	@EventHandler
+	public void onFMLServerStartedEvent(FMLServerStoppedEvent event) {
+		HavenBagsManager.teardown();
 	}
 }
