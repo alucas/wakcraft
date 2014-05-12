@@ -26,7 +26,7 @@ public class HavenBagProperty implements IExtendedEntityProperties, ISynchProper
 
 	@Override
 	public void init(Entity entity, World world) {
-		uid = 0;
+		uid = -1;
 		havenbag = 0;
 		posX = 0;
 		posY = 0;

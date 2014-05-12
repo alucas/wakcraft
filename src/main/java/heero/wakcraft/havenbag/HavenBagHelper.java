@@ -6,7 +6,6 @@ import heero.wakcraft.tileentity.TileEntityHavenBagProperties;
 import heero.wakcraft.world.TeleporterHavenBag;
 import heero.wakcraft.world.WorldProviderHaveBag;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -17,25 +16,6 @@ public class HavenBagHelper {
 	public static final int R_CRAFT = 2;
 	public static final int R_DECO = 4;
 	public static final int R_MERCHANT = 8;
-
-	public static int getNextAvailableUID(World havenBagWorld) {
-		if (havenBagWorld.provider.dimensionId != WakcraftConfig.havenBagDimensionId) {
-			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHaveBag.NAME, havenBagWorld.provider.getDimensionName());
-
-			return 0;
-		}
-
-		int uid = 0;
-
-		while (true) {
-			int[] coords = getCoordFromUID(++uid);
-			if (havenBagWorld.getBlock(coords[0], coords[1] - 1, coords[2] + 7).equals(Blocks.air)) {
-				break;
-			}
-		}
-
-		return uid;
-	}
 
 	public static int[] getCoordFromUID(int uid) {
 		return new int[] { (uid % 16) * 32, 20, (uid / 16) * 32 };

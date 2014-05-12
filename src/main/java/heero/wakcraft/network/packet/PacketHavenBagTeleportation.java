@@ -70,7 +70,7 @@ public class PacketHavenBagTeleportation implements IPacket {
 		}
 
 		// Initialisation
-		if (properties.uid != 10) {
+		if (properties.uid == -1) {
 			World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId);
 			if (havenBagWorld == null) {
 				FMLLog.warning("Error while loading the havenbag world : %d", WakcraftConfig.havenBagDimensionId);
@@ -78,14 +78,7 @@ public class PacketHavenBagTeleportation implements IPacket {
 				return;
 			}
 
-			int uid = HavenBagHelper.getNextAvailableUID(havenBagWorld);
-			if (uid == 0) {
-				FMLLog.warning("Error while requesting an unique havenbag identifier");
-
-				return;
-			}
-
-			properties.uid = uid;
+			properties.uid = player.worldObj.getUniqueDataId("havenbag");
 
 			FMLLog.info("New HavenBag atribution : %s, uid = %d", player.getDisplayName(), properties.uid);
 
