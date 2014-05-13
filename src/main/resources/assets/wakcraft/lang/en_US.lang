@@ -129,6 +129,7 @@ message.unlockHavenBag=Haven Bag Unlocked
 message.lockHavenBag=Haven Bag Locked
 message.cantOpenHavenBagHere=You can't open your Haven Bag here
 message.cantOpenHavenBagInAir=You must be on ground to enter in your haven bag
+message.phoenixRegister=Your spawn position has been updated
 
 profession.crafting=Crafting
 profession.harvesting=Harvesting
