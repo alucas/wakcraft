@@ -8,18 +8,13 @@ import heero.wakcraft.network.packet.PacketHavenBagVisitors;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 
 public class GUIHavenBagVisitors extends GuiScreen {
-	protected World world;
-	protected int uid;
 	protected HavenBagProperties properties;
 
-	public GUIHavenBagVisitors(World world, int uid) {
+	public GUIHavenBagVisitors(int uid) {
 		super();
 
-		this.world = world;
-		this.uid = uid;
 		this.properties = HavenBagsManager.getProperties(uid);
 	}
 
