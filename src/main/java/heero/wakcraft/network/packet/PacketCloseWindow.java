@@ -1,8 +1,5 @@
 package heero.wakcraft.network.packet;
 
-import heero.wakcraft.entity.property.HavenBagProperty;
-import heero.wakcraft.havenbag.HavenBagHelper;
-import heero.wakcraft.havenbag.HavenBagsManager;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
@@ -35,26 +32,11 @@ public class PacketCloseWindow implements IPacket {
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
+		FMLLog.warning("This is a serverbound only packet");
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		if (windowId == WINDOW_HB_VISITORS) {
-			HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
-			if (properties == null) {
-				FMLLog.warning("Error while loading player (%s) havenbag properties", player.getDisplayName());
-				return;
-			}
-
-			int havenBagUid = HavenBagHelper.getUIDFromCoord((int)player.posX, (int)player.posY, (int)player.posZ);
-			if (properties.getUID() != havenBagUid) {
-				FMLLog.warning("Player (%s) requested to close a window that not belong to him", player.getDisplayName());
-				return;
-			}
-
-			HavenBagsManager.sendProperties(player, havenBagUid);
-		} else {
-			FMLLog.warning("Unknow window ID : %d", windowId);
-		}
+		FMLLog.warning("Unknow window ID : %d", windowId);
 	}
 }

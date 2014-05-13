@@ -9,6 +9,7 @@ import io.netty.channel.ChannelHandlerContext;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
 import cpw.mods.fml.common.FMLLog;
 
@@ -76,6 +77,23 @@ public class PacketHavenBagVisitors implements IPacket {
 		} else {
 			FMLLog.warning("Unknow action : %d", action);
 			return;
+		}
+
+		for (Object entity : player.worldObj.getLoadedEntityList()) {
+			if (entity instanceof EntityPlayerMP) {
+				EntityPlayerMP playerMP = (EntityPlayerMP) entity;
+				properties = (HavenBagProperty) playerMP.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+				if (properties == null) {
+					FMLLog.warning("Error while loading player (%s) havenbag properties", playerMP.getDisplayName());
+					continue;
+				}
+
+				if (!properties.isInHavenBag(havenBagUid)) {
+					continue;
+				}
+
+				HavenBagsManager.sendProperties((EntityPlayerMP) entity, havenBagUid);
+			}
 		}
 	}
 }

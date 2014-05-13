@@ -93,6 +93,10 @@ public class HavenBagProperty implements IExtendedEntityProperties, ISynchProper
 		return havenbag != -1;
 	}
 
+	public boolean isInHavenBag(int havenBagUid) {
+		return havenbag == havenBagUid;
+	}
+
 	public int getUID() {
 		return uid;
 	}
