@@ -37,6 +37,10 @@ public class PacketCloseWindow implements IPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
+		if (windowId == WINDOW_HB_VISITORS) {
+			return;
+		}
+
 		FMLLog.warning("Unknow window ID : %d", windowId);
 	}
 }
