@@ -20,21 +20,13 @@ public class GUIHavenBagVisitors extends GuiScreen {
 
 		this.world = world;
 		this.uid = uid;
-
-		HavenBagProperties properties = HavenBagsManager.getProperties(uid);
-		if (properties == null) {
-			this.properties = null;
-		}
+		this.properties = HavenBagsManager.getProperties(uid);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
 		super.initGui();
-
-		if (properties == null) {
-			return;
-		}
 
 		int aclIndex = 2;
 		for (String name : properties.getRightKeys()) {
