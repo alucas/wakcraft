@@ -53,11 +53,11 @@ public class BlockHavenBagLock extends Block {
 			return true;
 		}
 
-		havenBagProperties.locked = !havenBagProperties.locked;
+		havenBagProperties.setLock(!havenBagProperties.isLocked());
 
 		HavenBagsManager.setProperties(propertiesHB.getUID(), havenBagProperties);
 
-		player.addChatMessage(new ChatComponentText(havenBagProperties.locked ? StatCollector.translateToLocal("message.lockHavenBag") : StatCollector.translateToLocal("message.unlockHavenBag")));
+		player.addChatMessage(new ChatComponentText(havenBagProperties.isLocked() ? StatCollector.translateToLocal("message.lockHavenBag") : StatCollector.translateToLocal("message.unlockHavenBag")));
 
 		return true;
 	}

@@ -1,7 +1,9 @@
 package heero.wakcraft.havenbag;
 
+import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WakcraftConfig;
 import heero.wakcraft.entity.property.HavenBagProperty;
+import heero.wakcraft.network.packet.PacketHavenBagProperties;
 import heero.wakcraft.world.TeleporterHavenBag;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -32,7 +34,7 @@ public class HavenBagHelper {
 
 		player.mcServer.getConfigurationManager().transferPlayerToDimension(player, WakcraftConfig.havenBagDimensionId, new TeleporterHavenBag(MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId), havenBagUID));
 
-		HavenBagsManager.sendProperties(player, properties.getUID());
+		Wakcraft.packetPipeline.sendTo(new PacketHavenBagProperties(properties.getUID()), player);
 	}
 
 	public static void leaveHavenBag(EntityPlayerMP player) {

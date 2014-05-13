@@ -5,10 +5,6 @@ import heero.wakcraft.havenbag.HavenBagProperties;
 import heero.wakcraft.havenbag.HavenBagsManager;
 import heero.wakcraft.network.packet.PacketCloseWindow;
 import heero.wakcraft.network.packet.PacketHavenBagVisitors;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StatCollector;
@@ -17,14 +13,18 @@ import net.minecraft.world.World;
 public class GUIHavenBagVisitors extends GuiScreen {
 	protected World world;
 	protected int uid;
-	protected Map<String, Integer>acl;
+	protected HavenBagProperties properties;
 
 	public GUIHavenBagVisitors(World world, int uid) {
 		super();
 
 		this.world = world;
 		this.uid = uid;
-		this.acl = new HashMap<String, Integer>();
+
+		HavenBagProperties properties = HavenBagsManager.getProperties(uid);
+		if (properties == null) {
+			this.properties = null;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -32,16 +32,13 @@ public class GUIHavenBagVisitors extends GuiScreen {
 	public void initGui() {
 		super.initGui();
 
-		HavenBagProperties tile = HavenBagsManager.getProperties(uid);
-		if (tile == null) {
+		if (properties == null) {
 			return;
 		}
 
-		this.acl = tile.acl;
-
 		int aclIndex = 2;
-		for (String name : acl.keySet()) {
-			int right = acl.get(name);
+		for (String name : properties.getRightKeys()) {
+			int right = properties.getRight(name);
 			if (name == HavenBagProperties.ACL_KEY_ALL) {
 				buttonList.add(new GUICheck(0, name, (right & 0x1) != 0, 100, 30));
 				buttonList.add(new GUICheck(1, name, (right & 0x2) != 0, 130, 30));
@@ -74,7 +71,7 @@ public class GUIHavenBagVisitors extends GuiScreen {
 		drawBackground(0);
 
 		int lineIndex = 0;
-		for (String name : acl.keySet()) {
+		for (String name : properties.getRightKeys()) {
 			if (name == HavenBagProperties.ACL_KEY_ALL) {
 				drawString(fontRendererObj, StatCollector.translateToLocal("key.all"), 20, 30, 0xFFFFFF);
 				continue;

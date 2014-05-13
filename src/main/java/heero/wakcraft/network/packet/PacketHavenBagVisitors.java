@@ -1,5 +1,6 @@
 package heero.wakcraft.network.packet;
 
+import heero.wakcraft.Wakcraft;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.havenbag.HavenBagProperties;
@@ -69,10 +70,10 @@ public class PacketHavenBagVisitors implements IPacket {
 		}
 
 		if (action == ACTION_ADD) {
-			hbProperties.acl.put(playerName, hbProperties.acl.get(playerName) | right);
+			hbProperties.setRight(playerName, hbProperties.getRight(playerName) | right);
 			HavenBagsManager.setProperties(havenBagUid, hbProperties);
 		} else if (action == ACTION_REMOVE) {
-			hbProperties.acl.put(playerName, hbProperties.acl.get(playerName) & ((~right) & 0xF));
+			hbProperties.setRight(playerName, hbProperties.getRight(playerName) & ((~right) & 0xF));
 			HavenBagsManager.setProperties(havenBagUid, hbProperties);
 		} else {
 			FMLLog.warning("Unknow action : %d", action);
@@ -88,11 +89,11 @@ public class PacketHavenBagVisitors implements IPacket {
 					continue;
 				}
 
-				if (!properties.isInHavenBag(havenBagUid)) {
+				if (properties.getHavenBag() != havenBagUid) {
 					continue;
 				}
 
-				HavenBagsManager.sendProperties((EntityPlayerMP) entity, havenBagUid);
+				Wakcraft.packetPipeline.sendTo(new PacketHavenBagProperties(havenBagUid), playerMP);
 			}
 		}
 	}

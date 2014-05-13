@@ -1,13 +1,8 @@
 package heero.wakcraft.havenbag;
 
-import heero.wakcraft.Wakcraft;
-import heero.wakcraft.network.packet.PacketHavenBagProperties;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
@@ -65,16 +60,6 @@ public class HavenBagsManager extends WorldSavedData {
 		instance.markDirty();
 	}
 
-	public static void sendProperties(EntityPlayer player, int uid) {
-		if (player.worldObj.isRemote) {
-			return;
-		}
-
-		if (player instanceof EntityPlayerMP) {
-			Wakcraft.packetPipeline.sendTo(new PacketHavenBagProperties(uid), (EntityPlayerMP) player);
-		}
-	}
-
 	public static NBTTagCompound getHavenBagNBT(int uid) {
 		NBTTagCompound tagHavenBag = new NBTTagCompound();
 
@@ -109,7 +94,7 @@ public class HavenBagsManager extends WorldSavedData {
 		NBTTagCompound tagProperties = tagHavenBag.getCompoundTag(TAG_PROPERTIES);
 
 		HavenBagProperties properties = new HavenBagProperties(); 
-		properties.locked = tagProperties.getBoolean(TAG_LOCKED);
+		properties.setLock(tagProperties.getBoolean(TAG_LOCKED));
 
 		NBTTagList tagACL = tagProperties.getTagList(TAG_ACL, 10);
 		for (int j = 0; j < tagACL.tagCount(); j++) {
@@ -117,7 +102,7 @@ public class HavenBagsManager extends WorldSavedData {
 			String name = tagEntry.getString(TAG_NAME);
 			int right = tagEntry.getInteger(TAG_RIGHT);
 
-			properties.acl.put(name, right);
+			properties.setRight(name, right);
 		}
 
 		havenbags.put(uid, properties);
@@ -143,15 +128,15 @@ public class HavenBagsManager extends WorldSavedData {
 
 		NBTTagCompound tagProperties = new NBTTagCompound();
 		NBTTagList tagACL = new NBTTagList();
-		for (String name : properties.acl.keySet()) {
+		for (String name : properties.getRightKeys()) {
 			NBTTagCompound tagEntry = new NBTTagCompound();
 			tagEntry.setString(TAG_NAME, name);
-			tagEntry.setInteger(TAG_RIGHT, properties.acl.get(name));
+			tagEntry.setInteger(TAG_RIGHT, properties.getRight(name));
 
 			tagACL.appendTag(tagEntry);
 		}
 
-		tagProperties.setBoolean(TAG_LOCKED, properties.locked);
+		tagProperties.setBoolean(TAG_LOCKED, properties.isLocked());
 		tagProperties.setTag(TAG_ACL, tagACL);
 
 		tagHavenBag.setInteger(TAG_UID, uid);

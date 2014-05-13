@@ -87,7 +87,7 @@ public class BlockHavenBagBarrier extends Block {
 				break;
 			}
 
-			int rightAll = hbProperties.acl.get(HavenBagProperties.ACL_KEY_ALL);
+			int rightAll = hbProperties.getRight(HavenBagProperties.ACL_KEY_ALL);
 //			int rightGuild = tile.acl.get(TileEntityHavenBagProperties.ACL_KEY_GUILD);
 //			int right = tile.acl.get(player.getDisplayName());
 

@@ -53,7 +53,7 @@ public class BlockHavenBag extends BlockContainer {
 			return true;
 		}
 
-		if (havenBagProperties.locked) {
+		if (havenBagProperties.isLocked()) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.lockHavenBag")));
 			return true;
 		}
