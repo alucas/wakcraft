@@ -71,6 +71,6 @@ public class CombinedClientProxy extends CommonProxy{
 	@Override
 	public void openHBVisitorsGui(EntityPlayer player) {
 		int uid = HavenBagHelper.getUIDFromCoord((int) player.posX, (int) player.posY, (int) player.posZ);
-		Minecraft.getMinecraft().displayGuiScreen(new GUIHavenBagVisitors(player.worldObj, uid));
+		Minecraft.getMinecraft().displayGuiScreen(new GUIHavenBagVisitors(uid));
 	}
 }
