@@ -10,5 +10,6 @@ public class BlockStairs2 extends BlockStairs {
 		super(block, metadata);
 		
 		this.setCreativeTab(WakcraftCreativeTabs.tabBlock);
+		this.useNeighborBrightness = true;
 	}
 }
