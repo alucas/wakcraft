@@ -12,11 +12,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSimple extends Block {
+public class BlockGeneric extends Block {
 	protected IIcon icons[][] = new IIcon[6][16];
 	protected String textures[][] = new String[6][16];
 
-	public BlockSimple(Material material) {
+	public BlockGeneric(Material material) {
 		super(material);
 	}
 
@@ -25,11 +25,11 @@ public class BlockSimple extends Block {
 		return super.setBlockTextureName(WInfo.MODID.toLowerCase() + ":" + textureName);
 	}
 
-	public BlockSimple setBlockTextureName(ForgeDirection side, String name) {
+	public BlockGeneric setBlockTextureName(ForgeDirection side, String name) {
 		return setBlockTextureName(side, 0, name);
 	}
 
-	public BlockSimple setBlockTextureName(ForgeDirection side, int metadata, String name) {
+	public BlockGeneric setBlockTextureName(ForgeDirection side, int metadata, String name) {
 		textures[Arrays.asList(ForgeDirection.VALID_DIRECTIONS).indexOf(side)][metadata] = name;
 
 		return this;

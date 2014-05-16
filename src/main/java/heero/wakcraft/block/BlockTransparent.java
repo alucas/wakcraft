@@ -4,7 +4,7 @@ import net.minecraft.block.material.Material;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTransparent extends BlockSimple {
+public class BlockTransparent extends BlockGeneric {
 
 	public BlockTransparent(Material material) {
 		super(material);
