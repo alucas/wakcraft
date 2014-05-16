@@ -13,8 +13,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSimple extends Block {
-	protected IIcon icons[] = new IIcon[6];
-	protected String textures[] = new String[6];
+	protected IIcon icons[][] = new IIcon[6][16];
+	protected String textures[][] = new String[6][16];
 
 	public BlockSimple(Material material) {
 		super(material);
@@ -25,19 +25,12 @@ public class BlockSimple extends Block {
 		return super.setBlockTextureName(WInfo.MODID.toLowerCase() + ":" + textureName);
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata) {
-		IIcon icon = icons[side];
-		if (icon != null) {
-			return icon;
-		}
-
-		return blockIcon;
+	public BlockSimple setBlockTextureName(ForgeDirection side, String name) {
+		return setBlockTextureName(side, 0, name);
 	}
 
-	public BlockSimple setBlockTextureName(ForgeDirection side, String name) {
-		textures[Arrays.asList(ForgeDirection.VALID_DIRECTIONS).indexOf(side)] = name;
+	public BlockSimple setBlockTextureName(ForgeDirection side, int metadata, String name) {
+		textures[Arrays.asList(ForgeDirection.VALID_DIRECTIONS).indexOf(side)][metadata] = name;
 
 		return this;
 	}
@@ -48,12 +41,30 @@ public class BlockSimple extends Block {
 		super.registerBlockIcons(register);
 
 		String modBaseName = WInfo.MODID.toLowerCase();
-		for (int i = 0; i < 6; i++) {
-			if (textures[i] == null) {
-				continue;
-			}
+		for (int i = 0; i < textures.length; i++) {
+			for (int j = 0; j < textures[0].length; j++) {
+				if (textures[i][j] == null) {
+					continue;
+				}
 
-			icons[i] = register.registerIcon(modBaseName + ":" + textures[i]);
+				icons[i][j] = register.registerIcon(modBaseName + ":" + textures[i][j]);
+			}
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int metadata) {
+		IIcon icon = icons[side][metadata];
+		if (icon != null) {
+			return icon;
+		}
+
+		icon = icons[side][0];
+		if (icon != null) {
+			return icon;
+		}
+
+		return blockIcon;
 	}
 }
