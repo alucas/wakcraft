@@ -1,9 +1,9 @@
 package heero.wakcraft.proxy;
 
 import heero.wakcraft.Wakcraft;
-import heero.wakcraft.WakcraftBlocks;
-import heero.wakcraft.WakcraftConfig;
-import heero.wakcraft.WakcraftItems;
+import heero.wakcraft.WBlocks;
+import heero.wakcraft.WConfig;
+import heero.wakcraft.WItems;
 import heero.wakcraft.entity.misc.EntityTextPopup;
 import heero.wakcraft.entity.monster.BlackGobbly;
 import heero.wakcraft.entity.monster.Gobball;
@@ -44,11 +44,11 @@ public class CommonProxy {
 	}
 
 	public void registerItems() {
-		WakcraftItems.registerItems();
+		WItems.registerItems();
 	}
 
 	public void registerBlocks() {
-		WakcraftBlocks.registerBlocks();
+		WBlocks.registerBlocks();
 	}
 
 	public void registerTileEntities() {
@@ -92,7 +92,7 @@ public class CommonProxy {
 	public void registerDimensions() {
 		GameRegistry.registerWorldGenerator(new WorldGenHavenBag(), 0);
 
-		DimensionManager.registerProviderType(WakcraftConfig.havenBagDimensionId, WorldProviderHaveBag.class, false);
-		DimensionManager.registerDimension(WakcraftConfig.havenBagDimensionId, WakcraftConfig.havenBagDimensionId);
+		DimensionManager.registerProviderType(WConfig.havenBagDimensionId, WorldProviderHaveBag.class, false);
+		DimensionManager.registerDimension(WConfig.havenBagDimensionId, WConfig.havenBagDimensionId);
 	}
 }

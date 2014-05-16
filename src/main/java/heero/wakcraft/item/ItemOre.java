@@ -1,6 +1,6 @@
 package heero.wakcraft.item;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class ItemOre extends ItemWithLevel {
 
 		setCreativeTab(WakcraftCreativeTabs.tabResource);
 		setUnlocalizedName("Ore");
-		setTextureName(WakcraftInfo.MODID.toLowerCase() + ":ore");
+		setTextureName(WInfo.MODID.toLowerCase() + ":ore");
 		setHasSubtypes(true);
 	}
 

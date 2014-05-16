@@ -1,6 +1,6 @@
 package heero.wakcraft.world;
 
-import heero.wakcraft.WakcraftConfig;
+import heero.wakcraft.WConfig;
 import heero.wakcraft.renderer.world.EndSkyRenderer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
@@ -19,7 +19,7 @@ public class WorldProviderHaveBag extends WorldProvider {
 		super.registerWorldChunkManager();
 
 		this.hasNoSky = true;
-		this.dimensionId = WakcraftConfig.havenBagDimensionId;
+		this.dimensionId = WConfig.havenBagDimensionId;
 		this.setSkyRenderer(new EndSkyRenderer());
 	}
 

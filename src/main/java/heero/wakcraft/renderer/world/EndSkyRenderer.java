@@ -1,6 +1,6 @@
 package heero.wakcraft.renderer.world;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class EndSkyRenderer extends IRenderHandler {
-	private static final ResourceLocation locationEndSkyPng = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/environment/havenbag_sky.png");
+	private static final ResourceLocation locationEndSkyPng = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/environment/havenbag_sky.png");
 
 	@Override
 	@SideOnly(Side.CLIENT)

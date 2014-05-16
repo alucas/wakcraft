@@ -1,6 +1,6 @@
 package heero.wakcraft.renderer.tileentity;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.client.model.ModelDragoexpress;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class RenderDragoexpress extends TileEntitySpecialRenderer {
-	private static final ResourceLocation texture = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/entity/dragoexpress.png");
+	private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/dragoexpress.png");
     private ModelDragoexpress model = new ModelDragoexpress();
 	
     public void renderTileEntityAt(TileEntityDragoexpress entity, double tileX, double tileY, double tileZ, float p_147539_8_)

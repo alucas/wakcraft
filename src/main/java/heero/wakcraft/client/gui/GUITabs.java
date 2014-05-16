@@ -1,6 +1,6 @@
 package heero.wakcraft.client.gui;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GUITabs extends GuiScreen {
 	private static final ResourceLocation tabButtonsTexture = new ResourceLocation(
-			WakcraftInfo.MODID.toLowerCase(), "textures/gui/tabs.png");
+			WInfo.MODID.toLowerCase(), "textures/gui/tabs.png");
 
 	protected int selectedTab;
 	protected GuiScreen tabs[];

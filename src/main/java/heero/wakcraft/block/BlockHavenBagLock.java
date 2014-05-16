@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
@@ -74,8 +74,8 @@ public class BlockHavenBagLock extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer) {
-		iconSide = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":havenbaglock");
-		iconTop = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":havenbaglock_top");
+		iconSide = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":havenbaglock");
+		iconTop = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":havenbaglock_top");
 	}
 
 	/**

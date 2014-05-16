@@ -1,6 +1,6 @@
 package heero.wakcraft.crafting;
 
-import heero.wakcraft.WakcraftItems;
+import heero.wakcraft.WItems;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
 
 import java.util.ArrayList;
@@ -25,13 +25,13 @@ public class CraftingManager {
 			recipes.put(profession, new ArrayList<IExtendedRecipe>());
 		}
 
-		addRecipe(PROFESSION.MINER, 0, new ItemStack(WakcraftItems.bomb), new ItemStack(WakcraftItems.canoonPowder), new ItemStack(WakcraftItems.clay, 3), new ItemStack(WakcraftItems.itemOre1, 3));
-		addRecipe(PROFESSION.MINER, 0, new ItemStack(WakcraftItems.fossil), new ItemStack(WakcraftItems.waterBucket, 2), new ItemStack(WakcraftItems.driedDung, 3));
-		addRecipe(PROFESSION.MINER, 10, new ItemStack(WakcraftItems.shamPearl), new ItemStack(WakcraftItems.pearl, 3), new ItemStack(WakcraftItems.waterBucket, 2));
-		addRecipe(PROFESSION.MINER, 15, new ItemStack(WakcraftItems.verbalasalt), new ItemStack(WakcraftItems.itemOre1, 3, 2));
-		addRecipe(PROFESSION.MINER, 20, new ItemStack(WakcraftItems.gumgum), new ItemStack(WakcraftItems.itemOre1, 15, 3));
-		addRecipe(PROFESSION.MINER, 20, new ItemStack(WakcraftItems.polishedmoonstone), new ItemStack(WakcraftItems.waterBucket, 2), new ItemStack(WakcraftItems.moonstone, 3));
-		addRecipe(PROFESSION.MINER, 25, new ItemStack(WakcraftItems.shadowyBlue), new ItemStack(WakcraftItems.itemOre1, 3, 5));
+		addRecipe(PROFESSION.MINER, 0, new ItemStack(WItems.bomb), new ItemStack(WItems.canoonPowder), new ItemStack(WItems.clay, 3), new ItemStack(WItems.itemOre1, 3));
+		addRecipe(PROFESSION.MINER, 0, new ItemStack(WItems.fossil), new ItemStack(WItems.waterBucket, 2), new ItemStack(WItems.driedDung, 3));
+		addRecipe(PROFESSION.MINER, 10, new ItemStack(WItems.shamPearl), new ItemStack(WItems.pearl, 3), new ItemStack(WItems.waterBucket, 2));
+		addRecipe(PROFESSION.MINER, 15, new ItemStack(WItems.verbalasalt), new ItemStack(WItems.itemOre1, 3, 2));
+		addRecipe(PROFESSION.MINER, 20, new ItemStack(WItems.gumgum), new ItemStack(WItems.itemOre1, 15, 3));
+		addRecipe(PROFESSION.MINER, 20, new ItemStack(WItems.polishedmoonstone), new ItemStack(WItems.waterBucket, 2), new ItemStack(WItems.moonstone, 3));
+		addRecipe(PROFESSION.MINER, 25, new ItemStack(WItems.shadowyBlue), new ItemStack(WItems.itemOre1, 3, 5));
 	}
 
 	public static final CraftingManager getInstance() {

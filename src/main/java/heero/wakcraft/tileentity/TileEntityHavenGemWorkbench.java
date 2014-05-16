@@ -1,6 +1,6 @@
 package heero.wakcraft.tileentity;
 
-import heero.wakcraft.WakcraftItems;
+import heero.wakcraft.WItems;
 import heero.wakcraft.havenbag.HavenBagGenerationHelper;
 import heero.wakcraft.havenbag.HavenBagHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +21,7 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 	public TileEntityHavenGemWorkbench() {
 		super();
 
-		havenGems.setInventorySlotContents(0, new ItemStack(WakcraftItems.merchantHG));
+		havenGems.setInventorySlotContents(0, new ItemStack(WItems.merchantHG));
 	}
 
 	public void readFromNBT(NBTTagCompound tagRoot) {
@@ -35,15 +35,15 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 			int slotId = tagGem.getByte(TAG_SLOT) & 255;
 
 			if (slotId == 0) {
-				havenGems.setInventorySlotContents(0, new ItemStack(WakcraftItems.merchantHG));
+				havenGems.setInventorySlotContents(0, new ItemStack(WItems.merchantHG));
 			} else if (slotId > 0 && slotId < havenGems.getSizeInventory()) {
 				ItemStack stack = ItemStack.loadItemStackFromNBT(tagGem);
 
 				int itemId = Item.getIdFromItem(stack.getItem());
-				if (itemId == Item.getIdFromItem(WakcraftItems.decoHG)
-						|| itemId == Item.getIdFromItem(WakcraftItems.merchantHG)
-						|| itemId == Item.getIdFromItem(WakcraftItems.craftHG)
-						|| itemId == Item.getIdFromItem(WakcraftItems.gardenHG)) {
+				if (itemId == Item.getIdFromItem(WItems.decoHG)
+						|| itemId == Item.getIdFromItem(WItems.merchantHG)
+						|| itemId == Item.getIdFromItem(WItems.craftHG)
+						|| itemId == Item.getIdFromItem(WItems.gardenHG)) {
 					havenGems.setInventorySlotContents(slotId, stack);
 				} else {
 					System.err.println("This item is not a haven gem identifier");
@@ -64,10 +64,10 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 
 			if (stack != null) {
 				int itemId = Item.getIdFromItem(stack.getItem());
-				if (itemId == Item.getIdFromItem(WakcraftItems.decoHG)
-						|| itemId == Item.getIdFromItem(WakcraftItems.merchantHG)
-						|| itemId == Item.getIdFromItem(WakcraftItems.craftHG)
-						|| itemId == Item.getIdFromItem(WakcraftItems.gardenHG)) {
+				if (itemId == Item.getIdFromItem(WItems.decoHG)
+						|| itemId == Item.getIdFromItem(WItems.merchantHG)
+						|| itemId == Item.getIdFromItem(WItems.craftHG)
+						|| itemId == Item.getIdFromItem(WItems.gardenHG)) {
 					NBTTagCompound tagGem = new NBTTagCompound();
 					tagGem.setByte(TAG_SLOT, (byte) i);
 
@@ -148,13 +148,13 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 
 		int itemId = Item.getIdFromItem(stack.getItem());
 		if (slotId == 0 && slotId == 1) {
-			if (itemId == Item.getIdFromItem(WakcraftItems.merchantHG)) {
+			if (itemId == Item.getIdFromItem(WItems.merchantHG)) {
 				return true;
 			}
-		} else if (itemId == Item.getIdFromItem(WakcraftItems.decoHG)
-				|| itemId == Item.getIdFromItem(WakcraftItems.merchantHG)
-				|| itemId == Item.getIdFromItem(WakcraftItems.craftHG)
-				|| itemId == Item.getIdFromItem(WakcraftItems.gardenHG)) {
+		} else if (itemId == Item.getIdFromItem(WItems.decoHG)
+				|| itemId == Item.getIdFromItem(WItems.merchantHG)
+				|| itemId == Item.getIdFromItem(WItems.craftHG)
+				|| itemId == Item.getIdFromItem(WItems.gardenHG)) {
 			return true;
 		}
 

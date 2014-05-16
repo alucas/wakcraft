@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 
 import java.util.Arrays;
 
@@ -22,7 +22,7 @@ public class BlockSimple extends Block {
 
 	@Override
 	public Block setBlockTextureName(String textureName) {
-		return super.setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":" + textureName);
+		return super.setBlockTextureName(WInfo.MODID.toLowerCase() + ":" + textureName);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class BlockSimple extends Block {
 	public void registerBlockIcons(IIconRegister register) {
 		super.registerBlockIcons(register);
 
-		String modBaseName = WakcraftInfo.MODID.toLowerCase();
+		String modBaseName = WInfo.MODID.toLowerCase();
 		for (int i = 0; i < 6; i++) {
 			if (textures[i] == null) {
 				continue;

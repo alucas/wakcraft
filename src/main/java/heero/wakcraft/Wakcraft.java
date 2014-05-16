@@ -20,21 +20,21 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 
-@Mod(modid = WakcraftInfo.MODID, name = WakcraftInfo.READABLE_NAME, version = WakcraftInfo.VERSION)
+@Mod(modid = WInfo.MODID, name = WInfo.READABLE_NAME, version = WInfo.VERSION)
 public class Wakcraft {
 	// The instance of your mod that Forge uses.
-	@Instance(value = WakcraftInfo.MODID)
+	@Instance(value = WInfo.MODID)
 	public static Wakcraft instance;
 
 	// Says where the client and server 'proxy' code is loaded.
-	@SidedProxy(clientSide = WakcraftInfo.PROXY_CLIENT_PATH, serverSide = WakcraftInfo.PROXY_SERVER_PATH)
+	@SidedProxy(clientSide = WInfo.PROXY_CLIENT_PATH, serverSide = WInfo.PROXY_SERVER_PATH)
 	public static CommonProxy proxy;
 
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		WakcraftConfig.loadConfig(event);
+		WConfig.loadConfig(event);
 
 		proxy.registerBlocks();
 		proxy.registerItems();

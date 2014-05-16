@@ -1,7 +1,7 @@
 package heero.wakcraft.block;
 
 import heero.wakcraft.Wakcraft;
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.block.material.AventureMaterial;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.misc.EntityTextPopup;
@@ -45,7 +45,7 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 		
 		setCreativeTab(WakcraftCreativeTabs.tabOreBlock);
 		
-		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":ore");
+		setBlockTextureName(WInfo.MODID.toLowerCase() + ":ore");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
 		setBlockName("Ore");
 		setHardness(6.66f); // 10s
@@ -67,8 +67,8 @@ public abstract class BlockOre extends Block implements ILevelBlock {
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister registerer) {
-    	iconBottom = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":oreBottom");
-        iconTop = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":oreTop");
+    	iconBottom = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":oreBottom");
+        iconTop = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":oreTop");
     }
     
     /**

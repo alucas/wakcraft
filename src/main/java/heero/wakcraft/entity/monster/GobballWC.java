@@ -1,6 +1,6 @@
 package heero.wakcraft.entity.monster;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -22,7 +22,7 @@ public class GobballWC extends Gobball {
 	@SideOnly(Side.CLIENT)
 	public static class RenderBouftouCG extends RenderLiving {
 		private static final ResourceLocation bouftouCG = new ResourceLocation(
-				WakcraftInfo.MODID, "textures/mobs/bouftoucg.png");
+				WInfo.MODID, "textures/mobs/bouftoucg.png");
 
 		public RenderBouftouCG(ModelBase par1ModelBase, float par2) {
 			super(par1ModelBase, par2);

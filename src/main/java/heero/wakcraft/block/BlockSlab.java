@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 
 import java.util.List;
@@ -46,10 +46,10 @@ public abstract class BlockSlab extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer) {
 		for (int i = 0; i < iconNames.length; i++) {
-			blockIconTop[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Top");
-			blockIconSide[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Side");
-			blockIconDemiSide[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":" + iconNames[i] + "DemiSide");
-			blockIconBottom[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Bottom");
+			blockIconTop[i] = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Top");
+			blockIconSide[i] = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Side");
+			blockIconDemiSide[i] = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + iconNames[i] + "DemiSide");
+			blockIconBottom[i] = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Bottom");
 		}
 	}
 

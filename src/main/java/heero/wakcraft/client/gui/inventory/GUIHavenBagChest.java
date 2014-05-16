@@ -1,6 +1,6 @@
 package heero.wakcraft.client.gui.inventory;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.havenbag.HavenBagChestHelper;
 import heero.wakcraft.inventory.ContainerHavenBagChest;
 import heero.wakcraft.inventory.ContainerHavenBagChest.HavenBagChestSlot;
@@ -19,8 +19,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIHavenBagChest extends GUIContainer {
-	private static final ResourceLocation textureBackground = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/gui/havenbagchest.png");
-	private static final ResourceLocation textureBackground_locked = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/gui/havenbagchest_locked.png");
+	private static final ResourceLocation textureBackground = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/havenbagchest.png");
+	private static final ResourceLocation textureBackground_locked = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/havenbagchest_locked.png");
 
 	public int chestId;
 

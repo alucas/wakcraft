@@ -1,7 +1,7 @@
 package heero.wakcraft.item;
 
-import heero.wakcraft.WakcraftBlocks;
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WBlocks;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.havenbag.HavenBagChestHelper;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
@@ -21,7 +21,7 @@ public class ItemIkiakit extends ItemWithLevel {
 
 		setCreativeTab(WakcraftCreativeTabs.tabResource);
 		setUnlocalizedName(name);
-		setTextureName(WakcraftInfo.MODID.toLowerCase() + ":" + name.toLowerCase());
+		setTextureName(WInfo.MODID.toLowerCase() + ":" + name.toLowerCase());
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class ItemIkiakit extends ItemWithLevel {
 			World world, int x, int y, int z, int side, float hitX, float hitY,
 			float hitZ) {
 		if (!world.isRemote) {
-			if (world.getBlock(x, y, z).equals(WakcraftBlocks.hbChest)) {
+			if (world.getBlock(x, y, z).equals(WBlocks.hbChest)) {
 				TileEntity tileEntity = world.getTileEntity(x, y, z);
 				if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagChest)) {
 					FMLLog.warning("Error while loading the TileEntityHavenBagChest (%d, %d, %d)", x, y, z);

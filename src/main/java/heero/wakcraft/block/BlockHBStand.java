@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IIcon;
@@ -13,7 +13,7 @@ public class BlockHBStand extends BlockYRotation {
 		super(Material.wood);
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
-		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":hbstand");
+		setBlockTextureName(WInfo.MODID.toLowerCase() + ":hbstand");
 		setBlockName("HBStand");
 	}
 

@@ -1,6 +1,6 @@
 package heero.wakcraft.client.gui.inventory;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
@@ -9,7 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIHavenGemWorkbench extends GuiContainer {
-	private static final ResourceLocation background = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/gui/havengem.png");
+	private static final ResourceLocation background = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/havengem.png");
 
 	public GUIHavenGemWorkbench(Container container) {
 		super(container);

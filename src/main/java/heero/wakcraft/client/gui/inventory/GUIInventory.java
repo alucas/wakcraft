@@ -1,6 +1,6 @@
 package heero.wakcraft.client.gui.inventory;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.resources.I18n;
@@ -11,7 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIInventory extends InventoryEffectRenderer {
-	private static final ResourceLocation professionBackground = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/gui/profession.png");
+	private static final ResourceLocation professionBackground = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/profession.png");
 
 	public GUIInventory(EntityPlayer player) {
 		super(player.inventoryContainer);

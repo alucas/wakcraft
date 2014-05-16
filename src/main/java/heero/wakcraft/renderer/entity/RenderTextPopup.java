@@ -1,6 +1,6 @@
 package heero.wakcraft.renderer.entity;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.entity.misc.EntityTextPopup;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderTextPopup extends Render {
-	private static final ResourceLocation texture = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/entity/ascii.png");
+	private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/ascii.png");
 
 	public RenderTextPopup() {
 	}

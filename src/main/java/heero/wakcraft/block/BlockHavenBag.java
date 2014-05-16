@@ -1,7 +1,7 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftConfig;
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WConfig;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.havenbag.HavenBagProperties;
@@ -25,7 +25,7 @@ public class BlockHavenBag extends BlockContainer {
 
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 		setBlockName("HavenBag");
-		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":havengemworkbench");
+		setBlockTextureName(WInfo.MODID.toLowerCase() + ":havengemworkbench");
 		setBlockUnbreakable();
 	}
 
@@ -41,9 +41,9 @@ public class BlockHavenBag extends BlockContainer {
 			return true;
 		}
 
-		World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId);
+		World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WConfig.havenBagDimensionId);
 		if (havenBagWorld == null) {
-			FMLLog.warning("Error while loading the havenbag world : %d", WakcraftConfig.havenBagDimensionId);
+			FMLLog.warning("Error while loading the havenbag world : %d", WConfig.havenBagDimensionId);
 
 			return false;
 		}

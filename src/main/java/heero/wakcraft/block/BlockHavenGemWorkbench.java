@@ -1,7 +1,7 @@
 package heero.wakcraft.block;
 
 import heero.wakcraft.Wakcraft;
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
@@ -81,8 +81,8 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer) {
-		iconSide = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":havengemworkbench");
-		iconTop = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":havengemworkbench_top");
+		iconSide = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":havengemworkbench");
+		iconTop = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":havengemworkbench_top");
 	}
 
 	/**

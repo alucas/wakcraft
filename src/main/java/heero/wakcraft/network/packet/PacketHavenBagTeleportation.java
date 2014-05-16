@@ -1,8 +1,8 @@
 package heero.wakcraft.network.packet;
 
 import heero.wakcraft.Wakcraft;
-import heero.wakcraft.WakcraftBlocks;
-import heero.wakcraft.WakcraftConfig;
+import heero.wakcraft.WBlocks;
+import heero.wakcraft.WConfig;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagGenerationHelper;
 import heero.wakcraft.havenbag.HavenBagHelper;
@@ -71,9 +71,9 @@ public class PacketHavenBagTeleportation implements IPacket {
 
 		// Initialisation
 		if (properties.getUID() == -1) {
-			World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WakcraftConfig.havenBagDimensionId);
+			World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WConfig.havenBagDimensionId);
 			if (havenBagWorld == null) {
-				FMLLog.warning("Error while loading the havenbag world : %d", WakcraftConfig.havenBagDimensionId);
+				FMLLog.warning("Error while loading the havenbag world : %d", WConfig.havenBagDimensionId);
 
 				return;
 			}
@@ -90,7 +90,7 @@ public class PacketHavenBagTeleportation implements IPacket {
 			}
 		}
 
-		player.worldObj.setBlock(posX, posY, posZ, WakcraftBlocks.havenbag);
+		player.worldObj.setBlock(posX, posY, posZ, WBlocks.havenbag);
 
 		TileEntity tileEntity = player.worldObj.getTileEntity(posX, posY, posZ);
 		if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBag)) {

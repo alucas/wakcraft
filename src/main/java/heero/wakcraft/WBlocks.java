@@ -42,7 +42,7 @@ import net.minecraft.block.material.Material;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class WakcraftBlocks {
+public class WBlocks {
 
 	public static Block dragoexpress, phoenix, sufokiaColor, sufokiaSun,
 			sufokiaWave, sufokiaStair, ore1, ore2, ore3, ore4, carpet1,
@@ -68,7 +68,7 @@ public class WakcraftBlocks {
 		GameRegistry.registerBlock(wood = (new BlockWood()), "blockWood");
 		GameRegistry.registerBlock(hbstand = (new BlockHBStand()), "blockHBStand");
 		GameRegistry.registerBlock(grass = (new BlockGrass()), ItemBlockGrass.class, "blockGrass");
-		GameRegistry.registerBlock(fence = (new BlockFence1(WakcraftInfo.MODID.toLowerCase() + ":palisade1", Material.wood).setBlockName("Fence1")), "blockFence");
+		GameRegistry.registerBlock(fence = (new BlockFence1(WInfo.MODID.toLowerCase() + ":palisade1", Material.wood).setBlockName("Fence1")), "blockFence");
 		GameRegistry.registerBlock(invisiblewall = (new BlockInvisibleWall()), "blockInvisibleWall");
 		GameRegistry.registerBlock(havenbag = (new BlockHavenBag()), "blockHavenBag");
 		GameRegistry.registerBlock(hbChest = (new BlockHavenBagChest()), "blockHavenBagChest");
@@ -84,7 +84,7 @@ public class WakcraftBlocks {
 		GameRegistry.registerBlock(hbBarrier = (new BlockHavenBagBarrier()), "blockHavenBagBarrier");
 
 		// Special blocks
-		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":polisher")), "BlockPolisher");
+		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(WInfo.MODID.toLowerCase() + ":polisher")), "BlockPolisher");
 		GameRegistry.registerBlock(dragoexpress = (new BlockDragoexpress()), "dragoexpressBlock");
 		GameRegistry.registerBlock(phoenix = (new BlockPhoenix()), "phoenixBlock");
 		GameRegistry.registerBlock(havenGemWorkbench = (new BlockHavenGemWorkbench()), "blockHavenGemWorkbench");

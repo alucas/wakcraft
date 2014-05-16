@@ -1,6 +1,6 @@
 package heero.wakcraft.client.gui.inventory;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.crafting.CraftingManager;
 import heero.wakcraft.crafting.IExtendedRecipe;
 import heero.wakcraft.crafting.RecipeWithLevel;
@@ -26,7 +26,7 @@ public class GUIWorkbench extends GuiContainer {
 
 	protected PROFESSION profession;
 
-	private static final ResourceLocation textures = new ResourceLocation(WakcraftInfo.MODID.toLowerCase(), "textures/gui/workbench.png");
+	private static final ResourceLocation textures = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/workbench.png");
 
 	public GUIWorkbench(Container container, PROFESSION profession) {
 		super(container);

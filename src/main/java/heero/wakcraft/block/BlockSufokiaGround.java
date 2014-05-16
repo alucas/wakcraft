@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class BlockSufokiaGround extends Block {
 		
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		
-		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":sufokiaGround0");
+		setBlockTextureName(WInfo.MODID.toLowerCase() + ":sufokiaGround0");
 		setBlockName("SufokiaGround");
 	}
 	
@@ -43,7 +43,7 @@ public class BlockSufokiaGround extends Block {
     @Override
     public void registerBlockIcons(IIconRegister registerer) {
     	for (int i = 0; i < 2; i++) {
-    		icons[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":sufokiaGround" + i);
+    		icons[i] = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":sufokiaGround" + i);
     	}
     }
     

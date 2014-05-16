@@ -1,6 +1,6 @@
 package heero.wakcraft.world;
 
-import heero.wakcraft.WakcraftConfig;
+import heero.wakcraft.WConfig;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
 import net.minecraft.entity.Entity;
@@ -30,7 +30,7 @@ public class TeleporterHavenBag extends Teleporter {
 	 * Place an entity in a nearby portal, creating one if necessary.
 	 */
 	public void placeInPortal(Entity entity, double oldPosX, double oldPosY, double oldPosZ, float oldYaw) {
-		if (entity.dimension == WakcraftConfig.havenBagDimensionId && uid != -1) {
+		if (entity.dimension == WConfig.havenBagDimensionId && uid != -1) {
 			int[] coords = HavenBagHelper.getCoordFromUID(uid);
 
 			entity.motionX = entity.motionY = entity.motionZ = 0;

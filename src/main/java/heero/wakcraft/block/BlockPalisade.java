@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.renderer.block.RenderBlockPalisade;
 import heero.wakcraft.util.RotationUtil;
@@ -46,7 +46,7 @@ public class BlockPalisade extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer) {
 		for (int i = 0; i < names.length; i++) {
-			icons[i] = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase()
+			icons[i] = registerer.registerIcon(WInfo.MODID.toLowerCase()
 					+ ":" + names[i]);
 		}
 	}

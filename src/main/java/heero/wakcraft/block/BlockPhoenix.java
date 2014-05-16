@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
 
@@ -28,7 +28,7 @@ public class BlockPhoenix extends BlockContainer {
 	public BlockPhoenix() {
 		super(Material.wood);
 
-		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":phoenix");
+		setBlockTextureName(WInfo.MODID.toLowerCase() + ":phoenix");
 
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 		setBlockName("phoenix");

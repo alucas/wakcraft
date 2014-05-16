@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,7 +17,7 @@ public class BlockPillar extends Block {
 		super(Material.wood);
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
-		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":pillarSide");
+		setBlockTextureName(WInfo.MODID.toLowerCase() + ":pillarSide");
 		setBlockName("Pillar");
 	}
 
@@ -36,7 +36,7 @@ public class BlockPillar extends Block {
 	public void registerBlockIcons(IIconRegister registerer) {
 		super.registerBlockIcons(registerer);
 
-		blockIconTop = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":pillarTop");
-		blockIconSide = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":pillarSide");
+		blockIconTop = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":pillarTop");
+		blockIconSide = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":pillarSide");
 	}
 }

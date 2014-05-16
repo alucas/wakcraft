@@ -1,8 +1,8 @@
 package heero.wakcraft.havenbag;
 
-import heero.wakcraft.WakcraftBlocks;
-import heero.wakcraft.WakcraftConfig;
-import heero.wakcraft.WakcraftItems;
+import heero.wakcraft.WBlocks;
+import heero.wakcraft.WConfig;
+import heero.wakcraft.WItems;
 import heero.wakcraft.world.WorldProviderHaveBag;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -17,7 +17,7 @@ public class HavenBagGenerationHelper {
 	protected static final int HB_LENGTH = 24;
 
 	public static boolean generateHavenBag(World havenBagWorld, int uid) {
-		if (havenBagWorld.provider.dimensionId != WakcraftConfig.havenBagDimensionId) {
+		if (havenBagWorld.provider.dimensionId != WConfig.havenBagDimensionId) {
 			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHaveBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return false;
@@ -30,7 +30,7 @@ public class HavenBagGenerationHelper {
 		int z = coords[2];
 
 		// Console blocks ground
-		ItemStack stack = new ItemStack(WakcraftItems.craftHG);
+		ItemStack stack = new ItemStack(WItems.craftHG);
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				Block block = getHBBlockFromStack(stack);
@@ -40,30 +40,30 @@ public class HavenBagGenerationHelper {
 
 		// Console blocks bridge
 		for (int i = 0; i < 2; i++) {
-			havenBagWorld.setBlock(x + 3 + i, y - 1, z + 4, WakcraftBlocks.hbBridge, 8, 2);
+			havenBagWorld.setBlock(x + 3 + i, y - 1, z + 4, WBlocks.hbBridge, 8, 2);
 		}
 
 		// Start bridge
-		havenBagWorld.setBlock(x + 0, y - 1, z + 7, WakcraftBlocks.hbCraft2);
-		havenBagWorld.setBlock(x + 1, y - 1, z + 7, WakcraftBlocks.hbCraft);
-		havenBagWorld.setBlock(x + 1, y + 0, z + 7, WakcraftBlocks.hbBarrier);
-		havenBagWorld.setBlock(x + 1, y + 1, z + 7, WakcraftBlocks.hbBarrier);
-		havenBagWorld.setBlock(x + 1, y + 2, z + 7, WakcraftBlocks.hbBarrier);
+		havenBagWorld.setBlock(x + 0, y - 1, z + 7, WBlocks.hbCraft2);
+		havenBagWorld.setBlock(x + 1, y - 1, z + 7, WBlocks.hbCraft);
+		havenBagWorld.setBlock(x + 1, y + 0, z + 7, WBlocks.hbBarrier);
+		havenBagWorld.setBlock(x + 1, y + 1, z + 7, WBlocks.hbBarrier);
+		havenBagWorld.setBlock(x + 1, y + 2, z + 7, WBlocks.hbBarrier);
 
 		// First gem ground
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				havenBagWorld.setBlock(x + 2 + i, y - 1, z + 5 + j, WakcraftBlocks.hbMerchant);
+				havenBagWorld.setBlock(x + 2 + i, y - 1, z + 5 + j, WBlocks.hbMerchant);
 			}
 		}
 
-		generateWalls(havenBagWorld, x - 1, y - 1, z - 1, WakcraftBlocks.invisiblewall, 0);
+		generateWalls(havenBagWorld, x - 1, y - 1, z - 1, WBlocks.invisiblewall, 0);
 
 		// Console blocks
-		havenBagWorld.setBlock(x + 2, y, z, WakcraftBlocks.hbLock);
-		havenBagWorld.setBlock(x + 3, y, z, WakcraftBlocks.hbVisitors);
-		havenBagWorld.setBlock(x + 4, y, z, WakcraftBlocks.havenGemWorkbench);
-		havenBagWorld.setBlock(x + 2, y, z + 3, WakcraftBlocks.hbChest);
+		havenBagWorld.setBlock(x + 2, y, z, WBlocks.hbLock);
+		havenBagWorld.setBlock(x + 3, y, z, WBlocks.hbVisitors);
+		havenBagWorld.setBlock(x + 4, y, z, WBlocks.havenGemWorkbench);
+		havenBagWorld.setBlock(x + 2, y, z + 3, WBlocks.hbChest);
 
 		return true;
 	}
@@ -81,7 +81,7 @@ public class HavenBagGenerationHelper {
 	}
 
 	public static void updateGem(World havenBagWorld, int uid, ItemStack stack, int gemPosition) {
-		if (havenBagWorld.provider.dimensionId != WakcraftConfig.havenBagDimensionId) {
+		if (havenBagWorld.provider.dimensionId != WConfig.havenBagDimensionId) {
 			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHaveBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return;
@@ -104,7 +104,7 @@ public class HavenBagGenerationHelper {
 	}
 
 	public static void updateBridge(World havenBagWorld, int uid, IInventory slots) {
-		if (havenBagWorld.provider.dimensionId != WakcraftConfig.havenBagDimensionId) {
+		if (havenBagWorld.provider.dimensionId != WConfig.havenBagDimensionId) {
 			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHaveBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return;
@@ -140,9 +140,9 @@ public class HavenBagGenerationHelper {
 					for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
 						for (int i = 0; i < 5; i++) {
 							if (i == 1 || i == 2) {
-								setHBBBlock(havenBagWorld, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, WakcraftBlocks.hbBridge, 0);
+								setHBBBlock(havenBagWorld, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, WBlocks.hbBridge, 0);
 							} else {
-								setHBBBlock(havenBagWorld, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, WakcraftBlocks.invisiblewall, 0);
+								setHBBBlock(havenBagWorld, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, WBlocks.invisiblewall, 0);
 							}
 						}
 					}
@@ -174,9 +174,9 @@ public class HavenBagGenerationHelper {
 					for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
 						for (int i = 0; i < 5; i++) {
 							if (i == 1 || i == 2) {
-								setHBBBlock(havenBagWorld, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, WakcraftBlocks.hbBridge, 0);
+								setHBBBlock(havenBagWorld, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, WBlocks.hbBridge, 0);
 							} else {
-								setHBBBlock(havenBagWorld, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, WakcraftBlocks.invisiblewall, 0);
+								setHBBBlock(havenBagWorld, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, WBlocks.invisiblewall, 0);
 							}
 						}
 					}
@@ -195,30 +195,30 @@ public class HavenBagGenerationHelper {
 			if (stack1 != null && stack2 != null && stack3 != null && stack4 != null && stack1.getItem().equals(stack2.getItem()) && stack1.getItem().equals(stack3.getItem()) && stack1.getItem().equals(stack4.getItem())) {
 				setHBBBlock(havenBagWorld, x + 7 + (i % 3) * 6, y - 1, z + 10 + (i / 3) * 6, getHBBlockFromStack(slots.getStackInSlot(i * 2)), 0);
 			} else {
-				setHBBBlock(havenBagWorld, x + 7 + (i % 3) * 6, y - 1, z + 10 + (i / 3) * 6, WakcraftBlocks.invisiblewall, 0);
+				setHBBBlock(havenBagWorld, x + 7 + (i % 3) * 6, y - 1, z + 10 + (i / 3) * 6, WBlocks.invisiblewall, 0);
 			}
 		}
 	}
 
 	private static Block getHBBlockFromStack(ItemStack stack) {
-		return (stack == null) ? WakcraftBlocks.invisiblewall
-				: (stack.getItem() == WakcraftItems.craftHG) ? ((int)(Math.random() * 2)) == 0 ? WakcraftBlocks.hbCraft : WakcraftBlocks.hbCraft2
-						: (stack.getItem() == WakcraftItems.merchantHG) ? WakcraftBlocks.hbMerchant
-								: (stack.getItem() == WakcraftItems.decoHG) ? ((int)(Math.random() * 2)) == 0 ? WakcraftBlocks.hbDeco : WakcraftBlocks.hbDeco2
-										: (stack.getItem() == WakcraftItems.gardenHG) ? WakcraftBlocks.hbGarden
+		return (stack == null) ? WBlocks.invisiblewall
+				: (stack.getItem() == WItems.craftHG) ? ((int)(Math.random() * 2)) == 0 ? WBlocks.hbCraft : WBlocks.hbCraft2
+						: (stack.getItem() == WItems.merchantHG) ? WBlocks.hbMerchant
+								: (stack.getItem() == WItems.decoHG) ? ((int)(Math.random() * 2)) == 0 ? WBlocks.hbDeco : WBlocks.hbDeco2
+										: (stack.getItem() == WItems.gardenHG) ? WBlocks.hbGarden
 												: Blocks.lapis_block;
 	}
 
 	private static void setHBBBlock(World world, int x, int y, int z, Block hbBlock, int metadata) {
-		if (hbBlock.equals(WakcraftBlocks.invisiblewall)) {
+		if (hbBlock.equals(WBlocks.invisiblewall)) {
 			for (int i = 0; i < 4; i++) {
 				world.setBlock(x, y + i, z, hbBlock, 0, 2);
 			}
-		} else if (hbBlock.equals(WakcraftBlocks.hbBridge)) {
-			world.setBlock(x, y, z, WakcraftBlocks.hbBridge, 0, 2);
+		} else if (hbBlock.equals(WBlocks.hbBridge)) {
+			world.setBlock(x, y, z, WBlocks.hbBridge, 0, 2);
 
 			for (int i = 1; i < 4; i++) {
-				world.setBlock(x, y + i, z, WakcraftBlocks.hbBarrier, 0, 2);
+				world.setBlock(x, y + i, z, WBlocks.hbBarrier, 0, 2);
 			}
 		} else {
 			world.setBlock(x, y, z, hbBlock, metadata, 2);

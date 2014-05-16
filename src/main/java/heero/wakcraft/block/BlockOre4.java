@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftItems;
+import heero.wakcraft.WItems;
 
 import java.util.Random;
 
@@ -17,7 +17,7 @@ public class BlockOre4 extends BlockOre {
 
 	@Override
 	public Item getItemDropped(int metadata, Random random, int fortuneLvl) {
-		return WakcraftItems.itemOre2;
+		return WItems.itemOre2;
 	}
 
 	/**

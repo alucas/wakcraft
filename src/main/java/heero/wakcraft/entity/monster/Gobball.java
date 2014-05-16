@@ -1,7 +1,7 @@
 package heero.wakcraft.entity.monster;
 
-import heero.wakcraft.WakcraftInfo;
-import heero.wakcraft.WakcraftItems;
+import heero.wakcraft.WInfo;
+import heero.wakcraft.WItems;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,10 +33,10 @@ public class Gobball extends EntityAnimal {
 	// private EntityAIEatGrass field_146087_bs = new EntityAIEatGrass(this);
 	protected static final Map<Integer, Integer> dropRate = new HashMap<Integer, Integer>();
 	static {
-		dropRate.put(Item.getIdFromItem(WakcraftItems.gobballWool), 50);
-		dropRate.put(Item.getIdFromItem(WakcraftItems.gobballSkin), 50);
-		dropRate.put(Item.getIdFromItem(WakcraftItems.gobballHorn), 50);
-		dropRate.put(Item.getIdFromItem(WakcraftItems.woollyKey), 5);
+		dropRate.put(Item.getIdFromItem(WItems.gobballWool), 50);
+		dropRate.put(Item.getIdFromItem(WItems.gobballSkin), 50);
+		dropRate.put(Item.getIdFromItem(WItems.gobballHorn), 50);
+		dropRate.put(Item.getIdFromItem(WItems.woollyKey), 5);
 	}
 
 	public Gobball(World par1World) {
@@ -59,10 +59,10 @@ public class Gobball extends EntityAnimal {
 				EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 
-		this.inventory.setInventorySlotContents(0, new ItemStack(WakcraftItems.gobballWool, 1, 0));
-		this.inventory.setInventorySlotContents(1, new ItemStack(WakcraftItems.gobballHorn, 1, 0));
-		this.inventory.setInventorySlotContents(2, new ItemStack(WakcraftItems.gobballSkin, 1, 0));
-		this.inventory.setInventorySlotContents(3, new ItemStack(WakcraftItems.woollyKey, 1, 0));
+		this.inventory.setInventorySlotContents(0, new ItemStack(WItems.gobballWool, 1, 0));
+		this.inventory.setInventorySlotContents(1, new ItemStack(WItems.gobballHorn, 1, 0));
+		this.inventory.setInventorySlotContents(2, new ItemStack(WItems.gobballSkin, 1, 0));
+		this.inventory.setInventorySlotContents(3, new ItemStack(WItems.woollyKey, 1, 0));
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class Gobball extends EntityAnimal {
 	@SideOnly(Side.CLIENT)
 	public static class RenderBouftou extends RenderLiving {
 		private static final ResourceLocation bouftou = new ResourceLocation(
-				WakcraftInfo.MODID.toLowerCase(), "textures/mobs/bouftou.png");
+				WInfo.MODID.toLowerCase(), "textures/mobs/bouftou.png");
 
 		public RenderBouftou(ModelBase par1ModelBase, float par2) {
 			super(par1ModelBase, par2);

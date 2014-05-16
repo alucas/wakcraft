@@ -1,6 +1,6 @@
 package heero.wakcraft.havenbag;
 
-import heero.wakcraft.WakcraftItems;
+import heero.wakcraft.WItems;
 import heero.wakcraft.item.ItemIkiakit;
 
 import java.util.Arrays;
@@ -22,9 +22,9 @@ public class HavenBagChestHelper {
 	private static final int[] CHESTS_SIZES = new int[] { 14, 14, 21, 21, 21,
 			28, 28 };
 	private static final Item[] CHESTS_IKIAKIT = new Item[] { null,
-			WakcraftItems.smallikiakit, WakcraftItems.adventurerikiakit,
-			WakcraftItems.kitikiakit, WakcraftItems.collectorikiakit,
-			WakcraftItems.goldenikiakit, WakcraftItems.emeraldikiakit };
+			WItems.smallikiakit, WItems.adventurerikiakit,
+			WItems.kitikiakit, WItems.collectorikiakit,
+			WItems.goldenikiakit, WItems.emeraldikiakit };
 
 	public static int getChestSize(int chestId) {
 		return CHESTS_SIZES[chestId];

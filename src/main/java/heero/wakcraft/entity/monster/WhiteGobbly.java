@@ -1,6 +1,6 @@
 package heero.wakcraft.entity.monster;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -22,7 +22,7 @@ public class WhiteGobbly extends Gobball {
 	@SideOnly(Side.CLIENT)
 	public static class RenderBouftonBlanc extends RenderLiving {
 		private static final ResourceLocation bouftonBlanc = new ResourceLocation(
-				WakcraftInfo.MODID, "textures/mobs/boufton.png");
+				WInfo.MODID, "textures/mobs/boufton.png");
 
 		public RenderBouftonBlanc(ModelBase par1ModelBase, float par2) {
 			super(par1ModelBase, par2);

@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftConfig;
+import heero.wakcraft.WConfig;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -33,7 +33,7 @@ public class BlockInvisibleWall extends Block {
 
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		if (world instanceof World && ((World) world).provider.dimensionId == WakcraftConfig.havenBagDimensionId) {
+		if (world instanceof World && ((World) world).provider.dimensionId == WConfig.havenBagDimensionId) {
 			return 15;
 		}
 

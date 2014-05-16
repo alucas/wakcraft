@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftBlocks;
+import heero.wakcraft.WBlocks;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.havenbag.HavenBagHelper;
@@ -96,22 +96,22 @@ public class BlockHavenBagBarrier extends Block {
 			Block block3 = world.getBlock(x + 1, 19, z);
 			Block block4 = world.getBlock(x - 1, 19, z);
 
-			if ((block1.equals(WakcraftBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
-					|| (block2.equals(WakcraftBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
-					|| (block3.equals(WakcraftBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
-					|| (block4.equals(WakcraftBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
-					|| (block1.equals(WakcraftBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
-					|| (block2.equals(WakcraftBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
-					|| (block3.equals(WakcraftBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
-					|| (block4.equals(WakcraftBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
-					|| (block1.equals(WakcraftBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
-					|| (block2.equals(WakcraftBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
-					|| (block3.equals(WakcraftBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
-					|| (block4.equals(WakcraftBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
-					|| (block1.equals(WakcraftBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
-					|| (block2.equals(WakcraftBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
-					|| (block3.equals(WakcraftBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
-					|| (block4.equals(WakcraftBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
+			if ((block1.equals(WBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
+					|| (block2.equals(WBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
+					|| (block3.equals(WBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
+					|| (block4.equals(WBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
+					|| (block1.equals(WBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
+					|| (block2.equals(WBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
+					|| (block3.equals(WBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
+					|| (block4.equals(WBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
+					|| (block1.equals(WBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
+					|| (block2.equals(WBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
+					|| (block3.equals(WBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
+					|| (block4.equals(WBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
+					|| (block1.equals(WBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
+					|| (block2.equals(WBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
+					|| (block3.equals(WBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
+					|| (block4.equals(WBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
 					) {
 				break;
 			}

@@ -1,7 +1,7 @@
 package heero.wakcraft.creativetab;
 
-import heero.wakcraft.WakcraftBlocks;
-import heero.wakcraft.WakcraftItems;
+import heero.wakcraft.WBlocks;
+import heero.wakcraft.WItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -15,7 +15,7 @@ public class WakcraftCreativeTabs {
 		@SideOnly(Side.CLIENT)
 		@Override
 		public Item getTabIconItem() {
-			return Item.getItemFromBlock(WakcraftBlocks.sufokiaWave);
+			return Item.getItemFromBlock(WBlocks.sufokiaWave);
 		}
 	};
 	public static final CreativeTabs tabSpecialBlock = new CreativeTabs(
@@ -23,7 +23,7 @@ public class WakcraftCreativeTabs {
 		@Override
 		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem() {
-			return Item.getItemFromBlock(WakcraftBlocks.dragoexpress);
+			return Item.getItemFromBlock(WBlocks.dragoexpress);
 		}
 	};
 	public static final CreativeTabs tabOreBlock = new CreativeTabs(
@@ -31,14 +31,14 @@ public class WakcraftCreativeTabs {
 		@Override
 		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem() {
-			return Item.getItemFromBlock(WakcraftBlocks.ore1);
+			return Item.getItemFromBlock(WBlocks.ore1);
 		}
 	};
 	public static final CreativeTabs tabResource = new CreativeTabs("resources") {
 		@SideOnly(Side.CLIENT)
 		@Override
 		public Item getTabIconItem() {
-			return WakcraftItems.gobballHorn;
+			return WItems.gobballHorn;
 		}
 	};
 	public static final CreativeTabs tabCombat = new CreativeTabs("combat") {

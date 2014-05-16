@@ -1,6 +1,6 @@
 package heero.wakcraft.item;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 
 public class ItemWoollyKey extends ItemWithLevel {
@@ -9,6 +9,6 @@ public class ItemWoollyKey extends ItemWithLevel {
 
 		setCreativeTab(WakcraftCreativeTabs.tabResource);
 		setUnlocalizedName("WoollyKey");
-		setTextureName(WakcraftInfo.MODID.toLowerCase() + ":woollykey");
+		setTextureName(WInfo.MODID.toLowerCase() + ":woollykey");
 	}
 }

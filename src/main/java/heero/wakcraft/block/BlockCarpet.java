@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,7 +14,7 @@ public class BlockCarpet extends BlockYRotation {
 	public BlockCarpet() {
 		super(Material.cloth);
 
-		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":carpet1");
+		setBlockTextureName(WInfo.MODID.toLowerCase() + ":carpet1");
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		setBlockName("Carpet1");
@@ -25,9 +25,9 @@ public class BlockCarpet extends BlockYRotation {
 	public void registerBlockIcons(IIconRegister registerer) {
 		super.registerBlockIcons(registerer);
 
-		iconCarpet1 = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":carpet1");
-		iconCarpet1Corner = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":carpet1Corner");
-		iconCarpet1Center = registerer.registerIcon(WakcraftInfo.MODID.toLowerCase() + ":carpet1Center");
+		iconCarpet1 = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":carpet1");
+		iconCarpet1Corner = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":carpet1Corner");
+		iconCarpet1Center = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":carpet1Center");
 	}
 
 	@Override

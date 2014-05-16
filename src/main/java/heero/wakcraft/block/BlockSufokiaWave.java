@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WakcraftInfo;
+import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class BlockSufokiaWave extends BlockYRotation {
 	public BlockSufokiaWave() {
 		super(Material.sand);
 
-		setBlockTextureName(WakcraftInfo.MODID.toLowerCase() + ":sufokiaWave1");
+		setBlockTextureName(WInfo.MODID.toLowerCase() + ":sufokiaWave1");
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		setBlockName("SufokiaWave");
@@ -44,7 +44,7 @@ public class BlockSufokiaWave extends BlockYRotation {
 	@Override
 	public void registerBlockIcons(IIconRegister registerer) {
 		for (int i = 0; i < nbBlock; i++) {
-			blockIconWave[i] = registerer.registerIcon(WakcraftInfo.MODID
+			blockIconWave[i] = registerer.registerIcon(WInfo.MODID
 					.toLowerCase() + ":sufokiaWave" + (i + 1));
 		}
 	}
