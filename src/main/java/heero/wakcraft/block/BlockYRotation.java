@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class BlockYRotation extends Block {
+public class BlockYRotation extends BlockGeneric {
 	public BlockYRotation(Material material) {
 		super(material);
 	}
@@ -65,42 +65,19 @@ public abstract class BlockYRotation extends Block {
 					|| neighbor == 6) {
 				return getCornerIcon(side, metadata);
 			}
-
-			return getTopIcon(side, metadata);
-		default:
-			return getSideIcon(side, metadata);
 		}
+
+		return getIcon(side, metadata);
 	}
-
-	/**
-	 * Gets the block's texture. Args: side, meta
-	 */
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getIcon(int side, int metadata) {
-		switch (side) {
-		case 0:
-		case 1:
-			return getTopIcon(side, metadata);
-		default:
-			return getSideIcon(side, metadata);
-		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	public abstract IIcon getTopIcon(int side, int metadata);
-
-	@SideOnly(Side.CLIENT)
-	public abstract IIcon getSideIcon(int side, int metadata);
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getCornerIcon(int side, int metadata) {
-		return getTopIcon(side, metadata);
+		return getIcon(side, metadata);
 	}
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getCenterIcon(int side, int metadata) {
-		return getTopIcon(side, metadata);
+		return getIcon(side, metadata);
 	}
 
 	/**

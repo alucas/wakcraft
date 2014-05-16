@@ -16,12 +16,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSufokiaWave extends BlockYRotation {
 	protected static final int nbBlock = 3;
-	protected IIcon[] blockIconWave = new IIcon[nbBlock];
 
 	public BlockSufokiaWave() {
 		super(Material.sand);
 
-		setBlockTextureName(WInfo.MODID.toLowerCase() + ":sufokiaWave1");
+		setBlockTextureName("sufokiaWave1");
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		setBlockName("SufokiaWave");
@@ -43,24 +42,18 @@ public class BlockSufokiaWave extends BlockYRotation {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister registerer) {
+		super.registerBlockIcons(registerer);
+
 		for (int i = 0; i < nbBlock; i++) {
-			blockIconWave[i] = registerer.registerIcon(WInfo.MODID
+			IIcon icon = registerer.registerIcon(WInfo.MODID
 					.toLowerCase() + ":sufokiaWave" + (i + 1));
+
+			for (int j = 0; j < 6; j++) {
+				icons[j][(i<<2)] = icon;
+				icons[j][(i<<2) + 1] = icon;
+				icons[j][(i<<2) + 2] = icon;
+				icons[j][(i<<2) + 3] = icon;
+			}
 		}
-	}
-
-	/**
-	 * Gets the block's texture. Args: side, meta
-	 */
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getTopIcon(int side, int metadata) {
-		return blockIconWave[(metadata >> 2) % nbBlock];
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getSideIcon(int side, int metadata) {
-		return getTopIcon(side, metadata);
 	}
 }
