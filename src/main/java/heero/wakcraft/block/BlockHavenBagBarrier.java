@@ -46,6 +46,11 @@ public class BlockHavenBagBarrier extends Block {
 	}
 
 	@Override
+	public boolean canCollideCheck(int p_149678_1_, boolean p_149678_2_) {
+		return false;
+	}
+
+	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		if (world.isRemote) {
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));

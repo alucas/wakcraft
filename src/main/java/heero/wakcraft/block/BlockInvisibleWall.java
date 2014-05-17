@@ -32,6 +32,11 @@ public class BlockInvisibleWall extends Block {
 	}
 
 	@Override
+	public boolean canCollideCheck(int p_149678_1_, boolean p_149678_2_) {
+		return false;
+	}
+
+	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
 		if (world instanceof World && ((World) world).provider.dimensionId == WConfig.havenBagDimensionId) {
 			return 15;
