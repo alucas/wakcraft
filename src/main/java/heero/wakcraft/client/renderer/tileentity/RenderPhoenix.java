@@ -1,4 +1,4 @@
-package heero.wakcraft.renderer.tileentity;
+package heero.wakcraft.client.renderer.tileentity;
 
 import heero.wakcraft.WInfo;
 import heero.wakcraft.block.BlockPhoenix;

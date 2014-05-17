@@ -1,4 +1,4 @@
-package heero.wakcraft.renderer.entity;
+package heero.wakcraft.client.renderer.entity;
 
 import heero.wakcraft.WInfo;
 import heero.wakcraft.entity.misc.EntityTextPopup;

@@ -1,4 +1,4 @@
-package heero.wakcraft.renderer.world;
+package heero.wakcraft.client.renderer.world;
 
 import heero.wakcraft.WInfo;
 import net.minecraft.client.Minecraft;

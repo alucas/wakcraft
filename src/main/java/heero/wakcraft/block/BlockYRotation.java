@@ -1,6 +1,6 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.renderer.block.RenderBlockYRotation;
+import heero.wakcraft.client.renderer.block.RenderBlockYRotation;
 import heero.wakcraft.util.RotationUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

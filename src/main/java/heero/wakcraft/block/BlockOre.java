@@ -1,14 +1,14 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WInfo;
+import heero.wakcraft.Wakcraft;
 import heero.wakcraft.block.material.AventureMaterial;
+import heero.wakcraft.client.renderer.block.RenderBlockOre;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.misc.EntityTextPopup;
 import heero.wakcraft.network.packet.PacketProfession;
 import heero.wakcraft.profession.ProfessionManager;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
-import heero.wakcraft.renderer.block.RenderBlockOre;
 
 import java.util.List;
 import java.util.Random;
