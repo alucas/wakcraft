@@ -92,33 +92,30 @@ public class BlockHavenBagBarrier extends Block {
 				break;
 			}
 
-			int rightAll = hbProperties.getRight(HavenBagProperties.ACL_KEY_ALL);
-//			int rightGuild = tile.acl.get(TileEntityHavenBagProperties.ACL_KEY_GUILD);
-//			int right = tile.acl.get(player.getDisplayName());
+			Integer rightAll = hbProperties.getRight(HavenBagProperties.ACL_KEY_ALL);
+			Integer rightGuild = hbProperties.getRight(HavenBagProperties.ACL_KEY_GUILD);
+			Integer right = hbProperties.getRight(player.getDisplayName());
 
-			Block block1 = world.getBlock(x, 19, z + 1);
-			Block block2 = world.getBlock(x, 19, z - 1);
-			Block block3 = world.getBlock(x + 1, 19, z);
-			Block block4 = world.getBlock(x - 1, 19, z);
-
-			if ((block1.equals(WBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
-					|| (block2.equals(WBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
-					|| (block3.equals(WBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
-					|| (block4.equals(WBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
-					|| (block1.equals(WBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
-					|| (block2.equals(WBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
-					|| (block3.equals(WBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
-					|| (block4.equals(WBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
-					|| (block1.equals(WBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
-					|| (block2.equals(WBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
-					|| (block3.equals(WBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
-					|| (block4.equals(WBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
-					|| (block1.equals(WBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
-					|| (block2.equals(WBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
-					|| (block3.equals(WBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
-					|| (block4.equals(WBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
-					) {
+			if (rightAll == 0 && rightGuild == 0 && (right == null || right == 0)) {
 				break;
+			}
+
+			Block[] blocks = new Block[4];
+			blocks[1] = world.getBlock(x, 19, z + 1);
+			blocks[2] = world.getBlock(x, 19, z - 1);
+			blocks[3] = world.getBlock(x + 1, 19, z);
+			blocks[4] = world.getBlock(x - 1, 19, z);
+
+			for (int i = 0; i < blocks.length; i++) {
+				if ((blocks[i].equals(WBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
+						|| (blocks[i].equals(WBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
+						|| (blocks[i].equals(WBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
+						|| (blocks[i].equals(WBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
+						|| (blocks[i].equals(WBlocks.hbDeco2) && (rightAll & HavenBagHelper.R_DECO) == 0)
+						|| (blocks[i].equals(WBlocks.hbCraft2) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
+						) {
+					break;
+				}
 			}
 
 			return;

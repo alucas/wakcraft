@@ -33,11 +33,11 @@ public class HavenBagProperties {
 		return acl.keySet();
 	}
 
-	public int getRight(String key) {
+	public Integer getRight(String key) {
 		return acl.get(key);
 	}
 
-	public void setRight(String key, int right) {
+	public void setRight(String key, Integer right) {
 		acl.put(key, right);
 	}
 }
