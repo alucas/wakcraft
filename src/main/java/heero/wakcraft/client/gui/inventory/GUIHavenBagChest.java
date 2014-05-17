@@ -45,7 +45,8 @@ public class GUIHavenBagChest extends GUIContainer {
 
 			drawString(fontRendererObj, ikiakitStack.getDisplayName(), guiLeft + 50, guiTop + 50, 0xFFFFFF);
 
-			drawSlot(ikiakitSlot);
+			func_146977_a(ikiakitSlot);
+
 			if (isMouseOverSlot(ikiakitSlot, mouseX + guiLeft, mouseY + guiTop)) {
 				drawSlotOverlay(ikiakitSlot);
 				renderToolTip(ikiakitStack, mouseX, mouseY);
@@ -111,7 +112,7 @@ public class GUIHavenBagChest extends GUIContainer {
 				continue;
 			}
 
-			drawSlot(slot);
+			func_146977_a(slot);
 
 			if (slot.slotNumber == hoveredSlotId) {
 				drawSlotOverlay(slot);
