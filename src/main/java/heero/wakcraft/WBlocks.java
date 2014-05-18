@@ -24,6 +24,7 @@ import heero.wakcraft.block.BlockSufokiaColor;
 import heero.wakcraft.block.BlockSufokiaGround;
 import heero.wakcraft.block.BlockSufokiaWave;
 import heero.wakcraft.block.BlockTransparent;
+import heero.wakcraft.block.BlockWakfu;
 import heero.wakcraft.block.BlockYRotation;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.item.ItemBlockGrass;
@@ -47,6 +48,7 @@ public class WBlocks {
 			polisher, havenGemWorkbench, invisiblewall, havenbag, hbChest,
 			hbLock, hbBridge, hbVisitors, hbBarrier, hbCraft,
 			hbCraft2, hbGarden, hbDeco, hbDeco2, hbMerchant;
+	public static Block wakfu, wakfuFull;
 
 	public static void registerBlocks() {
 		// Basic blocks
@@ -79,6 +81,8 @@ public class WBlocks {
 		GameRegistry.registerBlock(hbMerchant = (new BlockGeneric(Material.iron).setBlockTextureName(ForgeDirection.UP, "hbmerchant_top").setBlockTextureName("hbmerchant_side").setBlockName("HBMerchant").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBMerchant");
 		GameRegistry.registerBlock(hbVisitors = (new BlockHavenBagVisitors()), "blockHavenBagVisitors");
 		GameRegistry.registerBlock(hbBarrier = (new BlockHavenBagBarrier()), "blockHavenBagBarrier");
+		GameRegistry.registerBlock(wakfu = (new BlockWakfu()), "blockWakfu");
+		GameRegistry.registerBlock(wakfuFull = (new BlockGeneric(Material.wood).setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("wakfuGreen")), "blockWakfuFull");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(WInfo.MODID.toLowerCase() + ":polisher")), "BlockPolisher");
