@@ -18,7 +18,7 @@ import heero.wakcraft.tileentity.TileEntityHavenBag;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import heero.wakcraft.tileentity.TileEntityPhoenix;
-import heero.wakcraft.world.WorldProviderHaveBag;
+import heero.wakcraft.world.WorldProviderHavenBag;
 import heero.wakcraft.world.gen.WorldGenHavenBag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -92,7 +92,7 @@ public class CommonProxy {
 	public void registerDimensions() {
 		GameRegistry.registerWorldGenerator(new WorldGenHavenBag(), 0);
 
-		DimensionManager.registerProviderType(WConfig.havenBagDimensionId, WorldProviderHaveBag.class, false);
+		DimensionManager.registerProviderType(WConfig.havenBagDimensionId, WorldProviderHavenBag.class, false);
 		DimensionManager.registerDimension(WConfig.havenBagDimensionId, WConfig.havenBagDimensionId);
 	}
 }

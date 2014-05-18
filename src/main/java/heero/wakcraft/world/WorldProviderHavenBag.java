@@ -8,7 +8,7 @@ import net.minecraft.world.WorldProvider;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class WorldProviderHaveBag extends WorldProvider {
+public class WorldProviderHavenBag extends WorldProvider {
 	public static final String NAME = "WakcraftHavenBag";
 
 	/**
@@ -20,7 +20,10 @@ public class WorldProviderHaveBag extends WorldProvider {
 
 		this.hasNoSky = true;
 		this.dimensionId = WConfig.havenBagDimensionId;
-		this.setSkyRenderer(new EndSkyRenderer());
+
+		if (worldObj.isRemote) {
+			this.setSkyRenderer(new EndSkyRenderer());
+		}
 	}
 
 	/**

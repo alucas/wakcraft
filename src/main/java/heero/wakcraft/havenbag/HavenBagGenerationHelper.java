@@ -3,7 +3,7 @@ package heero.wakcraft.havenbag;
 import heero.wakcraft.WBlocks;
 import heero.wakcraft.WConfig;
 import heero.wakcraft.WItems;
-import heero.wakcraft.world.WorldProviderHaveBag;
+import heero.wakcraft.world.WorldProviderHavenBag;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -18,7 +18,7 @@ public class HavenBagGenerationHelper {
 
 	public static boolean generateHavenBag(World havenBagWorld, int uid) {
 		if (havenBagWorld.provider.dimensionId != WConfig.havenBagDimensionId) {
-			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHaveBag.NAME, havenBagWorld.provider.getDimensionName());
+			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return false;
 		}
@@ -82,7 +82,7 @@ public class HavenBagGenerationHelper {
 
 	public static void updateGem(World havenBagWorld, int uid, ItemStack stack, int gemPosition) {
 		if (havenBagWorld.provider.dimensionId != WConfig.havenBagDimensionId) {
-			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHaveBag.NAME, havenBagWorld.provider.getDimensionName());
+			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return;
 		}
@@ -105,7 +105,7 @@ public class HavenBagGenerationHelper {
 
 	public static void updateBridge(World havenBagWorld, int uid, IInventory slots) {
 		if (havenBagWorld.provider.dimensionId != WConfig.havenBagDimensionId) {
-			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHaveBag.NAME, havenBagWorld.provider.getDimensionName());
+			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return;
 		}
