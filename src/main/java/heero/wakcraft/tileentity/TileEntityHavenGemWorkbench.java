@@ -85,46 +85,78 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 		tagRoot.setTag(TAG_GEMS, tagGems);
 	}
 
+	/**
+	 * Returns the number of slots in the inventory.
+	 */
 	@Override
 	public int getSizeInventory() {
 		return havenGems.getSizeInventory();
 	}
 
+	/**
+	 * Returns the stack in slot i
+	 */
 	@Override
 	public ItemStack getStackInSlot(int slotId) {
 		return havenGems.getStackInSlot(slotId);
 	}
 
+	/**
+	 * Removes from an inventory slot (first arg) up to a specified number
+	 * (second arg) of items and returns them in a new stack.
+	 */
 	@Override
 	public ItemStack decrStackSize(int slotId, int quantity) {
 		return havenGems.decrStackSize(slotId, quantity);
 	}
 
+	/**
+	 * When some containers are closed they call this on each slot, then drop
+	 * whatever it returns as an EntityItem - like when you close a workbench
+	 * GUI.
+	 */
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slotId) {
 		return havenGems.getStackInSlotOnClosing(slotId);
 	}
 
+	/**
+	 * Sets the given item stack to the specified slot in the inventory (can be
+	 * crafting or armor sections).
+	 */
 	@Override
 	public void setInventorySlotContents(int slotId, ItemStack stack) {
 		havenGems.setInventorySlotContents(slotId, stack);
 	}
 
+	/**
+	 * Returns the name of the inventory
+	 */
 	@Override
 	public String getInventoryName() {
 		return havenGems.getInventoryName();
 	}
 
+	/**
+	 * Returns if the inventory is named
+	 */
 	@Override
 	public boolean hasCustomInventoryName() {
 		return havenGems.hasCustomInventoryName();
 	}
 
+	/**
+	 * Returns the maximum stack size for a inventory slot.
+	 */
 	@Override
 	public int getInventoryStackLimit() {
 		return 1;
 	}
 
+	/**
+	 * Do not make give this method the name canInteractWith because it clashes
+	 * with Container
+	 */
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return havenGems.isUseableByPlayer(player);
@@ -140,6 +172,10 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 		havenGems.closeInventory();
 	}
 
+	/**
+	 * Returns true if automation is allowed to insert the given stack (ignoring
+	 * stack size) into the given slot.
+	 */
 	@Override
 	public boolean isItemValidForSlot(int slotId, ItemStack stack) {
 		if (stack == null) {
@@ -168,5 +204,15 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 			HavenBagGenerationHelper.updateGem(worldObj, uid, getStackInSlot(slotId), slotId);
 			HavenBagGenerationHelper.updateBridge(worldObj, uid, havenGems);
 		}
+	}
+
+	/**
+	 * Determines if this TileEntity requires update calls.
+	 * 
+	 * @return True if you want updateEntity() to be called, false if not
+	 */
+	@Override
+	public boolean canUpdate() {
+		return false;
 	}
 }

@@ -25,6 +25,9 @@ public class TileEntityHavenBag extends TileEntity {
 		tagRoot.setInteger(TAG_UID, uid);
 	}
 
+	/**
+	 * Overriden in a sign to provide the text.
+	 */
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
@@ -34,8 +37,29 @@ public class TileEntityHavenBag extends TileEntity {
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
 	}
 
+	/**
+	 * Called when you receive a TileEntityData packet for the location this
+	 * TileEntity is currently in. On the client, the NetworkManager will always
+	 * be the remote server. On the server, it will be whomever is responsible
+	 * for sending the packet.
+	 * 
+	 * @param net
+	 *            The NetworkManager the packet originated from
+	 * @param pkt
+	 *            The data packet
+	 */
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
 		readFromNBT(packet.func_148857_g());
+	}
+
+	/**
+	 * Determines if this TileEntity requires update calls.
+	 * 
+	 * @return True if you want updateEntity() to be called, false if not
+	 */
+	@Override
+	public boolean canUpdate() {
+		return false;
 	}
 }
