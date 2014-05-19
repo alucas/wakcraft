@@ -4,7 +4,6 @@ import heero.wakcraft.block.BlockCarpet;
 import heero.wakcraft.block.BlockDragoexpress;
 import heero.wakcraft.block.BlockFence1;
 import heero.wakcraft.block.BlockGeneric;
-import heero.wakcraft.block.BlockGrass;
 import heero.wakcraft.block.BlockHavenBag;
 import heero.wakcraft.block.BlockHavenBagBarrier;
 import heero.wakcraft.block.BlockHavenBagChest;
@@ -19,20 +18,23 @@ import heero.wakcraft.block.BlockOre4;
 import heero.wakcraft.block.BlockPalisade;
 import heero.wakcraft.block.BlockPhoenix;
 import heero.wakcraft.block.BlockPolisher;
+import heero.wakcraft.block.BlockSlabDirt;
+import heero.wakcraft.block.BlockSlabGrass;
 import heero.wakcraft.block.BlockStairs2;
 import heero.wakcraft.block.BlockSufokiaColor;
 import heero.wakcraft.block.BlockSufokiaGround;
 import heero.wakcraft.block.BlockSufokiaWave;
 import heero.wakcraft.block.BlockTransparent;
 import heero.wakcraft.block.BlockWakfu;
+import heero.wakcraft.block.BlockSlabWakfu;
 import heero.wakcraft.block.BlockYRotation;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.item.ItemBlockGrass;
 import heero.wakcraft.item.ItemBlockOre1;
 import heero.wakcraft.item.ItemBlockOre2;
 import heero.wakcraft.item.ItemBlockOre3;
 import heero.wakcraft.item.ItemBlockOre4;
 import heero.wakcraft.item.ItemBlockPalisade;
+import heero.wakcraft.item.ItemBlockSlab;
 import heero.wakcraft.item.ItemBlockSufokiaGround;
 import heero.wakcraft.item.ItemBlockSufokiaWave;
 import net.minecraft.block.Block;
@@ -44,11 +46,11 @@ public class WBlocks {
 
 	public static Block dragoexpress, phoenix, sufokiaColor, sufokiaSun,
 			sufokiaWave, sufokiaStair, ore1, ore2, ore3, ore4, carpet1,
-			sufokiaGround, palisade, pillar, wood, hbstand, grass, fence,
-			polisher, havenGemWorkbench, invisiblewall, havenbag, hbChest,
-			hbLock, hbBridge, hbVisitors, hbBarrier, hbCraft,
-			hbCraft2, hbGarden, hbDeco, hbDeco2, hbMerchant;
-	public static Block wakfu, wakfuFull;
+			sufokiaGround, palisade, pillar, wood, hbstand, slabGrass,
+			slabDirt, fence, polisher, havenGemWorkbench, invisiblewall,
+			havenbag, hbChest, hbLock, hbBridge, hbVisitors, hbBarrier,
+			hbCraft, hbCraft2, hbGarden, hbDeco, hbDeco2, hbMerchant;
+	public static Block wakfu, wakfuFull, wakfuSlab;
 
 	public static void registerBlocks() {
 		// Basic blocks
@@ -66,7 +68,8 @@ public class WBlocks {
 		GameRegistry.registerBlock(pillar = (new BlockGeneric(Material.wood).setBlockTextureName(ForgeDirection.UP, "pillarTop").setBlockTextureName("pillarSide").setBlockName("Pillar").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockPillar");
 		GameRegistry.registerBlock(wood = (new BlockYRotation(Material.wood).setBlockTextureName("wood").setBlockName("Wood").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockWood");
 		GameRegistry.registerBlock(hbstand = (new BlockYRotation(Material.wood).setBlockTextureName("hbstand").setBlockName("HBStand").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBStand");
-		GameRegistry.registerBlock(grass = (new BlockGrass()), ItemBlockGrass.class, "blockGrass");
+		GameRegistry.registerBlock(slabGrass = (new BlockSlabGrass()), ItemBlockSlab.class, "blockGrass");
+		GameRegistry.registerBlock(slabDirt = (new BlockSlabDirt()), ItemBlockSlab.class, "blockSlabDirt");
 		GameRegistry.registerBlock(fence = (new BlockFence1(WInfo.MODID.toLowerCase() + ":palisade1", Material.wood).setBlockName("Fence1")), "blockFence");
 		GameRegistry.registerBlock(invisiblewall = (new BlockInvisibleWall()), "blockInvisibleWall");
 		GameRegistry.registerBlock(havenbag = (new BlockHavenBag()), "blockHavenBag");
@@ -83,6 +86,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(hbBarrier = (new BlockHavenBagBarrier()), "blockHavenBagBarrier");
 		GameRegistry.registerBlock(wakfu = (new BlockWakfu()), "blockWakfu");
 		GameRegistry.registerBlock(wakfuFull = (new BlockGeneric(Material.wood).setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("wakfuGreen")), "blockWakfuFull");
+		GameRegistry.registerBlock(wakfuSlab = (new BlockSlabWakfu()), ItemBlockSlab.class, "blockWakfuSlab");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(WInfo.MODID.toLowerCase() + ":polisher")), "BlockPolisher");

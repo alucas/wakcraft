@@ -1,92 +1,68 @@
 package heero.wakcraft.block;
 
-import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 
 import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.common.FMLLog;
 
-public abstract class BlockSlab extends Block {
-	protected String[] iconNames;
+public abstract class BlockSlab extends BlockGeneric {
+	// Opaque version of the slab block
+	public Block blockOpaque;
 
-	protected IIcon[] blockIconTop = new IIcon[4];
-	protected IIcon[] blockIconSide = new IIcon[4];
-	protected IIcon[] blockIconDemiSide = new IIcon[4];
-	protected IIcon[] blockIconBottom = new IIcon[4];
-
-	public BlockSlab(Material material) {
+	public BlockSlab(Material material, Block blockOpaque) {
 		super(material);
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
-	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-		for (int i = 0; i < iconNames.length; i++) {
-			list.add(new ItemStack(item, 1, i));
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister registerer) {
-		for (int i = 0; i < iconNames.length; i++) {
-			blockIconTop[i] = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Top");
-			blockIconSide[i] = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Side");
-			blockIconDemiSide[i] = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + iconNames[i] + "DemiSide");
-			blockIconBottom[i] = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + iconNames[i] + "Bottom");
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata) {
-		int type = metadata % iconNames.length;
-
-		if (side == 1) {
-			return blockIconTop[type];
-		} else if (side == 0) {
-			return blockIconBottom[type];
+		if (!blockOpaque.isOpaqueCube()) {
+			FMLLog.warning("The slab block " + this.getClass().getName() + " use a non opaque block : " + blockOpaque.getLocalizedName());
 		}
 
-		if (metadata == 0) {
-			return blockIconDemiSide[type];
-		}
-
-		return blockIconSide[type];
+		this.blockOpaque = blockOpaque;
 	}
 
+	/**
+	 * Updates the blocks bounds based on its current state. Args: world, x, y,
+	 * z
+	 */
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y,
-			int z) {
-		int state = (world.getBlockMetadata(x, y, z) >> 2) % 3;
-		if (state == 1) {
-			setBlockBounds(0, 0.5f, 0, 1, 1, 1);
-		} else if (state == 2) {
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+		int metadata = world.getBlockMetadata(x, y, z);
+		int type = metadata >> 2;
+		int pos = metadata & 0b11;
+
+		switch (type) {
+		case 0:
+			setBlockBounds(0, pos * 0.25F, 0, 1, pos * 0.25F + 0.25F, 1);
+			break;
+
+		case 1:
+			setBlockBounds(0, pos * 0.25F, 0, 1, pos * 0.25F + 0.5F, 1);
+			break;
+
+		case 2:
+			setBlockBounds(0, pos * 0.25F, 0, 1, pos * 0.25F + 0.75F, 1);
+			break;
+
+		default:
+			// Avoid to create a full block with isOpaqueCube() == false
 			setBlockBounds(0, 0, 0, 1, 1, 1);
-		} else {
-			setBlockBounds(0, 0, 0, 1, 0.5f, 1);
 		}
 	}
 
+	/**
+	 * Sets the block's bounds for rendering it as an item
+	 */
 	@Override
 	public void setBlockBoundsForItemRender() {
-		setBlockBounds(0, 0, 0, 1, 0.5f, 1);
+		setBlockBounds(0, 0, 0, 1, 0.25f, 1);
 	}
 
 	/**
