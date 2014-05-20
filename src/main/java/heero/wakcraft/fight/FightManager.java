@@ -4,9 +4,11 @@ import heero.wakcraft.entity.property.FightProperty;
 import heero.wakcraft.event.FightEvent;
 import heero.wakcraft.event.FightEvent.Type;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,6 +18,8 @@ import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class FightManager {
+	protected Map<Integer, List<List<EntityLivingBase>>> fights = new HashMap<Integer, List<List<EntityLivingBase>>>();
+
 	@SubscribeEvent
 	public void onAttackEntityEvent(AttackEntityEvent event) {
 		if (event.entityPlayer.worldObj.isRemote) {
@@ -38,7 +42,11 @@ public class FightManager {
 		}
 
 		if (!properties.isFighting() && !targetProperties.isFighting()) {
-			InitFight(event.entityPlayer, event.target);
+			if (event.target instanceof EntityLivingBase) {
+				InitFight(event.entityPlayer, (EntityLivingBase) event.target);
+			} else {
+				FMLLog.warning("Trying to create a fight with an inanimate entity : %s", event.target.getClass().getName());
+			}
 
 			event.setCanceled(true);
 			return;
@@ -51,7 +59,6 @@ public class FightManager {
 	}
 
 	@SubscribeEvent
-	@SuppressWarnings("unchecked")
 	public void onLivingDeathEvent(LivingDeathEvent event) {
 		if (event.entityLiving.worldObj.isRemote) {
 			return;
@@ -63,25 +70,17 @@ public class FightManager {
 			return;
 		}
 
-		List<Entity> entities = (List<Entity>) event.entityLiving.worldObj.getLoadedEntityList();
-		for (Entity entity : entities) {
-			if (entity instanceof EntityLivingBase) {
-				FightProperty entityProperties = (FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER);
-				if (entityProperties == null) {
-					FMLLog.warning("Error while loading the Fight properties of player : %s", entity.getClass().getName());
-					return;
-				}
-
-				if (entityProperties.getFightId() != properties.getFightId()) {
-					return;
-				}
-
-				entityProperties.resetFightId();
-			}
+		if (!properties.isFighting()) {
+			return;
 		}
+
+		int fightId = properties.getFightId();
+		properties.resetFightId();
+
+		updateFight(fightId);
 	}
 
-	protected void InitFight(EntityPlayer assailant, Entity target) {
+	protected void InitFight(EntityPlayer assailant, EntityLivingBase target) {
 		FightProperty assailantProperties = (FightProperty) assailant.getExtendedProperties(FightProperty.IDENTIFIER);
 		if (assailantProperties == null) {
 			FMLLog.warning("Error while loading the Fight properties of player : %s", assailant.getDisplayName());
@@ -99,6 +98,75 @@ public class FightManager {
 		assailantProperties.setFightId(fightId);
 		targetProperties.setFightId(fightId);
 
-		MinecraftForge.EVENT_BUS.post(new FightEvent(Type.START, fightId));
+		ArrayList<EntityLivingBase> fighters1 = new ArrayList<EntityLivingBase>();
+		ArrayList<EntityLivingBase> fighters2 = new ArrayList<EntityLivingBase>();
+		fighters1.add(assailant);
+		fighters2.add(target);
+
+		ArrayList<List<EntityLivingBase>> fighters = new ArrayList<List<EntityLivingBase>>();
+		fighters.add(fighters1);
+		fighters.add(fighters2);
+
+		fights.put(fightId, fighters);
+
+		MinecraftForge.EVENT_BUS.post(new FightEvent(Type.START, fightId, fighters));
+	}
+
+	private void updateFight(int fightId) {
+		List<List<EntityLivingBase>> fighters = fights.get(fightId);
+		if (fighters == null) {
+			FMLLog.warning("Trying to update a fight who does not exist : %d", fightId);
+			return;
+		}
+
+		for (int teamId = 0; teamId < 2; teamId++) {
+			List<EntityLivingBase> teamFighters = fighters.get(teamId);
+
+			boolean living = false;
+			for (EntityLivingBase entity : teamFighters) {
+					FightProperty entityProperties = (FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER);
+					if (entityProperties == null) {
+						FMLLog.warning("Error while loading the Fight properties of player : %s", entity.getClass().getName());
+						return;
+					}
+
+					if (entityProperties.getFightId() != fightId) {
+						continue;
+					}
+
+					living = true;
+			}
+
+			if (!living) {
+				stopFight(fightId);
+				return;
+			}
+		}
+	}
+
+	private void stopFight(int fightId) {
+		List<List<EntityLivingBase>> fighters = fights.get(fightId);
+		if (fighters == null) {
+			FMLLog.warning("Trying to stop a fight who does not exist : %d", fightId);
+			return;
+		}
+
+		MinecraftForge.EVENT_BUS.post(new FightEvent(Type.STOP, fightId, fighters));
+
+		for (int teamId = 0; teamId < 2; teamId++) {
+			List<EntityLivingBase> teamFighters = fighters.get(teamId);
+
+			for (EntityLivingBase entity : teamFighters) {
+					FightProperty entityProperties = (FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER);
+					if (entityProperties == null) {
+						FMLLog.warning("Error while loading the Fight properties of player : %s", entity.getClass().getName());
+						return;
+					}
+
+					entityProperties.resetFightId();
+			}
+		}
+
+		fights.remove(fightId);
 	}
 }
