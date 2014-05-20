@@ -8,6 +8,7 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -37,12 +38,7 @@ public class FightManager {
 		}
 
 		if (!properties.isFighting() && !targetProperties.isFighting()) {
-			int fightId = event.entityPlayer.worldObj.getUniqueDataId("fightId");
-
-			properties.setFightId(fightId);
-			targetProperties.setFightId(fightId);
-
-			MinecraftForge.EVENT_BUS.post(new FightEvent(Type.START, fightId));
+			InitFight(event.entityPlayer, event.target);
 
 			event.setCanceled(true);
 			return;
@@ -83,5 +79,26 @@ public class FightManager {
 				entityProperties.resetFightId();
 			}
 		}
+	}
+
+	protected void InitFight(EntityPlayer assailant, Entity target) {
+		FightProperty assailantProperties = (FightProperty) assailant.getExtendedProperties(FightProperty.IDENTIFIER);
+		if (assailantProperties == null) {
+			FMLLog.warning("Error while loading the Fight properties of player : %s", assailant.getDisplayName());
+			return;
+		}
+
+		FightProperty targetProperties = (FightProperty) target.getExtendedProperties(FightProperty.IDENTIFIER);
+		if (targetProperties == null) {
+			FMLLog.warning("Error while loading the Fight properties of : %s", target.getClass().getName());
+			return;
+		}
+
+		int fightId = assailant.worldObj.getUniqueDataId("fightId");
+
+		assailantProperties.setFightId(fightId);
+		targetProperties.setFightId(fightId);
+
+		MinecraftForge.EVENT_BUS.post(new FightEvent(Type.START, fightId));
 	}
 }
