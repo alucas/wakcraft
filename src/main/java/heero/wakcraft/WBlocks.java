@@ -49,7 +49,8 @@ public class WBlocks {
 			sufokiaGround, palisade, pillar, wood, hbstand, slabGrass,
 			slabDirt, fence, polisher, havenGemWorkbench, invisiblewall,
 			havenbag, hbChest, hbLock, hbBridge, hbVisitors, hbBarrier,
-			hbCraft, hbCraft2, hbGarden, hbDeco, hbDeco2, hbMerchant;
+			hbCraft, hbCraft2, hbGarden, hbDeco, hbDeco2, hbMerchant,
+			fightMovement, fightDirection;
 	public static Block wakfu, wakfuFull, wakfuSlab;
 
 	public static void registerBlocks() {
@@ -87,6 +88,8 @@ public class WBlocks {
 		GameRegistry.registerBlock(wakfu = (new BlockWakfu()), "blockWakfu");
 		GameRegistry.registerBlock(wakfuFull = (new BlockGeneric(Material.wood).setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("wakfuGreen")), "blockWakfuFull");
 		GameRegistry.registerBlock(wakfuSlab = (new BlockSlabWakfu()), ItemBlockSlab.class, "blockWakfuSlab");
+		GameRegistry.registerBlock(fightMovement = (new BlockGeneric(Material.ground).setBlockTextureName("movement").setBlockName("FightMovement")), "blockFightMovement");
+		GameRegistry.registerBlock(fightDirection = (new BlockGeneric(Material.ground).setBlockTextureName("direction").setBlockName("FightDirection")), "blockFightDirection");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(WInfo.MODID.toLowerCase() + ":polisher")), "BlockPolisher");

@@ -12,6 +12,7 @@ import heero.wakcraft.client.renderer.entity.RenderTextPopup;
 import heero.wakcraft.client.renderer.tileentity.RenderDragoexpress;
 import heero.wakcraft.client.renderer.tileentity.RenderPhoenix;
 import heero.wakcraft.client.renderer.tileentity.RendererHavenBagChest;
+import heero.wakcraft.client.renderer.world.FightRenderer;
 import heero.wakcraft.client.setting.KeyBindings;
 import heero.wakcraft.entity.misc.EntityTextPopup;
 import heero.wakcraft.entity.monster.BlackGobbly;
@@ -57,6 +58,7 @@ public class CombinedClientProxy extends CommonProxy{
 		super.registerEvents();
 
 		MinecraftForge.EVENT_BUS.register(new GUIEventHandler());
+		MinecraftForge.EVENT_BUS.register(new FightRenderer());
 	}
 
 	@Override
