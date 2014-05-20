@@ -1,7 +1,7 @@
 package heero.wakcraft.profession;
 
 import heero.wakcraft.block.ILevelBlock;
-import heero.wakcraft.entity.property.XpProfessionProperty;
+import heero.wakcraft.entity.property.ProfessionProperty;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -73,8 +73,8 @@ public class ProfessionManager {
 
 	public static void setXp(EntityPlayer player, PROFESSION profession,
 			int xpValue) {
-		XpProfessionProperty properties = (XpProfessionProperty) player
-				.getExtendedProperties(XpProfessionProperty.IDENTIFIER);
+		ProfessionProperty properties = (ProfessionProperty) player
+				.getExtendedProperties(ProfessionProperty.IDENTIFIER);
 
 		if (properties != null) {
 			properties.setXp(profession, xpValue);
@@ -82,8 +82,8 @@ public class ProfessionManager {
 	}
 
 	public static int getXp(EntityPlayer player, PROFESSION profession) {
-		XpProfessionProperty properties = (XpProfessionProperty) player
-				.getExtendedProperties(XpProfessionProperty.IDENTIFIER);
+		ProfessionProperty properties = (ProfessionProperty) player
+				.getExtendedProperties(ProfessionProperty.IDENTIFIER);
 
 		if (properties != null) {
 			return properties.getXp(profession);

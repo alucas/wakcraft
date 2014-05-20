@@ -12,7 +12,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-public class XpProfessionProperty implements IExtendedEntityProperties {
+public class ProfessionProperty implements IExtendedEntityProperties {
 	public static final String IDENTIFIER = "XpCrafting";
 
 	private static final String TAG_ID = "name";

@@ -1,15 +1,16 @@
 package heero.wakcraft.proxy;
 
-import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WBlocks;
 import heero.wakcraft.WConfig;
 import heero.wakcraft.WItems;
+import heero.wakcraft.Wakcraft;
 import heero.wakcraft.entity.misc.EntityTextPopup;
 import heero.wakcraft.entity.monster.BlackGobbly;
 import heero.wakcraft.entity.monster.Gobball;
 import heero.wakcraft.entity.monster.GobballWC;
 import heero.wakcraft.entity.monster.Gobbette;
 import heero.wakcraft.entity.monster.WhiteGobbly;
+import heero.wakcraft.eventhandler.EntityEventHandler;
 import heero.wakcraft.eventhandler.PlayerEventHandler;
 import heero.wakcraft.eventhandler.WorldEventHandler;
 import heero.wakcraft.network.GuiHandler;
@@ -38,6 +39,7 @@ public class CommonProxy {
 
 	public void registerEvents() {
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
+		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 
 		FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
