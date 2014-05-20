@@ -13,6 +13,7 @@ import heero.wakcraft.entity.monster.WhiteGobbly;
 import heero.wakcraft.eventhandler.EntityEventHandler;
 import heero.wakcraft.eventhandler.PlayerEventHandler;
 import heero.wakcraft.eventhandler.WorldEventHandler;
+import heero.wakcraft.fight.FightManager;
 import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
@@ -41,6 +42,7 @@ public class CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
+		MinecraftForge.EVENT_BUS.register(new FightManager());
 
 		FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
 	}

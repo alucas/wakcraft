@@ -12,6 +12,7 @@ public class FightProperty implements IExtendedEntityProperties {
 
 	@Override
 	public void init(Entity entity, World world) {
+		fightId = -1;
 	}
 
 	@Override
@@ -20,5 +21,21 @@ public class FightProperty implements IExtendedEntityProperties {
 
 	@Override
 	public void loadNBTData(NBTTagCompound tagRoot) {
+	}
+
+	public int getFightId() {
+		return fightId;
+	}
+
+	public void setFightId(int fightId) {
+		this.fightId = fightId;
+	}
+
+	public void resetFightId() {
+		this.fightId = -1;
+	}
+
+	public boolean isFighting() {
+		return fightId != -1;
 	}
 }
