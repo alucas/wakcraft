@@ -28,7 +28,15 @@ public class FightManager {
 	@SubscribeEvent
 	public void onAttackEntityEvent(AttackEntityEvent event) {
 		if (event.entityPlayer.worldObj.isRemote) {
-			event.setCanceled(true);
+			return;
+		}
+
+		if (!(event.target instanceof EntityLivingBase)) {
+			return;
+		}
+
+		EntityLivingBase target = (EntityLivingBase) event.target;
+		if (!target.isEntityAlive()) {
 			return;
 		}
 
@@ -39,19 +47,15 @@ public class FightManager {
 			return;
 		}
 
-		FightProperty targetProperties = (FightProperty) event.target.getExtendedProperties(FightProperty.IDENTIFIER);
+		FightProperty targetProperties = (FightProperty) target.getExtendedProperties(FightProperty.IDENTIFIER);
 		if (targetProperties == null) {
-			FMLLog.warning("Error while loading the Fight properties of : %s", event.target.getClass().getName());
+			FMLLog.warning("Error while loading the Fight properties of : %s", target.getClass().getName());
 			event.setCanceled(true);
 			return;
 		}
 
 		if (!properties.isFighting() && !targetProperties.isFighting()) {
-			if (event.entityPlayer instanceof EntityPlayerMP && event.target instanceof EntityLivingBase) {
-				InitFight((EntityPlayerMP) event.entityPlayer, (EntityLivingBase) event.target);
-			} else {
-				FMLLog.warning("Trying to create a fight with an inanimate entity : %s", event.target.getClass().getName());
-			}
+			initFight((EntityPlayerMP) event.entityPlayer, target);
 
 			event.setCanceled(true);
 			return;
@@ -80,12 +84,11 @@ public class FightManager {
 		}
 
 		int fightId = properties.getFightId();
-		properties.resetFightId();
 
 		updateFight(event.entity.worldObj, fightId);
 	}
 
-	protected void InitFight(EntityPlayerMP assailant, EntityLivingBase target) {
+	protected void initFight(EntityPlayerMP assailant, EntityLivingBase target) {
 		FightProperty assailantProperties = (FightProperty) assailant.getExtendedProperties(FightProperty.IDENTIFIER);
 		if (assailantProperties == null) {
 			FMLLog.warning("Error while loading the Fight properties of player : %s", assailant.getDisplayName());
@@ -135,13 +138,7 @@ public class FightManager {
 					return;
 				}
 
-				FightProperty entityProperties = (FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER);
-				if (entityProperties == null) {
-					FMLLog.warning("Error while loading the Fight properties of player : %s", entity.getClass().getName());
-					return;
-				}
-
-				if (entityProperties.getFightId() != fightId) {
+				if (!((EntityLivingBase) entity).isEntityAlive()) {
 					continue;
 				}
 
