@@ -4,6 +4,7 @@ import heero.wakcraft.havenbag.HavenBagsManager;
 import heero.wakcraft.network.PacketPipeline;
 import heero.wakcraft.network.packet.PacketCloseWindow;
 import heero.wakcraft.network.packet.PacketExtendedEntityProperty;
+import heero.wakcraft.network.packet.PacketFight;
 import heero.wakcraft.network.packet.PacketHavenBagProperties;
 import heero.wakcraft.network.packet.PacketHavenBagTeleportation;
 import heero.wakcraft.network.packet.PacketHavenBagVisitors;
@@ -53,6 +54,7 @@ public class Wakcraft {
 		packetPipeline.registerPacket(PacketHavenBagVisitors.class);
 		packetPipeline.registerPacket(PacketExtendedEntityProperty.class);
 		packetPipeline.registerPacket(PacketHavenBagProperties.class);
+		packetPipeline.registerPacket(PacketFight.class);
 		packetPipeline.postInitialise();
 	}
 
