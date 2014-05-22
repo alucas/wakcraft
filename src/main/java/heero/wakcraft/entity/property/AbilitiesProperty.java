@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-public class AbilitiesProperty implements IExtendedEntityProperties {
+public class AbilitiesProperty implements IExtendedEntityProperties, ISynchProperties {
 	public static final String IDENTIFIER = "abilities";
 
 	protected static String TAG_ABILITIES = "abilities";
@@ -115,5 +115,36 @@ public class AbilitiesProperty implements IExtendedEntityProperties {
 
 	public void set(String key, int value) {
 		abilities.put(key, value);
+	}
+
+	@Override
+	public NBTTagCompound getClientPacket() {
+		NBTTagCompound tagRoot = new NBTTagCompound();
+		NBTTagList tagAbilities = new NBTTagList();
+
+		for (String key : abilities.keySet()) {
+			NBTTagCompound tag = new NBTTagCompound();
+			tag.setString(TAG_NAME, key);
+			tag.setInteger(TAG_VALUE, abilities.get(key));
+
+			tagAbilities.appendTag(tag);
+		}
+
+		tagRoot.setTag(TAG_ABILITIES, tagAbilities);
+
+		return tagRoot;
+	}
+
+	@Override
+	public void onClientPacket(NBTTagCompound tagRoot) {
+		NBTTagList tagAbilities = tagRoot.getTagList(TAG_ABILITIES, 10);
+
+		for (int i = 0; i < tagAbilities.tagCount(); i++) {
+			NBTTagCompound tag = tagAbilities.getCompoundTagAt(i);
+			String key = tag.getString(TAG_NAME);
+			Integer value = tag.getInteger(TAG_VALUE);
+
+			abilities.put(key, value);
+		}
 	}
 }
