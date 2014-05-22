@@ -1,5 +1,6 @@
 package heero.wakcraft.eventhandler;
 
+import heero.wakcraft.entity.property.AbilitiesProperty;
 import heero.wakcraft.entity.property.FightProperty;
 import heero.wakcraft.entity.property.HavenBagProperty;
 import heero.wakcraft.entity.property.ProfessionProperty;
@@ -19,6 +20,7 @@ public class EntityEventHandler {
 			EntityPlayer player = (EntityPlayer) event.entity;
 			player.registerExtendedProperties(ProfessionProperty.IDENTIFIER, new ProfessionProperty());
 			player.registerExtendedProperties(HavenBagProperty.IDENTIFIER, new HavenBagProperty());
+			player.registerExtendedProperties(AbilitiesProperty.IDENTIFIER, new AbilitiesProperty());
 		}
 	}
 }
