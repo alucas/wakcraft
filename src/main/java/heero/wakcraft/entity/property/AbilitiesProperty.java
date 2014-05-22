@@ -16,70 +16,88 @@ public class AbilitiesProperty implements IExtendedEntityProperties, ISynchPrope
 	protected static String TAG_NAME = "Name";
 	protected static String TAG_VALUE = "Value";
 
-	// Principal
-	public static String HEALTH = "Health";
-	public static String ACTION = "Action";
-	public static String MOVEMENT = "Movement";
-	public static String WAKFU = "Wakfu";
-	public static String STRENGTH = "Strength";
-	public static String INTELLIGENCE = "Intelligence";
-	public static String AGILITY = "Agility";
-	public static String CHANCE = "Chance";
+	public enum ABILITY {
+		// Principal
+		HEALTH("Health"),
+		ACTION("Action"),
+		MOVEMENT("Movement"),
+		WAKFU("Wakfu"),
+		STRENGTH("Strength"),
+		INTELLIGENCE("Intelligence"),
+		AGILITY("Agility"),
+		CHANCE("Chance"),
 
-	// Batle
-	public static String INITIATIVE = "Initiative";
-	public static String HEAL = "Heal";
-	public static String CRITICAL = "Critical";
-	public static String critical_damage;
-	public static String critical_failure;
-	public static String BACKSTAB = "Backstab";
-	public static String BACKSTAB_RESISTANCE = "Backstab_Resistance";
-	public static String DODGE = "Dodge";
-	public static String LOCK = "Lock";
-	public static String BLOCK = "Block";
-	public static String WILLPOWER = "Willpower";
-	public static String RANGE = "Range";
+		// Battle
+		INITIATIVE("Initiative"),
+		HEAL("Heal"),
+		CRITICAL("Critical"),
+		CRITICAL_DAMAGE("Critical_Damage"),
+		CRITICAL_FAILURE("Critical_Failure"),
+		BACKSTAB("Backstab"),
+		BACKSTAB_RESISTANCE("Backstab_Resistance"),
+		DODGE("Dodge"),
+		LOCK("Lock"),
+		BLOCK("Block"),
+		WILLPOWER("Willpower"),
+		RANGE("Range"),
 
-	// Secondary
-	public static String CONTROL = "Control";
-	/** Increases the damages of the creatures and mechanisms you control */
-	public static String CMC_DAMAGE = "CMC_Damage";
-	public static String WISDOM = "Wisdom";
-	public static String PROSPECTION = "Prospection";
-	public static String PERCEPTION = "Perception";
-	public static String KIT = "Kit";
+		// Secondary
+		CONTROL("Control"),
+		/** Increases the damages of the creatures and mechanisms you control */
+		CMC_DAMAGE("CMC_Damage"),
+		WISDOM("Wisdom"),
+		PROSPECTION("Prospection"),
+		PERCEPTION("Perception"),
+		KIT("Kit");
 
-	protected String[] abilitiesBaseKeys = new String[] { STRENGTH,
-			INTELLIGENCE, AGILITY, CHANCE, BLOCK, RANGE, ACTION, MOVEMENT,
-			CRITICAL, KIT, LOCK, DODGE, INITIATIVE, HEALTH };
+		protected String name;
+
+		private ABILITY(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
+	}
+
+	protected ABILITY[] abilitiesPersistKeys = new ABILITY[] { ABILITY.STRENGTH,
+			ABILITY.INTELLIGENCE, ABILITY.AGILITY, ABILITY.CHANCE,
+			ABILITY.BLOCK, ABILITY.RANGE, ABILITY.ACTION, ABILITY.MOVEMENT,
+			ABILITY.CRITICAL, ABILITY.KIT, ABILITY.LOCK, ABILITY.DODGE,
+			ABILITY.INITIATIVE, ABILITY.HEALTH };
 
 	/** Persisted abilities */
-	protected Map<String, Integer> abilitiesBase = new HashMap<String, Integer>();
+	protected Map<ABILITY, Integer> abilitiesPersist = new HashMap<ABILITY, Integer>();
 	/** All abilities */
-	protected Map<String, Integer> abilities = new HashMap<String, Integer>();
+	protected Map<ABILITY, Integer> abilities = new HashMap<ABILITY, Integer>();
 
 	@Override
 	public void init(Entity entity, World world) {
-		abilitiesBase.clear();
+		abilitiesPersist.clear();
 
-		abilitiesBase.put(ACTION, 6);
-		abilitiesBase.put(MOVEMENT, 3);
-		abilitiesBase.put(HEALTH, 49);
-		abilitiesBase.put(CRITICAL, 3);
+		for (ABILITY key : abilitiesPersistKeys) {
+			abilitiesPersist.put(key, 0);
+		}
 
-		abilities.put(WAKFU, 6);
-		abilities.put(CONTROL, 1);
+		abilitiesPersist.put(ABILITY.ACTION, 6);
+		abilitiesPersist.put(ABILITY.MOVEMENT, 3);
+		abilitiesPersist.put(ABILITY.HEALTH, 49);
+		abilitiesPersist.put(ABILITY.CRITICAL, 3);
+
+		abilities.put(ABILITY.WAKFU, 6);
+		abilities.put(ABILITY.CONTROL, 1);
 	}
 
 	@Override
 	public void saveNBTData(NBTTagCompound tagRoot) {
 		NBTTagList tagAbilities = new NBTTagList();
 
-		for (String key : abilitiesBaseKeys) {
+		for (ABILITY key : abilitiesPersistKeys) {
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setString(TAG_NAME, key);
-			tag.setInteger(TAG_VALUE, abilitiesBase.get(key));
-
+			tag.setString(TAG_NAME, key.name);
+			tag.setInteger(TAG_VALUE, abilitiesPersist.get(key));
 			tagAbilities.appendTag(tag);
 		}
 
@@ -92,10 +110,10 @@ public class AbilitiesProperty implements IExtendedEntityProperties, ISynchPrope
 
 		for (int i = 0; i < tagAbilities.tagCount(); i++) {
 			NBTTagCompound tag = tagAbilities.getCompoundTagAt(i);
-			String key = tag.getString(TAG_NAME);
+			ABILITY key = ABILITY.valueOf(tag.getString(TAG_NAME));
 			Integer value = tag.getInteger(TAG_VALUE);
 
-			abilitiesBase.put(key, value);
+			abilitiesPersist.put(key, value);
 		}
 	}
 
@@ -105,7 +123,7 @@ public class AbilitiesProperty implements IExtendedEntityProperties, ISynchPrope
 			return value;
 		}
 
-		value = abilitiesBase.get(key);
+		value = abilitiesPersist.get(key);
 		if (value != null) {
 			return value;
 		}
@@ -113,7 +131,7 @@ public class AbilitiesProperty implements IExtendedEntityProperties, ISynchPrope
 		return 0;
 	}
 
-	public void set(String key, int value) {
+	public void set(ABILITY key, int value) {
 		abilities.put(key, value);
 	}
 
@@ -122,9 +140,9 @@ public class AbilitiesProperty implements IExtendedEntityProperties, ISynchPrope
 		NBTTagCompound tagRoot = new NBTTagCompound();
 		NBTTagList tagAbilities = new NBTTagList();
 
-		for (String key : abilities.keySet()) {
+		for (ABILITY key : abilities.keySet()) {
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setString(TAG_NAME, key);
+			tag.setString(TAG_NAME, key.name);
 			tag.setInteger(TAG_VALUE, abilities.get(key));
 
 			tagAbilities.appendTag(tag);
@@ -141,7 +159,7 @@ public class AbilitiesProperty implements IExtendedEntityProperties, ISynchPrope
 
 		for (int i = 0; i < tagAbilities.tagCount(); i++) {
 			NBTTagCompound tag = tagAbilities.getCompoundTagAt(i);
-			String key = tag.getString(TAG_NAME);
+			ABILITY key = ABILITY.valueOf(tag.getString(TAG_NAME));
 			Integer value = tag.getInteger(TAG_VALUE);
 
 			abilities.put(key, value);
