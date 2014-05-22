@@ -1,12 +1,14 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.WInfo;
+import heero.wakcraft.entity.property.AbilitiesProperty;
 import heero.wakcraft.entity.property.AbilitiesProperty.ABILITY;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -18,12 +20,15 @@ public class GUIAbilities extends GuiScreen {
 	protected static final int BUTTON_DOWN = 0;
 	protected static final int BUTTON_UP = 1;
 
+	protected static int NB_LINE = 6;
+
 	protected int guiWidth = 176;
 	protected int guiHeight = 166;
 	protected int guiLeft;
 	protected int guiTop;
 
 	protected EntityPlayer player;
+	protected AbilitiesProperty abilitiesManager;
 	protected int scroll;
 
 	public GUIAbilities(EntityPlayer player) {
@@ -31,6 +36,11 @@ public class GUIAbilities extends GuiScreen {
 
 		this.player = player;
 		this.scroll = 0;
+		this.abilitiesManager = (AbilitiesProperty) player.getExtendedProperties(AbilitiesProperty.IDENTIFIER);
+
+		if (this.abilitiesManager == null) {
+			FMLLog.warning("Error while loading the player's abilities (%s)", player.getDisplayName());
+		}
 	}
 
 	/**
@@ -43,8 +53,19 @@ public class GUIAbilities extends GuiScreen {
 		guiTop = (height - guiHeight) / 2;
 
 		buttonList.clear();
-		buttonList.add(new GuiButton(BUTTON_DOWN, guiLeft + 150, guiTop + 115, 20, 20, "-"));
-		buttonList.add(new GuiButton(BUTTON_UP, guiLeft + 150, guiTop + 140, 20, 20, "+"));
+		buttonList.add(new GuiButton(BUTTON_DOWN, guiLeft + (guiWidth / 2) - 25, guiTop + 140, 20, 20, "<"));
+		buttonList.add(new GuiButton(BUTTON_UP, guiLeft + (guiWidth / 2) + 5, guiTop + 140, 20, 20, ">"));
+
+		for (int i = 0; i < NB_LINE; i++) {
+			GuiButton buttonRemove = new GuiButton(100 + i * 2 + 0, guiLeft + 110, guiTop + 20 + i * 20, 20, 20, "-");
+			GuiButton buttonAdd = new GuiButton(100 + i * 2 + 1, guiLeft + 150, guiTop + 20 + i * 20, 20, 20, "+");
+
+			buttonRemove.enabled = false;
+			buttonAdd.enabled = false;
+
+			buttonList.add(buttonRemove);
+			buttonList.add(buttonAdd);
+		}
 
 		super.initGui();
 	}
@@ -61,8 +82,12 @@ public class GUIAbilities extends GuiScreen {
 
 		// Profession levels
 		ABILITY[] abilities = ABILITY.values();
-		for (int i = scroll; i < scroll + 7 && i >= 0 && i < abilities.length; i++) {
+		for (int i = scroll; i < scroll + NB_LINE && i >= 0 && i < abilities.length; i++) {
 			drawString(fontRendererObj, I18n.format("abilities." + abilities[i], new Object[0]), guiLeft + 5, guiTop + 25 + (i - scroll) * 20, 0xFFFFFF);
+
+			if (abilitiesManager != null) {
+				drawCenteredString(fontRendererObj, Integer.toString(abilitiesManager.get(abilities[i])), guiLeft + 140, guiTop + 25 + (i - scroll) * 20, 0xFFFFFF);
+			}
 		}
 
 		// Titles
@@ -80,7 +105,7 @@ public class GUIAbilities extends GuiScreen {
 
 		case BUTTON_UP:
 			scroll++;
-			if (scroll >= ABILITY.values().length) scroll = ABILITY.values().length - 1;
+			if (scroll > ABILITY.values().length - NB_LINE) scroll = ABILITY.values().length - NB_LINE;
 			break;
 
 		default:

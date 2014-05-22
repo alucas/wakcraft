@@ -117,7 +117,7 @@ public class AbilitiesProperty implements IExtendedEntityProperties, ISynchPrope
 		}
 	}
 
-	public int get(String key) {
+	public int get(ABILITY key) {
 		Integer value = abilities.get(key);
 		if (value != null) {
 			return value;
