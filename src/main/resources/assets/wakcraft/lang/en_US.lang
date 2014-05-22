@@ -131,8 +131,6 @@ message.cantOpenHavenBagHere=You can't open your Haven Bag here
 message.cantOpenHavenBagInAir=You must be on ground to enter in your haven bag
 message.phoenixRegister=Your spawn position has been updated
 
-profession.crafting=Crafting
-profession.harvesting=Harvesting
 profession.herbalist=Herbalist
 profession.lumberjack=Lumberjack
 profession.miner=Miner
@@ -151,6 +149,37 @@ profession.armorer=Armorer
 profession.jeweler=Jeweler
 profession.kama_minter=Kama Minter
 
+abilities.Health=Health
+abilities.Action=Action
+abilities.Movement=Movement
+abilities.Wakfu=Wakfu
+abilities.Strength=Strength
+abilities.Intelligence=Intelligence
+abilities.Agility=Agility
+abilities.Chance=Chance
+abilities.Initiative=Initiative
+abilities.Heal=Heal
+abilities.Critical=Critical Hits
+abilities.Critical_Damage=Critical Damages
+abilities.Critical_Failure=Critical Failures
+abilities.Backstab=Backstab
+abilities.Backstab_Resistance=Backstab Resistance
+abilities.Dodge=Dodge
+abilities.Lock=Lock
+abilities.Block=Block
+abilities.Willpower=Willpower
+abilities.Range=Range
+abilities.Control=Control
+abilities.CMC_Damage=CMC Damages
+abilities.Wisdom=Wisdom
+abilities.Prospection=Prospection
+abilities.Perception=Perception
+abilities.Kit=Kit Skill
+
 key.havenbag=Haven Bag
 key.guild=Guild
 key.all=All
+
+title.abilities=Abilities
+title.crafting=Crafting
+title.harvesting=Harvesting

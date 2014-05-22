@@ -66,7 +66,7 @@ public class GUIAbilities extends GuiScreen {
 		}
 
 		// Titles
-		drawString(fontRendererObj, I18n.format("abilities.abilities", new Object[0]), guiLeft + 5, guiTop + 5, 0xFFFFFF);
+		drawString(fontRendererObj, I18n.format("title.abilities", new Object[0]), guiLeft + 5, guiTop + 5, 0xFFFFFF);
 
 		super.drawScreen(mouseX, mouseY, renderPartialTicks);
 	}

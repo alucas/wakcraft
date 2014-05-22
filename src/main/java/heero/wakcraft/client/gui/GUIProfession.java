@@ -109,8 +109,8 @@ public class GUIProfession extends GuiScreen {
 		}
 
 		// Titles
-		drawString(fontRendererObj, I18n.format("profession.crafting", new Object[0]), guiLeft + 5, guiTop + 5, 0xFFFFFF);
-		drawString(fontRendererObj, I18n.format("profession.harvesting", new Object[0]), guiLeft + 5, guiTop + 55, 0xFFFFFF);
+		drawString(fontRendererObj, I18n.format("title.crafting", new Object[0]), guiLeft + 5, guiTop + 5, 0xFFFFFF);
+		drawString(fontRendererObj, I18n.format("title.harvesting", new Object[0]), guiLeft + 5, guiTop + 55, 0xFFFFFF);
 		drawString(fontRendererObj, I18n.format("profession." + currentProfession.toString().toLowerCase(), new Object[0]), guiLeft + 5, guiTop + 85, 0xFFFFFF);
 
 		drawString(fontRendererObj, "Lvl 5, Xp : " + Integer.toString(xp - xpLevel) + "/" + Integer.toString(xpNextLevel - xpLevel), guiLeft + 5, guiTop + 105, 0xFFFFFF);
