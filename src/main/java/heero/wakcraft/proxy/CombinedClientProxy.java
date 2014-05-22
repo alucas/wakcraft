@@ -33,21 +33,21 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 
-public class CombinedClientProxy extends CommonProxy{
+public class CombinedClientProxy extends CommonProxy {
 
 	@Override
-    public void registerRenderers() {
-    	RenderingRegistry.registerEntityRenderingHandler(Gobball.class, new Gobball.RenderBouftou(new ModelGobball(), 0.5f));
-    	RenderingRegistry.registerEntityRenderingHandler(Gobbette.class, new Gobbette.RenderBouffette(new ModelGobbette(), 0.5f));
-    	RenderingRegistry.registerEntityRenderingHandler(WhiteGobbly.class, new WhiteGobbly.RenderBouftonBlanc(new ModelGobbly(), 0.5f));
-    	RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderBouftonNoir(new ModelGobbly(), 0.5f));
-    	RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderBouftouCG(new ModelGobballWC(), 0.5f));
+	public void registerRenderers() {
+		RenderingRegistry.registerEntityRenderingHandler(Gobball.class, new Gobball.RenderBouftou(new ModelGobball(), 0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(Gobbette.class, new Gobbette.RenderBouffette(new ModelGobbette(), 0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(WhiteGobbly.class, new WhiteGobbly.RenderBouftonBlanc(new ModelGobbly(), 0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderBouftonNoir(new ModelGobbly(), 0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderBouftouCG(new ModelGobballWC(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new RenderTextPopup());
-    	
-    	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RenderDragoexpress());
-    	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RenderPhoenix());
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RenderDragoexpress());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RenderPhoenix());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHavenBagChest.class, new RendererHavenBagChest());
-    	
+
 		RenderingRegistry.registerBlockHandler(new RenderBlockYRotation(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RenderBlockOre(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RenderBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
