@@ -12,6 +12,7 @@ public class GUIWakcraft extends GUITabs {
 
 	public GUIWakcraft(EntityPlayer player) {
 		super(new GuiScreen[] { new GUIInventory(player),
+				new GUIAbilities(player),
 				new GUIProfession(player, PROFESSION.CHEF) });
 	}
 }
