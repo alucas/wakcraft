@@ -1,8 +1,9 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.WInfo;
+import heero.wakcraft.ability.AbilityManager;
+import heero.wakcraft.ability.AbilityManager.ABILITY;
 import heero.wakcraft.entity.property.AbilitiesProperty;
-import heero.wakcraft.entity.property.AbilitiesProperty.ABILITY;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -60,12 +61,11 @@ public class GUIAbilities extends GuiScreen {
 			GuiButton buttonRemove = new GuiButton(100 + i * 2 + 0, guiLeft + 110, guiTop + 20 + i * 20, 20, 20, "-");
 			GuiButton buttonAdd = new GuiButton(100 + i * 2 + 1, guiLeft + 150, guiTop + 20 + i * 20, 20, 20, "+");
 
-			buttonRemove.enabled = false;
-			buttonAdd.enabled = false;
-
 			buttonList.add(buttonRemove);
 			buttonList.add(buttonAdd);
 		}
+
+		updateButtons();
 
 		super.initGui();
 	}
@@ -110,6 +110,17 @@ public class GUIAbilities extends GuiScreen {
 
 		default:
 			break;
+		}
+
+		updateButtons();
+	}
+
+	protected void updateButtons() {
+		ABILITY[] abilities = ABILITY.values();
+		for (int i = 0; i < NB_LINE; i++) {
+			Boolean enabled = AbilityManager.isCustomizable(abilities[scroll + i]);
+			((GuiButton) (buttonList.get(2 + i * 2 + 0))).visible = enabled;
+			((GuiButton) (buttonList.get(2 + i * 2 + 1))).visible = enabled;
 		}
 	}
 }

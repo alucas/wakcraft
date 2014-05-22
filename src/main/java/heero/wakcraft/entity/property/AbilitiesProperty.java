@@ -1,5 +1,8 @@
 package heero.wakcraft.entity.property;
 
+import heero.wakcraft.ability.AbilityManager.ABILITY;
+
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,57 +19,11 @@ public class AbilitiesProperty implements IExtendedEntityProperties, ISynchPrope
 	protected static String TAG_NAME = "Name";
 	protected static String TAG_VALUE = "Value";
 
-	public enum ABILITY {
-		// Principal
-		HEALTH("Health"),
-		ACTION("Action"),
-		MOVEMENT("Movement"),
-		WAKFU("Wakfu"),
-		STRENGTH("Strength"),
-		INTELLIGENCE("Intelligence"),
-		AGILITY("Agility"),
-		CHANCE("Chance"),
-
-		// Battle
-		INITIATIVE("Initiative"),
-		HEAL("Heal"),
-		CRITICAL("Critical"),
-		CRITICAL_DAMAGE("Critical_Damage"),
-		CRITICAL_FAILURE("Critical_Failure"),
-		BACKSTAB("Backstab"),
-		BACKSTAB_RESISTANCE("Backstab_Resistance"),
-		DODGE("Dodge"),
-		LOCK("Lock"),
-		BLOCK("Block"),
-		WILLPOWER("Willpower"),
-		RANGE("Range"),
-
-		// Secondary
-		CONTROL("Control"),
-		/** Increases the damages of the creatures and mechanisms you control */
-		CMC_DAMAGE("CMC_Damage"),
-		WISDOM("Wisdom"),
-		PROSPECTION("Prospection"),
-		PERCEPTION("Perception"),
-		KIT("Kit");
-
-		protected String name;
-
-		private ABILITY(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
-	}
-
-	protected ABILITY[] abilitiesPersistKeys = new ABILITY[] { ABILITY.STRENGTH,
-			ABILITY.INTELLIGENCE, ABILITY.AGILITY, ABILITY.CHANCE,
-			ABILITY.BLOCK, ABILITY.RANGE, ABILITY.ACTION, ABILITY.MOVEMENT,
-			ABILITY.CRITICAL, ABILITY.KIT, ABILITY.LOCK, ABILITY.DODGE,
-			ABILITY.INITIATIVE, ABILITY.HEALTH };
+	protected EnumSet<ABILITY> abilitiesPersistKeys = EnumSet.of(
+			ABILITY.STRENGTH, ABILITY.INTELLIGENCE, ABILITY.AGILITY,
+			ABILITY.CHANCE, ABILITY.BLOCK, ABILITY.RANGE, ABILITY.ACTION,
+			ABILITY.MOVEMENT, ABILITY.CRITICAL, ABILITY.KIT, ABILITY.LOCK,
+			ABILITY.DODGE, ABILITY.INITIATIVE, ABILITY.HEALTH);
 
 	/** Persisted abilities */
 	protected Map<ABILITY, Integer> abilitiesPersist = new HashMap<ABILITY, Integer>();
@@ -96,7 +53,7 @@ public class AbilitiesProperty implements IExtendedEntityProperties, ISynchPrope
 
 		for (ABILITY key : abilitiesPersistKeys) {
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setString(TAG_NAME, key.name);
+			tag.setString(TAG_NAME, key.toString());
 			tag.setInteger(TAG_VALUE, abilitiesPersist.get(key));
 			tagAbilities.appendTag(tag);
 		}
@@ -142,7 +99,7 @@ public class AbilitiesProperty implements IExtendedEntityProperties, ISynchPrope
 
 		for (ABILITY key : abilities.keySet()) {
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setString(TAG_NAME, key.name);
+			tag.setString(TAG_NAME, key.toString());
 			tag.setInteger(TAG_VALUE, abilities.get(key));
 
 			tagAbilities.appendTag(tag);
