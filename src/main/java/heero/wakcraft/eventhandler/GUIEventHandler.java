@@ -1,6 +1,7 @@
 package heero.wakcraft.eventhandler;
 
-import heero.wakcraft.client.gui.GUIWakcraft;
+import heero.wakcraft.Wakcraft;
+import heero.wakcraft.network.packet.PacketOpenWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraftforge.client.event.GuiOpenEvent;
@@ -16,7 +17,7 @@ public class GUIEventHandler {
 				return;
 			}
 
-			mc.displayGuiScreen(new GUIWakcraft(mc.thePlayer));
+			Wakcraft.packetPipeline.sendToServer(new PacketOpenWindow(PacketOpenWindow.WINDOW_INVENTORY));
 
 			event.setCanceled(true);
 		}

@@ -4,18 +4,18 @@ import heero.wakcraft.WInfo;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIInventory extends InventoryEffectRenderer {
-	private static final ResourceLocation professionBackground = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/profession.png");
+	private static final ResourceLocation background = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/inventory.png");
 
-	public GUIInventory(EntityPlayer player) {
-		super(player.inventoryContainer);
-		
+	public GUIInventory(Container container) {
+		super(container);
+
 		allowUserInput = true;
 	}
 
@@ -25,7 +25,7 @@ public class GUIInventory extends InventoryEffectRenderer {
 	 */
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 86, 16, 4210752);
+		fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 86, 16, 0x404040);
 	}
 
 	@Override
@@ -33,9 +33,9 @@ public class GUIInventory extends InventoryEffectRenderer {
 			int mouseX, int mouseY) {
 		drawInventoryBackground(mouseX, mouseY);
 	}
-	
+
 	protected void drawInventoryBackground(int mouseX, int mouseY) {
-		mc.getTextureManager().bindTexture(field_147001_a);
+		mc.getTextureManager().bindTexture(background);
 
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
@@ -43,15 +43,11 @@ public class GUIInventory extends InventoryEffectRenderer {
 				(float) (guiLeft + 51) - mouseX, (float) (guiTop + 75 - 50)
 						- mouseY, mc.thePlayer);
 	}
-	
-	protected void drawProfessionBackground() {
-		mc.getTextureManager().bindTexture(professionBackground);
-		
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-	}
 
 	/**
-     * Draws either a gradient over the background screen (when it exists) or a flat gradient over background.png
-     */
-    public void drawDefaultBackground() {}
+	 * Draws either a gradient over the background screen (when it exists) or a
+	 * flat gradient over background.png
+	 */
+	public void drawDefaultBackground() {
+	}
 }

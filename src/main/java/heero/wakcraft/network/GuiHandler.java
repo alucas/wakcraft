@@ -1,10 +1,12 @@
 package heero.wakcraft.network;
 
 import heero.wakcraft.client.gui.GUIHavenBagChests;
+import heero.wakcraft.client.gui.GUIWakcraft;
 import heero.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
 import heero.wakcraft.client.gui.inventory.GUIWorkbench;
 import heero.wakcraft.inventory.ContainerHavenBagChest;
 import heero.wakcraft.inventory.ContainerHavenGemWorkbench;
+import heero.wakcraft.inventory.ContainerPlayerInventory;
 import heero.wakcraft.inventory.ContainerWorkbench;
 import heero.wakcraft.profession.ProfessionManager.PROFESSION;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
@@ -18,6 +20,7 @@ public class GuiHandler implements IGuiHandler {
 	public static final int GUI_POLISHER = 0;
 	public static final int GUI_HAVEN_GEM_WORKBENCH = 1;
 	public static final int GUI_HAVEN_BAG_CHEST = 2;
+	public static final int GUI_INVENTORY = 3;
 
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world,
@@ -25,6 +28,8 @@ public class GuiHandler implements IGuiHandler {
 		switch (id) {
 		case GUI_POLISHER:
 			return new ContainerWorkbench(player.inventory, world, PROFESSION.MINER);
+		case GUI_INVENTORY:
+			return new ContainerPlayerInventory(player);
 		case GUI_HAVEN_GEM_WORKBENCH:
 			TileEntityHavenGemWorkbench tile = (TileEntityHavenGemWorkbench)world.getTileEntity(x, y, z);
 			return new ContainerHavenGemWorkbench(player.inventory, tile);
@@ -46,6 +51,8 @@ public class GuiHandler implements IGuiHandler {
 		switch (id) {
 		case GUI_POLISHER:
 			return new GUIWorkbench(new ContainerWorkbench(player.inventory, world, PROFESSION.MINER), PROFESSION.MINER);
+		case GUI_INVENTORY:
+			return new GUIWakcraft(new ContainerPlayerInventory(player), player);
 		case GUI_HAVEN_GEM_WORKBENCH:
 			TileEntityHavenGemWorkbench tile = (TileEntityHavenGemWorkbench)world.getTileEntity(x, y, z);
 			return new GUIHavenGemWorkbench(new ContainerHavenGemWorkbench(player.inventory, tile));
