@@ -1,5 +1,6 @@
 package heero.wakcraft;
 
+import heero.wakcraft.ability.AbilityManager.ABILITY;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.item.ItemIkiakit;
 import heero.wakcraft.item.ItemWArmor;
@@ -54,13 +55,13 @@ public class WItems extends Items {
 		GameRegistry.registerItem(emeraldikiakit = new ItemIkiakit("EmeraldIkiakit"), "ItemEmeraldIkiakit");
 
 		// Armors
-		GameRegistry.registerItem(gobballBreastplate = ((new ItemWArmor(TYPE.CHESTPLATE, 15)).setUnlocalizedName("GobballBreastplate").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_breastplate")), "ItemGobballBreastplate");
-		GameRegistry.registerItem(gobboots = ((new ItemWArmor(TYPE.BOOTS, 15)).setUnlocalizedName("Gobboots").setTextureName(WInfo.MODID.toLowerCase() + ":gobboots")), "ItemGobboots");
-		GameRegistry.registerItem(gobballEpaulettes = ((new ItemWArmor(TYPE.EPAULET, 14)).setUnlocalizedName("GobballEpaulettes").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_epaulettes")), "ItemGobballEpaulettes");
-		GameRegistry.registerItem(gobballCape = ((new ItemWArmor(TYPE.CAPE, 14)).setUnlocalizedName("GobballCape").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_cape")), "ItemGobballCape");
-		GameRegistry.registerItem(gobballBelt = ((new ItemWArmor(TYPE.BELT, 13)).setUnlocalizedName("GobballBelt").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_belt")), "ItemGobballBelt");
-		GameRegistry.registerItem(gobballHeadgear = ((new ItemWArmor(TYPE.HELMET, 13)).setUnlocalizedName("GobballHeadgear").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_headgear")), "ItemGobballHeadgear");
-		GameRegistry.registerItem(gobballAmulet = ((new ItemWArmor(TYPE.AMULET, 12)).setUnlocalizedName("GobballAmulet").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_amulet")), "ItemGobballAmulet");
-		GameRegistry.registerItem(bouzeLiteYeahsRing = ((new ItemWArmor(TYPE.RING, 12)).setUnlocalizedName("BouzeLiteYeahsRing").setTextureName(WInfo.MODID.toLowerCase() + ":bouze_lite_yeahs_ring")), "ItemBouzeLiteYeahsRing");
+		GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(TYPE.CHESTPLATE, 15).setCharacteristic(ABILITY.HEALTH, 15).setCharacteristic(ABILITY.INITIATIVE, 5).setCharacteristic(ABILITY.FIRE_ATT, 3).setCharacteristic(ABILITY.EARTH_ATT, 3).setUnlocalizedName("GobballBreastplate").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_breastplate")), "ItemGobballBreastplate");
+		GameRegistry.registerItem(gobboots = (new ItemWArmor(TYPE.BOOTS, 15).setCharacteristic(ABILITY.HEALTH, 10).setCharacteristic(ABILITY.LOCK, 8).setCharacteristic(ABILITY.INITIATIVE, 6).setUnlocalizedName("Gobboots").setTextureName(WInfo.MODID.toLowerCase() + ":gobboots")), "ItemGobboots");
+		GameRegistry.registerItem(gobballEpaulettes = (new ItemWArmor(TYPE.EPAULET, 14).setCharacteristic(ABILITY.LOCK, 5).setCharacteristic(ABILITY.FIRE_ATT, 2).setCharacteristic(ABILITY.EARTH_ATT, 2).setUnlocalizedName("GobballEpaulettes").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_epaulettes")), "ItemGobballEpaulettes");
+		GameRegistry.registerItem(gobballCape = (new ItemWArmor(TYPE.CAPE, 14).setCharacteristic(ABILITY.HEALTH, 12).setCharacteristic(ABILITY.LOCK, 8).setCharacteristic(ABILITY.FIRE_ATT, 2).setCharacteristic(ABILITY.EARTH_ATT, 2).setUnlocalizedName("GobballCape").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_cape")), "ItemGobballCape");
+		GameRegistry.registerItem(gobballBelt = (new ItemWArmor(TYPE.BELT, 13).setCharacteristic(ABILITY.FIRE_ATT, 3).setCharacteristic(ABILITY.EARTH_ATT, 3).setUnlocalizedName("GobballBelt").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_belt")), "ItemGobballBelt");
+		GameRegistry.registerItem(gobballHeadgear = (new ItemWArmor(TYPE.HELMET, 13).setCharacteristic(ABILITY.HEALTH, 13).setCharacteristic(ABILITY.LOCK, 5).setCharacteristic(ABILITY.FIRE_ATT, 3).setCharacteristic(ABILITY.EARTH_ATT, 3).setUnlocalizedName("GobballHeadgear").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_headgear")), "ItemGobballHeadgear");
+		GameRegistry.registerItem(gobballAmulet = (new ItemWArmor(TYPE.AMULET, 12).setCharacteristic(ABILITY.HEALTH, 7).setCharacteristic(ABILITY.LOCK, 5).setUnlocalizedName("GobballAmulet").setTextureName(WInfo.MODID.toLowerCase() + ":gobball_amulet")), "ItemGobballAmulet");
+		GameRegistry.registerItem(bouzeLiteYeahsRing = (new ItemWArmor(TYPE.RING, 12).setCharacteristic(ABILITY.HEALTH, 6).setCharacteristic(ABILITY.INITIATIVE, 4).setUnlocalizedName("BouzeLiteYeahsRing").setTextureName(WInfo.MODID.toLowerCase() + ":bouze_lite_yeahs_ring")), "ItemBouzeLiteYeahsRing");
 	}
 }

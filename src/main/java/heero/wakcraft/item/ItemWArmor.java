@@ -1,6 +1,11 @@
 package heero.wakcraft.item;
 
+import heero.wakcraft.ability.AbilityManager.ABILITY;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,6 +27,7 @@ public class ItemWArmor extends ItemWithLevel {
 	public static IIcon petIcon;
 
 	protected final TYPE type;
+	protected final Map<ABILITY, Integer> characteristics;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon getPlaceholderIcon(TYPE type) {
@@ -55,6 +61,7 @@ public class ItemWArmor extends ItemWithLevel {
 		super(level);
 
 		this.type = type;
+		this.characteristics = new HashMap<ABILITY, Integer>();
 
 		setCreativeTab(WakcraftCreativeTabs.tabCombat);
 		setMaxStackSize(1);
@@ -62,5 +69,20 @@ public class ItemWArmor extends ItemWithLevel {
 
 	public TYPE getArmorType() {
 		return type;
+	}
+
+	public ItemWArmor setCharacteristic(ABILITY ability, int value) {
+		characteristics.put(ability, value);
+
+		return this;
+	}
+
+	public int getCharacteristic(ABILITY ability) {
+		Integer value =  characteristics.get(ability);
+		if (value == null) {
+			return 0;
+		}
+
+		return value;
 	}
 }

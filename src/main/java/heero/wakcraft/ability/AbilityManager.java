@@ -36,7 +36,21 @@ public class AbilityManager {
 		WISDOM("Wisdom"),
 		PROSPECTION("Prospection"),
 		PERCEPTION("Perception"),
-		KIT("Kit");
+		KIT("Kit"),
+
+		// Mastery
+		WATER_RES("Water_Res"),
+		WATER_ATT("Water_Att"),
+		EARTH_RES("Eeath_Res"),
+		EARTH_ATT("Eeath_Att"),
+		FIRE_RES("Fire_Res"),
+		FIRE_ATT("Fire_Att"),
+		AIR_RES("Air_Res"),
+		AIR_ATT("Air_Att"),
+		ACTION_RES("Action_Res"),
+		ACTION_ATT("Action_Att"),
+		MOVEMENT_RES("Movement_Res"),
+		MOVEMENT_ATT("Movement_Att");
 
 		protected String name;
 
