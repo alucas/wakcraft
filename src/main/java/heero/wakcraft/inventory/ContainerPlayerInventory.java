@@ -1,5 +1,6 @@
 package heero.wakcraft.inventory;
 
+import heero.wakcraft.entity.property.InventoryProperty;
 import heero.wakcraft.item.ItemWArmor;
 import heero.wakcraft.item.ItemWArmor.TYPE;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,14 +10,22 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerPlayerInventory extends Container {
 
 	public ContainerPlayerInventory(EntityPlayer player) {
-		for (int i = 0; i < 4; ++i) {
-			this.addSlotToContainer(new Slot(player.inventory, player.inventory.getSizeInventory() - 1 - i, 8, 8 + i * 18));
+		InventoryProperty properties = (InventoryProperty) player.getExtendedProperties(InventoryProperty.IDENTIFIER);
+		if (properties == null) {
+			FMLLog.warning("Error while loading the inventory of player " + player.getDisplayName());
+			return;
+		}
+
+		TYPE[] types = new TYPE[]{TYPE.HELMET, TYPE.CHESTPLATE, TYPE.BELT, TYPE.BOOTS, TYPE.AMULET, TYPE.CAPE, TYPE.RING, TYPE.WEAPON, TYPE.EPAULET, TYPE.PET, TYPE.RING, TYPE.WEAPON};
+		for (int i = 0; i < properties.armors.getSizeInventory() ; ++i) {
+			this.addSlotToContainer(new SlotArmor(types[i], properties.armors, i, 8 + (i / 4) * 18 + (i >= 4 ? 61 : 0), 8 + (i % 4) * 18));
 		}
 
 		bindPlayerInventory(player.inventory);

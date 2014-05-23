@@ -22,6 +22,7 @@ import heero.wakcraft.entity.monster.Gobbette;
 import heero.wakcraft.entity.monster.WhiteGobbly;
 import heero.wakcraft.eventhandler.GUIEventHandler;
 import heero.wakcraft.eventhandler.KeyInputHandler;
+import heero.wakcraft.eventhandler.TextureEventHandler;
 import heero.wakcraft.havenbag.HavenBagHelper;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
@@ -59,6 +60,7 @@ public class CombinedClientProxy extends CommonProxy {
 
 		MinecraftForge.EVENT_BUS.register(new GUIEventHandler());
 		MinecraftForge.EVENT_BUS.register(new FightRenderer());
+		MinecraftForge.EVENT_BUS.register(new TextureEventHandler());
 	}
 
 	@Override

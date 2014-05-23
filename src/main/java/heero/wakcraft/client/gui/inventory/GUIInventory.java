@@ -3,7 +3,6 @@ package heero.wakcraft.client.gui.inventory;
 import heero.wakcraft.WInfo;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
@@ -25,7 +24,7 @@ public class GUIInventory extends InventoryEffectRenderer {
 	 */
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 86, 16, 0x404040);
+//		fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 86, 16, 0x404040);
 	}
 
 	@Override

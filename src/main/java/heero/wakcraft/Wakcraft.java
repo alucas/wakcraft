@@ -37,12 +37,12 @@ public class Wakcraft {
 	public void preInit(FMLPreInitializationEvent event) {
 		WConfig.loadConfig(event);
 
+		proxy.registerEvents();
 		proxy.registerBlocks();
 		proxy.registerItems();
 		proxy.registerEntities();
 		proxy.registerTileEntities();
 		proxy.registerRenderers();
-		proxy.registerEvents();
 		proxy.registerGui(this);
 		proxy.registerDimensions();
 
