@@ -57,12 +57,12 @@ public class ContainerPlayerInventory extends Container {
 			ItemStack stack_in_slot = slot.getStack();
 			stack = stack_in_slot.copy();
 
-			if (slotId >= 0 && slotId < 12) {
-				if (!this.mergeItemStack(stack_in_slot, 12, 48, false)) {
+			if (slotId >= 12 && slotId < 39) {
+				if (!this.mergeItemStack(stack_in_slot, 39, 48, false)) {
 					return null;
 				}
-			} else {
-				if (mergeItemStack(stack_in_slot, 0, 12, false)) {
+			}else {
+				if (!this.mergeItemStack(stack_in_slot, 12, 39, false)) {
 					return null;
 				}
 			}
