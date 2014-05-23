@@ -1,11 +1,11 @@
 package heero.wakcraft.item;
 
-import net.minecraft.item.Item;
+import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class ItemWArmor extends Item {
+public class ItemWArmor extends ItemWithLevel {
 	public static enum TYPE {
 		HELMET, AMULET, EPAULET, CHESTPLATE, CAPE, RING, BELT, BOOTS, WEAPON, PET
 	}
@@ -51,8 +51,13 @@ public abstract class ItemWArmor extends Item {
 		}
 	}
 
-	public ItemWArmor(TYPE type) {
+	public ItemWArmor(TYPE type, int level) {
+		super(level);
+
 		this.type = type;
+
+		setCreativeTab(WakcraftCreativeTabs.tabCombat);
+		setMaxStackSize(1);
 	}
 
 	public TYPE getArmorType() {
