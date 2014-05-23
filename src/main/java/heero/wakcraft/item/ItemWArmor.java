@@ -4,9 +4,13 @@ import heero.wakcraft.ability.AbilityManager.ABILITY;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -84,5 +88,17 @@ public class ItemWArmor extends ItemWithLevel {
 		}
 
 		return value;
+	}
+
+	/**
+	 * allows items to add custom lines of information to the mouseover
+	 * description
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedItemTooltips) {
+		for (ABILITY characteristic : characteristics.keySet()) {
+			list.add(StatCollector.translateToLocalFormatted("characteristic." + characteristic.toString(), new Object[]{characteristics.get(characteristic)}));
+		}
 	}
 }
