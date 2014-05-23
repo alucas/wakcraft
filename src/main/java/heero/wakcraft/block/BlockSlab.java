@@ -8,9 +8,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Facing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class BlockSlab extends BlockGeneric {
 	// Opaque version of the slab block
@@ -26,6 +29,8 @@ public abstract class BlockSlab extends BlockGeneric {
 		}
 
 		this.blockOpaque = blockOpaque;
+		this.useNeighborBrightness = true;
+		this.setLightOpacity(255);
 	}
 
 	/**
@@ -87,5 +92,50 @@ public abstract class BlockSlab extends BlockGeneric {
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
+	}
+
+	/**
+	 * If this block doesn't render as an ordinary block it will return False
+	 * (examples: signs, buttons, stairs, etc)
+	 */
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	/**
+	 * How bright to render this block based on the light its receiving. Args:
+	 * iBlockAccess, x, y, z
+	 */
+	@SideOnly(Side.CLIENT)
+	@Override
+	public int getMixedBrightnessForBlock(IBlockAccess world, int x, int y, int z) {
+		int l = super.getMixedBrightnessForBlock(world, x, y, z);
+
+		if (l == 0) {
+			--y;
+			Block block = world.getBlock(x, y, z);
+			l = world.getLightBrightnessForSkyBlocks(x, y, z, block.getLightValue(world, x, y, z));
+		}
+
+		return l;
+	}
+
+	/**
+	 * Returns true if the given side of this block type should be rendered, if
+	 * the adjacent block is at the given coordinates. Args: blockAccess, x, y,
+	 * z, side
+	 */
+	@SideOnly(Side.CLIENT)
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
+		if (side != 1 && side != 0 && !super.shouldSideBeRendered(world, x, y, z, side)) {
+			return false;
+		} else {
+			int x2 = x + Facing.offsetsXForSide[Facing.oppositeSide[side]];
+			int y2 = y + Facing.offsetsYForSide[Facing.oppositeSide[side]];
+			int z2 = z + Facing.offsetsZForSide[Facing.oppositeSide[side]];
+			return !world.getBlock(x2, y2, z2).isOpaqueCube();
+		}
 	}
 }
