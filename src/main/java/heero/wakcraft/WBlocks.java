@@ -1,6 +1,7 @@
 package heero.wakcraft;
 
 import heero.wakcraft.block.BlockCarpet;
+import heero.wakcraft.block.BlockClassConsole;
 import heero.wakcraft.block.BlockDragoexpress;
 import heero.wakcraft.block.BlockFence1;
 import heero.wakcraft.block.BlockGeneric;
@@ -20,13 +21,13 @@ import heero.wakcraft.block.BlockPhoenix;
 import heero.wakcraft.block.BlockPolisher;
 import heero.wakcraft.block.BlockSlabDirt;
 import heero.wakcraft.block.BlockSlabGrass;
+import heero.wakcraft.block.BlockSlabWakfu;
 import heero.wakcraft.block.BlockStairs2;
 import heero.wakcraft.block.BlockSufokiaColor;
 import heero.wakcraft.block.BlockSufokiaGround;
 import heero.wakcraft.block.BlockSufokiaWave;
 import heero.wakcraft.block.BlockTransparent;
 import heero.wakcraft.block.BlockWakfu;
-import heero.wakcraft.block.BlockSlabWakfu;
 import heero.wakcraft.block.BlockYRotation;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.item.ItemBlockOre1;
@@ -50,7 +51,7 @@ public class WBlocks {
 			slabDirt, fence, polisher, havenGemWorkbench, invisiblewall,
 			havenbag, hbChest, hbLock, hbBridge, hbVisitors, hbBarrier,
 			hbCraft, hbCraft2, hbGarden, hbDeco, hbDeco2, hbMerchant,
-			fightMovement, fightDirection;
+			fightMovement, fightDirection, classConsole;
 	public static Block wakfu, wakfuFull, wakfuSlab;
 
 	public static void registerBlocks() {
@@ -91,6 +92,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(wakfuSlab = (new BlockSlabWakfu()), ItemBlockSlab.class, "blockWakfuSlab");
 		GameRegistry.registerBlock(fightMovement = (new BlockGeneric(Material.ground).setBlockTextureName("movement").setBlockName("FightMovement")), "blockFightMovement");
 		GameRegistry.registerBlock(fightDirection = (new BlockGeneric(Material.ground).setBlockTextureName("direction").setBlockName("FightDirection")), "blockFightDirection");
+		GameRegistry.registerBlock(classConsole = (new BlockClassConsole()), "blockClassConsole");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(modid + "polisher")), "BlockPolisher");

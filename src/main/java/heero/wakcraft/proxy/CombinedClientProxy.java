@@ -1,5 +1,6 @@
 package heero.wakcraft.proxy;
 
+import heero.wakcraft.client.gui.GUIClassSelection;
 import heero.wakcraft.client.gui.GUIHavenBagVisitors;
 import heero.wakcraft.client.model.ModelGobball;
 import heero.wakcraft.client.model.ModelGobballWC;
@@ -76,5 +77,10 @@ public class CombinedClientProxy extends CommonProxy {
 	public void openHBVisitorsGui(EntityPlayer player) {
 		int uid = HavenBagHelper.getUIDFromCoord((int) player.posX, (int) player.posY, (int) player.posZ);
 		Minecraft.getMinecraft().displayGuiScreen(new GUIHavenBagVisitors(uid));
+	}
+
+	@Override
+	public void openClassSelectionGui(EntityPlayer player) {
+		Minecraft.getMinecraft().displayGuiScreen(new GUIClassSelection(player));
 	}
 }

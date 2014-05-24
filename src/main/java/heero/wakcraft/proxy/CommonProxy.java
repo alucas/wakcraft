@@ -93,6 +93,9 @@ public class CommonProxy {
 	public void openHBVisitorsGui(EntityPlayer player) {
 	}
 
+	public void openClassSelectionGui(EntityPlayer player) {
+	}
+
 	public void registerDimensions() {
 		GameRegistry.registerWorldGenerator(new WorldGenHavenBag(), 0);
 
