@@ -56,20 +56,24 @@ public class GUIClassSelection extends GuiScreen {
 
 	@Override
 	public void confirmClicked(boolean result, int buttonId) {
-		try {
+		do {
 			if (!result) {
-				return;
+				break;
 			}
 
 			CharacterProperty properties = (CharacterProperty) player.getExtendedProperties(CharacterProperty.IDENTIFIER);
 			if (properties == null) {
 				FMLLog.warning("Error while loading the character properties of the player : " + player.getDisplayName());
-				return;
+				break;
 			}
 
 			properties.setCharacterClass(CLASS.values()[buttonId + 1]);
-		} finally {
-			Minecraft.getMinecraft().displayGuiScreen(this);
-		}
+
+			Minecraft.getMinecraft().displayGuiScreen(null);
+
+			return;
+		} while(false);
+
+		Minecraft.getMinecraft().displayGuiScreen(this);
 	}
 }
