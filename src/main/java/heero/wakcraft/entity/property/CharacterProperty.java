@@ -20,6 +20,7 @@ public class CharacterProperty implements IExtendedEntityProperties, ISynchPrope
 
 	@Override
 	public void init(Entity entity, World world) {
+		characterClass = CLASS.DISEMBODIED;
 		characterLevel = 0;
 	}
 
