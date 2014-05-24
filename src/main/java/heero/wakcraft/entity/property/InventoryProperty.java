@@ -1,7 +1,7 @@
 package heero.wakcraft.entity.property;
 
+import heero.wakcraft.inventory.InventoryArmors;
 import net.minecraft.entity.Entity;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -16,11 +16,11 @@ public class InventoryProperty implements IExtendedEntityProperties, ISynchPrope
 	protected static String TAG_ARMOR_ITEMS = "Items";
 	protected static String TAG_SLOT = "Slot";
 
-	public InventoryBasic armors;
+	public InventoryArmors armors;
 
 	@Override
 	public void init(Entity entity, World world) {
-		armors = new InventoryBasic("Armors", false, 12);
+		armors = new InventoryArmors();
 	}
 
 	@Override

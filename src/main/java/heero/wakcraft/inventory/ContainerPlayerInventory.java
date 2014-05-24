@@ -98,7 +98,7 @@ public class ContainerPlayerInventory extends Container {
 		 */
 		@Override
 		public int getSlotStackLimit() {
-			return 1;
+			return inventory.getInventoryStackLimit();
 		}
 
 		/**
@@ -107,15 +107,7 @@ public class ContainerPlayerInventory extends Container {
 		 */
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			if (stack == null) {
-				return false;
-			}
-
-			if (!(stack.getItem() instanceof ItemWArmor)) {
-				return false;
-			}
-
-			return ((ItemWArmor) (stack.getItem())).getArmorType() == armorType;
+			return inventory.isItemValidForSlot(slotNumber, stack);
 		}
 
 		/**
@@ -124,7 +116,11 @@ public class ContainerPlayerInventory extends Container {
 		@SideOnly(Side.CLIENT)
 		@Override
 		public IIcon getBackgroundIconIndex() {
-			return ItemWArmor.getPlaceholderIcon(armorType);
+			if (!(inventory instanceof InventoryArmors)) {
+				return null;
+			}
+
+			return ItemWArmor.getPlaceholderIcon(((InventoryArmors) inventory).getSlotType(slotNumber));
 		}
 	}
 }
