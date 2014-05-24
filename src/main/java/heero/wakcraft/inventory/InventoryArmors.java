@@ -1,7 +1,9 @@
 package heero.wakcraft.inventory;
 
+import heero.wakcraft.ability.AbilityManager;
 import heero.wakcraft.item.ItemWArmor;
 import heero.wakcraft.item.ItemWArmor.TYPE;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -15,12 +17,14 @@ public class InventoryArmors implements IInventory {
 	protected String customName;
 	protected int slotsCount;
 	protected ItemStack[] inventoryContents;
+	protected Entity entity;
 
-	public InventoryArmors() {
+	public InventoryArmors(Entity entity) {
 		this.customName = "Armors";
 		this.useCustomName = false;
 		this.slotsCount = 12;
 		this.inventoryContents = new ItemStack[slotsCount];
+		this.entity = entity;
 	}
 
 	/**
@@ -72,6 +76,22 @@ public class InventoryArmors implements IInventory {
 	 */
 	@Override
 	public void setInventorySlotContents(int slotId, ItemStack stack) {
+		if (stack != null && !(stack.getItem() instanceof ItemWArmor)) {
+			return;
+		}
+
+		if (this.inventoryContents[slotId] != null) {
+			ItemWArmor item = (ItemWArmor) this.inventoryContents[slotId].getItem();
+
+			AbilityManager.unequipItem(entity, item);
+		}
+
+		if (stack != null) {
+			ItemWArmor item = (ItemWArmor) stack.getItem();
+
+			AbilityManager.equipItem(entity, item);
+		}
+
 		this.inventoryContents[slotId] = stack;
 
 		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {

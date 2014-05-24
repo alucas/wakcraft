@@ -20,7 +20,7 @@ public class InventoryProperty implements IExtendedEntityProperties, ISynchPrope
 
 	@Override
 	public void init(Entity entity, World world) {
-		inventoryArmors = new InventoryArmors();
+		inventoryArmors = new InventoryArmors(entity);
 	}
 
 	@Override

@@ -1,7 +1,14 @@
 package heero.wakcraft.ability;
 
+import heero.wakcraft.entity.property.AbilitiesProperty;
+import heero.wakcraft.item.ItemWArmor;
+
 import java.util.EnumSet;
 import java.util.Set;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import cpw.mods.fml.common.FMLLog;
 
 public class AbilityManager {
 	public static enum ABILITY {
@@ -73,5 +80,37 @@ public class AbilityManager {
 
 	public static boolean isCustomizable(ABILITY ability) {
 		return customizableAbilities.contains(ability);
+	}
+
+	public static void equipItem(Entity entity, ItemWArmor item) {
+		if (!(entity instanceof EntityPlayer)) {
+			return;
+		}
+
+		AbilitiesProperty properties = (AbilitiesProperty) ((EntityPlayer) entity).getExtendedProperties(AbilitiesProperty.IDENTIFIER);
+		if (properties == null) {
+			FMLLog.warning("Error while loading the ability properties of player : " + ((EntityPlayer) entity).getDisplayName());
+			return;
+		}
+
+		for (ABILITY characteristic : item.getCharacteristics()) {
+			properties.set(characteristic, properties.get(characteristic) + item.getCharacteristic(characteristic));
+		}
+	}
+
+	public static void unequipItem(Entity entity, ItemWArmor item) {
+		if (!(entity instanceof EntityPlayer)) {
+			return;
+		}
+
+		AbilitiesProperty properties = (AbilitiesProperty) ((EntityPlayer) entity).getExtendedProperties(AbilitiesProperty.IDENTIFIER);
+		if (properties == null) {
+			FMLLog.warning("Error while loading the ability properties of player : " + ((EntityPlayer) entity).getDisplayName());
+			return;
+		}
+
+		for (ABILITY characteristic : item.getCharacteristics()) {
+			properties.set(characteristic, properties.get(characteristic) - item.getCharacteristic(characteristic));
+		}
 	}
 }

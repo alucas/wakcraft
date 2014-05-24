@@ -6,6 +6,7 @@ import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -88,6 +89,10 @@ public class ItemWArmor extends ItemWithLevel {
 		}
 
 		return value;
+	}
+
+	public Set<ABILITY> getCharacteristics() {
+		return characteristics.keySet();
 	}
 
 	/**
