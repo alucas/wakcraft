@@ -1,4 +1,4 @@
-package heero.wakcraft.ability;
+package heero.wakcraft.manager;
 
 import heero.wakcraft.entity.property.AbilitiesProperty;
 import heero.wakcraft.item.ItemWArmor;

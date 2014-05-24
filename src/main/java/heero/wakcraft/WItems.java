@@ -1,6 +1,5 @@
 package heero.wakcraft;
 
-import heero.wakcraft.ability.AbilityManager.ABILITY;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.item.ItemIkiakit;
 import heero.wakcraft.item.ItemWArmor;
@@ -9,6 +8,7 @@ import heero.wakcraft.item.ItemWoollyKey;
 import heero.wakcraft.item.ItemOre1;
 import heero.wakcraft.item.ItemOre2;
 import heero.wakcraft.item.ItemWithLevel;
+import heero.wakcraft.manager.AbilityManager.ABILITY;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.registry.GameRegistry;

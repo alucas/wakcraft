@@ -1,8 +1,8 @@
 package heero.wakcraft.inventory;
 
-import heero.wakcraft.ability.AbilityManager;
 import heero.wakcraft.item.ItemWArmor;
 import heero.wakcraft.item.ItemWArmor.TYPE;
+import heero.wakcraft.manager.AbilityManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

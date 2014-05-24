@@ -1,9 +1,9 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.WInfo;
-import heero.wakcraft.ability.AbilityManager;
-import heero.wakcraft.ability.AbilityManager.ABILITY;
 import heero.wakcraft.entity.property.AbilitiesProperty;
+import heero.wakcraft.manager.AbilityManager;
+import heero.wakcraft.manager.AbilityManager.ABILITY;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

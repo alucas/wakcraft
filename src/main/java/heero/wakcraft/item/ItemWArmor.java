@@ -1,7 +1,7 @@
 package heero.wakcraft.item;
 
-import heero.wakcraft.ability.AbilityManager.ABILITY;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.wakcraft.manager.AbilityManager.ABILITY;
 
 import java.util.HashMap;
 import java.util.List;

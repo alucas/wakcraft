@@ -1,6 +1,6 @@
 package heero.wakcraft.entity.property;
 
-import heero.wakcraft.ability.AbilityManager.ABILITY;
+import heero.wakcraft.manager.AbilityManager.ABILITY;
 
 import java.util.EnumSet;
 import java.util.HashMap;
