@@ -16,11 +16,11 @@ public class InventoryProperty implements IExtendedEntityProperties, ISynchPrope
 	protected static String TAG_ARMOR_ITEMS = "Items";
 	protected static String TAG_SLOT = "Slot";
 
-	public InventoryArmors armors;
+	public InventoryArmors inventoryArmors;
 
 	@Override
 	public void init(Entity entity, World world) {
-		armors = new InventoryArmors();
+		inventoryArmors = new InventoryArmors();
 	}
 
 	@Override
@@ -30,13 +30,13 @@ public class InventoryProperty implements IExtendedEntityProperties, ISynchPrope
 		NBTTagCompound tagArmor = new NBTTagCompound();
 		NBTTagList tagAmorsItems = new NBTTagList();
 
-		for (int i = 0; i < armors.getSizeInventory(); i++) {
-			if (armors.getStackInSlot(i) == null) {
+		for (int i = 0; i < inventoryArmors.getSizeInventory(); i++) {
+			if (inventoryArmors.getStackInSlot(i) == null) {
 				continue;
 			}
 
 			NBTTagCompound tagItem = new NBTTagCompound();
-			armors.getStackInSlot(i).writeToNBT(tagItem);
+			inventoryArmors.getStackInSlot(i).writeToNBT(tagItem);
 			tagItem.setInteger(TAG_SLOT, i);
 
 			tagAmorsItems.appendTag(tagItem);
@@ -58,7 +58,7 @@ public class InventoryProperty implements IExtendedEntityProperties, ISynchPrope
 			Integer slot = tagItem.getInteger(TAG_SLOT);
 			ItemStack stack = ItemStack.loadItemStackFromNBT(tagItem);
 
-			armors.setInventorySlotContents(slot, stack);
+			inventoryArmors.setInventorySlotContents(slot, stack);
 		}
 	}
 

@@ -42,7 +42,7 @@ public class InventoryArmors implements IInventory {
 		}
 
 		ItemStack itemstack = this.inventoryContents[slotId];
-		this.inventoryContents[slotId] = null;
+		setInventorySlotContents(slotId, null);
 
 		this.markDirty();
 
@@ -61,7 +61,7 @@ public class InventoryArmors implements IInventory {
 		}
 
 		ItemStack itemstack = this.inventoryContents[slotId];
-		this.inventoryContents[slotId] = null;
+		setInventorySlotContents(slotId, null);
 
 		return itemstack;
 	}

@@ -2,7 +2,6 @@ package heero.wakcraft.inventory;
 
 import heero.wakcraft.entity.property.InventoryProperty;
 import heero.wakcraft.item.ItemWArmor;
-import heero.wakcraft.item.ItemWArmor.TYPE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -23,9 +22,8 @@ public class ContainerPlayerInventory extends Container {
 			return;
 		}
 
-		TYPE[] types = new TYPE[]{TYPE.HELMET, TYPE.CHESTPLATE, TYPE.BELT, TYPE.BOOTS, TYPE.AMULET, TYPE.CAPE, TYPE.RING, TYPE.WEAPON, TYPE.EPAULET, TYPE.PET, TYPE.RING, TYPE.WEAPON};
-		for (int i = 0; i < properties.armors.getSizeInventory() ; ++i) {
-			this.addSlotToContainer(new SlotArmor(types[i], properties.armors, i, 8 + (i / 4) * 18 + (i >= 4 ? 61 : 0), 8 + (i % 4) * 18));
+		for (int i = 0; i < properties.inventoryArmors.getSizeInventory() ; ++i) {
+			this.addSlotToContainer(new SlotArmor(properties.inventoryArmors, i, 8 + (i / 4) * 18 + (i >= 4 ? 61 : 0), 8 + (i % 4) * 18));
 		}
 
 		bindPlayerInventory(player.inventory);
@@ -84,12 +82,8 @@ public class ContainerPlayerInventory extends Container {
 	}
 
 	protected class SlotArmor extends Slot {
-		protected final TYPE armorType;
-
-		public SlotArmor(TYPE type, IInventory inventory, int id, int x, int y) {
+		public SlotArmor(IInventory inventory, int id, int x, int y) {
 			super(inventory, id, x, y);
-
-			this.armorType = type;
 		}
 
 		/**
