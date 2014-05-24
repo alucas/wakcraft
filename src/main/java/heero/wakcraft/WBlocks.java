@@ -54,6 +54,7 @@ public class WBlocks {
 	public static Block wakfu, wakfuFull, wakfuSlab;
 
 	public static void registerBlocks() {
+		String modid = WInfo.MODID.toLowerCase() + ":";
 		// Basic blocks
 		GameRegistry.registerBlock(sufokiaColor = (new BlockSufokiaColor()), "blockSufokiaColor");
 		GameRegistry.registerBlock(sufokiaSun = (new BlockGeneric(Material.sand).setBlockTextureName("sufokiaSun").setBlockName("SufokiaSun").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockSufokiaSunBlock");
@@ -71,7 +72,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(hbstand = (new BlockYRotation(Material.wood).setBlockTextureName("hbstand").setBlockName("HBStand").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBStand");
 		GameRegistry.registerBlock(slabGrass = (new BlockSlabGrass()), ItemBlockSlab.class, "blockGrass");
 		GameRegistry.registerBlock(slabDirt = (new BlockSlabDirt()), ItemBlockSlab.class, "blockSlabDirt");
-		GameRegistry.registerBlock(fence = (new BlockFence1(WInfo.MODID.toLowerCase() + ":palisade1", Material.wood).setBlockName("Fence1")), "blockFence");
+		GameRegistry.registerBlock(fence = (new BlockFence1(modid + "palisade1", Material.wood).setBlockName("Fence1")), "blockFence");
 		GameRegistry.registerBlock(invisiblewall = (new BlockInvisibleWall()), "blockInvisibleWall");
 		GameRegistry.registerBlock(havenbag = (new BlockHavenBag()), "blockHavenBag");
 		GameRegistry.registerBlock(hbChest = (new BlockHavenBagChest()), "blockHavenBagChest");
@@ -92,7 +93,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(fightDirection = (new BlockGeneric(Material.ground).setBlockTextureName("direction").setBlockName("FightDirection")), "blockFightDirection");
 
 		// Special blocks
-		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(WInfo.MODID.toLowerCase() + ":polisher")), "BlockPolisher");
+		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(modid + "polisher")), "BlockPolisher");
 		GameRegistry.registerBlock(dragoexpress = (new BlockDragoexpress()), "dragoexpressBlock");
 		GameRegistry.registerBlock(phoenix = (new BlockPhoenix()), "phoenixBlock");
 		GameRegistry.registerBlock(havenGemWorkbench = (new BlockHavenGemWorkbench()), "blockHavenGemWorkbench");
