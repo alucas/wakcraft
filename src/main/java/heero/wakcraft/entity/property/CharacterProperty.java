@@ -8,8 +8,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 public class CharacterProperty implements IExtendedEntityProperties, ISynchProperties {
 	public static final String IDENTIFIER = "character";
 
-	protected static String TAG_CLASS = "Class";
-	protected static String TAG_LEVEL = "Level";
+	protected static String TAG_CLASS = "WClass";
+	protected static String TAG_LEVEL = "WLevel";
 
 	public static enum CLASS {
 		DISEMBODIED, FECA, OSAMODAS, ENUTROF, SRAM, XELOR, ECAFLIP, ENIRIPSA, IOP, CRA, SADIDA, SACRIER, PANDAWA, ROGUE, MASQUERAIDER, FOGGERNAUT;
@@ -27,7 +27,7 @@ public class CharacterProperty implements IExtendedEntityProperties, ISynchPrope
 	@Override
 	public void saveNBTData(NBTTagCompound tagRoot) {
 		tagRoot.setInteger(TAG_CLASS, characterClass.ordinal());
-		tagRoot.setInteger(TAG_CLASS, characterLevel);
+		tagRoot.setInteger(TAG_LEVEL, characterLevel);
 	}
 
 	@Override
