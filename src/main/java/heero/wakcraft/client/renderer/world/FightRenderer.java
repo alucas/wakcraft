@@ -126,10 +126,11 @@ public class FightRenderer extends IRenderHandler {
 
 	@SubscribeEvent
 	public void onRenderHandEvent(RenderHandEvent event) {
-		EntityPlayer player = event.context.mc.thePlayer;
-		FightProperty properties = (FightProperty) player.getExtendedProperties(FightProperty.IDENTIFIER);
+		Minecraft mc = Minecraft.getMinecraft();
+
+		FightProperty properties = (FightProperty) mc.thePlayer.getExtendedProperties(FightProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading the Fight properties of player : %s", player.getDisplayName());
+			FMLLog.warning("Error while loading the Fight properties of player : %s", mc.thePlayer.getDisplayName());
 			return;
 		}
 
@@ -137,6 +138,6 @@ public class FightRenderer extends IRenderHandler {
 			return;
 		}
 
-		render(event.partialTicks, event.context.theWorld, event.context.mc);
+		render(event.partialTicks, mc.theWorld, mc);
 	}
 }
