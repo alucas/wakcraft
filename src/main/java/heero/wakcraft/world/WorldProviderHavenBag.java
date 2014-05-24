@@ -5,6 +5,8 @@ import heero.wakcraft.client.renderer.world.EndSkyRenderer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.ChunkProviderFlat;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -126,5 +128,12 @@ public class WorldProviderHavenBag extends WorldProvider {
 		f5 *= f2 * 0.0F + 0.15F;
 		return this.worldObj.getWorldVec3Pool().getVecFromPool((double) f3,
 				(double) f4, (double) f5);
+	}
+
+	/**
+	 * Returns a new chunk provider which generates chunks for this world
+	 */
+	public IChunkProvider createChunkGenerator() {
+		return new ChunkProviderFlat(worldObj, worldObj.getSeed(), false, field_82913_c);
 	}
 }
