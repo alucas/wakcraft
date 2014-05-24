@@ -1,8 +1,8 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.Wakcraft;
-import heero.wakcraft.havenbag.HavenBagProperties;
-import heero.wakcraft.havenbag.HavenBagsManager;
+import heero.wakcraft.manager.HavenBagProperties;
+import heero.wakcraft.manager.HavenBagsManager;
 import heero.wakcraft.network.packet.PacketCloseWindow;
 import heero.wakcraft.network.packet.PacketHavenBagVisitors;
 import net.minecraft.client.gui.GuiButton;

@@ -1,4 +1,4 @@
-package heero.wakcraft.havenbag;
+package heero.wakcraft.manager;
 
 import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WConfig;

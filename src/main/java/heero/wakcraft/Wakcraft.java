@@ -1,6 +1,6 @@
 package heero.wakcraft;
 
-import heero.wakcraft.havenbag.HavenBagsManager;
+import heero.wakcraft.manager.HavenBagsManager;
 import heero.wakcraft.network.PacketPipeline;
 import heero.wakcraft.network.packet.PacketCloseWindow;
 import heero.wakcraft.network.packet.PacketExtendedEntityProperty;

@@ -3,9 +3,9 @@ package heero.wakcraft.block;
 import heero.wakcraft.WBlocks;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
-import heero.wakcraft.havenbag.HavenBagHelper;
-import heero.wakcraft.havenbag.HavenBagProperties;
-import heero.wakcraft.havenbag.HavenBagsManager;
+import heero.wakcraft.manager.HavenBagHelper;
+import heero.wakcraft.manager.HavenBagProperties;
+import heero.wakcraft.manager.HavenBagsManager;
 
 import java.util.List;
 

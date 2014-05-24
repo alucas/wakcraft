@@ -3,7 +3,7 @@ package heero.wakcraft.block;
 import heero.wakcraft.Wakcraft;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
-import heero.wakcraft.havenbag.HavenBagHelper;
+import heero.wakcraft.manager.HavenBagHelper;
 import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 

@@ -1,8 +1,8 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.WInfo;
-import heero.wakcraft.profession.ProfessionManager;
-import heero.wakcraft.profession.ProfessionManager.PROFESSION;
+import heero.wakcraft.manager.ProfessionManager;
+import heero.wakcraft.manager.ProfessionManager.PROFESSION;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

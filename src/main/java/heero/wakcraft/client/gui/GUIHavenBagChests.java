@@ -1,8 +1,8 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.client.gui.inventory.GUIHavenBagChest;
-import heero.wakcraft.havenbag.HavenBagChestHelper;
 import heero.wakcraft.inventory.ContainerHavenBagChest;
+import heero.wakcraft.manager.HavenBagChestHelper;
 import net.minecraft.client.gui.GuiScreen;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

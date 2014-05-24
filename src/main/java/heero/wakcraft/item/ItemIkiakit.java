@@ -3,7 +3,7 @@ package heero.wakcraft.item;
 import heero.wakcraft.WBlocks;
 import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.wakcraft.havenbag.HavenBagChestHelper;
+import heero.wakcraft.manager.HavenBagChestHelper;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

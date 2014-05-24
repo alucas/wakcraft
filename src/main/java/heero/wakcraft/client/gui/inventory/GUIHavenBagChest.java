@@ -1,9 +1,9 @@
 package heero.wakcraft.client.gui.inventory;
 
 import heero.wakcraft.WInfo;
-import heero.wakcraft.havenbag.HavenBagChestHelper;
 import heero.wakcraft.inventory.ContainerHavenBagChest;
 import heero.wakcraft.inventory.ContainerHavenBagChest.HavenBagChestSlot;
+import heero.wakcraft.manager.HavenBagChestHelper;
 
 import java.util.List;
 

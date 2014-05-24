@@ -1,4 +1,4 @@
-package heero.wakcraft.fight;
+package heero.wakcraft.manager;
 
 import heero.wakcraft.Wakcraft;
 import heero.wakcraft.entity.property.FightProperty;

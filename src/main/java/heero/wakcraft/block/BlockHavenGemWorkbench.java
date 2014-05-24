@@ -4,7 +4,7 @@ import heero.wakcraft.Wakcraft;
 import heero.wakcraft.WInfo;
 import heero.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.wakcraft.entity.property.HavenBagProperty;
-import heero.wakcraft.havenbag.HavenBagHelper;
+import heero.wakcraft.manager.HavenBagHelper;
 import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import net.minecraft.block.BlockContainer;

@@ -2,9 +2,9 @@ package heero.wakcraft.network.packet;
 
 import heero.wakcraft.Wakcraft;
 import heero.wakcraft.entity.property.HavenBagProperty;
-import heero.wakcraft.havenbag.HavenBagHelper;
-import heero.wakcraft.havenbag.HavenBagProperties;
-import heero.wakcraft.havenbag.HavenBagsManager;
+import heero.wakcraft.manager.HavenBagHelper;
+import heero.wakcraft.manager.HavenBagProperties;
+import heero.wakcraft.manager.HavenBagsManager;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package heero.wakcraft.inventory;
 
 import heero.wakcraft.crafting.CraftingManager;
-import heero.wakcraft.profession.ProfessionManager.PROFESSION;
+import heero.wakcraft.manager.ProfessionManager.PROFESSION;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

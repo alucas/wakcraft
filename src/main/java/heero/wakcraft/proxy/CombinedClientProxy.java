@@ -23,7 +23,7 @@ import heero.wakcraft.entity.monster.WhiteGobbly;
 import heero.wakcraft.eventhandler.GUIEventHandler;
 import heero.wakcraft.eventhandler.KeyInputHandler;
 import heero.wakcraft.eventhandler.TextureEventHandler;
-import heero.wakcraft.havenbag.HavenBagHelper;
+import heero.wakcraft.manager.HavenBagHelper;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.wakcraft.tileentity.TileEntityPhoenix;

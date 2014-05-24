@@ -1,7 +1,7 @@
 package heero.wakcraft.client.gui;
 
 import heero.wakcraft.client.gui.inventory.GUIInventory;
-import heero.wakcraft.profession.ProfessionManager.PROFESSION;
+import heero.wakcraft.manager.ProfessionManager.PROFESSION;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

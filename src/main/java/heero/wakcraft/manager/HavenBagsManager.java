@@ -1,4 +1,4 @@
-package heero.wakcraft.havenbag;
+package heero.wakcraft.manager;
 
 import java.util.HashMap;
 import java.util.Map;

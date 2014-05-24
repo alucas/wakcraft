@@ -1,6 +1,6 @@
 package heero.wakcraft.network.packet;
 
-import heero.wakcraft.havenbag.HavenBagsManager;
+import heero.wakcraft.manager.HavenBagsManager;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;

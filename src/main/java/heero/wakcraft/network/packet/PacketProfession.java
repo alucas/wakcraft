@@ -1,7 +1,7 @@
 package heero.wakcraft.network.packet;
 
-import heero.wakcraft.profession.ProfessionManager;
-import heero.wakcraft.profession.ProfessionManager.PROFESSION;
+import heero.wakcraft.manager.ProfessionManager;
+import heero.wakcraft.manager.ProfessionManager.PROFESSION;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.HashMap;

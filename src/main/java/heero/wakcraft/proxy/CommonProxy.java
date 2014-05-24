@@ -13,7 +13,7 @@ import heero.wakcraft.entity.monster.WhiteGobbly;
 import heero.wakcraft.eventhandler.EntityEventHandler;
 import heero.wakcraft.eventhandler.PlayerEventHandler;
 import heero.wakcraft.eventhandler.WorldEventHandler;
-import heero.wakcraft.fight.FightManager;
+import heero.wakcraft.manager.FightManager;
 import heero.wakcraft.network.GuiHandler;
 import heero.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.wakcraft.tileentity.TileEntityHavenBag;
