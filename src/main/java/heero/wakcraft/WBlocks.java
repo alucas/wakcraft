@@ -4,6 +4,7 @@ import heero.wakcraft.block.BlockCarpet;
 import heero.wakcraft.block.BlockClassConsole;
 import heero.wakcraft.block.BlockDragoexpress;
 import heero.wakcraft.block.BlockFence1;
+import heero.wakcraft.block.BlockFightWall;
 import heero.wakcraft.block.BlockGeneric;
 import heero.wakcraft.block.BlockHavenBag;
 import heero.wakcraft.block.BlockHavenBagBarrier;
@@ -51,7 +52,7 @@ public class WBlocks {
 			slabDirt, fence, polisher, havenGemWorkbench, invisiblewall,
 			havenbag, hbChest, hbLock, hbBridge, hbVisitors, hbBarrier,
 			hbCraft, hbCraft2, hbGarden, hbDeco, hbDeco2, hbMerchant,
-			fightMovement, fightDirection, classConsole;
+			fightMovement, fightDirection, fightWall, classConsole;
 	public static Block wakfu, wakfuFull, wakfuSlab;
 
 	public static void registerBlocks() {
@@ -92,6 +93,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(wakfuSlab = (new BlockSlabWakfu()), ItemBlockSlab.class, "blockWakfuSlab");
 		GameRegistry.registerBlock(fightMovement = (new BlockGeneric(Material.ground).setBlockTextureName("movement").setBlockName("FightMovement")), "blockFightMovement");
 		GameRegistry.registerBlock(fightDirection = (new BlockGeneric(Material.ground).setBlockTextureName("direction").setBlockName("FightDirection")), "blockFightDirection");
+		GameRegistry.registerBlock(fightWall = (new BlockFightWall()), "blockFightWall");
 		GameRegistry.registerBlock(classConsole = (new BlockClassConsole()), "blockClassConsole");
 
 		// Special blocks

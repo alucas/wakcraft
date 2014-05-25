@@ -140,7 +140,7 @@ public class FightManager {
 
 		List<ChunkCoordinates> blockList = new ArrayList<ChunkCoordinates>();
 
-		int radius = 5;
+		int radius = 10;
 		for (int j = 0; j <= radius * 2; j++) {
 			setFightWall(blockList, player.worldObj, posX + radius - j, posY, posZ + radius + 1);
 		}
@@ -160,12 +160,12 @@ public class FightManager {
 	protected void setFightWall(List<ChunkCoordinates> blockList, World world, int x, int y, int z) {
 		for (; y < world.getHeight() && !world.getBlock(x, y, z).equals(Blocks.air); ++y);
 		for (; y >= 0 && world.getBlock(x, y, z).equals(Blocks.air); --y);
-		world.setBlock(x, y + 1, z, WBlocks.fightMovement);
-		blockList.add(new ChunkCoordinates(x, y + 1, z));
 
-		if(world.getBlock(x, y + 2, z).equals(Blocks.air)) {
-			world.setBlock(x, y + 2, z, WBlocks.fightMovement);
-			blockList.add(new ChunkCoordinates(x, y + 2, z));
+		for (int i = 1; i <= 3; i++) {
+			if(world.getBlock(x, y + i, z).equals(Blocks.air)) {
+				world.setBlock(x, y + i, z, WBlocks.fightWall);
+				blockList.add(new ChunkCoordinates(x, y + i, z));
+			}
 		}
 	}
 
