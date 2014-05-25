@@ -1,5 +1,6 @@
 package heero.wakcraft;
 
+import heero.wakcraft.manager.FightManager;
 import heero.wakcraft.manager.HavenBagsManager;
 import heero.wakcraft.network.PacketPipeline;
 import heero.wakcraft.network.packet.PacketCloseWindow;
@@ -11,6 +12,7 @@ import heero.wakcraft.network.packet.PacketHavenBagVisitors;
 import heero.wakcraft.network.packet.PacketOpenWindow;
 import heero.wakcraft.network.packet.PacketProfession;
 import heero.wakcraft.proxy.CommonProxy;
+import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -20,6 +22,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 
 @Mod(modid = WInfo.MODID, name = WInfo.READABLE_NAME, version = WInfo.VERSION)
 public class Wakcraft {
@@ -70,6 +73,11 @@ public class Wakcraft {
 	@EventHandler
 	public void onFMLServerStartedEvent(FMLServerStartedEvent event) {
 		HavenBagsManager.setup();
+	}
+
+	@EventHandler
+	public void onFMLServerStoppingEvent(FMLServerStoppingEvent event) {
+		FightManager.teardown(MinecraftServer.getServer().getEntityWorld());
 	}
 
 	@EventHandler

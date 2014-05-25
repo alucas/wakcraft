@@ -24,16 +24,23 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 
 public class FightManager {
+	protected static int FIGHT_WALL_HEIGHT = 3;
+
 	// Map of <FightId, Teams<Entities<Id>>>
-	protected Map<Integer, List<List<Integer>>> fights = new HashMap<Integer, List<List<Integer>>>();
+	protected static Map<Integer, List<List<Integer>>> fights = new HashMap<Integer, List<List<Integer>>>();
 	// Map of <FightId, mapBlocks<blockPos>>
-	protected Map<Integer, List<ChunkCoordinates>> maps = new HashMap<Integer, List<ChunkCoordinates>>();
+	protected static Map<Integer, List<ChunkCoordinates>> maps = new HashMap<Integer, List<ChunkCoordinates>>();
 
 	@SubscribeEvent
 	public void onAttackEntityEvent(AttackEntityEvent event) {
 		if (event.entityPlayer.worldObj.isRemote) {
+			return;
+		}
+
+		if (event.entityPlayer.worldObj.provider.dimensionId != 0) {
 			return;
 		}
 
@@ -84,9 +91,26 @@ public class FightManager {
 			return;
 		}
 
-		FightProperty properties = (FightProperty) event.entityLiving.getExtendedProperties(FightProperty.IDENTIFIER);
+		updateFightOfEntity(event.entityLiving);
+	}
+
+
+	@SubscribeEvent
+	public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
+		if (event.player.worldObj.isRemote) {
+			return;
+		}
+
+		Boolean isDead = event.player.isDead;
+		event.player.isDead = true;
+		updateFightOfEntity(event.player);
+		event.player.isDead = isDead;
+	}
+
+	protected static void updateFightOfEntity(EntityLivingBase entity) {
+		FightProperty properties = (FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading the Fight properties of player : %s", event.entityLiving.getClass().getName());
+			FMLLog.warning("Error while loading the Fight properties of player : %s", entity.getClass().getName());
 			return;
 		}
 
@@ -96,10 +120,10 @@ public class FightManager {
 
 		int fightId = properties.getFightId();
 
-		updateFight(event.entity.worldObj, fightId);
+		updateFight(entity.worldObj, fightId);
 	}
 
-	protected int initFight(EntityPlayerMP assailant, EntityLivingBase target) {
+	protected static int initFight(EntityPlayerMP assailant, EntityLivingBase target) {
 		FightProperty assailantProperties = (FightProperty) assailant.getExtendedProperties(FightProperty.IDENTIFIER);
 		if (assailantProperties == null) {
 			FMLLog.warning("Error while loading the Fight properties of player : %s", assailant.getDisplayName());
@@ -133,7 +157,7 @@ public class FightManager {
 		return fightId;
 	}
 
-	protected void createFightMap(int fightId, EntityPlayerMP player) {
+	protected static void createFightMap(int fightId, EntityPlayerMP player) {
 		int posX = (int) Math.floor(player.posX);
 		int posY = (int) Math.floor(player.posY - 1.61);
 		int posZ = (int) Math.floor(player.posZ);
@@ -157,11 +181,11 @@ public class FightManager {
 		maps.put(fightId, blockList);
 	}
 
-	protected void setFightWall(List<ChunkCoordinates> blockList, World world, int x, int y, int z) {
+	protected static void setFightWall(List<ChunkCoordinates> blockList, World world, int x, int y, int z) {
 		for (; y < world.getHeight() && !world.getBlock(x, y, z).equals(Blocks.air); ++y);
 		for (; y >= 0 && world.getBlock(x, y, z).equals(Blocks.air); --y);
 
-		for (int i = 1; i <= 3; i++) {
+		for (int i = 1; i <= FIGHT_WALL_HEIGHT; i++) {
 			if(world.getBlock(x, y + i, z).equals(Blocks.air)) {
 				world.setBlock(x, y + i, z, WBlocks.fightWall);
 				blockList.add(new ChunkCoordinates(x, y + i, z));
@@ -169,15 +193,18 @@ public class FightManager {
 		}
 	}
 
-	protected void removeFightMap(World world, int fightId) {
+	protected static void removeFightMap(World world, int fightId) {
 		List<ChunkCoordinates> blockList = maps.remove(fightId);
+		if (blockList == null) {
+			return;
+		}
 
 		for (ChunkCoordinates block : blockList) {
 			world.setBlockToAir(block.posX, block.posY, block.posZ);
 		}
 	}
 
-	protected void updateFight(World world, int fightId) {
+	protected static void updateFight(World world, int fightId) {
 		List<List<Integer>> fight = fights.get(fightId);
 		if (fight == null) {
 			FMLLog.warning("Trying to update a fight who does not exist : %d", fightId);
@@ -211,7 +238,7 @@ public class FightManager {
 		}
 	}
 
-	protected void stopFight(World world, int fightId) {
+	protected static void stopFight(World world, int fightId) {
 		List<List<Integer>> fight = fights.get(fightId);
 		if (fight == null) {
 			FMLLog.warning("Trying to stop a fight who does not exist : %d", fightId);
@@ -237,6 +264,17 @@ public class FightManager {
 		}
 	}
 
+	protected static void stopFights(World world) {
+		for (int fightId : fights.keySet()) {
+			stopFight(world, fightId);
+			removeFightMap(world, fightId);
+		}
+	}
+
+	public static void teardown(World world) {
+		stopFights(world);
+	}
+
 	@SubscribeEvent
 	public void onFightEvent(FightEvent event) {
 		switch (event.type) {
@@ -257,7 +295,7 @@ public class FightManager {
 		}
 	}
 
-	protected void addFightersToFight(World world, List<List<Integer>> fighters, int fightId) {
+	protected static void addFightersToFight(World world, List<List<Integer>> fighters, int fightId) {
 		Iterator<List<Integer>> teams = fighters.iterator();
 		while (teams.hasNext()) {
 			Iterator<Integer> entities = teams.next().iterator();
@@ -279,7 +317,7 @@ public class FightManager {
 		}
 	}
 
-	protected void removeFightersFromFight(World world, List<List<Integer>> fighters) {
+	protected static void removeFightersFromFight(World world, List<List<Integer>> fighters) {
 		Iterator<List<Integer>> teams = fighters.iterator();
 		while (teams.hasNext()) {
 			Iterator<Integer> entities = teams.next().iterator();
