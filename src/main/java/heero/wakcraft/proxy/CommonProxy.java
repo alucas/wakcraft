@@ -39,12 +39,15 @@ public class CommonProxy {
 	}
 
 	public void registerEvents() {
+		FightManager fightManager = new FightManager();
+
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
-		MinecraftForge.EVENT_BUS.register(new FightManager());
+		MinecraftForge.EVENT_BUS.register(fightManager);
 
 		FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
+		FMLCommonHandler.instance().bus().register(fightManager);
 	}
 
 	public void registerItems() {

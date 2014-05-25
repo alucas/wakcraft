@@ -91,26 +91,9 @@ public class FightManager {
 			return;
 		}
 
-		updateFightOfEntity(event.entityLiving);
-	}
-
-
-	@SubscribeEvent
-	public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
-		if (event.player.worldObj.isRemote) {
-			return;
-		}
-
-		Boolean isDead = event.player.isDead;
-		event.player.isDead = true;
-		updateFightOfEntity(event.player);
-		event.player.isDead = isDead;
-	}
-
-	protected static void updateFightOfEntity(EntityLivingBase entity) {
-		FightProperty properties = (FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER);
+		FightProperty properties = (FightProperty) event.entityLiving.getExtendedProperties(FightProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading the Fight properties of player : %s", entity.getClass().getName());
+			FMLLog.warning("Error while loading the Fight properties of player : %s", event.entityLiving.getClass().getName());
 			return;
 		}
 
@@ -120,7 +103,31 @@ public class FightManager {
 
 		int fightId = properties.getFightId();
 
-		updateFight(entity.worldObj, fightId);
+		updateFight(event.entityLiving.worldObj, fightId);
+	}
+
+
+	@SubscribeEvent
+	public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
+		if (event.player.worldObj.isRemote) {
+			return;
+		}
+
+		FightProperty properties = (FightProperty) event.player.getExtendedProperties(FightProperty.IDENTIFIER);
+		if (properties == null) {
+			FMLLog.warning("Error while loading the Fight properties of player : %s", event.player.getClass().getName());
+			return;
+		}
+
+		if (!properties.isFighting()) {
+			return;
+		}
+
+		event.player.setDead();
+
+		int fightId = properties.getFightId();
+
+		updateFight(event.player.worldObj, fightId);
 	}
 
 	protected static int initFight(EntityPlayerMP assailant, EntityLivingBase target) {
