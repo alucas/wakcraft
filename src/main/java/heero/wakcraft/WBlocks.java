@@ -54,7 +54,8 @@ public class WBlocks {
 			havenbag, hbChest, hbLock, hbBridge, hbVisitors, hbBarrier,
 			hbCraft, hbCraft2, hbGarden, hbDeco, hbDeco2, hbMerchant,
 			fightMovement, fightDirection, fightWall, classConsole, ground1,
-			ground1Slab;
+			ground1Slab, ground2, ground2Slab, ground3, ground3Slab, ground4,
+			ground4Slab;
 	public static Block wakfu, wakfuFull, wakfuSlab;
 
 	public static void registerBlocks() {
@@ -99,6 +100,12 @@ public class WBlocks {
 		GameRegistry.registerBlock(classConsole = (new BlockClassConsole()), "blockClassConsole");
 		GameRegistry.registerBlock(ground1 = (new BlockGeneric(Material.ground).setBlockTextureName("ground1").setBlockName("Ground1")), "blockGround1");
 		GameRegistry.registerBlock(ground1Slab = (new BlockSlab(Material.ground, WBlocks.ground1).setBlockTextureName("ground1").setBlockName("Ground1Slab")), ItemBlockSlab.class, "blockGround1Slab");
+		GameRegistry.registerBlock(ground2 = (new BlockGeneric(Material.ground).setBlockTextureName("ground2").setBlockName("Ground2")), "blockGround2");
+		GameRegistry.registerBlock(ground2Slab = (new BlockSlab(Material.ground, WBlocks.ground2).setBlockTextureName("ground2").setBlockName("Ground2Slab")), ItemBlockSlab.class, "blockGround2Slab");
+		GameRegistry.registerBlock(ground3 = (new BlockGeneric(Material.ground).setBlockTextureName("ground3").setBlockName("Ground3")), "blockGround3");
+		GameRegistry.registerBlock(ground3Slab = (new BlockSlab(Material.ground, WBlocks.ground3).setBlockTextureName("ground3").setBlockName("Ground3Slab")), ItemBlockSlab.class, "blockGround3Slab");
+		GameRegistry.registerBlock(ground4 = (new BlockGeneric(Material.ground).setBlockTextureName("ground4").setBlockName("Ground4")), "blockGround4");
+		GameRegistry.registerBlock(ground4Slab = (new BlockSlab(Material.ground, WBlocks.ground4).setBlockTextureName("ground4").setBlockName("Ground4Slab")), ItemBlockSlab.class, "blockGround4Slab");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(modid + "polisher")), "BlockPolisher");
