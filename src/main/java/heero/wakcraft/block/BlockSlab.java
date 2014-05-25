@@ -15,7 +15,7 @@ import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class BlockSlab extends BlockGeneric {
+public class BlockSlab extends BlockGeneric {
 	// Opaque version of the slab block
 	public Block blockOpaque;
 

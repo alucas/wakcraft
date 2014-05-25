@@ -20,7 +20,7 @@ import heero.wakcraft.block.BlockOre4;
 import heero.wakcraft.block.BlockPalisade;
 import heero.wakcraft.block.BlockPhoenix;
 import heero.wakcraft.block.BlockPolisher;
-import heero.wakcraft.block.BlockSlabDirt;
+import heero.wakcraft.block.BlockSlab;
 import heero.wakcraft.block.BlockSlabGrass;
 import heero.wakcraft.block.BlockSlabWakfu;
 import heero.wakcraft.block.BlockStairs2;
@@ -41,6 +41,7 @@ import heero.wakcraft.item.ItemBlockSufokiaGround;
 import heero.wakcraft.item.ItemBlockSufokiaWave;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -52,7 +53,8 @@ public class WBlocks {
 			slabDirt, fence, polisher, havenGemWorkbench, invisiblewall,
 			havenbag, hbChest, hbLock, hbBridge, hbVisitors, hbBarrier,
 			hbCraft, hbCraft2, hbGarden, hbDeco, hbDeco2, hbMerchant,
-			fightMovement, fightDirection, fightWall, classConsole;
+			fightMovement, fightDirection, fightWall, classConsole, ground1,
+			ground1Slab;
 	public static Block wakfu, wakfuFull, wakfuSlab;
 
 	public static void registerBlocks() {
@@ -73,7 +75,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(wood = (new BlockYRotation(Material.wood).setBlockTextureName("wood").setBlockName("Wood").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockWood");
 		GameRegistry.registerBlock(hbstand = (new BlockYRotation(Material.wood).setBlockTextureName("hbstand").setBlockName("HBStand").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBStand");
 		GameRegistry.registerBlock(slabGrass = (new BlockSlabGrass()), ItemBlockSlab.class, "blockGrass");
-		GameRegistry.registerBlock(slabDirt = (new BlockSlabDirt()), ItemBlockSlab.class, "blockSlabDirt");
+		GameRegistry.registerBlock(slabDirt = (new BlockSlab(Material.ground, Blocks.dirt).setBlockTextureName("dirtSlab").setBlockName("SlabDirt")), ItemBlockSlab.class, "blockSlabDirt");
 		GameRegistry.registerBlock(fence = (new BlockFence1(modid + "palisade1", Material.wood).setBlockName("Fence1")), "blockFence");
 		GameRegistry.registerBlock(invisiblewall = (new BlockInvisibleWall()), "blockInvisibleWall");
 		GameRegistry.registerBlock(havenbag = (new BlockHavenBag()), "blockHavenBag");
@@ -95,6 +97,8 @@ public class WBlocks {
 		GameRegistry.registerBlock(fightDirection = (new BlockGeneric(Material.ground).setBlockTextureName("direction").setBlockName("FightDirection")), "blockFightDirection");
 		GameRegistry.registerBlock(fightWall = (new BlockFightWall()), "blockFightWall");
 		GameRegistry.registerBlock(classConsole = (new BlockClassConsole()), "blockClassConsole");
+		GameRegistry.registerBlock(ground1 = (new BlockGeneric(Material.ground).setBlockTextureName("ground1").setBlockName("Ground1")), "blockGround1");
+		GameRegistry.registerBlock(ground1Slab = (new BlockSlab(Material.ground, WBlocks.ground1).setBlockTextureName("ground1").setBlockName("Ground1Slab")), ItemBlockSlab.class, "blockGround1Slab");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(modid + "polisher")), "BlockPolisher");
