@@ -73,7 +73,7 @@ public class Wakcraft {
 	}
 
 	@EventHandler
-	public void onFMLServerStartedEvent(FMLServerStoppedEvent event) {
+	public void onFMLServerStoppedEvent(FMLServerStoppedEvent event) {
 		HavenBagsManager.teardown();
 	}
 }
