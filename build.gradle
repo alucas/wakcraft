@@ -1,3 +1,4 @@
+// This sets us up for building a forge project - you need all of these
 buildscript {
     repositories {
         mavenCentral()
@@ -21,9 +22,10 @@ apply plugin: 'forge'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-version = "1.7.2-1.9"
-group= "heero.wakcraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "Wakcraft"
+def versionInfo = getGitVersion()
+version = "1.7.2-${versionInfo['Wakcraft.version']}"
+group= "heero.mods" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "wakcraft"
 
 minecraft {
     version = "1.7.2-10.12.1.1060"
@@ -52,4 +54,43 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+
+    // generate version.properties file from the git version data earlier
+    doLast {
+        def propsFile = new File(destinationDir, 'version.properties')
+        def properties = new Properties()
+        properties.putAll(versionInfo)
+        properties['Wakcraft.build.mcversion'] = project.minecraft.version
+        properties.store(propsFile.newWriter(), null)
+    }
+}
+
+def getGitVersion()
+{
+    def out = [:]
+
+    // call git command.
+    def outStream = new ByteArrayOutputStream()
+    def result = exec {
+        executable = 'git'
+        args = [ 'describe', '--long', "--match=[^(jenkins)]*"]
+        standardOutput = outStream
+    }
+
+    def fullVersion = outStream.toString().trim()
+    def matcher = fullVersion =~ /(\d+).(\d+)-(\d+)-(.*)/
+
+    def maj = matcher[0][1]
+    def min = matcher[0][2]
+    def rev = matcher[0][3]
+    def bn = System.getenv("BUILD_NUMBER") ?: "1"
+
+    out['Wakcraft.build.major.number'] = maj.toString()
+    out['Wakcraft.build.minor.number'] = min.toString()
+    out['Wakcraft.build.revision.number'] = rev.toString()
+    out['Wakcraft.build.githash'] = matcher[0][4].toString()
+    out['Wakcraft.build.number'] = bn.toString()
+    out['Wakcraft.version'] = "${maj}.${min}.${rev}.${bn}".toString()
+
+    return out
 }
