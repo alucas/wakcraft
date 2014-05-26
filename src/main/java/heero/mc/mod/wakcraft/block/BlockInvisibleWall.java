@@ -38,7 +38,7 @@ public class BlockInvisibleWall extends Block {
 
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		if (world instanceof World && ((World) world).provider.dimensionId == WConfig.havenBagDimensionId) {
+		if (world instanceof World && ((World) world).provider.dimensionId == WConfig.HAVENBAG_DIMENSION_ID) {
 			return 15;
 		}
 

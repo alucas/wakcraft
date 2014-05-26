@@ -42,7 +42,7 @@ public class Wakcraft {
 		Version.init(event.getVersionProperties());
 		event.getModMetadata().version = Version.fullVersionString();
 
-		WConfig.loadConfig(event);
+		WConfig.loadConfig(event.getSuggestedConfigurationFile());
 
 		proxy.registerEvents();
 		proxy.registerBlocks();

@@ -30,7 +30,7 @@ public class TeleporterHavenBag extends Teleporter {
 	 * Place an entity in a nearby portal, creating one if necessary.
 	 */
 	public void placeInPortal(Entity entity, double oldPosX, double oldPosY, double oldPosZ, float oldYaw) {
-		if (entity.dimension == WConfig.havenBagDimensionId && uid != -1) {
+		if (entity.dimension == WConfig.HAVENBAG_DIMENSION_ID && uid != -1) {
 			int[] coords = HavenBagHelper.getCoordFromUID(uid);
 
 			entity.motionX = entity.motionY = entity.motionZ = 0;

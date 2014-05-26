@@ -41,9 +41,9 @@ public class BlockHavenBag extends BlockContainer {
 			return true;
 		}
 
-		World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WConfig.havenBagDimensionId);
+		World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WConfig.HAVENBAG_DIMENSION_ID);
 		if (havenBagWorld == null) {
-			FMLLog.warning("Error while loading the havenbag world : %d", WConfig.havenBagDimensionId);
+			FMLLog.warning("Error while loading the havenbag world : %d", WConfig.HAVENBAG_DIMENSION_ID);
 
 			return false;
 		}

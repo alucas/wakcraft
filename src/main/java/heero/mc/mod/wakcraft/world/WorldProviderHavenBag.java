@@ -21,7 +21,7 @@ public class WorldProviderHavenBag extends WorldProvider {
 		super.registerWorldChunkManager();
 
 		this.hasNoSky = true;
-		this.dimensionId = WConfig.havenBagDimensionId;
+		this.dimensionId = WConfig.HAVENBAG_DIMENSION_ID;
 
 		if (worldObj.isRemote) {
 			this.setSkyRenderer(new EndSkyRenderer());
