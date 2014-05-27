@@ -20,6 +20,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -76,7 +77,7 @@ public class FightManager {
 			List<ChunkCoordinates> coords = getMapAtPos(event.entityPlayer.worldObj, posX, posY, posZ, 10);
 
 			if (coords.size() < 100) {
-				event.entityPlayer.addChatMessage(new ChatComponentText("You can't begin to fight here"));
+				event.entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("cantFightHere")));
 				event.setCanceled(true);
 				return;
 			}
