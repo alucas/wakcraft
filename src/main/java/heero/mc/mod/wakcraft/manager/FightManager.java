@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.manager;
 
-import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
@@ -8,8 +7,10 @@ import heero.mc.mod.wakcraft.event.FightEvent.Type;
 import heero.mc.mod.wakcraft.network.packet.PacketFight;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -68,12 +70,24 @@ public class FightManager {
 		}
 
 		if (!properties.isFighting() && !targetProperties.isFighting()) {
-			int fightId = initFight((EntityPlayerMP) event.entityPlayer, target);
-			if (fightId == -1) {
+			int posX = (int) Math.floor(event.entityPlayer.posX);
+			int posY = (int) Math.floor(event.entityPlayer.posY - 1.61);
+			int posZ = (int) Math.floor(event.entityPlayer.posZ);
+			List<ChunkCoordinates> coords = getMapAtPos(event.entityPlayer.worldObj, posX, posY, posZ, 10);
+
+			if (coords.size() < 100) {
+				event.entityPlayer.addChatMessage(new ChatComponentText("You can't begin to fight here"));
+				event.setCanceled(true);
 				return;
 			}
 
-			createFightMap(fightId, (EntityPlayerMP) event.entityPlayer);
+			int fightId = initFight((EntityPlayerMP) event.entityPlayer, target);
+			if (fightId == -1) {
+				event.setCanceled(true);
+				return;
+			}
+
+			createFightMap(fightId, event.entityPlayer.worldObj, coords);
 
 			event.setCanceled(true);
 			return;
@@ -83,6 +97,67 @@ public class FightManager {
 			event.setCanceled(true);
 			return;
 		}
+	}
+
+	protected List<ChunkCoordinates> getMapAtPos(World world, int posX, int posY, int posZ, int radius) {
+		BitSet visited = new BitSet();
+
+		return getMapAtPos_rec(world, posX, posY, posZ, 0, 0, 0, visited, radius * radius);
+	}
+
+	protected static final int offsetX[] = new int[]{-1, 1, 0, 0};
+	protected static final int offsetZ[] = new int[]{0, 0, -1, 1};
+	protected List<ChunkCoordinates> getMapAtPos_rec(World world, int centerX, int centerY, int centerZ, int offsetX, int offsetY, int offsetZ, BitSet visited, int radius2) {
+		visited.set(50 + offsetX + 100 * (50 + offsetY) + 10000 * (50 + offsetZ));
+
+		if (offsetX * offsetX + offsetZ * offsetZ > radius2) {
+			return null;
+		}
+
+		if (!world.getBlock(centerX + offsetX, centerY + offsetY, centerZ + offsetZ).equals(Blocks.air)) {
+			if (!world.getBlock(centerX + offsetX, centerY + offsetY + 1, centerZ + offsetZ).equals(Blocks.air)) {
+				if (!world.getBlock(centerX + offsetX, centerY + offsetY + 2, centerZ + offsetZ).equals(Blocks.air)) {
+					return null;
+				}
+
+				if (!world.getBlock(centerX + offsetX, centerY + offsetY + 3, centerZ + offsetZ).equals(Blocks.air)) {
+					return null;
+				}
+
+				offsetY += 1;
+			} else if (!world.getBlock(centerX + offsetX, centerY + offsetY + 2, centerZ + offsetZ).equals(Blocks.air)) {
+				return null;
+			}
+		} else {
+			if (world.getBlock(centerX + offsetX, centerY + offsetY - 1, centerZ + offsetZ).equals(Blocks.air)) {
+				return null;
+			}
+
+			if (!world.getBlock(centerX + offsetX, centerY + offsetY + 1, centerZ + offsetZ).equals(Blocks.air)) {
+				return null;
+			}
+
+			if (!world.getBlock(centerX + offsetX, centerY + offsetY + 2, centerZ + offsetZ).equals(Blocks.air)) {
+				return null;
+			}
+
+			offsetY -= 1;
+		}
+
+		List<ChunkCoordinates> coords = new LinkedList<ChunkCoordinates>();
+		coords.add(new ChunkCoordinates(centerX + offsetX, centerY + offsetY + 1, centerZ + offsetZ));
+
+		List<ChunkCoordinates> coords_tmp;
+		for (int i = 0; i < 4; i++) {
+			if (!visited.get(50 + offsetX + FightManager.offsetX[i] + 100 * (50 + offsetY) + 10000 * (50 + offsetZ + FightManager.offsetZ[i]))) {
+				coords_tmp = getMapAtPos_rec(world, centerX, centerY, centerZ, offsetX + FightManager.offsetX[i], offsetY, offsetZ + FightManager.offsetZ[i], visited, radius2);
+				if (coords_tmp != null) {
+					coords.addAll(coords_tmp);
+				}
+			}
+		}
+
+		return coords;
 	}
 
 	@SubscribeEvent
@@ -164,40 +239,12 @@ public class FightManager {
 		return fightId;
 	}
 
-	protected static void createFightMap(int fightId, EntityPlayerMP player) {
-		int posX = (int) Math.floor(player.posX);
-		int posY = (int) Math.floor(player.posY - 1.61);
-		int posZ = (int) Math.floor(player.posZ);
-
-		List<ChunkCoordinates> blockList = new ArrayList<ChunkCoordinates>();
-
-		int radius = 10;
-		for (int j = 0; j <= radius * 2; j++) {
-			setFightWall(blockList, player.worldObj, posX + radius - j, posY, posZ + radius + 1);
-		}
-		for (int j = 0; j <= radius * 2; j++) {
-			setFightWall(blockList, player.worldObj, posX + radius - j, posY, posZ - radius - 1);
-		}
-		for (int j = 0; j <= radius * 2; j++) {
-			setFightWall(blockList, player.worldObj, posX + radius + 1, posY, posZ + radius - j);
-		}
-		for (int j = 0; j <= radius * 2; j++) {
-			setFightWall(blockList, player.worldObj, posX - radius - 1, posY, posZ + radius - j);
+	protected static void createFightMap(int fightId, World world, List<ChunkCoordinates> blockList) {
+		for (ChunkCoordinates block : blockList) {
+			world.setBlock(block.posX, block.posY, block.posZ, Blocks.stone);
 		}
 
 		maps.put(fightId, blockList);
-	}
-
-	protected static void setFightWall(List<ChunkCoordinates> blockList, World world, int x, int y, int z) {
-		for (; y < world.getHeight() && !world.getBlock(x, y, z).equals(Blocks.air); ++y);
-		for (; y >= 0 && world.getBlock(x, y, z).equals(Blocks.air); --y);
-
-		for (int i = 1; i <= FIGHT_WALL_HEIGHT; i++) {
-			if(world.getBlock(x, y + i, z).equals(Blocks.air)) {
-				world.setBlock(x, y + i, z, WBlocks.fightWall);
-				blockList.add(new ChunkCoordinates(x, y + i, z));
-			}
-		}
 	}
 
 	protected static void removeFightMap(World world, int fightId) {
