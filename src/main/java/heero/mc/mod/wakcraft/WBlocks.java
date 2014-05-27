@@ -4,6 +4,7 @@ import heero.mc.mod.wakcraft.block.BlockCarpet;
 import heero.mc.mod.wakcraft.block.BlockClassConsole;
 import heero.mc.mod.wakcraft.block.BlockDragoexpress;
 import heero.mc.mod.wakcraft.block.BlockFence1;
+import heero.mc.mod.wakcraft.block.BlockFightInsideWall;
 import heero.mc.mod.wakcraft.block.BlockFightWall;
 import heero.mc.mod.wakcraft.block.BlockGeneric;
 import heero.mc.mod.wakcraft.block.BlockHavenBag;
@@ -58,7 +59,8 @@ public class WBlocks {
 			ground4Slab, ground5, ground5Slab, ground6, ground6Slab, ground7,
 			ground7Slab, ground8, ground8Slab, ground9, ground9Slab, ground10,
 			ground10Slab, ground11, ground11Slab, ground12, ground12Slab,
-			ground13, ground13Slab, ground14, ground14Slab, box, plank;
+			ground13, ground13Slab, ground14, ground14Slab, box, plank,
+			fightInsideWall;
 	public static Block wakfu, wakfuFull, wakfuSlab;
 
 	public static void registerBlocks() {
@@ -100,6 +102,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(fightMovement = (new BlockGeneric(Material.ground).setBlockTextureName("movement").setBlockName("FightMovement")), "blockFightMovement");
 		GameRegistry.registerBlock(fightDirection = (new BlockGeneric(Material.ground).setBlockTextureName("direction").setBlockName("FightDirection")), "blockFightDirection");
 		GameRegistry.registerBlock(fightWall = (new BlockFightWall()), "blockFightWall");
+		GameRegistry.registerBlock(fightInsideWall = (new BlockFightInsideWall()), "blockFightInsideWall");
 		GameRegistry.registerBlock(classConsole = (new BlockClassConsole()), "blockClassConsole");
 		GameRegistry.registerBlock(ground1 = (new BlockGeneric(Material.ground).setBlockTextureName("ground1").setBlockName("Ground1")), "blockGround1");
 		GameRegistry.registerBlock(ground1Slab = (new BlockSlab(Material.ground, WBlocks.ground1).setBlockTextureName("ground1").setBlockName("Ground1Slab")), ItemBlockSlab.class, "blockGround1Slab");
