@@ -117,7 +117,6 @@ public class FightManager {
 
 	protected static final int offsetX[] = new int[]{-1, 1, 0, 0};
 	protected static final int offsetZ[] = new int[]{0, 0, -1, 1};
-	protected static FightBlockCoordinates fightBlock = new FightBlockCoordinates();
 	protected void getMapAtPos_rec(World world, int centerX, int centerY, int centerZ, int offsetX, int offsetY, int offsetZ, Set<FightBlockCoordinates> fightBlocks, BitSet visited, int radius2) {
 		visited.set(hashCoords(offsetX, offsetY, offsetZ));
 
@@ -126,7 +125,7 @@ public class FightManager {
 		}
 
 		int direction = 0;
-		// upd
+		// up
 		if (!world.getBlock(centerX + offsetX, centerY + offsetY + 1, centerZ + offsetZ).equals(Blocks.air)) {
 			// too hight
 			if (!world.getBlock(centerX + offsetX, centerY + offsetY + 2, centerZ + offsetZ).equals(Blocks.air)) {
