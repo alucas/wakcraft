@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.network.packet;
 
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.event.FightEvent.Type;
+import heero.mc.mod.wakcraft.manager.FightManager;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
@@ -76,10 +77,12 @@ public class PacketFight implements IPacket {
 		switch (type) {
 		case START:
 			MinecraftForge.EVENT_BUS.post(new FightEvent(player.worldObj, type, fightId, fighters));
+			FightManager.addFightersToFight(player.worldObj, fighters, fightId);
 			break;
 
 		case STOP:
 			MinecraftForge.EVENT_BUS.post(new FightEvent(player.worldObj, type, fightId, fighters));
+			FightManager.removeFightersFromFight(player.worldObj, fighters);
 			break;
 
 		default:

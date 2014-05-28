@@ -86,12 +86,17 @@ public class FightManager {
 				return;
 			}
 
-			int fightId = initFight((EntityPlayerMP) event.entityPlayer, target);
+			int fightId = event.entityPlayer.worldObj.getUniqueDataId("fightId");
+
+			List<List<Integer>> fightersList = initFight(fightId, (EntityPlayerMP) event.entityPlayer, target);
+
+			addFightersToFight(event.entityPlayer.worldObj, fightersList, fightId);
 
 			Set<FightBlockCoordinates> startBlocks = choseSartPositions(event.entityPlayer.worldObj.rand, fightBlocks);
 			generateMap(fightId, event.entityPlayer.worldObj, fightBlocks);
 
 			fightsMap.put(fightId, new FightMap(fightBlocks, startBlocks));
+			fighters.put(fightId, fightersList);
 
 			event.setCanceled(true);
 			return;
@@ -308,9 +313,7 @@ public class FightManager {
 		updateFight(event.player.worldObj, fightId);
 	}
 
-	protected static int initFight(EntityPlayerMP assailant, EntityLivingBase target) {
-		int fightId = assailant.worldObj.getUniqueDataId("fightId");
-
+	protected static List<List<Integer>> initFight(int fightId, EntityPlayerMP assailant, EntityLivingBase target) {
 		ArrayList<Integer> fighters1 = new ArrayList<Integer>();
 		ArrayList<Integer> fighters2 = new ArrayList<Integer>();
 		fighters1.add(assailant.getEntityId());
@@ -327,7 +330,7 @@ public class FightManager {
 			Wakcraft.packetPipeline.sendTo(new PacketFight(Type.START, fightId, fighters), (EntityPlayerMP) target);
 		}
 
-		return fightId;
+		return fighters;
 	}
 
 	protected static void updateFight(World world, int fightId) {
@@ -388,12 +391,16 @@ public class FightManager {
 				}
 			}
 		}
+
+		removeFightMap(world, fightId);
+		removeFightersFromFight(world, fighters.get(fightId));
+
+		fighters.remove(fightId);
 	}
 
 	protected static void stopFights(World world) {
 		for (int fightId : fighters.keySet()) {
 			stopFight(world, fightId);
-			removeFightMap(world, fightId);
 		}
 	}
 
@@ -401,27 +408,7 @@ public class FightManager {
 		stopFights(world);
 	}
 
-	@SubscribeEvent
-	public void onFightEvent(FightEvent event) {
-		switch (event.type) {
-		case START:
-			addFightersToFight(event.world, event.fighters, event.fightId);
-
-			fighters.put(event.fightId, event.fighters);
-			break;
-
-		case STOP:
-			removeFightersFromFight(event.world, event.fighters);
-
-			fighters.remove(event.fightId);
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	protected static void addFightersToFight(World world, List<List<Integer>> fighters, int fightId) {
+	public static void addFightersToFight(World world, List<List<Integer>> fighters, int fightId) {
 		Iterator<List<Integer>> teams = fighters.iterator();
 		while (teams.hasNext()) {
 			Iterator<Integer> entities = teams.next().iterator();
@@ -431,7 +418,7 @@ public class FightManager {
 		}
 	}
 
-	protected static void addFighterToFight(World world, int fighterId, int fightId) {
+	public static void addFighterToFight(World world, int fighterId, int fightId) {
 		Entity entity = world.getEntityByID(fighterId);
 		if (entity == null || !(entity instanceof EntityLivingBase)) {
 			FMLLog.warning("Wrond fighting entity id");
@@ -447,7 +434,7 @@ public class FightManager {
 		entityProperties.setFightId(fightId);
 	}
 
-	protected static void removeFightersFromFight(World world, List<List<Integer>> fighters) {
+	public static void removeFightersFromFight(World world, List<List<Integer>> fighters) {
 		Iterator<List<Integer>> teams = fighters.iterator();
 		while (teams.hasNext()) {
 			Iterator<Integer> entities = teams.next().iterator();
