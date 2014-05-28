@@ -57,14 +57,15 @@ public class FightManager {
 			return;
 		}
 
+		EntityPlayerMP player = (EntityPlayerMP) event.entityPlayer;
 		EntityLivingBase target = (EntityLivingBase) event.target;
 		if (!target.isEntityAlive()) {
 			return;
 		}
 
-		FightProperty properties = (FightProperty) event.entityPlayer.getExtendedProperties(FightProperty.IDENTIFIER);
+		FightProperty properties = (FightProperty) player.getExtendedProperties(FightProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading the Fight properties of player : %s", event.entityPlayer.getDisplayName());
+			FMLLog.warning("Error while loading the Fight properties of player : %s", player.getDisplayName());
 			event.setCanceled(true);
 			return;
 		}
@@ -77,20 +78,20 @@ public class FightManager {
 		}
 
 		if (!properties.isFighting() && !targetProperties.isFighting()) {
-			int posX = (int) Math.floor(event.entityPlayer.posX);
-			int posY = (int) Math.floor(event.entityPlayer.posY);
-			int posZ = (int) Math.floor(event.entityPlayer.posZ);
+			int posX = (int) Math.floor(player.posX);
+			int posY = (int) Math.floor(player.posY);
+			int posZ = (int) Math.floor(player.posZ);
 			Set<FightBlockCoordinates> fightBlocks = getMapAtPos(world, posX, posY, posZ, 10);
 
 			if (fightBlocks.size() < 100) {
-				event.entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("cantFightHere")));
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("cantFightHere")));
 				event.setCanceled(true);
 				return;
 			}
 
 			int fightId = world.getUniqueDataId("fightId");
 
-			List<List<Integer>> fightersList = initFight(fightId, (EntityPlayerMP) event.entityPlayer, target);
+			List<List<Integer>> fightersList = initFight(fightId, player, target);
 
 			addFightersToFight(world, fightersList, fightId);
 
