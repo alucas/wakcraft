@@ -225,7 +225,7 @@ public class FightManager {
 
 			switch (block.type) {
 			case NORMAL:
-				//world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightInsideWall);
+				world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightInsideWall);
 				break;
 			case WALL:
 				world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightWall);
@@ -247,19 +247,14 @@ public class FightManager {
 			return;
 		}
 
-		for (FightBlockCoordinates block : fightBlocks) {
-			// TODO : remove
-			if (block.type == TYPE.NORMAL) {
-				continue;
-			}
-
-			Block block2 = world.getBlock(block.posX, block.posY, block.posZ);
-			if (!block2.equals(WBlocks.fightWall) && !block2.equals(WBlocks.fightInsideWall) && !block2.equals(WBlocks.fightStart1) && !block2.equals(WBlocks.fightStart2)) {
+		for (FightBlockCoordinates blockCoords : fightBlocks) {
+			Block block = world.getBlock(blockCoords.posX, blockCoords.posY, blockCoords.posZ);
+			if (!block.equals(WBlocks.fightWall) && !block.equals(WBlocks.fightInsideWall) && !block.equals(WBlocks.fightStart1) && !block.equals(WBlocks.fightStart2)) {
 				FMLLog.warning("Trying to restore a block different of fight blocks");
 				continue;
 			}
 
-			world.setBlockToAir(block.posX, block.posY, block.posZ);
+			world.setBlockToAir(blockCoords.posX, blockCoords.posY, blockCoords.posZ);
 		}
 	}
 

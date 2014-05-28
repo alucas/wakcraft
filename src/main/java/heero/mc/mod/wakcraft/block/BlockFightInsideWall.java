@@ -10,10 +10,9 @@ import net.minecraft.world.World;
 public class BlockFightInsideWall extends BlockGeneric {
 
 	public BlockFightInsideWall() {
-		super(Material.ground);
+		super(Material.air);
 
-		setBlockTextureName("fightWall");
-		setBlockName("FightWall");
+		setBlockName("FightInsideWall");
 	}
 
 	/**
