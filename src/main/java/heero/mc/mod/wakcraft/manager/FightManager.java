@@ -426,21 +426,25 @@ public class FightManager {
 		while (teams.hasNext()) {
 			Iterator<Integer> entities = teams.next().iterator();
 			while (entities.hasNext()) {
-				Entity entity = world.getEntityByID(entities.next());
-				if (entity == null || !(entity instanceof EntityLivingBase)) {
-					FMLLog.warning("Wrond fighting entity id");
-					return;
-				}
-
-				FightProperty entityProperties = (FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER);
-				if (entityProperties == null) {
-					FMLLog.warning("Error while loading the Fight properties of player : %s", entity.getClass().getName());
-					return;
-				}
-
-				entityProperties.setFightId(fightId);
+				addFighterToFight(world, entities.next(), fightId);
 			}
 		}
+	}
+
+	protected static void addFighterToFight(World world, int fighterId, int fightId) {
+		Entity entity = world.getEntityByID(fighterId);
+		if (entity == null || !(entity instanceof EntityLivingBase)) {
+			FMLLog.warning("Wrond fighting entity id");
+			return;
+		}
+
+		FightProperty entityProperties = (FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER);
+		if (entityProperties == null) {
+			FMLLog.warning("Error while loading the Fight properties of player : %s", entity.getClass().getName());
+			return;
+		}
+
+		entityProperties.setFightId(fightId);
 	}
 
 	protected static void removeFightersFromFight(World world, List<List<Integer>> fighters) {
