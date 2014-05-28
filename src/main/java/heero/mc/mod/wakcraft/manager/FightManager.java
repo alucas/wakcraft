@@ -36,9 +36,9 @@ public class FightManager {
 	protected static int FIGHT_WALL_HEIGHT = 3;
 
 	// Map of <FightId, Teams<Entities<Id>>>
-	protected static Map<Integer, List<List<Integer>>> fights = new HashMap<Integer, List<List<Integer>>>();
-	// Map of <FightId, FightBlocks<Pos, Type>>
-	protected static Map<Integer, Set<FightBlockCoordinates>> maps = new HashMap<Integer, Set<FightBlockCoordinates>>();
+	protected static Map<Integer, List<List<Integer>>> fighters = new HashMap<Integer, List<List<Integer>>>();
+	// Map of <FightId, Fight info>
+	protected static Map<Integer, FightMap> fightsMap = new HashMap<Integer, FightMap>();
 
 	@SubscribeEvent
 	public void onAttackEntityEvent(AttackEntityEvent event) {
@@ -207,12 +207,15 @@ public class FightManager {
 
 		int maxStartBlock = 12;
 		int nbStartBlock = 0;
+		Set<FightBlockCoordinates> startBlocks = new HashSet<FightBlockCoordinates>();
 		while(nbStartBlock < maxStartBlock) {
 			int rand = world.rand.nextInt(fightBlocks.size());
 			FightBlockCoordinates coords = fightBlocksList.get(rand);
 			if (coords.type == TYPE.NORMAL && coords.metadata == 1) {
 				coords.type = TYPE.START;
 				coords.metadata = nbStartBlock % 2;
+
+				startBlocks.add(coords);
 				nbStartBlock++;
 			}
 		}
@@ -238,16 +241,16 @@ public class FightManager {
 			}
 		}
 
-		maps.put(fightId, fightBlocks);
+		fightsMap.put(fightId, new FightMap(fightBlocks, startBlocks));
 	}
 
 	protected static void removeFightMap(World world, int fightId) {
-		Set<FightBlockCoordinates> fightBlocks = maps.remove(fightId);
-		if (fightBlocks == null) {
+		FightMap fightMap = fightsMap.remove(fightId);
+		if (fightMap == null) {
 			return;
 		}
 
-		for (FightBlockCoordinates blockCoords : fightBlocks) {
+		for (FightBlockCoordinates blockCoords : fightMap.getFightBlocks()) {
 			Block block = world.getBlock(blockCoords.posX, blockCoords.posY, blockCoords.posZ);
 			if (!block.equals(WBlocks.fightWall) && !block.equals(WBlocks.fightInsideWall) && !block.equals(WBlocks.fightStart1) && !block.equals(WBlocks.fightStart2)) {
 				FMLLog.warning("Trying to restore a block different of fight blocks");
@@ -338,7 +341,7 @@ public class FightManager {
 	}
 
 	protected static void updateFight(World world, int fightId) {
-		List<List<Integer>> fight = fights.get(fightId);
+		List<List<Integer>> fight = fighters.get(fightId);
 		if (fight == null) {
 			FMLLog.warning("Trying to update a fight who does not exist : %d", fightId);
 			return;
@@ -372,7 +375,7 @@ public class FightManager {
 	}
 
 	protected static void stopFight(World world, int fightId) {
-		List<List<Integer>> fight = fights.get(fightId);
+		List<List<Integer>> fight = fighters.get(fightId);
 		if (fight == null) {
 			FMLLog.warning("Trying to stop a fight who does not exist : %d", fightId);
 			return;
@@ -398,7 +401,7 @@ public class FightManager {
 	}
 
 	protected static void stopFights(World world) {
-		for (int fightId : fights.keySet()) {
+		for (int fightId : fighters.keySet()) {
 			stopFight(world, fightId);
 			removeFightMap(world, fightId);
 		}
@@ -414,13 +417,13 @@ public class FightManager {
 		case START:
 			addFightersToFight(event.world, event.fighters, event.fightId);
 
-			fights.put(event.fightId, event.fighters);
+			fighters.put(event.fightId, event.fighters);
 			break;
 
 		case STOP:
 			removeFightersFromFight(event.world, event.fighters);
 
-			fights.remove(event.fightId);
+			fighters.remove(event.fightId);
 			break;
 
 		default:
