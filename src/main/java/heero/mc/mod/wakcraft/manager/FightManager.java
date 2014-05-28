@@ -93,7 +93,7 @@ public class FightManager {
 			addFightersToFight(world, fighters, fightId);
 
 			Set<FightBlockCoordinates> startBlocks = getSartingPositions(world.rand, fightBlocks);
-			generateFightMap(fightId, world, fightBlocks);
+			createFightMap(world, fightBlocks);
 
 			fights.put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
 
@@ -227,7 +227,13 @@ public class FightManager {
 		return startBlocks;
 	}
 
-	protected static void generateFightMap(int fightId, World world, Set<FightBlockCoordinates> fightBlocks) {
+	/**
+	 * Add the fight blocks to the world.
+	 * 
+	 * @param world			The world of the fight.
+	 * @param fightBlocks	The block coordinates list.
+	 */
+	protected static void createFightMap(World world, Set<FightBlockCoordinates> fightBlocks) {
 		for (FightBlockCoordinates block : fightBlocks) {
 			if (!world.getBlock(block.posX, block.posY, block.posZ).equals(Blocks.air)) {
 				FMLLog.warning("Trying to replace a block different of Air");
@@ -250,7 +256,13 @@ public class FightManager {
 		}
 	}
 
-	protected static void removeFightMap(World world, Set<FightBlockCoordinates> fightBlocks) {
+	/**
+	 * Remove the fight blocks from the world.
+	 * 
+	 * @param world			The world of the fight.
+	 * @param fightBlocks	The block coordinates list.
+	 */
+	protected static void destroyFightMap(World world, Set<FightBlockCoordinates> fightBlocks) {
 		for (FightBlockCoordinates blockCoords : fightBlocks) {
 			Block block = world.getBlock(blockCoords.posX, blockCoords.posY, blockCoords.posZ);
 			if (!block.equals(WBlocks.fightWall) && !block.equals(WBlocks.fightInsideWall) && !block.equals(WBlocks.fightStart1) && !block.equals(WBlocks.fightStart2)) {
@@ -385,7 +397,7 @@ public class FightManager {
 			}
 		}
 
-		removeFightMap(world, fight.fightBlocks);
+		destroyFightMap(world, fight.fightBlocks);
 		removeFightersFromFight(world, fight.fighters);
 	}
 
