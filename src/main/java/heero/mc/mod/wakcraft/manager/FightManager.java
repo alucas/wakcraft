@@ -87,10 +87,6 @@ public class FightManager {
 			}
 
 			int fightId = initFight((EntityPlayerMP) event.entityPlayer, target);
-			if (fightId == -1) {
-				event.setCanceled(true);
-				return;
-			}
 
 			Set<FightBlockCoordinates> startBlocks = choseSartPositions(event.entityPlayer.worldObj.rand, fightBlocks);
 			generateMap(fightId, event.entityPlayer.worldObj, fightBlocks);
@@ -313,18 +309,6 @@ public class FightManager {
 	}
 
 	protected static int initFight(EntityPlayerMP assailant, EntityLivingBase target) {
-		FightProperty assailantProperties = (FightProperty) assailant.getExtendedProperties(FightProperty.IDENTIFIER);
-		if (assailantProperties == null) {
-			FMLLog.warning("Error while loading the Fight properties of player : %s", assailant.getDisplayName());
-			return -1;
-		}
-
-		FightProperty targetProperties = (FightProperty) target.getExtendedProperties(FightProperty.IDENTIFIER);
-		if (targetProperties == null) {
-			FMLLog.warning("Error while loading the Fight properties of : %s", target.getClass().getName());
-			return -1;
-		}
-
 		int fightId = assailant.worldObj.getUniqueDataId("fightId");
 
 		ArrayList<Integer> fighters1 = new ArrayList<Integer>();
