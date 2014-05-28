@@ -78,7 +78,7 @@ public class FightManager {
 			int posX = (int) Math.floor(player.posX);
 			int posY = (int) Math.floor(player.posY);
 			int posZ = (int) Math.floor(player.posZ);
-			Set<FightBlockCoordinates> fightBlocks = getMapAtPos(world, posX, posY, posZ, 3);
+			Set<FightBlockCoordinates> fightBlocks = getFightBlocks(world, posX, posY, posZ, 3);
 
 			if (fightBlocks.size() < 100) {
 				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("cantFightHere")));
@@ -92,7 +92,7 @@ public class FightManager {
 
 			addFightersToFight(world, fighters, fightId);
 
-			Set<FightBlockCoordinates> startBlocks = choseSartPositions(world.rand, fightBlocks);
+			Set<FightBlockCoordinates> startBlocks = getSartingPositions(world.rand, fightBlocks);
 			generateFightMap(fightId, world, fightBlocks);
 
 			fights.put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
@@ -107,7 +107,7 @@ public class FightManager {
 		}
 	}
 
-	protected Set<FightBlockCoordinates> getMapAtPos(World world, int posX, int posY, int posZ, int radius) {
+	protected Set<FightBlockCoordinates> getFightBlocks(World world, int posX, int posY, int posZ, int radius) {
 		Set<FightBlockCoordinates> fightBlocks = new HashSet<FightBlockCoordinates>();
 
 		while(world.getBlock(posY, posY, posZ).equals(Blocks.air) && posY > 0) {
@@ -206,7 +206,7 @@ public class FightManager {
 		return ((y & 0xFF) << 16)  + ((x & 0xFF) << 8) + (z & 0xFF);
 	}
 
-	protected static Set<FightBlockCoordinates> choseSartPositions (Random worldRand, Set<FightBlockCoordinates> fightBlocks) {
+	protected static Set<FightBlockCoordinates> getSartingPositions (Random worldRand, Set<FightBlockCoordinates> fightBlocks) {
 		List<FightBlockCoordinates> fightBlocksList = new ArrayList<FightBlockCoordinates>(fightBlocks);
 
 		int maxStartBlock = 12;
