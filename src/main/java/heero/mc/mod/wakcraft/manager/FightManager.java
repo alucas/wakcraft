@@ -203,16 +203,32 @@ public class FightManager {
 	}
 
 	protected static void createFightMap(int fightId, World world, Set<FightBlockCoordinates> fightBlocks) {
+		int rand = world.rand.nextInt(fightBlocks.size());
+
+		List<FightBlockCoordinates> fightBlocksList = new ArrayList<FightBlockCoordinates>(fightBlocks);
+		fightBlocksList.get(rand).type = TYPE.START1;
+
 		for (FightBlockCoordinates block : fightBlocks) {
 			if (!world.getBlock(block.posX, block.posY, block.posZ).equals(Blocks.air)) {
 				FMLLog.warning("Trying to replace a block different of Air");
 				continue;
 			}
 
-			if (block.type == TYPE.NORMAL) {
+			switch (block.type) {
+			case NORMAL:
 				//world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightInsideWall);
-			} else if (block.type == TYPE.WALL) {
+				break;
+			case WALL:
 				world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightWall);
+				break;
+			case START1:
+				world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightStart1);
+				break;
+			case START2:
+				world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightStart2);
+				break;
+			default:
+				break;
 			}
 		}
 
@@ -232,7 +248,7 @@ public class FightManager {
 			}
 
 			Block block2 = world.getBlock(block.posX, block.posY, block.posZ);
-			if (!block2.equals(WBlocks.fightWall) && !block2.equals(WBlocks.fightInsideWall)) {
+			if (!block2.equals(WBlocks.fightWall) && !block2.equals(WBlocks.fightInsideWall) && !block2.equals(WBlocks.fightStart1) && !block2.equals(WBlocks.fightStart2)) {
 				FMLLog.warning("Trying to restore a block different of fight blocks");
 				continue;
 			}
