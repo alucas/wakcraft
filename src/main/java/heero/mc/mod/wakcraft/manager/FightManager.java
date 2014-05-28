@@ -43,11 +43,13 @@ public class FightManager {
 
 	@SubscribeEvent
 	public void onAttackEntityEvent(AttackEntityEvent event) {
-		if (event.entityPlayer.worldObj.isRemote) {
+		World world = event.entityPlayer.worldObj;
+
+		if (world.isRemote) {
 			return;
 		}
 
-		if (event.entityPlayer.worldObj.provider.dimensionId != 0) {
+		if (world.provider.dimensionId != 0) {
 			return;
 		}
 
@@ -78,7 +80,7 @@ public class FightManager {
 			int posX = (int) Math.floor(event.entityPlayer.posX);
 			int posY = (int) Math.floor(event.entityPlayer.posY);
 			int posZ = (int) Math.floor(event.entityPlayer.posZ);
-			Set<FightBlockCoordinates> fightBlocks = getMapAtPos(event.entityPlayer.worldObj, posX, posY, posZ, 10);
+			Set<FightBlockCoordinates> fightBlocks = getMapAtPos(world, posX, posY, posZ, 10);
 
 			if (fightBlocks.size() < 100) {
 				event.entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("cantFightHere")));
@@ -86,14 +88,14 @@ public class FightManager {
 				return;
 			}
 
-			int fightId = event.entityPlayer.worldObj.getUniqueDataId("fightId");
+			int fightId = world.getUniqueDataId("fightId");
 
 			List<List<Integer>> fightersList = initFight(fightId, (EntityPlayerMP) event.entityPlayer, target);
 
-			addFightersToFight(event.entityPlayer.worldObj, fightersList, fightId);
+			addFightersToFight(world, fightersList, fightId);
 
-			Set<FightBlockCoordinates> startBlocks = choseSartPositions(event.entityPlayer.worldObj.rand, fightBlocks);
-			generateMap(fightId, event.entityPlayer.worldObj, fightBlocks);
+			Set<FightBlockCoordinates> startBlocks = choseSartPositions(world.rand, fightBlocks);
+			generateMap(fightId, world, fightBlocks);
 
 			fightsMap.put(fightId, new FightMap(fightBlocks, startBlocks));
 			fighters.put(fightId, fightersList);
