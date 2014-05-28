@@ -182,7 +182,7 @@ public class FightManager {
 			// Direction ==  0 :    1, 2
 			// Direction ==  1 :       2, 3
 			if ((direction == -1 && i < 3) || (direction == 0 && (i == 1 || i == 2)) || (direction == 1 && i > 1)) {
-				FightBlockCoordinates blockCoords = new FightBlockCoordinates(centerX + offsetX, centerY + offsetY + i, centerZ + offsetZ, TYPE.NORMAL);
+				FightBlockCoordinates blockCoords = new FightBlockCoordinates(centerX + offsetX, centerY + offsetY + i, centerZ + offsetZ, TYPE.NORMAL, (direction + 1 == i) ? 1 : 0);
 				if (!fightBlocks.add(blockCoords)) {
 					fightBlocks.remove(blockCoords);
 					fightBlocks.add(blockCoords);
@@ -203,10 +203,19 @@ public class FightManager {
 	}
 
 	protected static void createFightMap(int fightId, World world, Set<FightBlockCoordinates> fightBlocks) {
-		int rand = world.rand.nextInt(fightBlocks.size());
-
 		List<FightBlockCoordinates> fightBlocksList = new ArrayList<FightBlockCoordinates>(fightBlocks);
-		fightBlocksList.get(rand).type = TYPE.START1;
+
+		int maxStartBlock = 12;
+		int nbStartBlock = 0;
+		while(nbStartBlock < maxStartBlock) {
+			int rand = world.rand.nextInt(fightBlocks.size());
+			FightBlockCoordinates coords = fightBlocksList.get(rand);
+			if (coords.type == TYPE.NORMAL && coords.metadata == 1) {
+				coords.type = TYPE.START;
+				coords.metadata = nbStartBlock % 2;
+				nbStartBlock++;
+			}
+		}
 
 		for (FightBlockCoordinates block : fightBlocks) {
 			if (!world.getBlock(block.posX, block.posY, block.posZ).equals(Blocks.air)) {
@@ -221,11 +230,8 @@ public class FightManager {
 			case WALL:
 				world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightWall);
 				break;
-			case START1:
-				world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightStart1);
-				break;
-			case START2:
-				world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightStart2);
+			case START:
+				world.setBlock(block.posX, block.posY, block.posZ, (block.metadata  == 0) ? WBlocks.fightStart1 : WBlocks.fightStart2);
 				break;
 			default:
 				break;
