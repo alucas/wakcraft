@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import net.minecraft.block.Block;
@@ -77,9 +78,9 @@ public class FightManager {
 			int posX = (int) Math.floor(event.entityPlayer.posX);
 			int posY = (int) Math.floor(event.entityPlayer.posY);
 			int posZ = (int) Math.floor(event.entityPlayer.posZ);
-			Set<FightBlockCoordinates> coords = getMapAtPos(event.entityPlayer.worldObj, posX, posY, posZ, 10);
+			Set<FightBlockCoordinates> fightBlocks = getMapAtPos(event.entityPlayer.worldObj, posX, posY, posZ, 10);
 
-			if (coords.size() < 100) {
+			if (fightBlocks.size() < 100) {
 				event.entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("cantFightHere")));
 				event.setCanceled(true);
 				return;
@@ -91,7 +92,10 @@ public class FightManager {
 				return;
 			}
 
-			createFightMap(fightId, event.entityPlayer.worldObj, coords);
+			Set<FightBlockCoordinates> startBlocks = choseSartPositions(event.entityPlayer.worldObj.rand, fightBlocks);
+			generateMap(fightId, event.entityPlayer.worldObj, fightBlocks);
+
+			fightsMap.put(fightId, new FightMap(fightBlocks, startBlocks));
 
 			event.setCanceled(true);
 			return;
@@ -202,14 +206,14 @@ public class FightManager {
 		return ((y & 0xFF) << 16)  + ((x & 0xFF) << 8) + (z & 0xFF);
 	}
 
-	protected static void createFightMap(int fightId, World world, Set<FightBlockCoordinates> fightBlocks) {
+	protected static Set<FightBlockCoordinates> choseSartPositions (Random worldRand, Set<FightBlockCoordinates> fightBlocks) {
 		List<FightBlockCoordinates> fightBlocksList = new ArrayList<FightBlockCoordinates>(fightBlocks);
 
 		int maxStartBlock = 12;
 		int nbStartBlock = 0;
 		Set<FightBlockCoordinates> startBlocks = new HashSet<FightBlockCoordinates>();
 		while(nbStartBlock < maxStartBlock) {
-			int rand = world.rand.nextInt(fightBlocks.size());
+			int rand = worldRand.nextInt(fightBlocks.size());
 			FightBlockCoordinates coords = fightBlocksList.get(rand);
 			if (coords.type == TYPE.NORMAL && coords.metadata == 1) {
 				coords.type = TYPE.START;
@@ -220,6 +224,10 @@ public class FightManager {
 			}
 		}
 
+		return startBlocks;
+	}
+
+	protected static void generateMap(int fightId, World world, Set<FightBlockCoordinates> fightBlocks) {
 		for (FightBlockCoordinates block : fightBlocks) {
 			if (!world.getBlock(block.posX, block.posY, block.posZ).equals(Blocks.air)) {
 				FMLLog.warning("Trying to replace a block different of Air");
@@ -240,8 +248,6 @@ public class FightManager {
 				break;
 			}
 		}
-
-		fightsMap.put(fightId, new FightMap(fightBlocks, startBlocks));
 	}
 
 	protected static void removeFightMap(World world, int fightId) {
