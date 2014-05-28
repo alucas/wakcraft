@@ -17,7 +17,7 @@ public class BlockFightStart extends BlockGeneric {
 
 		setBlockTextureName("fightStart" + team);
 		setBlockName("FightStart" + team);
-		setBlockBounds(0, 0, 0, 1, 0.1F, 1);
+		setBlockBounds(0, 0, 0, 1, 0.01F, 1);
 	}
 
 	/**
@@ -27,6 +27,15 @@ public class BlockFightStart extends BlockGeneric {
 	 */
 	@Override
 	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	/**
+	 * If this block doesn't render as an ordinary block it will return False
+	 * (examples: signs, buttons, stairs, etc)
+	 */
+	@Override
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
@@ -48,7 +57,7 @@ public class BlockFightStart extends BlockGeneric {
 	 */
 	@Override
 	public boolean canCollideCheck(int metadata, boolean stopOnLiquid) {
-		return true;
+		return false;
 	}
 
 	/**
