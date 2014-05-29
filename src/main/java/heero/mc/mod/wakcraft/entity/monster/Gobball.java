@@ -10,14 +10,13 @@ import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.AnimalChest;
 import net.minecraft.item.Item;
@@ -28,7 +27,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Gobball extends EntityAnimal {
+public class Gobball extends EntityCreature {
 	protected final AnimalChest inventory = new AnimalChest("Inventory", 10);
 	// private EntityAIEatGrass field_146087_bs = new EntityAIEatGrass(this);
 	protected static final Map<Integer, Integer> dropRate = new HashMap<Integer, Integer>();
@@ -192,11 +191,6 @@ public class Gobball extends EntityAnimal {
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) {
 		this.playSound("mob.sheep.step", 0.15F, 1.0F);
-	}
-
-	@Override
-	public Gobball createChild(EntityAgeable entity) {
-		return new Gobball(this.worldObj);
 	}
 
 	@Override

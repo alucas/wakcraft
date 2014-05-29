@@ -4,7 +4,6 @@ import heero.mc.mod.wakcraft.WInfo;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -13,11 +12,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlackGobbly extends Gobball {
 	public BlackGobbly(World world) {
 		super(world);
-	}
-
-	@Override
-	public BlackGobbly createChild(EntityAgeable entity) {
-		return new BlackGobbly(this.worldObj);
 	}
 
 	@SideOnly(Side.CLIENT)
