@@ -1,4 +1,4 @@
-package heero.mc.mod.wakcraft.entity.monster;
+package heero.mc.mod.wakcraft.entity.creature;
 
 import heero.mc.mod.wakcraft.WInfo;
 import net.minecraft.client.model.ModelBase;
@@ -9,16 +9,16 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class WhiteGobbly extends Gobball {
-	public WhiteGobbly(World world) {
+public class Gobbette extends Gobball {
+	public Gobbette(World world) {
 		super(world);
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class RenderWhiteGobbly extends RenderLiving {
-		private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID, "textures/mobs/boufton.png");
+	public static class RenderGobette extends RenderLiving {
+		private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID, "textures/mobs/bouffette.png");
 
-		public RenderWhiteGobbly(ModelBase model, float shadowSize) {
+		public RenderGobette(ModelBase model, float shadowSize) {
 			super(model, shadowSize);
 		}
 

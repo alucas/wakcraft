@@ -1,4 +1,4 @@
-package heero.mc.mod.wakcraft.entity.monster;
+package heero.mc.mod.wakcraft.entity.creature;
 
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.WItems;
