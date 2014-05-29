@@ -11,7 +11,6 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -21,7 +20,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.AnimalChest;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -145,26 +143,6 @@ public class Gobball extends EntityCreature {
 	}
 
 	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
-	@Override
-	public void writeEntityToNBT(NBTTagCompound tagRoot) {
-		super.writeEntityToNBT(tagRoot);
-
-		// par1NBTTagCompound.setByte("Color", (byte) this.getFleeceColor());
-	}
-
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
-	@Override
-	public void readEntityFromNBT(NBTTagCompound tagRoot) {
-		super.readEntityFromNBT(tagRoot);
-
-		// this.setFleeceColor(par1NBTTagCompound.getByte("Color"));
-	}
-
-	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
 	@Override
@@ -188,14 +166,12 @@ public class Gobball extends EntityCreature {
 		return "mob.sheep.say";
 	}
 
+	/**
+	 * Play step sound.
+	 */
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) {
 		this.playSound("mob.sheep.step", 0.15F, 1.0F);
-	}
-
-	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entity) {
-		return super.onSpawnWithEgg(entity);
 	}
 
 	@SideOnly(Side.CLIENT)
