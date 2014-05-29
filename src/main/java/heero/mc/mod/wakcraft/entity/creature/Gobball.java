@@ -10,11 +10,9 @@ import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.AnimalChest;
@@ -25,7 +23,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Gobball extends EntityCreature {
+public class Gobball extends EntityWCreature {
 	protected final AnimalChest inventory = new AnimalChest("Inventory", 10);
 	// private EntityAIEatGrass field_146087_bs = new EntityAIEatGrass(this);
 	protected static final Map<Integer, Integer> dropRate = new HashMap<Integer, Integer>();
@@ -51,7 +49,7 @@ public class Gobball extends EntityCreature {
 		// false));
 		// this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
 		// this.tasks.addTask(5, this.field_146087_bs);
-		this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
+//		this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(7, new EntityAIWatchClosest(this,
 				EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
