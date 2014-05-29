@@ -84,7 +84,7 @@ public class FightManager {
 			int posX = (int) Math.floor(player.posX);
 			int posY = (int) Math.floor(player.posY);
 			int posZ = (int) Math.floor(player.posZ);
-			Set<FightBlockCoordinates> fightBlocks = getFightBlocks(world, posX, posY, posZ, 3);
+			Set<FightBlockCoordinates> fightBlocks = getFightBlocks(world, posX, posY, posZ, 10);
 
 			if (fightBlocks.size() < 100) {
 				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("cantFightHere")));
