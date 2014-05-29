@@ -11,27 +11,26 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class Gobbette extends Gobball {
-	public Gobbette(World par1World) {
-		super(par1World);
+	public Gobbette(World world) {
+		super(world);
 	}
 
-	public Gobbette createChild(EntityAgeable par1EntityAgeable) {
+	@Override
+	public Gobbette createChild(EntityAgeable entity) {
 		return new Gobbette(this.worldObj);
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class RenderBouffette extends RenderLiving {
-		private static final ResourceLocation bouffette = new ResourceLocation(
-				WInfo.MODID, "textures/mobs/bouffette.png");
+	public static class RenderGobette extends RenderLiving {
+		private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID, "textures/mobs/bouffette.png");
 
-		public RenderBouffette(ModelBase par1ModelBase, float par2) {
-			super(par1ModelBase, par2);
+		public RenderGobette(ModelBase model, float shadowSize) {
+			super(model, shadowSize);
 		}
 
 		@Override
-		protected ResourceLocation getEntityTexture(Entity var1) {
-			return bouffette;
+		protected ResourceLocation getEntityTexture(Entity entity) {
+			return texture;
 		}
-
 	}
 }

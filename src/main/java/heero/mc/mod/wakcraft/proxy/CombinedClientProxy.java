@@ -39,11 +39,11 @@ public class CombinedClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderers() {
-		RenderingRegistry.registerEntityRenderingHandler(Gobball.class, new Gobball.RenderBouftou(new ModelGobball(), 0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(Gobbette.class, new Gobbette.RenderBouffette(new ModelGobbette(), 0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(WhiteGobbly.class, new WhiteGobbly.RenderBouftonBlanc(new ModelGobbly(), 0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderBouftonNoir(new ModelGobbly(), 0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderBouftouCG(new ModelGobballWC(), 0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(Gobball.class, new Gobball.RenderGobball(new ModelGobball(), 0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(Gobbette.class, new Gobbette.RenderGobette(new ModelGobbette(), 0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(WhiteGobbly.class, new WhiteGobbly.RenderWhiteGobbly(new ModelGobbly(), 0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderBlackGobbly(new ModelGobbly(), 0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderGobballWC(new ModelGobballWC(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new RenderTextPopup());
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RenderDragoexpress());

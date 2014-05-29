@@ -39,8 +39,8 @@ public class Gobball extends EntityAnimal {
 		dropRate.put(Item.getIdFromItem(WItems.woollyKey), 5);
 	}
 
-	public Gobball(World par1World) {
-		super(par1World);
+	public Gobball(World world) {
+		super(world);
 
 		// 1.2 block wide/tall
 		this.setSize(0.8F, 0.8F);
@@ -68,10 +68,12 @@ public class Gobball extends EntityAnimal {
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
+	@Override
 	protected boolean isAIEnabled() {
 		return true;
 	}
 
+	@Override
 	protected void updateAITasks() {
 		super.updateAITasks();
 	}
@@ -81,10 +83,12 @@ public class Gobball extends EntityAnimal {
 	 * required. For example, zombies and skeletons use this to react to
 	 * sunlight and start to burn.
 	 */
+	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 	}
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
@@ -92,6 +96,7 @@ public class Gobball extends EntityAnimal {
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 	}
 
+	@Override
 	protected void entityInit() {
 		super.entityInit();
 	}
@@ -101,7 +106,8 @@ public class Gobball extends EntityAnimal {
 	 * has recently been hit by a player. @param par2 - Level of Looting used to
 	 * kill this mob.
 	 */
-	protected void dropFewItems(boolean par1, int par2) {
+	@Override
+	protected void dropFewItems(boolean hitByPlayer, int lootingLevel) {
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 
 			ItemStack itemStack = inventory.getStackInSlot(i);
@@ -122,26 +128,29 @@ public class Gobball extends EntityAnimal {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void handleHealthUpdate(byte par1) {
-		System.out.println("HandleHealthUpdate : " + par1); // 2 : hurt, 3 : die
+	@Override
+	public void handleHealthUpdate(byte type) {
+		System.out.println("HandleHealthUpdate : " + type); // 2 : hurt, 3 : die
 															// ?
 
-		super.handleHealthUpdate(par1);
+		super.handleHealthUpdate(type);
 	}
 
 	/**
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow,
 	 * gets into the saddle on a pig.
 	 */
-	public boolean interact(EntityPlayer par1EntityPlayer) {
-		return super.interact(par1EntityPlayer);
+	@Override
+	public boolean interact(EntityPlayer player) {
+		return super.interact(player);
 	}
 
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-		super.writeEntityToNBT(par1NBTTagCompound);
+	@Override
+	public void writeEntityToNBT(NBTTagCompound tagRoot) {
+		super.writeEntityToNBT(tagRoot);
 
 		// par1NBTTagCompound.setByte("Color", (byte) this.getFleeceColor());
 	}
@@ -149,8 +158,9 @@ public class Gobball extends EntityAnimal {
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-		super.readEntityFromNBT(par1NBTTagCompound);
+	@Override
+	public void readEntityFromNBT(NBTTagCompound tagRoot) {
+		super.readEntityFromNBT(tagRoot);
 
 		// this.setFleeceColor(par1NBTTagCompound.getByte("Color"));
 	}
@@ -158,6 +168,7 @@ public class Gobball extends EntityAnimal {
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
+	@Override
 	protected String getLivingSound() {
 		return "mob.sheep.say";
 	}
@@ -165,6 +176,7 @@ public class Gobball extends EntityAnimal {
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound() {
 		return "mob.sheep.say";
 	}
@@ -172,37 +184,37 @@ public class Gobball extends EntityAnimal {
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound() {
 		return "mob.sheep.say";
 	}
 
-	protected void func_145780_a(int p_145780_1_, int p_145780_2_,
-			int p_145780_3_, Block p_145780_4_) {
+	@Override
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		this.playSound("mob.sheep.step", 0.15F, 1.0F);
 	}
 
-	public Gobball createChild(EntityAgeable par1EntityAgeable) {
+	@Override
+	public Gobball createChild(EntityAgeable entity) {
 		return new Gobball(this.worldObj);
 	}
 
-	public IEntityLivingData onSpawnWithEgg(
-			IEntityLivingData par1EntityLivingData) {
-		return super.onSpawnWithEgg(par1EntityLivingData);
+	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entity) {
+		return super.onSpawnWithEgg(entity);
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class RenderBouftou extends RenderLiving {
-		private static final ResourceLocation bouftou = new ResourceLocation(
-				WInfo.MODID.toLowerCase(), "textures/mobs/bouftou.png");
+	public static class RenderGobball extends RenderLiving {
+		private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/mobs/bouftou.png");
 
-		public RenderBouftou(ModelBase par1ModelBase, float par2) {
-			super(par1ModelBase, par2);
+		public RenderGobball(ModelBase model, float shadowSize) {
+			super(model, shadowSize);
 		}
 
 		@Override
-		protected ResourceLocation getEntityTexture(Entity var1) {
-			return bouftou;
+		protected ResourceLocation getEntityTexture(Entity entity) {
+			return texture;
 		}
-
 	}
 }

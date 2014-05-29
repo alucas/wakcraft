@@ -11,27 +11,26 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlackGobbly extends Gobball {
-	public BlackGobbly(World par1World) {
-		super(par1World);
+	public BlackGobbly(World world) {
+		super(world);
 	}
 
-	public BlackGobbly createChild(EntityAgeable par1EntityAgeable) {
+	@Override
+	public BlackGobbly createChild(EntityAgeable entity) {
 		return new BlackGobbly(this.worldObj);
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class RenderBouftonNoir extends RenderLiving {
-		private static final ResourceLocation bouftonNoir = new ResourceLocation(
-				WInfo.MODID, "textures/mobs/bouftonnoir.png");
+	public static class RenderBlackGobbly extends RenderLiving {
+		private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID, "textures/mobs/bouftonnoir.png");
 
-		public RenderBouftonNoir(ModelBase par1ModelBase, float par2) {
-			super(par1ModelBase, par2);
+		public RenderBlackGobbly(ModelBase model, float shadowSize) {
+			super(model, shadowSize);
 		}
 
 		@Override
-		protected ResourceLocation getEntityTexture(Entity var1) {
-			return bouftonNoir;
+		protected ResourceLocation getEntityTexture(Entity entity) {
+			return texture;
 		}
-
 	}
 }
