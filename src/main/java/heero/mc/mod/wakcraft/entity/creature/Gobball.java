@@ -11,9 +11,6 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.AnimalChest;
 import net.minecraft.item.Item;
@@ -25,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class Gobball extends EntityWCreature {
 	protected final AnimalChest inventory = new AnimalChest("Inventory", 10);
-	// private EntityAIEatGrass field_146087_bs = new EntityAIEatGrass(this);
+
 	protected static final Map<Integer, Integer> dropRate = new HashMap<Integer, Integer>();
 	static {
 		dropRate.put(Item.getIdFromItem(WItems.gobballWool), 50);
@@ -39,20 +36,6 @@ public class Gobball extends EntityWCreature {
 
 		// 1.2 block wide/tall
 		this.setSize(0.8F, 0.8F);
-
-		this.getNavigator().setAvoidsWater(true);
-
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		// this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-		// this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-		// this.tasks.addTask(3, new EntityAITempt(this, 1.1D, Items.wheat,
-		// false));
-		// this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
-		// this.tasks.addTask(5, this.field_146087_bs);
-//		this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this,
-				EntityPlayer.class, 6.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
 
 		this.inventory.setInventorySlotContents(0, new ItemStack(WItems.gobballWool, 1, 0));
 		this.inventory.setInventorySlotContents(1, new ItemStack(WItems.gobballHorn, 1, 0));
