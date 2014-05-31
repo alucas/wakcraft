@@ -2,6 +2,8 @@ package heero.mc.mod.wakcraft.entity.ai;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
@@ -34,8 +36,7 @@ public class EntityAIMoveOutWater extends EntityAIBase {
 			return false;
 		}
 
-		Vec3 blockCoords = getNearestRandomCoast(entity, 18);
-		System.out.println(blockCoords);
+		Vec3 blockCoords = getNearestRandomCoast(entity, 10);
 
 		if (blockCoords == null) {
 			return false;
@@ -64,7 +65,7 @@ public class EntityAIMoveOutWater extends EntityAIBase {
 		int selectedPosX = 0;
 		int selectedPosY = 0;
 		int selectedPosZ = 0;
-		float pathWeightMax = Float.MAX_VALUE;
+		double pathWeightMax = Double.MAX_VALUE;
 		boolean isInHomeRange;
 
 		if (entity.hasHome()) {
@@ -76,7 +77,7 @@ public class EntityAIMoveOutWater extends EntityAIBase {
 
 			isInHomeRange = distanceToHomeSquared < distanceToHomeMax * distanceToHomeMax;
 		} else {
-			isInHomeRange = false;
+			isInHomeRange = true;
 		}
 
 		for (int l1 = 0; l1 < 10; ++l1) {
@@ -84,23 +85,33 @@ public class EntityAIMoveOutWater extends EntityAIBase {
 			int posY = MathHelper.floor_double(entity.posY);
 			int posZ = MathHelper.floor_double(entity.posZ) + random.nextInt(2 * distanceMax) - distanceMax;
 
-			if (!isInHomeRange || entity.isWithinHomeDistance(posX, posY, posZ)) {
-				float pathWeight = posX * posX + posZ * posZ;
-
-				if (pathWeight < pathWeightMax && !(entity.worldObj.getBlock(posX, posY, posZ) instanceof IFluidBlock) && entity.worldObj.getBlock(posX, posY + 1, posZ).equals(Blocks.air)) {
-					pathWeightMax = pathWeight;
-					selectedPosX = posX;
-					selectedPosY = posY;
-					selectedPosZ = posZ;
-					blockFound = true;
-				}
+			if (!isInHomeRange && !entity.isWithinHomeDistance(posX, posY, posZ)) {
+				continue;
 			}
+
+			double pathWeight = (posX - entity.posX) * (posX - entity.posX) + (posZ - entity.posZ) * (posZ - entity.posZ);
+			if (pathWeight >= pathWeightMax) {
+				continue;
+			}
+
+			Block block = entity.worldObj.getBlock(posX, posY, posZ);
+			if (block instanceof BlockLiquid
+					|| block instanceof IFluidBlock
+					|| !entity.worldObj.getBlock(posX, posY + 1, posZ).equals(Blocks.air)) {
+				continue;
+			}
+
+			pathWeightMax = pathWeight;
+			selectedPosX = posX;
+			selectedPosY = posY + 1;
+			selectedPosZ = posZ;
+			blockFound = true;
 		}
 
-		if (blockFound) {
-			return entity.worldObj.getWorldVec3Pool().getVecFromPool((double) selectedPosX, (double) selectedPosY, (double) selectedPosZ);
-		} else {
+		if (!blockFound) {
 			return null;
 		}
+
+		return entity.worldObj.getWorldVec3Pool().getVecFromPool((double) selectedPosX, (double) selectedPosY, (double) selectedPosZ);
 	}
 }
