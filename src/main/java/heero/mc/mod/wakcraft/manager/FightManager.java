@@ -25,6 +25,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.ChunkCache;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -125,19 +127,20 @@ public class FightManager {
 	 */
 	protected Set<FightBlockCoordinates> getFightBlocks(World world, int posX, int posY, int posZ, int radius) {
 		Set<FightBlockCoordinates> fightBlocks = new HashSet<FightBlockCoordinates>();
+		ChunkCache chunks = new ChunkCache(world, posX - radius, posY - radius, posZ - radius, posX + radius, posY + radius, posZ + radius, 2);
 
 		while(world.getBlock(posY, posY, posZ).equals(Blocks.air) && posY > 0) {
 			posY--;
 		}
 
-		getMapAtPos_rec(world, posX, posY, posZ, 0, 0, 0, fightBlocks, new BitSet(), radius * radius);
+		getMapAtPos_rec(chunks, posX, posY, posZ, 0, 0, 0, fightBlocks, new BitSet(), radius * radius);
 
 		return fightBlocks;
 	}
 
 	protected static final int offsetX[] = new int[]{-1, 1, 0, 0};
 	protected static final int offsetZ[] = new int[]{0, 0, -1, 1};
-	protected void getMapAtPos_rec(World world, int centerX, int centerY, int centerZ, int offsetX, int offsetY, int offsetZ, Set<FightBlockCoordinates> fightBlocks, BitSet visited, int radius2) {
+	protected void getMapAtPos_rec(IBlockAccess world, int centerX, int centerY, int centerZ, int offsetX, int offsetY, int offsetZ, Set<FightBlockCoordinates> fightBlocks, BitSet visited, int radius2) {
 		visited.set(hashCoords(offsetX, offsetY, offsetZ));
 
 		// too far
