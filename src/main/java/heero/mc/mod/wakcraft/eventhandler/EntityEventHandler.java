@@ -2,11 +2,9 @@ package heero.mc.mod.wakcraft.eventhandler;
 
 import heero.mc.mod.wakcraft.entity.property.AbilitiesProperty;
 import heero.mc.mod.wakcraft.entity.property.CharacterProperty;
-import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.entity.property.InventoryProperty;
 import heero.mc.mod.wakcraft.entity.property.ProfessionProperty;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -14,10 +12,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class EntityEventHandler {
 	@SubscribeEvent
 	public void onEntityConstructing(EntityConstructing event) {
-		if (event.entity instanceof EntityLivingBase) {
-			event.entity.registerExtendedProperties(FightProperty.IDENTIFIER, new FightProperty());
-		}
-
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
 			player.registerExtendedProperties(ProfessionProperty.IDENTIFIER, new ProfessionProperty());

@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.manager;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.Wakcraft;
+import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.event.FightEvent.Type;
@@ -21,6 +22,7 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChatComponentText;
@@ -29,6 +31,7 @@ import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import cpw.mods.fml.common.FMLLog;
@@ -39,6 +42,18 @@ public class FightManager {
 	protected static int FIGHT_WALL_HEIGHT = 3;
 
 	protected static Map<Integer, FightInfo> fights = new HashMap<Integer, FightInfo>();
+
+	/**
+	 * Handler called when an entity is created.
+	 * 
+	 * @param event	Event object.
+	 */
+	@SubscribeEvent
+	public void onEntityConstructing(EntityConstructing event) {
+		if (event.entity instanceof IFighter || event.entity instanceof EntityPlayer) {
+			event.entity.registerExtendedProperties(FightProperty.IDENTIFIER, new FightProperty());
+		}
+	}
 
 	/**
 	 * Handler called when a player attack an entity. Test if the player and the
@@ -58,7 +73,7 @@ public class FightManager {
 			return;
 		}
 
-		if (!(event.target instanceof EntityLivingBase)) {
+		if (!(event.target instanceof IFighter)) {
 			return;
 		}
 
@@ -308,6 +323,14 @@ public class FightManager {
 	@SubscribeEvent
 	public void onLivingDeathEvent(LivingDeathEvent event) {
 		if (event.entityLiving.worldObj.isRemote) {
+			return;
+		}
+
+		if (event.entityLiving.worldObj.provider.dimensionId != 0) {
+			return;
+		}
+
+		if (!(event.entityLiving instanceof IFighter)) {
 			return;
 		}
 

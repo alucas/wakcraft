@@ -9,7 +9,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public class EntityWCreature extends EntityCreature implements IWMob{
+public class EntityWCreature extends EntityCreature implements IWMob, IFighter{
 
 	public EntityWCreature(World world) {
 		super(world);
