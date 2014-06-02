@@ -34,8 +34,4 @@ public class FightProperty implements IExtendedEntityProperties {
 	public void resetFightId() {
 		this.fightId = -1;
 	}
-
-	public boolean isFighting() {
-		return fightId != -1;
-	}
 }

@@ -6,9 +6,9 @@ import java.util.Set;
 public class FightInfo {
 	protected List<List<Integer>> fighters;
 	protected Set<FightBlockCoordinates> fightBlocks;
-	protected Set<FightBlockCoordinates> startBlocks;
+	protected List<FightBlockCoordinates> startBlocks;
 
-	public FightInfo(List<List<Integer>> fighters, Set<FightBlockCoordinates> fightBlocks, Set<FightBlockCoordinates> startBlocks) {
+	public FightInfo(List<List<Integer>> fighters, Set<FightBlockCoordinates> fightBlocks, List<FightBlockCoordinates> startBlocks) {
 		this.fighters = fighters;
 		this.fightBlocks = fightBlocks;
 		this.startBlocks = startBlocks;

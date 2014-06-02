@@ -2,10 +2,10 @@ package heero.mc.mod.wakcraft.manager;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.event.FightEvent.Type;
+import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.manager.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.network.packet.PacketFight;
 
@@ -22,7 +22,6 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChatComponentText;
@@ -50,7 +49,11 @@ public class FightManager {
 	 */
 	@SubscribeEvent
 	public void onEntityConstructing(EntityConstructing event) {
-		if (event.entity instanceof IFighter || event.entity instanceof EntityPlayer) {
+		if (!(event.entity instanceof EntityLivingBase)) {
+			return;
+		}
+
+		if (FightHelper.isFighter((EntityLivingBase) event.entity)) {
 			event.entity.registerExtendedProperties(FightProperty.IDENTIFIER, new FightProperty());
 		}
 	}
@@ -73,7 +76,11 @@ public class FightManager {
 			return;
 		}
 
-		if (!(event.target instanceof IFighter)) {
+		if (!FightHelper.isFighter(event.entityPlayer)) {
+			return;
+		}
+
+		if (!FightHelper.isFighter(event.target) || !(event.target instanceof EntityLivingBase)) {
 			return;
 		}
 
@@ -83,21 +90,7 @@ public class FightManager {
 			return;
 		}
 
-		FightProperty properties = (FightProperty) player.getExtendedProperties(FightProperty.IDENTIFIER);
-		if (properties == null) {
-			FMLLog.warning("Error while loading the Fight properties of player : %s", player.getDisplayName());
-			event.setCanceled(true);
-			return;
-		}
-
-		FightProperty targetProperties = (FightProperty) target.getExtendedProperties(FightProperty.IDENTIFIER);
-		if (targetProperties == null) {
-			FMLLog.warning("Error while loading the Fight properties of : %s", target.getClass().getName());
-			event.setCanceled(true);
-			return;
-		}
-
-		if (!properties.isFighting() && !targetProperties.isFighting()) {
+		if (!FightHelper.isFighting(player) && !FightHelper.isFighting(target)) {
 			int posX = (int) Math.floor(player.posX);
 			int posY = (int) Math.floor(player.posY);
 			int posZ = (int) Math.floor(player.posZ);
@@ -115,7 +108,10 @@ public class FightManager {
 
 			addFightersToFight(world, fighters, fightId);
 
-			Set<FightBlockCoordinates> startBlocks = getSartingPositions(world.rand, fightBlocks);
+			List<FightBlockCoordinates> startBlocks = getSartingPositions(world.rand, fightBlocks);
+
+			FightHelper.setStartPosition(target, startBlocks.get(0));
+
 			createFightMap(world, fightBlocks);
 
 			fights.put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
@@ -124,7 +120,7 @@ public class FightManager {
 			return;
 		}
 
-		if (properties.getFightId() != targetProperties.getFightId()) {
+		if (FightHelper.getFightId(player) != FightHelper.getFightId(target)) {
 			event.setCanceled(true);
 			return;
 		}
@@ -247,12 +243,12 @@ public class FightManager {
 	 * @param fightBlocks	Fight blocks.
 	 * @return
 	 */
-	protected static Set<FightBlockCoordinates> getSartingPositions (Random worldRand, Set<FightBlockCoordinates> fightBlocks) {
+	protected static List<FightBlockCoordinates> getSartingPositions (Random worldRand, Set<FightBlockCoordinates> fightBlocks) {
 		List<FightBlockCoordinates> fightBlocksList = new ArrayList<FightBlockCoordinates>(fightBlocks);
 
 		int maxStartBlock = 12;
 		int nbStartBlock = 0;
-		Set<FightBlockCoordinates> startBlocks = new HashSet<FightBlockCoordinates>();
+		List<FightBlockCoordinates> startBlocks = new ArrayList<FightBlockCoordinates>();
 		while(nbStartBlock < maxStartBlock) {
 			int rand = worldRand.nextInt(fightBlocks.size());
 			FightBlockCoordinates coords = fightBlocksList.get(rand);
@@ -330,21 +326,15 @@ public class FightManager {
 			return;
 		}
 
-		if (!(event.entityLiving instanceof IFighter)) {
+		if (!FightHelper.isFighter(event.entityLiving)) {
 			return;
 		}
 
-		FightProperty properties = (FightProperty) event.entityLiving.getExtendedProperties(FightProperty.IDENTIFIER);
-		if (properties == null) {
-			FMLLog.warning("Error while loading the Fight properties of player : %s", event.entityLiving.getClass().getName());
+		if (!FightHelper.isFighting(event.entityLiving)) {
 			return;
 		}
 
-		if (!properties.isFighting()) {
-			return;
-		}
-
-		int fightId = properties.getFightId();
+		int fightId = FightHelper.getFightId(event.entityLiving);
 
 		int defeatedTeam = getDefeatedTeam(event.entityLiving.worldObj, fightId);
 		if (defeatedTeam <= 0) {
@@ -366,19 +356,21 @@ public class FightManager {
 			return;
 		}
 
-		FightProperty properties = (FightProperty) event.player.getExtendedProperties(FightProperty.IDENTIFIER);
-		if (properties == null) {
-			FMLLog.warning("Error while loading the Fight properties of player : %s", event.player.getClass().getName());
+		if (event.player.worldObj.provider.dimensionId != 0) {
 			return;
 		}
 
-		if (!properties.isFighting()) {
+		if (!FightHelper.isFighter(event.player)) {
+			return;
+		}
+
+		if (!FightHelper.isFighting(event.player)) {
 			return;
 		}
 
 		event.player.setDead();
 
-		int fightId = properties.getFightId();
+		int fightId = FightHelper.getFightId(event.player);
 
 		int defeatedTeam = getDefeatedTeam(event.player.worldObj, fightId);
 		if (defeatedTeam <= 0) {

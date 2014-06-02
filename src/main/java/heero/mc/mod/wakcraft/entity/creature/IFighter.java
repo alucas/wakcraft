@@ -1,5 +1,8 @@
 package heero.mc.mod.wakcraft.entity.creature;
 
-public interface IFighter {
+import net.minecraft.util.ChunkCoordinates;
 
+public interface IFighter {
+	public void setStartPosition(ChunkCoordinates position);
+	public ChunkCoordinates getStartPosition();
 }
