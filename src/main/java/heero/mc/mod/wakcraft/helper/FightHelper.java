@@ -27,7 +27,7 @@ public class FightHelper {
 
 	public static ChunkCoordinates getStartPosition(Entity entity) {
 		if (entity instanceof IFighter) {
-			((IFighter) entity).getStartPosition();
+			return ((IFighter) entity).getStartPosition();
 		}
 
 		return null;

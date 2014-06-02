@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.entity.creature;
 
+import heero.mc.mod.wakcraft.entity.ai.EntityAIFight;
 import heero.mc.mod.wakcraft.entity.ai.EntityAIMoveOutWater;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -20,6 +21,7 @@ public class EntityWCreature extends EntityCreature implements IWMob, IFighter{
 
 		this.getNavigator().setAvoidsWater(true);
 
+		this.tasks.addTask(00, new EntityAIFight(this, 1.0D));
 		this.tasks.addTask(10, new EntityAISwimming(this));
 		this.tasks.addTask(20, new EntityAIMoveOutWater(this, 0.9D));
 		this.tasks.addTask(30, new EntityAIWander(this, 1.0D));
