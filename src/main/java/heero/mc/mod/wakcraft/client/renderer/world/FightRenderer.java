@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.client.renderer.world;
 
 import heero.mc.mod.wakcraft.WBlocks;
-import heero.mc.mod.wakcraft.entity.property.FightProperty;
+import heero.mc.mod.wakcraft.helper.FightHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -14,7 +14,6 @@ import net.minecraftforge.client.event.RenderHandEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -128,13 +127,11 @@ public class FightRenderer extends IRenderHandler {
 	public void onRenderHandEvent(RenderHandEvent event) {
 		Minecraft mc = Minecraft.getMinecraft();
 
-		FightProperty properties = (FightProperty) mc.thePlayer.getExtendedProperties(FightProperty.IDENTIFIER);
-		if (properties == null) {
-			FMLLog.warning("Error while loading the Fight properties of player : %s", mc.thePlayer.getDisplayName());
+		if (!FightHelper.isFighter(mc.thePlayer)) {
 			return;
 		}
 
-		if (!properties.isFighting()) {
+		if (!FightHelper.isFighting(mc.thePlayer)) {
 			return;
 		}
 
