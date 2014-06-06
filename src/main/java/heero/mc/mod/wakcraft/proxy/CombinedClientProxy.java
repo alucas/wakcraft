@@ -9,6 +9,7 @@ import heero.mc.mod.wakcraft.client.model.ModelGobbly;
 import heero.mc.mod.wakcraft.client.renderer.block.RenderBlockOre;
 import heero.mc.mod.wakcraft.client.renderer.block.RenderBlockPalisade;
 import heero.mc.mod.wakcraft.client.renderer.block.RenderBlockYRotation;
+import heero.mc.mod.wakcraft.client.renderer.entity.RenderSeedsPile;
 import heero.mc.mod.wakcraft.client.renderer.entity.RenderTextPopup;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RenderDragoexpress;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RenderPhoenix;
@@ -20,6 +21,7 @@ import heero.mc.mod.wakcraft.entity.creature.Gobball;
 import heero.mc.mod.wakcraft.entity.creature.GobballWC;
 import heero.mc.mod.wakcraft.entity.creature.Gobbette;
 import heero.mc.mod.wakcraft.entity.creature.WhiteGobbly;
+import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.eventhandler.GUIEventHandler;
 import heero.mc.mod.wakcraft.eventhandler.KeyInputHandler;
@@ -45,6 +47,7 @@ public class CombinedClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderBlackGobbly(new ModelGobbly(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderGobballWC(new ModelGobballWC(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new RenderTextPopup());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new RenderSeedsPile());
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RenderDragoexpress());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RenderPhoenix());

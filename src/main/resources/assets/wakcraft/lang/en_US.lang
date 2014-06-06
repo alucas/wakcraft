@@ -67,6 +67,7 @@ item.GobballCape.name=Gobball Cape
 item.GobballBelt.name=Gobball Belt
 item.GobballHeadgear.name=Gobball Headgear
 item.GobballAmulet.name=Gobball Amulet
+item.GobballSeed.name=Gobball Seed
 item.BouzeLiteYeahsRing.name=Bouze Lite Yeah's Ring
 
 tile.tannerWorkbench.name=Tanner Workbench
@@ -128,7 +129,7 @@ itemGroup.specialBlocks=Special Blocks
 itemGroup.resources=Resources
 itemGroup.oreBlocks=Ore Blocks
 
-message.blockOre.insufficientLevel=Insuffisant level to mine : %s (lvl. %d)
+message.blockOre.insufficientLevel=Insufficient level to mine : %s (lvl. %d)
 message.itemAndLevel=%s, lvl. %d
 message.chestAlreadyUnlocked=Chest already unlocked
 message.notYourBag=This is not your haven bag!
@@ -138,6 +139,7 @@ message.lockHavenBag=Haven Bag Locked
 message.cantOpenHavenBagHere=You can't open your Haven Bag here
 message.cantOpenHavenBagInAir=You must be on ground to enter in your haven bag
 message.phoenixRegister=Your spawn position has been updated
+message.seed.insufficientLevel=Insufficient level to use : %d (lvl. %d)
 
 profession.herbalist=Herbalist
 profession.lumberjack=Lumberjack

@@ -4,6 +4,7 @@ import heero.mc.mod.wakcraft.entity.property.AbilitiesProperty;
 import heero.mc.mod.wakcraft.entity.property.CharacterProperty;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.entity.property.InventoryProperty;
+import heero.mc.mod.wakcraft.entity.property.ItemInUseProperty;
 import heero.mc.mod.wakcraft.entity.property.ProfessionProperty;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
@@ -19,6 +20,7 @@ public class EntityEventHandler {
 			player.registerExtendedProperties(AbilitiesProperty.IDENTIFIER, new AbilitiesProperty());
 			player.registerExtendedProperties(InventoryProperty.IDENTIFIER, new InventoryProperty());
 			player.registerExtendedProperties(CharacterProperty.IDENTIFIER, new CharacterProperty());
+			player.registerExtendedProperties(ItemInUseProperty.IDENTIFIER, new ItemInUseProperty());
 		}
 	}
 }

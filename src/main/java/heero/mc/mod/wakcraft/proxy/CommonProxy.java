@@ -9,6 +9,7 @@ import heero.mc.mod.wakcraft.entity.creature.Gobball;
 import heero.mc.mod.wakcraft.entity.creature.GobballWC;
 import heero.mc.mod.wakcraft.entity.creature.Gobbette;
 import heero.mc.mod.wakcraft.entity.creature.WhiteGobbly;
+import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.eventhandler.EntityEventHandler;
 import heero.mc.mod.wakcraft.eventhandler.PlayerEventHandler;
@@ -74,6 +75,9 @@ public class CommonProxy {
 		registerEntity(GobballWC.class, "GobballWarChief", 0xeaeaea, 0xc22a23);
 
 		EntityRegistry.registerGlobalEntityID(EntityTextPopup.class, "TextPopup", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerGlobalEntityID(EntitySeedsPile.class, "SeedPile", EntityRegistry.findGlobalUniqueEntityId());
+
+		EntityRegistry.registerModEntity(EntitySeedsPile.class, "SeedPile", EntityRegistry.findGlobalUniqueEntityId(), Wakcraft.instance, 20, 5, false);
 	}
 
 	@SuppressWarnings("unchecked")

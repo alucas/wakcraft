@@ -4,7 +4,7 @@ import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.item.ItemIkiakit;
 import heero.mc.mod.wakcraft.item.ItemOre1;
 import heero.mc.mod.wakcraft.item.ItemOre2;
-import heero.mc.mod.wakcraft.item.ItemSeedGobball;
+import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import heero.mc.mod.wakcraft.item.ItemWArmor;
 import heero.mc.mod.wakcraft.item.ItemWithLevel;
 import heero.mc.mod.wakcraft.item.ItemWoollyKey;
@@ -57,7 +57,7 @@ public class WItems extends Items {
 		GameRegistry.registerItem(adventurerikiakit = new ItemIkiakit("AdventurerIkiakit"), "ItemAdventurerIkiakit");
 		GameRegistry.registerItem(collectorikiakit = new ItemIkiakit("CollectorIkiakit"), "ItemCollectorIkiakit");
 		GameRegistry.registerItem(emeraldikiakit = new ItemIkiakit("EmeraldIkiakit"), "ItemEmeraldIkiakit");
-		GameRegistry.registerItem(gobballSeed = new ItemSeedGobball(), "ItemGobballSeed");
+		GameRegistry.registerItem(gobballSeed = new ItemWCreatureSeeds(0, "GobballSeed", "gobballseed"), "ItemGobballSeed");
 
 		// Armors
 		GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(TYPE.CHESTPLATE, 15).setCharacteristic(ABILITY.HEALTH, 15).setCharacteristic(ABILITY.INITIATIVE, 5).setCharacteristic(ABILITY.FIRE_ATT, 3).setCharacteristic(ABILITY.EARTH_ATT, 3).setUnlocalizedName("GobballBreastplate").setTextureName(modid + "gobball_breastplate")), "ItemGobballBreastplate");
