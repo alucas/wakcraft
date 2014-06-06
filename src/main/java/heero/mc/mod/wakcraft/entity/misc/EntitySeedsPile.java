@@ -9,7 +9,10 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntitySeedsPile extends Entity implements IEntityAdditionalSpawnData {
-	private int age;
+	protected static final String TAG_AGE = "age";
+	protected static final String TAG_ITEM = "item";
+
+	protected int age;
 	protected ItemWCreatureSeeds itemSeeds;
 
 	public EntitySeedsPile(World world) {
@@ -31,11 +34,15 @@ public class EntitySeedsPile extends Entity implements IEntityAdditionalSpawnDat
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound var1) {
+	protected void readEntityFromNBT(NBTTagCompound tagRoot) {
+		age = tagRoot.getInteger(TAG_AGE);
+		itemSeeds = (ItemWCreatureSeeds) Item.getItemById(tagRoot.getInteger(TAG_ITEM));
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound var1) {
+	protected void writeEntityToNBT(NBTTagCompound tagRoot) {
+		tagRoot.setInteger(TAG_AGE, age);
+		tagRoot.setInteger(TAG_ITEM, Item.getIdFromItem(itemSeeds));
 	}
 
 	@Override
