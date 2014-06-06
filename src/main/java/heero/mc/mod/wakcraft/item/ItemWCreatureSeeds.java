@@ -2,10 +2,15 @@ package heero.mc.mod.wakcraft.item;
 
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.mc.mod.wakcraft.entity.creature.EntityWCreature;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.helper.ItemInUseHelper;
 import heero.mc.mod.wakcraft.manager.ProfessionManager;
 import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
@@ -16,8 +21,14 @@ import net.minecraft.world.World;
 public class ItemWCreatureSeeds extends ItemWithLevel {
 	protected static final int USE_DURATION = 100;
 
+	public Map<Character, Class<? extends EntityWCreature>> creatures;
+	public Map<String, Float> paterns;
+
 	public ItemWCreatureSeeds(int level, String name, String textureName) {
 		super(level);
+
+		creatures = new HashMap<Character, Class<? extends EntityWCreature>>();
+		paterns = new HashMap<String, Float>();
 
 		setCreativeTab(WakcraftCreativeTabs.tabResource);
 		setUnlocalizedName(name);
@@ -84,5 +95,17 @@ public class ItemWCreatureSeeds extends ItemWithLevel {
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
 		return USE_DURATION;
+	}
+
+	public <T extends EntityWCreature> ItemWCreatureSeeds addCreature(Character key, Class<T> creature) {
+		creatures.put(key, creature);
+
+		return this;
+	}
+
+	public ItemWCreatureSeeds addPatern(String patern, Float probability) {
+		paterns.put(patern, probability);
+
+		return this;
 	}
 }

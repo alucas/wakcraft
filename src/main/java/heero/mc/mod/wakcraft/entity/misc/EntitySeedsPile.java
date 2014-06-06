@@ -1,7 +1,11 @@
 package heero.mc.mod.wakcraft.entity.misc;
 
+import heero.mc.mod.wakcraft.entity.creature.EntityWCreature;
 import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import io.netty.buffer.ByteBuf;
+
+import java.lang.reflect.InvocationTargetException;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,6 +13,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntitySeedsPile extends Entity implements IEntityAdditionalSpawnData {
+	protected static final int GROW_DURATION = 300;
 	protected static final String TAG_AGE = "age";
 	protected static final String TAG_ITEM = "item";
 
@@ -49,8 +54,32 @@ public class EntitySeedsPile extends Entity implements IEntityAdditionalSpawnDat
 	public void onEntityUpdate() {
 		age++;
 
-		if (age > 300) {
+		if (age > GROW_DURATION) {
+			spawnGroup();
 			setDead();
+		}
+	}
+
+	protected void spawnGroup() {
+		if (!worldObj.isRemote) {
+			for (String patern : itemSeeds.paterns.keySet()) {
+				if (rand.nextFloat() < itemSeeds.paterns.get(patern)) {
+					for (Character c : patern.toCharArray()) {
+						Class<? extends EntityWCreature> creatureClass = itemSeeds.creatures.get(c);
+
+						try {
+							EntityWCreature creature = creatureClass.getConstructor(World.class).newInstance(worldObj);
+							creature.setPositionAndUpdate(posX - 3 + rand.nextInt(7), posY, posZ - 3 + rand.nextInt(7));
+							worldObj.spawnEntityInWorld(creature);
+						} catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+							e.printStackTrace();
+							break;
+						}
+					}
+
+					break;
+				}
+			}
 		}
 	}
 
