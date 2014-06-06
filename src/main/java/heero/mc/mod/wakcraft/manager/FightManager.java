@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.manager;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.Wakcraft;
+import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.event.FightEvent.Type;
@@ -18,9 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -40,7 +41,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 public class FightManager {
 	protected static int FIGHT_WALL_HEIGHT = 3;
 
-	protected static Map<Integer, FightInfo> fights = new HashMap<Integer, FightInfo>();
+	protected static Map<World, Map<Integer, FightInfo>> fights = new HashMap<World, Map<Integer, FightInfo>>();
 
 	/**
 	 * Handler called when an entity is created.
@@ -104,17 +105,23 @@ public class FightManager {
 
 			int fightId = world.getUniqueDataId("fightId");
 
-			List<List<Integer>> fighters = initFight(fightId, player, target);
+			List<List<EntityLivingBase>> fighters = initFight(fightId, player, target);
 
 			addFightersToFight(world, fighters, fightId);
 
 			List<FightBlockCoordinates> startBlocks = getSartingPositions(world.rand, fightBlocks);
 
-			FightHelper.setStartPosition(target, startBlocks.get(0));
+			for (int i = 0; i < fighters.get(1).size(); i++) {
+				FightHelper.setStartPosition(fighters.get(1).get(i), startBlocks.get(i));
+			}
 
 			createFightMap(world, fightBlocks);
 
-			fights.put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
+			if (!fights.containsKey(world)) {
+				fights.put(world, new HashMap<Integer, FightInfo>());
+			}
+
+			fights.get(world).put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
 
 			event.setCanceled(true);
 			return;
@@ -388,14 +395,31 @@ public class FightManager {
 	 * @param opponent	The opponent of the player.
 	 * @return	The fighter list.
 	 */
-	protected static List<List<Integer>> initFight(int fightId, EntityPlayerMP player, EntityLivingBase opponent) {
-		ArrayList<List<Integer>> fighters = new ArrayList<List<Integer>>();
+	protected static List<List<EntityLivingBase>> initFight(int fightId, EntityPlayerMP player, EntityLivingBase opponent) {
+		ArrayList<List<EntityLivingBase>> fighters = new ArrayList<List<EntityLivingBase>>();
 
-		ArrayList<Integer> fighters1 = new ArrayList<Integer>();
-		ArrayList<Integer> fighters2 = new ArrayList<Integer>();
+		ArrayList<EntityLivingBase> fighters1 = new ArrayList<EntityLivingBase>();
+		ArrayList<EntityLivingBase> fighters2 = new ArrayList<EntityLivingBase>();
 
-		fighters1.add(player.getEntityId());
-		fighters2.add(opponent.getEntityId());
+		fighters1.add(player);
+
+		if (opponent instanceof IFighter) {
+			List<UUID> group = ((IFighter) opponent).getGroup();
+			if (group == null) {
+				fighters2.add(opponent);
+			}
+			else {
+			for (UUID fighterUUID : group) {
+				for (Object entity : opponent.worldObj.getLoadedEntityList()) {
+					if (entity instanceof IFighter && ((EntityLivingBase) entity).getUniqueID().equals(fighterUUID)) {
+						fighters2.add((EntityLivingBase) entity);
+					}
+				}
+			}
+			}
+		} else {
+			fighters2.add(opponent);
+		}
 
 		fighters.add(fighters1);
 		fighters.add(fighters2);
@@ -418,19 +442,13 @@ public class FightManager {
 	 * @param world		World of the fight.
 	 * @param fighters	The fighters list.
 	 */
-	protected static void terminateFight(int fightId, World world, List<List<Integer>> fighters) {
+	protected static void terminateFight(int fightId, World world, List<List<EntityLivingBase>> fighters) {
 		MinecraftForge.EVENT_BUS.post(new FightEvent(world, Type.STOP, fightId, fighters));
 
 		for (int teamId = 0; teamId < 2; teamId++) {
-			List<Integer> team = fighters.get(teamId);
+			List<EntityLivingBase> team = fighters.get(teamId);
 
-			for (Integer entityId : team) {
-				Entity entity = world.getEntityByID(entityId);
-				if (entity == null || !(entity instanceof EntityLivingBase)) {
-					FMLLog.warning("Wrond fighting entity id");
-					return;
-				}
-
+			for (EntityLivingBase entity : team) {
 				if (entity instanceof EntityPlayerMP) {
 					Wakcraft.packetPipeline.sendTo(new PacketFight(Type.STOP, fightId, fighters), (EntityPlayerMP) entity);
 				}
@@ -447,24 +465,14 @@ public class FightManager {
 	 *         no defeated team yet.
 	 */
 	protected static int getDefeatedTeam(World world, int fightId) {
-		FightInfo fight = fights.get(fightId);
-		if (fight == null) {
-			FMLLog.warning("Trying to update a fight who does not exist : %d", fightId);
-			return -1;
-		}
+		FightInfo fight = fights.get(world).get(fightId);
 
 		for (int teamId = 1; teamId <= 2; teamId++) {
-			List<Integer> team = fight.fighters.get(teamId - 1);
+			List<EntityLivingBase> team = fight.fighters.get(teamId - 1);
 
 			boolean living = false;
-			for (Integer entityId : team) {
-				Entity entity = world.getEntityByID(entityId);
-				if (entity == null || !(entity instanceof EntityLivingBase)) {
-					FMLLog.warning("Wrond fighting entity id");
-					return -1;
-				}
-
-				if (!((EntityLivingBase) entity).isEntityAlive()) {
+			for (EntityLivingBase entity : team) {
+				if (!entity.isEntityAlive()) {
 					continue;
 				}
 
@@ -486,11 +494,7 @@ public class FightManager {
 	 * @param fightId	Identifier of the fight.
 	 */
 	protected static void stopFight(World world, int fightId) {
-		FightInfo fight = fights.remove(fightId);
-		if (fight == null) {
-			FMLLog.warning("Trying to stop a fight who does not exist : %d", fightId);
-			return;
-		}
+		FightInfo fight = fights.get(world).remove(fightId);
 
 		terminateFight(fightId, world, fight.fighters);
 		destroyFightMap(world, fight.fightBlocks);
@@ -503,7 +507,11 @@ public class FightManager {
 	 * @param world	World of the fights.
 	 */
 	protected static void stopFights(World world) {
-		for (int fightId : fights.keySet()) {
+		if (!fights.containsKey(world)) {
+			return;
+		}
+
+		for (int fightId : fights.get(world).keySet()) {
 			stopFight(world, fightId);
 		}
 	}
@@ -523,10 +531,10 @@ public class FightManager {
 	 * @param fighters	The fighters list.
 	 * @param fightId	Identifier of the fight.
 	 */
-	public static void addFightersToFight(World world, List<List<Integer>> fighters, int fightId) {
-		Iterator<List<Integer>> teams = fighters.iterator();
+	public static void addFightersToFight(World world, List<List<EntityLivingBase>> fighters, int fightId) {
+		Iterator<List<EntityLivingBase>> teams = fighters.iterator();
 		while (teams.hasNext()) {
-			Iterator<Integer> entities = teams.next().iterator();
+			Iterator<EntityLivingBase> entities = teams.next().iterator();
 			while (entities.hasNext()) {
 				addFighterToFight(world, entities.next(), fightId);
 			}
@@ -536,23 +544,11 @@ public class FightManager {
 	/**
 	 * Inform fighter of its entering in a fight.
 	 * @param world		World of the fight.
-	 * @param fighterId	The fighter.
+	 * @param fighter	The fighter.
 	 * @param fightId	Identifier of the fight.
 	 */
-	public static void addFighterToFight(World world, int fighterId, int fightId) {
-		Entity entity = world.getEntityByID(fighterId);
-		if (entity == null || !(entity instanceof EntityLivingBase)) {
-			FMLLog.warning("Wrond fighting entity id");
-			return;
-		}
-
-		FightProperty entityProperties = (FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER);
-		if (entityProperties == null) {
-			FMLLog.warning("Error while loading the Fight properties of player : %s", entity.getClass().getName());
-			return;
-		}
-
-		entityProperties.setFightId(fightId);
+	public static void addFighterToFight(World world, EntityLivingBase entity, int fightId) {
+		((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).setFightId(fightId);
 	}
 
 	/**
@@ -561,24 +557,12 @@ public class FightManager {
 	 * @param world		World of the fight.
 	 * @param fighters	Fighters list.
 	 */
-	public static void removeFightersFromFight(World world, List<List<Integer>> fighters) {
-		Iterator<List<Integer>> teams = fighters.iterator();
+	public static void removeFightersFromFight(World world, List<List<EntityLivingBase>> fighters) {
+		Iterator<List<EntityLivingBase>> teams = fighters.iterator();
 		while (teams.hasNext()) {
-			Iterator<Integer> entities = teams.next().iterator();
+			Iterator<EntityLivingBase> entities = teams.next().iterator();
 			while (entities.hasNext()) {
-				Entity entity = world.getEntityByID(entities.next());
-				if (entity == null || !(entity instanceof EntityLivingBase)) {
-					FMLLog.warning("Wrond fighting entity id");
-					return;
-				}
-
-				FightProperty entityProperties = (FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER);
-				if (entityProperties == null) {
-					FMLLog.warning("Error while loading the Fight properties of player : %s", entity.getClass().getName());
-					return;
-				}
-
-				entityProperties.resetFightId();
+				((FightProperty) entities.next().getExtendedProperties(FightProperty.IDENTIFIER)).resetFightId();
 			}
 		}
 	}
