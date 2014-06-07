@@ -60,6 +60,11 @@ public class FightRenderer extends IRenderHandler {
 				int y = posY;
 				for (; y < world.getHeight() && !world.isAirBlock(x, y + 1, z); ++y);
 				for (; y >= 0 && world.isAirBlock(x, y, z); --y);
+
+				if (!world.getBlock(x, y + 1, z).equals(WBlocks.fightInsideWall)) {
+					continue;
+				}
+
 				renderBlocks.renderBlockByRenderType(WBlocks.fightMovement, x, y, z);
 			}
 		}
@@ -103,6 +108,11 @@ public class FightRenderer extends IRenderHandler {
 			int y = posY;
 			for (; y < world.getHeight() && !world.isAirBlock(x, y + 1, posZ); ++y);
 			for (; y >= 0 && world.isAirBlock(x, y, posZ); --y);
+
+			if (!world.getBlock(x, y + 1, posZ).equals(WBlocks.fightInsideWall)) {
+				continue;
+			}
+
 			renderBlocks.renderBlockByRenderType(WBlocks.fightDirection, x, y, posZ);
 		}
 
@@ -110,6 +120,11 @@ public class FightRenderer extends IRenderHandler {
 			int y = posY;
 			for (; y < world.getHeight() && !world.isAirBlock(posX, y + 1, z); ++y);
 			for (; y >= 0 && world.isAirBlock(posX, y, z); --y);
+
+			if (!world.getBlock(posX, y + 1, z).equals(WBlocks.fightInsideWall)) {
+				continue;
+			}
+
 			renderBlocks.renderBlockByRenderType(WBlocks.fightDirection, posX, y, z);
 		}
 

@@ -71,4 +71,9 @@ public class BlockFightStart extends BlockGeneric {
 			int x, int y, int z, int side) {
 		return side == 1;
 	}
+
+	@Override
+	public boolean isAir(IBlockAccess world, int x, int y, int z) {
+		return true;
+	}
 }
