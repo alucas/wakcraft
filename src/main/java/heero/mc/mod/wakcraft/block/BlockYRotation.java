@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.client.renderer.block.RenderBlockYRotation;
+import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockYRotation;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -31,7 +31,7 @@ public class BlockYRotation extends BlockGeneric {
 	 */
 	@Override
 	public int getRenderType() {
-		return RenderBlockYRotation.renderId;
+		return RendererBlockYRotation.renderId;
 	}
 
 	/**

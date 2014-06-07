@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WInfo;
-import heero.mc.mod.wakcraft.client.renderer.block.RenderBlockPalisade;
+import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPalisade;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 
@@ -75,7 +75,7 @@ public class BlockPalisade extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderType() {
-		return RenderBlockPalisade.renderId;
+		return RendererBlockPalisade.renderId;
 	}
 
 	/**

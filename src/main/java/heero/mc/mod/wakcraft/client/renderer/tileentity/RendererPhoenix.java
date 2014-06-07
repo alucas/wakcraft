@@ -12,7 +12,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderPhoenix extends TileEntitySpecialRenderer {
+public class RendererPhoenix extends TileEntitySpecialRenderer {
 	private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/phoenix.png");
     private ModelPhoenix model = new ModelPhoenix();
 	

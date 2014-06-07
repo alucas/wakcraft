@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
-public abstract class RenderBlockGeneric implements
+public abstract class RendererBlockGeneric implements
 		ISimpleBlockRenderingHandler {
 
 	@Override

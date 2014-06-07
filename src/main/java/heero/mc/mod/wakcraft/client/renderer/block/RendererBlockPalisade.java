@@ -4,11 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
-public class RenderBlockPalisade extends RenderBlockGeneric {
+public class RendererBlockPalisade extends RendererBlockGeneric {
 	public static int renderId;
 
-	public RenderBlockPalisade(int renderId) {
-		RenderBlockPalisade.renderId = renderId;
+	public RendererBlockPalisade(int renderId) {
+		RendererBlockPalisade.renderId = renderId;
 	}
 
 	@Override

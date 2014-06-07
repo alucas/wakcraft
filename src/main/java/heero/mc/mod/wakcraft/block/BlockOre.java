@@ -3,7 +3,7 @@ package heero.mc.mod.wakcraft.block;
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.block.material.AventureMaterial;
-import heero.mc.mod.wakcraft.client.renderer.block.RenderBlockOre;
+import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockOre;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.manager.ProfessionManager;
@@ -122,7 +122,7 @@ public abstract class BlockOre extends Block implements ILevelBlock {
      */
     @Override
     public int getRenderType() {
-        return RenderBlockOre.renderId;
+        return RendererBlockOre.renderId;
     }
     
     /**

@@ -6,13 +6,13 @@ import heero.mc.mod.wakcraft.client.model.ModelGobball;
 import heero.mc.mod.wakcraft.client.model.ModelGobballWC;
 import heero.mc.mod.wakcraft.client.model.ModelGobbette;
 import heero.mc.mod.wakcraft.client.model.ModelGobbly;
-import heero.mc.mod.wakcraft.client.renderer.block.RenderBlockOre;
-import heero.mc.mod.wakcraft.client.renderer.block.RenderBlockPalisade;
-import heero.mc.mod.wakcraft.client.renderer.block.RenderBlockYRotation;
-import heero.mc.mod.wakcraft.client.renderer.entity.RenderSeedsPile;
-import heero.mc.mod.wakcraft.client.renderer.entity.RenderTextPopup;
-import heero.mc.mod.wakcraft.client.renderer.tileentity.RenderDragoexpress;
-import heero.mc.mod.wakcraft.client.renderer.tileentity.RenderPhoenix;
+import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockOre;
+import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPalisade;
+import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockYRotation;
+import heero.mc.mod.wakcraft.client.renderer.entity.RendererSeedsPile;
+import heero.mc.mod.wakcraft.client.renderer.entity.RendererTextPopup;
+import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererDragoexpress;
+import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererPhoenix;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererHavenBagChest;
 import heero.mc.mod.wakcraft.client.renderer.world.FightRenderer;
 import heero.mc.mod.wakcraft.client.setting.KeyBindings;
@@ -46,16 +46,16 @@ public class CombinedClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(WhiteGobbly.class, new WhiteGobbly.RenderWhiteGobbly(new ModelGobbly(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderBlackGobbly(new ModelGobbly(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderGobballWC(new ModelGobballWC(), 0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new RenderTextPopup());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new RenderSeedsPile());
+		RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new RendererTextPopup());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new RendererSeedsPile());
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RenderDragoexpress());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RenderPhoenix());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RendererDragoexpress());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RendererPhoenix());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHavenBagChest.class, new RendererHavenBagChest());
 
-		RenderingRegistry.registerBlockHandler(new RenderBlockYRotation(RenderingRegistry.getNextAvailableRenderId()));
-		RenderingRegistry.registerBlockHandler(new RenderBlockOre(RenderingRegistry.getNextAvailableRenderId()));
-		RenderingRegistry.registerBlockHandler(new RenderBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
+		RenderingRegistry.registerBlockHandler(new RendererBlockYRotation(RenderingRegistry.getNextAvailableRenderId()));
+		RenderingRegistry.registerBlockHandler(new RendererBlockOre(RenderingRegistry.getNextAvailableRenderId()));
+		RenderingRegistry.registerBlockHandler(new RendererBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
 	}
 
 	@Override

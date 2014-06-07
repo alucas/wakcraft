@@ -5,11 +5,11 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
-public class RenderBlockOre extends RenderBlockGeneric {
+public class RendererBlockOre extends RendererBlockGeneric {
 	public static int renderId;
 	
-	public RenderBlockOre(int renderId) {
-		RenderBlockOre.renderId = renderId;
+	public RendererBlockOre(int renderId) {
+		RendererBlockOre.renderId = renderId;
 	}
 	
 	@Override

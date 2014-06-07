@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderDragoexpress extends TileEntitySpecialRenderer {
+public class RendererDragoexpress extends TileEntitySpecialRenderer {
 	private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/dragoexpress.png");
     private ModelDragoexpress model = new ModelDragoexpress();
 	

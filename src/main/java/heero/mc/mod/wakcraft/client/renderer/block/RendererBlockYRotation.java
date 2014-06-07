@@ -4,11 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
-public class RenderBlockYRotation extends RenderBlockGeneric {
+public class RendererBlockYRotation extends RendererBlockGeneric {
 	public static int renderId;
 	
-	public RenderBlockYRotation(int renderId) {
-		RenderBlockYRotation.renderId = renderId;
+	public RendererBlockYRotation(int renderId) {
+		RendererBlockYRotation.renderId = renderId;
 	}
 	
 	@Override

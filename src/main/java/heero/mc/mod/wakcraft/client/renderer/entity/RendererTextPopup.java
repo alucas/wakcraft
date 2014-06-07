@@ -10,10 +10,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class RenderTextPopup extends Render {
+public class RendererTextPopup extends Render {
 	private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/ascii.png");
 
-	public RenderTextPopup() {
+	public RendererTextPopup() {
 	}
 
 	/**

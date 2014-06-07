@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class RenderSeedsPile extends Render {
+public class RendererSeedsPile extends Render {
 	private static final ResourceLocation generic = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/seedpile.png");
 	private static final ResourceLocation gobball = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/gobballSeedPile.png");
 
