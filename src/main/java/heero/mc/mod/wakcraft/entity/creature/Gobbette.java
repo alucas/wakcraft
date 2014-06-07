@@ -1,8 +1,8 @@
 package heero.mc.mod.wakcraft.entity.creature;
 
 import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -15,7 +15,7 @@ public class Gobbette extends Gobball {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class RenderGobette extends RenderLiving {
+	public static class RenderGobette extends RendererWCreature {
 		private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID, "textures/mobs/bouffette.png");
 
 		public RenderGobette(ModelBase model, float shadowSize) {
