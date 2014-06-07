@@ -2,13 +2,13 @@ package heero.mc.mod.wakcraft.entity.creature;
 
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.WItems;
+import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -156,7 +156,7 @@ public class Gobball extends EntityWCreature {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class RenderGobball extends RenderLiving {
+	public static class RenderGobball extends RendererWCreature {
 		private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/mobs/bouftou.png");
 
 		public RenderGobball(ModelBase model, float shadowSize) {
