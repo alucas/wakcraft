@@ -5,7 +5,6 @@ import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -17,8 +16,6 @@ import org.lwjgl.opengl.GL12;
 public class RenderSeedsPile extends Render {
 	private static final ResourceLocation generic = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/seedpile.png");
 	private static final ResourceLocation gobball = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/gobballSeedPile.png");
-
-	protected RenderBlocks renderBlocks = new RenderBlocks();
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
