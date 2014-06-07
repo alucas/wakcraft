@@ -60,6 +60,7 @@ public class EntityWCreature extends EntityCreature implements IWMob, IFighter{
 	public List<UUID> getGroup() {
 		if (group == null) {
 			group = new ArrayList<UUID>();
+			group.add(getUniqueID());
 		}
 
 		return group;
