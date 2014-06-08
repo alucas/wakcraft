@@ -56,7 +56,7 @@ public class ItemWCreatureSeeds extends ItemWithLevel {
 			return false;
 		}
 
-		for (Object entity : world.getLoadedEntityList()) {
+		for (Object entity : world.loadedEntityList) {
 			if (entity instanceof EntitySeedsPile) {
 				EntitySeedsPile entitySeeds = (EntitySeedsPile) entity;
 				if (entitySeeds.posX == x && entitySeeds.posY == y + 1 && entitySeeds.posZ == z) {

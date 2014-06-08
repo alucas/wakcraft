@@ -410,7 +410,7 @@ public class FightManager {
 			}
 			else {
 			for (UUID fighterUUID : group) {
-				for (Object entity : opponent.worldObj.getLoadedEntityList()) {
+				for (Object entity : opponent.worldObj.loadedEntityList) {
 					if (entity instanceof IFighter && ((EntityLivingBase) entity).getUniqueID().equals(fighterUUID)) {
 						fighters2.add((EntityLivingBase) entity);
 					}

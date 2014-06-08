@@ -80,7 +80,7 @@ public class PacketHavenBagVisitors implements IPacket {
 			return;
 		}
 
-		for (Object entity : player.worldObj.getLoadedEntityList()) {
+		for (Object entity : player.worldObj.loadedEntityList) {
 			if (entity instanceof EntityPlayerMP) {
 				EntityPlayerMP playerMP = (EntityPlayerMP) entity;
 				properties = (HavenBagProperty) playerMP.getExtendedProperties(HavenBagProperty.IDENTIFIER);
