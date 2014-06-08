@@ -112,7 +112,7 @@ public class FightManager {
 			List<FightBlockCoordinates> startBlocks = getSartingPositions(world.rand, fightBlocks);
 
 			for (int i = 0; i < fighters.get(1).size(); i++) {
-				FightHelper.setStartPosition(fighters.get(1).get(i), startBlocks.get(i));
+				FightHelper.setStartPosition(fighters.get(1).get(i), startBlocks.get(i * 2));
 			}
 
 			createFightMap(world, fightBlocks);
