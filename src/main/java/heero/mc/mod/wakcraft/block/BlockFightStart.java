@@ -1,8 +1,12 @@
 package heero.mc.mod.wakcraft.block;
 
+import heero.mc.mod.wakcraft.helper.FightHelper;
+
 import java.util.List;
 
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
@@ -13,7 +17,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockFightStart extends BlockGeneric {
 
 	public BlockFightStart(int team) {
-		super(Material.ground);
+		super(new Material(MapColor.redColor) {
+			@Override
+			public boolean isOpaque() {
+				return false;
+			}
+		});
 
 		setBlockTextureName("fightStart" + team);
 		setBlockName("FightStart" + team);
@@ -21,9 +30,7 @@ public class BlockFightStart extends BlockGeneric {
 	}
 
 	/**
-	 * Is this block (a) opaque and (b) a full 1m cube? This determines whether
-	 * or not to render the shared face of two adjacent blocks and also whether
-	 * the player can attach torches, redstone wire, etc to this block.
+	 * Not opaque, render surrounding blocks
 	 */
 	@Override
 	public boolean isOpaqueCube() {
@@ -40,9 +47,7 @@ public class BlockFightStart extends BlockGeneric {
 	}
 
 	/**
-	 * Adds all intersecting collision boxes to a list. (Be sure to only add
-	 * boxes to the list if they intersect the mask.) Parameters: World, X, Y,
-	 * Z, mask, list, colliding entity
+	 * This block is only here for the display : no collision
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -51,9 +56,7 @@ public class BlockFightStart extends BlockGeneric {
 	}
 
 	/**
-	 * Returns whether this block is collideable based on the arguments passed
-	 * in n@param par1 block metaData n@param par2 whether the player
-	 * right-clicked while holding a boat
+	 * This block is only here for the display : don't block raytracing
 	 */
 	@Override
 	public boolean canCollideCheck(int metadata, boolean stopOnLiquid) {
@@ -61,15 +64,14 @@ public class BlockFightStart extends BlockGeneric {
 	}
 
 	/**
-	 * Returns true if the given side of this block type should be rendered, if
-	 * the adjacent block is at the given coordinates. Args: blockAccess, x, y,
-	 * z, side
+	 * Only display the top texture, for player in fight (if the player is from
+	 * an other fight, that's not important)
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world,
 			int x, int y, int z, int side) {
-		return side == 1;
+		return side == 1 && FightHelper.isFighter(Minecraft.getMinecraft().thePlayer) && FightHelper.isFighting(Minecraft.getMinecraft().thePlayer);
 	}
 
 	@Override
