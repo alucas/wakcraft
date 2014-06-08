@@ -109,4 +109,8 @@ public class CommonProxy {
 		DimensionManager.registerProviderType(WConfig.HAVENBAG_DIMENSION_ID, WorldProviderHavenBag.class, false);
 		DimensionManager.registerDimension(WConfig.HAVENBAG_DIMENSION_ID, WConfig.HAVENBAG_DIMENSION_ID);
 	}
+
+	public EntityPlayer getCurrentPlayer() {
+		return null;
+	}
 }

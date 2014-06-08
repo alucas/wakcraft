@@ -86,4 +86,9 @@ public class CombinedClientProxy extends CommonProxy {
 	public void openClassSelectionGui(EntityPlayer player) {
 		Minecraft.getMinecraft().displayGuiScreen(new GUIClassSelection(player));
 	}
+
+	@Override
+	public EntityPlayer getCurrentPlayer() {
+		return Minecraft.getMinecraft().thePlayer;
+	}
 }
