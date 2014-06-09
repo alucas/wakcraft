@@ -254,6 +254,7 @@ public class FightManager {
 
 		int maxStartBlock = 12;
 		List<FightBlockCoordinates> startBlocks = new ArrayList<FightBlockCoordinates>();
+		FightBlockCoordinates tmpBlock = new FightBlockCoordinates(0, 0, 0, TYPE.NORMAL);
 		while(startBlocks.size() < maxStartBlock) {
 			int rand = worldRand.nextInt(fightBlocks.size());
 			FightBlockCoordinates coords = fightBlocksList.get(rand);
@@ -263,6 +264,11 @@ public class FightManager {
 			}
 
 			if (startBlocks.contains(coords)) {
+				continue;
+			}
+
+			tmpBlock.set(coords.posX, coords.posY - 1, coords.posZ);
+			if (fightBlocksList.contains(tmpBlock)) {
 				continue;
 			}
 
