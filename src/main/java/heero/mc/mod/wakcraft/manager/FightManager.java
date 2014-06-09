@@ -106,7 +106,7 @@ public class FightManager {
 			int fightId = world.getUniqueDataId("fightId");
 
 			List<FightBlockCoordinates> startBlocks = getSartPositions(world.rand, fightBlocks);
-			List<List<EntityLivingBase>> fighters = initFight(fightId, player, target, startBlocks);
+			List<List<EntityLivingBase>> fighters = initServerFight(fightId, player, target, startBlocks);
 
 			addFightersToFight(world, fighters, fightId);
 
@@ -408,7 +408,7 @@ public class FightManager {
 	 * @param startBlocks	The stat blocks list.
 	 * @return	The fighter list.
 	 */
-	protected static List<List<EntityLivingBase>> initFight(int fightId, EntityPlayerMP player, EntityLivingBase opponent, List<FightBlockCoordinates> startBlocks) {
+	protected static List<List<EntityLivingBase>> initServerFight(int fightId, EntityPlayerMP player, EntityLivingBase opponent, List<FightBlockCoordinates> startBlocks) {
 		ArrayList<List<EntityLivingBase>> fighters = new ArrayList<List<EntityLivingBase>>();
 
 		ArrayList<EntityLivingBase> fighters1 = new ArrayList<EntityLivingBase>();
@@ -446,6 +446,25 @@ public class FightManager {
 		}
 
 		return fighters;
+	}
+
+	/**
+	 * Initialize client side fight
+	 * 
+	 * @param world
+	 * @param fightId
+	 * @param fighters
+	 * @param startBlocks
+	 * @return
+	 */
+	public static void initClientFight(World world, int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
+		Map<Integer, FightInfo> worldFights = fights.get(world);
+		if (worldFights == null) {
+			worldFights = new HashMap<Integer, FightInfo>();
+			fights.put(world, worldFights);
+		}
+
+		worldFights.put(fightId, new FightInfo(fighters, startBlocks));
 	}
 
 	/**

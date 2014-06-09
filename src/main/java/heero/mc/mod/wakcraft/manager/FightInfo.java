@@ -16,8 +16,9 @@ public class FightInfo {
 		this.startBlocks = startBlocks;
 	}
 
-	public FightInfo(List<List<EntityLivingBase>> fighters) {
+	public FightInfo(List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
 		this.fighters = fighters;
+		this.startBlocks = startBlocks;
 	}
 
 	public Set<FightBlockCoordinates> getFightBlocks() {

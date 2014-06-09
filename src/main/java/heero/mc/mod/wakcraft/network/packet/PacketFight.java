@@ -122,14 +122,15 @@ public class PacketFight implements IPacket {
 		switch (type) {
 		case START:
 			fighters = getEntities(player.worldObj, fightersId);
-			MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(player.worldObj, fightId, fighters, startBlocks));
+			FightManager.initClientFight(player.worldObj, fightId, fighters, startBlocks);
 			FightManager.addFightersToFight(player.worldObj, fighters, fightId);
+			MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(player.worldObj, fightId, fighters, startBlocks));
 			break;
 
 		case STOP:
 			fighters = getEntities(player.worldObj, fightersId);
-			MinecraftForge.EVENT_BUS.post(FightEvent.getStopInstance(player.worldObj, fightId, fighters));
 			FightManager.removeFightersFromFight(player.worldObj, fighters);
+			MinecraftForge.EVENT_BUS.post(FightEvent.getStopInstance(player.worldObj, fightId, fighters));
 			break;
 
 		default:
