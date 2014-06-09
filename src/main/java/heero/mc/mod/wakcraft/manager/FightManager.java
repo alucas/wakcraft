@@ -439,10 +439,10 @@ public class FightManager {
 
 		MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(player.worldObj, fightId, fighters, startBlocks));
 
-		Wakcraft.packetPipeline.sendTo(new PacketFight(Type.START, fightId, fighters), player);
+		Wakcraft.packetPipeline.sendTo(new PacketFight(Type.START, fightId, fighters, startBlocks), player);
 
 		if (opponent instanceof EntityPlayerMP) {
-			Wakcraft.packetPipeline.sendTo(new PacketFight(Type.START, fightId, fighters), (EntityPlayerMP) opponent);
+			Wakcraft.packetPipeline.sendTo(new PacketFight(Type.START, fightId, fighters, startBlocks), (EntityPlayerMP) opponent);
 		}
 
 		return fighters;

@@ -3,6 +3,8 @@ package heero.mc.mod.wakcraft.network.packet;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.event.FightEvent.Type;
 import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.manager.FightBlockCoordinates;
+import heero.mc.mod.wakcraft.manager.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.manager.FightManager;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -23,6 +25,7 @@ public class PacketFight implements IPacket {
 	protected Type type;
 	protected int fightId;
 	protected List<List<Integer>> fightersId;
+	protected List<FightBlockCoordinates> startBlocks;
 
 	public PacketFight() {
 		this.fightersId = new ArrayList<List<Integer>>();
@@ -45,6 +48,12 @@ public class PacketFight implements IPacket {
 		}
 	}
 
+	public PacketFight(Type type, int fightId, ArrayList<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
+		this(type, fightId, fighters);
+
+		this.startBlocks = startBlocks;
+	}
+
 	@Override
 	public void encodeInto(ChannelHandlerContext ctx, PacketBuffer buffer)
 			throws IOException {
@@ -60,6 +69,16 @@ public class PacketFight implements IPacket {
 			Iterator<Integer> teamIterator = teamFighters.iterator();
 			while (teamIterator.hasNext()) {
 				buffer.writeInt(teamIterator.next());
+			}
+		}
+
+		if (type == Type.START) {
+			buffer.writeInt(startBlocks.size());
+
+			for (FightBlockCoordinates block : startBlocks) {
+				buffer.writeInt(block.posX);
+				buffer.writeInt(block.posY);
+				buffer.writeInt(block.posZ);
 			}
 		}
 	}
@@ -85,6 +104,15 @@ public class PacketFight implements IPacket {
 
 			this.fightersId.add(team);
 		}
+
+		if (type == Type.START) {
+			int nbBlock = buffer.readInt();
+
+			this.startBlocks = new ArrayList<FightBlockCoordinates>();
+			for (int i = 0; i < nbBlock; i++) {
+				startBlocks.add(new FightBlockCoordinates(buffer.readInt(), buffer.readInt(), buffer.readInt(), TYPE.NORMAL));
+			}
+		}
 	}
 
 	@Override
@@ -94,7 +122,7 @@ public class PacketFight implements IPacket {
 		switch (type) {
 		case START:
 			fighters = getEntities(player.worldObj, fightersId);
-			MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(player.worldObj, fightId, fighters, null));
+			MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(player.worldObj, fightId, fighters, startBlocks));
 			FightManager.addFightersToFight(player.worldObj, fighters, fightId);
 			break;
 
