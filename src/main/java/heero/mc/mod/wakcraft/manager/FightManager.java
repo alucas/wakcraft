@@ -105,11 +105,10 @@ public class FightManager {
 
 			int fightId = world.getUniqueDataId("fightId");
 
-			List<List<EntityLivingBase>> fighters = initFight(fightId, player, target);
+			List<FightBlockCoordinates> startBlocks = getSartPositions(world.rand, fightBlocks);
+			List<List<EntityLivingBase>> fighters = initFight(fightId, player, target, startBlocks);
 
 			addFightersToFight(world, fighters, fightId);
-
-			List<FightBlockCoordinates> startBlocks = getSartPositions(world.rand, fightBlocks);
 
 			for (int i = 0; i < fighters.get(1).size(); i++) {
 				FightHelper.setStartPosition(fighters.get(1).get(i), startBlocks.get(i * 2));
@@ -406,9 +405,10 @@ public class FightManager {
 	 * @param fightId	Identifier of the fight.
 	 * @param player	The player who started the fight.
 	 * @param opponent	The opponent of the player.
+	 * @param startBlocks	The stat blocks list.
 	 * @return	The fighter list.
 	 */
-	protected static List<List<EntityLivingBase>> initFight(int fightId, EntityPlayerMP player, EntityLivingBase opponent) {
+	protected static List<List<EntityLivingBase>> initFight(int fightId, EntityPlayerMP player, EntityLivingBase opponent, List<FightBlockCoordinates> startBlocks) {
 		ArrayList<List<EntityLivingBase>> fighters = new ArrayList<List<EntityLivingBase>>();
 
 		ArrayList<EntityLivingBase> fighters1 = new ArrayList<EntityLivingBase>();
@@ -437,7 +437,7 @@ public class FightManager {
 		fighters.add(fighters1);
 		fighters.add(fighters2);
 
-		MinecraftForge.EVENT_BUS.post(new FightEvent(player.worldObj, Type.START, fightId, fighters));
+		MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(player.worldObj, fightId, fighters, startBlocks));
 
 		Wakcraft.packetPipeline.sendTo(new PacketFight(Type.START, fightId, fighters), player);
 
@@ -456,7 +456,7 @@ public class FightManager {
 	 * @param fighters	The fighters list.
 	 */
 	protected static void terminateFight(int fightId, World world, List<List<EntityLivingBase>> fighters) {
-		MinecraftForge.EVENT_BUS.post(new FightEvent(world, Type.STOP, fightId, fighters));
+		MinecraftForge.EVENT_BUS.post(FightEvent.getStopInstance(world, fightId, fighters));
 
 		for (int teamId = 0; teamId < 2; teamId++) {
 			List<EntityLivingBase> team = fighters.get(teamId);
