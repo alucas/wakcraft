@@ -109,7 +109,7 @@ public class FightManager {
 
 			addFightersToFight(world, fighters, fightId);
 
-			List<FightBlockCoordinates> startBlocks = getSartingPositions(world.rand, fightBlocks);
+			List<FightBlockCoordinates> startBlocks = getSartPositions(world.rand, fightBlocks);
 
 			for (int i = 0; i < fighters.get(1).size(); i++) {
 				FightHelper.setStartPosition(fighters.get(1).get(i), startBlocks.get(i * 2));
@@ -250,25 +250,41 @@ public class FightManager {
 	 * @param fightBlocks	Fight blocks.
 	 * @return
 	 */
-	protected static List<FightBlockCoordinates> getSartingPositions (Random worldRand, Set<FightBlockCoordinates> fightBlocks) {
+	protected static List<FightBlockCoordinates> getSartPositions (Random worldRand, Set<FightBlockCoordinates> fightBlocks) {
 		List<FightBlockCoordinates> fightBlocksList = new ArrayList<FightBlockCoordinates>(fightBlocks);
 
 		int maxStartBlock = 12;
-		int nbStartBlock = 0;
 		List<FightBlockCoordinates> startBlocks = new ArrayList<FightBlockCoordinates>();
-		while(nbStartBlock < maxStartBlock) {
+		while(startBlocks.size() < maxStartBlock) {
 			int rand = worldRand.nextInt(fightBlocks.size());
 			FightBlockCoordinates coords = fightBlocksList.get(rand);
-			if (coords.type == TYPE.NORMAL && coords.metadata == 1) {
-				coords.type = TYPE.START;
-				coords.metadata = nbStartBlock % 2;
 
-				startBlocks.add(coords);
-				nbStartBlock++;
+			if (coords.getType() != TYPE.NORMAL) {
+				continue;
 			}
+
+			if (startBlocks.contains(coords)) {
+				continue;
+			}
+
+			startBlocks.add(coords);
 		}
 
 		return startBlocks;
+	}
+
+	public static List<FightBlockCoordinates> getSartPositions(World world, int FightId) {
+		Map<Integer, FightInfo> worldFights = fights.get(world);
+		if (worldFights == null) {
+			return null;
+		}
+
+		FightInfo fightInfo = worldFights.get(FightId);
+		if (fightInfo == null) {
+			return null;
+		}
+
+		return fightInfo.startBlocks;
 	}
 
 	/**
@@ -284,15 +300,12 @@ public class FightManager {
 				continue;
 			}
 
-			switch (block.type) {
+			switch (block.getType()) {
 			case NORMAL:
 				world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightInsideWall);
 				break;
 			case WALL:
 				world.setBlock(block.posX, block.posY, block.posZ, WBlocks.fightWall);
-				break;
-			case START:
-				world.setBlock(block.posX, block.posY, block.posZ, (block.metadata  == 0) ? WBlocks.fightStart1 : WBlocks.fightStart2);
 				break;
 			default:
 				break;

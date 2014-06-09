@@ -4,13 +4,12 @@ import net.minecraft.util.ChunkCoordinates;
 
 public class FightBlockCoordinates extends ChunkCoordinates {
 	public static enum TYPE {
-		NORMAL, WALL, START
+		NORMAL, WALL
 	};
 
 	protected TYPE type;
-	// NORMAL : 1 = onGround
+	// NORMAL
 	// WALL
-	// START : 0 = team0, 1 = team1
 	protected int metadata;
 
 	public FightBlockCoordinates(int x, int y, int z, TYPE type) {
@@ -40,5 +39,9 @@ public class FightBlockCoordinates extends ChunkCoordinates {
 
 	public int hashCode() {
 		return (this.posX & 0xFF) + ((this.posZ & 0xFF) << 8) + ((this.posY & 0xFF) << 16);
+	}
+
+	public TYPE getType() {
+		return type;
 	}
 }
