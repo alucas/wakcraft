@@ -49,10 +49,6 @@ public class FightRenderer extends IRenderHandler {
 	public void renderStartPosition(float partialTicks, WorldClient world, Minecraft mc, EntityPlayer player, List<FightBlockCoordinates> startBlocks) {
 		RenderBlocks renderBlocks = new RenderBlocks(world);
 
-		int posX = (int) Math.floor(player.posX);
-		int posY = (int) (player.posY - 1.63);
-		int posZ = (int) Math.floor(player.posZ);
-
 		double deltaX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
 		double deltaY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
 		double deltaZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * partialTicks;
@@ -62,7 +58,7 @@ public class FightRenderer extends IRenderHandler {
 		OpenGlHelper.glBlendFunc(774, 768, 1, 0);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		GL11.glPushMatrix();
-		GL11.glPolygonOffset(-5.0F, -5.0F);
+		GL11.glPolygonOffset(-2.0F, -2.0F);
 		GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		Tessellator par1Tessellator = Tessellator.instance;
@@ -70,19 +66,9 @@ public class FightRenderer extends IRenderHandler {
 		par1Tessellator.setTranslation(-deltaX, -deltaY, -deltaZ);
 		par1Tessellator.disableColor();
 
-		for (FightBlockCoordinates block : startBlocks) {
-			int x = block.posX - posX;
-			int y = posY;
-			int z = block.posZ - posZ;
-
-			for (; y < world.getHeight() && !world.isAirBlock(x, y + 1, z); ++y);
-			for (; y >= 0 && world.isAirBlock(x, y, z); --y);
-
-//			if (!world.getBlock(x, y + 1, z).equals(WBlocks.fightInsideWall)) {
-//				continue;
-//			}
-
-			renderBlocks.renderBlockByRenderType(WBlocks.fightStart1, x, y + 1, z);
+		for (int i = 0; i < startBlocks.size(); i++) {
+			FightBlockCoordinates block = startBlocks.get(i);
+			renderBlocks.renderBlockByRenderType((i % 2 == 0) ? WBlocks.fightStart1 : WBlocks.fightStart2, block.posX, block.posY, block.posZ);
 		}
 
 		par1Tessellator.draw();
