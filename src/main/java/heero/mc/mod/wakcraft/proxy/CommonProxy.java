@@ -14,7 +14,7 @@ import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.eventhandler.EntityEventHandler;
 import heero.mc.mod.wakcraft.eventhandler.PlayerEventHandler;
 import heero.mc.mod.wakcraft.eventhandler.WorldEventHandler;
-import heero.mc.mod.wakcraft.manager.FightManager;
+import heero.mc.mod.wakcraft.fight.FightEventsHandler;
 import heero.mc.mod.wakcraft.network.GuiHandler;
 import heero.mc.mod.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBag;
@@ -40,15 +40,15 @@ public class CommonProxy {
 	}
 
 	public void registerEvents() {
-		FightManager fightManager = new FightManager();
+		FightEventsHandler fightsHandler = new FightEventsHandler();
 
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
-		MinecraftForge.EVENT_BUS.register(fightManager);
+		MinecraftForge.EVENT_BUS.register(fightsHandler);
 
 		FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
-		FMLCommonHandler.instance().bus().register(fightManager);
+		FMLCommonHandler.instance().bus().register(fightsHandler);
 	}
 
 	public void registerItems() {

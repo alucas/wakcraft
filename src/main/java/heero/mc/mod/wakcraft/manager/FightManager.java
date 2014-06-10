@@ -31,105 +31,66 @@ import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 
 public class FightManager {
-	protected static int FIGHT_WALL_HEIGHT = 3;
-
 	protected static Map<World, Map<Integer, FightInfo>> fights = new HashMap<World, Map<Integer, FightInfo>>();
 
 	/**
-	 * Handler called when an entity is created.
+	 * Do the clean up before stopping the server.
 	 * 
-	 * @param event	Event object.
+	 * @param world	World of the fights.
 	 */
-	@SubscribeEvent
-	public void onEntityConstructing(EntityConstructing event) {
-		if (!(event.entity instanceof EntityLivingBase)) {
-			return;
-		}
-
-		if (FightHelper.isFighter((EntityLivingBase) event.entity)) {
-			event.entity.registerExtendedProperties(FightProperty.IDENTIFIER, new FightProperty());
-		}
+	public static void setUp(World world) {
 	}
 
 	/**
-	 * Handler called when a player attack an entity. Test if the player and the
-	 * entity are not already in a fight, and initialize a new fight.
+	 * Do the clean up before stopping the server.
 	 * 
-	 * @param event	Event object.
+	 * @param world	World of the fights.
 	 */
-	@SubscribeEvent
-	public void onAttackEntityEvent(AttackEntityEvent event) {
-		World world = event.entityPlayer.worldObj;
+	public static void teardown(World world) {
+		stopFights(world);
+	}
 
-		if (world.isRemote) {
-			return;
+	/**
+	 * Create a fight
+	 * @param world
+	 * @param player
+	 * @param target
+	 * @return	False if the creation failed
+	 */
+	public static boolean createFight(World world, EntityPlayerMP player, EntityLivingBase target) {
+		int posX = (int) Math.floor(player.posX);
+		int posY = (int) Math.floor(player.posY);
+		int posZ = (int) Math.floor(player.posZ);
+		Set<FightBlockCoordinates> fightBlocks = getFightBlocks(world, posX, posY, posZ, 10);
+
+		if (fightBlocks.size() < 100) {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("cantFightHere")));
+			return false;
 		}
 
-		if (world.provider.dimensionId != 0) {
-			return;
+		int fightId = world.getUniqueDataId("fightId");
+
+		List<FightBlockCoordinates> startBlocks = getSartPositions(world.rand, fightBlocks);
+		List<List<EntityLivingBase>> fighters = initServerFight(fightId, player, target, startBlocks);
+
+		addFightersToFight(world, fighters, fightId);
+
+		for (int i = 0; i < fighters.get(1).size(); i++) {
+			FightHelper.setStartPosition(fighters.get(1).get(i), startBlocks.get(i * 2));
 		}
 
-		if (!FightHelper.isFighter(event.entityPlayer)) {
-			return;
+		createFightMap(world, fightBlocks);
+
+		if (!fights.containsKey(world)) {
+			fights.put(world, new HashMap<Integer, FightInfo>());
 		}
 
-		if (!FightHelper.isFighter(event.target) || !(event.target instanceof EntityLivingBase)) {
-			return;
-		}
+		fights.get(world).put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
 
-		EntityPlayerMP player = (EntityPlayerMP) event.entityPlayer;
-		EntityLivingBase target = (EntityLivingBase) event.target;
-		if (!target.isEntityAlive()) {
-			return;
-		}
-
-		if (!FightHelper.isFighting(player) && !FightHelper.isFighting(target)) {
-			int posX = (int) Math.floor(player.posX);
-			int posY = (int) Math.floor(player.posY);
-			int posZ = (int) Math.floor(player.posZ);
-			Set<FightBlockCoordinates> fightBlocks = getFightBlocks(world, posX, posY, posZ, 10);
-
-			if (fightBlocks.size() < 100) {
-				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("cantFightHere")));
-				event.setCanceled(true);
-				return;
-			}
-
-			int fightId = world.getUniqueDataId("fightId");
-
-			List<FightBlockCoordinates> startBlocks = getSartPositions(world.rand, fightBlocks);
-			List<List<EntityLivingBase>> fighters = initServerFight(fightId, player, target, startBlocks);
-
-			addFightersToFight(world, fighters, fightId);
-
-			for (int i = 0; i < fighters.get(1).size(); i++) {
-				FightHelper.setStartPosition(fighters.get(1).get(i), startBlocks.get(i * 2));
-			}
-
-			createFightMap(world, fightBlocks);
-
-			if (!fights.containsKey(world)) {
-				fights.put(world, new HashMap<Integer, FightInfo>());
-			}
-
-			fights.get(world).put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
-
-			event.setCanceled(true);
-			return;
-		}
-
-		if (FightHelper.getFightId(player) != FightHelper.getFightId(target)) {
-			event.setCanceled(true);
-			return;
-		}
+		return true;
 	}
 
 	/**
@@ -142,7 +103,7 @@ public class FightManager {
 	 * @param radius	Maximal distance from the center of the selected blocks.
 	 * @return	The selected fight blocks.
 	 */
-	protected Set<FightBlockCoordinates> getFightBlocks(World world, int posX, int posY, int posZ, int radius) {
+	protected static Set<FightBlockCoordinates> getFightBlocks(World world, int posX, int posY, int posZ, int radius) {
 		Set<FightBlockCoordinates> fightBlocks = new HashSet<FightBlockCoordinates>();
 		ChunkCache chunks = new ChunkCache(world, posX - radius, posY - radius, posZ - radius, posX + radius, posY + radius, posZ + radius, 2);
 
@@ -157,7 +118,7 @@ public class FightManager {
 
 	protected static final int offsetX[] = new int[]{-1, 1, 0, 0};
 	protected static final int offsetZ[] = new int[]{0, 0, -1, 1};
-	protected void getMapAtPos_rec(IBlockAccess world, int centerX, int centerY, int centerZ, int offsetX, int offsetY, int offsetZ, Set<FightBlockCoordinates> fightBlocks, BitSet visited, int radius2) {
+	protected static void getMapAtPos_rec(IBlockAccess world, int centerX, int centerY, int centerZ, int offsetX, int offsetY, int offsetZ, Set<FightBlockCoordinates> fightBlocks, BitSet visited, int radius2) {
 		visited.set(hashCoords(offsetX, offsetY, offsetZ));
 
 		// too far
@@ -337,75 +298,6 @@ public class FightManager {
 	}
 
 	/**
-	 * Handler called when an Entity die.
-	 * 
-	 * @param event	The Event object.
-	 */
-	@SubscribeEvent
-	public void onLivingDeathEvent(LivingDeathEvent event) {
-		if (event.entityLiving.worldObj.isRemote) {
-			return;
-		}
-
-		if (event.entityLiving.worldObj.provider.dimensionId != 0) {
-			return;
-		}
-
-		if (!FightHelper.isFighter(event.entityLiving)) {
-			return;
-		}
-
-		if (!FightHelper.isFighting(event.entityLiving)) {
-			return;
-		}
-
-		int fightId = FightHelper.getFightId(event.entityLiving);
-
-		int defeatedTeam = getDefeatedTeam(event.entityLiving.worldObj, fightId);
-		if (defeatedTeam <= 0) {
-			return;
-		}
-
-		stopFight(event.entityLiving.worldObj, fightId);
-	}
-
-	/**
-	 * Handler called when a Player log out of the world (only in multiplayer
-	 * mode)
-	 * 
-	 * @param event	The Event object.
-	 */
-	@SubscribeEvent
-	public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
-		if (event.player.worldObj.isRemote) {
-			return;
-		}
-
-		if (event.player.worldObj.provider.dimensionId != 0) {
-			return;
-		}
-
-		if (!FightHelper.isFighter(event.player)) {
-			return;
-		}
-
-		if (!FightHelper.isFighting(event.player)) {
-			return;
-		}
-
-		event.player.setDead();
-
-		int fightId = FightHelper.getFightId(event.player);
-
-		int defeatedTeam = getDefeatedTeam(event.player.worldObj, fightId);
-		if (defeatedTeam <= 0) {
-			return;
-		}
-
-		stopFight(event.player.worldObj, fightId);
-	}
-
-	/**
 	 * Initialize the fight.
 	 * 
 	 * @param fightId	Identifier of the fight.
@@ -502,7 +394,7 @@ public class FightManager {
 	 * @return Return the defeated team, -1 if an error occurred, 0 if there is
 	 *         no defeated team yet.
 	 */
-	protected static int getDefeatedTeam(World world, int fightId) {
+	public static int getDefeatedTeam(World world, int fightId) {
 		FightInfo fight = fights.get(world).get(fightId);
 
 		for (int teamId = 1; teamId <= 2; teamId++) {
@@ -531,7 +423,7 @@ public class FightManager {
 	 * @param world		World of the fight.
 	 * @param fightId	Identifier of the fight.
 	 */
-	protected static void stopFight(World world, int fightId) {
+	public static void stopFight(World world, int fightId) {
 		FightInfo fight = fights.get(world).remove(fightId);
 
 		terminateFight(fightId, world, fight.fighters);
@@ -544,7 +436,7 @@ public class FightManager {
 	 * 
 	 * @param world	World of the fights.
 	 */
-	protected static void stopFights(World world) {
+	public static void stopFights(World world) {
 		if (!fights.containsKey(world)) {
 			return;
 		}
@@ -552,15 +444,6 @@ public class FightManager {
 		for (int fightId : fights.get(world).keySet()) {
 			stopFight(world, fightId);
 		}
-	}
-
-	/**
-	 * Do the clean up before stopping the server.
-	 * 
-	 * @param world	World of the fights.
-	 */
-	public static void teardown(World world) {
-		stopFights(world);
 	}
 
 	/**
