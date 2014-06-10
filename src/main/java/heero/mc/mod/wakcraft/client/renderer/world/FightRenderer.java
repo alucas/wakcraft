@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.IRenderHandler;
-import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 import org.lwjgl.opengl.GL11;
 
@@ -192,7 +192,7 @@ public class FightRenderer extends IRenderHandler {
 	}
 
 	@SubscribeEvent
-	public void onRenderHandEvent(RenderHandEvent event) {
+	public void onRenderWorldLastEvent(RenderWorldLastEvent event) {
 		Minecraft mc = Minecraft.getMinecraft();
 
 		render(event.partialTicks, mc.theWorld, mc);
