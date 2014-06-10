@@ -58,7 +58,7 @@ public class FightRenderer extends IRenderHandler {
 		OpenGlHelper.glBlendFunc(774, 768, 1, 0);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		GL11.glPushMatrix();
-		GL11.glPolygonOffset(-2.0F, -2.0F);
+		GL11.glPolygonOffset(-5.0F, -5.0F);
 		GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		Tessellator par1Tessellator = Tessellator.instance;
@@ -68,7 +68,7 @@ public class FightRenderer extends IRenderHandler {
 
 		for (int i = 0; i < startBlocks.size(); i++) {
 			FightBlockCoordinates block = startBlocks.get(i);
-			renderBlocks.renderBlockByRenderType((i % 2 == 0) ? WBlocks.fightStart1 : WBlocks.fightStart2, block.posX, block.posY, block.posZ);
+			renderBlocks.renderBlockByRenderType((i % 2 == 0) ? WBlocks.fightStart1 : WBlocks.fightStart2, block.posX, block.posY - 1, block.posZ);
 		}
 
 		par1Tessellator.draw();
