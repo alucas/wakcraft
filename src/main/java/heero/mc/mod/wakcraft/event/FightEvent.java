@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.event;
 
-import heero.mc.mod.wakcraft.manager.FightBlockCoordinates;
+import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 
 import java.util.ArrayList;
 import java.util.Collections;

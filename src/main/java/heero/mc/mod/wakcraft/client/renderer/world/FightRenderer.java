@@ -1,9 +1,9 @@
 package heero.mc.mod.wakcraft.client.renderer.world;
 
 import heero.mc.mod.wakcraft.WBlocks;
+import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
+import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.helper.FightHelper;
-import heero.mc.mod.wakcraft.manager.FightBlockCoordinates;
-import heero.mc.mod.wakcraft.manager.FightManager;
 
 import java.util.List;
 

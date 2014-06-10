@@ -1,4 +1,5 @@
-package heero.mc.mod.wakcraft.manager;
+package heero.mc.mod.wakcraft.fight;
+
 
 import java.util.List;
 import java.util.Set;

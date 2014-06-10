@@ -1,10 +1,10 @@
 package heero.mc.mod.wakcraft.network.packet;
 
 import heero.mc.mod.wakcraft.event.FightEvent.Type;
+import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
+import heero.mc.mod.wakcraft.fight.FightManager;
+import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.helper.FightHelper;
-import heero.mc.mod.wakcraft.manager.FightBlockCoordinates;
-import heero.mc.mod.wakcraft.manager.FightBlockCoordinates.TYPE;
-import heero.mc.mod.wakcraft.manager.FightManager;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;

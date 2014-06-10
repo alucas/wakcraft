@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft;
 
-import heero.mc.mod.wakcraft.manager.FightManager;
+import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.manager.HavenBagsManager;
 import heero.mc.mod.wakcraft.network.PacketPipeline;
 import heero.mc.mod.wakcraft.network.packet.PacketCloseWindow;

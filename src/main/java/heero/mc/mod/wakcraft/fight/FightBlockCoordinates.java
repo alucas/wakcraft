@@ -1,4 +1,4 @@
-package heero.mc.mod.wakcraft.manager;
+package heero.mc.mod.wakcraft.fight;
 
 import net.minecraft.util.ChunkCoordinates;
 

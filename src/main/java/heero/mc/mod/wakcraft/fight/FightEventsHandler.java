@@ -2,7 +2,6 @@ package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.helper.FightHelper;
-import heero.mc.mod.wakcraft.manager.FightManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;

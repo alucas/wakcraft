@@ -1,4 +1,4 @@
-package heero.mc.mod.wakcraft.manager;
+package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.Wakcraft;
@@ -6,8 +6,8 @@ import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.event.FightEvent.Type;
+import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.helper.FightHelper;
-import heero.mc.mod.wakcraft.manager.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.network.packet.PacketFight;
 
 import java.util.ArrayList;
