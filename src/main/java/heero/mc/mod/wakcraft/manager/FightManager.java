@@ -60,7 +60,7 @@ public class FightManager {
 	 * @param target
 	 * @return	False if the creation failed
 	 */
-	public static boolean createFight(World world, EntityPlayerMP player, EntityLivingBase target) {
+	public static boolean startFight(World world, EntityPlayerMP player, EntityLivingBase target) {
 		int posX = (int) Math.floor(player.posX);
 		int posY = (int) Math.floor(player.posY);
 		int posZ = (int) Math.floor(player.posZ);
