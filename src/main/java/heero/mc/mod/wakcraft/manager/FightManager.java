@@ -37,20 +37,16 @@ public class FightManager {
 	protected static Map<World, Map<Integer, FightInfo>> fights = new HashMap<World, Map<Integer, FightInfo>>();
 
 	/**
-	 * Do the clean up before stopping the server.
-	 * 
-	 * @param world	World of the fights.
+	 * Initialize the fight manager.
 	 */
-	public static void setUp(World world) {
+	public static void setUp() {
 	}
 
 	/**
 	 * Do the clean up before stopping the server.
-	 * 
-	 * @param world	World of the fights.
 	 */
-	public static void teardown(World world) {
-		stopFights(world);
+	public static void teardown() {
+		stopFights();
 	}
 
 	/**
@@ -286,6 +282,10 @@ public class FightManager {
 	 * @param fightBlocks	The block coordinates list.
 	 */
 	protected static void destroyFightMap(World world, Set<FightBlockCoordinates> fightBlocks) {
+		if (fightBlocks == null) {
+			return;
+		}
+
 		for (FightBlockCoordinates blockCoords : fightBlocks) {
 			Block block = world.getBlock(blockCoords.posX, blockCoords.posY, blockCoords.posZ);
 			if (!block.equals(WBlocks.fightWall) && !block.equals(WBlocks.fightInsideWall) && !block.equals(WBlocks.fightStart1) && !block.equals(WBlocks.fightStart2)) {
@@ -436,13 +436,11 @@ public class FightManager {
 	 * 
 	 * @param world	World of the fights.
 	 */
-	public static void stopFights(World world) {
-		if (!fights.containsKey(world)) {
-			return;
-		}
-
-		for (int fightId : fights.get(world).keySet()) {
-			stopFight(world, fightId);
+	public static void stopFights() {
+		for (World world : fights.keySet()) {
+			for (int fightId : fights.get(world).keySet()) {
+				stopFight(world, fightId);
+			}
 		}
 	}
 

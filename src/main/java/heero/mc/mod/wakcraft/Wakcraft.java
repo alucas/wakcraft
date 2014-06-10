@@ -12,7 +12,6 @@ import heero.mc.mod.wakcraft.network.packet.PacketHavenBagVisitors;
 import heero.mc.mod.wakcraft.network.packet.PacketOpenWindow;
 import heero.mc.mod.wakcraft.network.packet.PacketProfession;
 import heero.mc.mod.wakcraft.proxy.CommonProxy;
-import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -81,7 +80,7 @@ public class Wakcraft {
 
 	@EventHandler
 	public void onFMLServerStoppingEvent(FMLServerStoppingEvent event) {
-		FightManager.teardown(MinecraftServer.getServer().getEntityWorld());
+		FightManager.teardown();
 	}
 
 	@EventHandler

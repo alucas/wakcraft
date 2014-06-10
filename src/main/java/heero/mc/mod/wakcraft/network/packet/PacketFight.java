@@ -128,9 +128,7 @@ public class PacketFight implements IPacket {
 			break;
 
 		case STOP:
-			fighters = getEntities(player.worldObj, fightersId);
-			FightManager.removeFightersFromFight(player.worldObj, fighters);
-			MinecraftForge.EVENT_BUS.post(FightEvent.getStopInstance(player.worldObj, fightId, fighters));
+			FightManager.stopFight(player.worldObj, fightId);
 			break;
 
 		default:
