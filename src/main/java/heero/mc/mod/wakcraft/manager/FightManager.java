@@ -33,19 +33,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLLog;
 
-public class FightManager {
-	protected static Map<World, Map<Integer, FightInfo>> fights = new HashMap<World, Map<Integer, FightInfo>>();
+public enum FightManager {
+	INSTANCE;
+
+	protected Map<World, Map<Integer, FightInfo>> fights = new HashMap<World, Map<Integer, FightInfo>>();
 
 	/**
 	 * Initialize the fight manager.
 	 */
-	public static void setUp() {
+	public void setUp() {
 	}
 
 	/**
 	 * Do the clean up before stopping the server.
 	 */
-	public static void teardown() {
+	public void teardown() {
 		stopFights();
 	}
 
@@ -58,10 +60,10 @@ public class FightManager {
 	 * @param startBlocks
 	 * @return
 	 */
-	public static void startClientFight(World world, int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
+	public void startClientFight(World world, int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
 		initializeFight(fightId, world, fighters, startBlocks);
 
-		FightManager.addFightersToFight(world, fighters, fightId);
+		addFightersToFight(world, fighters, fightId);
 
 		Map<Integer, FightInfo> worldFights = fights.get(world);
 		if (worldFights == null) {
@@ -80,7 +82,7 @@ public class FightManager {
 	 * @param target
 	 * @return	False if the creation failed
 	 */
-	public static boolean startServerFight(World world, EntityPlayerMP player, EntityLivingBase target) {
+	public boolean startServerFight(World world, EntityPlayerMP player, EntityLivingBase target) {
 		int posX = (int) Math.floor(player.posX);
 		int posY = (int) Math.floor(player.posY);
 		int posZ = (int) Math.floor(player.posZ);
@@ -127,7 +129,7 @@ public class FightManager {
 	 * @param radius	Maximal distance from the center of the selected blocks.
 	 * @return	The selected fight blocks.
 	 */
-	protected static Set<FightBlockCoordinates> getFightBlocks(World world, int posX, int posY, int posZ, int radius) {
+	protected Set<FightBlockCoordinates> getFightBlocks(World world, int posX, int posY, int posZ, int radius) {
 		Set<FightBlockCoordinates> fightBlocks = new HashSet<FightBlockCoordinates>();
 		ChunkCache chunks = new ChunkCache(world, posX - radius, posY - radius, posZ - radius, posX + radius, posY + radius, posZ + radius, 2);
 
@@ -142,7 +144,7 @@ public class FightManager {
 
 	protected static final int offsetX[] = new int[]{-1, 1, 0, 0};
 	protected static final int offsetZ[] = new int[]{0, 0, -1, 1};
-	protected static void getMapAtPos_rec(IBlockAccess world, int centerX, int centerY, int centerZ, int offsetX, int offsetY, int offsetZ, Set<FightBlockCoordinates> fightBlocks, BitSet visited, int radius2) {
+	protected void getMapAtPos_rec(IBlockAccess world, int centerX, int centerY, int centerZ, int offsetX, int offsetY, int offsetZ, Set<FightBlockCoordinates> fightBlocks, BitSet visited, int radius2) {
 		visited.set(hashCoords(offsetX, offsetY, offsetZ));
 
 		// too far
@@ -223,7 +225,7 @@ public class FightManager {
 		}
 	}
 
-	protected static final int hashCoords(int x, int y, int z) {
+	protected final int hashCoords(int x, int y, int z) {
 		return ((y & 0xFF) << 16) + ((x & 0xFF) << 8) + (z & 0xFF);
 	}
 
@@ -234,7 +236,7 @@ public class FightManager {
 	 * @param fightBlocks	Fight blocks.
 	 * @return
 	 */
-	protected static List<FightBlockCoordinates> getSartPositions (Set<FightBlockCoordinates> fightBlocks) {
+	protected List<FightBlockCoordinates> getSartPositions (Set<FightBlockCoordinates> fightBlocks) {
 		List<FightBlockCoordinates> fightBlocksList = new ArrayList<FightBlockCoordinates>(fightBlocks);
 
 		int maxStartBlock = 12;
@@ -264,7 +266,7 @@ public class FightManager {
 		return startBlocks;
 	}
 
-	public static List<FightBlockCoordinates> getSartPositions(World world, int FightId) {
+	public List<FightBlockCoordinates> getSartPositions(World world, int FightId) {
 		Map<Integer, FightInfo> worldFights = fights.get(world);
 		if (worldFights == null) {
 			return null;
@@ -284,7 +286,7 @@ public class FightManager {
 	 * @param world			The world of the fight.
 	 * @param fightBlocks	The block coordinates list.
 	 */
-	protected static void createFightMap(World world, Set<FightBlockCoordinates> fightBlocks) {
+	protected void createFightMap(World world, Set<FightBlockCoordinates> fightBlocks) {
 		for (FightBlockCoordinates block : fightBlocks) {
 			if (!world.getBlock(block.posX, block.posY, block.posZ).equals(Blocks.air)) {
 				FMLLog.warning("Trying to replace a block different of Air");
@@ -310,7 +312,7 @@ public class FightManager {
 	 * @param world			The world of the fight.
 	 * @param fightBlocks	The block coordinates list.
 	 */
-	protected static void destroyFightMap(World world, Set<FightBlockCoordinates> fightBlocks) {
+	protected void destroyFightMap(World world, Set<FightBlockCoordinates> fightBlocks) {
 		if (fightBlocks == null) {
 			return;
 		}
@@ -334,7 +336,7 @@ public class FightManager {
 	 * @param opponent
 	 * @return
 	 */
-	protected static List<List<EntityLivingBase>> createTeams(int fightId, EntityPlayerMP player, EntityLivingBase opponent) {
+	protected List<List<EntityLivingBase>> createTeams(int fightId, EntityPlayerMP player, EntityLivingBase opponent) {
 		ArrayList<List<EntityLivingBase>> fighters = new ArrayList<List<EntityLivingBase>>();
 
 		ArrayList<EntityLivingBase> fighters1 = new ArrayList<EntityLivingBase>();
@@ -375,7 +377,7 @@ public class FightManager {
 	 * @param startBlocks	The stat blocks list.
 	 * @return	The fighter list.
 	 */
-	protected static void initializeFight(int fightId, World world, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
+	protected void initializeFight(int fightId, World world, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
 		MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(world, fightId, fighters, startBlocks));
 
 		for (int teamId = 0; teamId < 2; teamId++) {
@@ -396,7 +398,7 @@ public class FightManager {
 	 * @param world		World of the fight.
 	 * @param fighters	The fighters list.
 	 */
-	protected static void terminateFight(int fightId, World world, List<List<EntityLivingBase>> fighters) {
+	protected void terminateFight(int fightId, World world, List<List<EntityLivingBase>> fighters) {
 		MinecraftForge.EVENT_BUS.post(FightEvent.getStopInstance(world, fightId, fighters));
 
 		for (int teamId = 0; teamId < 2; teamId++) {
@@ -418,7 +420,7 @@ public class FightManager {
 	 * @return Return the defeated team, -1 if an error occurred, 0 if there is
 	 *         no defeated team yet.
 	 */
-	public static int getDefeatedTeam(World world, int fightId) {
+	public int getDefeatedTeam(World world, int fightId) {
 		FightInfo fight = fights.get(world).get(fightId);
 
 		for (int teamId = 1; teamId <= 2; teamId++) {
@@ -447,7 +449,7 @@ public class FightManager {
 	 * @param world		World of the fight.
 	 * @param fightId	Identifier of the fight.
 	 */
-	public static void stopFight(World world, int fightId) {
+	public void stopFight(World world, int fightId) {
 		FightInfo fight = fights.get(world).remove(fightId);
 
 		terminateFight(fightId, world, fight.fighters);
@@ -460,7 +462,7 @@ public class FightManager {
 	 * 
 	 * @param world	World of the fights.
 	 */
-	public static void stopFights() {
+	public void stopFights() {
 		for (World world : fights.keySet()) {
 			for (int fightId : fights.get(world).keySet()) {
 				stopFight(world, fightId);
@@ -474,7 +476,7 @@ public class FightManager {
 	 * @param fighters	The fighters list.
 	 * @param fightId	Identifier of the fight.
 	 */
-	public static void addFightersToFight(World world, List<List<EntityLivingBase>> fighters, int fightId) {
+	public void addFightersToFight(World world, List<List<EntityLivingBase>> fighters, int fightId) {
 		Iterator<List<EntityLivingBase>> teams = fighters.iterator();
 		while (teams.hasNext()) {
 			Iterator<EntityLivingBase> entities = teams.next().iterator();
@@ -490,7 +492,7 @@ public class FightManager {
 	 * @param fighter	The fighter.
 	 * @param fightId	Identifier of the fight.
 	 */
-	public static void addFighterToFight(World world, EntityLivingBase entity, int fightId) {
+	public void addFighterToFight(World world, EntityLivingBase entity, int fightId) {
 		((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).setFightId(fightId);
 	}
 
@@ -500,7 +502,7 @@ public class FightManager {
 	 * @param world		World of the fight.
 	 * @param fighters	Fighters list.
 	 */
-	public static void removeFightersFromFight(World world, List<List<EntityLivingBase>> fighters) {
+	public void removeFightersFromFight(World world, List<List<EntityLivingBase>> fighters) {
 		Iterator<List<EntityLivingBase>> teams = fighters.iterator();
 		while (teams.hasNext()) {
 			Iterator<EntityLivingBase> entities = teams.next().iterator();

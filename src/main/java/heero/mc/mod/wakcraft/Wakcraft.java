@@ -80,7 +80,7 @@ public class Wakcraft {
 
 	@EventHandler
 	public void onFMLServerStoppingEvent(FMLServerStoppingEvent event) {
-		FightManager.teardown();
+		FightManager.INSTANCE.teardown();
 	}
 
 	@EventHandler

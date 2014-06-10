@@ -37,7 +37,7 @@ public class FightRenderer extends IRenderHandler {
 			return;
 		}
 
-		List<FightBlockCoordinates> startBlocks = FightManager.getSartPositions(world, FightHelper.getFightId(player));
+		List<FightBlockCoordinates> startBlocks = FightManager.INSTANCE.getSartPositions(world, FightHelper.getFightId(player));
 		if (startBlocks != null) {
 			renderStartPosition(partialTicks, world, mc, player, startBlocks);
 		}

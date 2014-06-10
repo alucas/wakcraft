@@ -62,7 +62,7 @@ public class FightEventsHandler {
 		}
 
 		if (!FightHelper.isFighting(player) && !FightHelper.isFighting(target)) {
-			FightManager.startServerFight(world, player, target);
+			FightManager.INSTANCE.startServerFight(world, player, target);
 
 			event.setCanceled(true);
 			return;
@@ -99,12 +99,12 @@ public class FightEventsHandler {
 
 		int fightId = FightHelper.getFightId(event.entityLiving);
 
-		int defeatedTeam = FightManager.getDefeatedTeam(event.entityLiving.worldObj, fightId);
+		int defeatedTeam = FightManager.INSTANCE.getDefeatedTeam(event.entityLiving.worldObj, fightId);
 		if (defeatedTeam <= 0) {
 			return;
 		}
 
-		FightManager.stopFight(event.entityLiving.worldObj, fightId);
+		FightManager.INSTANCE.stopFight(event.entityLiving.worldObj, fightId);
 	}
 
 	/**
@@ -135,11 +135,11 @@ public class FightEventsHandler {
 
 		int fightId = FightHelper.getFightId(event.player);
 
-		int defeatedTeam = FightManager.getDefeatedTeam(event.player.worldObj, fightId);
+		int defeatedTeam = FightManager.INSTANCE.getDefeatedTeam(event.player.worldObj, fightId);
 		if (defeatedTeam <= 0) {
 			return;
 		}
 
-		FightManager.stopFight(event.player.worldObj, fightId);
+		FightManager.INSTANCE.stopFight(event.player.worldObj, fightId);
 	}
 }

@@ -120,11 +120,11 @@ public class PacketFight implements IPacket {
 		switch (type) {
 		case START:
 			fighters = getEntities(player.worldObj, fightersId);
-			FightManager.startClientFight(player.worldObj, fightId, fighters, startBlocks);
+			FightManager.INSTANCE.startClientFight(player.worldObj, fightId, fighters, startBlocks);
 			break;
 
 		case STOP:
-			FightManager.stopFight(player.worldObj, fightId);
+			FightManager.INSTANCE.stopFight(player.worldObj, fightId);
 			break;
 
 		default:
