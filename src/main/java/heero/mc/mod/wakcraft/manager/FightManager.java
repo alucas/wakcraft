@@ -93,7 +93,7 @@ public class FightManager {
 
 		int fightId = world.getUniqueDataId("fightId");
 
-		List<FightBlockCoordinates> startBlocks = getSartPositions(world.rand, fightBlocks);
+		List<FightBlockCoordinates> startBlocks = getSartPositions(fightBlocks);
 		List<List<EntityLivingBase>> fighters = createTeams(fightId, player, target);
 
 		initializeFight(fightId, world, fighters, startBlocks);
@@ -234,15 +234,16 @@ public class FightManager {
 	 * @param fightBlocks	Fight blocks.
 	 * @return
 	 */
-	protected static List<FightBlockCoordinates> getSartPositions (Random worldRand, Set<FightBlockCoordinates> fightBlocks) {
+	protected static List<FightBlockCoordinates> getSartPositions (Set<FightBlockCoordinates> fightBlocks) {
 		List<FightBlockCoordinates> fightBlocksList = new ArrayList<FightBlockCoordinates>(fightBlocks);
 
 		int maxStartBlock = 12;
+		Random random = new Random();
 		List<FightBlockCoordinates> startBlocks = new ArrayList<FightBlockCoordinates>();
 		FightBlockCoordinates tmpBlock = new FightBlockCoordinates(0, 0, 0, TYPE.NORMAL);
 		while(startBlocks.size() < maxStartBlock) {
-			int rand = worldRand.nextInt(fightBlocks.size());
-			FightBlockCoordinates coords = fightBlocksList.get(rand);
+			int index = random.nextInt(fightBlocks.size());
+			FightBlockCoordinates coords = fightBlocksList.get(index);
 
 			if (coords.getType() != TYPE.NORMAL) {
 				continue;
