@@ -46,7 +46,7 @@ public class PacketFight implements IPacket {
 		}
 	}
 
-	public PacketFight(Type type, int fightId, ArrayList<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
+	public PacketFight(Type type, int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
 		this(type, fightId, fighters);
 
 		this.startBlocks = startBlocks;

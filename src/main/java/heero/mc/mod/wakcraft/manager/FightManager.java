@@ -51,6 +51,7 @@ public class FightManager {
 
 	/**
 	 * Create a fight (Client side)
+	 * 
 	 * @param world
 	 * @param fightId
 	 * @param fighters
@@ -58,9 +59,9 @@ public class FightManager {
 	 * @return
 	 */
 	public static void startClientFight(World world, int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
-		FightManager.addFightersToFight(world, fighters, fightId);
+		initializeFight(fightId, world, fighters, startBlocks);
 
-		MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(world, fightId, fighters, startBlocks));
+		FightManager.addFightersToFight(world, fighters, fightId);
 
 		Map<Integer, FightInfo> worldFights = fights.get(world);
 		if (worldFights == null) {
@@ -73,6 +74,7 @@ public class FightManager {
 
 	/**
 	 * Create a fight (Server side)
+	 * 
 	 * @param world
 	 * @param player
 	 * @param target
@@ -92,7 +94,9 @@ public class FightManager {
 		int fightId = world.getUniqueDataId("fightId");
 
 		List<FightBlockCoordinates> startBlocks = getSartPositions(world.rand, fightBlocks);
-		List<List<EntityLivingBase>> fighters = initServerFight(fightId, player, target, startBlocks);
+		List<List<EntityLivingBase>> fighters = createTeams(fightId, player, target);
+
+		initializeFight(fightId, world, fighters, startBlocks);
 
 		addFightersToFight(world, fighters, fightId);
 
@@ -322,15 +326,14 @@ public class FightManager {
 	}
 
 	/**
-	 * Initialize the fight.
+	 * Create fighter' teams
 	 * 
-	 * @param fightId	Identifier of the fight.
-	 * @param player	The player who started the fight.
-	 * @param opponent	The opponent of the player.
-	 * @param startBlocks	The stat blocks list.
-	 * @return	The fighter list.
+	 * @param fightId
+	 * @param player
+	 * @param opponent
+	 * @return
 	 */
-	protected static List<List<EntityLivingBase>> initServerFight(int fightId, EntityPlayerMP player, EntityLivingBase opponent, List<FightBlockCoordinates> startBlocks) {
+	protected static List<List<EntityLivingBase>> createTeams(int fightId, EntityPlayerMP player, EntityLivingBase opponent) {
 		ArrayList<List<EntityLivingBase>> fighters = new ArrayList<List<EntityLivingBase>>();
 
 		ArrayList<EntityLivingBase> fighters1 = new ArrayList<EntityLivingBase>();
@@ -359,15 +362,30 @@ public class FightManager {
 		fighters.add(fighters1);
 		fighters.add(fighters2);
 
-		MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(player.worldObj, fightId, fighters, startBlocks));
-
-		Wakcraft.packetPipeline.sendTo(new PacketFight(Type.START, fightId, fighters, startBlocks), player);
-
-		if (opponent instanceof EntityPlayerMP) {
-			Wakcraft.packetPipeline.sendTo(new PacketFight(Type.START, fightId, fighters, startBlocks), (EntityPlayerMP) opponent);
-		}
-
 		return fighters;
+	}
+
+	/**
+	 * Initialize the fight.
+	 * 
+	 * @param fightId	Identifier of the fight.
+	 * @param player	The player who started the fight.
+	 * @param opponent	The opponent of the player.
+	 * @param startBlocks	The stat blocks list.
+	 * @return	The fighter list.
+	 */
+	protected static void initializeFight(int fightId, World world, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
+		MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(world, fightId, fighters, startBlocks));
+
+		for (int teamId = 0; teamId < 2; teamId++) {
+			List<EntityLivingBase> team = fighters.get(teamId);
+
+			for (EntityLivingBase entity : team) {
+				if (entity instanceof EntityPlayerMP) {
+					Wakcraft.packetPipeline.sendTo(new PacketFight(Type.START, fightId, fighters, startBlocks), (EntityPlayerMP) entity);
+				}
+			}
+		}
 	}
 
 	/**
