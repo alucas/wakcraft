@@ -50,13 +50,35 @@ public class FightManager {
 	}
 
 	/**
-	 * Create a fight
+	 * Create a fight (Client side)
+	 * @param world
+	 * @param fightId
+	 * @param fighters
+	 * @param startBlocks
+	 * @return
+	 */
+	public static void startClientFight(World world, int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
+		FightManager.addFightersToFight(world, fighters, fightId);
+
+		MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(world, fightId, fighters, startBlocks));
+
+		Map<Integer, FightInfo> worldFights = fights.get(world);
+		if (worldFights == null) {
+			worldFights = new HashMap<Integer, FightInfo>();
+			fights.put(world, worldFights);
+		}
+
+		worldFights.put(fightId, new FightInfo(fighters, startBlocks));
+	}
+
+	/**
+	 * Create a fight (Server side)
 	 * @param world
 	 * @param player
 	 * @param target
 	 * @return	False if the creation failed
 	 */
-	public static boolean startFight(World world, EntityPlayerMP player, EntityLivingBase target) {
+	public static boolean startServerFight(World world, EntityPlayerMP player, EntityLivingBase target) {
 		int posX = (int) Math.floor(player.posX);
 		int posY = (int) Math.floor(player.posY);
 		int posZ = (int) Math.floor(player.posZ);
@@ -80,11 +102,13 @@ public class FightManager {
 
 		createFightMap(world, fightBlocks);
 
-		if (!fights.containsKey(world)) {
-			fights.put(world, new HashMap<Integer, FightInfo>());
+		Map<Integer, FightInfo> worldFights = fights.get(world);
+		if (worldFights == null) {
+			worldFights = new HashMap<Integer, FightInfo>();
+			fights.put(world, worldFights);
 		}
 
-		fights.get(world).put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
+		worldFights.put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
 
 		return true;
 	}
@@ -344,25 +368,6 @@ public class FightManager {
 		}
 
 		return fighters;
-	}
-
-	/**
-	 * Initialize client side fight
-	 * 
-	 * @param world
-	 * @param fightId
-	 * @param fighters
-	 * @param startBlocks
-	 * @return
-	 */
-	public static void initClientFight(World world, int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
-		Map<Integer, FightInfo> worldFights = fights.get(world);
-		if (worldFights == null) {
-			worldFights = new HashMap<Integer, FightInfo>();
-			fights.put(world, worldFights);
-		}
-
-		worldFights.put(fightId, new FightInfo(fighters, startBlocks));
 	}
 
 	/**

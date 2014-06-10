@@ -62,7 +62,7 @@ public class FightEventsHandler {
 		}
 
 		if (!FightHelper.isFighting(player) && !FightHelper.isFighting(target)) {
-			FightManager.startFight(world, player, target);
+			FightManager.startServerFight(world, player, target);
 
 			event.setCanceled(true);
 			return;

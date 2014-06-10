@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.network.packet;
 
-import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.event.FightEvent.Type;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.manager.FightBlockCoordinates;
@@ -18,7 +17,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLLog;
 
 public class PacketFight implements IPacket {
@@ -122,9 +120,7 @@ public class PacketFight implements IPacket {
 		switch (type) {
 		case START:
 			fighters = getEntities(player.worldObj, fightersId);
-			FightManager.initClientFight(player.worldObj, fightId, fighters, startBlocks);
-			FightManager.addFightersToFight(player.worldObj, fighters, fightId);
-			MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(player.worldObj, fightId, fighters, startBlocks));
+			FightManager.startClientFight(player.worldObj, fightId, fighters, startBlocks);
 			break;
 
 		case STOP:
