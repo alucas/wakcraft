@@ -3,7 +3,6 @@ package heero.mc.mod.wakcraft.network.packet.fight;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.helper.FightHelper;
-import heero.mc.mod.wakcraft.network.packet.IPacket;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
@@ -18,7 +17,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
 
-public abstract class PacketFight implements IPacket {
+public class PacketFight implements IPacketFight {
 	protected int fightId = 0;
 
 	public PacketFight() {
@@ -40,9 +39,19 @@ public abstract class PacketFight implements IPacket {
 		this.fightId = buffer.readInt();
 	}
 
+
+	@Override
+	public void handleClientSide(EntityPlayer player) throws Exception {
+	}
+
 	@Override
 	public void handleServerSide(EntityPlayer player) throws Exception {
 		throw new RuntimeException("This is a client side packet");
+	}
+
+	@Override
+	public int getFightId() {
+		return fightId;
 	}
 
 	protected static List<List<EntityLivingBase>> getEntities(World world, List<List<Integer>> fightersId) {
