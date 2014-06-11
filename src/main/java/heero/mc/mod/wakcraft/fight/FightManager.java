@@ -507,7 +507,7 @@ public enum FightManager {
 		while (teams.hasNext()) {
 			Iterator<EntityLivingBase> entities = teams.next().iterator();
 			while (entities.hasNext()) {
-				((FightProperty) entities.next().getExtendedProperties(FightProperty.IDENTIFIER)).resetFightId();
+				((FightProperty) entities.next().getExtendedProperties(FightProperty.IDENTIFIER)).resetProperties();
 			}
 		}
 	}
