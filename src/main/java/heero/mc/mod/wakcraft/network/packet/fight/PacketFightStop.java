@@ -20,16 +20,6 @@ public class PacketFightStop implements IPacketFight {
 	}
 
 	@Override
-	public void handleClientSide(EntityPlayer player) throws Exception {
-		FightManager.INSTANCE.stopFight(player.worldObj, getFightId());
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player) throws Exception {
-		packetFight.handleServerSide(player);
-	}
-
-	@Override
 	public void encodeInto(ChannelHandlerContext ctx, PacketBuffer buffer)
 			throws IOException {
 		packetFight.encodeInto(ctx, buffer);
@@ -39,6 +29,16 @@ public class PacketFightStop implements IPacketFight {
 	public void decodeInto(ChannelHandlerContext ctx, PacketBuffer buffer)
 			throws IOException {
 		packetFight.decodeInto(ctx, buffer);
+	}
+
+	@Override
+	public void handleClientSide(EntityPlayer player) throws Exception {
+		FightManager.INSTANCE.stopFight(player.worldObj, getFightId());
+	}
+
+	@Override
+	public void handleServerSide(EntityPlayer player) throws Exception {
+		packetFight.handleServerSide(player);
 	}
 
 	@Override
