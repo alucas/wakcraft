@@ -517,17 +517,20 @@ public enum FightManager {
 				continue;
 			}
 
-			for (FightInfo fightInfo : fights.get(world).values()) {
-				updateFight(fightInfo, tickCounter);
+			for (int fightId : fights.get(world).keySet()) {
+				updateFight(world, fightId, tickCounter);
 			}
 		}
 	}
 
-	protected void updateFight(FightInfo fightInfo, int tickCounter) {
+	protected void updateFight(World world, int fightId, int tickCounter) {
+		FightInfo fightInfo = fights.get(world).get(fightId);
+
 		switch (fightInfo.getStage()) {
 		case PREFIGHT:
 			if (tickCounter > fightInfo.getTickStart() + 600) {
-				updateFightStage(fightInfo, Stage.FIGHT);
+				updateFightStage(world, fightId, Stage.FIGHT);
+				fightInfo.setStage(Stage.FIGHT);
 			}
 
 			break;
@@ -553,10 +556,22 @@ public enum FightManager {
 			return;
 		}
 
-		updateFightStage(fight, stage);
+		updateFightStage(world, fightId, stage);
+		fight.setStage(Stage.FIGHT);
 	}
 
-	protected void updateFightStage(FightInfo fightInfo, Stage stage) {
-		fightInfo.setStage(stage);
+	protected void updateFightStage(World world, int fightId, Stage stage) {
+		MinecraftForge.EVENT_BUS.post(new FightEvent.FightChangeStageEvent(world, fightId, stage));
+
+		List<List<EntityLivingBase>> fighters = fights.get(world).get(fightId).fighters;
+		for (int teamId = 0; teamId < 2; teamId++) {
+			List<EntityLivingBase> team = fighters.get(teamId);
+
+			for (EntityLivingBase entity : team) {
+				if (entity instanceof EntityPlayerMP) {
+					Wakcraft.packetPipeline.sendTo(new PacketFightStop(fightId), (EntityPlayerMP) entity);
+				}
+			}
+		}
 	}
 }
