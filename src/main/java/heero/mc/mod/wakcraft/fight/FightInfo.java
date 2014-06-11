@@ -10,6 +10,7 @@ import com.sun.istack.internal.Nullable;
 
 public class FightInfo {
 	public enum Stage {
+		UNKNOW,
 		PREFIGHT,
 		FIGHT;
 	}
