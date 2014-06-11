@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.event;
 
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
+import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,46 +13,54 @@ import cpw.mods.fml.common.eventhandler.Event;
 
 public class FightEvent extends Event {
 	public enum Type {
-		UNKNOW, START, STOP,
+		UNKNOW, START, STOP, CHANGE_STAGE,
 	}
 
 	public final World world;
 	public final Type type;
 	public final int fightId;
-	public final List<List<EntityLivingBase>> fighters;
-	public final List<FightBlockCoordinates> startBlocks;
 
-	protected FightEvent(final Type type, final World world, final int fightId, final List<List<EntityLivingBase>> fighters) {
+	public FightEvent(final Type type, final World world, final int fightId) {
 		super();
 
 		this.world = world;
 		this.type = type;
-		this.startBlocks = null;
 		this.fightId = fightId;
-
-		this.fighters = new ArrayList<List<EntityLivingBase>>();
-		this.fighters.add(Collections.unmodifiableList(fighters.get(0)));
-		this.fighters.add(Collections.unmodifiableList(fighters.get(1)));
 	}
 
-	protected FightEvent(final Type type, final World world, final int fightId, final List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
-		super();
+	public static class FightStartEvent extends FightEvent {
+		public final List<List<EntityLivingBase>> fighters;
+		public final List<FightBlockCoordinates> startBlocks;
 
-		this.world = world;
-		this.type = type;
-		this.startBlocks = startBlocks;
-		this.fightId = fightId;
+		public FightStartEvent(World world, int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
+			super(Type.START, world, fightId);
 
-		this.fighters = new ArrayList<List<EntityLivingBase>>();
-		this.fighters.add(Collections.unmodifiableList(fighters.get(0)));
-		this.fighters.add(Collections.unmodifiableList(fighters.get(1)));
+			this.startBlocks = startBlocks;
+			this.fighters = new ArrayList<List<EntityLivingBase>>();
+			this.fighters.add(Collections.unmodifiableList(fighters.get(0)));
+			this.fighters.add(Collections.unmodifiableList(fighters.get(1)));
+		}
 	}
 
-	public static FightEvent getStartInstance(final World world, final int fightId, final List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
-		return new FightEvent(Type.START, world, fightId, fighters, startBlocks);
+	public static class FightStopEvent extends FightEvent {
+		public final List<List<EntityLivingBase>> fighters;
+
+		public FightStopEvent(World world, int fightId, List<List<EntityLivingBase>> fighters) {
+			super(Type.STOP, world, fightId);
+
+			this.fighters = new ArrayList<List<EntityLivingBase>>();
+			this.fighters.add(Collections.unmodifiableList(fighters.get(0)));
+			this.fighters.add(Collections.unmodifiableList(fighters.get(1)));
+		}
 	}
 
-	public static FightEvent getStopInstance(final World world, final int fightId, final List<List<EntityLivingBase>> fighters) {
-		return new FightEvent(Type.STOP, world, fightId, fighters);
+	public static class FightChangeStageEvent extends FightEvent {
+		public final Stage stage;
+
+		public FightChangeStageEvent(World world, int fightId, Stage stage) {
+			super(Type.CHANGE_STAGE, world, fightId);
+
+			this.stage = stage;
+		}
 	}
 }

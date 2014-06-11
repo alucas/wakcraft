@@ -380,7 +380,7 @@ public enum FightManager {
 	 * @return	The fighter list.
 	 */
 	protected void initializeFight(int fightId, World world, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
-		MinecraftForge.EVENT_BUS.post(FightEvent.getStartInstance(world, fightId, fighters, startBlocks));
+		MinecraftForge.EVENT_BUS.post(new FightEvent.FightStartEvent(world, fightId, fighters, startBlocks));
 
 		for (int teamId = 0; teamId < 2; teamId++) {
 			List<EntityLivingBase> team = fighters.get(teamId);
@@ -401,7 +401,7 @@ public enum FightManager {
 	 * @param fighters	The fighters list.
 	 */
 	protected void terminateFight(int fightId, World world, List<List<EntityLivingBase>> fighters) {
-		MinecraftForge.EVENT_BUS.post(FightEvent.getStopInstance(world, fightId, fighters));
+		MinecraftForge.EVENT_BUS.post(new FightEvent.FightStopEvent(world, fightId, fighters));
 
 		for (int teamId = 0; teamId < 2; teamId++) {
 			List<EntityLivingBase> team = fighters.get(teamId);
