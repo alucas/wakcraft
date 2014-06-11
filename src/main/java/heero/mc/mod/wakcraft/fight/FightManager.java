@@ -477,23 +477,12 @@ public enum FightManager {
 	 * @param fightId	Identifier of the fight.
 	 */
 	public void addFightersToFight(World world, List<List<EntityLivingBase>> fighters, int fightId) {
-		Iterator<List<EntityLivingBase>> teams = fighters.iterator();
-		while (teams.hasNext()) {
-			Iterator<EntityLivingBase> entities = teams.next().iterator();
+		for (int teamId = 0; teamId < fighters.size(); teamId++) {
+			Iterator<EntityLivingBase> entities = fighters.get(teamId).iterator();
 			while (entities.hasNext()) {
-				addFighterToFight(world, entities.next(), fightId);
+				FightHelper.setProperties(entities.next(), fightId, teamId);
 			}
 		}
-	}
-
-	/**
-	 * Inform fighter of its entering in a fight.
-	 * @param world		World of the fight.
-	 * @param fighter	The fighter.
-	 * @param fightId	Identifier of the fight.
-	 */
-	public void addFighterToFight(World world, EntityLivingBase entity, int fightId) {
-		((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).setFightId(fightId);
 	}
 
 	/**

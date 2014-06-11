@@ -32,4 +32,13 @@ public class FightHelper {
 
 		return null;
 	}
+
+	public static int getTeam(Entity entity) {
+		return ((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).getTeam();
+	}
+
+	public static void setProperties(Entity entity, int fightId, int teamId) {
+		((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).setTeam(teamId);
+		((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).setFightId(fightId);
+	}
 }
