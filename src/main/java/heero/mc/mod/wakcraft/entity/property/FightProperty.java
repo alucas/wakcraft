@@ -9,10 +9,11 @@ public class FightProperty implements IExtendedEntityProperties {
 	public static final String IDENTIFIER = "fight";
 
 	protected int fightId;
+	protected int teamId;
 
 	@Override
 	public void init(Entity entity, World world) {
-		fightId = -1;
+		resetProperties();
 	}
 
 	@Override
@@ -31,7 +32,16 @@ public class FightProperty implements IExtendedEntityProperties {
 		this.fightId = fightId;
 	}
 
-	public void resetFightId() {
+	public void resetProperties() {
 		this.fightId = -1;
+		this.teamId = -1;
+	}
+
+	public int getTeam() {
+		return teamId;
+	}
+
+	public void setTeam(int teamId) {
+		this.teamId = teamId;
 	}
 }
