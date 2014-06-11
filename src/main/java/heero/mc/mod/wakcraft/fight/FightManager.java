@@ -5,11 +5,11 @@ import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
-import heero.mc.mod.wakcraft.event.FightEvent.Type;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
 import heero.mc.mod.wakcraft.helper.FightHelper;
-import heero.mc.mod.wakcraft.network.packet.PacketFight;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -387,7 +387,7 @@ public enum FightManager {
 
 			for (EntityLivingBase entity : team) {
 				if (entity instanceof EntityPlayerMP) {
-					Wakcraft.packetPipeline.sendTo(new PacketFight(Type.START, fightId, fighters, startBlocks), (EntityPlayerMP) entity);
+					Wakcraft.packetPipeline.sendTo(new PacketFightStart(fightId, fighters, startBlocks), (EntityPlayerMP) entity);
 				}
 			}
 		}
@@ -408,7 +408,7 @@ public enum FightManager {
 
 			for (EntityLivingBase entity : team) {
 				if (entity instanceof EntityPlayerMP) {
-					Wakcraft.packetPipeline.sendTo(new PacketFight(Type.STOP, fightId, fighters), (EntityPlayerMP) entity);
+					Wakcraft.packetPipeline.sendTo(new PacketFightStop(fightId), (EntityPlayerMP) entity);
 				}
 			}
 		}

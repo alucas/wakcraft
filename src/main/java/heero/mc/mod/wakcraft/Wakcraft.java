@@ -5,12 +5,13 @@ import heero.mc.mod.wakcraft.manager.HavenBagsManager;
 import heero.mc.mod.wakcraft.network.PacketPipeline;
 import heero.mc.mod.wakcraft.network.packet.PacketCloseWindow;
 import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
-import heero.mc.mod.wakcraft.network.packet.PacketFight;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagProperties;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagTeleportation;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagVisitors;
 import heero.mc.mod.wakcraft.network.packet.PacketOpenWindow;
 import heero.mc.mod.wakcraft.network.packet.PacketProfession;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
 import heero.mc.mod.wakcraft.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -60,7 +61,8 @@ public class Wakcraft {
 		packetPipeline.registerPacket(PacketHavenBagVisitors.class);
 		packetPipeline.registerPacket(PacketExtendedEntityProperty.class);
 		packetPipeline.registerPacket(PacketHavenBagProperties.class);
-		packetPipeline.registerPacket(PacketFight.class);
+		packetPipeline.registerPacket(PacketFightStart.class);
+		packetPipeline.registerPacket(PacketFightStop.class);
 		packetPipeline.postInitialise();
 	}
 
