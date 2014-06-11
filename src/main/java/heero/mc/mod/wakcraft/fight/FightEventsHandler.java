@@ -4,12 +4,15 @@ import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 
 public class FightEventsHandler {
 	/**
@@ -140,5 +143,12 @@ public class FightEventsHandler {
 		}
 
 		FightManager.INSTANCE.stopFight(event.player.worldObj, fightId);
+	}
+
+	@SubscribeEvent
+	public void onServerTickEvent(ServerTickEvent event) {
+		if (event.phase == Phase.END) {
+			FightManager.INSTANCE.updateFights(MinecraftServer.getServer().getTickCounter());
+		}
 	}
 }

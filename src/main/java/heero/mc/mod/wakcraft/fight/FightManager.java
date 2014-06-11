@@ -511,4 +511,7 @@ public enum FightManager {
 			}
 		}
 	}
+
+	public void updateFights(int tickCounter) {
+	}
 }
