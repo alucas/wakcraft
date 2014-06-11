@@ -527,7 +527,7 @@ public enum FightManager {
 		switch (fightInfo.getStage()) {
 		case PREFIGHT:
 			if (tickCounter > fightInfo.getTickStart() + 600) {
-				fightInfo.setStage(Stage.FIGHT);
+				updateFightStage(fightInfo, Stage.FIGHT);
 			}
 
 			break;
@@ -552,5 +552,11 @@ public enum FightManager {
 			FMLLog.warning("Trying to update the stage a fight that does not exist (wrong id)");
 			return;
 		}
+
+		updateFightStage(fight, stage);
+	}
+
+	protected void updateFightStage(FightInfo fightInfo, Stage stage) {
+		fightInfo.setStage(stage);
 	}
 }
