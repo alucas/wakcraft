@@ -71,7 +71,7 @@ public enum FightManager {
 			fights.put(world, worldFights);
 		}
 
-		worldFights.put(fightId, new FightInfo(fighters, startBlocks));
+		worldFights.put(fightId, new FightInfo(fighters, null, startBlocks));
 	}
 
 	/**
