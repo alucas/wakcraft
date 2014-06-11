@@ -7,6 +7,7 @@ import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.event.FightEvent.Type;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
+import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.network.packet.PacketFight;
 
@@ -25,6 +26,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.ChunkCache;
@@ -71,7 +73,7 @@ public enum FightManager {
 			fights.put(world, worldFights);
 		}
 
-		worldFights.put(fightId, new FightInfo(fighters, null, startBlocks));
+		worldFights.put(fightId, new FightInfo(fighters, null, startBlocks, -1));
 	}
 
 	/**
@@ -114,7 +116,7 @@ public enum FightManager {
 			fights.put(world, worldFights);
 		}
 
-		worldFights.put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
+		worldFights.put(fightId, new FightInfo(fighters, fightBlocks, startBlocks, MinecraftServer.getServer().getTickCounter()));
 
 		return true;
 	}
@@ -502,5 +504,28 @@ public enum FightManager {
 	}
 
 	public void updateFights(int tickCounter) {
+		for (World world : fights.keySet()) {
+			if (world.isRemote) {
+				continue;
+			}
+
+			for (FightInfo fightInfo : fights.get(world).values()) {
+				updateFight(fightInfo, tickCounter);
+			}
+		}
+	}
+
+	protected void updateFight(FightInfo fightInfo, int tickCounter) {
+		switch (fightInfo.getStage()) {
+		case PREFIGHT:
+			if (tickCounter > fightInfo.getTickStart() + 600) {
+				fightInfo.setStage(Stage.FIGHT);
+			}
+
+			break;
+
+		case FIGHT:
+			break;
+		}
 	}
 }
