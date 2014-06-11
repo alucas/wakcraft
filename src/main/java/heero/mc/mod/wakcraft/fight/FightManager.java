@@ -65,7 +65,7 @@ public enum FightManager {
 	public void startClientFight(World world, int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
 		initializeFight(fightId, world, fighters, startBlocks);
 
-		addFightersToFight(world, fighters, fightId);
+		addFightersToFight(fighters, fightId);
 
 		Map<Integer, FightInfo> worldFights = fights.get(world);
 		if (worldFights == null) {
@@ -102,7 +102,7 @@ public enum FightManager {
 
 		initializeFight(fightId, world, fighters, startBlocks);
 
-		addFightersToFight(world, fighters, fightId);
+		addFightersToFight(fighters, fightId);
 
 		for (int i = 0; i < fighters.get(1).size(); i++) {
 			FightHelper.setStartPosition(fighters.get(1).get(i), startBlocks.get(i * 2));
@@ -466,7 +466,7 @@ public enum FightManager {
 
 		terminateFight(fightId, world, fight.fighters);
 		destroyFightMap(world, fight.fightBlocks);
-		removeFightersFromFight(world, fight.fighters);
+		removeFightersFromFight(fight.fighters);
 	}
 
 	/**
@@ -484,11 +484,10 @@ public enum FightManager {
 
 	/**
 	 * Inform fighters of their entering in a fight.
-	 * @param world		World of the fight.
 	 * @param fighters	The fighters list.
 	 * @param fightId	Identifier of the fight.
 	 */
-	public void addFightersToFight(World world, List<List<EntityLivingBase>> fighters, int fightId) {
+	public void addFightersToFight(List<List<EntityLivingBase>> fighters, int fightId) {
 		for (int teamId = 0; teamId < fighters.size(); teamId++) {
 			Iterator<EntityLivingBase> entities = fighters.get(teamId).iterator();
 			while (entities.hasNext()) {
@@ -500,10 +499,9 @@ public enum FightManager {
 	/**
 	 * Inform fighters of their exiting of the fight
 	 * 
-	 * @param world		World of the fight.
 	 * @param fighters	Fighters list.
 	 */
-	public void removeFightersFromFight(World world, List<List<EntityLivingBase>> fighters) {
+	public void removeFightersFromFight(List<List<EntityLivingBase>> fighters) {
 		Iterator<List<EntityLivingBase>> teams = fighters.iterator();
 		while (teams.hasNext()) {
 			Iterator<EntityLivingBase> entities = teams.next().iterator();
