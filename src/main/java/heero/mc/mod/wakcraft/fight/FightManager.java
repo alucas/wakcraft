@@ -348,7 +348,7 @@ public enum FightManager {
 		fighters1.add(player);
 
 		if (opponent instanceof IFighter) {
-			List<UUID> group = ((IFighter) opponent).getGroup();
+			Set<UUID> group = ((IFighter) opponent).getGroup();
 			if (group == null) {
 				fighters2.add(opponent);
 			}

@@ -3,8 +3,8 @@ package heero.mc.mod.wakcraft.entity.creature;
 import heero.mc.mod.wakcraft.entity.ai.EntityAIFight;
 import heero.mc.mod.wakcraft.entity.ai.EntityAIMoveOutWater;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import net.minecraft.entity.EntityCreature;
@@ -24,7 +24,7 @@ public class EntityWCreature extends EntityCreature implements IWMob, IFighter{
 	protected static final String TAG_UUIDLEAST = "UUIDLeast";
 
 	protected ChunkCoordinates startPosition;
-	protected List<UUID> group;
+	protected Set<UUID> group;
 
 	public EntityWCreature(World world) {
 		super(world);
@@ -52,14 +52,14 @@ public class EntityWCreature extends EntityCreature implements IWMob, IFighter{
 	}
 
 	@Override
-	public void setGroup(List<UUID> group) {
+	public void setGroup(Set<UUID> group) {
 		this.group = group;
 	}
 
 	@Override
-	public List<UUID> getGroup() {
+	public Set<UUID> getGroup() {
 		if (group == null) {
-			group = new ArrayList<UUID>();
+			group = new HashSet<UUID>();
 			group.add(getUniqueID());
 		}
 

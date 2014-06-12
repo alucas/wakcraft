@@ -5,8 +5,8 @@ import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import io.netty.buffer.ByteBuf;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import net.minecraft.entity.Entity;
@@ -67,7 +67,7 @@ public class EntitySeedsPile extends Entity implements IEntityAdditionalSpawnDat
 		if (!worldObj.isRemote) {
 			for (String patern : itemSeeds.paterns.keySet()) {
 				if (rand.nextFloat() < itemSeeds.paterns.get(patern)) {
-					List<UUID> group = new ArrayList<UUID>();
+					Set<UUID> group = new HashSet<UUID>();
 
 					for (Character c : patern.toCharArray()) {
 						Class<? extends EntityWCreature> creatureClass = itemSeeds.creatures.get(c);
