@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
+import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -71,6 +72,11 @@ public class FightEventsHandler {
 		}
 
 		if (FightHelper.getFightId(player) != FightHelper.getFightId(target)) {
+			event.setCanceled(true);
+			return;
+		}
+
+		if (FightManager.INSTANCE.getFightStage(player.worldObj, FightHelper.getFightId(player)) == Stage.PREFIGHT) {
 			event.setCanceled(true);
 			return;
 		}
