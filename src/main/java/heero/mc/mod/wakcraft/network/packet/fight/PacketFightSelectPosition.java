@@ -49,13 +49,6 @@ public class PacketFightSelectPosition implements IPacketFight {
 
 	@Override
 	public void handleClientSide(EntityPlayer player) throws Exception {
-//		packetFight.handleClientSide(player);
-//
-//		FightManager.INSTANCE.startClientFight(player.worldObj, getFightId(), PacketFight.getEntities(player.worldObj, fightersId), startPositions);
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player) throws Exception {
 		Entity entity = player.worldObj.getEntityByID(fighterId);
 		if (entity == null) {
 			throw new RuntimeException("No entity found for id " + fighterId);
@@ -65,7 +58,16 @@ public class PacketFightSelectPosition implements IPacketFight {
 			throw new RuntimeException("The entity " + entity + " is not a valid fighter");
 		}
 
-		FightManager.INSTANCE.selectPosition((EntityLivingBase) entity, selectedPosition);
+		FightHelper.setStartPosition(entity, selectedPosition);
+	}
+
+	@Override
+	public void handleServerSide(EntityPlayer player) throws Exception {
+		if (!FightHelper.isFighter(player)) {
+			throw new RuntimeException("The entity " + player + " is not a valid fighter");
+		}
+
+		FightManager.INSTANCE.selectPosition((EntityLivingBase) player, selectedPosition);
 	}
 
 	@Override

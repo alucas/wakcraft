@@ -8,7 +8,9 @@ import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
 import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.network.packet.IPacket;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
 
@@ -613,9 +615,23 @@ public enum FightManager {
 		}
 
 		// Already reserved position
-		for (EntityLivingBase fighter : fights.get(world).get(fightId).fighters.get(teamId)) {
+		List<EntityLivingBase> fighters = fights.get(world).get(fightId).fighters.get(teamId);
+		for (EntityLivingBase fighter : fighters) {
 			if (position.equals(FightHelper.getStartPosition(fighter))) {
 				return;
+			}
+		}
+
+		if (entity.worldObj.isRemote) {
+			Wakcraft.packetPipeline.sendToServer(new PacketFightSelectPosition(fightId, entity, position));
+		} else {
+			FightHelper.setStartPosition(entity, position);
+
+			IPacket packet = new PacketFightSelectPosition(fightId, entity, position);
+			for (EntityLivingBase fighter : fighters) {
+				if (fighter instanceof EntityPlayerMP) {
+					Wakcraft.packetPipeline.sendTo(packet, (EntityPlayerMP) fighter);
+				}
 			}
 		}
 	}
