@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.entity.property;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
@@ -10,6 +11,7 @@ public class FightProperty implements IExtendedEntityProperties {
 
 	protected int fightId;
 	protected int teamId;
+	protected ChunkCoordinates startPosition;
 
 	@Override
 	public void init(Entity entity, World world) {
@@ -43,5 +45,13 @@ public class FightProperty implements IExtendedEntityProperties {
 
 	public void setTeam(int teamId) {
 		this.teamId = teamId;
+	}
+
+	public ChunkCoordinates getStartPosition() {
+		return startPosition;
+	}
+
+	public void setStartPosition(ChunkCoordinates startPosition) {
+		this.startPosition = startPosition;
 	}
 }

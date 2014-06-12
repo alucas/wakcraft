@@ -15,7 +15,6 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
 public class EntityWCreature extends EntityCreature implements IWMob, IFighter{
@@ -23,7 +22,6 @@ public class EntityWCreature extends EntityCreature implements IWMob, IFighter{
 	protected static final String TAG_UUIDMOST = "UUIDMost";
 	protected static final String TAG_UUIDLEAST = "UUIDLeast";
 
-	protected ChunkCoordinates startPosition;
 	protected Set<UUID> group;
 
 	public EntityWCreature(World world) {
@@ -39,16 +37,6 @@ public class EntityWCreature extends EntityCreature implements IWMob, IFighter{
 		this.tasks.addTask(30, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(40, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(50, new EntityAILookIdle(this));
-	}
-
-	@Override
-	public void setStartPosition(ChunkCoordinates position) {
-		this.startPosition = position;
-	}
-
-	@Override
-	public ChunkCoordinates getStartPosition() {
-		return startPosition;
 	}
 
 	@Override

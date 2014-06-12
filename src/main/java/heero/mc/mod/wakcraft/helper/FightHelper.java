@@ -19,18 +19,12 @@ public class FightHelper {
 		return (entity instanceof IFighter) || (entity instanceof EntityPlayer);
 	}
 
-	public static void setStartPosition(Entity entity, ChunkCoordinates position) {
-		if (entity instanceof IFighter) {
-			((IFighter) entity).setStartPosition(position);
-		}
+	public static void setStartPosition(Entity entity, ChunkCoordinates startPosition) {
+		((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).setStartPosition(startPosition);
 	}
 
 	public static ChunkCoordinates getStartPosition(Entity entity) {
-		if (entity instanceof IFighter) {
-			return ((IFighter) entity).getStartPosition();
-		}
-
-		return null;
+		return ((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).getStartPosition();
 	}
 
 	public static int getTeam(Entity entity) {
