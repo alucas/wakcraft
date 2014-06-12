@@ -546,13 +546,13 @@ public enum FightManager {
 	public void changeFightStage(World world, int fightId, Stage stage) {
 		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
 		if (fightsOfWorld == null) {
-			FMLLog.warning("Trying update the stage a fight that does not exist (wrong world)");
+			FMLLog.warning("Trying update the stage of a fight that does not exist (wrong world)");
 			return;
 		}
 
 		FightInfo fight = fightsOfWorld.remove(fightId);
 		if (fight == null) {
-			FMLLog.warning("Trying to update the stage a fight that does not exist (wrong id)");
+			FMLLog.warning("Trying to update the stage of a fight that does not exist (wrong id)");
 			return;
 		}
 
@@ -573,5 +573,21 @@ public enum FightManager {
 				}
 			}
 		}
+	}
+
+	public Stage getFightStage(World world, int fightId) {
+		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
+		if (fightsOfWorld == null) {
+			FMLLog.warning("Trying to get the stage of a fight that does not exist (wrong world)");
+			return Stage.UNKNOW;
+		}
+
+		FightInfo fight = fightsOfWorld.get(fightId);
+		if (fight == null) {
+			FMLLog.warning("Trying to get the stage of a fight that does not exist (wrong id)");
+			return Stage.UNKNOW;
+		}
+
+		return fight.getStage();
 	}
 }
