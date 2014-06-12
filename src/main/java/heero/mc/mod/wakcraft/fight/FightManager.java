@@ -8,6 +8,7 @@ import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
 import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
 
@@ -550,7 +551,7 @@ public enum FightManager {
 			return;
 		}
 
-		FightInfo fight = fightsOfWorld.remove(fightId);
+		FightInfo fight = fightsOfWorld.get(fightId);
 		if (fight == null) {
 			FMLLog.warning("Trying to update the stage of a fight that does not exist (wrong id)");
 			return;
@@ -569,7 +570,7 @@ public enum FightManager {
 
 			for (EntityLivingBase entity : team) {
 				if (entity instanceof EntityPlayerMP) {
-					Wakcraft.packetPipeline.sendTo(new PacketFightStop(fightId), (EntityPlayerMP) entity);
+					Wakcraft.packetPipeline.sendTo(new PacketFightChangeStage(fightId, stage), (EntityPlayerMP) entity);
 				}
 			}
 		}
