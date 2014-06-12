@@ -591,4 +591,8 @@ public enum FightManager {
 
 		return fight.getStage();
 	}
+
+	public void selectPosition(EntityLivingBase entity) {
+		System.out.println("select position");
+	}
 }

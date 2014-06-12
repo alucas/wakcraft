@@ -13,8 +13,8 @@ import heero.mc.mod.wakcraft.client.renderer.entity.RendererSeedsPile;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererTextPopup;
 import heero.mc.mod.wakcraft.client.renderer.fight.FightRenderer;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererDragoexpress;
-import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererPhoenix;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererHavenBagChest;
+import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererPhoenix;
 import heero.mc.mod.wakcraft.client.setting.KeyBindings;
 import heero.mc.mod.wakcraft.entity.creature.BlackGobbly;
 import heero.mc.mod.wakcraft.entity.creature.Gobball;
@@ -26,6 +26,7 @@ import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.eventhandler.GUIEventHandler;
 import heero.mc.mod.wakcraft.eventhandler.KeyInputHandler;
 import heero.mc.mod.wakcraft.eventhandler.TextureEventHandler;
+import heero.mc.mod.wakcraft.fight.FightClientEventsHandler;
 import heero.mc.mod.wakcraft.manager.HavenBagHelper;
 import heero.mc.mod.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
@@ -65,6 +66,7 @@ public class CombinedClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new GUIEventHandler());
 		MinecraftForge.EVENT_BUS.register(new FightRenderer());
 		MinecraftForge.EVENT_BUS.register(new TextureEventHandler());
+		FMLCommonHandler.instance().bus().register(new FightClientEventsHandler());
 	}
 
 	@Override
