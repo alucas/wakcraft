@@ -2,6 +2,8 @@ package heero.mc.mod.wakcraft.client.renderer.entity;
 
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.client.model.ModelFightArrow;
+import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
+import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -27,7 +29,9 @@ public abstract class RendererWCreature extends RendererLivingEntity {
 			double relativeZ, float rotationYaw, float partialTickTime) {
 		super.doRender(entity, relativeX, relativeY, relativeZ, rotationYaw, partialTickTime);
 
-		if (FightHelper.isFighter(entity) && FightHelper.isFighting(entity)) {
+		if (FightHelper.isFighter(entity)
+				&& FightHelper.isFighting(entity)
+				&& FightManager.INSTANCE.getFightStage(entity.worldObj, FightHelper.getFightId(entity)) == Stage.PREFIGHT) {
 			doRenderFightArrow(entity, relativeX, relativeY, relativeZ, partialTickTime);
 		}
 	}
