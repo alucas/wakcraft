@@ -63,10 +63,13 @@ public class CombinedClientProxy extends CommonProxy {
 	public void registerEvents() {
 		super.registerEvents();
 
+		FightClientEventsHandler fightEventHandler = new FightClientEventsHandler(new FightRenderer());
+
 		MinecraftForge.EVENT_BUS.register(new GUIEventHandler());
-		MinecraftForge.EVENT_BUS.register(new FightRenderer());
 		MinecraftForge.EVENT_BUS.register(new TextureEventHandler());
-		FMLCommonHandler.instance().bus().register(new FightClientEventsHandler());
+		MinecraftForge.EVENT_BUS.register(fightEventHandler);
+
+		FMLCommonHandler.instance().bus().register(fightEventHandler);
 	}
 
 	@Override
