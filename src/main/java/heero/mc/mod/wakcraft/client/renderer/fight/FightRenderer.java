@@ -1,4 +1,4 @@
-package heero.mc.mod.wakcraft.client.renderer.world;
+package heero.mc.mod.wakcraft.client.renderer.fight;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
@@ -14,8 +14,10 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.IRenderHandler;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 import org.lwjgl.opengl.GL11;
@@ -202,5 +204,21 @@ public class FightRenderer extends IRenderHandler {
 		Minecraft mc = Minecraft.getMinecraft();
 
 		render(event.partialTicks, mc.theWorld, mc);
+	}
+
+	@SubscribeEvent
+	public void onRenderLivingPreEvent(RenderLivingEvent.Pre event) {
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+		EntityLivingBase entity = event.entity;
+
+		if (!FightHelper.isFighter(player) || !FightHelper.isFighting(player)) {
+			return;
+		}
+
+		if (FightHelper.isFighter(entity) && FightHelper.getFightId(entity) == FightHelper.getFightId(player)) {
+			return;
+		}
+
+		event.setCanceled(true);
 	}
 }
