@@ -46,10 +46,6 @@ public class FightEventsHandler {
 			return;
 		}
 
-		if (world.provider.dimensionId != 0) {
-			return;
-		}
-
 		if (!FightHelper.isFighter(event.entityPlayer)) {
 			return;
 		}
@@ -93,10 +89,6 @@ public class FightEventsHandler {
 			return;
 		}
 
-		if (event.entityLiving.worldObj.provider.dimensionId != 0) {
-			return;
-		}
-
 		if (!FightHelper.isFighter(event.entityLiving)) {
 			return;
 		}
@@ -124,10 +116,6 @@ public class FightEventsHandler {
 	@SubscribeEvent
 	public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
 		if (event.player.worldObj.isRemote) {
-			return;
-		}
-
-		if (event.player.worldObj.provider.dimensionId != 0) {
 			return;
 		}
 
