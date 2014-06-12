@@ -6,6 +6,8 @@ import heero.mc.mod.wakcraft.helper.FightHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -54,7 +56,8 @@ public class FightClientEventsHandler {
 				return;
 			}
 
-			FightManager.INSTANCE.selectPosition(player);
+			ChunkCoordinates position = new ChunkCoordinates(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY - player.yOffset), MathHelper.floor_double(player.posZ));
+			FightManager.INSTANCE.selectPosition(player, position);
 		}
 	}
 }

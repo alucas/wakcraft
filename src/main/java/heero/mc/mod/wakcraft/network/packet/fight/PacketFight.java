@@ -130,22 +130,33 @@ public class PacketFight implements IPacketFight {
 		return fightersId;
 	}
 
-	protected static void encoreStartPositions(PacketBuffer buffer, List<FightBlockCoordinates> startPositions) {
+	protected static void encoreStartPositions(PacketBuffer buffer, List<List<FightBlockCoordinates>> startPositions) {
 		buffer.writeInt(startPositions.size());
 
-		for (FightBlockCoordinates block : startPositions) {
-			buffer.writeInt(block.posX);
-			buffer.writeInt(block.posY);
-			buffer.writeInt(block.posZ);
+		for (List<FightBlockCoordinates> startPositionOfTeam : startPositions) {
+			buffer.writeInt(startPositionOfTeam.size());
+
+			for (FightBlockCoordinates block : startPositionOfTeam) {
+				buffer.writeInt(block.posX);
+				buffer.writeInt(block.posY);
+				buffer.writeInt(block.posZ);
+			}
 		}
 	}
 
-	protected static List<FightBlockCoordinates> decodeStartPositions(PacketBuffer buffer) {
-		int nbBlock = buffer.readInt();
+	protected static List<List<FightBlockCoordinates>> decodeStartPositions(PacketBuffer buffer) {
+		int nbTeam = buffer.readInt();
 
-		List<FightBlockCoordinates> startPositions = new ArrayList<FightBlockCoordinates>();
-		for (int i = 0; i < nbBlock; i++) {
-			startPositions.add(new FightBlockCoordinates(buffer.readInt(), buffer.readInt(), buffer.readInt(), TYPE.NORMAL));
+		List<List<FightBlockCoordinates>> startPositions = new ArrayList<List<FightBlockCoordinates>>();
+		for (int i = 0; i < nbTeam; i++) {
+			List<FightBlockCoordinates> startPositionsOfTeam = new ArrayList<FightBlockCoordinates>();
+
+			int nbPosition = buffer.readInt();
+			for (int j = 0; j < nbPosition; j++) {
+				startPositionsOfTeam.add(new FightBlockCoordinates(buffer.readInt(), buffer.readInt(), buffer.readInt(), TYPE.NORMAL));
+			}
+
+			startPositions.add(startPositionsOfTeam);
 		}
 
 		return startPositions;

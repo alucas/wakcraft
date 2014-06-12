@@ -30,7 +30,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
@@ -65,7 +64,7 @@ public enum FightManager {
 	 * @param startBlocks
 	 * @return
 	 */
-	public void startClientFight(World world, int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
+	public void startClientFight(World world, int fightId, List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
 		initializeFight(fightId, world, fighters, startBlocks);
 
 		addFightersToFight(fighters, fightId);
@@ -100,7 +99,7 @@ public enum FightManager {
 
 		int fightId = world.getUniqueDataId("fightId");
 
-		List<FightBlockCoordinates> startBlocks = getSartPositions(fightBlocks);
+		List<List<FightBlockCoordinates>> startBlocks = getSartPositions(fightBlocks);
 		List<List<EntityLivingBase>> fighters = createTeams(fightId, player, target);
 
 		initializeFight(fightId, world, fighters, startBlocks);
@@ -108,7 +107,7 @@ public enum FightManager {
 		addFightersToFight(fighters, fightId);
 
 		for (int i = 0; i < fighters.get(1).size(); i++) {
-			FightHelper.setStartPosition(fighters.get(1).get(i), startBlocks.get(i * 2));
+			FightHelper.setStartPosition(fighters.get(1).get(i), startBlocks.get(1).get(i));
 		}
 
 		createFightMap(world, fightBlocks);
@@ -241,37 +240,45 @@ public enum FightManager {
 	 * @param fightBlocks	Fight blocks.
 	 * @return
 	 */
-	protected List<FightBlockCoordinates> getSartPositions (Set<FightBlockCoordinates> fightBlocks) {
+	protected List<List<FightBlockCoordinates>> getSartPositions (Set<FightBlockCoordinates> fightBlocks) {
 		List<FightBlockCoordinates> fightBlocksList = new ArrayList<FightBlockCoordinates>(fightBlocks);
 
-		int maxStartBlock = 12;
+		List<List<FightBlockCoordinates>> startBlocks = new ArrayList<List<FightBlockCoordinates>>();
+		startBlocks.add(new ArrayList<FightBlockCoordinates>());
+		startBlocks.add(new ArrayList<FightBlockCoordinates>());
+
 		Random random = new Random();
-		List<FightBlockCoordinates> startBlocks = new ArrayList<FightBlockCoordinates>();
-		FightBlockCoordinates tmpBlock = new FightBlockCoordinates(0, 0, 0, TYPE.NORMAL);
-		while(startBlocks.size() < maxStartBlock) {
-			int index = random.nextInt(fightBlocks.size());
-			FightBlockCoordinates coords = fightBlocksList.get(index);
+		ChunkCoordinates tmpBlock = new ChunkCoordinates(0, 0, 0);
 
-			if (coords.getType() != TYPE.NORMAL) {
-				continue;
+		int maxStartBlock = 6;
+		for (List<FightBlockCoordinates> startBlocksOfTeam : startBlocks) {
+			while(startBlocksOfTeam.size() < maxStartBlock) {
+				int index = random.nextInt(fightBlocks.size());
+				FightBlockCoordinates coords = fightBlocksList.get(index);
+
+				if (coords.getType() != TYPE.NORMAL) {
+					continue;
+				}
+
+				for (List<FightBlockCoordinates> startBlocksOfTeamTmp : startBlocks) {
+					if (startBlocksOfTeamTmp.contains(coords)) {
+						continue;
+					}
+				}
+
+				tmpBlock.set(coords.posX, coords.posY - 1, coords.posZ);
+				if (fightBlocksList.contains(tmpBlock)) {
+					continue;
+				}
+
+				startBlocksOfTeam.add(coords);
 			}
-
-			if (startBlocks.contains(coords)) {
-				continue;
-			}
-
-			tmpBlock.set(coords.posX, coords.posY - 1, coords.posZ);
-			if (fightBlocksList.contains(tmpBlock)) {
-				continue;
-			}
-
-			startBlocks.add(coords);
 		}
 
 		return startBlocks;
 	}
 
-	public List<FightBlockCoordinates> getSartPositions(World world, int FightId) {
+	public List<List<FightBlockCoordinates>> getSartPositions(World world, int FightId) {
 		Map<Integer, FightInfo> worldFights = fights.get(world);
 		if (worldFights == null) {
 			return null;
@@ -382,7 +389,7 @@ public enum FightManager {
 	 * @param startBlocks	The stat blocks list.
 	 * @return	The fighter list.
 	 */
-	protected void initializeFight(int fightId, World world, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
+	protected void initializeFight(int fightId, World world, List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
 		MinecraftForge.EVENT_BUS.post(new FightEvent.FightStartEvent(world, fightId, fighters, startBlocks));
 
 		for (int teamId = 0; teamId < 2; teamId++) {
@@ -594,21 +601,20 @@ public enum FightManager {
 		return fight.getStage();
 	}
 
-	public void selectPosition(EntityLivingBase entity) {
+	public void selectPosition(EntityLivingBase entity, ChunkCoordinates position) {
 		int teamId = FightHelper.getTeam(entity);
 		int fightId = FightHelper.getFightId(entity);
 		World world = entity.worldObj;
 
-		ChunkCoordinates position = new ChunkCoordinates(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY - entity.yOffset), MathHelper.floor_double(entity.posZ));
-		
-		List<FightBlockCoordinates> startPositions = getSartPositions(world, fightId);
-		if (startPositions == null || !startPositions.contains(position)) {
+		// Not a valid start position
+		List<List<FightBlockCoordinates>> startPositions = getSartPositions(world, fightId);
+		if (startPositions == null || !startPositions.get(teamId).contains(position)) {
 			return;
 		}
 
+		// Already reserved position
 		for (EntityLivingBase fighter : fights.get(world).get(fightId).fighters.get(teamId)) {
 			if (position.equals(FightHelper.getStartPosition(fighter))) {
-				System.out.println("deja prise");
 				return;
 			}
 		}

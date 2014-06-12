@@ -17,11 +17,11 @@ public class FightInfo {
 
 	protected List<List<EntityLivingBase>> fighters;
 	protected Set<FightBlockCoordinates> fightBlocks;
-	protected List<FightBlockCoordinates> startBlocks;
+	protected List<List<FightBlockCoordinates>> startBlocks;
 	protected int tickStart;
 	protected Stage stage;
 
-	public FightInfo(List<List<EntityLivingBase>> fighters, @Nullable Set<FightBlockCoordinates> fightBlocks, List<FightBlockCoordinates> startBlocks, int tickStart) {
+	public FightInfo(List<List<EntityLivingBase>> fighters, @Nullable Set<FightBlockCoordinates> fightBlocks, List<List<FightBlockCoordinates>> startBlocks, int tickStart) {
 		this.fighters = fighters;
 		this.fightBlocks = fightBlocks;
 		this.startBlocks = startBlocks;

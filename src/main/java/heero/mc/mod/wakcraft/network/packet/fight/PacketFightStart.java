@@ -15,14 +15,14 @@ import net.minecraft.network.PacketBuffer;
 public class PacketFightStart implements IPacketFight {
 	protected IPacketFight packetFight;
 	protected List<List<Integer>> fightersId;
-	protected List<FightBlockCoordinates> startPositions;
+	protected List<List<FightBlockCoordinates>> startPositions;
 
 	public PacketFightStart() {
 		this.packetFight = new PacketFight();
 		this.fightersId = new ArrayList<List<Integer>>();
 	}
 
-	public PacketFightStart(int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startPositions) {
+	public PacketFightStart(int fightId, List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startPositions) {
 		this.packetFight = new PacketFight(fightId);
 		this.fightersId = PacketFight.getIds(fighters);
 		this.startPositions = startPositions;

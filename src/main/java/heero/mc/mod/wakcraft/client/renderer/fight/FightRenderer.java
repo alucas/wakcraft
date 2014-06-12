@@ -40,7 +40,7 @@ public class FightRenderer extends IRenderHandler {
 		Stage fightStage = FightManager.INSTANCE.getFightStage(world, fightId);
 
 		if (fightStage == Stage.PREFIGHT) {
-			List<FightBlockCoordinates> startBlocks = FightManager.INSTANCE.getSartPositions(world, fightId);
+			List<List<FightBlockCoordinates>> startBlocks = FightManager.INSTANCE.getSartPositions(world, fightId);
 			if (startBlocks != null) {
 				renderStartPosition(partialTicks, world, mc, player, startBlocks);
 			}
@@ -50,7 +50,7 @@ public class FightRenderer extends IRenderHandler {
 		}
 	}
 
-	public void renderStartPosition(float partialTicks, WorldClient world, Minecraft mc, EntityPlayer player, List<FightBlockCoordinates> startBlocks) {
+	public void renderStartPosition(float partialTicks, WorldClient world, Minecraft mc, EntityPlayer player, List<List<FightBlockCoordinates>> startBlocks) {
 		RenderBlocks renderBlocks = new RenderBlocks(world);
 
 		double deltaX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
@@ -71,8 +71,11 @@ public class FightRenderer extends IRenderHandler {
 		par1Tessellator.disableColor();
 
 		for (int i = 0; i < startBlocks.size(); i++) {
-			FightBlockCoordinates block = startBlocks.get(i);
-			renderBlocks.renderBlockByRenderType((i % 2 == 0) ? WBlocks.fightStart1 : WBlocks.fightStart2, block.posX, block.posY - 1, block.posZ);
+			List<FightBlockCoordinates> startBlocksOfTeam = startBlocks.get(i);
+
+			for (FightBlockCoordinates block : startBlocksOfTeam) {
+				renderBlocks.renderBlockByRenderType((i == 0) ? WBlocks.fightStart1 : WBlocks.fightStart2, block.posX, block.posY - 1, block.posZ);
+			}
 		}
 
 		par1Tessellator.draw();

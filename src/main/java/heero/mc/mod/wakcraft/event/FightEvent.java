@@ -30,9 +30,9 @@ public class FightEvent extends Event {
 
 	public static class FightStartEvent extends FightEvent {
 		public final List<List<EntityLivingBase>> fighters;
-		public final List<FightBlockCoordinates> startBlocks;
+		public final List<List<FightBlockCoordinates>> startBlocks;
 
-		public FightStartEvent(World world, int fightId, List<List<EntityLivingBase>> fighters, List<FightBlockCoordinates> startBlocks) {
+		public FightStartEvent(World world, int fightId, List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
 			super(Type.START, world, fightId);
 
 			this.startBlocks = startBlocks;

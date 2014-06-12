@@ -65,7 +65,7 @@ public class PacketFightSelectPosition implements IPacketFight {
 			throw new RuntimeException("The entity " + entity + " is not a valid fighter");
 		}
 
-		FightManager.INSTANCE.selectPosition((EntityLivingBase) entity);
+		FightManager.INSTANCE.selectPosition((EntityLivingBase) entity, selectedPosition);
 	}
 
 	@Override
