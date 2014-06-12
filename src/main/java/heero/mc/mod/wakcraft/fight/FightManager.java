@@ -29,6 +29,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
@@ -593,6 +595,22 @@ public enum FightManager {
 	}
 
 	public void selectPosition(EntityLivingBase entity) {
-		System.out.println("select position");
+		int teamId = FightHelper.getTeam(entity);
+		int fightId = FightHelper.getFightId(entity);
+		World world = entity.worldObj;
+
+		ChunkCoordinates position = new ChunkCoordinates(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY - entity.yOffset), MathHelper.floor_double(entity.posZ));
+		
+		List<FightBlockCoordinates> startPositions = getSartPositions(world, fightId);
+		if (startPositions == null || !startPositions.contains(position)) {
+			return;
+		}
+
+		for (EntityLivingBase fighter : fights.get(world).get(fightId).fighters.get(teamId)) {
+			if (position.equals(FightHelper.getStartPosition(fighter))) {
+				System.out.println("deja prise");
+				return;
+			}
+		}
 	}
 }

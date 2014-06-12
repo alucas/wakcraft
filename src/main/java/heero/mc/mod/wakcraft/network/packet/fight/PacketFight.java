@@ -46,7 +46,6 @@ public class PacketFight implements IPacketFight {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) throws Exception {
-		throw new RuntimeException("This is a client side packet");
 	}
 
 	@Override

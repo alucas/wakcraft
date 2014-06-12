@@ -11,6 +11,7 @@ import heero.mc.mod.wakcraft.network.packet.PacketHavenBagVisitors;
 import heero.mc.mod.wakcraft.network.packet.PacketOpenWindow;
 import heero.mc.mod.wakcraft.network.packet.PacketProfession;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
 import heero.mc.mod.wakcraft.proxy.CommonProxy;
@@ -65,6 +66,7 @@ public class Wakcraft {
 		packetPipeline.registerPacket(PacketFightStart.class);
 		packetPipeline.registerPacket(PacketFightStop.class);
 		packetPipeline.registerPacket(PacketFightChangeStage.class);
+		packetPipeline.registerPacket(PacketFightSelectPosition.class);
 		packetPipeline.postInitialise();
 	}
 
