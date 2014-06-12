@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.client.renderer.world;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
+import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
 import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 
@@ -37,13 +38,18 @@ public class FightRenderer extends IRenderHandler {
 			return;
 		}
 
-		List<FightBlockCoordinates> startBlocks = FightManager.INSTANCE.getSartPositions(world, FightHelper.getFightId(player));
-		if (startBlocks != null) {
-			renderStartPosition(partialTicks, world, mc, player, startBlocks);
-		}
+		int fightId = FightHelper.getFightId(player);
+		Stage fightStage = FightManager.INSTANCE.getFightStage(world, fightId);
 
-		renderMovement(partialTicks, world, mc, player);
-		renderDirection(partialTicks, world, mc, player);
+		if (fightStage == Stage.PREFIGHT) {
+			List<FightBlockCoordinates> startBlocks = FightManager.INSTANCE.getSartPositions(world, fightId);
+			if (startBlocks != null) {
+				renderStartPosition(partialTicks, world, mc, player, startBlocks);
+			}
+		} else if (fightStage == Stage.FIGHT) {
+			renderMovement(partialTicks, world, mc, player);
+			renderDirection(partialTicks, world, mc, player);
+		}
 	}
 
 	public void renderStartPosition(float partialTicks, WorldClient world, Minecraft mc, EntityPlayer player, List<FightBlockCoordinates> startBlocks) {
