@@ -8,7 +8,6 @@ import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
 import heero.mc.mod.wakcraft.helper.FightHelper;
-import heero.mc.mod.wakcraft.network.packet.IPacket;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
@@ -38,6 +37,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public enum FightManager {
 	INSTANCE;
@@ -627,7 +627,7 @@ public enum FightManager {
 		} else {
 			FightHelper.setStartPosition(entity, position);
 
-			IPacket packet = new PacketFightSelectPosition(fightId, entity, position);
+			IMessage packet = new PacketFightSelectPosition(fightId, entity, position);
 			for (EntityLivingBase fighter : fighters) {
 				if (fighter instanceof EntityPlayerMP) {
 					Wakcraft.packetPipeline.sendTo(packet, (EntityPlayerMP) fighter);

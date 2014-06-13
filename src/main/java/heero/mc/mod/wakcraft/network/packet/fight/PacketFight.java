@@ -3,22 +3,19 @@ package heero.mc.mod.wakcraft.network.packet.fight;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.helper.FightHelper;
-import io.netty.channel.ChannelHandlerContext;
+import io.netty.buffer.ByteBuf;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
 
 public class PacketFight implements IPacketFight {
-	protected int fightId = 0;
+	public int fightId = 0;
 
 	public PacketFight() {
 	}
@@ -28,24 +25,13 @@ public class PacketFight implements IPacketFight {
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, PacketBuffer buffer)
-			throws IOException {
+	public void toBytes(ByteBuf buffer) {
 		buffer.writeInt(fightId);
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, PacketBuffer buffer)
-			throws IOException {
+	public void fromBytes(ByteBuf buffer) {
 		this.fightId = buffer.readInt();
-	}
-
-
-	@Override
-	public void handleClientSide(EntityPlayer player) throws Exception {
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player) throws Exception {
 	}
 
 	@Override
@@ -53,7 +39,7 @@ public class PacketFight implements IPacketFight {
 		return fightId;
 	}
 
-	protected static List<List<EntityLivingBase>> getEntities(World world, List<List<Integer>> fightersId) {
+	public static List<List<EntityLivingBase>> getEntities(World world, List<List<Integer>> fightersId) {
 		List<List<EntityLivingBase>> fighters = new ArrayList<List<EntityLivingBase>>();
 
 		Iterator<List<Integer>> iterator = fightersId.iterator();
@@ -99,7 +85,7 @@ public class PacketFight implements IPacketFight {
 		return fightersId;
 	}
 
-	protected static void encodeFighters(PacketBuffer buffer, List<List<Integer>> fightersId) {
+	protected static void encodeFighters(ByteBuf buffer, List<List<Integer>> fightersId) {
 		Iterator<List<Integer>> iterator = fightersId.iterator();
 		while (iterator.hasNext()) {
 			List<Integer> teamFighters = iterator.next();
@@ -113,7 +99,7 @@ public class PacketFight implements IPacketFight {
 		}
 	}
 
-	protected static List<List<Integer>> decodeFighters(PacketBuffer buffer) {
+	protected static List<List<Integer>> decodeFighters(ByteBuf buffer) {
 		List<List<Integer>> fightersId = new ArrayList<List<Integer>>();
 
 		for (int teamId = 0; teamId < 2; teamId++) {
@@ -130,7 +116,7 @@ public class PacketFight implements IPacketFight {
 		return fightersId;
 	}
 
-	protected static void encoreStartPositions(PacketBuffer buffer, List<List<FightBlockCoordinates>> startPositions) {
+	protected static void encoreStartPositions(ByteBuf buffer, List<List<FightBlockCoordinates>> startPositions) {
 		buffer.writeInt(startPositions.size());
 
 		for (List<FightBlockCoordinates> startPositionOfTeam : startPositions) {
@@ -144,7 +130,7 @@ public class PacketFight implements IPacketFight {
 		}
 	}
 
-	protected static List<List<FightBlockCoordinates>> decodeStartPositions(PacketBuffer buffer) {
+	protected static List<List<FightBlockCoordinates>> decodeStartPositions(ByteBuf buffer) {
 		int nbTeam = buffer.readInt();
 
 		List<List<FightBlockCoordinates>> startPositions = new ArrayList<List<FightBlockCoordinates>>();

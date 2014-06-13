@@ -2,16 +2,16 @@ package heero.mc.mod.wakcraft.network.packet;
 
 import heero.mc.mod.wakcraft.manager.ProfessionManager;
 import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
-import io.netty.channel.ChannelHandlerContext;
+import io.netty.buffer.ByteBuf;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
-public class PacketProfession implements IPacket {
-	private Map<PROFESSION, Integer> xps;
+public class PacketProfession implements IMessage {
+	public Map<PROFESSION, Integer> xps;
 
 	public PacketProfession() {
 		xps = new HashMap<PROFESSION, Integer>();
@@ -31,7 +31,7 @@ public class PacketProfession implements IPacket {
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, PacketBuffer buffer) {
+	public void toBytes(ByteBuf buffer) {
 		buffer.writeByte(xps.size());
 		for (PROFESSION profession : xps.keySet()) {
 			buffer.writeByte(profession.getValue());
@@ -40,7 +40,7 @@ public class PacketProfession implements IPacket {
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, PacketBuffer buffer) {
+	public void fromBytes(ByteBuf buffer) {
 		int nbProfession = buffer.readByte();
 		for (int i = 0; i < nbProfession; i++) {
 			PROFESSION profession = PROFESSION.getProfession(buffer.readByte());
@@ -48,16 +48,5 @@ public class PacketProfession implements IPacket {
 
 			xps.put(profession, xp);
 		}
-	}
-
-	@Override
-	public void handleClientSide(EntityPlayer player) {
-		for (PROFESSION profession : xps.keySet()) {
-			ProfessionManager.setXp(player, profession, xps.get(profession));
-		}
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player) {
 	}
 }

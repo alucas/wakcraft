@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.network.packet.fight;
 
-import heero.mc.mod.wakcraft.network.packet.IPacket;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
-public interface IPacketFight extends IPacket {
+public interface IPacketFight extends IMessage {
 	public int getFightId();
 }

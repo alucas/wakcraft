@@ -1,17 +1,12 @@
 package heero.mc.mod.wakcraft.network.packet.fight;
 
 import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
-import heero.mc.mod.wakcraft.fight.FightManager;
-import io.netty.channel.ChannelHandlerContext;
-
-import java.io.IOException;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
+import io.netty.buffer.ByteBuf;
 
 public class PacketFightChangeStage implements IPacketFight {
 	protected PacketFight packetFight;
-	protected Stage stage;
+
+	public Stage stage;
 
 	public PacketFightChangeStage() {
 		packetFight = new PacketFight();
@@ -24,17 +19,15 @@ public class PacketFightChangeStage implements IPacketFight {
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, PacketBuffer buffer)
-			throws IOException {
-		packetFight.encodeInto(ctx, buffer);
+	public void toBytes(ByteBuf buffer) {
+		packetFight.toBytes(buffer);
 
 		buffer.writeByte(stage.ordinal());
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, PacketBuffer buffer)
-			throws IOException {
-		packetFight.decodeInto(ctx, buffer);
+	public void fromBytes(ByteBuf buffer) {
+		packetFight.fromBytes(buffer);
 
 		int stageId = buffer.readByte();
 		if (stageId < 0 || stageId >= Stage.values().length) {
@@ -42,16 +35,6 @@ public class PacketFightChangeStage implements IPacketFight {
 		}
 
 		stage = Stage.values()[stageId];
-	}
-
-	@Override
-	public void handleClientSide(EntityPlayer player) throws Exception {
-		FightManager.INSTANCE.changeFightStage(player.worldObj, getFightId(), stage);
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player) throws Exception {
-		throw new RuntimeException("This is a client side packet");
 	}
 
 	@Override

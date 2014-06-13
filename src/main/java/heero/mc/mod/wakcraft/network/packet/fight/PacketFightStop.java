@@ -1,12 +1,6 @@
 package heero.mc.mod.wakcraft.network.packet.fight;
 
-import heero.mc.mod.wakcraft.fight.FightManager;
-import io.netty.channel.ChannelHandlerContext;
-
-import java.io.IOException;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
+import io.netty.buffer.ByteBuf;
 
 public class PacketFightStop implements IPacketFight {
 	protected PacketFight packetFight;
@@ -20,25 +14,13 @@ public class PacketFightStop implements IPacketFight {
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, PacketBuffer buffer)
-			throws IOException {
-		packetFight.encodeInto(ctx, buffer);
+	public void toBytes(ByteBuf buffer) {
+		packetFight.toBytes(buffer);
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, PacketBuffer buffer)
-			throws IOException {
-		packetFight.decodeInto(ctx, buffer);
-	}
-
-	@Override
-	public void handleClientSide(EntityPlayer player) throws Exception {
-		FightManager.INSTANCE.stopFight(player.worldObj, getFightId());
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player) throws Exception {
-		throw new RuntimeException("This is a client side packet");
+	public void fromBytes(ByteBuf buffer) {
+		packetFight.fromBytes(buffer);
 	}
 
 	@Override
