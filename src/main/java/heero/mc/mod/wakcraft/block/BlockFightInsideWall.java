@@ -1,10 +1,13 @@
 package heero.mc.mod.wakcraft.block;
 
+import heero.mc.mod.wakcraft.helper.FightHelper;
+
 import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
 public class BlockFightInsideWall extends BlockGeneric {
@@ -34,6 +37,16 @@ public class BlockFightInsideWall extends BlockGeneric {
 	@Override
 	public void addCollisionBoxesToList(World world, int x, int y, int z,
 			AxisAlignedBB mask, List list, Entity entity) {
+		if (!FightHelper.isFighter(entity) || !FightHelper.isFighting(entity)) {
+			return;
+		}
+
+		ChunkCoordinates pos = FightHelper.getStartPosition(entity);
+		if (pos == null || (pos.posX == x && pos.posZ == z && (pos.posY == y || pos.posY == y - 1))) {
+			return;
+		}
+
+		super.addCollisionBoxesToList(world, x, y, z, mask, list, entity);
 	}
 
 	/**
