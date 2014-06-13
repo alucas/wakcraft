@@ -28,7 +28,7 @@ group= "heero.mods" // http://maven.apache.org/guides/mini/guide-naming-conventi
 archivesBaseName = "wakcraft"
 
 minecraft {
-    version = "1.7.2-10.12.1.1060"
+    version = "1.7.2-10.12.2.1121"
     if (file('../run').exists()) {
         assetDir = "../run/assets"
     } else {
