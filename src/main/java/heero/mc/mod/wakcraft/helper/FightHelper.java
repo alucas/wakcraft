@@ -6,6 +6,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChunkCoordinates;
 
+import com.sun.istack.internal.Nullable;
+
 public class FightHelper {
 	public static boolean isFighting(Entity entity) {
 		return ((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).getFightId() != -1;
@@ -19,7 +21,7 @@ public class FightHelper {
 		return (entity instanceof IFighter) || (entity instanceof EntityPlayer);
 	}
 
-	public static void setStartPosition(Entity entity, ChunkCoordinates startPosition) {
+	public static void setStartPosition(Entity entity, @Nullable ChunkCoordinates startPosition) {
 		((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).setStartPosition(startPosition);
 	}
 

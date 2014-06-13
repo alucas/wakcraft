@@ -4,17 +4,19 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ChunkCoordinates;
 
+import com.sun.istack.internal.Nullable;
+
 public class PacketFightSelectPosition implements IPacketFight {
 	protected IPacketFight packetFight;
 
 	public Integer fighterId;
-	public ChunkCoordinates selectedPosition;
+	public @Nullable ChunkCoordinates selectedPosition;
 
 	public PacketFightSelectPosition() {
 		this.packetFight = new PacketFight();
 	}
 
-	public PacketFightSelectPosition(int fightId, EntityLivingBase fighter, ChunkCoordinates selectedPosition) {
+	public PacketFightSelectPosition(int fightId, EntityLivingBase fighter, @Nullable ChunkCoordinates selectedPosition) {
 		this.packetFight = new PacketFight(fightId);
 		this.fighterId = fighter.getEntityId();
 		this.selectedPosition = selectedPosition;
@@ -25,9 +27,16 @@ public class PacketFightSelectPosition implements IPacketFight {
 		packetFight.toBytes(buffer);
 
 		buffer.writeInt(fighterId);
-		buffer.writeInt(selectedPosition.posX);
-		buffer.writeInt(selectedPosition.posY);
-		buffer.writeInt(selectedPosition.posZ);
+
+		if (selectedPosition == null) {
+			buffer.writeInt(Integer.MAX_VALUE);
+			buffer.writeInt(Integer.MAX_VALUE);
+			buffer.writeInt(Integer.MAX_VALUE);
+		} else {
+			buffer.writeInt(selectedPosition.posX);
+			buffer.writeInt(selectedPosition.posY);
+			buffer.writeInt(selectedPosition.posZ);
+		}
 	}
 
 	@Override
@@ -35,7 +44,16 @@ public class PacketFightSelectPosition implements IPacketFight {
 		packetFight.fromBytes(buffer);
 
 		fighterId = buffer.readInt();
-		selectedPosition = new ChunkCoordinates(buffer.readInt(), buffer.readInt(), buffer.readInt());
+
+		int posX = buffer.readInt();
+		int posY = buffer.readInt();
+		int posZ = buffer.readInt();
+
+		if (posX != Integer.MAX_VALUE || posY != Integer.MAX_VALUE || posZ != Integer.MAX_VALUE) {
+			selectedPosition = new ChunkCoordinates(posX, posY, posZ);
+		} else {
+			selectedPosition = null;
+		}
 	}
 
 	@Override

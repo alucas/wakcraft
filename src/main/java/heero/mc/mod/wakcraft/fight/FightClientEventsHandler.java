@@ -56,6 +56,11 @@ public class FightClientEventsHandler {
 				return;
 			}
 
+			if (FightHelper.getStartPosition(player) != null) {
+				FightManager.INSTANCE.selectPosition(player, null);
+				return;
+			}
+
 			ChunkCoordinates position = new ChunkCoordinates(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY - player.yOffset), MathHelper.floor_double(player.posZ));
 			FightManager.INSTANCE.selectPosition(player, position);
 		}

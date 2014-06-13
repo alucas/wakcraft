@@ -6,6 +6,8 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
+import com.sun.istack.internal.Nullable;
+
 public class FightProperty implements IExtendedEntityProperties {
 	public static final String IDENTIFIER = "fight";
 
@@ -51,7 +53,7 @@ public class FightProperty implements IExtendedEntityProperties {
 		return startPosition;
 	}
 
-	public void setStartPosition(ChunkCoordinates startPosition) {
+	public void setStartPosition(@Nullable ChunkCoordinates startPosition) {
 		this.startPosition = startPosition;
 	}
 }

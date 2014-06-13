@@ -36,6 +36,9 @@ import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+
+import com.sun.istack.internal.Nullable;
+
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
@@ -603,23 +606,13 @@ public enum FightManager {
 		return fight.getStage();
 	}
 
-	public void selectPosition(EntityLivingBase entity, ChunkCoordinates position) {
+	public void selectPosition(EntityLivingBase entity, @Nullable ChunkCoordinates position) {
 		int teamId = FightHelper.getTeam(entity);
 		int fightId = FightHelper.getFightId(entity);
-		World world = entity.worldObj;
+		List<EntityLivingBase> fighters = fights.get(entity.worldObj).get(fightId).fighters.get(teamId);
 
-		// Not a valid start position
-		List<List<FightBlockCoordinates>> startPositions = getSartPositions(world, fightId);
-		if (startPositions == null || !startPositions.get(teamId).contains(position)) {
+		if (position != null && isStartPositionAvailable(entity.worldObj, fightId, teamId, fighters, position)) {
 			return;
-		}
-
-		// Already reserved position
-		List<EntityLivingBase> fighters = fights.get(world).get(fightId).fighters.get(teamId);
-		for (EntityLivingBase fighter : fighters) {
-			if (position.equals(FightHelper.getStartPosition(fighter))) {
-				return;
-			}
 		}
 
 		if (entity.worldObj.isRemote) {
@@ -634,5 +627,22 @@ public enum FightManager {
 				}
 			}
 		}
+	}
+
+	protected boolean isStartPositionAvailable(World world, int fightId, int teamId, List<EntityLivingBase> fighters, ChunkCoordinates position) {
+		// Not a valid start position
+		List<List<FightBlockCoordinates>> startPositions = getSartPositions(world, fightId);
+		if (startPositions == null || !startPositions.get(teamId).contains(position)) {
+			return false;
+		}
+
+		// Already reserved position
+		for (EntityLivingBase fighter : fighters) {
+			if (position.equals(FightHelper.getStartPosition(fighter))) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }
