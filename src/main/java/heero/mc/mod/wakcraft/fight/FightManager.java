@@ -7,7 +7,9 @@ import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
+import heero.mc.mod.wakcraft.helper.AbilityHelper;
 import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.manager.AbilityManager.ABILITY;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
@@ -15,6 +17,8 @@ import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
 
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -555,6 +559,8 @@ public enum FightManager {
 
 		switch (fightInfo.stage) {
 		case PREFIGHT:
+			sortTeams(fightInfo.fighters);
+
 			updateFightStage(world, fightId, Stage.FIGHT);
 			fightInfo.stage = Stage.FIGHT;
 
@@ -565,6 +571,17 @@ public enum FightManager {
 
 		default:
 			break;
+		}
+	}
+
+	protected void sortTeams(List<List<EntityLivingBase>> fighters) {
+		for (List<EntityLivingBase> team : fighters) {
+			Collections.sort(team, new Comparator<EntityLivingBase>(){
+				@Override
+				public int compare(EntityLivingBase a, EntityLivingBase b) {
+					return AbilityHelper.getAbility(a, ABILITY.INITIATIVE) > AbilityHelper.getAbility(b, ABILITY.INITIATIVE) ? 1 : -1;
+				}
+			} );
 		}
 	}
 
