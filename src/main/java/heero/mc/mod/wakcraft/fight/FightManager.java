@@ -28,7 +28,6 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.StatCollector;
@@ -44,6 +43,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public enum FightManager {
 	INSTANCE;
+
+	protected static final int PREFIGHT_DURATION = 600;
 
 	protected Map<World, Map<Integer, FightInfo>> fights = new HashMap<World, Map<Integer, FightInfo>>();
 
@@ -80,7 +81,11 @@ public enum FightManager {
 			fights.put(world, worldFights);
 		}
 
-		worldFights.put(fightId, new FightInfo(fighters, null, startBlocks, -1));
+		FightInfo fightInfo = new FightInfo(fighters, null, startBlocks);
+		fightInfo.stage = Stage.PREFIGHT;
+		fightInfo.timer = PREFIGHT_DURATION;
+
+		worldFights.put(fightId, fightInfo);
 	}
 
 	/**
@@ -123,7 +128,11 @@ public enum FightManager {
 			fights.put(world, worldFights);
 		}
 
-		worldFights.put(fightId, new FightInfo(fighters, fightBlocks, startBlocks, MinecraftServer.getServer().getTickCounter()));
+		FightInfo fightInfo = new FightInfo(fighters, fightBlocks, startBlocks);
+		fightInfo.stage = Stage.PREFIGHT;
+		fightInfo.timer = PREFIGHT_DURATION;
+
+		worldFights.put(fightId, fightInfo);
 
 		return true;
 	}
@@ -540,13 +549,14 @@ public enum FightManager {
 
 	protected void updateFight(World world, int fightId, int tickCounter) {
 		FightInfo fightInfo = fights.get(world).get(fightId);
+		if (--fightInfo.timer != 0) {
+			return;
+		}
 
-		switch (fightInfo.getStage()) {
+		switch (fightInfo.stage) {
 		case PREFIGHT:
-			if (tickCounter > fightInfo.getTickStart() + 600) {
-				updateFightStage(world, fightId, Stage.FIGHT);
-				fightInfo.setStage(Stage.FIGHT);
-			}
+			updateFightStage(world, fightId, Stage.FIGHT);
+			fightInfo.stage = Stage.FIGHT;
 
 			break;
 
@@ -572,7 +582,7 @@ public enum FightManager {
 		}
 
 		updateFightStage(world, fightId, stage);
-		fight.setStage(Stage.FIGHT);
+		fight.stage = stage;
 	}
 
 	protected void updateFightStage(World world, int fightId, Stage stage) {
@@ -603,7 +613,7 @@ public enum FightManager {
 			return Stage.UNKNOW;
 		}
 
-		return fight.getStage();
+		return fight.stage;
 	}
 
 	public void selectPosition(EntityLivingBase entity, @Nullable ChunkCoordinates position) {

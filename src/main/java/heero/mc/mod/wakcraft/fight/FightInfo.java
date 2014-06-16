@@ -18,30 +18,17 @@ public class FightInfo {
 	protected List<List<EntityLivingBase>> fighters;
 	protected Set<FightBlockCoordinates> fightBlocks;
 	protected List<List<FightBlockCoordinates>> startBlocks;
-	protected int tickStart;
-	protected Stage stage;
+	public Stage stage;
+	public int timer;
 
-	public FightInfo(List<List<EntityLivingBase>> fighters, @Nullable Set<FightBlockCoordinates> fightBlocks, List<List<FightBlockCoordinates>> startBlocks, int tickStart) {
+	public FightInfo(List<List<EntityLivingBase>> fighters, @Nullable Set<FightBlockCoordinates> fightBlocks, List<List<FightBlockCoordinates>> startBlocks) {
 		this.fighters = fighters;
 		this.fightBlocks = fightBlocks;
 		this.startBlocks = startBlocks;
-		this.tickStart = tickStart;
-		this.stage = Stage.PREFIGHT;
+		this.stage = Stage.UNKNOW;
 	}
 
 	public Set<FightBlockCoordinates> getFightBlocks() {
 		return fightBlocks;
-	}
-
-	public Stage getStage() {
-		return stage;
-	}
-
-	public void setStage(Stage stage) {
-		this.stage = stage;
-	}
-
-	public int getTickStart() {
-		return tickStart;
 	}
 }
