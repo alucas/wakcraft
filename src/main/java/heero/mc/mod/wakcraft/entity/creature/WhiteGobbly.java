@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.entity.creature;
 
 import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.ability.AbilityManager.ABILITY;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
 import heero.mc.mod.wakcraft.entity.property.AbilitiesProperty;
 import net.minecraft.client.model.ModelBase;
@@ -17,6 +18,19 @@ public class WhiteGobbly extends GobballGeneric {
 
 	@Override
 	public void initAbility(AbilitiesProperty property) {
+		property.set(ABILITY.HEALTH, 29);
+		property.set(ABILITY.ACTION, 4);
+		property.set(ABILITY.MOVEMENT, 3);
+		property.set(ABILITY.WAKFU, 4);
+		property.set(ABILITY.INITIATIVE, -8);
+		property.set(ABILITY.LOCK, -40);
+		property.set(ABILITY.DODGE, -40);
+
+		property.set(ABILITY.WATER_RES, 5);
+		property.set(ABILITY.EARTH_ATT, 10);
+		property.set(ABILITY.EARTH_RES, 15);
+		property.set(ABILITY.AIR_RES, -20);
+		property.set(ABILITY.FIRE_RES, 5);
 	}
 
 	@SideOnly(Side.CLIENT)
