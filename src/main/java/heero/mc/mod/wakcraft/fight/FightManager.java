@@ -565,7 +565,7 @@ public enum FightManager {
 
 		switch (fightInfo.stage) {
 		case PREFIGHT:
-			sortTeams(fightInfo.fighters);
+			fightInfo.fightersOrdered = sortTeams(fightInfo.fighters);
 
 			updateFightStage(world, fightId, Stage.FIGHT);
 			fightInfo.stage = Stage.FIGHT;
