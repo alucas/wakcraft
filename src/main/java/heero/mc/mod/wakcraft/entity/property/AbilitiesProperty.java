@@ -53,7 +53,7 @@ public class AbilitiesProperty implements IExtendedEntityProperties, ISynchPrope
 
 		for (ABILITY key : abilitiesPersistKeys) {
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setString(TAG_NAME, key.toString());
+			tag.setString(TAG_NAME, key.name());
 			tag.setInteger(TAG_VALUE, abilitiesPersist.get(key));
 			tagAbilities.appendTag(tag);
 		}
