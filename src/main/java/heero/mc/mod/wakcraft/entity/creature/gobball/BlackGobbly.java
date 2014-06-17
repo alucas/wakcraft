@@ -1,4 +1,4 @@
-package heero.mc.mod.wakcraft.entity.creature;
+package heero.mc.mod.wakcraft.entity.creature.gobball;
 
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager.CHARACTERISTIC;
@@ -11,8 +11,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class WhiteGobbly extends GobballGeneric {
-	public WhiteGobbly(World world) {
+public class BlackGobbly extends GobballGeneric {
+	public BlackGobbly(World world) {
 		super(world);
 	}
 
@@ -22,22 +22,23 @@ public class WhiteGobbly extends GobballGeneric {
 		property.set(CHARACTERISTIC.ACTION, 4);
 		property.set(CHARACTERISTIC.MOVEMENT, 3);
 		property.set(CHARACTERISTIC.WAKFU, 4);
-		property.set(CHARACTERISTIC.INITIATIVE, -8);
+		property.set(CHARACTERISTIC.INITIATIVE, -7);
 		property.set(CHARACTERISTIC.LOCK, -40);
 		property.set(CHARACTERISTIC.DODGE, -40);
+		property.set(CHARACTERISTIC.CRITICAL, 4);
 
 		property.set(CHARACTERISTIC.WATER_RES, 5);
-		property.set(CHARACTERISTIC.EARTH_ATT, 10);
+		property.set(CHARACTERISTIC.EARTH_ATT, 15);
 		property.set(CHARACTERISTIC.EARTH_RES, 15);
 		property.set(CHARACTERISTIC.AIR_RES, -20);
-		property.set(CHARACTERISTIC.FIRE_RES, 5);
+		property.set(CHARACTERISTIC.FIRE_RES, 10);
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class RenderWhiteGobbly extends RendererWCreature {
-		private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID, "textures/mobs/boufton.png");
+	public static class RenderBlackGobbly extends RendererWCreature {
+		private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID, "textures/mobs/bouftonnoir.png");
 
-		public RenderWhiteGobbly(ModelBase model, float shadowSize) {
+		public RenderBlackGobbly(ModelBase model, float shadowSize) {
 			super(model, shadowSize);
 		}
 

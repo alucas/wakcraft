@@ -1,6 +1,7 @@
-package heero.mc.mod.wakcraft.entity.creature;
+package heero.mc.mod.wakcraft.entity.creature.gobball;
 
 import heero.mc.mod.wakcraft.WItems;
+import heero.mc.mod.wakcraft.entity.creature.EntityWCreature;
 
 import java.util.HashMap;
 import java.util.Map;

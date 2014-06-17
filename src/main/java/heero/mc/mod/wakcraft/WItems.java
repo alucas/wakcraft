@@ -2,11 +2,11 @@ package heero.mc.mod.wakcraft;
 
 import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager.CHARACTERISTIC;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.mc.mod.wakcraft.entity.creature.BlackGobbly;
-import heero.mc.mod.wakcraft.entity.creature.Gobball;
-import heero.mc.mod.wakcraft.entity.creature.GobballWC;
-import heero.mc.mod.wakcraft.entity.creature.Gobbette;
-import heero.mc.mod.wakcraft.entity.creature.WhiteGobbly;
+import heero.mc.mod.wakcraft.entity.creature.gobball.BlackGobbly;
+import heero.mc.mod.wakcraft.entity.creature.gobball.Gobball;
+import heero.mc.mod.wakcraft.entity.creature.gobball.GobballWC;
+import heero.mc.mod.wakcraft.entity.creature.gobball.Gobbette;
+import heero.mc.mod.wakcraft.entity.creature.gobball.WhiteGobbly;
 import heero.mc.mod.wakcraft.item.ItemIkiakit;
 import heero.mc.mod.wakcraft.item.ItemOre1;
 import heero.mc.mod.wakcraft.item.ItemOre2;
