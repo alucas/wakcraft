@@ -17,7 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
-public class EntityWCreature extends EntityCreature implements IWMob, IFighter{
+public abstract class EntityWCreature extends EntityCreature implements IWMob, IFighter{
 	protected static final String TAG_GROUP = "Group";
 	protected static final String TAG_UUIDMOST = "UUIDMost";
 	protected static final String TAG_UUIDLEAST = "UUIDLeast";

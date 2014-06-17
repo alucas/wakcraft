@@ -3,6 +3,7 @@ package heero.mc.mod.wakcraft.entity.creature;
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
+import heero.mc.mod.wakcraft.entity.property.AbilitiesProperty;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -153,6 +154,10 @@ public class Gobball extends EntityWCreature {
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) {
 		this.playSound("mob.sheep.step", 0.15F, 1.0F);
+	}
+
+	@Override
+	public void initAbility(AbilitiesProperty property) {
 	}
 
 	@SideOnly(Side.CLIENT)
