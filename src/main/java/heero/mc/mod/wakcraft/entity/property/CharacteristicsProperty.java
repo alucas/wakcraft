@@ -84,6 +84,14 @@ public class CharacteristicsProperty implements IExtendedEntityProperties, ISync
 
 	public void enablePersistence(boolean enablePersistence) {
 		this.enablePersistence = enablePersistence;
+
+		if (enablePersistence) {
+			for (CHARACTERISTIC key : persistableCharacteristics) {
+				if (characteristics.get(key) == null) {
+					characteristics.put(key, 0);
+				}
+			}
+		}
 	}
 
 	@Override
