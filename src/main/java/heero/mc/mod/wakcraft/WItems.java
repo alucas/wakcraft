@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft;
 
+import heero.mc.mod.wakcraft.ability.AbilityManager.ABILITY;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.creature.BlackGobbly;
 import heero.mc.mod.wakcraft.entity.creature.Gobball;
@@ -14,7 +15,6 @@ import heero.mc.mod.wakcraft.item.ItemWArmor;
 import heero.mc.mod.wakcraft.item.ItemWithLevel;
 import heero.mc.mod.wakcraft.item.ItemWoollyKey;
 import heero.mc.mod.wakcraft.item.ItemWArmor.TYPE;
-import heero.mc.mod.wakcraft.manager.AbilityManager.ABILITY;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.registry.GameRegistry;

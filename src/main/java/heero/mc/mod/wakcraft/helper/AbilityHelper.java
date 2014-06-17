@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.helper;
 
+import heero.mc.mod.wakcraft.ability.AbilityManager.ABILITY;
 import heero.mc.mod.wakcraft.entity.property.AbilitiesProperty;
-import heero.mc.mod.wakcraft.manager.AbilityManager.ABILITY;
 import net.minecraft.entity.EntityLivingBase;
 
 public class AbilityHelper {
