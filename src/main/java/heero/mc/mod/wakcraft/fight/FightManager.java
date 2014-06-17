@@ -120,9 +120,7 @@ public enum FightManager {
 
 		addFightersToFight(fighters, fightId);
 
-		for (int i = 0; i < fighters.get(1).size(); i++) {
-			FightHelper.setStartPosition(fighters.get(1).get(i), startBlocks.get(1).get(i));
-		}
+		setStartPositionOfCreatures(fighters, startBlocks);
 
 		createFightMap(world, fightBlocks);
 
@@ -442,6 +440,14 @@ public enum FightManager {
 		}
 	}
 
+	protected void setStartPositionOfCreatures(List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
+		for (List<EntityLivingBase> team : fighters) {
+			for (int i = 0; i < team.size(); i++) {
+				FightHelper.setStartPosition(team.get(i), startBlocks.get(1).get(i));
+			}
+		}
+	}
+
 	/**
 	 * Return the defeated team (if there is one).
 	 * 
@@ -574,15 +580,46 @@ public enum FightManager {
 		}
 	}
 
-	protected void sortTeams(List<List<EntityLivingBase>> fighters) {
+	protected List<EntityLivingBase> sortTeams(List<List<EntityLivingBase>> fighters) {
 		for (List<EntityLivingBase> team : fighters) {
 			Collections.sort(team, new Comparator<EntityLivingBase>(){
 				@Override
 				public int compare(EntityLivingBase a, EntityLivingBase b) {
-					return AbilityHelper.getAbility(a, ABILITY.INITIATIVE) > AbilityHelper.getAbility(b, ABILITY.INITIATIVE) ? 1 : -1;
+					int initiativeA = AbilityHelper.getAbility(a, ABILITY.INITIATIVE);
+					int initiativeB = AbilityHelper.getAbility(b, ABILITY.INITIATIVE);
+					return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
 				}
 			} );
 		}
+
+		Collections.sort(fighters, new Comparator<List<EntityLivingBase>>(){
+			@Override
+			public int compare(List<EntityLivingBase> a, List<EntityLivingBase> b) {
+				int initiativeA = AbilityHelper.getAbility(a.get(0), ABILITY.INITIATIVE);
+				int initiativeB = AbilityHelper.getAbility(b.get(0), ABILITY.INITIATIVE);
+				return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
+			}
+		} );
+
+		List<EntityLivingBase> fightersSorted = new ArrayList<EntityLivingBase>();
+		List<Iterator<EntityLivingBase>> iterators = new ArrayList<Iterator<EntityLivingBase>>();
+		for (List<EntityLivingBase> team : fighters) {
+			iterators.add(team.iterator());
+		}
+
+		int previousListSize = 0;
+		do {
+			previousListSize = fightersSorted.size();
+
+			for (Iterator<EntityLivingBase> iterator : iterators) {
+				
+				if (iterator.hasNext()) {
+					fightersSorted.add(iterator.next());
+				}
+			}
+		} while(previousListSize != fightersSorted.size());
+
+		return fightersSorted;
 	}
 
 	public void changeFightStage(World world, int fightId, Stage stage) {

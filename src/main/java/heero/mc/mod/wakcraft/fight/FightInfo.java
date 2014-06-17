@@ -18,6 +18,7 @@ public class FightInfo {
 	protected List<List<EntityLivingBase>> fighters;
 	protected Set<FightBlockCoordinates> fightBlocks;
 	protected List<List<FightBlockCoordinates>> startBlocks;
+	public List<EntityLivingBase> fightersOrdered;
 	public Stage stage;
 	public int timer;
 
