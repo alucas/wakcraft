@@ -1,6 +1,6 @@
-package heero.mc.mod.wakcraft.ability;
+package heero.mc.mod.wakcraft.characteristic;
 
-import heero.mc.mod.wakcraft.entity.property.AbilitiesProperty;
+import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import heero.mc.mod.wakcraft.item.ItemWArmor;
 
 import java.util.EnumSet;
@@ -10,8 +10,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.FMLLog;
 
-public class AbilityManager {
-	public static enum ABILITY {
+public class CharacteristicsManager {
+	public static enum CHARACTERISTIC {
 		// Principal
 		HEALTH("Health"),
 		ACTION("Action"),
@@ -61,7 +61,7 @@ public class AbilityManager {
 
 		protected String name;
 
-		private ABILITY(String name) {
+		private CHARACTERISTIC(String name) {
 			this.name = name;
 		}
 
@@ -71,15 +71,15 @@ public class AbilityManager {
 		}
 	}
 
-	protected static Set<AbilityManager.ABILITY> customizableAbilities = EnumSet
-			.of(ABILITY.STRENGTH, ABILITY.INTELLIGENCE, ABILITY.AGILITY,
-					ABILITY.CHANCE, ABILITY.BLOCK, ABILITY.RANGE,
-					ABILITY.ACTION, ABILITY.MOVEMENT, ABILITY.CRITICAL,
-					ABILITY.KIT, ABILITY.LOCK, ABILITY.DODGE,
-					ABILITY.INITIATIVE, ABILITY.HEALTH);
+	protected static Set<CharacteristicsManager.CHARACTERISTIC> customizableCharacteristics = EnumSet
+			.of(CHARACTERISTIC.STRENGTH, CHARACTERISTIC.INTELLIGENCE, CHARACTERISTIC.AGILITY,
+					CHARACTERISTIC.CHANCE, CHARACTERISTIC.BLOCK, CHARACTERISTIC.RANGE,
+					CHARACTERISTIC.ACTION, CHARACTERISTIC.MOVEMENT, CHARACTERISTIC.CRITICAL,
+					CHARACTERISTIC.KIT, CHARACTERISTIC.LOCK, CHARACTERISTIC.DODGE,
+					CHARACTERISTIC.INITIATIVE, CHARACTERISTIC.HEALTH);
 
-	public static boolean isCustomizable(ABILITY ability) {
-		return customizableAbilities.contains(ability);
+	public static boolean isCustomizable(CHARACTERISTIC characteristics) {
+		return customizableCharacteristics.contains(characteristics);
 	}
 
 	public static void equipItem(Entity entity, ItemWArmor item) {
@@ -87,13 +87,13 @@ public class AbilityManager {
 			return;
 		}
 
-		AbilitiesProperty properties = (AbilitiesProperty) ((EntityPlayer) entity).getExtendedProperties(AbilitiesProperty.IDENTIFIER);
+		CharacteristicsProperty properties = (CharacteristicsProperty) ((EntityPlayer) entity).getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading the ability properties of player : " + ((EntityPlayer) entity).getDisplayName());
+			FMLLog.warning("Error while loading the characteristics properties of player : " + ((EntityPlayer) entity).getDisplayName());
 			return;
 		}
 
-		for (ABILITY characteristic : item.getCharacteristics()) {
+		for (CHARACTERISTIC characteristic : item.getCharacteristics()) {
 			properties.set(characteristic, properties.get(characteristic) + item.getCharacteristic(characteristic));
 		}
 	}
@@ -103,13 +103,13 @@ public class AbilityManager {
 			return;
 		}
 
-		AbilitiesProperty properties = (AbilitiesProperty) ((EntityPlayer) entity).getExtendedProperties(AbilitiesProperty.IDENTIFIER);
+		CharacteristicsProperty properties = (CharacteristicsProperty) ((EntityPlayer) entity).getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading the ability properties of player : " + ((EntityPlayer) entity).getDisplayName());
+			FMLLog.warning("Error while loading the characteristics properties of player : " + ((EntityPlayer) entity).getDisplayName());
 			return;
 		}
 
-		for (ABILITY characteristic : item.getCharacteristics()) {
+		for (CHARACTERISTIC characteristic : item.getCharacteristics()) {
 			properties.set(characteristic, properties.get(characteristic) - item.getCharacteristic(characteristic));
 		}
 	}

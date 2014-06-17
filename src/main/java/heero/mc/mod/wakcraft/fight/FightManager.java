@@ -2,13 +2,13 @@ package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.ability.AbilityManager.ABILITY;
+import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager.CHARACTERISTIC;
 import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
-import heero.mc.mod.wakcraft.helper.AbilityHelper;
+import heero.mc.mod.wakcraft.helper.CharacteristicsHelper;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
@@ -585,8 +585,8 @@ public enum FightManager {
 			Collections.sort(team, new Comparator<EntityLivingBase>(){
 				@Override
 				public int compare(EntityLivingBase a, EntityLivingBase b) {
-					int initiativeA = AbilityHelper.getAbility(a, ABILITY.INITIATIVE);
-					int initiativeB = AbilityHelper.getAbility(b, ABILITY.INITIATIVE);
+					int initiativeA = CharacteristicsHelper.getCharacteristics(a, CHARACTERISTIC.INITIATIVE);
+					int initiativeB = CharacteristicsHelper.getCharacteristics(b, CHARACTERISTIC.INITIATIVE);
 					return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
 				}
 			} );
@@ -595,8 +595,8 @@ public enum FightManager {
 		Collections.sort(fighters, new Comparator<List<EntityLivingBase>>(){
 			@Override
 			public int compare(List<EntityLivingBase> a, List<EntityLivingBase> b) {
-				int initiativeA = AbilityHelper.getAbility(a.get(0), ABILITY.INITIATIVE);
-				int initiativeB = AbilityHelper.getAbility(b.get(0), ABILITY.INITIATIVE);
+				int initiativeA = CharacteristicsHelper.getCharacteristics(a.get(0), CHARACTERISTIC.INITIATIVE);
+				int initiativeB = CharacteristicsHelper.getCharacteristics(b.get(0), CHARACTERISTIC.INITIATIVE);
 				return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
 			}
 		} );

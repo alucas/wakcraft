@@ -4,7 +4,7 @@ import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.ability.AbilityEventsHandler;
+import heero.mc.mod.wakcraft.characteristic.AbilityEventsHandler;
 import heero.mc.mod.wakcraft.entity.creature.BlackGobbly;
 import heero.mc.mod.wakcraft.entity.creature.Gobball;
 import heero.mc.mod.wakcraft.entity.creature.GobballWC;

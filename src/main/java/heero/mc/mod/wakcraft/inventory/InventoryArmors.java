@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.inventory;
 
-import heero.mc.mod.wakcraft.ability.AbilityManager;
+import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager;
 import heero.mc.mod.wakcraft.item.ItemWArmor;
 import heero.mc.mod.wakcraft.item.ItemWArmor.TYPE;
 import net.minecraft.entity.Entity;
@@ -83,13 +83,13 @@ public class InventoryArmors implements IInventory {
 		if (this.inventoryContents[slotId] != null) {
 			ItemWArmor item = (ItemWArmor) this.inventoryContents[slotId].getItem();
 
-			AbilityManager.unequipItem(entity, item);
+			CharacteristicsManager.unequipItem(entity, item);
 		}
 
 		if (stack != null) {
 			ItemWArmor item = (ItemWArmor) stack.getItem();
 
-			AbilityManager.equipItem(entity, item);
+			CharacteristicsManager.equipItem(entity, item);
 		}
 
 		this.inventoryContents[slotId] = stack;
