@@ -18,5 +18,7 @@ public class AbilityEventsHandler {
 		}
 
 		event.entity.registerExtendedProperties(AbilitiesProperty.IDENTIFIER, new AbilitiesProperty());
+
+		AbilityHelper.init(event.entity);
 	}
 }
