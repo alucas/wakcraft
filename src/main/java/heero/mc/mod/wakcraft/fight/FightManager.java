@@ -460,7 +460,7 @@ public enum FightManager {
 		FightInfo fight = fights.get(world).get(fightId);
 
 		for (int teamId = 1; teamId <= 2; teamId++) {
-			List<EntityLivingBase> team = fight.fighters.get(teamId - 1);
+			List<EntityLivingBase> team = fight.fightersByTeam.get(teamId - 1);
 
 			boolean living = false;
 			for (EntityLivingBase entity : team) {
@@ -498,9 +498,9 @@ public enum FightManager {
 			return;
 		}
 
-		terminateFight(fightId, world, fight.fighters);
+		terminateFight(fightId, world, fight.fightersByTeam);
 		destroyFightMap(world, fight.fightBlocks);
-		removeFightersFromFight(fight.fighters);
+		removeFightersFromFight(fight.fightersByTeam);
 	}
 
 	/**
@@ -565,7 +565,7 @@ public enum FightManager {
 
 		switch (fightInfo.stage) {
 		case PREFIGHT:
-			fightInfo.fightersOrdered = sortTeams(fightInfo.fighters);
+			fightInfo.fightersByFightOrder = sortTeams(fightInfo.fightersByTeam);
 
 			updateFightStage(world, fightId, Stage.FIGHT);
 			fightInfo.stage = Stage.FIGHT;
@@ -642,7 +642,7 @@ public enum FightManager {
 	protected void updateFightStage(World world, int fightId, Stage stage) {
 		MinecraftForge.EVENT_BUS.post(new FightEvent.FightChangeStageEvent(world, fightId, stage));
 
-		List<List<EntityLivingBase>> fighters = fights.get(world).get(fightId).fighters;
+		List<List<EntityLivingBase>> fighters = fights.get(world).get(fightId).fightersByTeam;
 		for (int teamId = 0; teamId < 2; teamId++) {
 			List<EntityLivingBase> team = fighters.get(teamId);
 
@@ -673,7 +673,7 @@ public enum FightManager {
 	public void selectPosition(EntityLivingBase entity, @Nullable ChunkCoordinates position) {
 		int teamId = FightHelper.getTeam(entity);
 		int fightId = FightHelper.getFightId(entity);
-		List<EntityLivingBase> fighters = fights.get(entity.worldObj).get(fightId).fighters.get(teamId);
+		List<EntityLivingBase> fighters = fights.get(entity.worldObj).get(fightId).fightersByTeam.get(teamId);
 
 		if (position != null && isStartPositionAvailable(entity.worldObj, fightId, teamId, fighters, position)) {
 			return;

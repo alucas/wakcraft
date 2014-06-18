@@ -15,15 +15,15 @@ public class FightInfo {
 		FIGHT;
 	}
 
-	protected List<List<EntityLivingBase>> fighters;
+	protected List<List<EntityLivingBase>> fightersByTeam;
 	protected Set<FightBlockCoordinates> fightBlocks;
 	protected List<List<FightBlockCoordinates>> startBlocks;
-	public List<EntityLivingBase> fightersOrdered;
+	public List<EntityLivingBase> fightersByFightOrder;
 	public Stage stage;
 	public int timer;
 
-	public FightInfo(List<List<EntityLivingBase>> fighters, @Nullable Set<FightBlockCoordinates> fightBlocks, List<List<FightBlockCoordinates>> startBlocks) {
-		this.fighters = fighters;
+	public FightInfo(List<List<EntityLivingBase>> fightersByTeam, @Nullable Set<FightBlockCoordinates> fightBlocks, List<List<FightBlockCoordinates>> startBlocks) {
+		this.fightersByTeam = fightersByTeam;
 		this.fightBlocks = fightBlocks;
 		this.startBlocks = startBlocks;
 		this.stage = Stage.UNKNOW;
