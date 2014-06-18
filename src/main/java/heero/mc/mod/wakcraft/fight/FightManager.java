@@ -48,7 +48,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 public enum FightManager {
 	INSTANCE;
 
-	protected static final int PREFIGHT_DURATION = 600;
+	protected static final int PREFIGHT_DURATION = 60;
+	protected static final int FIGHTTURN_DURATION = 60;
 
 	protected Map<World, Map<Integer, FightInfo>> fights = new HashMap<World, Map<Integer, FightInfo>>();
 
@@ -569,10 +570,25 @@ public enum FightManager {
 
 			updateFightStage(world, fightId, Stage.FIGHT);
 			fightInfo.stage = Stage.FIGHT;
+			fightInfo.currentFighterIndex = 0;
+			fightInfo.timer = FIGHTTURN_DURATION;
 
 			break;
 
 		case FIGHT:
+			int nbFighter = fightInfo.fightersByFightOrder.size();
+			for (int i = 0; i < nbFighter; i++) {
+				EntityLivingBase fighter = fightInfo.fightersByFightOrder.get((fightInfo.currentFighterIndex + i + 1) % nbFighter);
+				if (!fighter.isEntityAlive()) {
+					continue;
+				}
+
+				fightInfo.currentFighterIndex = (fightInfo.currentFighterIndex + i + 1) % nbFighter;
+				fightInfo.timer = FIGHTTURN_DURATION;
+
+				break;
+			}
+
 			break;
 
 		default:
