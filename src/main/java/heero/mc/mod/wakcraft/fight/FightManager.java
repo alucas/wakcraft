@@ -496,6 +496,14 @@ public enum FightManager {
 		}
 	}
 
+	protected void resetStartPosition(List<List<EntityLivingBase>> fighters) {
+		for (List<EntityLivingBase> team : fighters) {
+			for (EntityLivingBase fighter : team) {
+				FightHelper.setStartPosition(fighter, null);
+			}
+		}
+	}
+
 	/**
 	 * Return the defeated team (if there is one).
 	 * 
@@ -549,6 +557,7 @@ public enum FightManager {
 		terminateFight(fightId, world, fight.fightersByTeam);
 		destroyFightMap(world, fight.fightBlocks);
 		removeFightersFromFight(fight.fightersByTeam);
+		resetStartPosition(fight.fightersByTeam);
 	}
 
 	/**
