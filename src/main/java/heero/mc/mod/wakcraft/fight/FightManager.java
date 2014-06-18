@@ -613,7 +613,7 @@ public enum FightManager {
 
 		switch (fightInfo.stage) {
 		case PREFIGHT:
-			fightInfo.fightersByFightOrder = sortTeams(fightInfo.fightersByTeam);
+			fightInfo.fightersByFightOrder = getFightersByFightOrder(fightInfo.fightersByTeam);
 			setStartPositionOfRemainingFighters(fightInfo.fightersByTeam, fightInfo.startBlocks);
 			moveFighterToStartPosition(fightInfo.fightersByTeam);
 
@@ -645,8 +645,13 @@ public enum FightManager {
 		}
 	}
 
-	protected List<EntityLivingBase> sortTeams(List<List<EntityLivingBase>> fighters) {
+	protected List<EntityLivingBase> getFightersByFightOrder(List<List<EntityLivingBase>> fighters) {
+		List<List<EntityLivingBase>> fightersTmp = new ArrayList<List<EntityLivingBase>>();
 		for (List<EntityLivingBase> team : fighters) {
+			fightersTmp.add(new ArrayList<EntityLivingBase>(team));
+		}
+
+		for (List<EntityLivingBase> team : fightersTmp) {
 			Collections.sort(team, new Comparator<EntityLivingBase>(){
 				@Override
 				public int compare(EntityLivingBase a, EntityLivingBase b) {
@@ -657,7 +662,7 @@ public enum FightManager {
 			} );
 		}
 
-		Collections.sort(fighters, new Comparator<List<EntityLivingBase>>(){
+		Collections.sort(fightersTmp, new Comparator<List<EntityLivingBase>>(){
 			@Override
 			public int compare(List<EntityLivingBase> a, List<EntityLivingBase> b) {
 				int initiativeA = CharacteristicsHelper.getCharacteristics(a.get(0), CHARACTERISTIC.INITIATIVE);
