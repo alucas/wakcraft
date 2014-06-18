@@ -21,6 +21,10 @@ public class FightHelper {
 		return (entity instanceof IFighter) || (entity instanceof EntityPlayer);
 	}
 
+	public static boolean isAutonomousFighter(Entity entity) {
+		return !(entity instanceof EntityPlayer);
+	}
+
 	public static void setStartPosition(Entity entity, @Nullable ChunkCoordinates startPosition) {
 		((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).setStartPosition(startPosition);
 	}

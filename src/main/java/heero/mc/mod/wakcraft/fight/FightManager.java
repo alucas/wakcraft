@@ -121,7 +121,7 @@ public enum FightManager {
 
 		addFightersToFight(fighters, fightId);
 
-		setStartPositionOfCreatures(fighters, startBlocks);
+		setStartPositionOfAutonomousFighters(fighters, startBlocks);
 
 		createFightMap(world, fightBlocks);
 
@@ -441,10 +441,57 @@ public enum FightManager {
 		}
 	}
 
-	protected void setStartPositionOfCreatures(List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
-		for (List<EntityLivingBase> team : fighters) {
+	protected void setStartPositionOfAutonomousFighters(List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
+		for (int j = 0; j < fighters.size(); j++) {
+			List<EntityLivingBase> team = fighters.get(j);
+
 			for (int i = 0; i < team.size(); i++) {
-				FightHelper.setStartPosition(team.get(i), startBlocks.get(1).get(i));
+				if (!FightHelper.isAutonomousFighter(team.get(i))) {
+					continue;
+				}
+
+				FightHelper.setStartPosition(team.get(i), startBlocks.get(j).get(i));
+			}
+		}
+	}
+
+	protected void setStartPositionOfRemainingFighters(List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
+		for (int j = 0; j < fighters.size(); j++) {
+			List<EntityLivingBase> team = fighters.get(j);
+
+			List<ChunkCoordinates> availablePositions = new ArrayList<ChunkCoordinates>(startBlocks.get(j));
+			for (EntityLivingBase fighter : team) {
+				ChunkCoordinates startPosition = FightHelper.getStartPosition(fighter);
+				if (startPosition == null) {
+					continue;
+				}
+
+				availablePositions.remove(startPosition);
+			}
+
+			Iterator<ChunkCoordinates> iterator = availablePositions.iterator();
+			for (EntityLivingBase fighter : team) {
+				if (FightHelper.getStartPosition(fighter) != null) {
+					continue;
+				}
+
+				FightHelper.setStartPosition(fighter, iterator.next());
+			}
+		}
+	}
+
+	protected void moveFighterToStartPosition(List<List<EntityLivingBase>> fighters) {
+		for (int j = 0; j < fighters.size(); j++) {
+			List<EntityLivingBase> team = fighters.get(j);
+
+			for (int i = 0; i < team.size(); i++) {
+				ChunkCoordinates startPosition = FightHelper.getStartPosition(team.get(i));
+				if (startPosition == null) {
+					FMLLog.warning("The fighter " + team.get(i) + " doesn't have a starting position");
+					continue;
+				}
+
+				team.get(i).setPositionAndUpdate(startPosition.posX + 0.5, startPosition.posY, startPosition.posZ + 0.5);
 			}
 		}
 	}
@@ -567,6 +614,8 @@ public enum FightManager {
 		switch (fightInfo.stage) {
 		case PREFIGHT:
 			fightInfo.fightersByFightOrder = sortTeams(fightInfo.fightersByTeam);
+			setStartPositionOfRemainingFighters(fightInfo.fightersByTeam, fightInfo.startBlocks);
+			moveFighterToStartPosition(fightInfo.fightersByTeam);
 
 			updateFightStage(world, fightId, Stage.FIGHT);
 			fightInfo.stage = Stage.FIGHT;
