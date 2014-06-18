@@ -754,7 +754,7 @@ public enum FightManager {
 		int fightId = FightHelper.getFightId(entity);
 		List<EntityLivingBase> fighters = fights.get(entity.worldObj).get(fightId).fightersByTeam.get(teamId);
 
-		if (position != null && isStartPositionAvailable(entity.worldObj, fightId, teamId, fighters, position)) {
+		if (position != null && !isStartPositionAvailable(entity.worldObj, fightId, teamId, fighters, position)) {
 			return;
 		}
 
