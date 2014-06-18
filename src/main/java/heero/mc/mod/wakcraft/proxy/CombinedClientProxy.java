@@ -28,6 +28,22 @@ import heero.mc.mod.wakcraft.eventhandler.KeyInputHandler;
 import heero.mc.mod.wakcraft.eventhandler.TextureEventHandler;
 import heero.mc.mod.wakcraft.fight.FightClientEventsHandler;
 import heero.mc.mod.wakcraft.manager.HavenBagHelper;
+import heero.mc.mod.wakcraft.network.handler.HandlerClientExtendedEntityProperty;
+import heero.mc.mod.wakcraft.network.handler.HandlerClientHavenBagProperties;
+import heero.mc.mod.wakcraft.network.handler.HandlerClientOpenWindow;
+import heero.mc.mod.wakcraft.network.handler.HandlerClientProfession;
+import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightChangeStage;
+import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightSelectPosition;
+import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightStart;
+import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightStop;
+import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
+import heero.mc.mod.wakcraft.network.packet.PacketHavenBagProperties;
+import heero.mc.mod.wakcraft.network.packet.PacketOpenWindow;
+import heero.mc.mod.wakcraft.network.packet.PacketProfession;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
 import heero.mc.mod.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.mc.mod.wakcraft.tileentity.TileEntityPhoenix;
@@ -37,6 +53,8 @@ import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 
 public class CombinedClientProxy extends CommonProxy {
 
@@ -95,5 +113,18 @@ public class CombinedClientProxy extends CommonProxy {
 	@Override
 	public EntityPlayer getCurrentPlayer() {
 		return Minecraft.getMinecraft().thePlayer;
+	}
+
+	public void registerPackets(SimpleNetworkWrapper packetPipeline) {
+		super.registerPackets(packetPipeline);
+
+		packetPipeline.registerMessage(HandlerClientOpenWindow.class, PacketOpenWindow.class, 1, Side.CLIENT);
+		packetPipeline.registerMessage(HandlerClientProfession.class, PacketProfession.class, 4, Side.CLIENT);
+		packetPipeline.registerMessage(HandlerClientExtendedEntityProperty.class, PacketExtendedEntityProperty.class, 6, Side.CLIENT);
+		packetPipeline.registerMessage(HandlerClientHavenBagProperties.class, PacketHavenBagProperties.class, 7, Side.CLIENT);
+		packetPipeline.registerMessage(HandlerClientFightStart.class, PacketFightStart.class, 8, Side.CLIENT);
+		packetPipeline.registerMessage(HandlerClientFightStop.class, PacketFightStop.class, 9, Side.CLIENT);
+		packetPipeline.registerMessage(HandlerClientFightChangeStage.class, PacketFightChangeStage.class, 10, Side.CLIENT);
+		packetPipeline.registerMessage(HandlerClientFightSelectPosition.class, PacketFightSelectPosition.class, 11, Side.CLIENT);
 	}
 }

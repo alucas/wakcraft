@@ -17,6 +17,16 @@ import heero.mc.mod.wakcraft.eventhandler.PlayerEventHandler;
 import heero.mc.mod.wakcraft.eventhandler.WorldEventHandler;
 import heero.mc.mod.wakcraft.fight.FightEventsHandler;
 import heero.mc.mod.wakcraft.network.GuiHandler;
+import heero.mc.mod.wakcraft.network.handler.HandlerServerCloseWindow;
+import heero.mc.mod.wakcraft.network.handler.HandlerServerHavenBagTeleportation;
+import heero.mc.mod.wakcraft.network.handler.HandlerServerHavenBagVisitors;
+import heero.mc.mod.wakcraft.network.handler.HandlerServerOpenWindow;
+import heero.mc.mod.wakcraft.network.handler.fight.HandlerServerFightSelectPosition;
+import heero.mc.mod.wakcraft.network.packet.PacketCloseWindow;
+import heero.mc.mod.wakcraft.network.packet.PacketHavenBagTeleportation;
+import heero.mc.mod.wakcraft.network.packet.PacketHavenBagVisitors;
+import heero.mc.mod.wakcraft.network.packet.PacketOpenWindow;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import heero.mc.mod.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBag;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
@@ -32,8 +42,10 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class CommonProxy {
 
@@ -114,5 +126,13 @@ public class CommonProxy {
 
 	public EntityPlayer getCurrentPlayer() {
 		return null;
+	}
+
+	public void registerPackets(SimpleNetworkWrapper packetPipeline) {
+		packetPipeline.registerMessage(HandlerServerHavenBagTeleportation.class, PacketHavenBagTeleportation.class, 0, Side.SERVER);
+		packetPipeline.registerMessage(HandlerServerOpenWindow.class, PacketOpenWindow.class, 2, Side.SERVER);
+		packetPipeline.registerMessage(HandlerServerCloseWindow.class, PacketCloseWindow.class, 3, Side.SERVER);
+		packetPipeline.registerMessage(HandlerServerHavenBagVisitors.class, PacketHavenBagVisitors.class, 5, Side.SERVER);
+		packetPipeline.registerMessage(HandlerServerFightSelectPosition.class, PacketFightSelectPosition.class, 12, Side.SERVER);
 	}
 }
