@@ -86,4 +86,19 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 			getGroup().add(new UUID(tagFighter.getLong(TAG_UUIDMOST), tagFighter.getLong(TAG_UUIDLEAST)));
 		}
 	}
+
+	/**
+	 * Can't be pushed by other entities
+	 */
+	@Override
+	public boolean canBePushed() {
+		return false;
+	}
+
+	/**
+	 * Do not push other entities
+	 */
+	@Override
+	protected void collideWithNearbyEntities() {
+	}
 }
