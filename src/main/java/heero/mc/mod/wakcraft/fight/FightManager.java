@@ -664,8 +664,8 @@ public enum FightManager {
 			Collections.sort(team, new Comparator<EntityLivingBase>(){
 				@Override
 				public int compare(EntityLivingBase a, EntityLivingBase b) {
-					int initiativeA = CharacteristicsHelper.getCharacteristics(a, CHARACTERISTIC.INITIATIVE);
-					int initiativeB = CharacteristicsHelper.getCharacteristics(b, CHARACTERISTIC.INITIATIVE);
+					int initiativeA = CharacteristicsHelper.getCharacteristic(a, CHARACTERISTIC.INITIATIVE);
+					int initiativeB = CharacteristicsHelper.getCharacteristic(b, CHARACTERISTIC.INITIATIVE);
 					return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
 				}
 			} );
@@ -674,8 +674,8 @@ public enum FightManager {
 		Collections.sort(fightersTmp, new Comparator<List<EntityLivingBase>>(){
 			@Override
 			public int compare(List<EntityLivingBase> a, List<EntityLivingBase> b) {
-				int initiativeA = CharacteristicsHelper.getCharacteristics(a.get(0), CHARACTERISTIC.INITIATIVE);
-				int initiativeB = CharacteristicsHelper.getCharacteristics(b.get(0), CHARACTERISTIC.INITIATIVE);
+				int initiativeA = CharacteristicsHelper.getCharacteristic(a.get(0), CHARACTERISTIC.INITIATIVE);
+				int initiativeB = CharacteristicsHelper.getCharacteristic(b.get(0), CHARACTERISTIC.INITIATIVE);
 				return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
 			}
 		} );

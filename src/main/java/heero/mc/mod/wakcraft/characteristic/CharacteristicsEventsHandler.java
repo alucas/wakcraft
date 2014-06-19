@@ -19,6 +19,6 @@ public class CharacteristicsEventsHandler {
 
 		event.entity.registerExtendedProperties(CharacteristicsProperty.IDENTIFIER, new CharacteristicsProperty());
 
-		CharacteristicsHelper.init(event.entity);
+		CharacteristicsHelper.initCharacteristics(event.entity);
 	}
 }

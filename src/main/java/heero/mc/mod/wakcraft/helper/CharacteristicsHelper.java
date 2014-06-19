@@ -11,11 +11,11 @@ public class CharacteristicsHelper {
 		return (entity instanceof EntityPlayer || entity instanceof IEntityWithCharacteristics);
 	}
 
-	public static int getCharacteristics(Entity entity, CHARACTERISTIC characteristic) {
+	public static int getCharacteristic(Entity entity, CHARACTERISTIC characteristic) {
 		return ((CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER)).get(characteristic);
 	}
 
-	public static void init(Entity entity) {
+	public static void initCharacteristics(Entity entity) {
 		CharacteristicsProperty property = (CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
 
 		if (entity instanceof IEntityWithCharacteristics) {
