@@ -2,12 +2,15 @@ package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.Wakcraft;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.entity.creature.IFighter;
+import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
@@ -612,6 +615,7 @@ public enum FightManager {
 		case PREFIGHT:
 			setStartPositionOfRemainingFighters(fightInfo.getFightersByTeam(), fightInfo.getStartBlocks());
 			moveFighterToStartPosition(fightInfo.getFightersByTeam());
+			initFightersFightCharacteristics(fightInfo.getFightersByTeam());
 
 			updateFightStage(world, fightId, FightStage.FIGHT);
 			fightInfo.setStage(FightStage.FIGHT, FIGHTTURN_DURATION);
@@ -730,5 +734,21 @@ public enum FightManager {
 		}
 
 		return 0;
+	}
+
+	private void initFightersFightCharacteristics(List<List<EntityLivingBase>> fightersByTeam) {
+		for (List<EntityLivingBase> team : fightersByTeam) {
+			for (EntityLivingBase fighter : team) {
+				for (Characteristic characteristic : Characteristic.values()) {
+					FightHelper.resetFightCharacteristic(fighter, characteristic);
+				}
+
+				if (!(fighter instanceof EntityPlayerMP)) {
+					continue;
+				}
+
+				Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(fighter, FightCharacteristicsProperty.IDENTIFIER), (EntityPlayerMP) fighter);
+			}
+		}
 	}
 }
