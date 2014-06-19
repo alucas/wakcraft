@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.block;
 
+import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class BlockFightInsideWall extends BlockGeneric {
@@ -45,9 +47,26 @@ public class BlockFightInsideWall extends BlockGeneric {
 			return;
 		}
 
-		ChunkCoordinates pos = FightHelper.getStartPosition(entity);
-		if (pos == null || (pos.posX == x && pos.posZ == z && (pos.posY == y || pos.posY == y - 1))) {
-			return;
+		switch (FightManager.INSTANCE.getFightStage(world, FightHelper.getFightId(entity))) {
+		case PREFIGHT:
+			ChunkCoordinates pos = FightHelper.getStartPosition(entity);
+			if (pos == null || (pos.posX == x && pos.posZ == z && (pos.posY == y || pos.posY == y - 1))) {
+				return;
+			}
+
+			break;
+		case FIGHT:
+			int posX = MathHelper.floor_double(entity.posX);
+			int posY = MathHelper.floor_double(entity.posY);
+			int posZ = MathHelper.floor_double(entity.posZ);
+
+			if (posX == x && posZ == z && (posY == y || posY == y - 1)) {
+				return;
+			}
+
+			break;
+		default:
+			break;
 		}
 
 		super.addCollisionBoxesToList(world, x, y, z, mask, list, entity);
