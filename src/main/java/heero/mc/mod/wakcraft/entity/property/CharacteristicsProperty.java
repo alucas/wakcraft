@@ -102,7 +102,7 @@ public class CharacteristicsProperty implements IExtendedEntityProperties, ISync
 
 		for (Characteristic key : characteristics.keySet()) {
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setString(TAG_NAME, key.toString());
+			tag.setString(TAG_NAME, key.name());
 			tag.setInteger(TAG_VALUE, characteristics.get(key));
 
 			tagCharacteristics.appendTag(tag);
