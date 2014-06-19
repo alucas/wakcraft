@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.entity.property;
 
+import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
 
 import java.util.HashMap;
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class ProfessionProperty implements IExtendedEntityProperties {
-	public static final String IDENTIFIER = "XpCrafting";
+	public static final String IDENTIFIER = WInfo.MODID + "Profession";
 
 	private static final String TAG_ID = "name";
 	private static final String TAG_LEVEL = "level";

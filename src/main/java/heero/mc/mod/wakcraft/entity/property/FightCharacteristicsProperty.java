@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.entity.property;
 
+import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 
 import java.util.HashMap;
@@ -11,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class FightCharacteristicsProperty implements IExtendedEntityProperties {
-	public static final String IDENTIFIER = "fightCharacteristics";
+	public static final String IDENTIFIER = WInfo.MODID + "FightCharacteristics";
 
 	/** All characteristics */
 	protected Map<Characteristic, Integer> characteristics = new HashMap<Characteristic, Integer>();

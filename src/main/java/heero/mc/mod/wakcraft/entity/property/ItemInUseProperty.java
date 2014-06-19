@@ -1,12 +1,13 @@
 package heero.mc.mod.wakcraft.entity.property;
 
+import heero.mc.mod.wakcraft.WInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class ItemInUseProperty implements IExtendedEntityProperties {
-	public static final String IDENTIFIER = "ItemInUse";
+	public static final String IDENTIFIER = WInfo.MODID + "ItemInUse";
 
 	public int posX;
 	public int posY;

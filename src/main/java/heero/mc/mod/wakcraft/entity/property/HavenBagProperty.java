@@ -1,12 +1,13 @@
 package heero.mc.mod.wakcraft.entity.property;
 
+import heero.mc.mod.wakcraft.WInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class HavenBagProperty implements IExtendedEntityProperties, ISynchProperties {
-	public static final String IDENTIFIER = "HavenBag";
+	public static final String IDENTIFIER = WInfo.MODID + "HavenBag";
 
 	private static final String TAG_HAVENBAG = "HavenBag";
 	private static final String TAG_UID = "UID";
