@@ -121,8 +121,6 @@ public enum FightManager {
 
 		addFightersToFight(fighters, fightId);
 
-		setStartPositionOfAutonomousFighters(fighters, startBlocks);
-
 		createFightMap(world, fightBlocks);
 
 		Map<Integer, FightInfo> worldFights = fights.get(world);
@@ -136,6 +134,8 @@ public enum FightManager {
 		fightInfo.timer = PREFIGHT_DURATION;
 
 		worldFights.put(fightId, fightInfo);
+
+		setStartPositionOfAutonomousFighters(fighters, startBlocks);
 
 		return true;
 	}
@@ -450,7 +450,7 @@ public enum FightManager {
 					continue;
 				}
 
-				FightHelper.setStartPosition(team.get(i), startBlocks.get(j).get(i));
+				selectPosition(team.get(i), startBlocks.get(j).get(i));
 			}
 		}
 	}
@@ -475,7 +475,7 @@ public enum FightManager {
 					continue;
 				}
 
-				FightHelper.setStartPosition(fighter, iterator.next());
+				selectPosition(fighter, iterator.next());
 			}
 		}
 	}
