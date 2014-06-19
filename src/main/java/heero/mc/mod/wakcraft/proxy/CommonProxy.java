@@ -4,7 +4,7 @@ import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.characteristic.AbilityEventsHandler;
+import heero.mc.mod.wakcraft.characteristic.CharacteristicsEventsHandler;
 import heero.mc.mod.wakcraft.entity.creature.gobball.BlackGobbly;
 import heero.mc.mod.wakcraft.entity.creature.gobball.Gobball;
 import heero.mc.mod.wakcraft.entity.creature.gobball.GobballWC;
@@ -58,7 +58,7 @@ public class CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
-		MinecraftForge.EVENT_BUS.register(new AbilityEventsHandler());
+		MinecraftForge.EVENT_BUS.register(new CharacteristicsEventsHandler());
 		MinecraftForge.EVENT_BUS.register(fightsHandler);
 
 		FMLCommonHandler.instance().bus().register(new PlayerEventHandler());

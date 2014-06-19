@@ -5,7 +5,7 @@ import heero.mc.mod.wakcraft.helper.CharacteristicsHelper;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class AbilityEventsHandler {
+public class CharacteristicsEventsHandler {
 	/**
 	 * Handler called when an entity is created.
 	 * 
