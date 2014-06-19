@@ -59,8 +59,8 @@ public class BlockFightInsideWall extends BlockGeneric {
 			break;
 		case FIGHT:
 			int posX = MathHelper.floor_double(entity.posX);
-			int posY = MathHelper.floor_double(entity.posY);
 			int posZ = MathHelper.floor_double(entity.posZ);
+
 			int movementPoint = CharacteristicsHelper.getCharacteristic(entity, CHARACTERISTIC.MOVEMENT);
 			int distance = MathHelper.abs_int(posX - x) + MathHelper.abs_int(posZ - z);
 
