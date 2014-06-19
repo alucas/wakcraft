@@ -2,13 +2,11 @@ package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
-import heero.mc.mod.wakcraft.helper.CharacteristicsHelper;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
@@ -17,8 +15,6 @@ import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
 
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -298,7 +294,7 @@ public enum FightManager {
 			return null;
 		}
 
-		return fightInfo.startBlocks;
+		return fightInfo.getStartBlocks();
 	}
 
 	/**
@@ -508,7 +504,7 @@ public enum FightManager {
 		FightInfo fight = fights.get(world).get(fightId);
 
 		for (int teamId = 1; teamId <= 2; teamId++) {
-			List<EntityLivingBase> team = fight.fightersByTeam.get(teamId - 1);
+			List<EntityLivingBase> team = fight.getFightersByTeam().get(teamId - 1);
 
 			boolean living = false;
 			for (EntityLivingBase entity : team) {
@@ -546,10 +542,10 @@ public enum FightManager {
 			return;
 		}
 
-		terminateFight(fightId, world, fight.fightersByTeam);
-		destroyFightMap(world, fight.fightBlocks);
-		removeFightersFromFight(fight.fightersByTeam);
-		resetStartPosition(fight.fightersByTeam);
+		terminateFight(fightId, world, fight.getFightersByTeam());
+		destroyFightMap(world, fight.getFightBlocks());
+		removeFightersFromFight(fight.getFightersByTeam());
+		resetStartPosition(fight.getFightersByTeam());
 	}
 
 	/**
@@ -608,15 +604,14 @@ public enum FightManager {
 
 	protected void updateFight(World world, int fightId, int tickCounter) {
 		FightInfo fightInfo = fights.get(world).get(fightId);
-		if (--fightInfo.timer != 0) {
+		if (!fightInfo.tick()) {
 			return;
 		}
 
-		switch (fightInfo.stage) {
+		switch (fightInfo.getStage()) {
 		case PREFIGHT:
-			fightInfo.fightersByFightOrder = getFightersByFightOrder(fightInfo.fightersByTeam);
-			setStartPositionOfRemainingFighters(fightInfo.fightersByTeam, fightInfo.startBlocks);
-			moveFighterToStartPosition(fightInfo.fightersByTeam);
+			setStartPositionOfRemainingFighters(fightInfo.getFightersByTeam(), fightInfo.getStartBlocks());
+			moveFighterToStartPosition(fightInfo.getFightersByTeam());
 
 			updateFightStage(world, fightId, FightStage.FIGHT);
 			fightInfo.setStage(FightStage.FIGHT, FIGHTTURN_DURATION);
@@ -624,71 +619,14 @@ public enum FightManager {
 			break;
 
 		case FIGHT:
-			int nbFighter = fightInfo.fightersByFightOrder.size();
-			for (int i = 0; i < nbFighter; i++) {
-				EntityLivingBase fighter = fightInfo.fightersByFightOrder.get((fightInfo.currentFighterIndex + i + 1) % nbFighter);
-				if (!fighter.isEntityAlive()) {
-					continue;
-				}
-
-				fightInfo.currentFighterIndex = (fightInfo.currentFighterIndex + i + 1) % nbFighter;
-				fightInfo.timer = FIGHTTURN_DURATION;
-
-				break;
-			}
+			fightInfo.setCurrentFighterId(getNextFighter(fightInfo));
+			fightInfo.updateStageDuration(FIGHTTURN_DURATION);
 
 			break;
 
 		default:
 			break;
 		}
-	}
-
-	protected List<EntityLivingBase> getFightersByFightOrder(List<List<EntityLivingBase>> fighters) {
-		List<List<EntityLivingBase>> fightersTmp = new ArrayList<List<EntityLivingBase>>();
-		for (List<EntityLivingBase> team : fighters) {
-			fightersTmp.add(new ArrayList<EntityLivingBase>(team));
-		}
-
-		for (List<EntityLivingBase> team : fightersTmp) {
-			Collections.sort(team, new Comparator<EntityLivingBase>(){
-				@Override
-				public int compare(EntityLivingBase a, EntityLivingBase b) {
-					int initiativeA = CharacteristicsHelper.getCharacteristic(a, Characteristic.INITIATIVE);
-					int initiativeB = CharacteristicsHelper.getCharacteristic(b, Characteristic.INITIATIVE);
-					return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
-				}
-			} );
-		}
-
-		Collections.sort(fightersTmp, new Comparator<List<EntityLivingBase>>(){
-			@Override
-			public int compare(List<EntityLivingBase> a, List<EntityLivingBase> b) {
-				int initiativeA = CharacteristicsHelper.getCharacteristic(a.get(0), Characteristic.INITIATIVE);
-				int initiativeB = CharacteristicsHelper.getCharacteristic(b.get(0), Characteristic.INITIATIVE);
-				return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
-			}
-		} );
-
-		List<EntityLivingBase> fightersSorted = new ArrayList<EntityLivingBase>();
-		List<Iterator<EntityLivingBase>> iterators = new ArrayList<Iterator<EntityLivingBase>>();
-		for (List<EntityLivingBase> team : fighters) {
-			iterators.add(team.iterator());
-		}
-
-		int previousListSize = 0;
-		do {
-			previousListSize = fightersSorted.size();
-
-			for (Iterator<EntityLivingBase> iterator : iterators) {
-				
-				if (iterator.hasNext()) {
-					fightersSorted.add(iterator.next());
-				}
-			}
-		} while(previousListSize != fightersSorted.size());
-
-		return fightersSorted;
 	}
 
 	public void changeFightStage(World world, int fightId, FightStage stage) {
@@ -711,7 +649,7 @@ public enum FightManager {
 	protected void updateFightStage(World world, int fightId, FightStage stage) {
 		MinecraftForge.EVENT_BUS.post(new FightEvent.FightChangeStageEvent(world, fightId, stage));
 
-		List<List<EntityLivingBase>> fighters = fights.get(world).get(fightId).fightersByTeam;
+		List<List<EntityLivingBase>> fighters = fights.get(world).get(fightId).getFightersByTeam();
 		for (int teamId = 0; teamId < 2; teamId++) {
 			List<EntityLivingBase> team = fighters.get(teamId);
 
@@ -736,13 +674,13 @@ public enum FightManager {
 			return FightStage.UNKNOW;
 		}
 
-		return fight.stage;
+		return fight.getStage();
 	}
 
 	public void selectPosition(EntityLivingBase entity, @Nullable ChunkCoordinates position) {
 		int teamId = FightHelper.getTeam(entity);
 		int fightId = FightHelper.getFightId(entity);
-		List<EntityLivingBase> fighters = fights.get(entity.worldObj).get(fightId).fightersByTeam.get(teamId);
+		List<EntityLivingBase> fighters = fights.get(entity.worldObj).get(fightId).getFightersByTeam().get(teamId);
 
 		if (position != null && !isStartPositionAvailable(entity.worldObj, fightId, teamId, fighters, position)) {
 			return;
@@ -777,5 +715,20 @@ public enum FightManager {
 		}
 
 		return true;
+	}
+
+	protected int getNextFighter(FightInfo fightInfo) {
+		int nbFighter = fightInfo.getFightersCount();
+		int currentFighterId = fightInfo.getCurrentFighterId();
+		for (int i = 0; i < nbFighter; i++) {
+			EntityLivingBase fighter = fightInfo.getFightersByFightOrder().get((currentFighterId + i + 1) % nbFighter);
+			if (!fighter.isEntityAlive()) {
+				continue;
+			}
+
+			return (currentFighterId + i + 1) % nbFighter;
+		}
+
+		return 0;
 	}
 }
