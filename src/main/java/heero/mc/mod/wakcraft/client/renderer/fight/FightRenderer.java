@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.client.renderer.fight;
 
 import heero.mc.mod.wakcraft.WBlocks;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
 import heero.mc.mod.wakcraft.fight.FightManager;
@@ -112,7 +113,7 @@ public class FightRenderer extends IRenderHandler {
 		par1Tessellator.setTranslation(-deltaX, -deltaY, -deltaZ);
 		par1Tessellator.disableColor();
 
-		int movement = 5;
+		int movement = FightHelper.getFightCharacteristic(player, Characteristic.MOVEMENT);
 		for (int x = posX - movement; x <= posX + movement; x++) {
 			for (int z = posZ - movement; z <= posZ + movement; z++) {
 				if (Math.abs(posX - x) + Math.abs(posZ - z) > movement) continue;
