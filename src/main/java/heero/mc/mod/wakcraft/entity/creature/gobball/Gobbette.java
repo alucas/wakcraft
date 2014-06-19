@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.entity.creature.gobball;
 
 import heero.mc.mod.wakcraft.WInfo;
-import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager.CHARACTERISTIC;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import net.minecraft.client.model.ModelBase;
@@ -18,17 +18,17 @@ public class Gobbette extends GobballGeneric {
 
 	@Override
 	public void initCharacteristics(CharacteristicsProperty property) {
-		property.set(CHARACTERISTIC.HEALTH, 110);
-		property.set(CHARACTERISTIC.ACTION, 5);
-		property.set(CHARACTERISTIC.MOVEMENT, 4);
-		property.set(CHARACTERISTIC.WAKFU, 4);
-		property.set(CHARACTERISTIC.INITIATIVE, 16);
-		property.set(CHARACTERISTIC.DODGE, 3);
+		property.set(Characteristic.HEALTH, 110);
+		property.set(Characteristic.ACTION, 5);
+		property.set(Characteristic.MOVEMENT, 4);
+		property.set(Characteristic.WAKFU, 4);
+		property.set(Characteristic.INITIATIVE, 16);
+		property.set(Characteristic.DODGE, 3);
 
-		property.set(CHARACTERISTIC.WATER_RES, 5);
-		property.set(CHARACTERISTIC.EARTH_RES, 12);
-		property.set(CHARACTERISTIC.AIR_RES, -7);
-		property.set(CHARACTERISTIC.FIRE_RES, 5);
+		property.set(Characteristic.WATER_RES, 5);
+		property.set(Characteristic.EARTH_RES, 12);
+		property.set(Characteristic.AIR_RES, -7);
+		property.set(Characteristic.FIRE_RES, 5);
 	}
 
 	@SideOnly(Side.CLIENT)

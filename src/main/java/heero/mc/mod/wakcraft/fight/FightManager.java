@@ -2,7 +2,7 @@ package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager.CHARACTERISTIC;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
@@ -664,8 +664,8 @@ public enum FightManager {
 			Collections.sort(team, new Comparator<EntityLivingBase>(){
 				@Override
 				public int compare(EntityLivingBase a, EntityLivingBase b) {
-					int initiativeA = CharacteristicsHelper.getCharacteristic(a, CHARACTERISTIC.INITIATIVE);
-					int initiativeB = CharacteristicsHelper.getCharacteristic(b, CHARACTERISTIC.INITIATIVE);
+					int initiativeA = CharacteristicsHelper.getCharacteristic(a, Characteristic.INITIATIVE);
+					int initiativeB = CharacteristicsHelper.getCharacteristic(b, Characteristic.INITIATIVE);
 					return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
 				}
 			} );
@@ -674,8 +674,8 @@ public enum FightManager {
 		Collections.sort(fightersTmp, new Comparator<List<EntityLivingBase>>(){
 			@Override
 			public int compare(List<EntityLivingBase> a, List<EntityLivingBase> b) {
-				int initiativeA = CharacteristicsHelper.getCharacteristic(a.get(0), CHARACTERISTIC.INITIATIVE);
-				int initiativeB = CharacteristicsHelper.getCharacteristic(b.get(0), CHARACTERISTIC.INITIATIVE);
+				int initiativeA = CharacteristicsHelper.getCharacteristic(a.get(0), Characteristic.INITIATIVE);
+				int initiativeB = CharacteristicsHelper.getCharacteristic(b.get(0), Characteristic.INITIATIVE);
 				return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
 			}
 		} );

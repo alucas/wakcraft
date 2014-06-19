@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.item;
 
-import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager.CHARACTERISTIC;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class ItemWArmor extends ItemWithLevel {
 	public static IIcon petIcon;
 
 	protected final TYPE type;
-	protected final Map<CHARACTERISTIC, Integer> characteristics;
+	protected final Map<Characteristic, Integer> characteristics;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon getPlaceholderIcon(TYPE type) {
@@ -66,7 +66,7 @@ public class ItemWArmor extends ItemWithLevel {
 		super(level);
 
 		this.type = type;
-		this.characteristics = new HashMap<CHARACTERISTIC, Integer>();
+		this.characteristics = new HashMap<Characteristic, Integer>();
 
 		setCreativeTab(WakcraftCreativeTabs.tabCombat);
 		setMaxStackSize(1);
@@ -76,13 +76,13 @@ public class ItemWArmor extends ItemWithLevel {
 		return type;
 	}
 
-	public ItemWArmor setCharacteristic(CHARACTERISTIC ability, int value) {
+	public ItemWArmor setCharacteristic(Characteristic ability, int value) {
 		characteristics.put(ability, value);
 
 		return this;
 	}
 
-	public int getCharacteristic(CHARACTERISTIC ability) {
+	public int getCharacteristic(Characteristic ability) {
 		Integer value =  characteristics.get(ability);
 		if (value == null) {
 			return 0;
@@ -91,7 +91,7 @@ public class ItemWArmor extends ItemWithLevel {
 		return value;
 	}
 
-	public Set<CHARACTERISTIC> getCharacteristics() {
+	public Set<Characteristic> getCharacteristics() {
 		return characteristics.keySet();
 	}
 
@@ -102,7 +102,7 @@ public class ItemWArmor extends ItemWithLevel {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advancedItemTooltips) {
-		for (CHARACTERISTIC characteristic : characteristics.keySet()) {
+		for (Characteristic characteristic : characteristics.keySet()) {
 			list.add(StatCollector.translateToLocalFormatted("characteristic." + characteristic.toString(), new Object[]{characteristics.get(characteristic)}));
 		}
 	}

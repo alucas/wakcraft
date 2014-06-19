@@ -1,8 +1,8 @@
 package heero.mc.mod.wakcraft.client.gui;
 
 import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager;
-import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager.CHARACTERISTIC;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -81,7 +81,7 @@ public class GUIAbilities extends GuiScreen {
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, guiWidth, guiHeight);
 
 		// Profession levels
-		CHARACTERISTIC[] abilities = CHARACTERISTIC.values();
+		Characteristic[] abilities = Characteristic.values();
 		for (int i = scroll; i < scroll + NB_LINE && i >= 0 && i < abilities.length; i++) {
 			drawString(fontRendererObj, I18n.format("abilities." + abilities[i], new Object[0]), guiLeft + 5, guiTop + 25 + (i - scroll) * 20, 0xFFFFFF);
 
@@ -105,7 +105,7 @@ public class GUIAbilities extends GuiScreen {
 
 		case BUTTON_UP:
 			scroll++;
-			if (scroll > CHARACTERISTIC.values().length - NB_LINE) scroll = CHARACTERISTIC.values().length - NB_LINE;
+			if (scroll > Characteristic.values().length - NB_LINE) scroll = Characteristic.values().length - NB_LINE;
 			break;
 
 		default:
@@ -116,7 +116,7 @@ public class GUIAbilities extends GuiScreen {
 	}
 
 	protected void updateButtons() {
-		CHARACTERISTIC[] abilities = CHARACTERISTIC.values();
+		Characteristic[] abilities = Characteristic.values();
 		for (int i = 0; i < NB_LINE; i++) {
 			Boolean enabled = CharacteristicsManager.isCustomizable(abilities[scroll + i]);
 			((GuiButton) (buttonList.get(2 + i * 2 + 0))).visible = enabled;

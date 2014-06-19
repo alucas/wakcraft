@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.entity.property;
 
-import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager.CHARACTERISTIC;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -19,16 +19,16 @@ public class CharacteristicsProperty implements IExtendedEntityProperties, ISync
 	protected static String TAG_NAME = "Name";
 	protected static String TAG_VALUE = "Value";
 
-	protected static EnumSet<CHARACTERISTIC> persistableCharacteristics = EnumSet.of(
-			CHARACTERISTIC.STRENGTH, CHARACTERISTIC.INTELLIGENCE, CHARACTERISTIC.AGILITY,
-			CHARACTERISTIC.CHANCE, CHARACTERISTIC.BLOCK, CHARACTERISTIC.RANGE, CHARACTERISTIC.ACTION,
-			CHARACTERISTIC.MOVEMENT, CHARACTERISTIC.CRITICAL, CHARACTERISTIC.KIT, CHARACTERISTIC.LOCK,
-			CHARACTERISTIC.DODGE, CHARACTERISTIC.INITIATIVE, CHARACTERISTIC.HEALTH);
+	protected static EnumSet<Characteristic> persistableCharacteristics = EnumSet.of(
+			Characteristic.STRENGTH, Characteristic.INTELLIGENCE, Characteristic.AGILITY,
+			Characteristic.CHANCE, Characteristic.BLOCK, Characteristic.RANGE, Characteristic.ACTION,
+			Characteristic.MOVEMENT, Characteristic.CRITICAL, Characteristic.KIT, Characteristic.LOCK,
+			Characteristic.DODGE, Characteristic.INITIATIVE, Characteristic.HEALTH);
 
 	/** Enable persistence */
 	protected boolean enablePersistence = false;
 	/** All characteristics */
-	protected Map<CHARACTERISTIC, Integer> characteristics = new HashMap<CHARACTERISTIC, Integer>();
+	protected Map<Characteristic, Integer> characteristics = new HashMap<Characteristic, Integer>();
 
 	@Override
 	public void init(Entity entity, World world) {
@@ -42,7 +42,7 @@ public class CharacteristicsProperty implements IExtendedEntityProperties, ISync
 
 		NBTTagList tagCharacteristics = new NBTTagList();
 
-		for (CHARACTERISTIC key : persistableCharacteristics) {
+		for (Characteristic key : persistableCharacteristics) {
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setString(TAG_NAME, key.name());
 			tag.setInteger(TAG_VALUE, characteristics.get(key));
@@ -62,14 +62,14 @@ public class CharacteristicsProperty implements IExtendedEntityProperties, ISync
 
 		for (int i = 0; i < tagCharacteristics.tagCount(); i++) {
 			NBTTagCompound tag = tagCharacteristics.getCompoundTagAt(i);
-			CHARACTERISTIC key = CHARACTERISTIC.valueOf(tag.getString(TAG_NAME));
+			Characteristic key = Characteristic.valueOf(tag.getString(TAG_NAME));
 			Integer value = tag.getInteger(TAG_VALUE);
 
 			characteristics.put(key, value);
 		}
 	}
 
-	public int get(CHARACTERISTIC key) {
+	public int get(Characteristic key) {
 		Integer value = characteristics.get(key);
 		if (value != null) {
 			return value;
@@ -78,7 +78,7 @@ public class CharacteristicsProperty implements IExtendedEntityProperties, ISync
 		return 0;
 	}
 
-	public void set(CHARACTERISTIC key, int value) {
+	public void set(Characteristic key, int value) {
 		characteristics.put(key, value);
 	}
 
@@ -86,7 +86,7 @@ public class CharacteristicsProperty implements IExtendedEntityProperties, ISync
 		this.enablePersistence = enablePersistence;
 
 		if (enablePersistence) {
-			for (CHARACTERISTIC key : persistableCharacteristics) {
+			for (Characteristic key : persistableCharacteristics) {
 				if (characteristics.get(key) == null) {
 					characteristics.put(key, 0);
 				}
@@ -99,7 +99,7 @@ public class CharacteristicsProperty implements IExtendedEntityProperties, ISync
 		NBTTagCompound tagRoot = new NBTTagCompound();
 		NBTTagList tagCharacteristics = new NBTTagList();
 
-		for (CHARACTERISTIC key : characteristics.keySet()) {
+		for (Characteristic key : characteristics.keySet()) {
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setString(TAG_NAME, key.toString());
 			tag.setInteger(TAG_VALUE, characteristics.get(key));
@@ -118,7 +118,7 @@ public class CharacteristicsProperty implements IExtendedEntityProperties, ISync
 
 		for (int i = 0; i < tagCharacteristics.tagCount(); i++) {
 			NBTTagCompound tag = tagCharacteristics.getCompoundTagAt(i);
-			CHARACTERISTIC key = CHARACTERISTIC.valueOf(tag.getString(TAG_NAME));
+			Characteristic key = Characteristic.valueOf(tag.getString(TAG_NAME));
 			Integer value = tag.getInteger(TAG_VALUE);
 
 			characteristics.put(key, value);

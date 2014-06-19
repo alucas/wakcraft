@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.helper;
 
-import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager.CHARACTERISTIC;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.entity.creature.IEntityWithCharacteristics;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import net.minecraft.entity.Entity;
@@ -11,7 +11,7 @@ public class CharacteristicsHelper {
 		return (entity instanceof EntityPlayer || entity instanceof IEntityWithCharacteristics);
 	}
 
-	public static int getCharacteristic(Entity entity, CHARACTERISTIC characteristic) {
+	public static int getCharacteristic(Entity entity, Characteristic characteristic) {
 		return ((CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER)).get(characteristic);
 	}
 
@@ -23,13 +23,13 @@ public class CharacteristicsHelper {
 		} else if (entity instanceof EntityPlayer) {
 			property.enablePersistence(true);
 
-			property.set(CHARACTERISTIC.ACTION, 6);
-			property.set(CHARACTERISTIC.MOVEMENT, 3);
-			property.set(CHARACTERISTIC.HEALTH, 49);
-			property.set(CHARACTERISTIC.CRITICAL, 3);
+			property.set(Characteristic.ACTION, 6);
+			property.set(Characteristic.MOVEMENT, 3);
+			property.set(Characteristic.HEALTH, 49);
+			property.set(Characteristic.CRITICAL, 3);
 
-			property.set(CHARACTERISTIC.WAKFU, 6);
-			property.set(CHARACTERISTIC.CONTROL, 1);
+			property.set(Characteristic.WAKFU, 6);
+			property.set(Characteristic.CONTROL, 1);
 		}
 	}
 }

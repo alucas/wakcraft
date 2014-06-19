@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager.CHARACTERISTIC;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.helper.CharacteristicsHelper;
 import heero.mc.mod.wakcraft.helper.FightHelper;
@@ -61,7 +61,7 @@ public class BlockFightInsideWall extends BlockGeneric {
 			int posX = MathHelper.floor_double(entity.posX);
 			int posZ = MathHelper.floor_double(entity.posZ);
 
-			int movementPoint = CharacteristicsHelper.getCharacteristic(entity, CHARACTERISTIC.MOVEMENT);
+			int movementPoint = CharacteristicsHelper.getCharacteristic(entity, Characteristic.MOVEMENT);
 			int distance = MathHelper.abs_int(posX - x) + MathHelper.abs_int(posZ - z);
 
 			if (movementPoint >= distance) {

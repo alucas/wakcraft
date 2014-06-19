@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.entity.creature.gobball;
 
 import heero.mc.mod.wakcraft.WInfo;
-import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager.CHARACTERISTIC;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import net.minecraft.client.model.ModelBase;
@@ -18,20 +18,20 @@ public class BlackGobbly extends GobballGeneric {
 
 	@Override
 	public void initCharacteristics(CharacteristicsProperty property) {
-		property.set(CHARACTERISTIC.HEALTH, 29);
-		property.set(CHARACTERISTIC.ACTION, 4);
-		property.set(CHARACTERISTIC.MOVEMENT, 3);
-		property.set(CHARACTERISTIC.WAKFU, 4);
-		property.set(CHARACTERISTIC.INITIATIVE, -7);
-		property.set(CHARACTERISTIC.LOCK, -40);
-		property.set(CHARACTERISTIC.DODGE, -40);
-		property.set(CHARACTERISTIC.CRITICAL, 4);
+		property.set(Characteristic.HEALTH, 29);
+		property.set(Characteristic.ACTION, 4);
+		property.set(Characteristic.MOVEMENT, 3);
+		property.set(Characteristic.WAKFU, 4);
+		property.set(Characteristic.INITIATIVE, -7);
+		property.set(Characteristic.LOCK, -40);
+		property.set(Characteristic.DODGE, -40);
+		property.set(Characteristic.CRITICAL, 4);
 
-		property.set(CHARACTERISTIC.WATER_RES, 5);
-		property.set(CHARACTERISTIC.EARTH_ATT, 15);
-		property.set(CHARACTERISTIC.EARTH_RES, 15);
-		property.set(CHARACTERISTIC.AIR_RES, -20);
-		property.set(CHARACTERISTIC.FIRE_RES, 10);
+		property.set(Characteristic.WATER_RES, 5);
+		property.set(Characteristic.EARTH_ATT, 15);
+		property.set(Characteristic.EARTH_RES, 15);
+		property.set(Characteristic.AIR_RES, -20);
+		property.set(Characteristic.FIRE_RES, 10);
 	}
 
 	@SideOnly(Side.CLIENT)
