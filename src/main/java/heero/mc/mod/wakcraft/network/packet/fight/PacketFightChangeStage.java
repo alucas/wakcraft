@@ -1,18 +1,18 @@
 package heero.mc.mod.wakcraft.network.packet.fight;
 
-import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
+import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import io.netty.buffer.ByteBuf;
 
 public class PacketFightChangeStage implements IPacketFight {
 	protected PacketFight packetFight;
 
-	public Stage stage;
+	public FightStage stage;
 
 	public PacketFightChangeStage() {
 		packetFight = new PacketFight();
 	}
 
-	public PacketFightChangeStage(int fightId, Stage stage) {
+	public PacketFightChangeStage(int fightId, FightStage stage) {
 		packetFight = new PacketFight(fightId);
 
 		this.stage = stage;
@@ -30,11 +30,11 @@ public class PacketFightChangeStage implements IPacketFight {
 		packetFight.fromBytes(buffer);
 
 		int stageId = buffer.readByte();
-		if (stageId < 0 || stageId >= Stage.values().length) {
+		if (stageId < 0 || stageId >= FightStage.values().length) {
 			throw new RuntimeException("Invialide value of 'stage'");
 		}
 
-		stage = Stage.values()[stageId];
+		stage = FightStage.values()[stageId];
 	}
 
 	@Override

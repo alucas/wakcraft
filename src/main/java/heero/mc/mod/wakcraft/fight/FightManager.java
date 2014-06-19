@@ -7,7 +7,7 @@ import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
-import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
+import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.helper.CharacteristicsHelper;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
@@ -618,8 +618,8 @@ public enum FightManager {
 			setStartPositionOfRemainingFighters(fightInfo.fightersByTeam, fightInfo.startBlocks);
 			moveFighterToStartPosition(fightInfo.fightersByTeam);
 
-			updateFightStage(world, fightId, Stage.FIGHT);
-			fightInfo.setStage(Stage.FIGHT, FIGHTTURN_DURATION);
+			updateFightStage(world, fightId, FightStage.FIGHT);
+			fightInfo.setStage(FightStage.FIGHT, FIGHTTURN_DURATION);
 
 			break;
 
@@ -691,7 +691,7 @@ public enum FightManager {
 		return fightersSorted;
 	}
 
-	public void changeFightStage(World world, int fightId, Stage stage) {
+	public void changeFightStage(World world, int fightId, FightStage stage) {
 		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
 		if (fightsOfWorld == null) {
 			FMLLog.warning("Trying update the stage of a fight that does not exist (wrong world)");
@@ -708,7 +708,7 @@ public enum FightManager {
 		fight.setStage(stage);
 	}
 
-	protected void updateFightStage(World world, int fightId, Stage stage) {
+	protected void updateFightStage(World world, int fightId, FightStage stage) {
 		MinecraftForge.EVENT_BUS.post(new FightEvent.FightChangeStageEvent(world, fightId, stage));
 
 		List<List<EntityLivingBase>> fighters = fights.get(world).get(fightId).fightersByTeam;
@@ -723,17 +723,17 @@ public enum FightManager {
 		}
 	}
 
-	public Stage getFightStage(World world, int fightId) {
+	public FightStage getFightStage(World world, int fightId) {
 		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
 		if (fightsOfWorld == null) {
 			FMLLog.warning("Trying to get the stage of a fight that does not exist (wrong world)");
-			return Stage.UNKNOW;
+			return FightStage.UNKNOW;
 		}
 
 		FightInfo fight = fightsOfWorld.get(fightId);
 		if (fight == null) {
 			FMLLog.warning("Trying to get the stage of a fight that does not exist (wrong id)");
-			return Stage.UNKNOW;
+			return FightStage.UNKNOW;
 		}
 
 		return fight.stage;

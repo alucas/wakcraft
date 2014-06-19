@@ -3,7 +3,7 @@ package heero.mc.mod.wakcraft.client.renderer.fight;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
-import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
+import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 
@@ -38,14 +38,14 @@ public class FightRenderer extends IRenderHandler {
 		}
 
 		int fightId = FightHelper.getFightId(player);
-		Stage fightStage = FightManager.INSTANCE.getFightStage(world, fightId);
+		FightStage fightStage = FightManager.INSTANCE.getFightStage(world, fightId);
 
-		if (fightStage == Stage.PREFIGHT) {
+		if (fightStage == FightStage.PREFIGHT) {
 			List<List<FightBlockCoordinates>> startBlocks = FightManager.INSTANCE.getSartPositions(world, fightId);
 			if (startBlocks != null) {
 				renderStartPosition(partialTicks, world, mc, player, startBlocks);
 			}
-		} else if (fightStage == Stage.FIGHT) {
+		} else if (fightStage == FightStage.FIGHT) {
 			renderMovement(partialTicks, world, mc, player);
 			renderDirection(partialTicks, world, mc, player);
 		}

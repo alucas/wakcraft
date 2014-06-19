@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.event;
 
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
-import heero.mc.mod.wakcraft.fight.FightInfo.Stage;
+import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,9 +55,9 @@ public class FightEvent extends Event {
 	}
 
 	public static class FightChangeStageEvent extends FightEvent {
-		public final Stage stage;
+		public final FightStage stage;
 
-		public FightChangeStageEvent(World world, int fightId, Stage stage) {
+		public FightChangeStageEvent(World world, int fightId, FightStage stage) {
 			super(Type.CHANGE_STAGE, world, fightId);
 
 			this.stage = stage;
