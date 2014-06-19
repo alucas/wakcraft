@@ -86,11 +86,7 @@ public enum FightManager {
 			fights.put(world, worldFights);
 		}
 
-		FightInfo fightInfo = new FightInfo(fighters, null, startBlocks);
-		fightInfo.stage = Stage.PREFIGHT;
-		fightInfo.timer = PREFIGHT_DURATION;
-
-		worldFights.put(fightId, fightInfo);
+		worldFights.put(fightId, new FightInfo(fighters, null, startBlocks));
 	}
 
 	/**
@@ -129,11 +125,7 @@ public enum FightManager {
 			fights.put(world, worldFights);
 		}
 
-		FightInfo fightInfo = new FightInfo(fighters, fightBlocks, startBlocks);
-		fightInfo.stage = Stage.PREFIGHT;
-		fightInfo.timer = PREFIGHT_DURATION;
-
-		worldFights.put(fightId, fightInfo);
+		worldFights.put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
 
 		setStartPositionOfAutonomousFighters(fighters, startBlocks);
 
@@ -627,9 +619,7 @@ public enum FightManager {
 			moveFighterToStartPosition(fightInfo.fightersByTeam);
 
 			updateFightStage(world, fightId, Stage.FIGHT);
-			fightInfo.stage = Stage.FIGHT;
-			fightInfo.currentFighterIndex = 0;
-			fightInfo.timer = FIGHTTURN_DURATION;
+			fightInfo.setStage(Stage.FIGHT, FIGHTTURN_DURATION);
 
 			break;
 
@@ -715,7 +705,7 @@ public enum FightManager {
 		}
 
 		updateFightStage(world, fightId, stage);
-		fight.stage = stage;
+		fight.setStage(stage);
 	}
 
 	protected void updateFightStage(World world, int fightId, Stage stage) {
