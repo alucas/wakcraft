@@ -72,12 +72,18 @@ public class FightEventsHandler {
 			return;
 		}
 
-		if (FightHelper.getFightId(player) != FightHelper.getFightId(target)) {
+		int fightId = FightHelper.getFightId(player);
+		if (fightId != FightHelper.getFightId(target)) {
 			event.setCanceled(true);
 			return;
 		}
 
-		if (FightManager.INSTANCE.getFightStage(player.worldObj, FightHelper.getFightId(player)) != FightStage.FIGHT) {
+		if (FightManager.INSTANCE.getFightStage(world, fightId) != FightStage.FIGHT) {
+			event.setCanceled(true);
+			return;
+		}
+
+		if (FightManager.INSTANCE.getCurrentFighter(world, fightId) != player) {
 			event.setCanceled(true);
 			return;
 		}
