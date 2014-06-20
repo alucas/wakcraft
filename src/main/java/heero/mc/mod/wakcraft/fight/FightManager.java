@@ -739,9 +739,9 @@ public enum FightManager {
 	public void selectPosition(EntityLivingBase entity, @Nullable ChunkCoordinates position) {
 		int teamId = FightHelper.getTeam(entity);
 		int fightId = FightHelper.getFightId(entity);
-		List<EntityLivingBase> fighters = fights.get(entity.worldObj).get(fightId).getFightersByTeam().get(teamId);
+		List<List<EntityLivingBase>> fightersByTeam = fights.get(entity.worldObj).get(fightId).getFightersByTeam();
 
-		if (position != null && !isStartPositionAvailable(entity.worldObj, fightId, teamId, fighters, position)) {
+		if (position != null && !isStartPositionAvailable(entity.worldObj, fightId, teamId, fightersByTeam.get(teamId), position)) {
 			return;
 		}
 
@@ -751,9 +751,11 @@ public enum FightManager {
 			FightHelper.setStartPosition(entity, position);
 
 			IMessage packet = new PacketFightSelectPosition(fightId, entity, position);
-			for (EntityLivingBase fighter : fighters) {
-				if (fighter instanceof EntityPlayerMP) {
-					Wakcraft.packetPipeline.sendTo(packet, (EntityPlayerMP) fighter);
+			for (List<EntityLivingBase> team : fightersByTeam) {
+				for (EntityLivingBase fighter : team) {
+					if (fighter instanceof EntityPlayerMP) {
+						Wakcraft.packetPipeline.sendTo(packet, (EntityPlayerMP) fighter);
+					}
 				}
 			}
 		}
