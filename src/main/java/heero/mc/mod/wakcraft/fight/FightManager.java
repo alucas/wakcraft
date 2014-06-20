@@ -628,12 +628,15 @@ public enum FightManager {
 			break;
 
 		case FIGHT:
+			resetFighterCharacteristics(fightInfo.fightersByTeam, fightInfo.getCurrentFighter());
+
 			EntityLivingBase nextFighter = getNextAvailableFighter(fightInfo);
 			if (nextFighter == null) {
 				FMLLog.warning("Can't find a living fighter for the next turn");
 				stopFight(fightInfo.getCurrentFighter().worldObj, FightHelper.getFightId(fightInfo.getCurrentFighter()));
 				return;
 			}
+
 
 			fightInfo.setCurrentFighter(nextFighter);
 			fightInfo.updateStageDuration(FIGHTTURN_DURATION);
@@ -806,15 +809,21 @@ public enum FightManager {
 	protected void initFightersFightCharacteristics(List<List<EntityLivingBase>> fightersByTeam) {
 		for (List<EntityLivingBase> team : fightersByTeam) {
 			for (EntityLivingBase fighter : team) {
-				for (Characteristic characteristic : Characteristic.values()) {
-					FightHelper.resetFightCharacteristic(fighter, characteristic);
-				}
+				resetFighterCharacteristics(fightersByTeam, fighter);
+			}
+		}
+	}
 
-				if (!(fighter instanceof EntityPlayerMP)) {
-					continue;
-				}
+	protected void resetFighterCharacteristics(List<List<EntityLivingBase>> fightersByTeam, EntityLivingBase currentFighter) {
+		for (Characteristic characteristic : Characteristic.values()) {
+			FightHelper.resetFightCharacteristic(currentFighter, characteristic);
+		}
 
-				Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(fighter, FightCharacteristicsProperty.IDENTIFIER), (EntityPlayerMP) fighter);
+		for (List<EntityLivingBase> team : fightersByTeam) {
+			for (EntityLivingBase fighter : team) {
+				if (fighter instanceof EntityPlayerMP) {
+					Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(currentFighter, FightCharacteristicsProperty.IDENTIFIER), (EntityPlayerMP) fighter);
+				}
 			}
 		}
 	}
