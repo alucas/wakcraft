@@ -49,6 +49,10 @@ public class FightHelper {
 		return ((FightCharacteristicsProperty) entity.getExtendedProperties(FightCharacteristicsProperty.IDENTIFIER)).get(characteristic);
 	}
 
+	public static void setFightCharacteristic(Entity entity, Characteristic characteristic, int value) {
+		((FightCharacteristicsProperty) entity.getExtendedProperties(FightCharacteristicsProperty.IDENTIFIER)).set(characteristic, value);
+	}
+
 	public static void resetFightCharacteristic(Entity entity, Characteristic characteristic) {
 		int value = ((CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER)).get(characteristic);
 		((FightCharacteristicsProperty) entity.getExtendedProperties(FightCharacteristicsProperty.IDENTIFIER)).set(characteristic, value);

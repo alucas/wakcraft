@@ -34,6 +34,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
@@ -840,5 +841,22 @@ public enum FightManager {
 	}
 
 	public void updateFights(EntityLivingBase fighter) {
+		ChunkCoordinates previousPosition = FightHelper.getCurrentPosition(fighter);
+		double distance = fighter.getDistance(previousPosition.posX + 0.5, fighter.posY, previousPosition.posZ + 0.5);
+
+		if (distance > MathHelper.sqrt_double(2) / 2 + 0.1) {
+			ChunkCoordinates currentPosition = new ChunkCoordinates(MathHelper.floor_double(fighter.posX), MathHelper.floor_double(fighter.posY), MathHelper.floor_double(fighter.posZ));
+			int usedMovementPoint = MathHelper.abs_int(currentPosition.posX - previousPosition.posX) + MathHelper.abs_int(currentPosition.posZ - previousPosition.posZ);
+			int movementPoint = FightHelper.getFightCharacteristic(fighter, Characteristic.MOVEMENT);
+
+			int remainingMovementPoint = movementPoint - usedMovementPoint;
+			if (remainingMovementPoint < 0) {
+				FMLLog.warning("Fighter " + fighter + " used more movement point that disponible");
+				remainingMovementPoint = 0;;
+			}
+
+			FightHelper.setFightCharacteristic(fighter, Characteristic.MOVEMENT, remainingMovementPoint);
+			FightHelper.setCurrentPosition(fighter, currentPosition);
+		}
 	}
 }

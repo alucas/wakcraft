@@ -59,12 +59,10 @@ public class BlockFightInsideWall extends BlockGeneric {
 
 			break;
 		case FIGHT:
-			int posX = MathHelper.floor_double(entity.posX);
-			int posZ = MathHelper.floor_double(entity.posZ);
-
+			ChunkCoordinates currentPosition = FightHelper.getCurrentPosition(entity);
 			EntityLivingBase currentFighter = FightManager.INSTANCE.getCurrentFighter(world, fightId);
 			int movementPoint = (currentFighter == entity) ? FightHelper.getFightCharacteristic(entity, Characteristic.MOVEMENT) : 0;
-			int distance = MathHelper.abs_int(posX - x) + MathHelper.abs_int(posZ - z);
+			int distance = MathHelper.abs_int(currentPosition.posX - x) + MathHelper.abs_int(currentPosition.posZ - z);
 
 			if (movementPoint >= distance) {
 				return;
