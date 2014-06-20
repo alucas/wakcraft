@@ -8,6 +8,7 @@ import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
@@ -48,7 +49,8 @@ public class BlockFightInsideWall extends BlockGeneric {
 			return;
 		}
 
-		switch (FightManager.INSTANCE.getFightStage(world, FightHelper.getFightId(entity))) {
+		int fightId = FightHelper.getFightId(entity);
+		switch (FightManager.INSTANCE.getFightStage(world, fightId)) {
 		case PREFIGHT:
 			ChunkCoordinates pos = FightHelper.getStartPosition(entity);
 			if (pos == null || (pos.posX == x && pos.posZ == z && (pos.posY == y || pos.posY == y - 1))) {
@@ -60,7 +62,8 @@ public class BlockFightInsideWall extends BlockGeneric {
 			int posX = MathHelper.floor_double(entity.posX);
 			int posZ = MathHelper.floor_double(entity.posZ);
 
-			int movementPoint = FightHelper.getFightCharacteristic(entity, Characteristic.MOVEMENT);
+			EntityLivingBase currentFighter = FightManager.INSTANCE.getCurrentFighter(world, fightId);
+			int movementPoint = (currentFighter == entity) ? FightHelper.getFightCharacteristic(entity, Characteristic.MOVEMENT) : 0;
 			int distance = MathHelper.abs_int(posX - x) + MathHelper.abs_int(posZ - z);
 
 			if (movementPoint >= distance) {

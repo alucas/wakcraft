@@ -693,6 +693,49 @@ public enum FightManager {
 		return fight.getStage();
 	}
 
+	public EntityLivingBase getCurrentFighter(World world, int fightId) {
+		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
+		if (fightsOfWorld == null) {
+			FMLLog.warning("Trying to get the current fighter of a fight that does not exist (wrong world)");
+			return null;
+		}
+
+		FightInfo fight = fightsOfWorld.get(fightId);
+		if (fight == null) {
+			FMLLog.warning("Trying to get the current fighter of a fight that does not exist (wrong id)");
+			return null;
+		}
+
+		if (fight.getStage() != FightStage.FIGHT) {
+			FMLLog.warning("Trying to get the current fighter in an incompatible stage ( " + fight.getStage() + " )");
+			return null;
+		}
+
+		return fight.getCurrentFighter();
+	}
+
+	public void setCurrentFighter(World world, int fightId, EntityLivingBase fighter) {
+		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
+		if (fightsOfWorld == null) {
+			FMLLog.warning("Trying to set the current fighter of a fight that does not exist (wrong world)");
+			return;
+		}
+
+		FightInfo fight = fightsOfWorld.get(fightId);
+		if (fight == null) {
+			FMLLog.warning("Trying to set the current fighter of a fight that does not exist (wrong id)");
+			return;
+		}
+
+		if (fight.getStage() != FightStage.FIGHT) {
+			FMLLog.warning("Trying to set the current fighter in an incompatible stage ( " + fight.getStage() + " )");
+			return;
+		}
+
+		startTurn(world, fightId, fighter);
+		fight.setCurrentFighter(fighter);
+	}
+
 	public void selectPosition(EntityLivingBase entity, @Nullable ChunkCoordinates position) {
 		int teamId = FightHelper.getTeam(entity);
 		int fightId = FightHelper.getFightId(entity);

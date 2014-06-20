@@ -21,7 +21,7 @@ public class HandlerClientFightStartTurn implements IMessageHandler<PacketFightS
 			return null;
 		}
 
-		FightManager.INSTANCE.startTurn(world, message.getFightId(), entity);
+		FightManager.INSTANCE.setCurrentFighter(world, message.getFightId(), entity);
 
 		return null;
 	}
