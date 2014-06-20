@@ -7,6 +7,8 @@ import heero.mc.mod.wakcraft.helper.FightHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -75,7 +77,14 @@ public class FightEventsHandler {
 			return;
 		}
 
-		if (FightManager.INSTANCE.getFightStage(player.worldObj, FightHelper.getFightId(player)) == FightStage.PREFIGHT) {
+		if (FightManager.INSTANCE.getFightStage(player.worldObj, FightHelper.getFightId(player)) != FightStage.FIGHT) {
+			event.setCanceled(true);
+			return;
+		}
+
+		ChunkCoordinates playerPosition = FightHelper.getCurrentPosition(player);
+		ChunkCoordinates targetPosition = FightHelper.getCurrentPosition(target);
+		if (MathHelper.abs(playerPosition.posX - targetPosition.posX) + MathHelper.abs(playerPosition.posZ - targetPosition.posZ) > 1) {
 			event.setCanceled(true);
 			return;
 		}
