@@ -93,7 +93,7 @@ public class FightRenderer extends IRenderHandler {
 		RenderBlocks renderBlocks = new RenderBlocks(world);
 
 		int posX = (int) Math.floor(player.posX);
-		int posY = (int) (player.posY - 1.63);
+		int posY = (int) (player.posY - player.yOffset);
 		int posZ = (int) Math.floor(player.posZ);
 
 		double deltaX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
@@ -118,7 +118,7 @@ public class FightRenderer extends IRenderHandler {
 			for (int z = posZ - movement; z <= posZ + movement; z++) {
 				if (Math.abs(posX - x) + Math.abs(posZ - z) > movement) continue;
 
-				int y = posY;
+				int y = posY - 1;
 				for (; y < world.getHeight() && !world.isAirBlock(x, y + 1, z); ++y);
 				for (; y >= 0 && world.isAirBlock(x, y, z); --y);
 
