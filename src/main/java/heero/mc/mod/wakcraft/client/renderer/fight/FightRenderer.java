@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.client.IRenderHandler;
 
 import org.lwjgl.opengl.GL11;
@@ -93,10 +94,6 @@ public class FightRenderer extends IRenderHandler {
 	public void renderMovement(float partialTicks, WorldClient world, Minecraft mc, EntityPlayer player) {
 		RenderBlocks renderBlocks = new RenderBlocks(world);
 
-		int posX = (int) Math.floor(player.posX);
-		int posY = (int) (player.posY - player.yOffset);
-		int posZ = (int) Math.floor(player.posZ);
-
 		double deltaX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
 		double deltaY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
 		double deltaZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * partialTicks;
@@ -114,13 +111,14 @@ public class FightRenderer extends IRenderHandler {
 		par1Tessellator.setTranslation(-deltaX, -deltaY, -deltaZ);
 		par1Tessellator.disableColor();
 
+		ChunkCoordinates currentPosition = FightHelper.getCurrentPosition(player);
 		EntityLivingBase currentFighter = FightManager.INSTANCE.getCurrentFighter(world, FightHelper.getFightId(player));
 		int movement = (currentFighter == player) ? FightHelper.getFightCharacteristic(player, Characteristic.MOVEMENT) : 0;
-		for (int x = posX - movement; x <= posX + movement; x++) {
-			for (int z = posZ - movement; z <= posZ + movement; z++) {
-				if (Math.abs(posX - x) + Math.abs(posZ - z) > movement) continue;
+		for (int x = currentPosition.posX - movement; x <= currentPosition.posX + movement; x++) {
+			for (int z = currentPosition.posZ - movement; z <= currentPosition.posZ + movement; z++) {
+				if (Math.abs(currentPosition.posX - x) + Math.abs(currentPosition.posZ - z) > movement) continue;
 
-				int y = posY - 1;
+				int y = currentPosition.posY - 1;
 				for (; y < world.getHeight() && !world.isAirBlock(x, y + 1, z); ++y);
 				for (; y >= 0 && world.isAirBlock(x, y, z); --y);
 
