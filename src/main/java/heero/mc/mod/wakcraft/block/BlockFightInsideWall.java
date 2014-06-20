@@ -64,11 +64,15 @@ public class BlockFightInsideWall extends BlockGeneric {
 			int movementPoint = (currentFighter == entity) ? FightHelper.getFightCharacteristic(entity, Characteristic.MOVEMENT) : 0;
 			int distance = MathHelper.abs_int(currentPosition.posX - x) + MathHelper.abs_int(currentPosition.posZ - z);
 
-			if (movementPoint >= distance) {
-				return;
+			if (movementPoint < distance) {
+				break;
 			}
 
-			break;
+			if (FightManager.INSTANCE.isThereFighterInAABB(world, fightId, AxisAlignedBB.getBoundingBox(x, y - 1, z, x + 1, y + 1, z + 1))) {
+				break;
+			}
+
+			return;
 		default:
 			break;
 		}

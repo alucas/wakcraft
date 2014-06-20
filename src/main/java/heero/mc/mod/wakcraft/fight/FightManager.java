@@ -32,6 +32,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
@@ -867,5 +868,30 @@ public enum FightManager {
 			FightHelper.setFightCharacteristic(fighter, Characteristic.MOVEMENT, remainingMovementPoint);
 			FightHelper.setCurrentPosition(fighter, currentPosition);
 		}
+	}
+
+	public boolean isThereFighterInAABB(World world, int fightId, AxisAlignedBB boundingBox) {
+		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
+		if (fightsOfWorld == null) {
+			FMLLog.warning("Trying to get the fighters of a fight that does not exist (wrong world)");
+			return true;
+		}
+
+		FightInfo fight = fightsOfWorld.get(fightId);
+		if (fight == null) {
+			FMLLog.warning("Trying to get the fighters of a fight that does not exist (wrong id)");
+			return true;
+		}
+
+		for (List<EntityLivingBase> team : fight.fightersByTeam) {
+			for (EntityLivingBase fighter : team) {
+				ChunkCoordinates position = FightHelper.getCurrentPosition(fighter);
+				if (position.posX + 1 > boundingBox.minX && position.posX < boundingBox.maxX && position.posY + 1 > boundingBox.minY && position.posY < boundingBox.maxY && position.posZ + 1 > boundingBox.minZ && position.posZ < boundingBox.maxZ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }
