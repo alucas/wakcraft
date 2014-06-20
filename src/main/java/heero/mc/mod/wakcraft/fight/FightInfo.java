@@ -89,12 +89,16 @@ public class FightInfo {
 		return this.fightersByFightOrder;
 	}
 
-	public int getCurrentFighterId() {
-		return this.currentFighterIndex;
+	public void setCurrentFighter(EntityLivingBase fighter) {
+		this.currentFighterIndex = this.fightersByFightOrder.indexOf(fighter);
 	}
 
-	public void setCurrentFighterId(int currentFighterId) {
-		this.currentFighterIndex = currentFighterId;
+	public EntityLivingBase getCurrentFighter() {
+		return this.fightersByFightOrder.get(this.currentFighterIndex);
+	}
+
+	public EntityLivingBase getNextFighter(int increment) {
+		return this.fightersByFightOrder.get((this.currentFighterIndex + increment) % this.fightersByFightOrder.size());
 	}
 
 	/**

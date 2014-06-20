@@ -621,15 +621,22 @@ public enum FightManager {
 			updateFightStage(world, fightId, FightStage.FIGHT);
 			fightInfo.setStage(FightStage.FIGHT, FIGHTTURN_DURATION);
 
-			startTurn(world, fightId, fightInfo.getFightersByFightOrder().get(fightInfo.getCurrentFighterId()));
+			startTurn(world, fightId, fightInfo.getCurrentFighter());
 
 			break;
 
 		case FIGHT:
-			fightInfo.setCurrentFighterId(getNextFighter(fightInfo));
+			EntityLivingBase nextFighter = getNextAvailableFighter(fightInfo);
+			if (nextFighter == null) {
+				FMLLog.warning("Can't find a living fighter for the next turn");
+				stopFight(fightInfo.getCurrentFighter().worldObj, FightHelper.getFightId(fightInfo.getCurrentFighter()));
+				return;
+			}
+
+			fightInfo.setCurrentFighter(nextFighter);
 			fightInfo.updateStageDuration(FIGHTTURN_DURATION);
 
-			startTurn(world, fightId, fightInfo.getFightersByFightOrder().get(fightInfo.getCurrentFighterId()));
+			startTurn(world, fightId, fightInfo.getCurrentFighter());
 
 			break;
 
@@ -726,19 +733,18 @@ public enum FightManager {
 		return true;
 	}
 
-	protected int getNextFighter(FightInfo fightInfo) {
+	protected EntityLivingBase getNextAvailableFighter(FightInfo fightInfo) {
 		int nbFighter = fightInfo.getFightersCount();
-		int currentFighterId = fightInfo.getCurrentFighterId();
-		for (int i = 0; i < nbFighter; i++) {
-			EntityLivingBase fighter = fightInfo.getFightersByFightOrder().get((currentFighterId + i + 1) % nbFighter);
+		for (int i = 1; i <= nbFighter; i++) {
+			EntityLivingBase fighter = fightInfo.getNextFighter(i);
 			if (!fighter.isEntityAlive()) {
 				continue;
 			}
 
-			return (currentFighterId + i + 1) % nbFighter;
+			return fighter;
 		}
 
-		return 0;
+		return null;
 	}
 
 	private void initFightersFightCharacteristics(List<List<EntityLivingBase>> fightersByTeam) {
@@ -758,7 +764,6 @@ public enum FightManager {
 	}
 
 	public void startTurn(World world, int fightId, EntityLivingBase fighter) {
-		System.out.println("start turn " + fighter);
 		MinecraftForge.EVENT_BUS.post(new FightEvent.FightStartTurnEvent(world, fightId, fighter));
 
 		List<List<EntityLivingBase>> fightersByTeam = fights.get(world).get(fightId).getFightersByTeam();
