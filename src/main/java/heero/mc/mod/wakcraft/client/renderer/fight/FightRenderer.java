@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.IRenderHandler;
 
@@ -113,7 +114,8 @@ public class FightRenderer extends IRenderHandler {
 		par1Tessellator.setTranslation(-deltaX, -deltaY, -deltaZ);
 		par1Tessellator.disableColor();
 
-		int movement = FightHelper.getFightCharacteristic(player, Characteristic.MOVEMENT);
+		EntityLivingBase currentFighter = FightManager.INSTANCE.getCurrentFighter(world, FightHelper.getFightId(player));
+		int movement = (currentFighter == player) ? FightHelper.getFightCharacteristic(player, Characteristic.MOVEMENT) : 0;
 		for (int x = posX - movement; x <= posX + movement; x++) {
 			for (int z = posZ - movement; z <= posZ + movement; z++) {
 				if (Math.abs(posX - x) + Math.abs(posZ - z) > movement) continue;
