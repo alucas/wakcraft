@@ -13,7 +13,7 @@ import cpw.mods.fml.common.eventhandler.Event;
 
 public class FightEvent extends Event {
 	public enum Type {
-		UNKNOW, START, STOP, CHANGE_STAGE,
+		UNKNOW, START, STOP, CHANGE_STAGE, START_TURN,
 	}
 
 	public final World world;
@@ -61,6 +61,16 @@ public class FightEvent extends Event {
 			super(Type.CHANGE_STAGE, world, fightId);
 
 			this.stage = stage;
+		}
+	}
+
+	public static class FightStartTurnEvent extends FightEvent {
+		public final EntityLivingBase fighter;
+
+		public FightStartTurnEvent(World world, int fightId, EntityLivingBase fighter) {
+			super(Type.START_TURN, world, fightId);
+
+			this.fighter = fighter;
 		}
 	}
 }

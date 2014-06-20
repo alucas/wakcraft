@@ -14,6 +14,7 @@ import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStartTurn;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
 
 import java.util.ArrayList;
@@ -620,11 +621,15 @@ public enum FightManager {
 			updateFightStage(world, fightId, FightStage.FIGHT);
 			fightInfo.setStage(FightStage.FIGHT, FIGHTTURN_DURATION);
 
+			startTurn(world, fightId, fightInfo.getFightersByFightOrder().get(fightInfo.getCurrentFighterId()));
+
 			break;
 
 		case FIGHT:
 			fightInfo.setCurrentFighterId(getNextFighter(fightInfo));
 			fightInfo.updateStageDuration(FIGHTTURN_DURATION);
+
+			startTurn(world, fightId, fightInfo.getFightersByFightOrder().get(fightInfo.getCurrentFighterId()));
 
 			break;
 
@@ -748,6 +753,20 @@ public enum FightManager {
 				}
 
 				Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(fighter, FightCharacteristicsProperty.IDENTIFIER), (EntityPlayerMP) fighter);
+			}
+		}
+	}
+
+	public void startTurn(World world, int fightId, EntityLivingBase fighter) {
+		System.out.println("start turn " + fighter);
+		MinecraftForge.EVENT_BUS.post(new FightEvent.FightStartTurnEvent(world, fightId, fighter));
+
+		List<List<EntityLivingBase>> fightersByTeam = fights.get(world).get(fightId).getFightersByTeam();
+		for (List<EntityLivingBase> team : fightersByTeam) {
+			for (EntityLivingBase entity : team) {
+				if (entity instanceof EntityPlayerMP) {
+					Wakcraft.packetPipeline.sendTo(new PacketFightStartTurn(fightId, fighter), (EntityPlayerMP) entity);
+				}
 			}
 		}
 	}

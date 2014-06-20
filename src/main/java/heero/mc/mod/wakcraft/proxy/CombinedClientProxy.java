@@ -35,6 +35,7 @@ import heero.mc.mod.wakcraft.network.handler.HandlerClientProfession;
 import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightChangeStage;
 import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightSelectPosition;
 import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightStart;
+import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightStartTurn;
 import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightStop;
 import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagProperties;
@@ -43,6 +44,7 @@ import heero.mc.mod.wakcraft.network.packet.PacketProfession;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStartTurn;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
 import heero.mc.mod.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
@@ -126,5 +128,6 @@ public class CombinedClientProxy extends CommonProxy {
 		packetPipeline.registerMessage(HandlerClientFightStop.class, PacketFightStop.class, 9, Side.CLIENT);
 		packetPipeline.registerMessage(HandlerClientFightChangeStage.class, PacketFightChangeStage.class, 10, Side.CLIENT);
 		packetPipeline.registerMessage(HandlerClientFightSelectPosition.class, PacketFightSelectPosition.class, 11, Side.CLIENT);
+		packetPipeline.registerMessage(HandlerClientFightStartTurn.class, PacketFightStartTurn.class, 13, Side.CLIENT);
 	}
 }
