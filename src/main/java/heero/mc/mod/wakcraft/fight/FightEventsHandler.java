@@ -10,6 +10,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -146,5 +147,26 @@ public class FightEventsHandler {
 		if (event.phase == Phase.END) {
 			FightManager.INSTANCE.updateFights(MinecraftServer.getServer().getTickCounter());
 		}
+	}
+
+	@SubscribeEvent
+	public void onLivingUpdateEvent(LivingUpdateEvent event) {
+		EntityLivingBase entity = event.entityLiving;
+
+		if (!FightHelper.isFighter(entity) || !FightHelper.isFighting(entity)) {
+			return;
+		}
+
+		int fightId = FightHelper.getFightId(entity);
+		if (FightManager.INSTANCE.getFightStage(entity.worldObj, fightId) != FightStage.FIGHT) {
+			return;
+		}
+
+		EntityLivingBase currentFighter = FightManager.INSTANCE.getCurrentFighter(entity.worldObj, fightId);
+		if (currentFighter != entity) {
+			return;
+		}
+
+		FightManager.INSTANCE.updateFights(entity);
 	}
 }

@@ -15,6 +15,7 @@ public class FightProperty implements IExtendedEntityProperties {
 	protected int fightId;
 	protected int teamId;
 	protected ChunkCoordinates startPosition;
+	protected ChunkCoordinates currentPosition;
 
 	@Override
 	public void init(Entity entity, World world) {
@@ -56,5 +57,13 @@ public class FightProperty implements IExtendedEntityProperties {
 
 	public void setStartPosition(@Nullable ChunkCoordinates startPosition) {
 		this.startPosition = startPosition;
+	}
+
+	public ChunkCoordinates getCurrentPosition() {
+		return currentPosition;
+	}
+
+	public void setCurrentPosition(ChunkCoordinates position) {
+		this.currentPosition = position;
 	}
 }

@@ -616,6 +616,7 @@ public enum FightManager {
 		case PREFIGHT:
 			setStartPositionOfRemainingFighters(fightInfo.getFightersByTeam(), fightInfo.getStartBlocks());
 			moveFighterToStartPosition(fightInfo.getFightersByTeam());
+			initFightersCurrentPosition(fightInfo.getFightersByTeam());
 			initFightersFightCharacteristics(fightInfo.getFightersByTeam());
 
 			updateFightStage(world, fightId, FightStage.FIGHT);
@@ -656,6 +657,15 @@ public enum FightManager {
 		if (fight == null) {
 			FMLLog.warning("Trying to update the stage of a fight that does not exist (wrong id)");
 			return;
+		}
+
+		switch (stage) {
+		case FIGHT:
+			initFightersCurrentPosition(fight.fightersByTeam);
+			break;
+
+		default:
+			break;
 		}
 
 		updateFightStage(world, fightId, stage);
@@ -792,7 +802,7 @@ public enum FightManager {
 		return null;
 	}
 
-	private void initFightersFightCharacteristics(List<List<EntityLivingBase>> fightersByTeam) {
+	protected void initFightersFightCharacteristics(List<List<EntityLivingBase>> fightersByTeam) {
 		for (List<EntityLivingBase> team : fightersByTeam) {
 			for (EntityLivingBase fighter : team) {
 				for (Characteristic characteristic : Characteristic.values()) {
@@ -808,6 +818,14 @@ public enum FightManager {
 		}
 	}
 
+	protected void initFightersCurrentPosition(List<List<EntityLivingBase>> fightersByTeam) {
+		for (List<EntityLivingBase> team : fightersByTeam) {
+			for (EntityLivingBase fighter : team) {
+				FightHelper.setCurrentPosition(fighter, FightHelper.getStartPosition(fighter));
+			}
+		}
+	}
+
 	public void startTurn(World world, int fightId, EntityLivingBase fighter) {
 		MinecraftForge.EVENT_BUS.post(new FightEvent.FightStartTurnEvent(world, fightId, fighter));
 
@@ -819,5 +837,8 @@ public enum FightManager {
 				}
 			}
 		}
+	}
+
+	public void updateFights(EntityLivingBase fighter) {
 	}
 }

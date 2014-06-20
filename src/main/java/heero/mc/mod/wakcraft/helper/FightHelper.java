@@ -53,4 +53,12 @@ public class FightHelper {
 		int value = ((CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER)).get(characteristic);
 		((FightCharacteristicsProperty) entity.getExtendedProperties(FightCharacteristicsProperty.IDENTIFIER)).set(characteristic, value);
 	}
+
+	public static void setCurrentPosition(Entity entity, @Nullable ChunkCoordinates startPosition) {
+		((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).setCurrentPosition(startPosition);
+	}
+
+	public static ChunkCoordinates getCurrentPosition(Entity entity) {
+		return ((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).getCurrentPosition();
+	}
 }
