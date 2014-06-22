@@ -100,9 +100,9 @@ public enum FightManager {
 	 * @return	False if the creation failed
 	 */
 	public boolean startServerFight(World world, EntityPlayerMP player, EntityLivingBase target) {
-		int posX = (int) Math.floor(player.posX);
-		int posY = (int) Math.floor(player.posY);
-		int posZ = (int) Math.floor(player.posZ);
+		int posX = MathHelper.floor_double(player.posX);
+		int posY = MathHelper.floor_double(player.posY);
+		int posZ = MathHelper.floor_double(player.posZ);
 		Set<FightBlockCoordinates> fightBlocks = getFightBlocks(world, posX, posY, posZ, 10);
 
 		if (fightBlocks.size() < 100) {
