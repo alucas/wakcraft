@@ -148,7 +148,7 @@ public enum FightManager {
 		Set<FightBlockCoordinates> fightBlocks = new HashSet<FightBlockCoordinates>();
 		ChunkCache chunks = new ChunkCache(world, posX - radius, posY - radius, posZ - radius, posX + radius, posY + radius, posZ + radius, 2);
 
-		while(world.getBlock(posY, posY, posZ).equals(Blocks.air) && posY > 0) {
+		while(chunks.getBlock(posX, posY, posZ).equals(Blocks.air) && posY > 0) {
 			posY--;
 		}
 
