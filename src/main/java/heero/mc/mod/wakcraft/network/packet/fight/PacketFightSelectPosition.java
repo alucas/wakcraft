@@ -1,10 +1,11 @@
 package heero.mc.mod.wakcraft.network.packet.fight;
 
 import io.netty.buffer.ByteBuf;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ChunkCoordinates;
-
-import com.sun.istack.internal.Nullable;
 
 public class PacketFightSelectPosition implements IPacketFight {
 	protected IPacketFight packetFight;

@@ -11,9 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.entity.EntityLivingBase;
+import javax.annotation.Nullable;
 
-import com.sun.istack.internal.Nullable;
+import net.minecraft.entity.EntityLivingBase;
 
 public class FightInfo {
 	protected static final int PREFIGHT_DURATION = 60;

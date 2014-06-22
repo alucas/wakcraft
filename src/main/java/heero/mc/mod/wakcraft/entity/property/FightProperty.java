@@ -1,13 +1,14 @@
 package heero.mc.mod.wakcraft.entity.property;
 
 import heero.mc.mod.wakcraft.WInfo;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-
-import com.sun.istack.internal.Nullable;
 
 public class FightProperty implements IExtendedEntityProperties {
 	public static final String IDENTIFIER = WInfo.MODID + "Fight";

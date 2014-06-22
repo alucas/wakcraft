@@ -36,6 +36,11 @@ minecraft {
     }
 }
 
+dependencies
+{
+    compile 'com.google.code.findbugs:jsr305:1.3.9'
+}
+
 processResources
 {
     // this will ensure that this task is redone when the versions change.
