@@ -15,6 +15,7 @@ import heero.mc.mod.wakcraft.item.ItemWArmor.TYPE;
 import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import heero.mc.mod.wakcraft.item.ItemWithLevel;
 import heero.mc.mod.wakcraft.item.ItemWoollyKey;
+import heero.mc.mod.wakcraft.spell.Spell;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -29,6 +30,11 @@ public class WItems extends Items {
 			gobballBreastplate, gobboots, gobballEpaulettes, gobballCape,
 			gobballBelt, gobballHeadgear, gobballAmulet, bouzeLiteYeahsRing,
 			gobballSeed;
+	// Iop spells
+	public static Item spellShaker, spellRocknoceros, spellImpact, spellCharge,
+			spellDevastate, spellThunderbolt, spellJudgment,
+			spellSuperIopPunch, spellCelestialSword, spellIopsWrath, spellJabs,
+			spellFlurry, spellIntimidation, spellGuttingGust, spellUppercut;
 
 	public static void registerItems() {
 		String modid = WInfo.MODID.toLowerCase() + ":";
@@ -73,5 +79,22 @@ public class WItems extends Items {
 		GameRegistry.registerItem(gobballHeadgear = (new ItemWArmor(TYPE.HELMET, 13).setCharacteristic(Characteristic.HEALTH, 13).setCharacteristic(Characteristic.LOCK, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName("GobballHeadgear").setTextureName(modid + "gobball_headgear")), "ItemGobballHeadgear");
 		GameRegistry.registerItem(gobballAmulet = (new ItemWArmor(TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.LOCK, 5).setUnlocalizedName("GobballAmulet").setTextureName(modid + "gobball_amulet")), "ItemGobballAmulet");
 		GameRegistry.registerItem(bouzeLiteYeahsRing = (new ItemWArmor(TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 6).setCharacteristic(Characteristic.INITIATIVE, 4).setUnlocalizedName("BouzeLiteYeahsRing").setTextureName(modid + "bouze_lite_yeahs_ring")), "ItemBouzeLiteYeahsRing");
+
+		// Iop spells
+		GameRegistry.registerItem(spellShaker = (new Spell("Shaker")), "SpellShaker");
+		GameRegistry.registerItem(spellRocknoceros = (new Spell("Rocknoceros")), "SpellRocknoceros");
+		GameRegistry.registerItem(spellImpact = (new Spell("Impact")), "SpellImpact");
+		GameRegistry.registerItem(spellCharge = (new Spell("Charge")), "SpellCharge");
+		GameRegistry.registerItem(spellDevastate = (new Spell("Devastate")), "SpellDevastate");
+		GameRegistry.registerItem(spellThunderbolt = (new Spell("Thunderbolt")), "SpellThunderbolt");
+		GameRegistry.registerItem(spellJudgment = (new Spell("Judgment")), "SpellJudgment");
+		GameRegistry.registerItem(spellSuperIopPunch = (new Spell("SuperIopPunch")), "SpellSuperIopPunch");
+		GameRegistry.registerItem(spellCelestialSword = (new Spell("CelestialSword")), "SpellCelestialSword");
+		GameRegistry.registerItem(spellIopsWrath = (new Spell("IopsWrath")), "SpellIopsWrath");
+		GameRegistry.registerItem(spellJabs = (new Spell("Jabs")), "SpellJabs");
+		GameRegistry.registerItem(spellFlurry = (new Spell("Flurry")), "SpellFlurry");
+		GameRegistry.registerItem(spellIntimidation = (new Spell("Intimidation")), "SpellIntimidation");
+		GameRegistry.registerItem(spellGuttingGust = (new Spell("GuttingGust")), "SpellGuttingGust");
+		GameRegistry.registerItem(spellUppercut = (new Spell("Uppercut")), "SpellUppercut");
 	}
 }

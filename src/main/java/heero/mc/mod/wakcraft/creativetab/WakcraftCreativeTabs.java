@@ -48,4 +48,11 @@ public class WakcraftCreativeTabs {
 			return Items.diamond_sword;
 		}
 	};
+	public static final CreativeTabs tabSpells = new CreativeTabs("spells") {
+		@SideOnly(Side.CLIENT)
+		@Override
+		public Item getTabIconItem() {
+			return Items.diamond_sword;
+		}
+	};
 }

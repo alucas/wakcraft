@@ -70,6 +70,22 @@ item.GobballAmulet.name=Gobball Amulet
 item.GobballSeed.name=Gobball Seed
 item.BouzeLiteYeahsRing.name=Bouze Lite Yeah's Ring
 
+item.SpellShaker.name=Shaker
+item.SpellRocknoceros.name=Rocknoceros
+item.SpellImpact.name=Impact
+item.SpellCharge.name=Charge
+item.SpellDevastate.name=Devastate
+item.SpellThunderbolt.name=Thunderbolt
+item.SpellJudgment.name=Judgment
+item.SpellSuperIopPunch.name=Super Iop Punch
+item.SpellCelestialSword.name=Celestial Sword
+item.SpellIopsWrath.name=Iop's Wrath
+item.SpellJabs.name=Jabs
+item.SpellFlurry.name=Flurry
+item.SpellIntimidation.name=Intimidation
+item.SpellGuttingGust.name=Gutting Gust
+item.SpellUppercut.name=Uppercut
+
 tile.tannerWorkbench.name=Tanner Workbench
 tile.dragoexpress.name=Drago-Express
 tile.phoenix.name=Phoenix
