@@ -85,6 +85,16 @@ item.SpellFlurry.name=Flurry
 item.SpellIntimidation.name=Intimidation
 item.SpellGuttingGust.name=Gutting Gust
 item.SpellUppercut.name=Uppercut
+item.SpellJump.name=Jump
+item.SpellDefensiveStance.name=Defensive Stance
+item.SpellFlatten.name=Flatten
+item.SpellBraveryStandard.name=Bravery Standard
+item.SpellIncrease.name=Increase
+item.SpellVirility.name=Virility
+item.SpellCompulsion.name=Compulsion
+item.SpellAuthority.name=Authority
+item.SpellShowOff.name=Show Off
+item.SpellLockingPro.name=Locking Pro
 
 tile.tannerWorkbench.name=Tanner Workbench
 tile.dragoexpress.name=Drago-Express

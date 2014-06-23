@@ -34,7 +34,10 @@ public class WItems extends Items {
 	public static Item spellShaker, spellRocknoceros, spellImpact, spellCharge,
 			spellDevastate, spellThunderbolt, spellJudgment,
 			spellSuperIopPunch, spellCelestialSword, spellIopsWrath, spellJabs,
-			spellFlurry, spellIntimidation, spellGuttingGust, spellUppercut;
+			spellFlurry, spellIntimidation, spellGuttingGust, spellUppercut,
+			spellJump, spellDefensiveStance, spellFlatten,
+			spellBraveryStandard, spellIncrease, spellVirility,
+			spellCompulsion, spellAuthority, spellShowOff, spellLockingPro;
 
 	public static void registerItems() {
 		String modid = WInfo.MODID.toLowerCase() + ":";
@@ -96,5 +99,15 @@ public class WItems extends Items {
 		GameRegistry.registerItem(spellIntimidation = (new Spell("Intimidation")), "SpellIntimidation");
 		GameRegistry.registerItem(spellGuttingGust = (new Spell("GuttingGust")), "SpellGuttingGust");
 		GameRegistry.registerItem(spellUppercut = (new Spell("Uppercut")), "SpellUppercut");
+		GameRegistry.registerItem(spellJump = (new Spell("Jump")), "SpellJump");
+		GameRegistry.registerItem(spellDefensiveStance = (new Spell("DefensiveStance")), "SpellDefensiveStance");
+		GameRegistry.registerItem(spellFlatten = (new Spell("Flatten")), "SpellFlatten");
+		GameRegistry.registerItem(spellBraveryStandard = (new Spell("BraveryStandard")), "SpellBraveryStandard");
+		GameRegistry.registerItem(spellIncrease = (new Spell("Increase")), "SpellIncrease");
+		GameRegistry.registerItem(spellVirility = (new Spell("Virility")), "SpellVirility");
+		GameRegistry.registerItem(spellCompulsion = (new Spell("Compulsion")), "SpellCompulsion");
+		GameRegistry.registerItem(spellAuthority = (new Spell("Authority")), "SpellAuthority");
+		GameRegistry.registerItem(spellShowOff = (new Spell("ShowOff")), "SpellShowOff");
+		GameRegistry.registerItem(spellLockingPro = (new Spell("LockingPro")), "SpellLockingPro");
 	}
 }
