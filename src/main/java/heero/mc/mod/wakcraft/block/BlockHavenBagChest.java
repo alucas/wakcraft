@@ -156,7 +156,7 @@ public class BlockHavenBagChest extends BlockContainer {
 			return true;
 		}
 
-		player.openGui(Wakcraft.instance, GuiHandler.GuiId.HAVEN_BAG_CHEST.ordinal(), world, x, y, z);
+		player.openGui(Wakcraft.instance, GuiHandler.GuiId.HAVEN_BAG_CHEST_NORMAL.ordinal(), world, x, y, z);
 
 		return true;
 	}

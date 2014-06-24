@@ -1,9 +1,13 @@
 package heero.mc.mod.wakcraft.client.gui;
 
 import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Wakcraft;
+import heero.mc.mod.wakcraft.network.GuiHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
@@ -15,17 +19,25 @@ public class GUITabs extends GuiScreen {
 	private static final ResourceLocation tabButtonsTexture = new ResourceLocation(
 			WInfo.MODID.toLowerCase(), "textures/gui/tabs.png");
 
-	protected int selectedTab;
-	protected GuiScreen tabs[];
+	protected GuiScreen currentScreen;
+	protected EntityPlayer player;
+	protected World world;
+	protected int x, y, z;
+	protected GuiHandler.GuiId tabs[];
 
 	protected int tabButtonLeft;
 	protected int tabButtonTop;
 
-	public GUITabs(GuiScreen tabs[]) {
+	public GUITabs(GuiScreen currentScreen, EntityPlayer player, World world, int x, int y, int z, GuiHandler.GuiId tabs[]) {
 		super();
 
+		this.currentScreen = currentScreen;
+		this.player = player;
+		this.world = world;
+		this.x = x;
+		this.y = y;
+		this.z = z;
 		this.allowUserInput = true;
-		this.selectedTab = 0;
 		this.tabs = tabs;
 	}
 
@@ -37,9 +49,7 @@ public class GUITabs extends GuiScreen {
 	public void setWorldAndResolution(Minecraft minecraft, int width, int height) {
 		super.setWorldAndResolution(minecraft, width, height);
 
-		for (int i = 0; i < tabs.length; i++) {
-			tabs[i].setWorldAndResolution(minecraft, width, height);
-		}
+		currentScreen.setWorldAndResolution(minecraft, width, height);
 	}
 
 	/**
@@ -67,10 +77,10 @@ public class GUITabs extends GuiScreen {
 
 		for (int i = 0; i < tabs.length; i++) {
 			drawTexturedModalRect(tabButtonLeft, tabButtonTop + 30 * i,
-					(selectedTab == i) ? 0 : 33, i * 28, 33, 28);
+					(0 == i) ? 0 : 33, i * 28, 33, 28);
 		}
 
-		tabs[selectedTab].drawScreen(mouseX, mouseY, renderPartialTicks);
+		currentScreen.drawScreen(mouseX, mouseY, renderPartialTicks);
 	}
 
 	/**
@@ -78,7 +88,7 @@ public class GUITabs extends GuiScreen {
 	 */
 	@Override
 	public void handleMouseInput() {
-		tabs[selectedTab].handleMouseInput();
+		currentScreen.handleMouseInput();
 
 		super.handleMouseInput();
 	}
@@ -88,7 +98,7 @@ public class GUITabs extends GuiScreen {
 	 */
 	@Override
 	public void handleKeyboardInput() {
-		tabs[selectedTab].handleKeyboardInput();
+		currentScreen.handleKeyboardInput();
 
 		super.handleKeyboardInput();
 	}
@@ -107,17 +117,17 @@ public class GUITabs extends GuiScreen {
 				if (relativeMouseX >= 0 && relativeMouseX < 29
 						&& relativeMouseY > i * 30
 						&& relativeMouseY < 30 + i * 30) {
-					setSelectedTab(i);
+					selectTab(i);
 				}
 			}
 		}
 	}
 
-	protected void setSelectedTab(int tabId) {
+	protected void selectTab(int tabId) {
 		if (tabId < 0 || tabId >= tabs.length) {
 			return;
 		}
 
-		selectedTab = tabId;
+		player.openGui(Wakcraft.instance, tabs[tabId].ordinal(), world, x, y, z);
 	}
 }

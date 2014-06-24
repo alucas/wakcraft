@@ -1,19 +1,16 @@
 package heero.mc.mod.wakcraft.client.gui;
 
-import heero.mc.mod.wakcraft.client.gui.inventory.GUIInventory;
-import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
+import heero.mc.mod.wakcraft.network.GuiHandler;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIWakcraft extends GUITabs {
-
-	public GUIWakcraft(Container container, EntityPlayer player) {
-		super(new GuiScreen[] { new GUIInventory(container),
-				new GUIAbilities(player),
-				new GUIProfession(player, PROFESSION.CHEF) });
+	public GUIWakcraft(GuiScreen guiScreen, EntityPlayer player, World world, int x, int y, int z) {
+		super(guiScreen, player, world, x, y, z, new GuiHandler.GuiId[] { GuiHandler.GuiId.INVENTORY,
+				GuiHandler.GuiId.ABILITIES, GuiHandler.GuiId.PROFESSION });
 	}
 }

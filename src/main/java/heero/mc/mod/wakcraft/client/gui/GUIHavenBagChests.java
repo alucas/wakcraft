@@ -3,26 +3,31 @@ package heero.mc.mod.wakcraft.client.gui;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenBagChest;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
 import heero.mc.mod.wakcraft.manager.HavenBagChestHelper;
-import net.minecraft.client.gui.GuiScreen;
+import heero.mc.mod.wakcraft.network.GuiHandler;
+import heero.mc.mod.wakcraft.network.GuiHandler.GuiId;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIHavenBagChests extends GUITabs {
-	private ContainerHavenBagChest container;
+	protected static GuiHandler.GuiId[] havenBagChestGuiIds = new GuiHandler.GuiId[] {
+			GuiHandler.GuiId.HAVEN_BAG_CHEST_NORMAL,
+			GuiHandler.GuiId.HAVEN_BAG_CHEST_SMALL,
+			GuiHandler.GuiId.HAVEN_BAG_CHEST_ADVENTURER,
+			GuiHandler.GuiId.HAVEN_BAG_CHEST_KIT,
+			GuiHandler.GuiId.HAVEN_BAG_CHEST_COLLECTOR,
+			GuiHandler.GuiId.HAVEN_BAG_CHEST_GOLDEN,
+			GuiHandler.GuiId.HAVEN_BAG_CHEST_EMERALD };
 
-	public GUIHavenBagChests(ContainerHavenBagChest container) {
-		super(new GuiScreen[] { new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_NORMAL),
-				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_SMALL),
-				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_ADVENTURER),
-				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_KIT),
-				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_COLLECTOR),
-				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_GOLDEN),
-				new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_EMERALD) });
+	protected ContainerHavenBagChest container;
+
+	public GUIHavenBagChests(GuiId guiId, ContainerHavenBagChest container, EntityPlayer player, World world, int x, int y, int z) {
+		super(new GUIHavenBagChest(container, HavenBagChestHelper.CHEST_NORMAL),
+				player, world, x, y, z, havenBagChestGuiIds);
 
 		this.container = container;
-
-		setSelectedTab(0);
 	}
 
 	/**
@@ -36,10 +41,9 @@ public class GUIHavenBagChests extends GUITabs {
 	}
 
 	@Override
-	protected void setSelectedTab(int tabId) {
-		super.setSelectedTab(tabId);
-
-		container.updateHBSlots(((GUIHavenBagChest)tabs[selectedTab]).chestId);
+	protected void selectTab(int tabId) {
+		((GUIHavenBagChest) currentScreen).chestId = tabId;
+		container.updateHBSlots(tabId);
 	}
 
 	@Override
