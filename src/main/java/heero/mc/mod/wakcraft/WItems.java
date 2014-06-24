@@ -34,7 +34,7 @@ public class WItems extends Items {
 			ikiakitCollector, ikiakitGolden, ikiakitEmerald;
 
 	// Iop spells
-	public static Item spellShaker, spellRocknoceros, spellImpact, spellCharge,
+	public static Spell spellShaker, spellRocknoceros, spellImpact, spellCharge,
 			spellDevastate, spellThunderbolt, spellJudgment,
 			spellSuperIopPunch, spellCelestialSword, spellIopsWrath, spellJabs,
 			spellFlurry, spellIntimidation, spellGuttingGust, spellUppercut,
