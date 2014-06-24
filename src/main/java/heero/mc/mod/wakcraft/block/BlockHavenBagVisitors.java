@@ -4,7 +4,7 @@ import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
-import heero.mc.mod.wakcraft.havenbag.HavenBagHelper;
+import heero.mc.mod.wakcraft.helper.HavenBagHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;

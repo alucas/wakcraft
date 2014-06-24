@@ -3,6 +3,7 @@ package heero.mc.mod.wakcraft.havenbag;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WItems;
+import heero.mc.mod.wakcraft.helper.HavenBagHelper;
 import heero.mc.mod.wakcraft.world.WorldProviderHavenBag;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

@@ -3,7 +3,7 @@ package heero.mc.mod.wakcraft.item;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.mc.mod.wakcraft.helper.ChestType;
+import heero.mc.mod.wakcraft.havenbag.ChestType;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.tileentity;
 
 import heero.mc.mod.wakcraft.block.BlockHavenBagChest;
-import heero.mc.mod.wakcraft.helper.ChestType;
+import heero.mc.mod.wakcraft.havenbag.ChestType;
 
 import java.util.HashMap;
 import java.util.Iterator;

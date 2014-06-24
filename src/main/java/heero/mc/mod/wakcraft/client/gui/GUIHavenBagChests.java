@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.client.gui;
 
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenBagChest;
-import heero.mc.mod.wakcraft.helper.ChestType;
+import heero.mc.mod.wakcraft.havenbag.ChestType;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
 import heero.mc.mod.wakcraft.network.GuiHandler;
 import heero.mc.mod.wakcraft.network.GuiHandler.GuiId;

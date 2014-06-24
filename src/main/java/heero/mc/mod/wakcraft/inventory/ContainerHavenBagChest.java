@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.inventory;
 
-import heero.mc.mod.wakcraft.helper.ChestType;
+import heero.mc.mod.wakcraft.havenbag.ChestType;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

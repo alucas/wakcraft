@@ -1,4 +1,4 @@
-package heero.mc.mod.wakcraft.helper;
+package heero.mc.mod.wakcraft.havenbag;
 
 import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.item.ItemIkiakit;
