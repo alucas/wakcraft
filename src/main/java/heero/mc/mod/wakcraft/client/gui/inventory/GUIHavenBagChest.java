@@ -22,9 +22,9 @@ public class GUIHavenBagChest extends GUIContainer {
 	private static final ResourceLocation textureBackground = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/havenbagchest.png");
 	private static final ResourceLocation textureBackground_locked = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/havenbagchest_locked.png");
 
-	public int chestId;
+	public HavenBagChestHelper.ChestType chestId;
 
-	public GUIHavenBagChest(ContainerHavenBagChest container, int chestId) {
+	public GUIHavenBagChest(ContainerHavenBagChest container, HavenBagChestHelper.ChestType chestId) {
 		super(container);
 
 		this.chestId = chestId;

@@ -50,7 +50,12 @@ public class ItemIkiakit extends ItemWithLevel {
 				}
 
 				TileEntityHavenBagChest tileEntityChest = (TileEntityHavenBagChest) tileEntity;
-				int chestId = HavenBagChestHelper.getChestIdFromIkiakit(this);
+				HavenBagChestHelper.ChestType chestId = HavenBagChestHelper.getChestIdFromIkiakit(this);
+				if (chestId == null) {
+					FMLLog.warning("No chestId found for itiakit : " + this);
+
+					return false;
+				}
 
 				if (tileEntityChest.isChestUnlocked(chestId)) {
 					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.chestAlreadyUnlocked")));
