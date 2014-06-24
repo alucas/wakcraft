@@ -55,7 +55,7 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 			return true;
 		}
 
-		player.openGui(Wakcraft.instance, GuiHandler.GUI_HAVEN_GEM_WORKBENCH, world, x, y, z);
+		player.openGui(Wakcraft.instance, GuiHandler.GuiId.HAVEN_GEM_WORKBENCH.ordinal(), world, x, y, z);
 
 		return true;
 	}

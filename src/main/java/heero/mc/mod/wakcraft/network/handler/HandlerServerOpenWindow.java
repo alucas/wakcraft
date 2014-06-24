@@ -15,7 +15,7 @@ public class HandlerServerOpenWindow implements IMessageHandler<PacketOpenWindow
 		EntityPlayer player = ctx.getServerHandler().playerEntity;
 
 		if (message.windowId == PacketOpenWindow.WINDOW_INVENTORY) {
-			player.openGui(Wakcraft.instance, GuiHandler.GUI_INVENTORY, player.worldObj, (int) Math.floor(player.posX), (int) Math.floor(player.posY), (int) Math.floor(player.posZ));
+			player.openGui(Wakcraft.instance, GuiHandler.GuiId.INVENTORY.ordinal(), player.worldObj, (int) Math.floor(player.posX), (int) Math.floor(player.posY), (int) Math.floor(player.posZ));
 		} else {
 			FMLLog.warning("Unknow window ID : %d", message.windowId);
 		}

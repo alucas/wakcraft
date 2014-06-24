@@ -14,55 +14,77 @@ import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
-	public static final int GUI_POLISHER = 0;
-	public static final int GUI_HAVEN_GEM_WORKBENCH = 1;
-	public static final int GUI_HAVEN_BAG_CHEST = 2;
-	public static final int GUI_INVENTORY = 3;
+	public static enum GuiId {
+		POLISHER, HAVEN_GEM_WORKBENCH, HAVEN_BAG_CHEST, INVENTORY, ABILITIES, PROFESSION
+	}
 
 	@Override
-	public Object getServerGuiElement(int id, EntityPlayer player, World world,
-			int x, int y, int z) {
-		switch (id) {
-		case GUI_POLISHER:
+	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+		GuiId guiId = (id >= 0 && id < GuiId.values().length) ? GuiId.values()[id] : null;
+		if (guiId == null) {
+			FMLLog.warning("Invalid Gui identifier : " + id);
+			return null;
+		}
+
+		switch (guiId) {
+		case POLISHER:
 			return new ContainerWorkbench(player.inventory, world, PROFESSION.MINER);
-		case GUI_INVENTORY:
+		case INVENTORY:
 			return new ContainerPlayerInventory(player);
-		case GUI_HAVEN_GEM_WORKBENCH:
+		case HAVEN_GEM_WORKBENCH:
 			TileEntityHavenGemWorkbench tile = (TileEntityHavenGemWorkbench)world.getTileEntity(x, y, z);
 			return new ContainerHavenGemWorkbench(player.inventory, tile);
-		case GUI_HAVEN_BAG_CHEST:
+		case HAVEN_BAG_CHEST:
 			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagChest)) {
 				return null;
 			}
 
 			return new ContainerHavenBagChest(player.inventory, (TileEntityHavenBagChest) tileEntity);
+		case ABILITIES:
+			break;
+		case PROFESSION:
+			break;
+		default:
+			break;
 		}
 
 		return null;
 	}
 
 	@Override
-	public Object getClientGuiElement(int id, EntityPlayer player, World world,
-			int x, int y, int z) {
-		switch (id) {
-		case GUI_POLISHER:
+	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+		GuiId guiId = (id >= 0 && id < GuiId.values().length) ? GuiId.values()[id] : null;
+		if (guiId == null) {
+			FMLLog.warning("Invalid Gui identifier : " + id);
+			return null;
+		}
+
+		switch (guiId) {
+		case POLISHER:
 			return new GUIWorkbench(new ContainerWorkbench(player.inventory, world, PROFESSION.MINER), PROFESSION.MINER);
-		case GUI_INVENTORY:
+		case INVENTORY:
 			return new GUIWakcraft(new ContainerPlayerInventory(player), player);
-		case GUI_HAVEN_GEM_WORKBENCH:
+		case HAVEN_GEM_WORKBENCH:
 			TileEntityHavenGemWorkbench tile = (TileEntityHavenGemWorkbench)world.getTileEntity(x, y, z);
 			return new GUIHavenGemWorkbench(new ContainerHavenGemWorkbench(player.inventory, tile));
-		case GUI_HAVEN_BAG_CHEST:
+		case HAVEN_BAG_CHEST:
 			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagChest)) {
 				return null;
 			}
 
 			return new GUIHavenBagChests(new ContainerHavenBagChest(player.inventory, (TileEntityHavenBagChest) tileEntity));
+		case ABILITIES:
+			break;
+		case PROFESSION:
+			break;
+		default:
+			break;
 		}
 
 		return null;

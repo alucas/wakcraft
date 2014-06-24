@@ -23,7 +23,7 @@ public class BlockPolisher extends Block {
 			return true;
 		}
 
-		player.openGui(Wakcraft.instance, GuiHandler.GUI_POLISHER, world, x, y, z);
+		player.openGui(Wakcraft.instance, GuiHandler.GuiId.POLISHER.ordinal(), world, x, y, z);
 
 		return true;
 	}
