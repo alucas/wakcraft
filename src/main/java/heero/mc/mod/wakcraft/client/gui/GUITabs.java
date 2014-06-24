@@ -2,7 +2,10 @@ package heero.mc.mod.wakcraft.client.gui;
 
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.network.GuiHandler;
+import heero.mc.mod.wakcraft.network.GuiHandler.GuiId;
+
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,12 +26,13 @@ public class GUITabs extends GuiScreen {
 	protected EntityPlayer player;
 	protected World world;
 	protected int x, y, z;
-	protected GuiHandler.GuiId tabs[];
+	protected List<GuiId> tabs;
+	protected int selectedTab;
 
 	protected int tabButtonLeft;
 	protected int tabButtonTop;
 
-	public GUITabs(GuiScreen currentScreen, EntityPlayer player, World world, int x, int y, int z, GuiHandler.GuiId tabs[]) {
+	public GUITabs(GuiScreen currentScreen, EntityPlayer player, World world, int x, int y, int z, int selectedTab, List<GuiId> tabs) {
 		super();
 
 		this.currentScreen = currentScreen;
@@ -39,6 +43,7 @@ public class GUITabs extends GuiScreen {
 		this.z = z;
 		this.allowUserInput = true;
 		this.tabs = tabs;
+		this.selectedTab = selectedTab;
 	}
 
 	/**
@@ -75,9 +80,9 @@ public class GUITabs extends GuiScreen {
 
 		mc.getTextureManager().bindTexture(tabButtonsTexture);
 
-		for (int i = 0; i < tabs.length; i++) {
+		for (int i = 0; i < tabs.size(); i++) {
 			drawTexturedModalRect(tabButtonLeft, tabButtonTop + 30 * i,
-					(0 == i) ? 0 : 33, i * 28, 33, 28);
+					(selectedTab == i) ? 0 : 33, i * 28, 33, 28);
 		}
 
 		currentScreen.drawScreen(mouseX, mouseY, renderPartialTicks);
@@ -113,7 +118,7 @@ public class GUITabs extends GuiScreen {
 			int relativeMouseX = mouseX - tabButtonLeft;
 			int relativeMouseY = mouseY - tabButtonTop;
 
-			for (int i = 0; i < tabs.length; ++i) {
+			for (int i = 0; i < tabs.size(); ++i) {
 				if (relativeMouseX >= 0 && relativeMouseX < 29
 						&& relativeMouseY > i * 30
 						&& relativeMouseY < 30 + i * 30) {
@@ -124,10 +129,11 @@ public class GUITabs extends GuiScreen {
 	}
 
 	protected void selectTab(int tabId) {
-		if (tabId < 0 || tabId >= tabs.length) {
+		if (tabId < 0 || tabId >= tabs.size()) {
 			return;
 		}
 
-		player.openGui(Wakcraft.instance, tabs[tabId].ordinal(), world, x, y, z);
+		selectedTab = tabId;
+		player.openGui(Wakcraft.instance, tabs.get(tabId).ordinal(), world, x, y, z);
 	}
 }

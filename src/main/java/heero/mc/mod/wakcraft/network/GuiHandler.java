@@ -91,7 +91,7 @@ public class GuiHandler implements IGuiHandler {
 		case POLISHER:
 			return new GUIWorkbench(new ContainerWorkbench(player.inventory, world, PROFESSION.MINER), PROFESSION.MINER);
 		case INVENTORY:
-			return new GUIWakcraft(new GUIInventory(new ContainerPlayerInventory(player)), player, world, x, y, z);
+			return new GUIWakcraft(guiId, new GUIInventory(new ContainerPlayerInventory(player)), player, world, x, y, z);
 		case HAVEN_GEM_WORKBENCH:
 			tileEntity = (TileEntityHavenGemWorkbench)world.getTileEntity(x, y, z);
 			if (tileEntity == null || !(tileEntity instanceof TileEntityHavenGemWorkbench)) {
@@ -113,9 +113,9 @@ public class GuiHandler implements IGuiHandler {
 
 			return new GUIHavenBagChests(guiId, new ContainerHavenBagChest(player.inventory, (TileEntityHavenBagChest) tileEntity), player, world, x, y, z);
 		case ABILITIES:
-			return new GUIWakcraft(new GUIAbilities(player), player, world, x, y, z);
+			return new GUIWakcraft(guiId, new GUIAbilities(player), player, world, x, y, z);
 		case PROFESSION:
-			return new GUIWakcraft(new GUIProfession(player, PROFESSION.CHEF), player, world, x, y, z);
+			return new GUIWakcraft(guiId, new GUIProfession(player, PROFESSION.CHEF), player, world, x, y, z);
 		default:
 			break;
 		}

@@ -1,6 +1,10 @@
 package heero.mc.mod.wakcraft.client.gui;
 
-import heero.mc.mod.wakcraft.network.GuiHandler;
+import heero.mc.mod.wakcraft.network.GuiHandler.GuiId;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -9,8 +13,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIWakcraft extends GUITabs {
-	public GUIWakcraft(GuiScreen guiScreen, EntityPlayer player, World world, int x, int y, int z) {
-		super(guiScreen, player, world, x, y, z, new GuiHandler.GuiId[] { GuiHandler.GuiId.INVENTORY,
-				GuiHandler.GuiId.ABILITIES, GuiHandler.GuiId.PROFESSION });
+	protected static List<GuiId> guis = new ArrayList<GuiId>();
+	static {
+		guis.add(GuiId.INVENTORY);
+		guis.add(GuiId.ABILITIES);
+		guis.add(GuiId.PROFESSION);
+	}
+
+	public GUIWakcraft(GuiId guiId, GuiScreen guiScreen, EntityPlayer player, World world, int x, int y, int z) {
+		super(guiScreen, player, world, x, y, z, guis.indexOf(guiId), guis);
 	}
 }
