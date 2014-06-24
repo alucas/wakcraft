@@ -4,8 +4,8 @@ import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.crafting.CraftingManager;
 import heero.mc.mod.wakcraft.crafting.IExtendedRecipe;
 import heero.mc.mod.wakcraft.crafting.RecipeWithLevel;
-import heero.mc.mod.wakcraft.manager.ProfessionManager;
-import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
+import heero.mc.mod.wakcraft.profession.ProfessionManager;
+import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 
 import java.util.List;
 

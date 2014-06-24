@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.entity.property;
 
 import heero.mc.mod.wakcraft.WInfo;
-import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
+import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 
 import java.util.HashMap;
 import java.util.Map;

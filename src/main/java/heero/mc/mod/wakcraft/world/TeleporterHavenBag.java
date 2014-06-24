@@ -2,7 +2,7 @@ package heero.mc.mod.wakcraft.world;
 
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
-import heero.mc.mod.wakcraft.manager.HavenBagHelper;
+import heero.mc.mod.wakcraft.havenbag.HavenBagHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.Teleporter;

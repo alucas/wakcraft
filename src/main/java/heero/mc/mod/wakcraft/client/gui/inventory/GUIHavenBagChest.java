@@ -1,9 +1,9 @@
 package heero.mc.mod.wakcraft.client.gui.inventory;
 
 import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.helper.ChestType;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest.HavenBagChestSlot;
-import heero.mc.mod.wakcraft.manager.HavenBagChestHelper;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ public class GUIHavenBagChest extends GUIContainer {
 	private static final ResourceLocation textureBackground = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/havenbagchest.png");
 	private static final ResourceLocation textureBackground_locked = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/havenbagchest_locked.png");
 
-	public HavenBagChestHelper.ChestType chestId;
+	public ChestType chestId;
 
-	public GUIHavenBagChest(ContainerHavenBagChest container, HavenBagChestHelper.ChestType chestId) {
+	public GUIHavenBagChest(ContainerHavenBagChest container, ChestType chestId) {
 		super(container);
 
 		this.chestId = chestId;
@@ -39,7 +39,7 @@ public class GUIHavenBagChest extends GUIContainer {
 
 			drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-			ItemStack ikiakitStack = new ItemStack(HavenBagChestHelper.getChestIkiakit(chestId));
+			ItemStack ikiakitStack = new ItemStack(chestId.ikiakit);
 			Slot ikiakitSlot = new Slot(new InventoryBasic("", false, 1), 0, guiLeft + 26, guiTop + 60);
 			ikiakitSlot.putStack(ikiakitStack);
 
@@ -62,7 +62,7 @@ public class GUIHavenBagChest extends GUIContainer {
 
 		GL11.glEnable(GL11.GL_BLEND);
 
-		for (int i = HavenBagChestHelper.getChestSize(chestId); i < 54; i++) {
+		for (int i = chestId.chestSize; i < 54; i++) {
 			drawTexturedModalRect(guiLeft + 8 + (i % 9) * 18, guiTop + 18 + (i / 9) * 18, xSize, 0, 16, 16);
 		}
 

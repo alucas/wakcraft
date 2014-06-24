@@ -11,7 +11,7 @@ import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenGemWorkbench;
 import heero.mc.mod.wakcraft.inventory.ContainerPlayerInventory;
 import heero.mc.mod.wakcraft.inventory.ContainerWorkbench;
-import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
+import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import net.minecraft.entity.player.EntityPlayer;

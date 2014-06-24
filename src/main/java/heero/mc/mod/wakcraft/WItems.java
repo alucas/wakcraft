@@ -25,11 +25,14 @@ public class WItems extends Items {
 			itemOre1, itemOre2, canoonPowder, clay, waterBucket, driedDung,
 			pearl, moonstone, bomb, fossil, shamPearl, verbalasalt, gumgum,
 			polishedmoonstone, shadowyBlue, merchantHG, decoHG, craftHG,
-			gardenHG, smallikiakit, goldenikiakit, kitikiakit,
-			adventurerikiakit, collectorikiakit, emeraldikiakit,
-			gobballBreastplate, gobboots, gobballEpaulettes, gobballCape,
-			gobballBelt, gobballHeadgear, gobballAmulet, bouzeLiteYeahsRing,
-			gobballSeed;
+			gardenHG, gobballBreastplate, gobboots, gobballEpaulettes,
+			gobballCape, gobballBelt, gobballHeadgear, gobballAmulet,
+			bouzeLiteYeahsRing, gobballSeed;
+
+	// Ikiakits
+	public static ItemIkiakit ikiakitSmall, ikiakitAdventurer, ikiakitKit,
+			ikiakitCollector, ikiakitGolden, ikiakitEmerald;
+
 	// Iop spells
 	public static Item spellShaker, spellRocknoceros, spellImpact, spellCharge,
 			spellDevastate, spellThunderbolt, spellJudgment,
@@ -65,12 +68,12 @@ public class WItems extends Items {
 		GameRegistry.registerItem(decoHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("DecoHG").setTextureName(modid + "decohg").setMaxStackSize(1)), "ItemDecoHG");
 		GameRegistry.registerItem(craftHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("CraftHG").setTextureName(modid + "crafthg").setMaxStackSize(1)), "ItemCraftHG");
 		GameRegistry.registerItem(gardenHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GardenHG").setTextureName(modid + "gardenhg").setMaxStackSize(1)), "ItemGardenHG");
-		GameRegistry.registerItem(smallikiakit = new ItemIkiakit("SmallIkiakit"), "ItemSmallIkiakit");
-		GameRegistry.registerItem(goldenikiakit = new ItemIkiakit("GoldenIkiakit"), "ItemGoldenIkiakit");
-		GameRegistry.registerItem(kitikiakit = new ItemIkiakit("KitIkiakit"), "ItemKitIkiakit");
-		GameRegistry.registerItem(adventurerikiakit = new ItemIkiakit("AdventurerIkiakit"), "ItemAdventurerIkiakit");
-		GameRegistry.registerItem(collectorikiakit = new ItemIkiakit("CollectorIkiakit"), "ItemCollectorIkiakit");
-		GameRegistry.registerItem(emeraldikiakit = new ItemIkiakit("EmeraldIkiakit"), "ItemEmeraldIkiakit");
+		GameRegistry.registerItem(ikiakitSmall = new ItemIkiakit("SmallIkiakit"), "ItemSmallIkiakit");
+		GameRegistry.registerItem(ikiakitGolden = new ItemIkiakit("GoldenIkiakit"), "ItemGoldenIkiakit");
+		GameRegistry.registerItem(ikiakitKit = new ItemIkiakit("KitIkiakit"), "ItemKitIkiakit");
+		GameRegistry.registerItem(ikiakitAdventurer = new ItemIkiakit("AdventurerIkiakit"), "ItemAdventurerIkiakit");
+		GameRegistry.registerItem(ikiakitCollector = new ItemIkiakit("CollectorIkiakit"), "ItemCollectorIkiakit");
+		GameRegistry.registerItem(ikiakitEmerald = new ItemIkiakit("EmeraldIkiakit"), "ItemEmeraldIkiakit");
 		GameRegistry.registerItem(gobballSeed = new ItemWCreatureSeeds(0, "GobballSeed", "gobballseed").addCreature('G', Gobball.class).addCreature('B', BlackGobbly.class).addCreature('W', WhiteGobbly.class).addCreature('E', Gobbette.class).addCreature('C', GobballWC.class).addPatern("EWB", 0.5F), "ItemGobballSeed");
 
 		// Armors

@@ -1,4 +1,4 @@
-package heero.mc.mod.wakcraft.manager;
+package heero.mc.mod.wakcraft.profession;
 
 import heero.mc.mod.wakcraft.block.ILevelBlock;
 import heero.mc.mod.wakcraft.entity.property.ProfessionProperty;

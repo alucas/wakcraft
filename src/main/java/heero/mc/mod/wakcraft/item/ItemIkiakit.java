@@ -3,7 +3,7 @@ package heero.mc.mod.wakcraft.item;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.mc.mod.wakcraft.manager.HavenBagChestHelper;
+import heero.mc.mod.wakcraft.helper.ChestType;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -50,7 +50,7 @@ public class ItemIkiakit extends ItemWithLevel {
 				}
 
 				TileEntityHavenBagChest tileEntityChest = (TileEntityHavenBagChest) tileEntity;
-				HavenBagChestHelper.ChestType chestId = HavenBagChestHelper.getChestIdFromIkiakit(this);
+				ChestType chestId = ChestType.getChestIdFromIkiakit(this);
 				if (chestId == null) {
 					FMLLog.warning("No chestId found for itiakit : " + this);
 

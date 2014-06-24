@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.network.packet;
 
-import heero.mc.mod.wakcraft.manager.ProfessionManager;
-import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
+import heero.mc.mod.wakcraft.profession.ProfessionManager;
+import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import io.netty.buffer.ByteBuf;
 
 import java.util.HashMap;

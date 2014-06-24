@@ -5,8 +5,8 @@ import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.creature.EntityWCreature;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.helper.ItemInUseHelper;
-import heero.mc.mod.wakcraft.manager.ProfessionManager;
-import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
+import heero.mc.mod.wakcraft.profession.ProfessionManager;
+import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 
 import java.util.HashMap;
 import java.util.Map;

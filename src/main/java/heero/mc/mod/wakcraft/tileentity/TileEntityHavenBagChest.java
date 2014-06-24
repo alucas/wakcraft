@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.tileentity;
 
 import heero.mc.mod.wakcraft.block.BlockHavenBagChest;
-import heero.mc.mod.wakcraft.manager.HavenBagChestHelper;
+import heero.mc.mod.wakcraft.helper.ChestType;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -39,7 +39,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 			TAG_CHEST_EMERALD };
 
 	private Map<Integer, ItemStack> chestContents;
-	private Map<HavenBagChestHelper.ChestType, Boolean> chestUnlocked;
+	private Map<ChestType, Boolean> chestUnlocked;
 	
 	private int inventorySize;
 
@@ -61,20 +61,20 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 	public TileEntityHavenBagChest(int chestType) {
 		cachedChestType = chestType;
 		chestContents = new HashMap<Integer, ItemStack>();
-		chestUnlocked = new HashMap<HavenBagChestHelper.ChestType, Boolean>();
+		chestUnlocked = new HashMap<ChestType, Boolean>();
 		inventorySize = 0;
 
-		for (HavenBagChestHelper.ChestType chestId : HavenBagChestHelper.ChestType.values()) {
-			inventorySize += HavenBagChestHelper.getChestSize(chestId);
-			chestUnlocked.put(chestId, (chestId == HavenBagChestHelper.ChestType.CHEST_NORMAL));
+		for (ChestType chestId : ChestType.values()) {
+			inventorySize += chestId.chestSize;
+			chestUnlocked.put(chestId, (chestId == ChestType.CHEST_NORMAL));
 		}
 	}
 
-	public boolean isChestUnlocked(HavenBagChestHelper.ChestType chestId) {
+	public boolean isChestUnlocked(ChestType chestId) {
 		return chestUnlocked.get(chestId);
 	}
 
-	public void unlockChest(HavenBagChestHelper.ChestType chestId) {
+	public void unlockChest(ChestType chestId) {
 		chestUnlocked.put(chestId, true);
 	}
 
@@ -179,7 +179,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 		super.readFromNBT(tagRoot);
 		
 		int inventorySize = 0;
-		for (HavenBagChestHelper.ChestType chestId : HavenBagChestHelper.ChestType.values()) {
+		for (ChestType chestId : ChestType.values()) {
 			NBTTagCompound tagChest = tagRoot.getCompoundTag(CHESTS_TAGS[chestId.ordinal()]);
 			NBTTagList tagItems = tagChest.getTagList(TAG_ITEMS, 10);
 
@@ -191,13 +191,13 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 					NBTTagCompound tagItem = tagItems.getCompoundTagAt(i);
 					int slotId = tagItem.getByte(TAG_SLOT) & 255;
 
-					if (slotId >= 0 && slotId < HavenBagChestHelper.getChestSize(chestId)) {
+					if (slotId >= 0 && slotId < chestId.chestSize) {
 						chestContents.put(inventorySize + slotId, ItemStack.loadItemStackFromNBT(tagItem));
 					}
 				}
 			}
 
-			inventorySize += HavenBagChestHelper.getChestSize(chestId);
+			inventorySize += chestId.chestSize;
 		}
 	}
 
@@ -206,14 +206,14 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 		super.writeToNBT(tagRoot);
 
 		int inventorySize = 0;
-		for (HavenBagChestHelper.ChestType chestId : HavenBagChestHelper.ChestType.values()) {
+		for (ChestType chestId : ChestType.values()) {
 			Boolean unlocked = chestUnlocked.get(chestId);
 
 			NBTTagCompound tagChest = new NBTTagCompound();
 			NBTTagList tagItems = new NBTTagList();
 
 			if (unlocked) {
-				for (int slotId = 0; slotId < HavenBagChestHelper.getChestSize(chestId); slotId++) {
+				for (int slotId = 0; slotId < chestId.chestSize; slotId++) {
 					ItemStack stack = chestContents.get(inventorySize + slotId);
 					if (stack == null) {
 						continue;
@@ -231,7 +231,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 			tagChest.setBoolean(TAG_UNLOCKED, unlocked);
 			tagRoot.setTag(CHESTS_TAGS[chestId.ordinal()], tagChest);
 
-			inventorySize += HavenBagChestHelper.getChestSize(chestId);
+			inventorySize += chestId.chestSize;
 		}
 	}
 

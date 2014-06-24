@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft;
 
 import heero.mc.mod.wakcraft.fight.FightManager;
-import heero.mc.mod.wakcraft.manager.HavenBagsManager;
+import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
 import heero.mc.mod.wakcraft.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;

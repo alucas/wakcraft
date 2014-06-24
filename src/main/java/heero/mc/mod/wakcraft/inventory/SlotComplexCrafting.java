@@ -2,7 +2,7 @@ package heero.mc.mod.wakcraft.inventory;
 
 import heero.mc.mod.wakcraft.crafting.CraftingManager;
 import heero.mc.mod.wakcraft.crafting.IExtendedRecipe;
-import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
+import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;

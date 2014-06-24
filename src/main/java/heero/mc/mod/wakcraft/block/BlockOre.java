@@ -6,9 +6,9 @@ import heero.mc.mod.wakcraft.block.material.AventureMaterial;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockOre;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
-import heero.mc.mod.wakcraft.manager.ProfessionManager;
-import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
 import heero.mc.mod.wakcraft.network.packet.PacketProfession;
+import heero.mc.mod.wakcraft.profession.ProfessionManager;
+import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 
 import java.util.List;
 import java.util.Random;

@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.network.packet;
 
-import heero.mc.mod.wakcraft.manager.HavenBagsManager;
+import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.network.ByteBufUtils;

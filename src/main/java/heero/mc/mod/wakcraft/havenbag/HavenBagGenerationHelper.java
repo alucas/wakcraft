@@ -1,4 +1,4 @@
-package heero.mc.mod.wakcraft.manager;
+package heero.mc.mod.wakcraft.havenbag;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WConfig;

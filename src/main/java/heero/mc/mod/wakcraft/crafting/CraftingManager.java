@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.crafting;
 
 import heero.mc.mod.wakcraft.WItems;
-import heero.mc.mod.wakcraft.manager.ProfessionManager.PROFESSION;
+import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 
 import java.util.ArrayList;
 import java.util.HashMap;

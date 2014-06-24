@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.inventory;
 
-import heero.mc.mod.wakcraft.manager.HavenBagChestHelper;
+import heero.mc.mod.wakcraft.helper.ChestType;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -19,8 +19,8 @@ public class ContainerHavenBagChest extends Container {
 		tileEntity.openInventory();
 
 		int havenBagChestId = 0;
-		for (HavenBagChestHelper.ChestType chestId : HavenBagChestHelper.ChestType.values()) {
-			for (int i = 0; i < HavenBagChestHelper.getChestSize(chestId); i++) {
+		for (ChestType chestId : ChestType.values()) {
+			for (int i = 0; i < chestId.chestSize; i++) {
 				this.addSlotToContainer(new HavenBagChestSlot(tileEntity, havenBagChestId++, chestId, 8 + (i % 9) * 18, 18 + (i / 9) * 18));
 			}
 		}
@@ -45,7 +45,7 @@ public class ContainerHavenBagChest extends Container {
 		return true;
 	}
 
-	public void updateHBSlots(HavenBagChestHelper.ChestType selectedChestId) {
+	public void updateHBSlots(ChestType selectedChestId) {
 		for (int slotId = 0; slotId < inventorySlots.size(); slotId++) {
 			Slot slot = getSlot(slotId);
 			if (slot instanceof HavenBagChestSlot) {
@@ -54,7 +54,7 @@ public class ContainerHavenBagChest extends Container {
 		}
 	}
 
-	public boolean isChestUnlocked(HavenBagChestHelper.ChestType chestId) {
+	public boolean isChestUnlocked(ChestType chestId) {
 		return tileEntity.isChestUnlocked(chestId);
 	}
 
@@ -74,8 +74,8 @@ public class ContainerHavenBagChest extends Container {
 				}
 			} else {
 				int inventoryIndex = 0;
-				for (HavenBagChestHelper.ChestType chestId : HavenBagChestHelper.ChestType.values()) {
-					int chestSize = HavenBagChestHelper.getChestSize(chestId);
+				for (ChestType chestId : ChestType.values()) {
+					int chestSize = chestId.chestSize;
 
 					if (tileEntity.isChestUnlocked(chestId)) {
 						if (mergeItemStack(stack_in_slot, inventoryIndex, inventoryIndex + chestSize, false)) {
@@ -115,9 +115,9 @@ public class ContainerHavenBagChest extends Container {
 
 	public class HavenBagChestSlot extends Slot {
 		public boolean conceal;
-		public HavenBagChestHelper.ChestType chestId;
+		public ChestType chestId;
 
-		public HavenBagChestSlot(IInventory inventory, int inventoryId, HavenBagChestHelper.ChestType chestId, int posX, int posY) {
+		public HavenBagChestSlot(IInventory inventory, int inventoryId, ChestType chestId, int posX, int posY) {
 			super(inventory, inventoryId, posX, posY);
 
 			this.chestId = chestId;

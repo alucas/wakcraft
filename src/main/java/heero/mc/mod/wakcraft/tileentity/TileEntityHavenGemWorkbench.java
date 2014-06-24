@@ -1,8 +1,8 @@
 package heero.mc.mod.wakcraft.tileentity;
 
 import heero.mc.mod.wakcraft.WItems;
-import heero.mc.mod.wakcraft.manager.HavenBagGenerationHelper;
-import heero.mc.mod.wakcraft.manager.HavenBagHelper;
+import heero.mc.mod.wakcraft.havenbag.HavenBagGenerationHelper;
+import heero.mc.mod.wakcraft.havenbag.HavenBagHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;

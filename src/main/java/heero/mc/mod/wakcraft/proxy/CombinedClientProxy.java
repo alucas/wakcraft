@@ -27,7 +27,7 @@ import heero.mc.mod.wakcraft.eventhandler.GUIEventHandler;
 import heero.mc.mod.wakcraft.eventhandler.KeyInputHandler;
 import heero.mc.mod.wakcraft.eventhandler.TextureEventHandler;
 import heero.mc.mod.wakcraft.fight.FightClientEventsHandler;
-import heero.mc.mod.wakcraft.manager.HavenBagHelper;
+import heero.mc.mod.wakcraft.havenbag.HavenBagHelper;
 import heero.mc.mod.wakcraft.network.handler.HandlerClientExtendedEntityProperty;
 import heero.mc.mod.wakcraft.network.handler.HandlerClientHavenBagProperties;
 import heero.mc.mod.wakcraft.network.handler.HandlerClientOpenWindow;
