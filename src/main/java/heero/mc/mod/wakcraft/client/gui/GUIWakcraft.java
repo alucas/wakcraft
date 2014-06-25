@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.client.gui;
 
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.network.GuiId;
+import heero.mc.mod.wakcraft.network.packet.PacketOpenWindow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -28,6 +30,25 @@ public class GUIWakcraft extends GUITabs {
 
 	@Override
 	protected void onSelectTab(int tabId) {
-		player.openGui(Wakcraft.instance, tabs.get(tabId).ordinal(), world, x, y, z);
+		if (tabId < 0 || tabId >= tabs.size()) {
+			FMLLog.warning("Cannot convert tabId %d to guiId");
+			return;
+		}
+
+		GuiId guiId = tabs.get(tabId);
+		switch (guiId) {
+		case INVENTORY:
+		case SPELLS:
+			Wakcraft.packetPipeline.sendToServer(new PacketOpenWindow(tabs.get(tabId)));
+			break;
+
+		default:
+			player.openGui(Wakcraft.instance, guiId.ordinal(), world, x, y, z);
+		}
+	}
+
+	@Override
+	public boolean doesGuiPauseGame() {
+		return false;
 	}
 }
