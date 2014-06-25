@@ -76,6 +76,19 @@ public class ContainerSpells extends Container {
 		return oldStack;
 	}
 
+	@Override
+	public ItemStack slotClick(int slotId, int button, int mode, EntityPlayer player) {
+		// 0 = Click
+		// 1 = Shift + Click
+		// 4 = Drop item
+		// -999 = Unknown slot id
+		if (mode == 4 || ((mode == 0 || mode == 1) && slotId == -999)) {
+			return null;
+		}
+
+		return super.slotClick(slotId, button, mode, player);
+	}
+
 	protected class SlotInfinite extends Slot {
 		public SlotInfinite(IInventory inventory, int id, int x, int y) {
 			super(inventory, id, x, y);
