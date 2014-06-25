@@ -4,7 +4,7 @@ import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.helper.HavenBagHelper;
-import heero.mc.mod.wakcraft.network.GuiHandler;
+import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 
 import java.util.Random;
@@ -156,7 +156,7 @@ public class BlockHavenBagChest extends BlockContainer {
 			return true;
 		}
 
-		player.openGui(Wakcraft.instance, GuiHandler.GuiId.HAVEN_BAG_CHEST_NORMAL.ordinal(), world, x, y, z);
+		player.openGui(Wakcraft.instance, GuiId.HAVEN_BAG_CHEST_NORMAL.ordinal(), world, x, y, z);
 
 		return true;
 	}

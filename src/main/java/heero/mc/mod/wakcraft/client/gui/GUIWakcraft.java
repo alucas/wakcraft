@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.client.gui;
 
-import heero.mc.mod.wakcraft.network.GuiHandler.GuiId;
+import heero.mc.mod.wakcraft.Wakcraft;
+import heero.mc.mod.wakcraft.network.GuiId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,5 +24,10 @@ public class GUIWakcraft extends GUITabs {
 
 	public GUIWakcraft(GuiId guiId, GuiScreen guiScreen, EntityPlayer player, World world, int x, int y, int z) {
 		super(guiScreen, player, world, x, y, z, guis.indexOf(guiId), guis);
+	}
+
+	@Override
+	protected void onSelectTab(int tabId) {
+		player.openGui(Wakcraft.instance, tabs.get(tabId).ordinal(), world, x, y, z);
 	}
 }

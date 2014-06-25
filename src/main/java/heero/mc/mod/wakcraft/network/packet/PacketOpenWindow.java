@@ -1,28 +1,32 @@
 package heero.mc.mod.wakcraft.network.packet;
 
+import heero.mc.mod.wakcraft.network.GuiId;
 import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class PacketOpenWindow implements IMessage {
-	public static final int WINDOW_HB_VISITORS = 1;
-	public static final int WINDOW_INVENTORY = 2;
-
-	public int windowId;
+	public GuiId windowId;
 
 	public PacketOpenWindow() {
 	}
 
-	public PacketOpenWindow(int windowId) {
+	public PacketOpenWindow(GuiId windowId) {
 		this.windowId = windowId;
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buffer) {
-		this.windowId = buffer.readInt();
+		int index = buffer.readInt();
+		if (index < 0 || index > GuiId.values().length) {
+			this.windowId = GuiId.UNKNOW;
+			return;
+		}
+
+		this.windowId = GuiId.values()[index];
 	}
 
 	@Override
 	public void toBytes(ByteBuf buffer) {
-		buffer.writeInt(windowId);
+		buffer.writeInt(windowId.ordinal());
 	}
 }

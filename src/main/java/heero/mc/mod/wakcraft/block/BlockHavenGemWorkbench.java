@@ -5,7 +5,7 @@ import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.helper.HavenBagHelper;
-import heero.mc.mod.wakcraft.network.GuiHandler;
+import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -55,7 +55,7 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 			return true;
 		}
 
-		player.openGui(Wakcraft.instance, GuiHandler.GuiId.HAVEN_GEM_WORKBENCH.ordinal(), world, x, y, z);
+		player.openGui(Wakcraft.instance, GuiId.HAVEN_GEM_WORKBENCH.ordinal(), world, x, y, z);
 
 		return true;
 	}

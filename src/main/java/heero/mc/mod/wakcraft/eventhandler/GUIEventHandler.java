@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.eventhandler;
 
 import heero.mc.mod.wakcraft.Wakcraft;
+import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.network.packet.PacketOpenWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -17,7 +18,7 @@ public class GUIEventHandler {
 				return;
 			}
 
-			Wakcraft.packetPipeline.sendToServer(new PacketOpenWindow(PacketOpenWindow.WINDOW_INVENTORY));
+			Wakcraft.packetPipeline.sendToServer(new PacketOpenWindow(GuiId.INVENTORY));
 
 			event.setCanceled(true);
 		}

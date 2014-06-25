@@ -2,7 +2,7 @@ package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
-import heero.mc.mod.wakcraft.network.GuiHandler;
+import heero.mc.mod.wakcraft.network.GuiId;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +23,7 @@ public class BlockPolisher extends Block {
 			return true;
 		}
 
-		player.openGui(Wakcraft.instance, GuiHandler.GuiId.POLISHER.ordinal(), world, x, y, z);
+		player.openGui(Wakcraft.instance, GuiId.POLISHER.ordinal(), world, x, y, z);
 
 		return true;
 	}

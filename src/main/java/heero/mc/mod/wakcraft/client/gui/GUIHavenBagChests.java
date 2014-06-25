@@ -3,7 +3,7 @@ package heero.mc.mod.wakcraft.client.gui;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenBagChest;
 import heero.mc.mod.wakcraft.havenbag.ChestType;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
-import heero.mc.mod.wakcraft.network.GuiHandler.GuiId;
+import heero.mc.mod.wakcraft.network.GuiId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,19 +53,6 @@ public class GUIHavenBagChests extends GUITabs {
 	}
 
 	@Override
-	protected void selectTab(int tabId) {
-		ChestType chestTypes[] = ChestType.values();
-		if (tabId < 0 || tabId >= chestTypes.length) {
-			FMLLog.warning("Cannot convert tabId %d to chestTypeId");
-			return;
-		}
-
-		selectedTab = tabId;
-		((GUIHavenBagChest) currentScreen).chestId = chestTypes[tabId];
-		container.updateHBSlots(chestTypes[tabId]);
-	}
-
-	@Override
 	public boolean doesGuiPauseGame() {
 		return false;
 	}
@@ -79,5 +66,17 @@ public class GUIHavenBagChests extends GUITabs {
 		if (this.mc.thePlayer != null) {
 			container.onContainerClosed(this.mc.thePlayer);
 		}
+	}
+
+	@Override
+	protected void onSelectTab(int tabId) {
+		ChestType chestTypes[] = ChestType.values();
+		if (tabId < 0 || tabId >= chestTypes.length) {
+			FMLLog.warning("Cannot convert tabId %d to chestTypeId");
+			return;
+		}
+
+		((GUIHavenBagChest) currentScreen).chestId = chestTypes[tabId];
+		container.updateHBSlots(chestTypes[tabId]);
 	}
 }

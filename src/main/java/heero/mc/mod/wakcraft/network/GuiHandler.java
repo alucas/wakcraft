@@ -24,22 +24,6 @@ import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
-	public static enum GuiId {
-		ABILITIES,
-		INVENTORY,
-		HAVEN_BAG_CHEST_NORMAL,
-		HAVEN_BAG_CHEST_SMALL,
-		HAVEN_BAG_CHEST_ADVENTURER,
-		HAVEN_BAG_CHEST_KIT,
-		HAVEN_BAG_CHEST_COLLECTOR,
-		HAVEN_BAG_CHEST_GOLDEN,
-		HAVEN_BAG_CHEST_EMERALD,
-		HAVEN_GEM_WORKBENCH,
-		POLISHER,
-		PROFESSION,
-		SPELLS
-	}
-
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		GuiId guiId = (id >= 0 && id < GuiId.values().length) ? GuiId.values()[id] : null;

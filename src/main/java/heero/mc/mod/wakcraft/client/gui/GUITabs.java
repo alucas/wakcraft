@@ -1,8 +1,7 @@
 package heero.mc.mod.wakcraft.client.gui;
 
 import heero.mc.mod.wakcraft.WInfo;
-import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.network.GuiHandler.GuiId;
+import heero.mc.mod.wakcraft.network.GuiId;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GUITabs extends GuiScreen {
+public abstract class GUITabs extends GuiScreen {
 	private static final ResourceLocation tabButtonsTexture = new ResourceLocation(
 			WInfo.MODID.toLowerCase(), "textures/gui/tabs.png");
 
@@ -134,6 +133,9 @@ public class GUITabs extends GuiScreen {
 		}
 
 		selectedTab = tabId;
-		player.openGui(Wakcraft.instance, tabs.get(tabId).ordinal(), world, x, y, z);
+
+		onSelectTab(tabId);
 	}
+
+	protected abstract void onSelectTab(int tabId);
 }
