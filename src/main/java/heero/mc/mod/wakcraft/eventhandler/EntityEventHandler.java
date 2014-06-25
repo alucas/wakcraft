@@ -5,6 +5,7 @@ import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.entity.property.InventoryProperty;
 import heero.mc.mod.wakcraft.entity.property.ItemInUseProperty;
 import heero.mc.mod.wakcraft.entity.property.ProfessionProperty;
+import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -19,6 +20,7 @@ public class EntityEventHandler {
 			player.registerExtendedProperties(InventoryProperty.IDENTIFIER, new InventoryProperty());
 			player.registerExtendedProperties(CharacterProperty.IDENTIFIER, new CharacterProperty());
 			player.registerExtendedProperties(ItemInUseProperty.IDENTIFIER, new ItemInUseProperty());
+			player.registerExtendedProperties(SpellsProperty.IDENTIFIER, new SpellsProperty());
 		}
 	}
 }
