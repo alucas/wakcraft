@@ -6,10 +6,12 @@ import heero.mc.mod.wakcraft.client.gui.GUIProfession;
 import heero.mc.mod.wakcraft.client.gui.GUIWakcraft;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIInventory;
+import heero.mc.mod.wakcraft.client.gui.inventory.GUISpells;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIWorkbench;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenGemWorkbench;
 import heero.mc.mod.wakcraft.inventory.ContainerPlayerInventory;
+import heero.mc.mod.wakcraft.inventory.ContainerSpells;
 import heero.mc.mod.wakcraft.inventory.ContainerWorkbench;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
@@ -23,8 +25,8 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 	public static enum GuiId {
-		POLISHER,
-		HAVEN_GEM_WORKBENCH,
+		ABILITIES,
+		INVENTORY,
 		HAVEN_BAG_CHEST_NORMAL,
 		HAVEN_BAG_CHEST_SMALL,
 		HAVEN_BAG_CHEST_ADVENTURER,
@@ -32,9 +34,10 @@ public class GuiHandler implements IGuiHandler {
 		HAVEN_BAG_CHEST_COLLECTOR,
 		HAVEN_BAG_CHEST_GOLDEN,
 		HAVEN_BAG_CHEST_EMERALD,
-		INVENTORY,
-		ABILITIES,
-		PROFESSION
+		HAVEN_GEM_WORKBENCH,
+		POLISHER,
+		PROFESSION,
+		SPELLS
 	}
 
 	@Override
@@ -66,10 +69,8 @@ public class GuiHandler implements IGuiHandler {
 			}
 
 			return new ContainerHavenBagChest(player.inventory, (TileEntityHavenBagChest) tileEntity);
-		case ABILITIES:
-			break;
-		case PROFESSION:
-			break;
+		case SPELLS:
+			return new ContainerSpells(player);
 		default:
 			break;
 		}
@@ -116,6 +117,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GUIWakcraft(guiId, new GUIAbilities(player), player, world, x, y, z);
 		case PROFESSION:
 			return new GUIWakcraft(guiId, new GUIProfession(player, PROFESSION.CHEF), player, world, x, y, z);
+		case SPELLS:
+			return new GUIWakcraft(guiId, new GUISpells(new ContainerSpells(player)), player, world, x, y, z);
 		default:
 			break;
 		}

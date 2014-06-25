@@ -18,6 +18,7 @@ public class GUIWakcraft extends GUITabs {
 		guis.add(GuiId.INVENTORY);
 		guis.add(GuiId.ABILITIES);
 		guis.add(GuiId.PROFESSION);
+		guis.add(GuiId.SPELLS);
 	}
 
 	public GUIWakcraft(GuiId guiId, GuiScreen guiScreen, EntityPlayer player, World world, int x, int y, int z) {

@@ -32,4 +32,9 @@ public class Spell extends Item {
 			float hitZ) {
 		return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
 	}
+
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		return 1;
+	}
 }
