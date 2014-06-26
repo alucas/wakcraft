@@ -488,14 +488,6 @@ public enum FightManager {
 		}
 	}
 
-	protected void resetStartPosition(List<List<EntityLivingBase>> fighters) {
-		for (List<EntityLivingBase> team : fighters) {
-			for (EntityLivingBase fighter : team) {
-				FightHelper.setStartPosition(fighter, null);
-			}
-		}
-	}
-
 	/**
 	 * Return the defeated team (if there is one).
 	 * 
@@ -549,7 +541,6 @@ public enum FightManager {
 		terminateFight(fightId, world, fight.getFightersByTeam());
 		destroyFightMap(world, fight.getFightBlocks());
 		removeFightersFromFight(fight.getFightersByTeam());
-		resetStartPosition(fight.getFightersByTeam());
 	}
 
 	/**
@@ -584,16 +575,13 @@ public enum FightManager {
 	/**
 	 * Inform fighters of their exiting of the fight
 	 * 
-	 * @param fighters	Fighters list.
+	 * @param fightersByTeam	Fighters list.
 	 */
-	public void removeFightersFromFight(List<List<EntityLivingBase>> fighters) {
-		Iterator<List<EntityLivingBase>> teams = fighters.iterator();
-		while (teams.hasNext()) {
-			Iterator<EntityLivingBase> entities = teams.next().iterator();
-			while (entities.hasNext()) {
-				EntityLivingBase entity = entities.next();
-
-				FightHelper.resetProperties(entity);
+	public void removeFightersFromFight(List<List<EntityLivingBase>> fightersByTeam) {
+		for (List<EntityLivingBase> team : fightersByTeam) {
+			for (EntityLivingBase fighter : team) {
+				FightHelper.resetProperties(fighter);
+				FightHelper.setStartPosition(fighter, null);
 			}
 		}
 	}
