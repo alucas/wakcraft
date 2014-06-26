@@ -1,7 +1,15 @@
 package heero.mc.mod.wakcraft.proxy;
 
+import heero.mc.mod.wakcraft.client.gui.GUIAbilities;
 import heero.mc.mod.wakcraft.client.gui.GUIClassSelection;
+import heero.mc.mod.wakcraft.client.gui.GUIHavenBagChests;
 import heero.mc.mod.wakcraft.client.gui.GUIHavenBagVisitors;
+import heero.mc.mod.wakcraft.client.gui.GUIProfession;
+import heero.mc.mod.wakcraft.client.gui.GUIWakcraft;
+import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
+import heero.mc.mod.wakcraft.client.gui.inventory.GUIInventory;
+import heero.mc.mod.wakcraft.client.gui.inventory.GUISpells;
+import heero.mc.mod.wakcraft.client.gui.inventory.GUIWorkbench;
 import heero.mc.mod.wakcraft.client.model.ModelGobball;
 import heero.mc.mod.wakcraft.client.model.ModelGobballWC;
 import heero.mc.mod.wakcraft.client.model.ModelGobbette;
@@ -28,6 +36,12 @@ import heero.mc.mod.wakcraft.eventhandler.KeyInputHandler;
 import heero.mc.mod.wakcraft.eventhandler.TextureEventHandler;
 import heero.mc.mod.wakcraft.fight.FightClientEventsHandler;
 import heero.mc.mod.wakcraft.helper.HavenBagHelper;
+import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
+import heero.mc.mod.wakcraft.inventory.ContainerHavenGemWorkbench;
+import heero.mc.mod.wakcraft.inventory.ContainerPlayerInventory;
+import heero.mc.mod.wakcraft.inventory.ContainerSpells;
+import heero.mc.mod.wakcraft.inventory.ContainerWorkbench;
+import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.network.handler.HandlerClientExtendedEntityProperty;
 import heero.mc.mod.wakcraft.network.handler.HandlerClientHavenBagProperties;
 import heero.mc.mod.wakcraft.network.handler.HandlerClientOpenWindow;
@@ -46,11 +60,16 @@ import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStartTurn;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
+import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import heero.mc.mod.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
+import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import heero.mc.mod.wakcraft.tileentity.TileEntityPhoenix;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -129,5 +148,47 @@ public class CombinedClientProxy extends CommonProxy {
 		packetPipeline.registerMessage(HandlerClientFightChangeStage.class, PacketFightChangeStage.class, 10, Side.CLIENT);
 		packetPipeline.registerMessage(HandlerClientFightSelectPosition.class, PacketFightSelectPosition.class, 11, Side.CLIENT);
 		packetPipeline.registerMessage(HandlerClientFightStartTurn.class, PacketFightStartTurn.class, 13, Side.CLIENT);
+	}
+
+	@Override
+	public Object getGui(GuiId guiId, EntityPlayer player, World world, int x, int y, int z) {
+		TileEntity tileEntity;
+
+		switch (guiId) {
+		case POLISHER:
+			return new GUIWorkbench(new ContainerWorkbench(player.inventory, world, PROFESSION.MINER), PROFESSION.MINER);
+		case INVENTORY:
+			return new GUIWakcraft(guiId, new GUIInventory(new ContainerPlayerInventory(player)), player, world, x, y, z);
+		case HAVEN_GEM_WORKBENCH:
+			tileEntity = (TileEntityHavenGemWorkbench)world.getTileEntity(x, y, z);
+			if (tileEntity == null || !(tileEntity instanceof TileEntityHavenGemWorkbench)) {
+				return null;
+			}
+
+			return new GUIHavenGemWorkbench(new ContainerHavenGemWorkbench(player.inventory, (IInventory) tileEntity));
+		case HAVEN_BAG_CHEST_NORMAL:
+		case HAVEN_BAG_CHEST_SMALL:
+		case HAVEN_BAG_CHEST_ADVENTURER:
+		case HAVEN_BAG_CHEST_KIT:
+		case HAVEN_BAG_CHEST_COLLECTOR:
+		case HAVEN_BAG_CHEST_GOLDEN:
+		case HAVEN_BAG_CHEST_EMERALD:
+			tileEntity = world.getTileEntity(x, y, z);
+			if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagChest)) {
+				return null;
+			}
+
+			return new GUIHavenBagChests(guiId, new ContainerHavenBagChest(player.inventory, (TileEntityHavenBagChest) tileEntity), player, world, x, y, z);
+		case ABILITIES:
+			return new GUIWakcraft(guiId, new GUIAbilities(player), player, world, x, y, z);
+		case PROFESSION:
+			return new GUIWakcraft(guiId, new GUIProfession(player, PROFESSION.CHEF), player, world, x, y, z);
+		case SPELLS:
+			return new GUIWakcraft(guiId, new GUISpells(new ContainerSpells(player)), player, world, x, y, z);
+		default:
+			break;
+		}
+
+		return null;
 	}
 }

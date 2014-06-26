@@ -17,6 +17,7 @@ import heero.mc.mod.wakcraft.eventhandler.PlayerEventHandler;
 import heero.mc.mod.wakcraft.eventhandler.WorldEventHandler;
 import heero.mc.mod.wakcraft.fight.FightEventsHandler;
 import heero.mc.mod.wakcraft.network.GuiHandler;
+import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.network.handler.HandlerServerCloseWindow;
 import heero.mc.mod.wakcraft.network.handler.HandlerServerHavenBagTeleportation;
 import heero.mc.mod.wakcraft.network.handler.HandlerServerHavenBagVisitors;
@@ -38,6 +39,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -134,5 +136,9 @@ public class CommonProxy {
 		packetPipeline.registerMessage(HandlerServerCloseWindow.class, PacketCloseWindow.class, 3, Side.SERVER);
 		packetPipeline.registerMessage(HandlerServerHavenBagVisitors.class, PacketHavenBagVisitors.class, 5, Side.SERVER);
 		packetPipeline.registerMessage(HandlerServerFightSelectPosition.class, PacketFightSelectPosition.class, 12, Side.SERVER);
+	}
+
+	public Object getGui(GuiId guiId, EntityPlayer player, World world, int x, int y, int z) {
+		return null;
 	}
 }
