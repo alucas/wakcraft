@@ -125,7 +125,7 @@ public class HavenBagsManager extends WorldSavedData {
 	}
 
 	protected void writeHavenBagToNBT(NBTTagCompound tagHavenBag, int uid){
-		HavenBagProperties properties = havenbags.get(uid);
+		HavenBagProperties properties = getProperties(uid);
 
 		NBTTagCompound tagProperties = new NBTTagCompound();
 		NBTTagList tagACL = new NBTTagList();
