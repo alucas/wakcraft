@@ -65,6 +65,8 @@ public abstract class GUITabs extends GuiScreen {
 		tabButtonTop = height / 2 - 70;
 
 		super.initGui();
+
+		currentScreen.initGui();
 	}
 
 	/**
