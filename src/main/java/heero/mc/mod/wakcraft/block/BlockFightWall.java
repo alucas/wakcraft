@@ -56,7 +56,7 @@ public class BlockFightWall extends BlockGeneric {
 	@Override
 	public MovingObjectPosition collisionRayTrace(World world, int posX, int posY, int posZ, Vec3 vec1, Vec3 vec2) {
 		if (world.isRemote) {
-			if (!FightHelper.isFighter(Wakcraft.proxy.getCurrentPlayer()) || !FightHelper.isFighting(Wakcraft.proxy.getCurrentPlayer())) {
+			if (!FightHelper.isFighter(Wakcraft.proxy.getClientPlayer()) || !FightHelper.isFighting(Wakcraft.proxy.getClientPlayer())) {
 				return null;
 			}
 		}

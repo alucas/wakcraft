@@ -1,8 +1,8 @@
 package heero.mc.mod.wakcraft.network.handler.fight;
 
+import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -11,7 +11,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 public class HandlerClientFightSelectPosition implements IMessageHandler<PacketFightSelectPosition, IMessage> {
 	@Override
 	public IMessage onMessage(PacketFightSelectPosition message, MessageContext ctx) {
-		Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(message.fighterId);
+		Entity entity = Wakcraft.proxy.getClientWorld().getEntityByID(message.fighterId);
 		if (entity == null) {
 			throw new RuntimeException("No entity found for id " + message.fighterId);
 		}

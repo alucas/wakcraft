@@ -1,8 +1,8 @@
 package heero.mc.mod.wakcraft.network.handler;
 
+import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.property.ISynchProperties;
 import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import cpw.mods.fml.common.FMLLog;
@@ -13,7 +13,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 public class HandlerClientExtendedEntityProperty implements IMessageHandler<PacketExtendedEntityProperty, IMessage> {
 	@Override
 	public IMessage onMessage(PacketExtendedEntityProperty message, MessageContext ctx) {
-		Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(message.entityId);
+		Entity entity = Wakcraft.proxy.getClientWorld().getEntityByID(message.entityId);
 		if (entity == null) {
 			FMLLog.warning("Error while loading entity %d, entity not found", message.entityId);
 			return null;
