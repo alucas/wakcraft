@@ -49,7 +49,7 @@ public class FightRenderer extends IRenderHandler {
 			}
 		} else if (fightStage == FightStage.FIGHT) {
 			renderMovement(partialTicks, world, mc, player);
-			renderDirection(partialTicks, world, mc, player);
+			//renderDirection(partialTicks, world, mc, player);
 		}
 	}
 
