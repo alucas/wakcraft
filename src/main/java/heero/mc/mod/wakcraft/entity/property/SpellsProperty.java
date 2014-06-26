@@ -18,7 +18,6 @@ public class SpellsProperty implements IExtendedEntityProperties, ISynchProperti
 	protected static String TAG_SLOT = "Slot";
 
 	protected IInventory spellsInventory = new InventoryBasic("spellsInventory", false, 34);
-	protected IInventory itemsSave = new InventoryBasic("itemsSave", false, 9);
 
 	@Override
 	public void init(Entity entity, World world) {
@@ -98,9 +97,5 @@ public class SpellsProperty implements IExtendedEntityProperties, ISynchProperti
 
 	public IInventory getSpellsInventory() {
 		return spellsInventory;
-	}
-
-	public IInventory getItemsSave() {
-		return itemsSave;
 	}
 }

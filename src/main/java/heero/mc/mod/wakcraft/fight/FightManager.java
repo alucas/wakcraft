@@ -5,7 +5,6 @@ import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
-import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
@@ -32,7 +31,6 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
@@ -579,21 +577,6 @@ public enum FightManager {
 				EntityLivingBase entity = entities.next();
 
 				FightHelper.setProperties(entity, fightId, teamId);
-
-				if (entity instanceof EntityPlayer) {
-					EntityPlayer player = (EntityPlayer) entity;
-
-					SpellsProperty properties = (SpellsProperty) player.getExtendedProperties(SpellsProperty.IDENTIFIER);
-					if (properties == null) {
-						FMLLog.warning("Error while loading the spells properties");
-						continue;
-					}
-
-					for (int i = 0; i < 9; i++) {
-						properties.getItemsSave().setInventorySlotContents(i, player.inventory.mainInventory[i]);
-						player.inventory.mainInventory[i] = properties.getSpellsInventory().getStackInSlot(i + 25);
-					}
-				}
 			}
 		}
 	}
@@ -611,20 +594,6 @@ public enum FightManager {
 				EntityLivingBase entity = entities.next();
 
 				FightHelper.resetProperties(entity);
-
-				if (entity instanceof EntityPlayer) {
-					EntityPlayer player = (EntityPlayer) entity;
-
-					SpellsProperty properties = (SpellsProperty) player.getExtendedProperties(SpellsProperty.IDENTIFIER);
-					if (properties == null) {
-						FMLLog.warning("Error while loading the spells properties");
-						continue;
-					}
-
-					for (int i = 0; i < 9; i++) {
-						player.inventory.mainInventory[i] = properties.getItemsSave().getStackInSlot(i);
-					}
-				}
 			}
 		}
 	}
