@@ -51,9 +51,9 @@ public abstract class GUITabs extends GuiScreen {
 	 */
 	@Override
 	public void setWorldAndResolution(Minecraft minecraft, int width, int height) {
-		super.setWorldAndResolution(minecraft, width, height);
-
 		currentScreen.setWorldAndResolution(minecraft, width, height);
+
+		super.setWorldAndResolution(minecraft, width, height);
 	}
 
 	/**
