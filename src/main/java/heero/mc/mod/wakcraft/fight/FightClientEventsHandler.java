@@ -2,10 +2,12 @@ package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.client.gui.fight.GuiFightOverlay;
+import heero.mc.mod.wakcraft.client.renderer.fight.FighterRenderer;
 import heero.mc.mod.wakcraft.client.setting.KeyBindings;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChunkCoordinates;
@@ -16,16 +18,23 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 
 public class FightClientEventsHandler {
 	protected IRenderHandler fightWorldRender;
 	protected GuiFightOverlay guiFightOverlay;
+	protected FighterRenderer fighterRenderer;
 
-	public FightClientEventsHandler(IRenderHandler fightWorldRender, GuiFightOverlay guiFightOverlay) {
+	public FightClientEventsHandler(IRenderHandler fightWorldRender, GuiFightOverlay guiFightOverlay, FighterRenderer fighterRenderer) {
 		this.fightWorldRender = fightWorldRender;
 		this.guiFightOverlay = guiFightOverlay;
+		this.fighterRenderer = fighterRenderer;
 	}
 
 	@SubscribeEvent
@@ -95,7 +104,24 @@ public class FightClientEventsHandler {
 			return;
 		}
 
+		GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
+		fighterRenderer.renderHand(event.partialTicks, event.renderPass);
+
 		event.setCanceled(true);
 		return;
+	}
+
+	@SubscribeEvent
+	public void onServerTickEvent(ServerTickEvent event) {
+		if (event.phase != Phase.END) {
+			return;
+		}
+
+		EntityPlayer player = Wakcraft.proxy.getClientPlayer();
+		if (!FightHelper.isFighter(player) || !FightHelper.isFighting(player) || !(player instanceof EntityPlayerSP)) {
+			return;
+		}
+
+		fighterRenderer.updateRenderer((EntityPlayerSP) player);
 	}
 }

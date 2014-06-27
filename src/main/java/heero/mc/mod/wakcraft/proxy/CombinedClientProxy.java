@@ -21,6 +21,7 @@ import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockYRotation;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererSeedsPile;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererTextPopup;
 import heero.mc.mod.wakcraft.client.renderer.fight.FightRenderer;
+import heero.mc.mod.wakcraft.client.renderer.fight.FighterRenderer;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererDragoexpress;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererHavenBagChest;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererPhoenix;
@@ -80,13 +81,20 @@ public class CombinedClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void registerEvents() {
-		super.registerEvents();
-
-		FightClientEventsHandler fightEventHandler = new FightClientEventsHandler(new FightRenderer(), new GuiFightOverlay(Minecraft.getMinecraft()));
+	public void registerPreInitEvents() {
+		super.registerPreInitEvents();
 
 		MinecraftForge.EVENT_BUS.register(new GUIEventHandler());
 		MinecraftForge.EVENT_BUS.register(new TextureEventHandler());
+	}
+
+	@Override
+	public void registerInitEvents() {
+		super.registerInitEvents();
+
+		Minecraft minecraft = Minecraft.getMinecraft();
+		FightClientEventsHandler fightEventHandler = new FightClientEventsHandler(new FightRenderer(), new GuiFightOverlay(minecraft), new FighterRenderer(minecraft));
+
 		MinecraftForge.EVENT_BUS.register(fightEventHandler);
 
 		FMLCommonHandler.instance().bus().register(fightEventHandler);

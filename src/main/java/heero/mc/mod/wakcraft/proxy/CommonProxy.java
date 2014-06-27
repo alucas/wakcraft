@@ -70,7 +70,7 @@ public class CommonProxy {
 	public void registerRenderers() {
 	}
 
-	public void registerEvents() {
+	public void registerPreInitEvents() {
 		FightEventsHandler fightsHandler = new FightEventsHandler();
 
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
@@ -81,6 +81,9 @@ public class CommonProxy {
 
 		FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
 		FMLCommonHandler.instance().bus().register(fightsHandler);
+	}
+
+	public void registerInitEvents() {
 	}
 
 	public void registerItems() {

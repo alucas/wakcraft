@@ -34,7 +34,7 @@ public class Wakcraft {
 
 		WConfig.loadConfig(event.getSuggestedConfigurationFile());
 
-		proxy.registerEvents();
+		proxy.registerPreInitEvents();
 		proxy.registerBlocks();
 		proxy.registerItems();
 		proxy.registerEntities();
@@ -47,6 +47,7 @@ public class Wakcraft {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		proxy.registerInitEvents();
 		proxy.registerKeyBindings();
 	}
 
