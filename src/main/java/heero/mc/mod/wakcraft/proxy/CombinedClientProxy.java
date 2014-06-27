@@ -6,6 +6,7 @@ import heero.mc.mod.wakcraft.client.gui.GUIHavenBagChests;
 import heero.mc.mod.wakcraft.client.gui.GUIHavenBagVisitors;
 import heero.mc.mod.wakcraft.client.gui.GUIProfession;
 import heero.mc.mod.wakcraft.client.gui.GUIWakcraft;
+import heero.mc.mod.wakcraft.client.gui.fight.GuiFightOverlay;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIInventory;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUISpells;
@@ -82,7 +83,7 @@ public class CombinedClientProxy extends CommonProxy {
 	public void registerEvents() {
 		super.registerEvents();
 
-		FightClientEventsHandler fightEventHandler = new FightClientEventsHandler(new FightRenderer());
+		FightClientEventsHandler fightEventHandler = new FightClientEventsHandler(new FightRenderer(), new GuiFightOverlay(Minecraft.getMinecraft()));
 
 		MinecraftForge.EVENT_BUS.register(new GUIEventHandler());
 		MinecraftForge.EVENT_BUS.register(new TextureEventHandler());

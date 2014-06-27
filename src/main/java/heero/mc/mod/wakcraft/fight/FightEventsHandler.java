@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
+import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -34,6 +35,7 @@ public class FightEventsHandler {
 		if (FightHelper.isFighter((EntityLivingBase) event.entity)) {
 			event.entity.registerExtendedProperties(FightProperty.IDENTIFIER, new FightProperty());
 			event.entity.registerExtendedProperties(FightCharacteristicsProperty.IDENTIFIER, new FightCharacteristicsProperty());
+			event.entity.registerExtendedProperties(SpellsProperty.IDENTIFIER, new SpellsProperty());
 		}
 	}
 

@@ -5,11 +5,13 @@ import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
+import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ChunkCoordinates;
 
 public class FightHelper {
@@ -69,5 +71,9 @@ public class FightHelper {
 
 	public static ChunkCoordinates getCurrentPosition(Entity entity) {
 		return ((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).getCurrentPosition();
+	}
+
+	public static IInventory getSpellsInventory(Entity entity) {
+		return ((SpellsProperty) entity.getExtendedProperties(SpellsProperty.IDENTIFIER)).getSpellsInventory();
 	}
 }
