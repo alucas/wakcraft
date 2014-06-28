@@ -139,7 +139,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(plank = (new BlockGeneric(Material.wood).setBlockTextureName("plank").setBlockName("Plank").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockPlank");
 
 		// Special blocks
-		GameRegistry.registerBlock(polisher = (new BlockPolisher().setBlockName("Polisher").setBlockTextureName(modid + "polisher")), "BlockPolisher");
+		GameRegistry.registerBlock(polisher = (new BlockPolisher()), "BlockPolisher");
 		GameRegistry.registerBlock(dragoexpress = (new BlockDragoexpress()), "dragoexpressBlock");
 		GameRegistry.registerBlock(phoenix = (new BlockPhoenix()), "phoenixBlock");
 		GameRegistry.registerBlock(havenGemWorkbench = (new BlockHavenGemWorkbench()), "blockHavenGemWorkbench");

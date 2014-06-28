@@ -13,7 +13,6 @@ import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.resources.I18n;
@@ -29,7 +28,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class BlockOre extends Block implements ILevelBlock {
+public abstract class BlockOre extends BlockGeneric implements ILevelBlock {
 	public static IIcon iconTop, iconBottom;
 	protected float[][] colors;
 	protected int[]levels;
@@ -45,7 +44,7 @@ public abstract class BlockOre extends Block implements ILevelBlock {
 		
 		setCreativeTab(WakcraftCreativeTabs.tabOreBlock);
 		
-		setBlockTextureName(WInfo.MODID.toLowerCase() + ":ore");
+		setBlockTextureName("ore");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
 		setBlockName("Ore");
 		setHardness(6.66f); // 10s

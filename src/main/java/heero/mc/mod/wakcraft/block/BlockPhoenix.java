@@ -32,6 +32,7 @@ public class BlockPhoenix extends BlockContainer {
 
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 		setBlockName("phoenix");
+		setBlockUnbreakable();
 	}
 
 	@Override

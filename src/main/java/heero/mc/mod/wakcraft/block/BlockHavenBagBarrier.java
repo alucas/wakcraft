@@ -1,7 +1,6 @@
 package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WBlocks;
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
@@ -21,12 +20,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import cpw.mods.fml.common.FMLLog;
 
-public class BlockHavenBagBarrier extends Block {
+public class BlockHavenBagBarrier extends BlockGeneric {
 
 	public BlockHavenBagBarrier() {
 		super(Material.air);
 
-		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		setBlockName("HavenBagBarrier");
 	}
 

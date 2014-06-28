@@ -10,5 +10,6 @@ public class BlockFence1 extends BlockFence {
 		super(iconPath, material);
 		
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
+		setBlockUnbreakable();
 	}
 }

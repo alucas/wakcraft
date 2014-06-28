@@ -1,21 +1,19 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public class BlockClassConsole extends Block {
+public class BlockClassConsole extends BlockGeneric {
 
 	public BlockClassConsole() {
 		super(Material.wood);
 
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 		setBlockName("ClassConsole");
-		setBlockTextureName(WInfo.MODID.toLowerCase() + ":classConsole");
+		setBlockTextureName("classConsole");
 	}
 
 	/**

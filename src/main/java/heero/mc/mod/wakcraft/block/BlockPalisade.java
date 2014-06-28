@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPalisade extends Block {
+public class BlockPalisade extends BlockGeneric {
 	private static String[] names = new String[] { "palisade1", "palisade2" };
 	private static IIcon[] icons = new IIcon[4];
 

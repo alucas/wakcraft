@@ -21,6 +21,7 @@ public class BlockDragoexpress extends BlockContainer {
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 		setBlockName("dragoexpress");
 		setLightOpacity(0);
+		setBlockUnbreakable();
 	}
 
 	@Override

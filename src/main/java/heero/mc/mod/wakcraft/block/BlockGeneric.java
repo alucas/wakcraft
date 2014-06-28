@@ -19,6 +19,8 @@ public class BlockGeneric extends Block {
 
 	public BlockGeneric(Material material) {
 		super(material);
+
+		setBlockUnbreakable();
 	}
 
 	/**

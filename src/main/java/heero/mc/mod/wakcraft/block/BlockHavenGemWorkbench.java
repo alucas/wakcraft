@@ -30,6 +30,7 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 		super(Material.wood);
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 		setBlockName("HavenGemWorkbench");
+		setBlockUnbreakable();
 	}
 
 	@Override

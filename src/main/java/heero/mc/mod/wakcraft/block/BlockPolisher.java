@@ -3,16 +3,17 @@ package heero.mc.mod.wakcraft.block;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.network.GuiId;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public class BlockPolisher extends Block {
+public class BlockPolisher extends BlockGeneric {
 
 	public BlockPolisher() {
 		super(Material.wood);
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
+		setBlockName("Polisher");
+		setBlockTextureName("polisher");
 	}
 
 	@Override

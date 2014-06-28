@@ -2,12 +2,11 @@ package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockInvisibleWall extends Block {
+public class BlockInvisibleWall extends BlockGeneric {
 
 	public BlockInvisibleWall() {
 		super(Material.air);

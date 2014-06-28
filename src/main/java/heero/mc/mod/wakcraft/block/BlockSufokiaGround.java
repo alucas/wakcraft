@@ -5,7 +5,6 @@ import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,7 +14,7 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSufokiaGround extends Block {
+public class BlockSufokiaGround extends BlockGeneric {
 	private IIcon[] icons = new IIcon[16];
 	
 	public BlockSufokiaGround() {
@@ -23,7 +22,7 @@ public class BlockSufokiaGround extends Block {
 		
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		
-		setBlockTextureName(WInfo.MODID.toLowerCase() + ":sufokiaGround0");
+		setBlockTextureName("sufokiaGround0");
 		setBlockName("SufokiaGround");
 	}
 	
