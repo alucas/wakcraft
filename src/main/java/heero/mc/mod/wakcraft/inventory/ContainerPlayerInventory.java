@@ -3,7 +3,6 @@ package heero.mc.mod.wakcraft.inventory;
 import heero.mc.mod.wakcraft.entity.property.InventoryProperty;
 import heero.mc.mod.wakcraft.item.ItemWArmor;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -26,10 +25,10 @@ public class ContainerPlayerInventory extends Container {
 			this.addSlotToContainer(new SlotArmor(properties.getInventoryArmors(), i, 8 + (i / 4) * 18 + (i >= 4 ? 61 : 0), 8 + (i % 4) * 18));
 		}
 
-		bindPlayerInventory(player.inventory);
+		bindPlayerInventory(properties.getInventoryItems());
 	}
 
-	protected void bindPlayerInventory(InventoryPlayer inventory) {
+	protected void bindPlayerInventory(IInventory inventory) {
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
 				this.addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
