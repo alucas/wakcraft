@@ -3,6 +3,8 @@ package heero.mc.mod.wakcraft.entity.property;
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.inventory.InventoryArmors;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -17,11 +19,16 @@ public class InventoryProperty implements IExtendedEntityProperties, ISynchPrope
 	protected static String TAG_ARMOR_ITEMS = "Items";
 	protected static String TAG_SLOT = "Slot";
 
-	public InventoryArmors inventoryArmors;
+	protected IInventory inventoryArmors;
+	protected IInventory inventoryItems;
 
 	@Override
 	public void init(Entity entity, World world) {
 		inventoryArmors = new InventoryArmors(entity);
+
+		if (entity instanceof EntityPlayer) {
+			inventoryItems = ((EntityPlayer) entity).inventory;
+		}
 	}
 
 	@Override
@@ -75,5 +82,13 @@ public class InventoryProperty implements IExtendedEntityProperties, ISynchPrope
 	@Override
 	public void onClientPacket(NBTTagCompound tagRoot) {
 		loadNBTData(tagRoot);
+	}
+
+	public IInventory getInventoryArmors() {
+		return inventoryArmors;
+	}
+
+	public IInventory getInventoryItems() {
+		return inventoryItems;
 	}
 }
