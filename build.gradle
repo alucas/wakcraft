@@ -28,11 +28,19 @@ group= "heero.mods" // http://maven.apache.org/guides/mini/guide-naming-conventi
 archivesBaseName = "wakcraft"
 
 minecraft {
-    version = "1.7.2-10.12.2.1121"
+    version = "1.7.10-10.13.0.1152"
     if (file('../run').exists()) {
         assetDir = "../run/assets"
     } else {
         assetDir = "assets"
+    }
+}
+
+jar
+{
+    manifest
+    {
+        attributes 'FMLAT': 'heero.mc.mod.wakcraft.Wakcraft'
     }
 }
 
