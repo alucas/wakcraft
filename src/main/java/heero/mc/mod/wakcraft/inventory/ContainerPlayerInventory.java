@@ -22,8 +22,8 @@ public class ContainerPlayerInventory extends Container {
 			return;
 		}
 
-		for (int i = 0; i < properties.inventoryArmors.getSizeInventory() ; ++i) {
-			this.addSlotToContainer(new SlotArmor(properties.inventoryArmors, i, 8 + (i / 4) * 18 + (i >= 4 ? 61 : 0), 8 + (i % 4) * 18));
+		for (int i = 0; i < properties.getInventoryArmors().getSizeInventory() ; ++i) {
+			this.addSlotToContainer(new SlotArmor(properties.getInventoryArmors(), i, 8 + (i / 4) * 18 + (i >= 4 ? 61 : 0), 8 + (i % 4) * 18));
 		}
 
 		bindPlayerInventory(player.inventory);
