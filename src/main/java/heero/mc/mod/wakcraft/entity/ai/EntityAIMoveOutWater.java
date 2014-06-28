@@ -112,6 +112,6 @@ public class EntityAIMoveOutWater extends EntityAIBase {
 			return null;
 		}
 
-		return entity.worldObj.getWorldVec3Pool().getVecFromPool((double) selectedPosX, (double) selectedPosY, (double) selectedPosZ);
+		return Vec3.createVectorHelper((double) selectedPosX, (double) selectedPosY, (double) selectedPosZ);
 	}
 }

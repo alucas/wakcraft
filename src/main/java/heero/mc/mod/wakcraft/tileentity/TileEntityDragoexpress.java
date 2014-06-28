@@ -22,7 +22,7 @@ public class TileEntityDragoexpress extends TileEntity {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox() {
-		return AxisAlignedBB.getAABBPool().getAABB(xCoord - 6, yCoord, zCoord - 6, xCoord + 6, yCoord + 2, zCoord + 6);
+		return AxisAlignedBB.getBoundingBox(xCoord - 6, yCoord, zCoord - 6, xCoord + 6, yCoord + 2, zCoord + 6);
 	}
 
 	/**

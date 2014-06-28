@@ -277,7 +277,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory {
 			f = 5.0F;
 			List list = this.worldObj.getEntitiesWithinAABB(
 					EntityPlayer.class,
-					AxisAlignedBB.getAABBPool().getAABB(
+					AxisAlignedBB.getBoundingBox(
 							(double) ((float) this.xCoord - f),
 							(double) ((float) this.yCoord - f),
 							(double) ((float) this.zCoord - f),

@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.client.gui;
 
-import cpw.mods.fml.common.FMLLog;
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.entity.property.CharacterProperty;
 import heero.mc.mod.wakcraft.entity.property.CharacterProperty.CLASS;
@@ -8,10 +7,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiYesNo;
+import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import cpw.mods.fml.common.FMLLog;
 
-public class GUIClassSelection extends GuiScreen {
+public class GUIClassSelection extends GuiScreen implements GuiYesNoCallback {
 	protected static final ResourceLocation background = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/background.png");
 
 	protected EntityPlayer player;
