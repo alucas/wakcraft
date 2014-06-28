@@ -29,6 +29,7 @@ public class BlockFightWall extends BlockGeneric {
 
 		setBlockTextureName("fightWall");
 		setBlockName("FightWall");
+		setBlockUnbreakable();
 	}
 
 	/**
