@@ -22,6 +22,7 @@ import heero.mc.mod.wakcraft.client.renderer.entity.RendererSeedsPile;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererTextPopup;
 import heero.mc.mod.wakcraft.client.renderer.fight.FightRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.FighterRenderer;
+import heero.mc.mod.wakcraft.client.renderer.fight.SpellRenderer;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererDragoexpress;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererHavenBagChest;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererPhoenix;
@@ -93,7 +94,10 @@ public class CombinedClientProxy extends CommonProxy {
 		super.registerInitEvents();
 
 		Minecraft minecraft = Minecraft.getMinecraft();
-		FightClientEventsHandler fightEventHandler = new FightClientEventsHandler(new FightRenderer(), new GuiFightOverlay(minecraft), new FighterRenderer(minecraft));
+		FighterRenderer fighterRenderer = new FighterRenderer(minecraft, new SpellRenderer(minecraft));
+		FightRenderer fighteRenderer = new FightRenderer();
+		GuiFightOverlay guiFightOverlay = new GuiFightOverlay(minecraft);
+		FightClientEventsHandler fightEventHandler = new FightClientEventsHandler(fighteRenderer, guiFightOverlay, fighterRenderer);
 
 		MinecraftForge.EVENT_BUS.register(fightEventHandler);
 

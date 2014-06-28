@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.client.renderer.fight;
 
-import heero.mc.mod.wakcraft.helper.FightHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -26,9 +25,9 @@ public class FighterRenderer {
 	private DynamicTexture lightmapTexture;
 	private ResourceLocation locationLightMap;
 
-	public FighterRenderer (Minecraft minecraft) {
+	public FighterRenderer (Minecraft minecraft, ItemRenderer itemRenderer) {
 		this.mc = minecraft;
-		this.itemRenderer = new ItemRenderer(minecraft);
+		this.itemRenderer = itemRenderer;
 		this.lightmapTexture = new DynamicTexture(16, 16);
 		this.locationLightMap = minecraft.getTextureManager().getDynamicTextureLocation("lightMap", this.lightmapTexture);
 	}
@@ -76,8 +75,7 @@ public class FighterRenderer {
 
 			GL11.glPopMatrix();
 
-			if (mc.gameSettings.thirdPersonView == 0
-					&& !mc.renderViewEntity.isPlayerSleeping()) {
+			if (mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping()) {
 				this.itemRenderer.renderOverlays(partialTick);
 				this.hurtCameraEffect(partialTick);
 			}
@@ -206,6 +204,6 @@ public class FighterRenderer {
 	public void updateRenderer(EntityPlayerSP player) {
 		updateFovModifierHand(player);
 
-		itemRenderer.itemToRender = FightHelper.getSpellsInventory(player).getStackInSlot(25 + player.inventory.currentItem);
+		itemRenderer.updateEquippedItem();
 	}
 }
