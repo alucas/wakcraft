@@ -20,6 +20,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public abstract class EntityWCreature extends EntityCreature implements IWMob, IFighter{
@@ -68,11 +69,14 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 			FightHelper.setFightCharacteristic(this, Characteristic.HEALTH, health - damage);
 
 			this.worldObj.setEntityState(this, (byte) 2);
+			playSoundHurt();
 			return;
 		}
 
-		this.setDead();
 		this.worldObj.setEntityState(this, (byte) 3);
+		playSoundDeath();
+		setHealth(0.0F);
+		onDeath(DamageSource.generic);
 	}
 
 	@Override
@@ -116,5 +120,21 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 	 */
 	@Override
 	protected void collideWithNearbyEntities() {
+	}
+
+	protected void playSoundDeath() {
+		String sound = getDeathSound();
+
+		if (sound != null) {
+			playSound(sound, getSoundVolume(), getSoundPitch());
+		}
+	}
+
+	protected void playSoundHurt() {
+		String sound = getHurtSound();
+
+		if (sound != null) {
+			this.playSound(sound, getSoundVolume(), getSoundPitch());
+		}
 	}
 }
