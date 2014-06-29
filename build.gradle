@@ -36,6 +36,11 @@ minecraft {
     }
 }
 
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
 jar
 {
     manifest
