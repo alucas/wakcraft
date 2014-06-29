@@ -806,9 +806,8 @@ public enum FightManager {
 	}
 
 	protected void resetFighterCharacteristics(List<List<EntityLivingBase>> fightersByTeam, EntityLivingBase currentFighter) {
-		for (Characteristic characteristic : Characteristic.values()) {
-			FightHelper.resetFightCharacteristic(currentFighter, characteristic);
-		}
+		FightHelper.resetFightCharacteristic(currentFighter, Characteristic.ACTION);
+		FightHelper.resetFightCharacteristic(currentFighter, Characteristic.MOVEMENT);
 
 		for (List<EntityLivingBase> team : fightersByTeam) {
 			for (EntityLivingBase fighter : team) {
