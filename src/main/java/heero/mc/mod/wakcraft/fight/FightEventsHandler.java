@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.fight;
 
+import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
@@ -57,13 +58,15 @@ public class FightEventsHandler {
 			return;
 		}
 
-		if (!FightHelper.isFighter(event.target) || !(event.target instanceof EntityLivingBase)) {
+		if (!FightHelper.isFighter(event.target) || !(event.target instanceof EntityLivingBase) || !(event.target instanceof IFighter)) {
 			return;
 		}
 
 		EntityPlayerMP player = (EntityPlayerMP) event.entityPlayer;
 		EntityLivingBase target = (EntityLivingBase) event.target;
+		IFighter targetFighter = (IFighter) event.target;
 		if (!target.isEntityAlive()) {
+			event.setCanceled(true);
 			return;
 		}
 
@@ -96,6 +99,9 @@ public class FightEventsHandler {
 			event.setCanceled(true);
 			return;
 		}
+
+		targetFighter.onAttacked(player, FightHelper.getCurrentSpell(player));
+		event.setCanceled(true);
 	}
 
 	/**

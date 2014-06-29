@@ -105,9 +105,6 @@ public abstract class GobballGeneric extends EntityWCreature {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void handleHealthUpdate(byte type) {
-		System.out.println("HandleHealthUpdate : " + type); // 2 : hurt, 3 : die
-															// ?
-
 		super.handleHealthUpdate(type);
 	}
 

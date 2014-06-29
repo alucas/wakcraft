@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 
 public class FightHelper {
@@ -75,5 +76,9 @@ public class FightHelper {
 
 	public static IInventory getSpellsInventory(Entity entity) {
 		return ((SpellsProperty) entity.getExtendedProperties(SpellsProperty.IDENTIFIER)).getSpellsInventory();
+	}
+
+	public static ItemStack getCurrentSpell(EntityPlayer entity) {
+		return ((SpellsProperty) entity.getExtendedProperties(SpellsProperty.IDENTIFIER)).getSpellsInventory().getStackInSlot(25 + entity.inventory.currentItem);
 	}
 }

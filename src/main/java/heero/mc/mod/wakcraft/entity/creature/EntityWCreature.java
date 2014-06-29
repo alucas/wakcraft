@@ -1,18 +1,23 @@
 package heero.mc.mod.wakcraft.entity.creature;
 
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.entity.ai.EntityAIFight;
 import heero.mc.mod.wakcraft.entity.ai.EntityAIMoveOutWater;
+import heero.mc.mod.wakcraft.fight.DamageUtil;
+import heero.mc.mod.wakcraft.helper.FightHelper;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
@@ -52,6 +57,22 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 		}
 
 		return group;
+	}
+
+	@Override
+	public void onAttacked(final EntityLivingBase attacker, final ItemStack stack) {
+		int damage = DamageUtil.computeDamage(attacker, this, stack);
+		int health = FightHelper.getFightCharacteristic(this, Characteristic.HEALTH);
+
+		if (health - damage > 0) {
+			FightHelper.setFightCharacteristic(this, Characteristic.HEALTH, health - damage);
+
+			this.worldObj.setEntityState(this, (byte) 2);
+			return;
+		}
+
+		this.setDead();
+		this.worldObj.setEntityState(this, (byte) 3);
 	}
 
 	@Override

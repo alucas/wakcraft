@@ -16,6 +16,7 @@ import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import heero.mc.mod.wakcraft.item.ItemWithLevel;
 import heero.mc.mod.wakcraft.item.ItemWoollyKey;
 import heero.mc.mod.wakcraft.spell.Spell;
+import heero.mc.mod.wakcraft.spell.effect.EffectDamage;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -87,7 +88,7 @@ public class WItems extends Items {
 		GameRegistry.registerItem(bouzeLiteYeahsRing = (new ItemWArmor(TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 6).setCharacteristic(Characteristic.INITIATIVE, 4).setUnlocalizedName("BouzeLiteYeahsRing").setTextureName(modid + "bouze_lite_yeahs_ring")), "ItemBouzeLiteYeahsRing");
 
 		// Iop spells
-		GameRegistry.registerItem(spellShaker = (new Spell("Shaker")), "SpellShaker");
+		GameRegistry.registerItem(spellShaker = new Spell("Shaker").setEffect(new EffectDamage(4, 130)).setEffectCritical(new EffectDamage(7, 192)), "SpellShaker");
 		GameRegistry.registerItem(spellRocknoceros = (new Spell("Rocknoceros")), "SpellRocknoceros");
 		GameRegistry.registerItem(spellImpact = (new Spell("Impact")), "SpellImpact");
 		GameRegistry.registerItem(spellCharge = (new Spell("Charge")), "SpellCharge");
