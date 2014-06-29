@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.network.packet.fight;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.helper.FightHelper;
@@ -12,7 +13,6 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLLog;
 
 public class PacketFight implements IPacketFight {
 	public int fightId = 0;
@@ -51,12 +51,12 @@ public class PacketFight implements IPacketFight {
 				int entityId = teamIterator.next();
 				Entity entity = world.getEntityByID(entityId);
 				if (entity == null) {
-					FMLLog.warning("No entity found for id " + entityId);
+					WLog.warning("No entity found for id " + entityId);
 					continue;
 				}
 
 				if (!FightHelper.isFighter(entity)) {
-					FMLLog.warning("The entity " + entity + " is not a valid fighter");
+					WLog.warning("The entity " + entity + " is not a valid fighter");
 					continue;
 				}
 

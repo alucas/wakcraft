@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.inventory;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.entity.property.InventoryProperty;
 import heero.mc.mod.wakcraft.item.ItemWArmor;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,7 +9,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -17,7 +17,7 @@ public class ContainerPlayerInventory extends Container {
 	public ContainerPlayerInventory(EntityPlayer player) {
 		InventoryProperty properties = (InventoryProperty) player.getExtendedProperties(InventoryProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading the inventory of player " + player.getDisplayName());
+			WLog.warning("Error while loading the inventory of player " + player.getDisplayName());
 			return;
 		}
 

@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WBlocks;
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
@@ -18,7 +19,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import cpw.mods.fml.common.FMLLog;
 
 public class BlockHavenBagBarrier extends BlockGeneric {
 
@@ -76,7 +76,7 @@ public class BlockHavenBagBarrier extends BlockGeneric {
 			int havenBagUID = HavenBagHelper.getUIDFromCoord((int)entity.posX, (int)entity.posY, (int)entity.posZ);
 			IExtendedEntityProperties properties = entity.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 			if (properties == null || !(properties instanceof HavenBagProperty)) {
-				FMLLog.warning("Error while loading the player (%s) properties", player.getDisplayName());
+				WLog.warning("Error while loading the player (%s) properties", player.getDisplayName());
 				break;
 			}
 

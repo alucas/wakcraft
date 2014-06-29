@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.item;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.havenbag.ChestType;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
@@ -13,7 +14,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import cpw.mods.fml.common.FMLLog;
 
 public class ItemIkiakit extends ItemWithLevel {
 	public ItemIkiakit(String name) {
@@ -44,7 +44,7 @@ public class ItemIkiakit extends ItemWithLevel {
 			if (world.getBlock(x, y, z).equals(WBlocks.hbChest)) {
 				TileEntity tileEntity = world.getTileEntity(x, y, z);
 				if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagChest)) {
-					FMLLog.warning("Error while loading the TileEntityHavenBagChest (%d, %d, %d)", x, y, z);
+					WLog.warning("Error while loading the TileEntityHavenBagChest (%d, %d, %d)", x, y, z);
 
 					return false;
 				}
@@ -52,7 +52,7 @@ public class ItemIkiakit extends ItemWithLevel {
 				TileEntityHavenBagChest tileEntityChest = (TileEntityHavenBagChest) tileEntity;
 				ChestType chestId = ChestType.getChestIdFromIkiakit(this);
 				if (chestId == null) {
-					FMLLog.warning("No chestId found for itiakit : " + this);
+					WLog.warning("No chestId found for itiakit : " + this);
 
 					return false;
 				}

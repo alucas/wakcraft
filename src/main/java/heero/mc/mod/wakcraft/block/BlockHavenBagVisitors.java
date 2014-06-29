@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
@@ -14,7 +15,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -36,7 +36,7 @@ public class BlockHavenBagVisitors extends BlockGeneric {
 
 		IExtendedEntityProperties properties = player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 		if (properties == null || !(properties instanceof HavenBagProperty)) {
-			FMLLog.warning("Error while loading the player (%s) extended properties", player.getDisplayName());
+			WLog.warning("Error while loading the player (%s) extended properties", player.getDisplayName());
 			return true;
 		}
 

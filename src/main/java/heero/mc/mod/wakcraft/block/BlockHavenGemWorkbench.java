@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
@@ -18,7 +19,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -41,7 +41,7 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 
 		IExtendedEntityProperties properties = player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 		if (properties == null || !(properties instanceof HavenBagProperty)) {
-			FMLLog.warning("Error while loading the player (%s) extended properties", player.getDisplayName());
+			WLog.warning("Error while loading the player (%s) extended properties", player.getDisplayName());
 			return true;
 		}
 
@@ -52,7 +52,7 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 
 		TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile == null && !(tile instanceof TileEntityHavenGemWorkbench)) {
-			FMLLog.warning("Error while loading the tile entity (%d, %d, %d)", x, y, z);
+			WLog.warning("Error while loading the tile entity (%d, %d, %d)", x, y, z);
 			return true;
 		}
 

@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.network.handler;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WConfig;
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagGenerationHelper;
@@ -18,7 +19,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -30,7 +30,7 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 
 		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading player (%s) havenbag properties", player.getDisplayName());
+			WLog.warning("Error while loading player (%s) havenbag properties", player.getDisplayName());
 			return null;
 		}
 
@@ -61,18 +61,18 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 		if (properties.getUID() == -1) {
 			World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WConfig.HAVENBAG_DIMENSION_ID);
 			if (havenBagWorld == null) {
-				FMLLog.warning("Error while loading the havenbag world : %d", WConfig.HAVENBAG_DIMENSION_ID);
+				WLog.warning("Error while loading the havenbag world : %d", WConfig.HAVENBAG_DIMENSION_ID);
 
 				return null;
 			}
 
 			properties.setUID(player.worldObj.getUniqueDataId("havenbag"));
 
-			FMLLog.info("New HavenBag atribution : %s, uid = %d", player.getDisplayName(), properties.getUID());
+			WLog.info("New HavenBag atribution : %s, uid = %d", player.getDisplayName(), properties.getUID());
 
 			boolean result = HavenBagGenerationHelper.generateHavenBag(havenBagWorld, properties.getUID());
 			if (!result) {
-				FMLLog.warning("Error during the generation of the havenbag : %d", properties.getUID());
+				WLog.warning("Error during the generation of the havenbag : %d", properties.getUID());
 
 				return null;
 			}
@@ -82,7 +82,7 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 
 		TileEntity tileEntity = player.worldObj.getTileEntity(posX, posY, posZ);
 		if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBag)) {
-			FMLLog.warning("Error while loading the tile entity (%d, %d, %d)", posX, posY, posZ);
+			WLog.warning("Error while loading the tile entity (%d, %d, %d)", posX, posY, posZ);
 			return null;
 		}
 

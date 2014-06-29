@@ -3,6 +3,7 @@ package heero.mc.mod.wakcraft.havenbag;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WItems;
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.helper.HavenBagHelper;
 import heero.mc.mod.wakcraft.world.WorldProviderHavenBag;
 import net.minecraft.block.Block;
@@ -10,7 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLLog;
 
 public class HavenBagGenerationHelper {
 	protected static final int HB_HEIGHT = 4;
@@ -19,7 +19,7 @@ public class HavenBagGenerationHelper {
 
 	public static boolean generateHavenBag(World havenBagWorld, int uid) {
 		if (havenBagWorld.provider.dimensionId != WConfig.HAVENBAG_DIMENSION_ID) {
-			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
+			WLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return false;
 		}
@@ -83,7 +83,7 @@ public class HavenBagGenerationHelper {
 
 	public static void updateGem(World havenBagWorld, int uid, ItemStack stack, int gemPosition) {
 		if (havenBagWorld.provider.dimensionId != WConfig.HAVENBAG_DIMENSION_ID) {
-			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
+			WLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return;
 		}
@@ -106,7 +106,7 @@ public class HavenBagGenerationHelper {
 
 	public static void updateBridge(World havenBagWorld, int uid, IInventory slots) {
 		if (havenBagWorld.provider.dimensionId != WConfig.HAVENBAG_DIMENSION_ID) {
-			FMLLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
+			WLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return;
 		}

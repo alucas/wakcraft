@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.client.gui;
 
 import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
@@ -9,7 +10,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -40,7 +40,7 @@ public class GUIAbilities extends GuiScreen {
 		this.abilitiesManager = (CharacteristicsProperty) player.getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
 
 		if (this.abilitiesManager == null) {
-			FMLLog.warning("Error while loading the player's abilities (%s)", player.getDisplayName());
+			WLog.warning("Error while loading the player's abilities (%s)", player.getDisplayName());
 		}
 	}
 

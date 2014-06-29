@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
@@ -17,7 +18,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLLog;
 
 public class BlockHavenBag extends BlockContainer {
 	public BlockHavenBag() {
@@ -37,13 +37,13 @@ public class BlockHavenBag extends BlockContainer {
 	
 		TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile == null || !(tile instanceof TileEntityHavenBag)) {
-			FMLLog.warning("Error while loading the tile entity (%d, %d, %d)", x, y, z);
+			WLog.warning("Error while loading the tile entity (%d, %d, %d)", x, y, z);
 			return true;
 		}
 
 		World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WConfig.HAVENBAG_DIMENSION_ID);
 		if (havenBagWorld == null) {
-			FMLLog.warning("Error while loading the havenbag world : %d", WConfig.HAVENBAG_DIMENSION_ID);
+			WLog.warning("Error while loading the havenbag world : %d", WConfig.HAVENBAG_DIMENSION_ID);
 
 			return false;
 		}

@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.client.gui;
 
 import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.entity.property.CharacterProperty;
 import heero.mc.mod.wakcraft.entity.property.CharacterProperty.CLASS;
 import net.minecraft.client.Minecraft;
@@ -10,7 +11,6 @@ import net.minecraft.client.gui.GuiYesNo;
 import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.common.FMLLog;
 
 public class GUIClassSelection extends GuiScreen implements GuiYesNoCallback {
 	protected static final ResourceLocation background = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/background.png");
@@ -64,7 +64,7 @@ public class GUIClassSelection extends GuiScreen implements GuiYesNoCallback {
 
 			CharacterProperty properties = (CharacterProperty) player.getExtendedProperties(CharacterProperty.IDENTIFIER);
 			if (properties == null) {
-				FMLLog.warning("Error while loading the character properties of the player : " + player.getDisplayName());
+				WLog.warning("Error while loading the character properties of the player : " + player.getDisplayName());
 				break;
 			}
 

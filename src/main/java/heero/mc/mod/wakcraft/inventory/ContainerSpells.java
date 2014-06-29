@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.inventory;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 import heero.mc.mod.wakcraft.spell.Spell;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,14 +8,13 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.common.FMLLog;
 
 public class ContainerSpells extends Container {
 
 	public ContainerSpells(EntityPlayer player) {
 		SpellsProperty properties = (SpellsProperty) player.getExtendedProperties(SpellsProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading the spells of player " + player.getDisplayName());
+			WLog.warning("Error while loading the spells of player " + player.getDisplayName());
 			return;
 		}
 

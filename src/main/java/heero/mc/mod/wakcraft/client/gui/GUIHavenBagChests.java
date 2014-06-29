@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.client.gui;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenBagChest;
 import heero.mc.mod.wakcraft.havenbag.ChestType;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
@@ -10,7 +11,6 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -72,7 +72,7 @@ public class GUIHavenBagChests extends GUITabs {
 	protected void onSelectTab(int tabId) {
 		ChestType chestTypes[] = ChestType.values();
 		if (tabId < 0 || tabId >= chestTypes.length) {
-			FMLLog.warning("Cannot convert tabId %d to chestTypeId");
+			WLog.warning("Cannot convert tabId %d to chestTypeId");
 			return;
 		}
 

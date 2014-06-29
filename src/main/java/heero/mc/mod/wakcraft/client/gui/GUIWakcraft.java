@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.client.gui;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.network.packet.PacketOpenWindow;
@@ -10,7 +11,6 @@ import java.util.List;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -31,7 +31,7 @@ public class GUIWakcraft extends GUITabs {
 	@Override
 	protected void onSelectTab(int tabId) {
 		if (tabId < 0 || tabId >= tabs.size()) {
-			FMLLog.warning("Cannot convert tabId %d to guiId");
+			WLog.warning("Cannot convert tabId %d to guiId");
 			return;
 		}
 

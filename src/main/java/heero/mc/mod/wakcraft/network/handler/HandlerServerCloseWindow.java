@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.network.handler;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.network.packet.PacketCloseWindow;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -13,7 +13,7 @@ public class HandlerServerCloseWindow implements IMessageHandler<PacketCloseWind
 			return null;
 		}
 
-		FMLLog.warning("Unknow window ID : %d", message.windowId);
+		WLog.warning("Unknow window ID : %d", message.windowId);
 
 		return null;
 	}

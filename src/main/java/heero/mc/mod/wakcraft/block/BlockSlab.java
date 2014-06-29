@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.block;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 
 import java.util.List;
@@ -11,7 +12,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Facing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -25,7 +25,7 @@ public class BlockSlab extends BlockGeneric {
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 
 		if (!blockOpaque.isOpaqueCube()) {
-			FMLLog.warning("The slab block " + this.getClass().getName() + " use a non opaque block : " + blockOpaque.getLocalizedName());
+			WLog.warning("The slab block " + this.getClass().getName() + " use a non opaque block : " + blockOpaque.getLocalizedName());
 		}
 
 		this.blockOpaque = blockOpaque;

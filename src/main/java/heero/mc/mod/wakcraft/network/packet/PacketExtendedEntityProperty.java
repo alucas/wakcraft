@@ -1,11 +1,11 @@
 package heero.mc.mod.wakcraft.network.packet;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.entity.property.ISynchProperties;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
@@ -31,13 +31,13 @@ public class PacketExtendedEntityProperty implements IMessage {
 
 		IExtendedEntityProperties properties = entity.getExtendedProperties(identifier);
 		if (properties == null) {
-			FMLLog.warning("Error while loading %s properties of entity %d, properties not found", identifier, entityId);
+			WLog.warning("Error while loading %s properties of entity %d, properties not found", identifier, entityId);
 
 			throw new RuntimeException("Properties not found");
 		}
 
 		if (!(properties instanceof ISynchProperties)) {
-			FMLLog.warning("Properties %s are not synchronisable", identifier);
+			WLog.warning("Properties %s are not synchronisable", identifier);
 
 			throw new RuntimeException("Properties not synchronisable");
 		}

@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.characteristic;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import heero.mc.mod.wakcraft.item.ItemWArmor;
 
@@ -8,7 +9,6 @@ import java.util.Set;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.common.FMLLog;
 
 public class CharacteristicsManager {
 	protected static Set<Characteristic> customizableCharacteristics = EnumSet
@@ -29,7 +29,7 @@ public class CharacteristicsManager {
 
 		CharacteristicsProperty properties = (CharacteristicsProperty) ((EntityPlayer) entity).getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading the characteristics properties of player : " + ((EntityPlayer) entity).getDisplayName());
+			WLog.warning("Error while loading the characteristics properties of player : " + ((EntityPlayer) entity).getDisplayName());
 			return;
 		}
 
@@ -45,7 +45,7 @@ public class CharacteristicsManager {
 
 		CharacteristicsProperty properties = (CharacteristicsProperty) ((EntityPlayer) entity).getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading the characteristics properties of player : " + ((EntityPlayer) entity).getDisplayName());
+			WLog.warning("Error while loading the characteristics properties of player : " + ((EntityPlayer) entity).getDisplayName());
 			return;
 		}
 

@@ -1,13 +1,13 @@
 package heero.mc.mod.wakcraft.helper;
 
 import heero.mc.mod.wakcraft.WConfig;
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagProperties;
 import heero.mc.mod.wakcraft.world.TeleporterHavenBag;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import cpw.mods.fml.common.FMLLog;
 
 public class HavenBagHelper {
 	public static final int R_GARDEN = 1;
@@ -26,7 +26,7 @@ public class HavenBagHelper {
 	public static void teleportPlayerToHavenBag(EntityPlayerMP player, int havenBagUID) {
 		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading havenbag player (%s) properties", player.getDisplayName());
+			WLog.warning("Error while loading havenbag player (%s) properties", player.getDisplayName());
 			return;
 		}
 
@@ -40,7 +40,7 @@ public class HavenBagHelper {
 	public static void leaveHavenBag(EntityPlayerMP player) {
 		HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 		if (properties == null) {
-			FMLLog.warning("Error while loading havenbag player (%s) properties", player.getDisplayName());
+			WLog.warning("Error while loading havenbag player (%s) properties", player.getDisplayName());
 			return;
 		}
 

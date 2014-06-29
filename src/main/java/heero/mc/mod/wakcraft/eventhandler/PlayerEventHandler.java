@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.eventhandler;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
@@ -7,7 +8,6 @@ import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagProperties;
 import heero.mc.mod.wakcraft.network.packet.PacketProfession;
 import net.minecraft.entity.player.EntityPlayerMP;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -24,7 +24,7 @@ public class PlayerEventHandler {
 
 			HavenBagProperty properties = (HavenBagProperty) playerMP.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 			if (properties == null) {
-				FMLLog.warning("Error while loading player (%s) havenbag properties", playerMP.getDisplayName());
+				WLog.warning("Error while loading player (%s) havenbag properties", playerMP.getDisplayName());
 				return;
 			}
 

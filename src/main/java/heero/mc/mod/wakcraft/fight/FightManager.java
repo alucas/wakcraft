@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.WBlocks;
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.entity.creature.IFighter;
@@ -42,7 +43,6 @@ import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public enum FightManager {
@@ -310,7 +310,7 @@ public enum FightManager {
 	protected void createFightMap(World world, Set<FightBlockCoordinates> fightBlocks) {
 		for (FightBlockCoordinates block : fightBlocks) {
 			if (!world.getBlock(block.posX, block.posY, block.posZ).equals(Blocks.air)) {
-				FMLLog.warning("Trying to replace a block different of Air");
+				WLog.warning("Trying to replace a block different of Air");
 				continue;
 			}
 
@@ -341,7 +341,7 @@ public enum FightManager {
 		for (FightBlockCoordinates blockCoords : fightBlocks) {
 			Block block = world.getBlock(blockCoords.posX, blockCoords.posY, blockCoords.posZ);
 			if (!block.equals(WBlocks.fightWall) && !block.equals(WBlocks.fightInsideWall) && !block.equals(WBlocks.fightStart1) && !block.equals(WBlocks.fightStart2)) {
-				FMLLog.warning("Trying to restore a block different of fight blocks");
+				WLog.warning("Trying to restore a block different of fight blocks");
 				continue;
 			}
 
@@ -479,7 +479,7 @@ public enum FightManager {
 			for (int i = 0; i < team.size(); i++) {
 				ChunkCoordinates startPosition = FightHelper.getStartPosition(team.get(i));
 				if (startPosition == null) {
-					FMLLog.warning("The fighter " + team.get(i) + " doesn't have a starting position");
+					WLog.warning("The fighter " + team.get(i) + " doesn't have a starting position");
 					continue;
 				}
 
@@ -528,13 +528,13 @@ public enum FightManager {
 	public void stopFight(World world, int fightId) {
 		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
 		if (fightsOfWorld == null) {
-			FMLLog.warning("Trying to stop a fight that does not exist (wrong world)");
+			WLog.warning("Trying to stop a fight that does not exist (wrong world)");
 			return;
 		}
 
 		FightInfo fight = fightsOfWorld.remove(fightId);
 		if (fight == null) {
-			FMLLog.warning("Trying to stop a fight that does not exist (wrong id)");
+			WLog.warning("Trying to stop a fight that does not exist (wrong id)");
 			return;
 		}
 
@@ -623,7 +623,7 @@ public enum FightManager {
 
 			EntityLivingBase nextFighter = getNextAvailableFighter(fightInfo);
 			if (nextFighter == null) {
-				FMLLog.warning("Can't find a living fighter for the next turn");
+				WLog.warning("Can't find a living fighter for the next turn");
 				stopFight(fightInfo.getCurrentFighter().worldObj, FightHelper.getFightId(fightInfo.getCurrentFighter()));
 				return;
 			}
@@ -644,13 +644,13 @@ public enum FightManager {
 	public void changeFightStage(World world, int fightId, FightStage stage) {
 		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
 		if (fightsOfWorld == null) {
-			FMLLog.warning("Trying update the stage of a fight that does not exist (wrong world)");
+			WLog.warning("Trying update the stage of a fight that does not exist (wrong world)");
 			return;
 		}
 
 		FightInfo fight = fightsOfWorld.get(fightId);
 		if (fight == null) {
-			FMLLog.warning("Trying to update the stage of a fight that does not exist (wrong id)");
+			WLog.warning("Trying to update the stage of a fight that does not exist (wrong id)");
 			return;
 		}
 
@@ -685,13 +685,13 @@ public enum FightManager {
 	public FightStage getFightStage(World world, int fightId) {
 		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
 		if (fightsOfWorld == null) {
-			FMLLog.warning("Trying to get the stage of a fight that does not exist (wrong world)");
+			WLog.warning("Trying to get the stage of a fight that does not exist (wrong world)");
 			return FightStage.UNKNOW;
 		}
 
 		FightInfo fight = fightsOfWorld.get(fightId);
 		if (fight == null) {
-			FMLLog.warning("Trying to get the stage of a fight that does not exist (wrong id)");
+			WLog.warning("Trying to get the stage of a fight that does not exist (wrong id)");
 			return FightStage.UNKNOW;
 		}
 
@@ -701,18 +701,18 @@ public enum FightManager {
 	public EntityLivingBase getCurrentFighter(World world, int fightId) {
 		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
 		if (fightsOfWorld == null) {
-			FMLLog.warning("Trying to get the current fighter of a fight that does not exist (wrong world)");
+			WLog.warning("Trying to get the current fighter of a fight that does not exist (wrong world)");
 			return null;
 		}
 
 		FightInfo fight = fightsOfWorld.get(fightId);
 		if (fight == null) {
-			FMLLog.warning("Trying to get the current fighter of a fight that does not exist (wrong id)");
+			WLog.warning("Trying to get the current fighter of a fight that does not exist (wrong id)");
 			return null;
 		}
 
 		if (fight.getStage() != FightStage.FIGHT) {
-			FMLLog.warning("Trying to get the current fighter in an incompatible stage ( " + fight.getStage() + " )");
+			WLog.warning("Trying to get the current fighter in an incompatible stage ( " + fight.getStage() + " )");
 			return null;
 		}
 
@@ -722,18 +722,18 @@ public enum FightManager {
 	public void setCurrentFighter(World world, int fightId, EntityLivingBase fighter) {
 		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
 		if (fightsOfWorld == null) {
-			FMLLog.warning("Trying to set the current fighter of a fight that does not exist (wrong world)");
+			WLog.warning("Trying to set the current fighter of a fight that does not exist (wrong world)");
 			return;
 		}
 
 		FightInfo fight = fightsOfWorld.get(fightId);
 		if (fight == null) {
-			FMLLog.warning("Trying to set the current fighter of a fight that does not exist (wrong id)");
+			WLog.warning("Trying to set the current fighter of a fight that does not exist (wrong id)");
 			return;
 		}
 
 		if (fight.getStage() != FightStage.FIGHT) {
-			FMLLog.warning("Trying to set the current fighter in an incompatible stage ( " + fight.getStage() + " )");
+			WLog.warning("Trying to set the current fighter in an incompatible stage ( " + fight.getStage() + " )");
 			return;
 		}
 
@@ -851,7 +851,7 @@ public enum FightManager {
 
 			int remainingMovementPoint = movementPoint - usedMovementPoint;
 			if (remainingMovementPoint < 0) {
-				FMLLog.warning("Fighter " + fighter + " used more movement point that disponible");
+				WLog.warning("Fighter " + fighter + " used more movement point that disponible");
 				remainingMovementPoint = 0;;
 			}
 
@@ -863,13 +863,13 @@ public enum FightManager {
 	public boolean isThereFighterInAABB(World world, int fightId, AxisAlignedBB boundingBox) {
 		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
 		if (fightsOfWorld == null) {
-			FMLLog.warning("Trying to get the fighters of a fight that does not exist (wrong world)");
+			WLog.warning("Trying to get the fighters of a fight that does not exist (wrong world)");
 			return true;
 		}
 
 		FightInfo fight = fightsOfWorld.get(fightId);
 		if (fight == null) {
-			FMLLog.warning("Trying to get the fighters of a fight that does not exist (wrong id)");
+			WLog.warning("Trying to get the fighters of a fight that does not exist (wrong id)");
 			return true;
 		}
 
