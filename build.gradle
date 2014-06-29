@@ -40,7 +40,7 @@ jar
 {
     manifest
     {
-        attributes 'FMLAT': 'heero.mc.mod.wakcraft.Wakcraft'
+        attributes 'FMLAT': 'wakcraft_at.cfg'
     }
 }
 
