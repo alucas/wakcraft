@@ -6,5 +6,4 @@ import java.util.UUID;
 public interface IFighter extends IEntityWithCharacteristics {
 	public void setGroup(Set<UUID> group);
 	public Set<UUID> getGroup();
-	public int getId();
 }

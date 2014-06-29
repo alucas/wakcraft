@@ -55,11 +55,6 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 	}
 
 	@Override
-	public int getId() {
-		return getEntityId();
-	}
-
-	@Override
 	public void writeToNBT(NBTTagCompound tagRoot) {
 		super.writeToNBT(tagRoot);
 
