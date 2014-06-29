@@ -609,7 +609,7 @@ public enum FightManager {
 			setStartPositionOfRemainingFighters(fightInfo.getFightersByTeam(), fightInfo.getStartBlocks());
 			moveFighterToStartPosition(fightInfo.getFightersByTeam());
 			initFightersCurrentPosition(fightInfo.getFightersByTeam());
-			initFightersFightCharacteristics(fightInfo.getFightersByTeam());
+			initFightersCharacteristics(fightInfo.getFightersByTeam());
 
 			updateFightStage(world, fightId, FightStage.FIGHT);
 			fightInfo.setStage(FightStage.FIGHT, FIGHTTURN_DURATION);
@@ -797,10 +797,24 @@ public enum FightManager {
 		return null;
 	}
 
-	protected void initFightersFightCharacteristics(List<List<EntityLivingBase>> fightersByTeam) {
+	protected void initFightersCharacteristics(List<List<EntityLivingBase>> fightersByTeam) {
 		for (List<EntityLivingBase> team : fightersByTeam) {
 			for (EntityLivingBase fighter : team) {
-				resetFighterCharacteristics(fightersByTeam, fighter);
+				initFighterCharacteristics(fightersByTeam, fighter);
+			}
+		}
+	}
+
+	protected void initFighterCharacteristics(List<List<EntityLivingBase>> fightersByTeam, EntityLivingBase currentFighter) {
+		for (Characteristic characteristic : Characteristic.values()) {
+			FightHelper.resetFightCharacteristic(currentFighter, characteristic);
+		}
+
+		for (List<EntityLivingBase> team : fightersByTeam) {
+			for (EntityLivingBase fighter : team) {
+				if (fighter instanceof EntityPlayerMP) {
+					Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(currentFighter, FightCharacteristicsProperty.IDENTIFIER), (EntityPlayerMP) fighter);
+				}
 			}
 		}
 	}
@@ -812,6 +826,7 @@ public enum FightManager {
 		for (List<EntityLivingBase> team : fightersByTeam) {
 			for (EntityLivingBase fighter : team) {
 				if (fighter instanceof EntityPlayerMP) {
+					// TODO : Don't send all characteristics
 					Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(currentFighter, FightCharacteristicsProperty.IDENTIFIER), (EntityPlayerMP) fighter);
 				}
 			}
