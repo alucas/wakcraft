@@ -39,6 +39,12 @@ public class GuiHandler implements IGuiHandler {
 
 			return new ContainerHavenGemWorkbench(player.inventory, (TileEntityHavenGemWorkbench) tileEntity);
 		case HAVEN_BAG_CHEST_NORMAL:
+		case HAVEN_BAG_CHEST_SMALL:
+		case HAVEN_BAG_CHEST_ADVENTURER:
+		case HAVEN_BAG_CHEST_KIT:
+		case HAVEN_BAG_CHEST_COLLECTOR:
+		case HAVEN_BAG_CHEST_GOLDEN:
+		case HAVEN_BAG_CHEST_EMERALD:
 			tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagChest)) {
 				return null;
