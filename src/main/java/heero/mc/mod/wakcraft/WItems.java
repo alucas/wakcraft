@@ -16,6 +16,7 @@ import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import heero.mc.mod.wakcraft.item.ItemWithLevel;
 import heero.mc.mod.wakcraft.item.ItemWoollyKey;
 import heero.mc.mod.wakcraft.spell.Spell;
+import heero.mc.mod.wakcraft.spell.effect.EffectArea;
 import heero.mc.mod.wakcraft.spell.effect.EffectDamage;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -88,11 +89,11 @@ public class WItems extends Items {
 		GameRegistry.registerItem(bouzeLiteYeahsRing = (new ItemWArmor(TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 6).setCharacteristic(Characteristic.INITIATIVE, 4).setUnlocalizedName("BouzeLiteYeahsRing").setTextureName(modid + "bouze_lite_yeahs_ring")), "ItemBouzeLiteYeahsRing");
 
 		// Iop spells
-		GameRegistry.registerItem(spellShaker = new Spell("Shaker").setEffect(new EffectDamage(4, 130)).setEffectCritical(new EffectDamage(7, 192)), "SpellShaker");
-		GameRegistry.registerItem(spellRocknoceros = (new Spell("Rocknoceros")), "SpellRocknoceros");
-		GameRegistry.registerItem(spellImpact = (new Spell("Impact")), "SpellImpact");
-		GameRegistry.registerItem(spellCharge = (new Spell("Charge")), "SpellCharge");
-		GameRegistry.registerItem(spellDevastate = (new Spell("Devastate")), "SpellDevastate");
+		GameRegistry.registerItem(spellShaker = (new Spell("Shaker").setEffect(new EffectDamage(4, 130)).setEffectCritical(new EffectDamage(7, 192))), "SpellShaker");
+		GameRegistry.registerItem(spellRocknoceros = (new Spell("Rocknoceros").setEffect(new EffectDamage(4, 122)).setEffectCritical(new EffectDamage(6, 184))), "SpellRocknoceros");
+		GameRegistry.registerItem(spellImpact = (new Spell("Impact").setEffect(new EffectDamage(2, 48, EffectArea.CROSS)).setEffectCritical(new EffectDamage(3, 72, EffectArea.CROSS))), "SpellImpact");
+		GameRegistry.registerItem(spellCharge = (new Spell("Charge").setEffect(new EffectDamage(3, 100)).setEffectCritical(new EffectDamage(5, 146))), "SpellCharge");
+		GameRegistry.registerItem(spellDevastate = (new Spell("Devastate").setEffect(new EffectDamage(7, 136, EffectArea.AROUND)).setEffectCritical(new EffectDamage(11, 173, EffectArea.AROUND))), "SpellDevastate");
 		GameRegistry.registerItem(spellThunderbolt = (new Spell("Thunderbolt")), "SpellThunderbolt");
 		GameRegistry.registerItem(spellJudgment = (new Spell("Judgment")), "SpellJudgment");
 		GameRegistry.registerItem(spellSuperIopPunch = (new Spell("SuperIopPunch")), "SpellSuperIopPunch");
