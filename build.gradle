@@ -22,13 +22,16 @@ apply plugin: 'forge'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
+mcVersion="1.7.10"
+forgeVersion="${mcVersion}-10.13.0.1152"
+
 def versionInfo = getGitVersion()
-version = "1.7.10-${versionInfo['Wakcraft.version']}"
+version = "${forgeVersion}-${versionInfo['Wakcraft.version']}"
 group= "heero.mods" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "wakcraft"
 
 minecraft {
-    version = "1.7.10-10.13.0.1152"
+    version = "${forgeVersion}"
     if (file('../run').exists()) {
         assetDir = "../run/assets"
     } else {
