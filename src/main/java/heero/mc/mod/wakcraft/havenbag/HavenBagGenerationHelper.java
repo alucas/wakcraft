@@ -18,7 +18,7 @@ public class HavenBagGenerationHelper {
 	protected static final int HB_LENGTH = 24;
 
 	public static boolean generateHavenBag(World havenBagWorld, int uid) {
-		if (havenBagWorld.provider.dimensionId != WConfig.HAVENBAG_DIMENSION_ID) {
+		if (havenBagWorld.provider.dimensionId != WConfig.getHavenBagDimensionId()) {
 			WLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return false;
@@ -82,7 +82,7 @@ public class HavenBagGenerationHelper {
 	}
 
 	public static void updateGem(World havenBagWorld, int uid, ItemStack stack, int gemPosition) {
-		if (havenBagWorld.provider.dimensionId != WConfig.HAVENBAG_DIMENSION_ID) {
+		if (havenBagWorld.provider.dimensionId != WConfig.getHavenBagDimensionId()) {
 			WLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return;
@@ -105,7 +105,7 @@ public class HavenBagGenerationHelper {
 	}
 
 	public static void updateBridge(World havenBagWorld, int uid, IInventory slots) {
-		if (havenBagWorld.provider.dimensionId != WConfig.HAVENBAG_DIMENSION_ID) {
+		if (havenBagWorld.provider.dimensionId != WConfig.getHavenBagDimensionId()) {
 			WLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, havenBagWorld.provider.getDimensionName());
 
 			return;

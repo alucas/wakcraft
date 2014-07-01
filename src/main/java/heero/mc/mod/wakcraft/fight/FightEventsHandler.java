@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.fight;
 
+import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
@@ -49,6 +50,10 @@ public class FightEventsHandler {
 	@SubscribeEvent
 	public void onAttackEntityEvent(AttackEntityEvent event) {
 		World world = event.entityPlayer.worldObj;
+
+		if (!WConfig.isWakfuFightEnable()) {
+			return;
+		}
 
 		if (world.isRemote) {
 			return;

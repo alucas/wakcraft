@@ -59,9 +59,9 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 
 		// Initialization
 		if (properties.getUID() == -1) {
-			World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WConfig.HAVENBAG_DIMENSION_ID);
+			World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WConfig.getHavenBagDimensionId());
 			if (havenBagWorld == null) {
-				WLog.warning("Error while loading the havenbag world : %d", WConfig.HAVENBAG_DIMENSION_ID);
+				WLog.warning("Error while loading the havenbag world : %d", WConfig.getHavenBagDimensionId());
 
 				return null;
 			}

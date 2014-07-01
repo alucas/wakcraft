@@ -141,8 +141,8 @@ public class CommonProxy {
 	public void registerDimensions() {
 		GameRegistry.registerWorldGenerator(new WorldGenHavenBag(), 0);
 
-		DimensionManager.registerProviderType(WConfig.HAVENBAG_DIMENSION_ID, WorldProviderHavenBag.class, false);
-		DimensionManager.registerDimension(WConfig.HAVENBAG_DIMENSION_ID, WConfig.HAVENBAG_DIMENSION_ID);
+		DimensionManager.registerProviderType(WConfig.getHavenBagDimensionId(), WorldProviderHavenBag.class, false);
+		DimensionManager.registerDimension(WConfig.getHavenBagDimensionId(), WConfig.getHavenBagDimensionId());
 	}
 
 	public EntityPlayer getClientPlayer() {

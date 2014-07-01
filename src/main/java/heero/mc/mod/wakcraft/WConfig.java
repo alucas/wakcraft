@@ -7,22 +7,34 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Level;
 
 public class WConfig {
-	protected static String KEY_HAVENBAG_DIMENSION = "havenBagDimentionId";
+	private static final String KEY_HAVENBAG_DIMENSION = "havenBagDimentionId";
+	private static final String KEY_WAKFU_FIGHT_ENABLE = "enableWakfuFight";
 
-	public static int HAVENBAG_DIMENSION_ID;
+	private static int havenBagDimensionId;
+	private static boolean wakfuFightEnable;
 
 	public static void loadConfig(File configFilet) {
 		Configuration config = new Configuration(configFilet);
 
 		try {
 			config.load();
-			WConfig.HAVENBAG_DIMENSION_ID = config.get(Configuration.CATEGORY_GENERAL, KEY_HAVENBAG_DIMENSION, 2).getInt();
+
+			WConfig.havenBagDimensionId = config.get(Configuration.CATEGORY_GENERAL, KEY_HAVENBAG_DIMENSION, 2).getInt();
+			WConfig.wakfuFightEnable = config.get(Configuration.CATEGORY_GENERAL, KEY_WAKFU_FIGHT_ENABLE, false).getBoolean();
 		} catch (Exception e) {
-			WLog.log(Level.ERROR, e, "Wakcraft has a problem loading it's configuration");
+			WLog.log(Level.ERROR, e, "Error while loading the configuration");
 		} finally {
 			if (config.hasChanged()) {
 				config.save();
 			}
 		}
+	}
+
+	public static int getHavenBagDimensionId() {
+		return havenBagDimensionId;
+	}
+
+	public static boolean isWakfuFightEnable() {
+		return wakfuFightEnable;
 	}
 }
