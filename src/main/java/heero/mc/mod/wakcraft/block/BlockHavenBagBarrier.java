@@ -99,10 +99,10 @@ public class BlockHavenBagBarrier extends BlockGeneric {
 			}
 
 			Block[] blocks = new Block[4];
-			blocks[1] = world.getBlock(x, 19, z + 1);
-			blocks[2] = world.getBlock(x, 19, z - 1);
-			blocks[3] = world.getBlock(x + 1, 19, z);
-			blocks[4] = world.getBlock(x - 1, 19, z);
+			blocks[0] = world.getBlock(x, 19, z + 1);
+			blocks[1] = world.getBlock(x, 19, z - 1);
+			blocks[2] = world.getBlock(x + 1, 19, z);
+			blocks[3] = world.getBlock(x - 1, 19, z);
 
 			for (int i = 0; i < blocks.length; i++) {
 				if ((blocks[i].equals(WBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
