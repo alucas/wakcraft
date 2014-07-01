@@ -2,7 +2,7 @@ package heero.mc.mod.wakcraft.inventory;
 
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
-import heero.mc.mod.wakcraft.spell.Spell;
+import heero.mc.mod.wakcraft.spell.ISpell;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -96,7 +96,7 @@ public class ContainerSpells extends Container {
 
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			return stack.getItem() instanceof Spell;
+			return stack.getItem() instanceof ISpell;
 		}
 
 		@Override

@@ -15,7 +15,9 @@ import heero.mc.mod.wakcraft.item.ItemWArmor.TYPE;
 import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import heero.mc.mod.wakcraft.item.ItemWithLevel;
 import heero.mc.mod.wakcraft.item.ItemWoollyKey;
-import heero.mc.mod.wakcraft.spell.Spell;
+import heero.mc.mod.wakcraft.spell.ActiveSpecialitySpell;
+import heero.mc.mod.wakcraft.spell.ElementalSpell;
+import heero.mc.mod.wakcraft.spell.PassiveSpacialitySpell;
 import heero.mc.mod.wakcraft.spell.effect.EffectArea;
 import heero.mc.mod.wakcraft.spell.effect.EffectDamage;
 import net.minecraft.init.Items;
@@ -36,13 +38,15 @@ public class WItems extends Items {
 			ikiakitCollector, ikiakitGolden, ikiakitEmerald;
 
 	// Iop spells
-	public static Spell spellShaker, spellRocknoceros, spellImpact, spellCharge,
-			spellDevastate, spellThunderbolt, spellJudgment,
+	public static ElementalSpell spellShaker, spellRocknoceros, spellImpact,
+			spellCharge, spellDevastate, spellThunderbolt, spellJudgment,
 			spellSuperIopPunch, spellCelestialSword, spellIopsWrath, spellJabs,
-			spellFlurry, spellIntimidation, spellGuttingGust, spellUppercut,
-			spellJump, spellDefensiveStance, spellFlatten,
-			spellBraveryStandard, spellIncrease, spellVirility,
-			spellCompulsion, spellAuthority, spellShowOff, spellLockingPro;
+			spellFlurry, spellIntimidation, spellGuttingGust, spellUppercut;
+
+	public static ActiveSpecialitySpell spellJump, spellDefensiveStance, spellFlatten,
+			spellBraveryStandard, spellIncrease;
+	public static PassiveSpacialitySpell spellVirility, spellCompulsion, spellAuthority,
+			spellShowOff, spellLockingPro;
 
 	public static void registerItems() {
 		String modid = WInfo.MODID.toLowerCase() + ":";
@@ -89,30 +93,30 @@ public class WItems extends Items {
 		GameRegistry.registerItem(bouzeLiteYeahsRing = (new ItemWArmor(TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 6).setCharacteristic(Characteristic.INITIATIVE, 4).setUnlocalizedName("BouzeLiteYeahsRing").setTextureName(modid + "bouze_lite_yeahs_ring")), "ItemBouzeLiteYeahsRing");
 
 		// Iop spells
-		GameRegistry.registerItem(spellShaker = (new Spell("Shaker").setEffect(new EffectDamage(4, 130)).setEffectCritical(new EffectDamage(7, 192))), "SpellShaker");
-		GameRegistry.registerItem(spellRocknoceros = (new Spell("Rocknoceros").setEffect(new EffectDamage(4, 122)).setEffectCritical(new EffectDamage(6, 184))), "SpellRocknoceros");
-		GameRegistry.registerItem(spellImpact = (new Spell("Impact").setEffect(new EffectDamage(2, 48, EffectArea.CROSS)).setEffectCritical(new EffectDamage(3, 72, EffectArea.CROSS))), "SpellImpact");
-		GameRegistry.registerItem(spellCharge = (new Spell("Charge").setEffect(new EffectDamage(3, 100)).setEffectCritical(new EffectDamage(5, 146))), "SpellCharge");
-		GameRegistry.registerItem(spellDevastate = (new Spell("Devastate").setEffect(new EffectDamage(7, 136, EffectArea.AROUND)).setEffectCritical(new EffectDamage(11, 173, EffectArea.AROUND))), "SpellDevastate");
-		GameRegistry.registerItem(spellThunderbolt = (new Spell("Thunderbolt")), "SpellThunderbolt");
-		GameRegistry.registerItem(spellJudgment = (new Spell("Judgment")), "SpellJudgment");
-		GameRegistry.registerItem(spellSuperIopPunch = (new Spell("SuperIopPunch")), "SpellSuperIopPunch");
-		GameRegistry.registerItem(spellCelestialSword = (new Spell("CelestialSword")), "SpellCelestialSword");
-		GameRegistry.registerItem(spellIopsWrath = (new Spell("IopsWrath")), "SpellIopsWrath");
-		GameRegistry.registerItem(spellJabs = (new Spell("Jabs")), "SpellJabs");
-		GameRegistry.registerItem(spellFlurry = (new Spell("Flurry")), "SpellFlurry");
-		GameRegistry.registerItem(spellIntimidation = (new Spell("Intimidation")), "SpellIntimidation");
-		GameRegistry.registerItem(spellGuttingGust = (new Spell("GuttingGust")), "SpellGuttingGust");
-		GameRegistry.registerItem(spellUppercut = (new Spell("Uppercut")), "SpellUppercut");
-		GameRegistry.registerItem(spellJump = (new Spell("Jump")), "SpellJump");
-		GameRegistry.registerItem(spellDefensiveStance = (new Spell("DefensiveStance")), "SpellDefensiveStance");
-		GameRegistry.registerItem(spellFlatten = (new Spell("Flatten")), "SpellFlatten");
-		GameRegistry.registerItem(spellBraveryStandard = (new Spell("BraveryStandard")), "SpellBraveryStandard");
-		GameRegistry.registerItem(spellIncrease = (new Spell("Increase")), "SpellIncrease");
-		GameRegistry.registerItem(spellVirility = (new Spell("Virility")), "SpellVirility");
-		GameRegistry.registerItem(spellCompulsion = (new Spell("Compulsion")), "SpellCompulsion");
-		GameRegistry.registerItem(spellAuthority = (new Spell("Authority")), "SpellAuthority");
-		GameRegistry.registerItem(spellShowOff = (new Spell("ShowOff")), "SpellShowOff");
-		GameRegistry.registerItem(spellLockingPro = (new Spell("LockingPro")), "SpellLockingPro");
+		GameRegistry.registerItem(spellShaker = (new ElementalSpell("Shaker", 4, 0, 0).setEffect(new EffectDamage(4, 130)).setEffectCritical(new EffectDamage(7, 192))), "SpellShaker");
+		GameRegistry.registerItem(spellRocknoceros = (new ElementalSpell("Rocknoceros", 5, 0, 0).setEffect(new EffectDamage(4, 122)).setEffectCritical(new EffectDamage(6, 184))), "SpellRocknoceros");
+		GameRegistry.registerItem(spellImpact = (new ElementalSpell("Impact", 2, 0, 0).setEffect(new EffectDamage(2, 48, EffectArea.CROSS)).setEffectCritical(new EffectDamage(3, 72, EffectArea.CROSS))), "SpellImpact");
+		GameRegistry.registerItem(spellCharge = (new ElementalSpell("Charge", 4, 1, 0).setEffect(new EffectDamage(3, 100)).setEffectCritical(new EffectDamage(5, 146))), "SpellCharge");
+		GameRegistry.registerItem(spellDevastate = (new ElementalSpell("Devastate", 5, 1, 0).setEffect(new EffectDamage(7, 136, EffectArea.AROUND)).setEffectCritical(new EffectDamage(11, 173, EffectArea.AROUND))), "SpellDevastate");
+		GameRegistry.registerItem(spellThunderbolt = (new ElementalSpell("Thunderbolt", 3, 0, 0)), "SpellThunderbolt");
+		GameRegistry.registerItem(spellJudgment = (new ElementalSpell("Judgment", 4, 1, 0)), "SpellJudgment");
+		GameRegistry.registerItem(spellSuperIopPunch = (new ElementalSpell("SuperIopPunch", 5, 0, 0)), "SpellSuperIopPunch");
+		GameRegistry.registerItem(spellCelestialSword = (new ElementalSpell("CelestialSword", 3, 0, 0)), "SpellCelestialSword");
+		GameRegistry.registerItem(spellIopsWrath = (new ElementalSpell("IopsWrath", 6, 0, 1)), "SpellIopsWrath");
+		GameRegistry.registerItem(spellJabs = (new ElementalSpell("Jabs", 2, 0, 0)), "SpellJabs");
+		GameRegistry.registerItem(spellFlurry = (new ElementalSpell("Flurry", 1, 0, 0)), "SpellFlurry");
+		GameRegistry.registerItem(spellIntimidation = (new ElementalSpell("Intimidation", 3, 0, 0)), "SpellIntimidation");
+		GameRegistry.registerItem(spellGuttingGust = (new ElementalSpell("GuttingGust", 0, 1, 0)), "SpellGuttingGust");
+		GameRegistry.registerItem(spellUppercut = (new ElementalSpell("Uppercut", 0, 0, 1)), "SpellUppercut");
+		GameRegistry.registerItem(spellJump = (new ActiveSpecialitySpell("Jump")), "SpellJump");
+		GameRegistry.registerItem(spellDefensiveStance = (new ActiveSpecialitySpell("DefensiveStance")), "SpellDefensiveStance");
+		GameRegistry.registerItem(spellFlatten = (new ActiveSpecialitySpell("Flatten")), "SpellFlatten");
+		GameRegistry.registerItem(spellBraveryStandard = (new ActiveSpecialitySpell("BraveryStandard")), "SpellBraveryStandard");
+		GameRegistry.registerItem(spellIncrease = (new ActiveSpecialitySpell("Increase")), "SpellIncrease");
+		GameRegistry.registerItem(spellVirility = (new PassiveSpacialitySpell("Virility")), "SpellVirility");
+		GameRegistry.registerItem(spellCompulsion = (new PassiveSpacialitySpell("Compulsion")), "SpellCompulsion");
+		GameRegistry.registerItem(spellAuthority = (new PassiveSpacialitySpell("Authority")), "SpellAuthority");
+		GameRegistry.registerItem(spellShowOff = (new PassiveSpacialitySpell("ShowOff")), "SpellShowOff");
+		GameRegistry.registerItem(spellLockingPro = (new PassiveSpacialitySpell("LockingPro")), "SpellLockingPro");
 	}
 }
