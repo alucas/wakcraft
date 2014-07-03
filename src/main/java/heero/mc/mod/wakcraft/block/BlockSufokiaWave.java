@@ -15,9 +15,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSufokiaWave extends BlockYRotation {
-	protected static final int nbBlock = 3;
+	protected static final int nbBlock = 4;
 
 	public BlockSufokiaWave() {
+		//super(Material.sand);
 		super(Material.sand);
 
 		setBlockTextureName("sufokiaWave1");
@@ -53,6 +54,7 @@ public class BlockSufokiaWave extends BlockYRotation {
 				icons[j][(i<<2) + 1] = icon;
 				icons[j][(i<<2) + 2] = icon;
 				icons[j][(i<<2) + 3] = icon;
+				icons[j][(i<<2) + 4] = icon;
 			}
 		}
 	}
