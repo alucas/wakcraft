@@ -62,7 +62,7 @@ public class WBlocks {
 			ground10Slab, ground11, ground11Slab, ground12, ground12Slab,
 			ground13, ground13Slab, ground14, ground14Slab, box, plank,
 			fightInsideWall, fightStart1, fightStart2, ground15Slab,
-			ground16Slab;
+			ground16Slab, ground17Slab, ground18Slab;
 	public static Block wakfu, wakfuFull, wakfuSlab;
 
 	public static void registerBlocks() {
@@ -140,6 +140,8 @@ public class WBlocks {
 		GameRegistry.registerBlock(plank = (new BlockGeneric(Material.wood).setBlockTextureName("plank").setBlockName("Plank").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockPlank");
 		GameRegistry.registerBlock(ground15Slab = (new BlockSlab(Material.ground, Blocks.sandstone).setBlockTextureName("ground15").setBlockName("Ground15Slab")), ItemBlockSlab.class, "blockGround15Slab");
 		GameRegistry.registerBlock(ground16Slab = (new BlockSlab(Material.ground, Blocks.quartz_block).setBlockTextureName("ground16").setBlockName("Ground16Slab")), ItemBlockSlab.class, "blockGround16Slab");
+		GameRegistry.registerBlock(ground17Slab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround).setBlockTextureName("sufokiaGround0").setBlockName("Ground17Slab")), ItemBlockSlab.class, "blockGround17Slab");
+		GameRegistry.registerBlock(ground18Slab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround, 1).setBlockTextureName("sufokiaGround1").setBlockName("Ground18Slab")), ItemBlockSlab.class, "blockGround18Slab");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher()), "BlockPolisher");

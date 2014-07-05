@@ -15,11 +15,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSlab extends BlockGeneric {
+public class BlockSlab extends BlockGeneric implements IBlockProvider {
 	// Opaque version of the slab block
-	public Block blockOpaque;
+	private final Block blockOpaque;
+	private final int blockOpaqueMetadata;
 
-	public BlockSlab(Material material, Block blockOpaque) {
+	public BlockSlab(final Material material, final Block blockOpaque, final int blockOpaqueMetadata) {
 		super(material);
 
 		setCreativeTab(WakcraftCreativeTabs.tabBlock);
@@ -29,8 +30,13 @@ public class BlockSlab extends BlockGeneric {
 		}
 
 		this.blockOpaque = blockOpaque;
+		this.blockOpaqueMetadata = blockOpaqueMetadata;
 		this.useNeighborBrightness = true;
 		this.setLightOpacity(255);
+	}
+
+	public BlockSlab(final Material material, final Block blockOpaque) {
+		this(material, blockOpaque, 0);
 	}
 
 	/**
@@ -137,5 +143,15 @@ public class BlockSlab extends BlockGeneric {
 			int z2 = z + Facing.offsetsZForSide[Facing.oppositeSide[side]];
 			return !world.getBlock(x2, y2, z2).isOpaqueCube();
 		}
+	}
+
+	@Override
+	public Block getBlock() {
+		return blockOpaque;
+	}
+
+	@Override
+	public int getBlockMetadata() {
+		return blockOpaqueMetadata;
 	}
 }

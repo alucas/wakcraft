@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.item;
 
-import heero.mc.mod.wakcraft.block.BlockSlab;
+import heero.mc.mod.wakcraft.block.IBlockProvider;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -12,13 +12,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBlockSlab extends ItemBlock {
 	// Opaque version of the slab block
 	protected Block blockOpaque;
+	protected int blockOpaqueMetadata;
 
 	public ItemBlockSlab(Block block) {
 		super(block);
 
-		if (block instanceof BlockSlab) {
-			this.blockOpaque = ((BlockSlab) block).blockOpaque;
+		if (!(block instanceof IBlockProvider)) {
+			throw new IllegalArgumentException("The block " + block.getUnlocalizedName() + " must implement " + IBlockProvider.class.getName());
 		}
+
+		this.blockOpaque = ((IBlockProvider) block).getBlock();
+		this.blockOpaqueMetadata = ((IBlockProvider) block).getBlockMetadata();
 	}
 
 	/**
@@ -39,7 +43,7 @@ public class ItemBlockSlab extends ItemBlock {
 				int pos = metadata & 0b11;
 
 				if (pos == 1 && size == 2) {
-					world.setBlock(x, y, z, blockOpaque);
+					world.setBlock(x, y, z, blockOpaque, blockOpaqueMetadata, 2);
 					return true;
 				} else if (pos > 0) {
 					world.setBlockMetadataWithNotify(x, y, z, ((size + 1) << 2) + pos - 1, 2);
@@ -54,7 +58,7 @@ public class ItemBlockSlab extends ItemBlock {
 				int pos = metadata & 0b11;
 
 				if (pos == 0 && size == 2) {
-					world.setBlock(x, y - 1, z, blockOpaque);
+					world.setBlock(x, y - 1, z, blockOpaque, blockOpaqueMetadata, 2);
 					return true;
 				} else if (size + pos == 2) {
 					world.setBlockMetadataWithNotify(x, y - 1, z, ((size + 1) << 2) + pos, 2);
@@ -72,7 +76,7 @@ public class ItemBlockSlab extends ItemBlock {
 				int pos = metadata & 0b11;
 
 				if (pos == 0 && size == 2) {
-					world.setBlock(x, y, z, blockOpaque);
+					world.setBlock(x, y, z, blockOpaque, blockOpaqueMetadata, 2);
 					return true;
 				} else if (size + pos < 3) {
 					world.setBlockMetadataWithNotify(x, y, z, ((size + 1) << 2) + pos, 2);
@@ -86,7 +90,7 @@ public class ItemBlockSlab extends ItemBlock {
 				int pos = metadata & 0b11;
 
 				if (size == 2 && pos == 1) {
-					world.setBlock(x, y + 1, z, blockOpaque);
+					world.setBlock(x, y + 1, z, blockOpaque, blockOpaqueMetadata, 2);
 					return true;
 				} else if (pos == 1) {
 					world.setBlockMetadataWithNotify(x, y + 1, z, ((size + 1) << 2) + pos, 2);
@@ -108,7 +112,7 @@ public class ItemBlockSlab extends ItemBlock {
 				int sum = size + pos;
 
 				if (size == 2 && ((sectionY == 0 && pos == 1) || (sectionY == 3 && pos == 0))) {
-					world.setBlock(posX, y, posZ,blockOpaque);
+					world.setBlock(posX, y, posZ,blockOpaque, blockOpaqueMetadata, 2);
 				}
 
 				if ((sectionY == 0 && pos == 1) || (sectionY == 1 && pos == 2) || (sectionY == 2 && pos == 3)) {
