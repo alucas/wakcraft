@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSufokiaWave extends BlockYRotation {
-	protected static final int nbBlock = 3;
+	protected static final int nbBlock = 4;
 
 	public BlockSufokiaWave() {
 		super(Material.sand);

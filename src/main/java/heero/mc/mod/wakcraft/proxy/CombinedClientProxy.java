@@ -11,6 +11,7 @@ import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIInventory;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUISpells;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIWorkbench;
+import heero.mc.mod.wakcraft.client.model.ModelBowMeow;
 import heero.mc.mod.wakcraft.client.model.ModelGobball;
 import heero.mc.mod.wakcraft.client.model.ModelGobballWC;
 import heero.mc.mod.wakcraft.client.model.ModelGobbette;
@@ -32,6 +33,7 @@ import heero.mc.mod.wakcraft.entity.creature.gobball.Gobball;
 import heero.mc.mod.wakcraft.entity.creature.gobball.GobballWC;
 import heero.mc.mod.wakcraft.entity.creature.gobball.Gobbette;
 import heero.mc.mod.wakcraft.entity.creature.gobball.WhiteGobbly;
+import heero.mc.mod.wakcraft.entity.creature.meow.BowMeow;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.eventhandler.GUIEventHandler;
@@ -69,6 +71,8 @@ public class CombinedClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(WhiteGobbly.class, new WhiteGobbly.RenderWhiteGobbly(new ModelGobbly(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderBlackGobbly(new ModelGobbly(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderGobballWC(new ModelGobballWC(), 0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(BowMeow.class, new BowMeow.RenderBowMeow(new ModelBowMeow(), 0.5f));
+		
 		RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new RendererTextPopup());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new RendererSeedsPile());
 
