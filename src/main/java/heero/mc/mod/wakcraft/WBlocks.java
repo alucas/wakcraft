@@ -21,6 +21,7 @@ import heero.mc.mod.wakcraft.block.BlockOre3;
 import heero.mc.mod.wakcraft.block.BlockOre4;
 import heero.mc.mod.wakcraft.block.BlockPalisade;
 import heero.mc.mod.wakcraft.block.BlockPhoenix;
+import heero.mc.mod.wakcraft.block.BlockPlant;
 import heero.mc.mod.wakcraft.block.BlockPolisher;
 import heero.mc.mod.wakcraft.block.BlockSlab;
 import heero.mc.mod.wakcraft.block.BlockSlabGrass;
@@ -142,6 +143,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(ground16Slab = (new BlockSlab(Material.ground, Blocks.quartz_block).setBlockTextureName("ground16").setBlockName("Ground16Slab")), ItemBlockSlab.class, "blockGround16Slab");
 		GameRegistry.registerBlock(ground17Slab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround).setBlockTextureName("sufokiaGround0").setBlockName("Ground17Slab")), ItemBlockSlab.class, "blockGround17Slab");
 		GameRegistry.registerBlock(ground18Slab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround, 1).setBlockTextureName("sufokiaGround1").setBlockName("Ground18Slab")), ItemBlockSlab.class, "blockGround18Slab");
+		GameRegistry.registerBlock((new BlockPlant().setBlockTextureName("plant1").setBlockName("Plant1")), "blockPlant1");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher()), "BlockPolisher");

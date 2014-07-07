@@ -18,6 +18,7 @@ import heero.mc.mod.wakcraft.client.model.ModelGobbette;
 import heero.mc.mod.wakcraft.client.model.ModelGobbly;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockOre;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPalisade;
+import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPlant;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockYRotation;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererSeedsPile;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererTextPopup;
@@ -83,6 +84,7 @@ public class CombinedClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new RendererBlockYRotation(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RendererBlockOre(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RendererBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
+		RenderingRegistry.registerBlockHandler(new RendererBlockPlant(RenderingRegistry.getNextAvailableRenderId()));
 	}
 
 	@Override
