@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.item;
 
+import heero.mc.mod.wakcraft.block.BlockSlab;
 import heero.mc.mod.wakcraft.block.IBlockProvider;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,8 +46,8 @@ public class ItemBlockSlab extends ItemBlock {
 		case 0: // Bottom
 			if (world.getBlock(x, y, z) == field_150939_a) {
 				int metadata = world.getBlockMetadata(x, y, z);
-				int size = metadata >> 2;
-				int pos = metadata & 0b11;
+				int size = BlockSlab.getSize(metadata);
+				int pos = BlockSlab.getBottomPosition(metadata);
 
 				if (pos == 1 && size == 2) {
 					playSoundPlaced(world, x, y, z);
@@ -62,8 +63,8 @@ public class ItemBlockSlab extends ItemBlock {
 			Block block = world.getBlock(x, y - 1, z);
 			if (block == field_150939_a) {
 				int metadata = world.getBlockMetadata(x, y - 1, z);
-				int size = metadata >> 2;
-				int pos = metadata & 0b11;
+				int size = BlockSlab.getSize(metadata);
+				int pos = BlockSlab.getBottomPosition(metadata);
 
 				if (pos == 0 && size == 2) {
 					playSoundPlaced(world, x, y - 1, z);
@@ -83,8 +84,8 @@ public class ItemBlockSlab extends ItemBlock {
 		case 1: // Top
 			if (world.getBlock(x, y, z) == field_150939_a) {
 				int metadata = world.getBlockMetadata(x, y, z);
-				int size = metadata >> 2;
-				int pos = metadata & 0b11;
+				int size = BlockSlab.getSize(metadata);
+				int pos = BlockSlab.getBottomPosition(metadata);
 
 				if (pos == 0 && size == 2) {
 					playSoundPlaced(world, x, y, z);
@@ -99,8 +100,8 @@ public class ItemBlockSlab extends ItemBlock {
 
 			if (world.getBlock(x, y + 1, z) == field_150939_a) {
 				int metadata = world.getBlockMetadata(x, y, z);
-				int size = metadata >> 2;
-				int pos = metadata & 0b11;
+				int size = BlockSlab.getSize(metadata);
+				int pos = BlockSlab.getBottomPosition(metadata);
 
 				if (size == 2 && pos == 1) {
 					playSoundPlaced(world, x, y + 1, z);
@@ -120,8 +121,8 @@ public class ItemBlockSlab extends ItemBlock {
 
 			if (world.getBlock(posX, y, posZ) == field_150939_a) {
 				int metadata = world.getBlockMetadata(posX, y, posZ);
-				int size = metadata >> 2;
-				int pos = metadata & 0b11;
+				int size = BlockSlab.getSize(metadata);
+				int pos = BlockSlab.getBottomPosition(metadata);
 
 				int sectionY = (int) (hitY * 4);
 				int sum = size + pos;
@@ -162,8 +163,8 @@ public class ItemBlockSlab extends ItemBlock {
 	public boolean func_150936_a(World world, int x, int y, int z, int side,
 			EntityPlayer player, ItemStack itemStack) {
 		int metadata = world.getBlockMetadata(x, y, z);
-		int size = metadata >> 2;
-		int pos = metadata & 0b11;
+		int size = BlockSlab.getSize(metadata);
+		int pos = BlockSlab.getBottomPosition(metadata);
 
 		int posX = x + ((side == 5) ? 1 : (side == 4) ? -1 : 0);
 		int posZ = z + ((side == 3) ? 1 : (side == 2) ? -1 : 0);
@@ -178,8 +179,8 @@ public class ItemBlockSlab extends ItemBlock {
 		block = world.getBlock(posX, posY, posZ);
 		if (block == this.field_150939_a) {
 			metadata = world.getBlockMetadata(posX, posY, posZ);
-			size = metadata >> 2;
-			pos = metadata & 0b11;
+			size = BlockSlab.getSize(metadata);
+			pos = BlockSlab.getBottomPosition(metadata);
 
 			int sum = pos + size;
 
