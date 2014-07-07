@@ -20,6 +20,18 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
 	private final Block blockOpaque;
 	private final int blockOpaqueMetadata;
 
+	public static int getSize(int metadata) {
+		return (metadata >> 2) & 0b11;
+	}
+
+	public static int getBottomPosition(int metadata) {
+		return metadata & 0b11;
+	}
+
+	public static int getTopPosition(int metadata) {
+		return getBottomPosition(metadata) + getSize(metadata);
+	}
+
 	public BlockSlab(final Material material, final Block blockOpaque, final int blockOpaqueMetadata) {
 		super(material);
 
