@@ -31,7 +31,7 @@ public class WItems extends Items {
 			polishedmoonstone, shadowyBlue, merchantHG, decoHG, craftHG,
 			gardenHG, gobballBreastplate, gobboots, gobballEpaulettes,
 			gobballCape, gobballBelt, gobballHeadgear, gobballAmulet,
-			bouzeLiteYeahsRing, gobballSeed;
+			bouzeLiteYeahsRing, gobballSeed, tofuFeather, tofuBlood;
 
 	// Ikiakits
 	public static ItemIkiakit ikiakitSmall, ikiakitAdventurer, ikiakitKit,
@@ -55,6 +55,10 @@ public class WItems extends Items {
 		GameRegistry.registerItem(gobballSkin = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GobballSkin").setTextureName(modid + "gobballskin")), "GobballSkin");
 		GameRegistry.registerItem(gobballHorn = ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GobballHorn").setTextureName(modid + "gobballhorn")), "GobballHorn");
 		GameRegistry.registerItem(woollyKey = (new ItemWoollyKey()), "WoollyKey");
+		
+		GameRegistry.registerItem(tofuFeather = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("TofuFeather").setTextureName(modid + "tofufeather")), "TofuFeather");
+		GameRegistry.registerItem(tofuBlood = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("TofuBlood").setTextureName(modid + "tofublood")), "TofuBlood");
+		
 		GameRegistry.registerItem(itemOre1 = (new ItemOre1()), "ItemOre1");
 		GameRegistry.registerItem(itemOre2 = (new ItemOre2()), "ItemOre2");
 		GameRegistry.registerItem(canoonPowder = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("CanoonPowder").setTextureName(modid + "canoonpowder")), "ItemCanoonPowder");
