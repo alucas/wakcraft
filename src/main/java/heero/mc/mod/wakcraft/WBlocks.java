@@ -31,7 +31,6 @@ import heero.mc.mod.wakcraft.block.BlockSufokiaColor;
 import heero.mc.mod.wakcraft.block.BlockSufokiaGround;
 import heero.mc.mod.wakcraft.block.BlockSufokiaWave;
 import heero.mc.mod.wakcraft.block.BlockTransparent;
-import heero.mc.mod.wakcraft.block.BlockWakfu;
 import heero.mc.mod.wakcraft.block.BlockYRotation;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.item.ItemBlockOre1;
@@ -99,7 +98,6 @@ public class WBlocks {
 		GameRegistry.registerBlock(hbMerchant = (new BlockGeneric(Material.iron).setBlockTextureName(ForgeDirection.UP, "hbmerchant_top").setBlockTextureName("hbmerchant_side").setBlockName("HBMerchant").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBMerchant");
 		GameRegistry.registerBlock(hbVisitors = (new BlockHavenBagVisitors()), "blockHavenBagVisitors");
 		GameRegistry.registerBlock(hbBarrier = (new BlockHavenBagBarrier()), "blockHavenBagBarrier");
-		GameRegistry.registerBlock(wakfu = (new BlockWakfu()), "blockWakfu");
 		GameRegistry.registerBlock(wakfuFull = (new BlockGeneric(Material.wood).setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("wakfuGreen")), "blockWakfuFull");
 		GameRegistry.registerBlock(wakfuSlab = (new BlockSlabWakfu()), ItemBlockSlab.class, "blockWakfuSlab");
 		GameRegistry.registerBlock(fightMovement = (new BlockGeneric(Material.ground).setBlockTextureName("movement").setBlockName("FightMovement")), "blockFightMovement");
