@@ -10,7 +10,6 @@ import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -73,7 +72,7 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		if (world.isRemote) {
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
+			Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
 		}
 
 		return false;

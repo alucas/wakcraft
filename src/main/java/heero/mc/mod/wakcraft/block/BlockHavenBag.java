@@ -3,6 +3,7 @@ package heero.mc.mod.wakcraft.block;
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.WLog;
+import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
@@ -10,7 +11,6 @@ import heero.mc.mod.wakcraft.helper.HavenBagHelper;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBag;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -77,7 +77,7 @@ public class BlockHavenBag extends BlockContainer {
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		if (world.isRemote) {
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
+			Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
 		}
 
 		return false;
