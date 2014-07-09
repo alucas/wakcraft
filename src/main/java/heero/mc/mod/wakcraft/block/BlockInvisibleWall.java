@@ -1,8 +1,10 @@
 package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WConfig;
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.mc.mod.wakcraft.Wakcraft;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -11,8 +13,20 @@ public class BlockInvisibleWall extends BlockGeneric {
 	public BlockInvisibleWall() {
 		super(Material.air);
 
-		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		setBlockName("InvisibleWall");
+	}
+
+	/**
+	 * Checks to see if its valid to put this block at the specified
+	 * coordinates. Args: world, x, y, z
+	 */
+	@Override
+	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+		if (world.isRemote) {
+			Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
+		}
+
+		return false;
 	}
 
 	@Override
