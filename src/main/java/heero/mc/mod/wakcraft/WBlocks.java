@@ -25,7 +25,7 @@ import heero.mc.mod.wakcraft.block.BlockPlant;
 import heero.mc.mod.wakcraft.block.BlockPolisher;
 import heero.mc.mod.wakcraft.block.BlockSlab;
 import heero.mc.mod.wakcraft.block.BlockSlabGrass;
-import heero.mc.mod.wakcraft.block.BlockSlabWakfu;
+import heero.mc.mod.wakcraft.block.BlockDebugSlab;
 import heero.mc.mod.wakcraft.block.BlockStairs2;
 import heero.mc.mod.wakcraft.block.BlockSufokiaColor;
 import heero.mc.mod.wakcraft.block.BlockSufokiaGround;
@@ -63,7 +63,7 @@ public class WBlocks {
 			ground13, ground13Slab, ground14, ground14Slab, box, plank,
 			fightInsideWall, fightStart1, fightStart2, ground15Slab,
 			ground16Slab, ground17Slab, ground18Slab, plant1, plant2;
-	public static Block wakfu, wakfuFull, wakfuSlab;
+	public static Block wakfu, debug, debugSlab;
 
 	public static void registerBlocks() {
 		String modid = WInfo.MODID.toLowerCase() + ":";
@@ -98,8 +98,8 @@ public class WBlocks {
 		GameRegistry.registerBlock(hbMerchant = (new BlockGeneric(Material.iron).setBlockTextureName(ForgeDirection.UP, "hbmerchant_top").setBlockTextureName("hbmerchant_side").setBlockName("HBMerchant").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBMerchant");
 		GameRegistry.registerBlock(hbVisitors = (new BlockHavenBagVisitors()), "blockHavenBagVisitors");
 		GameRegistry.registerBlock(hbBarrier = (new BlockHavenBagBarrier()), "blockHavenBagBarrier");
-		GameRegistry.registerBlock(wakfuFull = (new BlockGeneric(Material.wood).setCreativeTab(WakcraftCreativeTabs.tabBlock).setBlockTextureName("wakfuGreen")), "blockWakfuFull");
-		GameRegistry.registerBlock(wakfuSlab = (new BlockSlabWakfu()), ItemBlockSlab.class, "blockWakfuSlab");
+		GameRegistry.registerBlock(debug = (new BlockGeneric(Material.wood).setBlockTextureName("wakfuGreen").setBlockName("Debug")), "blockWakfuFull");
+		GameRegistry.registerBlock(debugSlab = (new BlockDebugSlab()), ItemBlockSlab.class, "blockWakfuSlab");
 		GameRegistry.registerBlock(fightMovement = (new BlockGeneric(Material.ground).setBlockTextureName("movement").setBlockName("FightMovement")), "blockFightMovement");
 		GameRegistry.registerBlock(fightDirection = (new BlockGeneric(Material.ground).setBlockTextureName("direction").setBlockName("FightDirection")), "blockFightDirection");
 		GameRegistry.registerBlock(fightWall = (new BlockFightWall()), "blockFightWall");

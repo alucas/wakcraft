@@ -4,12 +4,12 @@ import heero.mc.mod.wakcraft.WBlocks;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockSlabWakfu extends BlockSlab {
+public class BlockDebugSlab extends BlockSlab {
 
-	public BlockSlabWakfu() {
-		super(Material.ground, WBlocks.wakfuFull);
+	public BlockDebugSlab() {
+		super(Material.ground, WBlocks.debug);
 
-		setBlockName("SlabWakfu");
+		setBlockName("DebugSlab");
 		setBlockTextureName("wakfuGreen");
 		setBlockTextureName(ForgeDirection.UP, 0, "wakfuRed");
 		setBlockTextureName(ForgeDirection.UP, 1, "wakfuBlue");
