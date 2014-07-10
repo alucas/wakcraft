@@ -12,6 +12,7 @@ import heero.mc.mod.wakcraft.entity.creature.gobball.Gobbette;
 import heero.mc.mod.wakcraft.entity.creature.gobball.WhiteGobbly;
 import heero.mc.mod.wakcraft.entity.creature.meow.BowMeow;
 import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
+import heero.mc.mod.wakcraft.entity.creature.tofu.Tofurby;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.eventhandler.EntityEventHandler;
@@ -110,8 +111,9 @@ public class CommonProxy {
 		registerEntity(WhiteGobbly.class, "WhiteGobbly", 0xeaeaea, 0xc29ab3);
 		registerEntity(BlackGobbly.class, "BlackGobbly", 0xeaeaea, 0xc22ab3);
 		registerEntity(GobballWC.class, "GobballWarChief", 0xeaeaea, 0xc22a23);
-		registerEntity(BowMeow.class, "BowMeow", 0xeaeaea, 0xc22a23);
-		registerEntity(BabyTofu.class, "BabyTofu", 0xeaeaea, 0xc22a23);
+		registerEntity(BowMeow.class, "BowMeow", 0xeaeaea, 0x000000);
+		registerEntity(BabyTofu.class, "BabyTofu", 0xeaeaea, 0xffa500);
+		registerEntity(Tofurby.class, "Tofurby", 0xeaeaea, 0xffa500);
 
 		EntityRegistry.registerGlobalEntityID(EntityTextPopup.class, "TextPopup", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntitySeedsPile.class, "SeedPile", EntityRegistry.findGlobalUniqueEntityId());
