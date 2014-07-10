@@ -2,7 +2,8 @@ package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.Wakcraft;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
@@ -11,7 +12,12 @@ import net.minecraft.world.World;
 public class BlockInvisibleWall extends BlockGeneric {
 
 	public BlockInvisibleWall() {
-		super(Material.air);
+		super(new MaterialTransparent(MapColor.airColor) {
+			@Override
+			public boolean isReplaceable() {
+				return false;
+			}
+		});
 
 		setBlockName("InvisibleWall");
 	}
