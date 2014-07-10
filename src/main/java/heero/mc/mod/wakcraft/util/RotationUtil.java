@@ -5,27 +5,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class RotationUtil {
-	public static void setOrientationFromYaw(World world, int x, int y, int z,
-			float yaw) {
-		int l = MathHelper.floor_double((double) (yaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-		switch (l) {
-		case 0:
-			setOrientation(world, x, y, z, ForgeDirection.SOUTH);
-			break;
-		case 1:
-			setOrientation(world, x, y, z, ForgeDirection.WEST);
-			break;
-		case 2:
-			setOrientation(world, x, y, z, ForgeDirection.NORTH);
-			break;
-		default:
-			setOrientation(world, x, y, z, ForgeDirection.EAST);
-		}
+	public static ForgeDirection directions[] = new ForgeDirection[]{ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.NORTH, ForgeDirection.EAST};
+	public static ForgeDirection getOrientationFromYaw(float yaw) {
+		return directions[MathHelper.floor_double((double) (yaw * 4.0F / 360.0F) + 0.5D) & 3];
 	}
 
-	public static void setOrientation(World world, int x, int y, int z,
-			ForgeDirection direction) {
+	public static void setOrientationFromYaw(World world, int x, int y, int z,
+			float yaw) {
+		ForgeDirection direction = getOrientationFromYaw(yaw);
 
 		int metadata = world.getBlockMetadata(x, y, z) & 0xc;
 
