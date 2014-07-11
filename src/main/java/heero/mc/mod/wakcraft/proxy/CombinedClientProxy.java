@@ -17,6 +17,7 @@ import heero.mc.mod.wakcraft.client.model.ModelGobball;
 import heero.mc.mod.wakcraft.client.model.ModelGobballWC;
 import heero.mc.mod.wakcraft.client.model.ModelGobbette;
 import heero.mc.mod.wakcraft.client.model.ModelGobbly;
+import heero.mc.mod.wakcraft.client.model.ModelTofurby;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockOre;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPalisade;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPlant;
@@ -37,6 +38,7 @@ import heero.mc.mod.wakcraft.entity.creature.gobball.Gobbette;
 import heero.mc.mod.wakcraft.entity.creature.gobball.WhiteGobbly;
 import heero.mc.mod.wakcraft.entity.creature.meow.BowMeow;
 import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
+import heero.mc.mod.wakcraft.entity.creature.tofu.Tofurby;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.eventhandler.GUIEventHandler;
@@ -76,6 +78,7 @@ public class CombinedClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderGobballWC(new ModelGobballWC(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(BowMeow.class, new BowMeow.RenderBowMeow(new ModelBowMeow(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(BabyTofu.class, new BabyTofu.RenderBabyTofu(new ModelBabyTofu(), 0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(Tofurby.class, new Tofurby.RenderTofurby(new ModelTofurby(), 0.5f));
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new RendererTextPopup());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new RendererSeedsPile());
