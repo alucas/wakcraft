@@ -14,24 +14,30 @@ public enum Characteristic {
 	// Battle
 	INITIATIVE("Initiative"),
 	HEAL("Heal"),
+	/** Probability to do a critical hit (in %) */
 	CRITICAL("Critical"),
+	/** Critical damage bonus (in %) */
 	CRITICAL_DAMAGE("Critical_Damage"),
+	/** Probability to do a critical failure (in %) */
 	CRITICAL_FAILURE("Critical_Failure"),
 	BACKSTAB("Backstab"),
 	BACKSTAB_RESISTANCE("Backstab_Resistance"),
 	DODGE("Dodge"),
 	LOCK("Lock"),
 	BLOCK("Block"),
+	/** Increase the chance to apply a state */
 	WILLPOWER("Willpower"),
 	RANGE("Range"),
 
 	// Secondary
+	/** Increase the number of creatures you can control */
 	CONTROL("Control"),
 	/** Increases the damages of the creatures and mechanisms you control */
 	CMC_DAMAGE("CMC_Damage"),
 	WISDOM("Wisdom"),
 	PROSPECTION("Prospection"),
 	PERCEPTION("Perception"),
+	/** Decrease the required level to equip an item */
 	KIT("Kit"),
 
 	// Mastery
