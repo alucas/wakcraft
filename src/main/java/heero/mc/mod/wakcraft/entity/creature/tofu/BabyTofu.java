@@ -1,7 +1,5 @@
 package heero.mc.mod.wakcraft.entity.creature.tofu;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
@@ -10,6 +8,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BabyTofu extends TofuGeneric{
 
@@ -26,6 +26,7 @@ public class BabyTofu extends TofuGeneric{
 		property.set(Characteristic.INITIATIVE, 1);
 		property.set(Characteristic.LOCK, -16);
 		property.set(Characteristic.DODGE, -12);
+		property.set(Characteristic.CRITICAL, 5);
 
 		property.set(Characteristic.WATER_RES, 2);
 		property.set(Characteristic.EARTH_RES, 2);

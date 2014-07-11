@@ -26,12 +26,14 @@ public class Tofurby extends TofuGeneric{
 		property.set(Characteristic.INITIATIVE, 23);
 		property.set(Characteristic.LOCK, 3);
 		property.set(Characteristic.DODGE, 21);
+		property.set(Characteristic.CRITICAL, 7);
 
 		property.set(Characteristic.WATER_RES, 8);
 		property.set(Characteristic.EARTH_RES, 8);
 		property.set(Characteristic.AIR_RES, 18);
 		property.set(Characteristic.FIRE_RES, -6);
 
+		property.set(Characteristic.EARTH_ATT, 33);
 		property.set(Characteristic.AIR_ATT, 33);
 		
 	}
