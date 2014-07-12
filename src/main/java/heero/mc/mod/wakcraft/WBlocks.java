@@ -32,6 +32,7 @@ import heero.mc.mod.wakcraft.block.BlockSufokiaGround;
 import heero.mc.mod.wakcraft.block.BlockSufokiaWave;
 import heero.mc.mod.wakcraft.block.BlockTransparent;
 import heero.mc.mod.wakcraft.block.BlockYRotation;
+import heero.mc.mod.wakcraft.block.BlockYRotationSlab;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.item.ItemBlockOre1;
 import heero.mc.mod.wakcraft.item.ItemBlockOre2;
@@ -62,7 +63,8 @@ public class WBlocks {
 			ground10Slab, ground11, ground11Slab, ground12, ground12Slab,
 			ground13, ground13Slab, ground14, ground14Slab, box, plank,
 			fightInsideWall, fightStart1, fightStart2, ground15Slab,
-			ground16Slab, ground17Slab, ground18Slab, plant1, plant2;
+			ground16Slab, ground17Slab, ground18Slab, plant1, plant2,
+			ground19Slab, ground20Slab, ground21Slab, ground22Slab;
 	public static Block wakfu, debug, debugSlab;
 
 	public static void registerBlocks() {
@@ -143,6 +145,10 @@ public class WBlocks {
 		GameRegistry.registerBlock(ground18Slab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround, 1).setBlockTextureName("sufokiaGround1").setBlockName("Ground18Slab")), ItemBlockSlab.class, "blockGround18Slab");
 		GameRegistry.registerBlock(plant1 = (new BlockPlant().setBlockTextureName("plant1").setBlockName("Plant1")), "blockPlant1");
 		GameRegistry.registerBlock(plant2 = (new BlockPlant().setBlockTextureName("plant2").setBlockName("Plant2")), "blockPlant2");
+		GameRegistry.registerBlock(ground19Slab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 2, ForgeDirection.NORTH).setBlockTextureName("sufokiaWave1").setBlockName("Ground19Slab")), ItemBlockSlab.class, "blockGround19Slab");
+		GameRegistry.registerBlock(ground20Slab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 0, ForgeDirection.SOUTH).setBlockTextureName("sufokiaWave1").setBlockName("Ground20Slab")), ItemBlockSlab.class, "blockGround20Slab");
+		GameRegistry.registerBlock(ground21Slab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 3, ForgeDirection.EAST).setBlockTextureName("sufokiaWave1").setBlockName("Ground21Slab")), ItemBlockSlab.class, "blockGround21Slab");
+		GameRegistry.registerBlock(ground22Slab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 1, ForgeDirection.WEST).setBlockTextureName("sufokiaWave1").setBlockName("Ground22Slab")), ItemBlockSlab.class, "blockGround22Slab");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher()), "BlockPolisher");
