@@ -7,6 +7,7 @@ import heero.mc.mod.wakcraft.entity.creature.gobball.Gobball;
 import heero.mc.mod.wakcraft.entity.creature.gobball.GobballWC;
 import heero.mc.mod.wakcraft.entity.creature.gobball.Gobbette;
 import heero.mc.mod.wakcraft.entity.creature.gobball.WhiteGobbly;
+import heero.mc.mod.wakcraft.item.ItemBlockYRotation;
 import heero.mc.mod.wakcraft.item.ItemIkiakit;
 import heero.mc.mod.wakcraft.item.ItemOre1;
 import heero.mc.mod.wakcraft.item.ItemOre2;
@@ -32,6 +33,9 @@ public class WItems extends Items {
 			gardenHG, gobballBreastplate, gobboots, gobballEpaulettes,
 			gobballCape, gobballBelt, gobballHeadgear, gobballAmulet,
 			bouzeLiteYeahsRing, gobballSeed, tofuFeather, tofuBlood;
+
+	// ItemBlock
+	public static Item sufokiaWave1;
 
 	// Ikiakits
 	public static ItemIkiakit ikiakitSmall, ikiakitAdventurer, ikiakitKit,
@@ -85,6 +89,9 @@ public class WItems extends Items {
 		GameRegistry.registerItem(ikiakitCollector = new ItemIkiakit("CollectorIkiakit"), "ItemCollectorIkiakit");
 		GameRegistry.registerItem(ikiakitEmerald = new ItemIkiakit("EmeraldIkiakit"), "ItemEmeraldIkiakit");
 		GameRegistry.registerItem(gobballSeed = new ItemWCreatureSeeds(0, "GobballSeed", "gobballseed").addCreature('G', Gobball.class).addCreature('B', BlackGobbly.class).addCreature('W', WhiteGobbly.class).addCreature('E', Gobbette.class).addCreature('C', GobballWC.class).addPatern("EWB", 0.5F), "ItemGobballSeed");
+
+		// ItemBlock
+		GameRegistry.registerItem(sufokiaWave1 = new ItemBlockYRotation(WBlocks.sufokiaWave1NorthSlab, WBlocks.sufokiaWave1EastSlab, WBlocks.sufokiaWave1SouthSlab, WBlocks.sufokiaWave1WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemSufokiaWave1");
 
 		// Armors
 		GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 15).setCharacteristic(Characteristic.INITIATIVE, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName("GobballBreastplate").setTextureName(modid + "gobball_breastplate")), "ItemGobballBreastplate");
