@@ -17,7 +17,7 @@ public class ItemBlockRenderer implements IItemRenderer {
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
 			ItemRendererHelper helper) {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -27,6 +27,6 @@ public class ItemBlockRenderer implements IItemRenderer {
 			return;
 		}
 
-		this.renderBlocksIr.renderBlockAsItem(((IBlockProvider) stack.getItem()).getBlock(), stack.getItemDamage(), 1.0F);
+		this.renderBlocksIr.renderBlockAsItem(((IBlockProvider) stack.getItem()).getBlock(), 0, 1.0F);
 	}
 }
