@@ -67,7 +67,8 @@ public class WBlocks {
 			sufokiaWave1NorthSlab, sufokiaWave1SouthSlab, sufokiaWave1EastSlab,
 			sufokiaWave1WestSlab, sufokiaSunSlab, pillarSlab,
 			sufokiaWave2NorthSlab, sufokiaWave2SouthSlab, sufokiaWave2EastSlab,
-			sufokiaWave2WestSlab;
+			sufokiaWave2WestSlab, sufokiaWave3NorthSlab, sufokiaWave3SouthSlab,
+			sufokiaWave3EastSlab, sufokiaWave3WestSlab;
 	public static Block debug, debugSlab;
 
 	public static void registerBlocks() {
@@ -158,6 +159,10 @@ public class WBlocks {
 		GameRegistry.registerBlock(sufokiaWave2SouthSlab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 4, ForgeDirection.SOUTH).setBlockTextureName("sufokiaWave2").setBlockName("sufokiaWave2SouthSlab")), ItemBlockSlab.class, "sufokiaWave2SouthSlab");
 		GameRegistry.registerBlock(sufokiaWave2EastSlab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 7, ForgeDirection.EAST).setBlockTextureName("sufokiaWave2").setBlockName("sufokiaWave2EastSlab")), ItemBlockSlab.class, "sufokiaWave2EastSlab");
 		GameRegistry.registerBlock(sufokiaWave2WestSlab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 5, ForgeDirection.WEST).setBlockTextureName("sufokiaWave2").setBlockName("sufokiaWave2WestSlab")), ItemBlockSlab.class, "sufokiaWave2WestSlab");
+		GameRegistry.registerBlock(sufokiaWave3NorthSlab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 10, ForgeDirection.NORTH).setBlockTextureName("sufokiaWave3").setBlockName("sufokiaWave3NorthSlab")), ItemBlockSlab.class, "sufokiaWave3NorthSlab");
+		GameRegistry.registerBlock(sufokiaWave3SouthSlab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 8, ForgeDirection.SOUTH).setBlockTextureName("sufokiaWave3").setBlockName("sufokiaWave3SouthSlab")), ItemBlockSlab.class, "sufokiaWave3SouthSlab");
+		GameRegistry.registerBlock(sufokiaWave3EastSlab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 11, ForgeDirection.EAST).setBlockTextureName("sufokiaWave3").setBlockName("sufokiaWave3EastSlab")), ItemBlockSlab.class, "sufokiaWave3EastSlab");
+		GameRegistry.registerBlock(sufokiaWave3WestSlab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 9, ForgeDirection.WEST).setBlockTextureName("sufokiaWave3").setBlockName("sufokiaWave3WestSlab")), ItemBlockSlab.class, "sufokiaWave3WestSlab");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher()), "BlockPolisher");

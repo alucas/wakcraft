@@ -35,7 +35,7 @@ public class WItems extends Items {
 			bouzeLiteYeahsRing, gobballSeed, tofuFeather, tofuBlood;
 
 	// ItemBlock
-	public static Item sufokiaWave1, sufokiaWave2;
+	public static Item sufokiaWave1, sufokiaWave2, sufokiaWave3;
 
 	// Ikiakits
 	public static ItemIkiakit ikiakitSmall, ikiakitAdventurer, ikiakitKit,
@@ -93,6 +93,7 @@ public class WItems extends Items {
 		// ItemBlock
 		GameRegistry.registerItem(sufokiaWave1 = new ItemBlockYRotation(WBlocks.sufokiaWave1NorthSlab, WBlocks.sufokiaWave1EastSlab, WBlocks.sufokiaWave1SouthSlab, WBlocks.sufokiaWave1WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemSufokiaWave1");
 		GameRegistry.registerItem(sufokiaWave2 = new ItemBlockYRotation(WBlocks.sufokiaWave2NorthSlab, WBlocks.sufokiaWave2EastSlab, WBlocks.sufokiaWave2SouthSlab, WBlocks.sufokiaWave2WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemSufokiaWave2");
+		GameRegistry.registerItem(sufokiaWave3 = new ItemBlockYRotation(WBlocks.sufokiaWave3NorthSlab, WBlocks.sufokiaWave3EastSlab, WBlocks.sufokiaWave3SouthSlab, WBlocks.sufokiaWave3WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemSufokiaWave3");
 
 		// Armors
 		GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 15).setCharacteristic(Characteristic.INITIATIVE, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName("GobballBreastplate").setTextureName(modid + "gobball_breastplate")), "ItemGobballBreastplate");
