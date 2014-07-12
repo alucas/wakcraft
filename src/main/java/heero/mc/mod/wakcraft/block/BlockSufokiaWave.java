@@ -1,7 +1,6 @@
 package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WInfo;
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 
 import java.util.List;
 
@@ -15,14 +14,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSufokiaWave extends BlockYRotation {
-	protected static final int nbBlock = 4;
+	protected static final int nbBlock = 3;
 
 	public BlockSufokiaWave() {
 		super(Material.sand);
 
 		setBlockTextureName("sufokiaWave1");
 
-		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		setBlockName("SufokiaWave");
 	}
 
