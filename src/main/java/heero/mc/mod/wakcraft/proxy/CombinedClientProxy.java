@@ -99,6 +99,7 @@ public class CombinedClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(WItems.sufokiaWave1, rendererItemBlock);
 		MinecraftForgeClient.registerItemRenderer(WItems.sufokiaWave2, rendererItemBlock);
 		MinecraftForgeClient.registerItemRenderer(WItems.sufokiaWave3, rendererItemBlock);
+		MinecraftForgeClient.registerItemRenderer(WItems.ground1, rendererItemBlock);
 	}
 
 	@Override

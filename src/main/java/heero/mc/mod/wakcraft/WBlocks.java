@@ -116,7 +116,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(fightStart2 = (new BlockFightStart(2)), "blockFightStart2");
 		GameRegistry.registerBlock(classConsole = (new BlockClassConsole()), "blockClassConsole");
 		GameRegistry.registerBlock(ground1 = (new BlockGeneric(Material.ground).setBlockTextureName("ground1").setBlockName("Ground1")), "blockGround1");
-		GameRegistry.registerBlock(ground1Slab = (new BlockSlab(Material.ground, WBlocks.ground1).setBlockTextureName("ground1").setBlockName("Ground1Slab")), ItemBlockSlab.class, "blockGround1Slab");
+		GameRegistry.registerBlock(ground1Slab = (new BlockYRotationSlab(Material.ground, WBlocks.ground1).setBlockTextureName("ground1").setBlockName("Ground1Slab")), ItemBlockSlab.class, "blockGround1Slab");
 		GameRegistry.registerBlock(ground2 = (new BlockGeneric(Material.ground).setBlockTextureName("ground2").setBlockName("Ground2")), "blockGround2");
 		GameRegistry.registerBlock(ground2Slab = (new BlockSlab(Material.ground, WBlocks.ground2).setBlockTextureName("ground2").setBlockName("Ground2Slab")), ItemBlockSlab.class, "blockGround2Slab");
 		GameRegistry.registerBlock(ground3 = (new BlockGeneric(Material.ground).setBlockTextureName("ground3").setBlockName("Ground3")), "blockGround3");
@@ -124,11 +124,11 @@ public class WBlocks {
 		GameRegistry.registerBlock(ground4 = (new BlockGeneric(Material.ground).setBlockTextureName("ground4").setBlockName("Ground4")), "blockGround4");
 		GameRegistry.registerBlock(ground4Slab = (new BlockSlab(Material.ground, WBlocks.ground4).setBlockTextureName("ground4").setBlockName("Ground4Slab")), ItemBlockSlab.class, "blockGround4Slab");
 		GameRegistry.registerBlock(ground5 = (new BlockGeneric(Material.ground).setBlockTextureName("ground5").setBlockName("Ground5")), "blockGround5");
-		GameRegistry.registerBlock(ground5Slab = (new BlockSlab(Material.ground, WBlocks.ground5).setBlockTextureName("ground5").setBlockName("Ground5Slab")), ItemBlockSlab.class, "blockGround5Slab");
+		GameRegistry.registerBlock(ground5Slab = (new BlockYRotationSlab(Material.ground, WBlocks.ground5).setBlockTextureName("ground5").setBlockName("Ground5Slab")), ItemBlockSlab.class, "blockGround5Slab");
 		GameRegistry.registerBlock(ground6 = (new BlockGeneric(Material.ground).setBlockTextureName("ground6").setBlockName("Ground6")), "blockGround6");
-		GameRegistry.registerBlock(ground6Slab = (new BlockSlab(Material.ground, WBlocks.ground6).setBlockTextureName("ground6").setBlockName("Ground6Slab")), ItemBlockSlab.class, "blockGround6Slab");
+		GameRegistry.registerBlock(ground6Slab = (new BlockYRotationSlab(Material.ground, WBlocks.ground6).setBlockTextureName("ground6").setBlockName("Ground6Slab")), ItemBlockSlab.class, "blockGround6Slab");
 		GameRegistry.registerBlock(ground7 = (new BlockGeneric(Material.ground).setBlockTextureName("ground7").setBlockName("Ground7")), "blockGround7");
-		GameRegistry.registerBlock(ground7Slab = (new BlockSlab(Material.ground, WBlocks.ground7).setBlockTextureName("ground7").setBlockName("Ground7Slab")), ItemBlockSlab.class, "blockGround7Slab");
+		GameRegistry.registerBlock(ground7Slab = (new BlockYRotationSlab(Material.ground, WBlocks.ground7).setBlockTextureName("ground7").setBlockName("Ground7Slab")), ItemBlockSlab.class, "blockGround7Slab");
 		GameRegistry.registerBlock(ground8 = (new BlockGeneric(Material.ground).setBlockTextureName("ground8").setBlockName("Ground8")), "blockGround8");
 		GameRegistry.registerBlock(ground8Slab = (new BlockSlab(Material.ground, WBlocks.ground8).setBlockTextureName("ground8").setBlockName("Ground8Slab")), ItemBlockSlab.class, "blockGround8Slab");
 		GameRegistry.registerBlock(ground9 = (new BlockGeneric(Material.ground).setBlockTextureName("ground9").setBlockName("Ground9")), "blockGround9");

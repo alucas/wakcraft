@@ -20,6 +20,10 @@ public class BlockYRotationSlab extends BlockSlab implements IRotation {
 		this(material, blockOpaque, 0, yRotation);
 	}
 
+	public BlockYRotationSlab(final Material material, final Block blockOpaque) {
+		this(material, blockOpaque, 0, ForgeDirection.NORTH);
+	}
+
 	/**
 	 * If this block doesn't render as an ordinary block it will return False
 	 * (examples: signs, buttons, stairs, etc)
