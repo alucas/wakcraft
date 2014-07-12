@@ -21,7 +21,7 @@ import heero.mc.mod.wakcraft.client.model.ModelTofurby;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockOre;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPalisade;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPlant;
-import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockYRotation;
+import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockRotation;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererSeedsPile;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererTextPopup;
 import heero.mc.mod.wakcraft.client.renderer.fight.FightRenderer;
@@ -87,7 +87,7 @@ public class CombinedClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RendererPhoenix());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHavenBagChest.class, new RendererHavenBagChest());
 
-		RenderingRegistry.registerBlockHandler(new RendererBlockYRotation(RenderingRegistry.getNextAvailableRenderId()));
+		RenderingRegistry.registerBlockHandler(new RendererBlockRotation(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RendererBlockOre(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RendererBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RendererBlockPlant(RenderingRegistry.getNextAvailableRenderId()));

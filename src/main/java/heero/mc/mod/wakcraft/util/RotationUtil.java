@@ -1,43 +1,59 @@
 package heero.mc.mod.wakcraft.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class RotationUtil {
-	public static ForgeDirection directions[] = new ForgeDirection[]{ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.NORTH, ForgeDirection.EAST};
-	public static ForgeDirection getOrientationFromYaw(float yaw) {
-		return directions[MathHelper.floor_double((double) (yaw * 4.0F / 360.0F) + 0.5D) & 3];
+	public static List<ForgeDirection> yRotation = new ArrayList<>();
+	static {
+		yRotation.add(ForgeDirection.SOUTH);
+		yRotation.add(ForgeDirection.WEST);
+		yRotation.add(ForgeDirection.NORTH);
+		yRotation.add(ForgeDirection.EAST);
 	}
 
-	public static void setOrientationFromYaw(World world, int x, int y, int z,
+	public static ForgeDirection getYRotationFromYaw(float yaw) {
+		return yRotation.get(MathHelper.floor_double((double) (yaw * 4.0F / 360.0F) + 0.5D) & 0b11);
+	}
+
+	public static ForgeDirection getYRotationFromMetadata(int metadata) {
+		return yRotation.get(metadata & 0b11);
+	}
+
+	public static void setYRotationFromYaw(World world, int x, int y, int z,
 			float yaw) {
-		ForgeDirection direction = getOrientationFromYaw(yaw);
+		ForgeDirection rotation = getYRotationFromYaw(yaw);
 
-		int metadata = world.getBlockMetadata(x, y, z) & 0xc;
+		int metadata = world.getBlockMetadata(x, y, z);
 
-		switch (direction) {
-		case NORTH:
-			world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
-			break;
-		case EAST:
-			world.setBlockMetadataWithNotify(x, y, z, metadata | 0x1, 2);
-			break;
-		case WEST:
-			world.setBlockMetadataWithNotify(x, y, z, metadata | 0x2, 2);
-			break;
-		default:
-			world.setBlockMetadataWithNotify(x, y, z, metadata | 0x3, 2);
-			break;
-		}
+		world.setBlockMetadataWithNotify(x, y, z, (metadata & 0b1100) + yRotation.indexOf(rotation), 2);
 	}
 
-	public static ForgeDirection getOrientationFromMetadata(int metadata) {
-		metadata &= 0x3;
+	public static int getNorthRotation(ForgeDirection direction) {
+		return direction == ForgeDirection.DOWN ? 3 : direction == ForgeDirection.EAST ? 2 : direction == ForgeDirection.WEST ? 1 : 0 ;
+	}
 
-		return metadata == 0x0 ? ForgeDirection.NORTH
-				: metadata == 0x1 ? ForgeDirection.SOUTH
-						: metadata == 0x2 ? ForgeDirection.EAST
-								: ForgeDirection.WEST;
+	public static int getSouthRotation(ForgeDirection direction) {
+		return direction == ForgeDirection.DOWN ? 3 : direction == ForgeDirection.WEST ? 2 : direction == ForgeDirection.EAST ? 1 : 0 ;
+	}
+
+	public static int getTopRotation(ForgeDirection direction) {
+		return direction == ForgeDirection.SOUTH ? 3 : direction == ForgeDirection.WEST ? 2 : direction == ForgeDirection.EAST ? 1 : 0 ;
+	}
+
+	public static int getYNegRotation(ForgeDirection direction) {
+		return direction == ForgeDirection.SOUTH ? 3 : direction == ForgeDirection.EAST ? 2 : direction == ForgeDirection.WEST ? 1 : 0 ;
+	}
+
+	public static int getEastRotation(ForgeDirection direction) {
+		return direction == ForgeDirection.DOWN ? 3 : direction == ForgeDirection.SOUTH ? 2 : direction == ForgeDirection.NORTH ? 1 : 0 ;
+	}
+
+	public static int getWestRotation(ForgeDirection direction) {
+		return direction == ForgeDirection.DOWN ? 3 : direction == ForgeDirection.NORTH ? 2 : direction == ForgeDirection.SOUTH ? 1 : 0 ;
 	}
 }

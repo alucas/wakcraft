@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockYRotation;
+import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockRotation;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -9,10 +9,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockYRotation extends BlockGeneric {
+public class BlockYRotation extends BlockGeneric implements IRotation {
 	public BlockYRotation(Material material) {
 		super(material);
 	}
@@ -31,7 +32,7 @@ public class BlockYRotation extends BlockGeneric {
 	 */
 	@Override
 	public int getRenderType() {
-		return RendererBlockYRotation.renderId;
+		return RendererBlockRotation.renderId;
 	}
 
 	/**
@@ -88,6 +89,36 @@ public class BlockYRotation extends BlockGeneric {
 			EntityLivingBase player, ItemStack itemBlock) {
 		super.onBlockPlacedBy(world, x, y, z, player, itemBlock);
 
-		RotationUtil.setOrientationFromYaw(world, x, y, z, player.rotationYaw);
+		RotationUtil.setYRotationFromYaw(world, x, y, z, player.rotationYaw);
+	}
+
+	@Override
+	public ForgeDirection getTopRotation(int metadata) {
+		return RotationUtil.getYRotationFromMetadata(metadata);
+	}
+
+	@Override
+	public ForgeDirection getBottomRotation(int metadata) {
+		return RotationUtil.getYRotationFromMetadata(metadata);
+	}
+
+	@Override
+	public ForgeDirection getEastRotation(int metadata) {
+		return ForgeDirection.UP;
+	}
+
+	@Override
+	public ForgeDirection getWestRotation(int metadata) {
+		return ForgeDirection.UP;
+	}
+
+	@Override
+	public ForgeDirection getNorthRotation(int metadata) {
+		return ForgeDirection.UP;
+	}
+
+	@Override
+	public ForgeDirection getSouthRotation(int metadata) {
+		return ForgeDirection.UP;
 	}
 }

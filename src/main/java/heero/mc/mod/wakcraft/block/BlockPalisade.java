@@ -138,7 +138,7 @@ public class BlockPalisade extends BlockGeneric {
 			EntityLivingBase player, ItemStack itemBlock) {
 		super.onBlockPlacedBy(world, x, y, z, player, itemBlock);
 
-		RotationUtil.setOrientationFromYaw(world, x, y, z, player.rotationYaw);
+		RotationUtil.setYRotationFromYaw(world, x, y, z, player.rotationYaw);
 	}
 
 	/**
