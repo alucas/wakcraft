@@ -65,7 +65,7 @@ public class WBlocks {
 			fightInsideWall, fightStart1, fightStart2, ground15Slab,
 			ground16Slab, ground17Slab, ground18Slab, plant1, plant2,
 			sufokiaWave1NorthSlab, sufokiaWave1SouthSlab, sufokiaWave1EastSlab,
-			sufokiaWave1WestSlab, sufokiaSunSlab;
+			sufokiaWave1WestSlab, sufokiaSunSlab, pillarSlab;
 	public static Block wakfu, debug, debugSlab;
 
 	public static void registerBlocks() {
@@ -83,7 +83,8 @@ public class WBlocks {
 		GameRegistry.registerBlock(ore4 = (new BlockOre4()), ItemBlockOre4.class, "blockOre4");
 		GameRegistry.registerBlock(carpet1 = (new BlockCarpet()), "carpet1Block");
 		GameRegistry.registerBlock(palisade = (new BlockPalisade()), ItemBlockPalisade.class, "blockPalisade");
-		GameRegistry.registerBlock(pillar = (new BlockGeneric(Material.wood).setBlockTextureName(ForgeDirection.UP, "pillarTop").setBlockTextureName("pillarSide").setBlockName("Pillar").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockPillar");
+		GameRegistry.registerBlock(pillar = (new BlockGeneric(Material.wood).setBlockTextureName(ForgeDirection.UP, "pillarTop").setBlockTextureName("pillarSide").setBlockName("Pillar")), "blockPillar");
+		GameRegistry.registerBlock(pillarSlab = (new BlockSlab(Material.wood, WBlocks.pillar).setBlockTextureName(ForgeDirection.UP, "pillarTop").setBlockTextureName("pillarSide").setBlockName("PillarSlab")), ItemBlockSlab.class, "blockPillarSlab");
 		GameRegistry.registerBlock(wood = (new BlockYRotation(Material.wood).setBlockTextureName("wood").setBlockName("Wood").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockWood");
 		GameRegistry.registerBlock(hbstand = (new BlockYRotation(Material.wood).setBlockTextureName("hbstand").setBlockName("HBStand").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBStand");
 		GameRegistry.registerBlock(slabGrass = (new BlockSlabGrass()), ItemBlockSlab.class, "blockGrass");
