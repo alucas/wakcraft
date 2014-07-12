@@ -8,8 +8,12 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBlockYRotation extends Item {
+public class ItemBlockYRotation extends Item implements IBlockProvider {
+	protected final Block block;
+
 	protected final ItemBlock itemBlockNorth;
 	protected final ItemBlock itemBlockEast;
 	protected final ItemBlock itemBlockSouth;
@@ -17,6 +21,8 @@ public class ItemBlockYRotation extends Item {
 
 	public ItemBlockYRotation(Block blockNorth, Block blockEast, Block blockSouth, Block blockWest) {
 		super();
+
+		this.block = blockNorth;
 
 		this.itemBlockNorth = (ItemBlock) Item.getItemFromBlock(blockNorth);
 		this.itemBlockEast = (ItemBlock) Item.getItemFromBlock(blockEast);
@@ -26,6 +32,14 @@ public class ItemBlockYRotation extends Item {
 		if (itemBlockNorth == null || itemBlockEast == null || itemBlockSouth == null || itemBlockWest == null) {
 			throw new RuntimeException("Failed to initialize " + this.getClass().getCanonicalName());
 		}
+	}
+
+	/**
+	 * Returns 0 for /terrain.png, 1 for /gui/items.png
+	 */
+	@SideOnly(Side.CLIENT)
+	public int getSpriteNumber() {
+		return 0;
 	}
 
 	/**
@@ -54,5 +68,10 @@ public class ItemBlockYRotation extends Item {
 		}
 
 		return false;
+	}
+
+	@Override
+	public Block getBlock() {
+		return block;
 	}
 }

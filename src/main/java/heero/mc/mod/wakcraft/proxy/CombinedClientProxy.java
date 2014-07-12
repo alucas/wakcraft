@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.proxy;
 
+import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.client.gui.GUIAbilities;
 import heero.mc.mod.wakcraft.client.gui.GUIClassSelection;
 import heero.mc.mod.wakcraft.client.gui.GUIHavenBagChests;
@@ -27,6 +28,7 @@ import heero.mc.mod.wakcraft.client.renderer.entity.RendererTextPopup;
 import heero.mc.mod.wakcraft.client.renderer.fight.FightRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.FighterRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.SpellRenderer;
+import heero.mc.mod.wakcraft.client.renderer.item.ItemBlockRenderer;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererDragoexpress;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererHavenBagChest;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererPhoenix;
@@ -62,6 +64,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -91,6 +94,8 @@ public class CombinedClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new RendererBlockOre(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RendererBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RendererBlockPlant(RenderingRegistry.getNextAvailableRenderId()));
+
+		MinecraftForgeClient.registerItemRenderer(WItems.sufokiaWave1, new ItemBlockRenderer());
 	}
 
 	@Override
