@@ -1,7 +1,6 @@
 package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WInfo;
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 
 import java.util.List;
 
@@ -19,8 +18,6 @@ public class BlockSufokiaGround extends BlockGeneric {
 	
 	public BlockSufokiaGround() {
 		super(Material.rock);
-		
-		setCreativeTab(WakcraftCreativeTabs.tabBlock);
 		
 		setBlockTextureName("sufokiaGround0");
 		setBlockName("SufokiaGround");
