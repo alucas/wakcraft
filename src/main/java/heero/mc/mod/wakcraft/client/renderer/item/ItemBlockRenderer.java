@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.client.renderer.item;
 
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.item.IBlockProvider;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
@@ -27,6 +28,9 @@ public class ItemBlockRenderer implements IItemRenderer {
 			return;
 		}
 
-		this.renderBlocksIr.renderBlockAsItem(((IBlockProvider) stack.getItem()).getBlock(), 0, 1.0F);
+		Block block = ((IBlockProvider) stack.getItem()).getBlock();
+		block.setBlockBoundsForItemRender();
+
+		this.renderBlocksIr.renderBlockAsItem(block, 0, 1.0F);
 	}
 }
