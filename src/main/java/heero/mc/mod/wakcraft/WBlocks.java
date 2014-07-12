@@ -66,7 +66,7 @@ public class WBlocks {
 			ground16Slab, ground17Slab, ground18Slab, plant1, plant2,
 			sufokiaWave1NorthSlab, sufokiaWave1SouthSlab, sufokiaWave1EastSlab,
 			sufokiaWave1WestSlab, sufokiaSunSlab, pillarSlab;
-	public static Block wakfu, debug, debugSlab;
+	public static Block debug, debugSlab;
 
 	public static void registerBlocks() {
 		String modid = WInfo.MODID.toLowerCase() + ":";
