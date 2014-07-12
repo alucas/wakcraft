@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
-public class ItemBlockRenderer implements IItemRenderer {
+public class RendererItemBlock implements IItemRenderer {
 	private RenderBlocks renderBlocksIr = new RenderBlocks();
 
 	@Override
