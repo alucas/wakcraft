@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft;
 
 import heero.mc.mod.wakcraft.block.BlockCarpet;
 import heero.mc.mod.wakcraft.block.BlockClassConsole;
+import heero.mc.mod.wakcraft.block.BlockDebugSlab;
 import heero.mc.mod.wakcraft.block.BlockDragoexpress;
 import heero.mc.mod.wakcraft.block.BlockFence1;
 import heero.mc.mod.wakcraft.block.BlockFightInsideWall;
@@ -25,7 +26,6 @@ import heero.mc.mod.wakcraft.block.BlockPlant;
 import heero.mc.mod.wakcraft.block.BlockPolisher;
 import heero.mc.mod.wakcraft.block.BlockSlab;
 import heero.mc.mod.wakcraft.block.BlockSlabGrass;
-import heero.mc.mod.wakcraft.block.BlockDebugSlab;
 import heero.mc.mod.wakcraft.block.BlockStairs2;
 import heero.mc.mod.wakcraft.block.BlockSufokiaColor;
 import heero.mc.mod.wakcraft.block.BlockSufokiaGround;
@@ -65,14 +65,15 @@ public class WBlocks {
 			fightInsideWall, fightStart1, fightStart2, ground15Slab,
 			ground16Slab, ground17Slab, ground18Slab, plant1, plant2,
 			sufokiaWave1NorthSlab, sufokiaWave1SouthSlab, sufokiaWave1EastSlab,
-			sufokiaWave1WestSlab;
+			sufokiaWave1WestSlab, sufokiaSunSlab;
 	public static Block wakfu, debug, debugSlab;
 
 	public static void registerBlocks() {
 		String modid = WInfo.MODID.toLowerCase() + ":";
 		// Basic blocks
 		GameRegistry.registerBlock(sufokiaColor = (new BlockSufokiaColor()), "blockSufokiaColor");
-		GameRegistry.registerBlock(sufokiaSun = (new BlockGeneric(Material.sand).setBlockTextureName("sufokiaSun").setBlockName("SufokiaSun").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockSufokiaSunBlock");
+		GameRegistry.registerBlock(sufokiaSun = (new BlockGeneric(Material.sand).setBlockTextureName("sufokiaSun").setBlockName("SufokiaSun")), "blockSufokiaSunBlock");
+		GameRegistry.registerBlock(sufokiaSunSlab = (new BlockSlab(Material.sand, WBlocks.sufokiaSun).setBlockTextureName("sufokiaSun").setBlockName("SufokiaSunSlab")), ItemBlockSlab.class, "blockSufokiaSunSlab");
 		GameRegistry.registerBlock(sufokiaWave = (new BlockSufokiaWave()), ItemBlockSufokiaWave.class, "blockSufokiaWaveBlock");
 		GameRegistry.registerBlock(sufokiaStair = ((new BlockStairs2(sufokiaColor, 0)).setBlockName("SufokiaStair")), "blockSufokiaStair");
 		GameRegistry.registerBlock(sufokiaGround = (new BlockSufokiaGround()), ItemBlockSufokiaGround.class, "sufokiaGroundBlock");
