@@ -36,7 +36,7 @@ public class WItems extends Items {
 
 	// ItemBlock
 	public static Item sufokiaWave1, sufokiaWave2, sufokiaWave3,
-			ground1, ground2, carpet1;
+			ground1, ground2, carpet1, wood1;
 
 	// Ikiakits
 	public static ItemIkiakit ikiakitSmall, ikiakitAdventurer, ikiakitKit,
@@ -97,7 +97,8 @@ public class WItems extends Items {
 		GameRegistry.registerItem(sufokiaWave3 = new ItemBlockYRotation(WBlocks.sufokiaWave3NorthSlab, WBlocks.sufokiaWave3EastSlab, WBlocks.sufokiaWave3SouthSlab, WBlocks.sufokiaWave3WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemSufokiaWave3");
 		GameRegistry.registerItem(ground1 = new ItemBlockYRotation(WBlocks.ground1Slab, WBlocks.ground6Slab, WBlocks.ground5Slab, WBlocks.ground7Slab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemGround1");
 		GameRegistry.registerItem(ground2 = new ItemBlockYRotation(WBlocks.ground2Slab, WBlocks.ground9Slab, WBlocks.ground8Slab, WBlocks.ground10Slab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemGround2");
-		GameRegistry.registerItem(carpet1 = new ItemBlockYRotation(WBlocks.carpet1NorthSlab, WBlocks.carpet1EastSlab, WBlocks.carpet1SouthSlab, WBlocks.carpet1WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemCarpet2");
+		GameRegistry.registerItem(carpet1 = new ItemBlockYRotation(WBlocks.carpet1NorthSlab, WBlocks.carpet1EastSlab, WBlocks.carpet1SouthSlab, WBlocks.carpet1WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemCarpet1");
+		GameRegistry.registerItem(wood1 = new ItemBlockYRotation(WBlocks.wood1NorthSlab, WBlocks.wood1EastSlab, WBlocks.wood1SouthSlab, WBlocks.wood1WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemWood1");
 
 		// Armors
 		GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 15).setCharacteristic(Characteristic.INITIATIVE, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName("GobballBreastplate").setTextureName(modid + "gobball_breastplate")), "ItemGobballBreastplate");
