@@ -1,9 +1,10 @@
 package heero.mc.mod.wakcraft.block;
 
+import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockRotation;
 import heero.mc.mod.wakcraft.util.RotationUtil;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -13,7 +14,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockYRotation extends BlockGeneric implements IRotation {
+public class BlockYRotation extends BlockGeneric implements IRotation, ICenterCorner {
+	private String nameCorner, nameCenter;
+	private IIcon iconCorner, iconCenter;
+
 	public BlockYRotation(Material material) {
 		super(material);
 	}
@@ -51,11 +55,10 @@ public class BlockYRotation extends BlockGeneric implements IRotation {
 		switch (side) {
 		case 0:
 		case 1:
-			int blockId = Block.getIdFromBlock(world.getBlock(x, y, z));
-			boolean t1 = Block.getIdFromBlock(world.getBlock(x + 1, y, z)) == blockId;
-			boolean t2 = Block.getIdFromBlock(world.getBlock(x, y, z + 1)) == blockId;
-			boolean t3 = Block.getIdFromBlock(world.getBlock(x - 1, y, z)) == blockId;
-			boolean t4 = Block.getIdFromBlock(world.getBlock(x, y, z - 1)) == blockId;
+			boolean t1 = (world.getBlock(x + 1, y, z) instanceof ICenterCorner);
+			boolean t2 = (world.getBlock(x, y, z + 1) instanceof ICenterCorner);
+			boolean t3 = (world.getBlock(x - 1, y, z) instanceof ICenterCorner);
+			boolean t4 = (world.getBlock(x, y, z - 1) instanceof ICenterCorner);
 
 			int neighbor = (t1 ? 1 : 0) + (t2 ? 2 : 0) + (t3 ? 4 : 0)
 					+ (t4 ? 8 : 0);
@@ -72,13 +75,36 @@ public class BlockYRotation extends BlockGeneric implements IRotation {
 	}
 
 	@SideOnly(Side.CLIENT)
+	public BlockYRotation setBlockCornerTextureName(String nameCorner) {
+		this.nameCorner = nameCorner;
+
+		return this;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public BlockYRotation setBlockCenterTextureName(String nameCenter) {
+		this.nameCenter = nameCenter;
+
+		return this;
+	}
+
+	@SideOnly(Side.CLIENT)
 	public IIcon getCornerIcon(int side, int metadata) {
-		return getIcon(side, metadata);
+		return iconCorner;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getCenterIcon(int side, int metadata) {
-		return getIcon(side, metadata);
+		return iconCenter;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister registerer) {
+		super.registerBlockIcons(registerer);
+
+		iconCorner = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + nameCorner);
+		iconCenter = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + nameCenter);
 	}
 
 	/**
