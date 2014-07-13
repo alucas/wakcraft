@@ -72,7 +72,8 @@ public class WBlocks {
 			sufokiaWave2WestSlab, sufokiaWave3NorthSlab, sufokiaWave3SouthSlab,
 			sufokiaWave3EastSlab, sufokiaWave3WestSlab, wood1NorthSlab,
 			wood1SouthSlab, wood1EastSlab, wood1WestSlab, carpet1NorthSlab,
-			carpet1SouthSlab, carpet1EastSlab, carpet1WestSlab, scree1;
+			carpet1SouthSlab, carpet1EastSlab, carpet1WestSlab, scree1,
+			hbstandSlab;
 	public static Block debug, debugSlab;
 
 	public static void registerBlocks() {
@@ -93,7 +94,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(pillar = (new BlockGeneric(Material.wood).setBlockTextureName(ForgeDirection.UP, "pillarTop").setBlockTextureName("pillarSide").setBlockName("Pillar")), "blockPillar");
 		GameRegistry.registerBlock(pillarSlab = (new BlockSlab(Material.wood, WBlocks.pillar).setBlockTextureName(ForgeDirection.UP, "pillarTop").setBlockTextureName("pillarSide").setBlockName("PillarSlab")), ItemBlockSlab.class, "blockPillarSlab");
 		GameRegistry.registerBlock(wood = (new BlockYRotation(Material.wood).setBlockTextureName("wood").setBlockName("Wood")), "blockWood");
-		GameRegistry.registerBlock(hbstand = (new BlockYRotation(Material.wood).setBlockTextureName("hbstand").setBlockName("HBStand").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBStand");
+		GameRegistry.registerBlock(hbstand = (new BlockGeneric(Material.wood).setBlockTextureName("hbstand").setBlockName("HBStand")), "blockHBStand");
 		GameRegistry.registerBlock(slabGrass = (new BlockSlabGrass()), ItemBlockSlab.class, "blockGrass");
 		GameRegistry.registerBlock(slabDirt = (new BlockSlab(Material.ground, Blocks.dirt).setBlockTextureName("dirtSlab").setBlockName("SlabDirt")), ItemBlockSlab.class, "blockSlabDirt");
 		GameRegistry.registerBlock(fence = (new BlockFence1(modid + "palisade1", Material.wood).setBlockName("Fence1")), "blockFence");
@@ -176,6 +177,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(carpet1EastSlab = (new BlockCenterCornerSlab(Material.cloth, WBlocks.carpet1, 3, ForgeDirection.EAST).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1EastSlab");
 		GameRegistry.registerBlock(carpet1WestSlab = (new BlockCenterCornerSlab(Material.cloth, WBlocks.carpet1, 1, ForgeDirection.WEST).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1WestSlab");
 		GameRegistry.registerBlock(scree1 = (new BlockScree()), "blockScree1");
+		GameRegistry.registerBlock(hbstandSlab = (new BlockSlab(Material.wood, WBlocks.hbstand).setBlockTextureName("hbstand").setBlockName("HBStandSlab").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBStandSlab");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher()), "BlockPolisher");
