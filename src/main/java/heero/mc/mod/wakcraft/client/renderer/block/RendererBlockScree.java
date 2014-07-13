@@ -38,6 +38,8 @@ public class RendererBlockScree extends RendererBlockGeneric {
 			Block block, int modelId, RenderBlocks renderer) {
 		float yOffset = getYOffset(blockAccess, block, x, y, z);
 
+		renderer.renderAllFaces = true;
+
 		renderer.setRenderBounds(0, yOffset, 0, 0.5, 0.3 + yOffset, 0.5);
 		renderer.renderStandardBlock(block, x, y, z);
 
@@ -48,7 +50,11 @@ public class RendererBlockScree extends RendererBlockGeneric {
 		renderer.renderStandardBlock(block, x, y, z);
 
 		renderer.setRenderBounds(0.5, yOffset, 0.5, 1, 1 + yOffset, 1);
-		return renderer.renderStandardBlock(block, x, y, z);
+		boolean flag = renderer.renderStandardBlock(block, x, y, z);
+
+		renderer.renderAllFaces = false;
+
+		return flag;
 	}
 
 	protected float getYOffset(IBlockAccess blockAccess, Block block,
