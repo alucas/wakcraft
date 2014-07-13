@@ -52,14 +52,12 @@ public class BlockCenterCornerSlab extends BlockYRotationSlab implements ICenter
 		return getIcon(side, metadata);
 	}
 
-	@SideOnly(Side.CLIENT)
 	public BlockCenterCornerSlab setBlockCornerTextureName(String nameCorner) {
 		this.nameCorner = nameCorner;
 
 		return this;
 	}
 
-	@SideOnly(Side.CLIENT)
 	public BlockCenterCornerSlab setBlockCenterTextureName(String nameCenter) {
 		this.nameCenter = nameCenter;
 
