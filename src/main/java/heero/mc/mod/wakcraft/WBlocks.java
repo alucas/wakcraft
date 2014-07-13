@@ -73,7 +73,7 @@ public class WBlocks {
 			sufokiaWave3EastSlab, sufokiaWave3WestSlab, wood1NorthSlab,
 			wood1SouthSlab, wood1EastSlab, wood1WestSlab, carpet1NorthSlab,
 			carpet1SouthSlab, carpet1EastSlab, carpet1WestSlab, scree1,
-			hbstandSlab;
+			hbstandSlab, sufokiaWave2;
 	public static Block debug, debugSlab;
 
 	public static void registerBlocks() {
@@ -178,6 +178,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(carpet1WestSlab = (new BlockCenterCornerSlab(Material.cloth, WBlocks.carpet1, 1, ForgeDirection.WEST).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1WestSlab");
 		GameRegistry.registerBlock(scree1 = (new BlockScree()), "blockScree1");
 		GameRegistry.registerBlock(hbstandSlab = (new BlockSlab(Material.wood, WBlocks.hbstand).setBlockTextureName("hbstand").setBlockName("HBStandSlab").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockHBStandSlab");
+		GameRegistry.registerBlock(sufokiaWave2 = (new BlockGeneric(Material.sand).setBlockTextureName("sufokiaWave4").setBlockName("SufokiaWave2").setCreativeTab(WakcraftCreativeTabs.tabBlock)), "blockSufokiaWave2Block");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher()), "BlockPolisher");
