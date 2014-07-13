@@ -25,6 +25,7 @@ import heero.mc.mod.wakcraft.block.BlockPalisade;
 import heero.mc.mod.wakcraft.block.BlockPhoenix;
 import heero.mc.mod.wakcraft.block.BlockPlant;
 import heero.mc.mod.wakcraft.block.BlockPolisher;
+import heero.mc.mod.wakcraft.block.BlockScree;
 import heero.mc.mod.wakcraft.block.BlockSlab;
 import heero.mc.mod.wakcraft.block.BlockSlabGrass;
 import heero.mc.mod.wakcraft.block.BlockStairs2;
@@ -70,7 +71,7 @@ public class WBlocks {
 			sufokiaWave2NorthSlab, sufokiaWave2SouthSlab, sufokiaWave2EastSlab,
 			sufokiaWave2WestSlab, sufokiaWave3NorthSlab, sufokiaWave3SouthSlab,
 			sufokiaWave3EastSlab, sufokiaWave3WestSlab, carpet1NorthSlab,
-			carpet1SouthSlab, carpet1EastSlab, carpet1WestSlab;
+			carpet1SouthSlab, carpet1EastSlab, carpet1WestSlab, scree1;
 	public static Block debug, debugSlab;
 
 	public static void registerBlocks() {
@@ -169,6 +170,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(carpet1SouthSlab = (new BlockCenterCornerSlab(Material.cloth, WBlocks.carpet1, 0, ForgeDirection.SOUTH).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1SouthSlab");
 		GameRegistry.registerBlock(carpet1EastSlab = (new BlockCenterCornerSlab(Material.cloth, WBlocks.carpet1, 3, ForgeDirection.EAST).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1EastSlab");
 		GameRegistry.registerBlock(carpet1WestSlab = (new BlockCenterCornerSlab(Material.cloth, WBlocks.carpet1, 1, ForgeDirection.WEST).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1WestSlab");
+		GameRegistry.registerBlock(scree1 = (new BlockScree()), "blockScree1");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher()), "BlockPolisher");

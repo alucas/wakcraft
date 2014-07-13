@@ -23,6 +23,7 @@ import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockOre;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPalisade;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPlant;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockRotation;
+import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockScree;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererSeedsPile;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererTextPopup;
 import heero.mc.mod.wakcraft.client.renderer.fight.FightRenderer;
@@ -94,6 +95,7 @@ public class CombinedClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new RendererBlockOre(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RendererBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RendererBlockPlant(RenderingRegistry.getNextAvailableRenderId()));
+		RenderingRegistry.registerBlockHandler(new RendererBlockScree(RenderingRegistry.getNextAvailableRenderId()));
 
 		RendererItemBlock rendererItemBlock = new RendererItemBlock();
 		MinecraftForgeClient.registerItemRenderer(WItems.sufokiaWave1, rendererItemBlock);
