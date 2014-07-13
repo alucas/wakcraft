@@ -1,5 +1,7 @@
 package heero.mc.mod.wakcraft;
 
+import heero.mc.mod.wakcraft.block.BlockCenterCorner;
+import heero.mc.mod.wakcraft.block.BlockCenterCornerSlab;
 import heero.mc.mod.wakcraft.block.BlockClassConsole;
 import heero.mc.mod.wakcraft.block.BlockDebugSlab;
 import heero.mc.mod.wakcraft.block.BlockDragoexpress;
@@ -84,7 +86,7 @@ public class WBlocks {
 		GameRegistry.registerBlock(ore2 = (new BlockOre2()), ItemBlockOre2.class, "blockOre2");
 		GameRegistry.registerBlock(ore3 = (new BlockOre3()), ItemBlockOre3.class, "blockOre3");
 		GameRegistry.registerBlock(ore4 = (new BlockOre4()), ItemBlockOre4.class, "blockOre4");
-		GameRegistry.registerBlock(carpet1 = (new BlockYRotation(Material.cloth).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), "carpet1Block");
+		GameRegistry.registerBlock(carpet1 = (new BlockCenterCorner(Material.cloth).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), "carpet1Block");
 		GameRegistry.registerBlock(palisade = (new BlockPalisade()), ItemBlockPalisade.class, "blockPalisade");
 		GameRegistry.registerBlock(pillar = (new BlockGeneric(Material.wood).setBlockTextureName(ForgeDirection.UP, "pillarTop").setBlockTextureName("pillarSide").setBlockName("Pillar")), "blockPillar");
 		GameRegistry.registerBlock(pillarSlab = (new BlockSlab(Material.wood, WBlocks.pillar).setBlockTextureName(ForgeDirection.UP, "pillarTop").setBlockTextureName("pillarSide").setBlockName("PillarSlab")), ItemBlockSlab.class, "blockPillarSlab");
@@ -163,10 +165,10 @@ public class WBlocks {
 		GameRegistry.registerBlock(sufokiaWave3SouthSlab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 8, ForgeDirection.SOUTH).setBlockTextureName("sufokiaWave3").setBlockName("sufokiaWave3SouthSlab")), ItemBlockSlab.class, "sufokiaWave3SouthSlab");
 		GameRegistry.registerBlock(sufokiaWave3EastSlab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 11, ForgeDirection.EAST).setBlockTextureName("sufokiaWave3").setBlockName("sufokiaWave3EastSlab")), ItemBlockSlab.class, "sufokiaWave3EastSlab");
 		GameRegistry.registerBlock(sufokiaWave3WestSlab = (new BlockYRotationSlab(Material.ground, WBlocks.sufokiaWave, 9, ForgeDirection.WEST).setBlockTextureName("sufokiaWave3").setBlockName("sufokiaWave3WestSlab")), ItemBlockSlab.class, "sufokiaWave3WestSlab");
-		GameRegistry.registerBlock(carpet1NorthSlab = (new BlockYRotationSlab(Material.cloth, WBlocks.carpet1, 2, ForgeDirection.NORTH).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1NorthSlab");
-		GameRegistry.registerBlock(carpet1SouthSlab = (new BlockYRotationSlab(Material.cloth, WBlocks.carpet1, 0, ForgeDirection.SOUTH).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1SouthSlab");
-		GameRegistry.registerBlock(carpet1EastSlab = (new BlockYRotationSlab(Material.cloth, WBlocks.carpet1, 3, ForgeDirection.EAST).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1EastSlab");
-		GameRegistry.registerBlock(carpet1WestSlab = (new BlockYRotationSlab(Material.cloth, WBlocks.carpet1, 1, ForgeDirection.WEST).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1WestSlab");
+		GameRegistry.registerBlock(carpet1NorthSlab = (new BlockCenterCornerSlab(Material.cloth, WBlocks.carpet1, 2, ForgeDirection.NORTH).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1NorthSlab");
+		GameRegistry.registerBlock(carpet1SouthSlab = (new BlockCenterCornerSlab(Material.cloth, WBlocks.carpet1, 0, ForgeDirection.SOUTH).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1SouthSlab");
+		GameRegistry.registerBlock(carpet1EastSlab = (new BlockCenterCornerSlab(Material.cloth, WBlocks.carpet1, 3, ForgeDirection.EAST).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1EastSlab");
+		GameRegistry.registerBlock(carpet1WestSlab = (new BlockCenterCornerSlab(Material.cloth, WBlocks.carpet1, 1, ForgeDirection.WEST).setBlockCenterTextureName("carpet1Center").setBlockCornerTextureName("carpet1Corner").setBlockTextureName("carpet1").setBlockName("Carpet1")), ItemBlockSlab.class, "carpet1WestSlab");
 
 		// Special blocks
 		GameRegistry.registerBlock(polisher = (new BlockPolisher()), "BlockPolisher");
