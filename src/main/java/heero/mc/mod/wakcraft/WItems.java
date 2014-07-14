@@ -32,7 +32,11 @@ public class WItems extends Items {
 			polishedmoonstone, shadowyBlue, merchantHG, decoHG, craftHG,
 			gardenHG, gobballBreastplate, gobboots, gobballEpaulettes,
 			gobballCape, gobballBelt, gobballHeadgear, gobballAmulet,
-			bouzeLiteYeahsRing, gobballSeed, tofuFeather, tofuBlood;
+			bouzeLiteYeahsRing, gobballSeed,
+			// Tofu Resources
+			tofuFeather, tofuBlood,
+			// Tofu Armors
+			helmetofu,tofuBreastplate,tofuCloak,tofuEpaulettes,tofuBelt,tofuAmulet,tofuRing,tofuBoots;
 
 	// ItemBlock
 	public static Item sufokiaWave1, sufokiaWave2, sufokiaWave3,
@@ -100,7 +104,9 @@ public class WItems extends Items {
 		GameRegistry.registerItem(carpet1 = new ItemBlockYRotation(WBlocks.carpet1NorthSlab, WBlocks.carpet1EastSlab, WBlocks.carpet1SouthSlab, WBlocks.carpet1WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemCarpet1");
 		GameRegistry.registerItem(wood1 = new ItemBlockYRotation(WBlocks.wood1NorthSlab, WBlocks.wood1EastSlab, WBlocks.wood1SouthSlab, WBlocks.wood1WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemWood1");
 
-		// Armors
+		// ARMORS
+		
+		// Goball Armors
 		GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 15).setCharacteristic(Characteristic.INITIATIVE, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName("GobballBreastplate").setTextureName(modid + "gobball_breastplate")), "ItemGobballBreastplate");
 		GameRegistry.registerItem(gobboots = (new ItemWArmor(TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 10).setCharacteristic(Characteristic.LOCK, 8).setCharacteristic(Characteristic.INITIATIVE, 6).setUnlocalizedName("Gobboots").setTextureName(modid + "gobboots")), "ItemGobboots");
 		GameRegistry.registerItem(gobballEpaulettes = (new ItemWArmor(TYPE.EPAULET, 14).setCharacteristic(Characteristic.LOCK, 5).setCharacteristic(Characteristic.FIRE_ATT, 2).setCharacteristic(Characteristic.EARTH_ATT, 2).setUnlocalizedName("GobballEpaulettes").setTextureName(modid + "gobball_epaulettes")), "ItemGobballEpaulettes");
@@ -109,7 +115,18 @@ public class WItems extends Items {
 		GameRegistry.registerItem(gobballHeadgear = (new ItemWArmor(TYPE.HELMET, 13).setCharacteristic(Characteristic.HEALTH, 13).setCharacteristic(Characteristic.LOCK, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName("GobballHeadgear").setTextureName(modid + "gobball_headgear")), "ItemGobballHeadgear");
 		GameRegistry.registerItem(gobballAmulet = (new ItemWArmor(TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.LOCK, 5).setUnlocalizedName("GobballAmulet").setTextureName(modid + "gobball_amulet")), "ItemGobballAmulet");
 		GameRegistry.registerItem(bouzeLiteYeahsRing = (new ItemWArmor(TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 6).setCharacteristic(Characteristic.INITIATIVE, 4).setUnlocalizedName("BouzeLiteYeahsRing").setTextureName(modid + "bouze_lite_yeahs_ring")), "ItemBouzeLiteYeahsRing");
-
+		
+		// Tofu Armors
+		GameRegistry.registerItem(helmetofu = (new ItemWArmor(TYPE.HELMET, 13).setCharacteristic(Characteristic.HEALTH, 9).setCharacteristic(Characteristic.INITIATIVE, 3).setCharacteristic(Characteristic.WATER_ATT, 4).setCharacteristic(Characteristic.AIR_ATT, 4).setUnlocalizedName("Helmetofu").setTextureName(modid + "helmetofu")), "ItemHelmetofu");
+		GameRegistry.registerItem(tofuBreastplate = (new ItemWArmor(TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 13).setCharacteristic(Characteristic.INITIATIVE, 6).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName("TofuBreastplate").setTextureName(modid + "tofu_breastplate")), "ItemTofuBreastplate");
+		GameRegistry.registerItem(tofuCloak = (new ItemWArmor(TYPE.CAPE, 14).setCharacteristic(Characteristic.HEALTH, 12).setCharacteristic(Characteristic.DODGE, 4).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName("TofuCloak").setTextureName(modid + "tofu_cloak")), "ItemTofuCloak");
+		GameRegistry.registerItem(tofuEpaulettes = (new ItemWArmor(TYPE.EPAULET, 14).setCharacteristic(Characteristic.DODGE, 5).setCharacteristic(Characteristic.WATER_ATT, 2).setCharacteristic(Characteristic.AIR_ATT, 2).setUnlocalizedName("TofuEpaulettes").setTextureName(modid + "tofu_epaulettes")), "ItemTofuEpaulettes");
+		GameRegistry.registerItem(tofuBelt = (new ItemWArmor(TYPE.BELT, 13).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName("TofuBelt").setTextureName(modid + "tofu_belt")), "ItemTofuBelt");
+		GameRegistry.registerItem(tofuAmulet = (new ItemWArmor(TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.DODGE, 5).setUnlocalizedName("TofuAmulet").setTextureName(modid + "tofu_amulet")), "ItemTofuAmulet");
+		GameRegistry.registerItem(tofuRing = (new ItemWArmor(TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.INITIATIVE, 3).setUnlocalizedName("TofuRing").setTextureName(modid + "tofu_ring")), "ItemTofuRing");
+		GameRegistry.registerItem(tofuBoots = (new ItemWArmor(TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.DODGE, 7).setCharacteristic(Characteristic.INITIATIVE, 8).setUnlocalizedName("TofuBoots").setTextureName(modid + "tofu_boots")), "ItemTofuBoots");
+		
+		// SPELLS
 		// Iop spells
 		GameRegistry.registerItem(spellShaker = (new ElementalSpell("Shaker", 4, 0, 0).setEffect(new EffectDamage(4, 130)).setEffectCritical(new EffectDamage(7, 192))), "SpellShaker");
 		GameRegistry.registerItem(spellRocknoceros = (new ElementalSpell("Rocknoceros", 5, 0, 0).setEffect(new EffectDamage(4, 122)).setEffectCritical(new EffectDamage(6, 184))), "SpellRocknoceros");

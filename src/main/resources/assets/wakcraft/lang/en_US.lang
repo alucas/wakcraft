@@ -74,6 +74,15 @@ item.GobballAmulet.name=Gobball Amulet
 item.GobballSeed.name=Gobball Seed
 item.BouzeLiteYeahsRing.name=Bouze Lite Yeah's Ring
 
+item.Helmetofu.name=Helmetofu
+item.TofuBreastplate.name=Tofu Breastplate
+item.TofuCloak.name=Tofu Cloak
+item.TofuEpaulettes.name=Tofu Epaulettes
+item.TofuBelt.name=Tofu Belt
+item.TofuAmulet.name=Tofu Amulet
+item.TofuRing.name=Tofu Ring
+item.TofuBoots.name=Tofu Boots
+
 item.SpellShaker.name=Shaker
 item.SpellRocknoceros.name=Rocknoceros
 item.SpellImpact.name=Impact
