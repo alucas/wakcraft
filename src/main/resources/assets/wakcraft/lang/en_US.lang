@@ -6,6 +6,8 @@ entity.GobballWarChief.name=Gobball War Chief
 entity.BowMeow.name=Bow Meow
 entity.BabyTofu.name=Baby Tofu
 
+item.TofuFeather.name=Tofu Feather
+item.TofuBlood.name=Tofu Blood
 item.GobballWool.name=Gobball Wool
 item.GobballSkin.name=Gobball Skin
 item.GobballHorn.name=Gobball Horn
