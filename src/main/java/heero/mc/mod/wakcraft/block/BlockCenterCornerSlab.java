@@ -67,7 +67,7 @@ public class BlockCenterCornerSlab extends BlockYRotationSlab implements ICenter
 	@SideOnly(Side.CLIENT)
 	public IIcon getCornerIcon(int side, int metadata) {
 		if (iconCorner == null) {
-			getIcon(side, metadata);
+			return getIcon(side, metadata);
 		}
 
 		return iconCorner;
@@ -76,7 +76,7 @@ public class BlockCenterCornerSlab extends BlockYRotationSlab implements ICenter
 	@SideOnly(Side.CLIENT)
 	public IIcon getCenterIcon(int side, int metadata) {
 		if (iconCenter == null) {
-			getIcon(side, metadata);
+			return getIcon(side, metadata);
 		}
 
 		return iconCenter;

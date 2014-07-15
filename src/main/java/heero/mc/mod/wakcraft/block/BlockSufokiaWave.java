@@ -13,8 +13,10 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSufokiaWave extends BlockYRotation {
+public class BlockSufokiaWave extends BlockCenterCorner {
 	protected static final int nbBlock = 3;
+
+	protected IIcon wave3Corner;
 
 	public BlockSufokiaWave() {
 		super(Material.sand);
@@ -53,5 +55,18 @@ public class BlockSufokiaWave extends BlockYRotation {
 				icons[j][(i<<2) + 3] = icon;
 			}
 		}
+
+		wave3Corner = registerer.registerIcon(WInfo.MODID
+				.toLowerCase() + ":sufokiaWave3Corner");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getCornerIcon(int side, int metadata) {
+		if ((metadata >> 2) == 2) {
+			return wave3Corner;
+		}
+
+		return super.getCornerIcon(side, metadata);
 	}
 }
