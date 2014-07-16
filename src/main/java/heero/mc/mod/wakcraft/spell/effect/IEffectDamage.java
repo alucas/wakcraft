@@ -1,19 +1,13 @@
 package heero.mc.mod.wakcraft.spell.effect;
 
 /**
- * Damage effect interface. In Wakfu damage usually obey to the
- * formula : Base + Level * Factor.
+ * Damage effect interface.
  */
 public interface IEffectDamage extends IEffect {
 	/**
-	 * Returns the damage base value.
+	 * Returns the damage value.
+	 * @param spellLevel	The spell's level.
 	 * @return	The damage base value.
 	 */
-	public int getDamageBase();
-
-	/**
-	 * Returns the damage factor value.
-	 * @return	The damage factor value.
-	 */
-	public int getDamageFactor(); 
+	public int getDamage(final int spellLevel);
 }

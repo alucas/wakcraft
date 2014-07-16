@@ -20,8 +20,7 @@ public class DamageUtil {
 					continue;
 				}
 
-				IEffectDamage effectDamage = (IEffectDamage) effect;
-				damage = (int) (spell.getLevel(stack.getItemDamage()) / 200.0 * effectDamage.getDamageFactor() + effectDamage.getDamageBase());
+				damage += ((IEffectDamage) effect).getDamage(spell.getLevel(stack.getItemDamage()));
 			}
 		} else {
 			damage = 1;
