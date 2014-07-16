@@ -28,7 +28,7 @@ public class PassiveSpacialitySpell extends Item implements IPassiveSpell {
 		this.effects = new ArrayList<>();
 
 		setCreativeTab(WakcraftCreativeTabs.tabSpells);
-		setUnlocalizedName("Spell" + name);
+		setUnlocalizedName(name);
 		setTextureName(WInfo.MODID.toLowerCase() + ":spells/" + name.toLowerCase());
 	}
 
@@ -61,5 +61,15 @@ public class PassiveSpacialitySpell extends Item implements IPassiveSpell {
 	@Override
 	public List<IEffect> getEffects() {
 		return effects;
+	}
+
+	@Override
+	public String getUnlocalizedName() {
+		return "spell." + super.getUnlocalizedName().substring(5);
+	}
+
+	@Override
+	public String getUnlocalizedName(ItemStack stack) {
+		return "spell." + super.getUnlocalizedName(stack).substring(5);
 	}
 }

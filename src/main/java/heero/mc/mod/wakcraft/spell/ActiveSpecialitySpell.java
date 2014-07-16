@@ -33,7 +33,7 @@ public class ActiveSpecialitySpell extends Item implements IActiveSpell {
 		this.wakfuCost = 0;
 
 		setCreativeTab(WakcraftCreativeTabs.tabSpells);
-		setUnlocalizedName("Spell" + name);
+		setUnlocalizedName(name);
 		setTextureName(WInfo.MODID.toLowerCase() + ":spells/" + name.toLowerCase());
 	}
 
@@ -105,5 +105,15 @@ public class ActiveSpecialitySpell extends Item implements IActiveSpell {
 	@Override
 	public int getWakfuCost() {
 		return wakfuCost;
+	}
+
+	@Override
+	public String getUnlocalizedName() {
+		return "spell." + super.getUnlocalizedName().substring(5);
+	}
+
+	@Override
+	public String getUnlocalizedName(ItemStack stack) {
+		return "spell." + super.getUnlocalizedName(stack).substring(5);
 	}
 }
