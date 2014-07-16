@@ -7,13 +7,22 @@ import java.util.List;
 
 import net.minecraft.util.StatCollector;
 
-public class State implements IState {
-	private String name;
+public enum State implements IState {
+	AERIAL("Aerial", 2),
+	DISORIENTED("Disoriented", 4),
+	EXPLOSION("Explosion", 300),
+	FLAMING("Flaming", 1),
+	SCALDED("Scalded", 300),
+	STUNNED("Stunned", 1);
 
-	private List<IEffect> effects;
+	private final String name;
+	private final int maxLevel;
 
-	public State(final String name) {
+	private final List<IEffect> effects;
+
+	private State(final String name, final int maxLevel) {
 		this.name = name;
+		this.maxLevel = maxLevel;
 
 		this.effects = new ArrayList<>();
 	}
@@ -30,8 +39,12 @@ public class State implements IState {
 
 	@Override
 	public int getLevel(int metadata) {
-		// metadata = level
-		return metadata;
+		if (metadata >= maxLevel) {
+			throw new IllegalArgumentException("Invalid metadata value. Must be between 0 and " + (maxLevel - 1));
+		}
+
+		// level = metadata + 1
+		return metadata + 1;
 	}
 
 	@Override
