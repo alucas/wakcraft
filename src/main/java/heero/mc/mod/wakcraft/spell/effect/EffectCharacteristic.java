@@ -4,7 +4,7 @@ import heero.mc.mod.wakcraft.characteristic.ICharacteristic;
 import net.minecraft.util.StatCollector;
 
 /**
- * Main IEffectState implementation.
+ * Main IEffectCharacteristic implementation.
  */
 public class EffectCharacteristic implements IEffectCharacteristic, IEffectProbability {
 	private final IEffectArea effectArea;

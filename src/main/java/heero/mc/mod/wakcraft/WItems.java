@@ -22,6 +22,7 @@ import heero.mc.mod.wakcraft.spell.PassiveSpecialitySpell;
 import heero.mc.mod.wakcraft.spell.effect.EffectArea;
 import heero.mc.mod.wakcraft.spell.effect.EffectCharacteristic;
 import heero.mc.mod.wakcraft.spell.effect.EffectDamage;
+import heero.mc.mod.wakcraft.spell.effect.EffectElement;
 import heero.mc.mod.wakcraft.spell.effect.EffectMovement;
 import heero.mc.mod.wakcraft.spell.effect.EffectState;
 import heero.mc.mod.wakcraft.spell.state.State;
@@ -132,11 +133,11 @@ public class WItems extends Items {
 		
 		// SPELLS
 		// Iop spells
-		GameRegistry.registerItem(spellShaker = (new ElementalSpell("Shaker", 4, 0, 0).setEffect(new EffectDamage(4, 130 / 200.0F)).setEffectCritical(new EffectDamage(7, 192 / 200.0F))), "SpellShaker");
-		GameRegistry.registerItem(spellRocknoceros = (new ElementalSpell("Rocknoceros", 5, 0, 0).setEffect(new EffectDamage(4, 122 / 200.0F)).setEffect(new EffectState(State.STUNNED, 1, 0, 0.1F, 0)).setEffectCritical(new EffectDamage(6, 184 / 200.0F)).setEffectCritical(new EffectState(State.STUNNED, 1, 0, 0.15F, 0))), "SpellRocknoceros");
-		GameRegistry.registerItem(spellImpact = (new ElementalSpell("Impact", 2, 0, 0).setEffect(new EffectDamage(2, 48 / 200.0F, EffectArea.CROSS)).setEffect(new EffectCharacteristic(Characteristic.MOVEMENT, -1, 0, 0.1F, 0, EffectArea.CROSS)).setEffectCritical(new EffectDamage(3, 72 / 200.0F, EffectArea.CROSS)).setEffectCritical(new EffectCharacteristic(Characteristic.MOVEMENT, -1, 0, 0.15F, 0, EffectArea.CROSS))), "SpellImpact");
-		GameRegistry.registerItem(spellCharge = (new ElementalSpell("Charge", 4, 1, 0).setEffect(new EffectMovement(2, 0)).setEffect(new EffectDamage(3, 100 / 200.0F)).setEffect(new EffectState(State.STUNNED, 1, 0, 0.10F, 0)).setEffectCritical(new EffectMovement(2, 0)).setEffectCritical(new EffectDamage(5, 146 / 200.0F)).setEffectCritical(new EffectState(State.STUNNED, 1, 0, 0.15F, 0))), "SpellCharge");
-		GameRegistry.registerItem(spellDevastate = (new ElementalSpell("Devastate", 5, 1, 0).setEffect(new EffectDamage(7, 136 / 200.0F, EffectArea.AROUND)).setEffectCritical(new EffectDamage(11, 173 / 200.0F, EffectArea.AROUND))), "SpellDevastate");
+		GameRegistry.registerItem(spellShaker = (new ElementalSpell("Shaker", 4, 0, 0).setEffect(new EffectDamage(4, 130 / 200.0F, EffectElement.EARTH)).setEffectCritical(new EffectDamage(7, 192 / 200.0F, EffectElement.EARTH))), "SpellShaker");
+		GameRegistry.registerItem(spellRocknoceros = (new ElementalSpell("Rocknoceros", 5, 0, 0).setEffect(new EffectDamage(4, 122 / 200.0F, EffectElement.EARTH)).setEffect(new EffectState(State.STUNNED, 1, 0, 0.1F, 0)).setEffectCritical(new EffectDamage(6, 184 / 200.0F, EffectElement.EARTH)).setEffectCritical(new EffectState(State.STUNNED, 1, 0, 0.15F, 0))), "SpellRocknoceros");
+		GameRegistry.registerItem(spellImpact = (new ElementalSpell("Impact", 2, 0, 0).setEffect(new EffectDamage(2, 48 / 200.0F, EffectElement.EARTH, EffectArea.CROSS)).setEffect(new EffectCharacteristic(Characteristic.MOVEMENT, -1, 0, 0.1F, 0, EffectArea.CROSS)).setEffectCritical(new EffectDamage(3, 72 / 200.0F, EffectElement.EARTH, EffectArea.CROSS)).setEffectCritical(new EffectCharacteristic(Characteristic.MOVEMENT, -1, 0, 0.15F, 0, EffectArea.CROSS))), "SpellImpact");
+		GameRegistry.registerItem(spellCharge = (new ElementalSpell("Charge", 4, 1, 0).setEffect(new EffectMovement(2, 0)).setEffect(new EffectDamage(3, 100 / 200.0F, EffectElement.EARTH)).setEffect(new EffectState(State.STUNNED, 1, 0, 0.10F, 0)).setEffectCritical(new EffectMovement(2, 0)).setEffectCritical(new EffectDamage(5, 146 / 200.0F, EffectElement.EARTH)).setEffectCritical(new EffectState(State.STUNNED, 1, 0, 0.15F, 0))), "SpellCharge");
+		GameRegistry.registerItem(spellDevastate = (new ElementalSpell("Devastate", 5, 1, 0).setEffect(new EffectDamage(7, 136 / 200.0F, EffectElement.EARTH, EffectArea.AROUND)).setEffectCritical(new EffectDamage(11, 173 / 200.0F, EffectElement.EARTH, EffectArea.AROUND))), "SpellDevastate");
 		GameRegistry.registerItem(spellThunderbolt = (new ElementalSpell("Thunderbolt", 3, 0, 0).setEffect(new EffectState(State.SCALDED, 1, 38 / 200.0F)).setEffectCritical(new EffectState(State.SCALDED, 2, 56 / 200.0F))), "SpellThunderbolt");
 		GameRegistry.registerItem(spellJudgment = (new ElementalSpell("Judgment", 4, 1, 0).setEffect(new EffectState(State.DISORIENTED, 1, 0, 0.1F, 99 / 200.0F)).setEffectCritical(new EffectState(State.DISORIENTED, 1, 0, 0.1F, 150 / 200.0F))), "SpellJudgment");
 		GameRegistry.registerItem(spellSuperIopPunch = (new ElementalSpell("SuperIopPunch", 5, 0, 0).setEffect(new EffectState(State.EXPLOSION, 0, 100 / 200.0F, 0.3F, 0)).setEffectCritical(new EffectState(State.EXPLOSION, 0, 100 / 200.0F, 0.45F, 0))), "SpellSuperIopPunch");

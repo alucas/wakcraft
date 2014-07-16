@@ -1,14 +1,12 @@
 package heero.mc.mod.wakcraft.spell.effect;
 
-import net.minecraft.util.StatCollector;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 
 /**
  * Main IEffectDamage implementation.
  */
-public class EffectDamage implements IEffectDamage {
-	private final int damageBase;
-	private final float damageFactor;
-	private final IEffectArea effectArea;
+public class EffectDamage extends EffectCharacteristic implements IEffectDamage {
+	private final IEffectElement element;
 
 	/**
 	 * Main constructor.
@@ -16,10 +14,10 @@ public class EffectDamage implements IEffectDamage {
 	 * @param damageFactor	The damage factor value.
 	 * @param effectArea	The area of the effect.
 	 */
-	public EffectDamage(final int damageBase, final float damageFactor, IEffectArea effectArea) {
-		this.damageBase = damageBase;
-		this.damageFactor = damageFactor;
-		this.effectArea = effectArea;
+	public EffectDamage(final int damageBase, final float damageFactor, IEffectElement element, IEffectArea effectArea) {
+		super(Characteristic.HEALTH, -damageBase, -damageFactor, 1, 0);
+
+		this.element = element;
 	}
 
 	/**
@@ -27,22 +25,12 @@ public class EffectDamage implements IEffectDamage {
 	 * @param damageBase	The damage vase value.
 	 * @param damageFactor	The damage factor value.
 	 */
-	public EffectDamage(final int damageBase, final float damageFactor) {
-		this(damageBase, damageFactor, EffectArea.POINT);
+	public EffectDamage(final int damageBase, final float damageFactor, IEffectElement element) {
+		this(damageBase, damageFactor, element, EffectArea.POINT);
 	}
 
 	@Override
-	public int getDamage(final int spellLevel) {
-		return (int) (damageBase + damageFactor * spellLevel);
-	}
-
-	@Override
-	public IEffectArea getZone() {
-		return effectArea;
-	}
-
-	@Override
-	public String getDescription(int spellLevel) {
-		return StatCollector.translateToLocalFormatted("effect.damage.description", getDamage(spellLevel));
+	public IEffectElement getElement() {
+		return element;
 	}
 }

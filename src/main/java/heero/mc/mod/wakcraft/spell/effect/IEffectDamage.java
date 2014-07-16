@@ -3,11 +3,10 @@ package heero.mc.mod.wakcraft.spell.effect;
 /**
  * Damage effect interface.
  */
-public interface IEffectDamage extends IEffect {
+public interface IEffectDamage extends IEffectCharacteristic {
 	/**
-	 * Returns the damage value.
-	 * @param spellLevel	The spell's level.
-	 * @return	The damage base value.
+	 * Returns the element of the damages.
+	 * @return	The element of the damages.
 	 */
-	public int getDamage(final int spellLevel);
+	public IEffectElement getElement();
 }
