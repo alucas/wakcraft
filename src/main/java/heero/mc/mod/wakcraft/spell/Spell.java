@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.spell;
 
-import net.minecraft.client.resources.I18n;
+import net.minecraft.util.StatCollector;
 
 public class Spell implements ISpell {
 	private final String description;
@@ -9,10 +9,9 @@ public class Spell implements ISpell {
 		this.description = "spell." + name + ".description";
 	}
 
-	private static final Object nullObject = new Object();
 	@Override
 	public String getDescription() {
-		return I18n.format(description, nullObject);
+		return StatCollector.translateToLocal(description);
 	}
 
 	@Override
