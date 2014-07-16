@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.characteristic;
 
-public enum Characteristic {
+public enum Characteristic implements ICharacteristic {
 	// Principal
 	HEALTH("Health"),
 	ACTION("Action"),
