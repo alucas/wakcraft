@@ -5,7 +5,7 @@ import heero.mc.mod.wakcraft.spell.state.IState;
 /**
  * Main IEffectState implementation.
  */
-public class EffectState implements IEffectState {
+public class EffectState implements IEffectState, IEffectProbability {
 	private final IEffectArea effectArea;
 
 	private final IState state;
