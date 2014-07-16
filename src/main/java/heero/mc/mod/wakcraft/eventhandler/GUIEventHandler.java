@@ -3,7 +3,11 @@ package heero.mc.mod.wakcraft.eventhandler;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.network.packet.PacketOpenWindow;
+import heero.mc.mod.wakcraft.spell.IActiveSpell;
+import heero.mc.mod.wakcraft.spell.ICondition;
+import heero.mc.mod.wakcraft.spell.IPassiveSpell;
 import heero.mc.mod.wakcraft.spell.ISpell;
+import heero.mc.mod.wakcraft.spell.effect.IEffect;
 import heero.mc.mod.wakcraft.util.StringUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -31,7 +35,35 @@ public class GUIEventHandler {
 	@SubscribeEvent
 	public void onItemTooltipEvent(ItemTooltipEvent event) {
 		if (event.itemStack.getItem() instanceof ISpell) {
-			String description  = StatCollector.translateToLocal(((ISpell) event.itemStack.getItem()).getDescription());
+			ISpell spell = (ISpell) event.itemStack.getItem();
+
+			if (spell instanceof IPassiveSpell) {
+				event.toolTip.add("Effets :");
+
+				for (IEffect effect : ((IPassiveSpell) spell).getEffects()) {
+					event.toolTip.add(effect.toString());
+				}
+			} else if (spell instanceof IActiveSpell) {
+				event.toolTip.add("Effets :");
+
+				for (IEffect effect : ((IActiveSpell) spell).getEffects()) {
+					event.toolTip.add(effect.toString());
+				}
+
+				event.toolTip.add("Critical effets :");
+
+				for (IEffect effect : ((IActiveSpell) spell).getEffectsCritical()) {
+					event.toolTip.add(effect.toString());
+				}
+
+				event.toolTip.add("Usage conditions :");
+
+				for (ICondition condition : ((IActiveSpell) spell).getCondition()) {
+					event.toolTip.add(condition.toString());
+				}
+			}
+
+			String description  = StatCollector.translateToLocal(spell.getDescription());
 
 			for (String string : StringUtil.warpString(description, 26)) {
 				event.toolTip.add(string);
