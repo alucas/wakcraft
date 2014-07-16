@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 /**
  * Passive Specialty Spell implementation.
  */
-public class PassiveSpacialitySpell extends Item implements IPassiveSpell {
+public class PassiveSpecialitySpell extends Item implements IPassiveSpell {
 	private final ISpell spell;
 
 	private final List<IEffect> effects;
@@ -22,7 +22,7 @@ public class PassiveSpacialitySpell extends Item implements IPassiveSpell {
 	 * Main constructor.
 	 * @param name	The name of the spell.
 	 */
-	public PassiveSpacialitySpell(final String name) {
+	public PassiveSpecialitySpell(final String name) {
 		this.spell = new Spell(name);
 
 		this.effects = new ArrayList<>();
@@ -52,7 +52,7 @@ public class PassiveSpacialitySpell extends Item implements IPassiveSpell {
 	}
 
 	@Override
-	public PassiveSpacialitySpell setEffect(final IEffect effect) {
+	public PassiveSpecialitySpell setEffect(final IEffect effect) {
 		effects.add(effect);
 
 		return this;

@@ -18,7 +18,7 @@ import heero.mc.mod.wakcraft.item.ItemWithLevel;
 import heero.mc.mod.wakcraft.item.ItemWoollyKey;
 import heero.mc.mod.wakcraft.spell.ActiveSpecialitySpell;
 import heero.mc.mod.wakcraft.spell.ElementalSpell;
-import heero.mc.mod.wakcraft.spell.PassiveSpacialitySpell;
+import heero.mc.mod.wakcraft.spell.PassiveSpecialitySpell;
 import heero.mc.mod.wakcraft.spell.effect.EffectArea;
 import heero.mc.mod.wakcraft.spell.effect.EffectCharacteristic;
 import heero.mc.mod.wakcraft.spell.effect.EffectDamage;
@@ -58,7 +58,7 @@ public class WItems extends Items {
 
 	public static ActiveSpecialitySpell spellJump, spellDefensiveStance, spellFlatten,
 			spellBraveryStandard, spellIncrease;
-	public static PassiveSpacialitySpell spellVirility, spellCompulsion, spellAuthority,
+	public static PassiveSpecialitySpell spellVirility, spellCompulsion, spellAuthority,
 			spellShowOff, spellLockingPro;
 
 	public static void registerItems() {
@@ -152,10 +152,10 @@ public class WItems extends Items {
 		GameRegistry.registerItem(spellFlatten = (new ActiveSpecialitySpell("Flatten")), "SpellFlatten");
 		GameRegistry.registerItem(spellBraveryStandard = (new ActiveSpecialitySpell("BraveryStandard")), "SpellBraveryStandard");
 		GameRegistry.registerItem(spellIncrease = (new ActiveSpecialitySpell("Increase")), "SpellIncrease");
-		GameRegistry.registerItem(spellVirility = (new PassiveSpacialitySpell("Virility")), "SpellVirility");
-		GameRegistry.registerItem(spellCompulsion = (new PassiveSpacialitySpell("Compulsion")), "SpellCompulsion");
-		GameRegistry.registerItem(spellAuthority = (new PassiveSpacialitySpell("Authority")), "SpellAuthority");
-		GameRegistry.registerItem(spellShowOff = (new PassiveSpacialitySpell("ShowOff")), "SpellShowOff");
-		GameRegistry.registerItem(spellLockingPro = (new PassiveSpacialitySpell("LockingPro")), "SpellLockingPro");
+		GameRegistry.registerItem(spellVirility = (new PassiveSpecialitySpell("Virility")), "SpellVirility");
+		GameRegistry.registerItem(spellCompulsion = (new PassiveSpecialitySpell("Compulsion")), "SpellCompulsion");
+		GameRegistry.registerItem(spellAuthority = (new PassiveSpecialitySpell("Authority")), "SpellAuthority");
+		GameRegistry.registerItem(spellShowOff = (new PassiveSpecialitySpell("ShowOff")), "SpellShowOff");
+		GameRegistry.registerItem(spellLockingPro = (new PassiveSpecialitySpell("LockingPro")), "SpellLockingPro");
 	}
 }
