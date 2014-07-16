@@ -10,6 +10,9 @@ import java.util.List;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+/**
+ * Elemental spell implementation.
+ */
 public class ElementalSpell extends Item implements IActiveSpell {
 	private final ISpell spell;
 
@@ -21,6 +24,13 @@ public class ElementalSpell extends Item implements IActiveSpell {
 	private final int movementCost;
 	private final int wakfuCost;
 
+	/**
+	 * Main constructor.
+	 * @param name	The name of the spell.
+	 * @param actionCost	The action point cost of the spell.
+	 * @param movementCost	The movement point cost of the spell.
+	 * @param wakfuCost		The wakfu point cost of the spell.
+	 */
 	public ElementalSpell(final String name, final int actionCost, final int movementCost, final int wakfuCost) {
 		this.spell = new Spell(name);
 

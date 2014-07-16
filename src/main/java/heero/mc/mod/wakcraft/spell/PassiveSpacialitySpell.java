@@ -10,11 +10,18 @@ import java.util.List;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+/**
+ * Passive Specialty Spell implementation.
+ */
 public class PassiveSpacialitySpell extends Item implements IPassiveSpell {
 	private final ISpell spell;
 
 	private final List<IEffect> effects;
 
+	/**
+	 * Main constructor.
+	 * @param name	The name of the spell.
+	 */
 	public PassiveSpacialitySpell(final String name) {
 		this.spell = new Spell(name);
 
