@@ -131,17 +131,17 @@ public class WItems extends Items {
 		// SPELLS
 		// Iop spells
 		GameRegistry.registerItem(spellShaker = (new ElementalSpell("Shaker", 4, 0, 0).setEffect(new EffectDamage(4, 130)).setEffectCritical(new EffectDamage(7, 192))), "SpellShaker");
-		GameRegistry.registerItem(spellRocknoceros = (new ElementalSpell("Rocknoceros", 5, 0, 0).setEffect(new EffectDamage(4, 122)).setEffect(new EffectState(State.STUNNED, 1, 10)).setEffectCritical(new EffectDamage(6, 184)).setEffectCritical(new EffectState(State.STUNNED, 1, 15))), "SpellRocknoceros");
+		GameRegistry.registerItem(spellRocknoceros = (new ElementalSpell("Rocknoceros", 5, 0, 0).setEffect(new EffectDamage(4, 122)).setEffect(new EffectState(State.STUNNED, 1, 0, 0.1F, 0)).setEffectCritical(new EffectDamage(6, 184)).setEffectCritical(new EffectState(State.STUNNED, 1, 0, 0.15F, 0))), "SpellRocknoceros");
 		GameRegistry.registerItem(spellImpact = (new ElementalSpell("Impact", 2, 0, 0).setEffect(new EffectDamage(2, 48, EffectArea.CROSS)).setEffectCritical(new EffectDamage(3, 72, EffectArea.CROSS))), "SpellImpact");
-		GameRegistry.registerItem(spellCharge = (new ElementalSpell("Charge", 4, 1, 0).setEffect(new EffectDamage(3, 100)).setEffect(new EffectState(State.STUNNED, 1, 10)).setEffectCritical(new EffectDamage(5, 146)).setEffectCritical(new EffectState(State.STUNNED, 1, 15))), "SpellCharge");
+		GameRegistry.registerItem(spellCharge = (new ElementalSpell("Charge", 4, 1, 0).setEffect(new EffectDamage(3, 100)).setEffect(new EffectState(State.STUNNED, 1, 0, 0.10F, 0)).setEffectCritical(new EffectDamage(5, 146)).setEffectCritical(new EffectState(State.STUNNED, 1, 0, 0.15F, 0))), "SpellCharge");
 		GameRegistry.registerItem(spellDevastate = (new ElementalSpell("Devastate", 5, 1, 0).setEffect(new EffectDamage(7, 136, EffectArea.AROUND)).setEffectCritical(new EffectDamage(11, 173, EffectArea.AROUND))), "SpellDevastate");
-		GameRegistry.registerItem(spellThunderbolt = (new ElementalSpell("Thunderbolt", 3, 0, 0).setEffect(new EffectState(State.SCALDED, 1)).setEffectCritical(new EffectState(State.SCALDED, 1))), "SpellThunderbolt");
-		GameRegistry.registerItem(spellJudgment = (new ElementalSpell("Judgment", 4, 1, 0).setEffect(new EffectState(State.DISORIENTED, 1, 1)).setEffectCritical(new EffectState(State.DISORIENTED, 1, 1))), "SpellJudgment");
-		GameRegistry.registerItem(spellSuperIopPunch = (new ElementalSpell("SuperIopPunch", 5, 0, 0).setEffect(new EffectState(State.EXPLOSION, 1, 30)).setEffectCritical(new EffectState(State.EXPLOSION, 1, 45))), "SpellSuperIopPunch");
+		GameRegistry.registerItem(spellThunderbolt = (new ElementalSpell("Thunderbolt", 3, 0, 0).setEffect(new EffectState(State.SCALDED, 1, 38 / 200.0F)).setEffectCritical(new EffectState(State.SCALDED, 2, 56 / 200.0F))), "SpellThunderbolt");
+		GameRegistry.registerItem(spellJudgment = (new ElementalSpell("Judgment", 4, 1, 0).setEffect(new EffectState(State.DISORIENTED, 1, 0, 0.1F, 99 / 200.0F)).setEffectCritical(new EffectState(State.DISORIENTED, 1, 0, 0.1F, 150 / 200.0F))), "SpellJudgment");
+		GameRegistry.registerItem(spellSuperIopPunch = (new ElementalSpell("SuperIopPunch", 5, 0, 0).setEffect(new EffectState(State.EXPLOSION, 0, 100 / 200.0F, 0.3F, 0)).setEffectCritical(new EffectState(State.EXPLOSION, 0, 100 / 200.0F, 0.45F, 0))), "SpellSuperIopPunch");
 		GameRegistry.registerItem(spellCelestialSword = (new ElementalSpell("CelestialSword", 3, 0, 0).setEffect(new EffectState(State.FLAMING)).setEffectCritical(new EffectState(State.FLAMING))), "SpellCelestialSword");
-		GameRegistry.registerItem(spellIopsWrath = (new ElementalSpell("IopsWrath", 6, 0, 1).setEffect(new EffectState(State.EXPLOSION, 1, 66)).setEffectCritical(new EffectState(State.EXPLOSION, 1))), "SpellIopsWrath");
+		GameRegistry.registerItem(spellIopsWrath = (new ElementalSpell("IopsWrath", 6, 0, 1).setEffect(new EffectState(State.EXPLOSION, 0, 100 / 200.0F, 0.66F, 0)).setEffectCritical(new EffectState(State.EXPLOSION, 0, 100 / 200.0F))), "SpellIopsWrath");
 		GameRegistry.registerItem(spellJabs = (new ElementalSpell("Jabs", 2, 0, 0)), "SpellJabs");
-		GameRegistry.registerItem(spellFlurry = (new ElementalSpell("Flurry", 1, 0, 0).setEffect(new EffectState(State.AERIAL, 1)).setEffectCritical(new EffectState(State.AERIAL, 2))), "SpellFlurry");
+		GameRegistry.registerItem(spellFlurry = (new ElementalSpell("Flurry", 1, 0, 0).setEffect(new EffectState(State.AERIAL, 1, 0)).setEffectCritical(new EffectState(State.AERIAL, 2, 0))), "SpellFlurry");
 		GameRegistry.registerItem(spellIntimidation = (new ElementalSpell("Intimidation", 3, 0, 0)), "SpellIntimidation");
 		GameRegistry.registerItem(spellGuttingGust = (new ElementalSpell("GuttingGust", 0, 1, 0)), "SpellGuttingGust");
 		GameRegistry.registerItem(spellUppercut = (new ElementalSpell("Uppercut", 0, 0, 1)), "SpellUppercut");

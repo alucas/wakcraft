@@ -14,13 +14,15 @@ public interface IEffectState extends IEffect {
 
 	/**
 	 * Returns the level of the state to apply or add.
+	 * @param spellLevel	Value used to retrieve the level of the state to apply.
 	 * @return	The level of the state to apply or add.
 	 */
-	public int getStateLevel();
+	public int getStateLevel(final int spellLevel);
 
 	/**
 	 * Returns the probability to apply the state.
+	 * @param spellLevel	Value used to retrieve the probability to apply a state.
 	 * @return	The probability to apply the state.
 	 */
-	public int getProbability();
+	public float getProbability(final int metadata);
 }
