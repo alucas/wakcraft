@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.spell.state;
 
-import heero.mc.mod.wakcraft.spell.ISpell;
 import heero.mc.mod.wakcraft.spell.effect.IEffect;
 
 import java.util.List;
@@ -33,7 +32,7 @@ public interface IState {
 	 * @param effect	The effect to add to the state.
 	 * @return	This instance, for usage commodity.
 	 */
-	public ISpell setEffect(final IEffect effect);
+	public IState setEffect(final IEffect effect);
 
 	/**
 	 * Returns the list of effects of this state.
