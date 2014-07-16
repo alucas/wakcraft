@@ -1,5 +1,7 @@
 package heero.mc.mod.wakcraft.spell.effect;
 
+import net.minecraft.util.StatCollector;
+
 /**
  * Main IEffectDamage implementation.
  */
@@ -37,5 +39,10 @@ public class EffectMovement implements IEffectMovement {
 	@Override
 	public IEffectArea getZone() {
 		return effectArea;
+	}
+
+	@Override
+	public String getDescription(int spellLevel) {
+		return StatCollector.translateToLocalFormatted("effect.movement.description", getValue(spellLevel));
 	}
 }

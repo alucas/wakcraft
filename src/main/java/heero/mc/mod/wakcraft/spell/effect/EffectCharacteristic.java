@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.spell.effect;
 
 import heero.mc.mod.wakcraft.characteristic.ICharacteristic;
+import net.minecraft.util.StatCollector;
 
 /**
  * Main IEffectState implementation.
@@ -59,5 +60,10 @@ public class EffectCharacteristic implements IEffectCharacteristic, IEffectProba
 	@Override
 	public int getValue(int spellLevel) {
 		return (int) (amountBase + amountFactor * spellLevel);
+	}
+
+	@Override
+	public String getDescription(int spellLevel) {
+		return StatCollector.translateToLocalFormatted("effect.characteristic.description", getValue(spellLevel), getProbability(spellLevel));
 	}
 }

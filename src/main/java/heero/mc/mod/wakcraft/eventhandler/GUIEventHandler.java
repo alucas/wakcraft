@@ -35,31 +35,32 @@ public class GUIEventHandler {
 	@SubscribeEvent
 	public void onItemTooltipEvent(ItemTooltipEvent event) {
 		if (event.itemStack.getItem() instanceof ISpell) {
-			ISpell spell = (ISpell) event.itemStack.getItem();
+			final ISpell spell = (ISpell) event.itemStack.getItem();
+			final int spellLevel = spell.getLevel(event.itemStack.getItemDamage());
 
 			if (spell instanceof IPassiveSpell) {
 				event.toolTip.add("Effets :");
 
 				for (IEffect effect : ((IPassiveSpell) spell).getEffects()) {
-					event.toolTip.add(effect.toString());
+					event.toolTip.add(effect.getDescription(spellLevel));
 				}
 			} else if (spell instanceof IActiveSpell) {
 				event.toolTip.add("Effets :");
 
 				for (IEffect effect : ((IActiveSpell) spell).getEffects()) {
-					event.toolTip.add(effect.toString());
+					event.toolTip.add(effect.getDescription(spellLevel));
 				}
 
 				event.toolTip.add("Critical effets :");
 
 				for (IEffect effect : ((IActiveSpell) spell).getEffectsCritical()) {
-					event.toolTip.add(effect.toString());
+					event.toolTip.add(effect.getDescription(spellLevel));
 				}
 
 				event.toolTip.add("Usage conditions :");
 
 				for (ICondition condition : ((IActiveSpell) spell).getConditions()) {
-					event.toolTip.add(condition.toString());
+					event.toolTip.add(condition.getDescription(spellLevel));
 				}
 			}
 

@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.spell.effect;
 
 import heero.mc.mod.wakcraft.spell.state.IState;
+import net.minecraft.util.StatCollector;
 
 /**
  * Main IEffectState implementation.
@@ -80,5 +81,10 @@ public class EffectState implements IEffectState, IEffectProbability {
 	@Override
 	public float getProbability(final int spellLevel) {
 		return probabilityBase + probabilityFactor * spellLevel;
+	}
+
+	@Override
+	public String getDescription(int spellLevel) {
+		return StatCollector.translateToLocalFormatted("effect.state.description", getState(), getStateLevel(spellLevel), getProbability(spellLevel));
 	}
 }
