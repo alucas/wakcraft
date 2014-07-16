@@ -95,7 +95,7 @@ public class ElementalSpell extends Item implements IActiveSpell {
 	}
 
 	@Override
-	public List<ICondition> getCondition() {
+	public List<ICondition> getConditions() {
 		return conditions;
 	}
 

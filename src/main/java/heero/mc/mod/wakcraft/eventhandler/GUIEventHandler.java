@@ -58,7 +58,7 @@ public class GUIEventHandler {
 
 				event.toolTip.add("Usage conditions :");
 
-				for (ICondition condition : ((IActiveSpell) spell).getCondition()) {
+				for (ICondition condition : ((IActiveSpell) spell).getConditions()) {
 					event.toolTip.add(condition.toString());
 				}
 			}

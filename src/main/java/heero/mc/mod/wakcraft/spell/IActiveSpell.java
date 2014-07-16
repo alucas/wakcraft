@@ -63,5 +63,5 @@ public interface IActiveSpell extends ISpell {
 	 * Returns the usage conditions of the spell.
 	 * @return	The usage conditions of the spell.
 	 */
-	public List<ICondition> getCondition();
+	public List<ICondition> getConditions();
 }
