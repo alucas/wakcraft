@@ -6,16 +6,14 @@ public class EffectDamage implements IEffectDamage {
 	private final int damageFactor;
 	private final IEffectArea effectArea;
 
-	public EffectDamage(final int damageBase, final int damageFactor) {
-		this.damageBase = damageBase;
-		this.damageFactor = damageFactor;
-		this.effectArea = EffectArea.POINT;
-	}
-
 	public EffectDamage(final int damageBase, final int damageFactor, IEffectArea effectArea) {
 		this.damageBase = damageBase;
 		this.damageFactor = damageFactor;
 		this.effectArea = effectArea;
+	}
+
+	public EffectDamage(final int damageBase, final int damageFactor) {
+		this(damageBase, damageFactor, EffectArea.POINT);
 	}
 
 	@Override
