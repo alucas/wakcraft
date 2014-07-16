@@ -16,7 +16,7 @@ public interface IEffectState extends IEffect {
 	 * Returns the level of the state to apply or add.
 	 * @return	The level of the state to apply or add.
 	 */
-	public int getLevel();
+	public int getStateLevel();
 
 	/**
 	 * Returns the probability to apply the state.
