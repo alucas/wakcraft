@@ -65,8 +65,8 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 		int damage = DamageUtil.computeDamage(attacker, this, stack);
 		int health = FightHelper.getFightCharacteristic(this, Characteristic.HEALTH);
 
-		if (health - damage > 0) {
-			FightHelper.setFightCharacteristic(this, Characteristic.HEALTH, health - damage);
+		if (health + damage > 0) {
+			FightHelper.setFightCharacteristic(this, Characteristic.HEALTH, health + damage);
 
 			this.worldObj.setEntityState(this, (byte) 2);
 			playSoundHurt();

@@ -20,10 +20,10 @@ public class DamageUtil {
 					continue;
 				}
 
-				damage += ((IEffectDamage) effect).getDamage(spell.getLevel(stack.getItemDamage()));
+				damage += ((IEffectDamage) effect).getValue(spell.getLevel(stack.getItemDamage()));
 			}
 		} else {
-			damage = 1;
+			damage = -1;
 		}
 
 		return damage;
