@@ -33,6 +33,20 @@ public class EffectState implements IEffectState {
 		this(state, stateLevel, probability, EffectArea.POINT);
 	}
 
+	/**
+	 * Constructor with default value of effect's area : POINT, and application probability : 100%
+	 */
+	public EffectState(final IState state, final int stateLevel) {
+		this(state, stateLevel, 100, EffectArea.POINT);
+	}
+
+	/**
+	 * Constructor with default value of effect's area : POINT, and application probability : 100% and stateLevel : 1
+	 */
+	public EffectState(final IState state) {
+		this(state, 1, 100, EffectArea.POINT);
+	}
+
 	@Override
 	public IEffectArea getZone() {
 		return effectArea;
