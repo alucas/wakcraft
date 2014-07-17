@@ -33,9 +33,9 @@ public class GUIEventHandler {
 		}
 	}
 
-	private static final String stringEffects = StatCollector.translateToLocal("effect.category.effects");
-	private static final String stringCriticalEffects = StatCollector.translateToLocal("effect.category.effectsCritical");
-	private static final String stringConditions = StatCollector.translateToLocal("effect.category.conditions");
+	private static final String stringEffects = StatCollector.translateToLocal("spell.category.effects");
+	private static final String stringCriticalEffects = StatCollector.translateToLocal("spell.category.effectsCritical");
+	private static final String stringConditions = StatCollector.translateToLocal("spell.category.conditions");
 	@SubscribeEvent
 	public void onItemTooltipEvent(ItemTooltipEvent event) {
 		if (event.itemStack.getItem() instanceof ISpell) {
@@ -51,25 +51,30 @@ public class GUIEventHandler {
 
 				event.toolTip.add("");
 			} else if (spell instanceof IActiveSpell) {
+				IActiveSpell activeSpell = (IActiveSpell) spell;
+
+				event.toolTip.add(StatCollector.translateToLocalFormatted("spell.category.active", activeSpell.getActionCost(), activeSpell.getMovementCost(), activeSpell.getWakfuCost()));
+				event.toolTip.add("");
+
 				event.toolTip.add(EnumChatFormatting.BLUE + stringEffects);
 
-				for (IEffect effect : ((IActiveSpell) spell).getEffects()) {
+				for (IEffect effect : activeSpell.getEffects()) {
 					event.toolTip.add(effect.getDescription(spellLevel));
 				}
 
 				event.toolTip.add("");
 				event.toolTip.add(EnumChatFormatting.BLUE + stringCriticalEffects);
 
-				for (IEffect effect : ((IActiveSpell) spell).getEffectsCritical()) {
+				for (IEffect effect : activeSpell.getEffectsCritical()) {
 					event.toolTip.add(effect.getDescription(spellLevel));
 				}
 
 				event.toolTip.add("");
 
-				if (((IActiveSpell) spell).getConditions().size() > 0) {
+				if (activeSpell.getConditions().size() > 0) {
 					event.toolTip.add(EnumChatFormatting.BLUE + stringConditions);
 
-					for (ICondition condition : ((IActiveSpell) spell).getConditions()) {
+					for (ICondition condition : activeSpell.getConditions()) {
 						event.toolTip.add(condition.getDescription(spellLevel));
 					}
 
