@@ -135,6 +135,11 @@ spell.Authority.description=Sometimes Iops hit so hard that they're able to make
 spell.ShowOff.description=For a Iop, the battlefield is a stage, all set for him to show off. Try to steal his limelight, and he'll make a show of you...
 spell.LockingPro.description=A Iop's mind is never too far from the Gobbowl pitch, and he's always ready to mark and lock enemies. If an enemy starts its turn facing the Iop, it will be locked.
 
+effect.characteristic.Movement.description=%d MP (%d%%)
+effect.characteristic.Health.description=%d HP
+effect.movement.description=Gets closer by %d cells
+effect.state.description=%s (+%d Lvl.)
+
 tile.tannerWorkbench.name=Tanner Workbench
 tile.dragoexpress.name=Drago-Express
 tile.phoenix.name=Phoenix

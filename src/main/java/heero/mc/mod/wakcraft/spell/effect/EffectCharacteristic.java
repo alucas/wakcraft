@@ -64,6 +64,7 @@ public class EffectCharacteristic implements IEffectCharacteristic, IEffectProba
 
 	@Override
 	public String getDescription(int spellLevel) {
-		return StatCollector.translateToLocalFormatted("effect.characteristic.description", getValue(spellLevel), getProbability(spellLevel));
+		final float probability = getProbability(spellLevel);
+		return StatCollector.translateToLocalFormatted("effect.characteristic." + characteristic + ".description", getValue(spellLevel), (probability >= 1) ? 100 : (int) (probability * 100));
 	}
 }
