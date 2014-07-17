@@ -86,6 +86,11 @@ public class EffectState implements IEffectState, IEffectProbability {
 	@Override
 	public String getDescription(int spellLevel) {
 		final float probability = getProbability(spellLevel);
-		return StatCollector.translateToLocalFormatted("effect.state.description", getState(), getStateLevel(spellLevel), probability >= 1 ? 100 : (int) (probability * 100));
+
+		if (probability >= 1) {
+			return StatCollector.translateToLocalFormatted("effect.state2.description", getState(), getStateLevel(spellLevel));
+		}
+
+		return StatCollector.translateToLocalFormatted("effect.state.description", getState(), getStateLevel(spellLevel), (int) (probability * 100));
 	}
 }

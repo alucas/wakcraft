@@ -144,6 +144,7 @@ effect.characteristic.Movement.description=%d MP (%d%%)
 effect.characteristic.Health.description=%d HP
 effect.movement.description=Gets closer by %d cells
 effect.state.description=%s (+%d Lvl.) (%d%%)
+effect.state2.description=%s (+%d Lvl.)
 
 tile.tannerWorkbench.name=Tanner Workbench
 tile.dragoexpress.name=Drago-Express
