@@ -143,7 +143,7 @@ spell.category.active=%d AP, %d MP, %d WP
 effect.characteristic.Movement.description=%d MP (%d%%)
 effect.characteristic.Health.description=%d HP
 effect.movement.description=Gets closer by %d cells
-effect.state.description=%s (+%d Lvl.)
+effect.state.description=%s (+%d Lvl.) (%d%%)
 
 tile.tannerWorkbench.name=Tanner Workbench
 tile.dragoexpress.name=Drago-Express
