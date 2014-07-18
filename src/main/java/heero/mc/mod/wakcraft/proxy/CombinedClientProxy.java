@@ -19,6 +19,7 @@ import heero.mc.mod.wakcraft.client.model.ModelGobballWC;
 import heero.mc.mod.wakcraft.client.model.ModelGobbette;
 import heero.mc.mod.wakcraft.client.model.ModelGobbly;
 import heero.mc.mod.wakcraft.client.model.ModelTofurby;
+import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockFence;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockOre;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPalisade;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPlant;
@@ -96,6 +97,7 @@ public class CombinedClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new RendererBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RendererBlockPlant(RenderingRegistry.getNextAvailableRenderId()));
 		RenderingRegistry.registerBlockHandler(new RendererBlockScree(RenderingRegistry.getNextAvailableRenderId()));
+		RenderingRegistry.registerBlockHandler(new RendererBlockFence(RenderingRegistry.getNextAvailableRenderId()));
 
 		RendererItemBlock rendererItemBlock = new RendererItemBlock();
 		MinecraftForgeClient.registerItemRenderer(WItems.sufokiaWave1, rendererItemBlock);
