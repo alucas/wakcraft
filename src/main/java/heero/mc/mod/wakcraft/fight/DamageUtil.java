@@ -13,6 +13,10 @@ public class DamageUtil {
 	public static int computeDamage(final EntityLivingBase attacker, final EntityLivingBase target, final ItemStack stack) {
 		int damage = 0;
 
+		if (stack == null) {
+			return damage;
+		}
+
 		if (stack.getItem() instanceof IActiveSpell) {
 			IActiveSpell spell = (IActiveSpell) stack.getItem();
 			for (IEffect effect : spell.getEffects()) {
