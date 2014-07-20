@@ -582,6 +582,7 @@ public enum FightManager {
 			for (EntityLivingBase fighter : team) {
 				FightHelper.resetProperties(fighter);
 				FightHelper.setStartPosition(fighter, null);
+				FightHelper.resetDisplayName(fighter);
 			}
 		}
 	}
@@ -610,6 +611,7 @@ public enum FightManager {
 			moveFighterToStartPosition(fightInfo.getFightersByTeam());
 			initFightersCurrentPosition(fightInfo.getFightersByTeam());
 			initFightersCharacteristics(fightInfo.getFightersByTeam());
+			initFightersDisplayName(fightInfo.getFightersByTeam());
 
 			updateFightStage(world, fightId, FightStage.FIGHT);
 			fightInfo.setStage(FightStage.FIGHT, FIGHTTURN_DURATION);
@@ -829,6 +831,14 @@ public enum FightManager {
 					// TODO : Don't send all characteristics
 					Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(currentFighter, FightCharacteristicsProperty.IDENTIFIER), (EntityPlayerMP) fighter);
 				}
+			}
+		}
+	}
+
+	protected void initFightersDisplayName(List<List<EntityLivingBase>> fightersByTeam) {
+		for (List<EntityLivingBase> team : fightersByTeam) {
+			for (EntityLivingBase fighter : team) {
+				FightHelper.updateDisplayName(fighter);
 			}
 		}
 	}

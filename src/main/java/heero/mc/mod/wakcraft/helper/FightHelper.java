@@ -10,6 +10,7 @@ import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -80,5 +81,14 @@ public class FightHelper {
 
 	public static ItemStack getCurrentSpell(EntityPlayer entity) {
 		return ((SpellsProperty) entity.getExtendedProperties(SpellsProperty.IDENTIFIER)).getSpellsInventory().getStackInSlot(25 + entity.inventory.currentItem);
+	}
+
+	public static void updateDisplayName(Entity entity) {
+		int maxHealth = ((CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER)).get(Characteristic.HEALTH);
+		if (entity instanceof EntityLiving) ((EntityLiving) entity).setCustomNameTag(getFightCharacteristic(entity, Characteristic.HEALTH) + " / " + maxHealth);
+	}
+
+	public static void resetDisplayName(Entity entity) {
+		if (entity instanceof EntityLiving) ((EntityLiving) entity).setCustomNameTag("");
 	}
 }
