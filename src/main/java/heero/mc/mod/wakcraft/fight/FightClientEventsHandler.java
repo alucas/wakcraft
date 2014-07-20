@@ -91,6 +91,7 @@ public class FightClientEventsHandler {
 			}
 
 			guiFightOverlay.renderFighterHotbar(player, event.resolution, event.partialTicks);
+			guiFightOverlay.renderCharacteristics(player, event.resolution, event.partialTicks);
 
 			event.setCanceled(true);
 			return;

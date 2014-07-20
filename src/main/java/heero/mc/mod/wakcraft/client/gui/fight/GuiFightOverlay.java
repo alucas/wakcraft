@@ -1,5 +1,7 @@
 package heero.mc.mod.wakcraft.client.gui.fight;
 
+import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -16,6 +18,7 @@ import org.lwjgl.opengl.GL12;
 
 public class GuiFightOverlay extends Gui {
 	private static final ResourceLocation WIDGETS = new ResourceLocation("textures/gui/widgets.png");
+	private static final ResourceLocation CHARACTERISTICS = new ResourceLocation(WInfo.MODID, "textures/gui/fightoverlay.png");
 
 	protected final Minecraft minecraft;
 	protected final RenderItem itemRenderer;
@@ -89,5 +92,32 @@ public class GuiFightOverlay extends Gui {
 
 			itemRenderer.renderItemOverlayIntoGUI(this.minecraft.fontRenderer, this.minecraft.getTextureManager(), itemstack, x, y);
 		}
+	}
+
+	public void renderCharacteristics(EntityLivingBase fighter, ScaledResolution resolution, float partialTicks) {
+		minecraft.mcProfiler.startSection("characteristics");
+
+		int width = resolution.getScaledWidth();
+		int height = resolution.getScaledHeight();
+
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+
+		minecraft.renderEngine.bindTexture(CHARACTERISTICS);
+
+		drawTexturedModalRect(width / 2 - 114, height - 44, 0, 0, 100, 100);
+
+		int pointAP = FightHelper.getFightCharacteristic(fighter, Characteristic.ACTION);
+		int pointMP = FightHelper.getFightCharacteristic(fighter, Characteristic.MOVEMENT);
+		int pointWP = FightHelper.getFightCharacteristic(fighter, Characteristic.WAKFU);
+
+		drawString(minecraft.fontRenderer, Integer.toString(pointAP), width / 2 - 86, height - 38, 0xBBBBBB);
+		drawString(minecraft.fontRenderer, Integer.toString(pointMP), width / 2 - 101, height - 32, 0xBBBBBB);
+		drawString(minecraft.fontRenderer, Integer.toString(pointWP), width / 2 - 107, height - 17, 0xBBBBBB);
+
+		GL11.glDisable(GL11.GL_BLEND);
+
+		minecraft.mcProfiler.endSection();
 	}
 }
