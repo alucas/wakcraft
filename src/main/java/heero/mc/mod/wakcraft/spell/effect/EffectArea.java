@@ -11,5 +11,9 @@ public enum EffectArea implements IEffectArea {
 	/** All 8 blocks around the specified block. */
 	AROUND,
 	/** A cross of 5 blocks. */
-	CROSS
+	CROSS,
+	/** Vertical line, size 3*/
+	LINE_V_3,
+	/** Circle size 2 */
+	CIRCLE_2
 }
