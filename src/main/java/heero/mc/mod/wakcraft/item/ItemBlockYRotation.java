@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.item;
 
+import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,6 +29,8 @@ public class ItemBlockYRotation extends Item implements IBlockProvider {
 		this.itemBlockEast = (ItemBlock) Item.getItemFromBlock(blockEast);
 		this.itemBlockSouth = (ItemBlock) Item.getItemFromBlock(blockSouth);
 		this.itemBlockWest = (ItemBlock) Item.getItemFromBlock(blockWest);
+
+		setTextureName(WInfo.MODID.toLowerCase() + ":no_icon");
 
 		if (itemBlockNorth == null || itemBlockEast == null || itemBlockSouth == null || itemBlockWest == null) {
 			throw new RuntimeException("Failed to initialize " + this.getClass().getCanonicalName());
