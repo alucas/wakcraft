@@ -20,6 +20,7 @@ public class BlockInvisibleWall extends BlockGeneric {
 		});
 
 		setBlockName("InvisibleWall");
+		setBlockTextureName("no_icon");
 	}
 
 	/**
