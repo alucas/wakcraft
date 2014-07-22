@@ -21,6 +21,11 @@ public class ActiveSpecialitySpell extends Item implements IActiveSpell {
 	private final int movementCost;
 	private final int wakfuCost;
 
+	private int   rangeMinBase;
+	private float rangeMinFactor;
+	private int   rangeMaxBase;
+	private float rangeMaxFactor;
+
 	public ActiveSpecialitySpell(final String name) {
 		this.spell = new Spell(name);
 
@@ -31,6 +36,11 @@ public class ActiveSpecialitySpell extends Item implements IActiveSpell {
 		this.actionCost = 0;
 		this.movementCost = 0;
 		this.wakfuCost = 0;
+
+		this.rangeMinBase = 0;
+		this.rangeMinFactor = 0;
+		this.rangeMaxBase = 0;
+		this.rangeMaxFactor = 0;
 
 		setCreativeTab(WakcraftCreativeTabs.tabSpells);
 		setUnlocalizedName(name);
@@ -109,12 +119,29 @@ public class ActiveSpecialitySpell extends Item implements IActiveSpell {
 
 	@Override
 	public int getRangeMax(int spellLevel) {
-		return 0;
+		return (int) (rangeMaxBase + rangeMaxFactor * spellLevel);
 	}
 
 	@Override
 	public int getRangeMin(int spellLevel) {
-		return 0;
+		return (int) (rangeMinBase + rangeMinFactor * spellLevel);
+	}
+
+	/**
+	 * Set the range of the spell.
+	 * @param rangeMinMin	The minimal range at level 0.
+	 * @param rangeMinMax	The minimal range at level 9.
+	 * @param rangeMaxMin	The maximal range at level 0.
+	 * @param rangeMaxMax	The maximal range at level 9.
+	 * @return	This instance.
+	 */
+	public ActiveSpecialitySpell setRange(final int rangeMinMin, final int rangeMinMax, final int rangeMaxMin, final int rangeMaxMax) {
+		this.rangeMinBase = rangeMinMin;
+		this.rangeMinFactor = (rangeMinMax - rangeMinMin) / 9.0F;
+		this.rangeMaxBase = rangeMaxMin;
+		this.rangeMaxFactor = (rangeMaxMax - rangeMaxMax) / 9.0F;
+
+		return this;
 	}
 
 	@Override
