@@ -171,6 +171,19 @@ public class ElementalSpell extends Item implements IActiveSpell {
 		return this;
 	}
 
+	/**
+	 * Initialize the range of the spell.
+	 * @param rangeMin	The minimal range.
+	 * @param rangeMax	The maximal range.
+	 * @return	This instance.
+	 */
+	public ElementalSpell setRange(final int rangeMin, final int rangeMax) {
+		this.rangeMin = rangeMin;
+		this.rangeMax = rangeMax;
+
+		return this;
+	}
+
 	@Override
 	public String getUnlocalizedName() {
 		return "spell." + super.getUnlocalizedName().substring(5);
