@@ -26,6 +26,9 @@ public class ElementalSpell extends Item implements IActiveSpell {
 
 	private int rangeMin;
 	private int rangeMax;
+	private boolean isRangeViewRequired;
+	private boolean isRangeModifiable;
+	private IRangeMode rangeMode;
 
 	/**
 	 * Main constructor.
@@ -47,6 +50,9 @@ public class ElementalSpell extends Item implements IActiveSpell {
 
 		this.rangeMin = 0;
 		this.rangeMax = 0;
+		this.isRangeModifiable = false;
+		this.isRangeViewRequired = true;
+		this.rangeMode = RangeMode.DEFAULT;
 
 		setCreativeTab(WakcraftCreativeTabs.tabSpells);
 		setUnlocalizedName(name);
@@ -130,15 +136,37 @@ public class ElementalSpell extends Item implements IActiveSpell {
 		return rangeMin;
 	}
 
+	@Override
+	public boolean isRangeModifiable() {
+		return isRangeModifiable;
+	}
+
+	@Override
+	public boolean isRangeViewRequired() {
+		return isRangeViewRequired;
+	}
+
+	@Override
+	public IRangeMode getRangeMode() {
+		return rangeMode;
+	}
+
 	/**
 	 * Initialize the range of the spell.
 	 * @param rangeMin	The minimal range.
 	 * @param rangeMax	The maximal range.
+	 * @param isRangeViewRequired	True if the spell can be launch behind obstacle.
+	 * @param isRangeModifiable		True if the range can be modified.
+	 * @param rangeMode				The range mode. LINE, DIAGONALE, DEFAULT, ...
 	 * @return	This instance.
 	 */
-	public ElementalSpell setRange(final int rangeMin, final int rangeMax) {
+	public ElementalSpell setRange(final int rangeMin, final int rangeMax, final boolean isRangeViewRequired, final boolean isRangeModifiable, final IRangeMode rangeMode) {
 		this.rangeMin = rangeMin;
 		this.rangeMax = rangeMax;
+
+		this.isRangeViewRequired = isRangeViewRequired;
+		this.isRangeModifiable = isRangeModifiable;
+		this.rangeMode = rangeMode;
 
 		return this;
 	}

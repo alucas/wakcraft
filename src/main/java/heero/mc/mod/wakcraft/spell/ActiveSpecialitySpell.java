@@ -25,6 +25,9 @@ public class ActiveSpecialitySpell extends Item implements IActiveSpell {
 	private float rangeMinFactor;
 	private int   rangeMaxBase;
 	private float rangeMaxFactor;
+	private boolean isRangeViewRequired;
+	private boolean isRangeModifiable;
+	private IRangeMode rangeMode;
 
 	public ActiveSpecialitySpell(final String name) {
 		this.spell = new Spell(name);
@@ -41,6 +44,9 @@ public class ActiveSpecialitySpell extends Item implements IActiveSpell {
 		this.rangeMinFactor = 0;
 		this.rangeMaxBase = 0;
 		this.rangeMaxFactor = 0;
+		this.isRangeModifiable = false;
+		this.isRangeViewRequired = true;
+		this.rangeMode = RangeMode.DEFAULT;
 
 		setCreativeTab(WakcraftCreativeTabs.tabSpells);
 		setUnlocalizedName(name);
@@ -127,19 +133,41 @@ public class ActiveSpecialitySpell extends Item implements IActiveSpell {
 		return (int) (rangeMinBase + rangeMinFactor * spellLevel);
 	}
 
+	@Override
+	public boolean isRangeModifiable() {
+		return isRangeModifiable;
+	}
+
+	@Override
+	public boolean isRangeViewRequired() {
+		return isRangeViewRequired;
+	}
+
+	@Override
+	public IRangeMode getRangeMode() {
+		return rangeMode;
+	}
+
 	/**
 	 * Set the range of the spell.
 	 * @param rangeMinMin	The minimal range at level 0.
 	 * @param rangeMinMax	The minimal range at level 9.
 	 * @param rangeMaxMin	The maximal range at level 0.
 	 * @param rangeMaxMax	The maximal range at level 9.
+	 * @param isRangeViewRequired	True if the spell can be launch behind obstacle.
+	 * @param isRangeModifiable		True if the range can be modified.
+	 * @param rangeMode				The range mode. LINE, DIAGONALE, DEFAULT, ...
 	 * @return	This instance.
 	 */
-	public ActiveSpecialitySpell setRange(final int rangeMinMin, final int rangeMinMax, final int rangeMaxMin, final int rangeMaxMax) {
+	public ActiveSpecialitySpell setRange(final int rangeMinMin, final int rangeMinMax, final int rangeMaxMin, final int rangeMaxMax, final boolean isRangeViewRequired, final boolean isRangeModifiable, final IRangeMode rangeMode) {
 		this.rangeMinBase = rangeMinMin;
 		this.rangeMinFactor = (rangeMinMax - rangeMinMin) / 9.0F;
 		this.rangeMaxBase = rangeMaxMin;
 		this.rangeMaxFactor = (rangeMaxMax - rangeMaxMax) / 9.0F;
+
+		this.isRangeViewRequired = isRangeViewRequired;
+		this.isRangeModifiable = isRangeModifiable;
+		this.rangeMode = rangeMode;
 
 		return this;
 	}

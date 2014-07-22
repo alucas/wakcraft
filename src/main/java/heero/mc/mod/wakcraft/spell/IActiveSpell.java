@@ -41,6 +41,24 @@ public interface IActiveSpell extends ISpell {
 	public int getRangeMin(final int spellLevel);
 
 	/**
+	 * Returns is the range is modifiable.
+	 * @return	True if the range is modifiable.
+	 */
+	public boolean isRangeModifiable();
+
+	/**
+	 * Returns if the spell can be launch behind obstacle.
+	 * @return	True if the spell can be launch behind obstacle.
+	 */
+	public boolean isRangeViewRequired();
+
+	/**
+	 * Return the range mode ; LINE, DIAGONAL, NORMAL, ...
+	 * @return	The range mode.
+	 */
+	public IRangeMode getRangeMode();
+
+	/**
 	 * Add an effect to the spell.
 	 * @param effect	The effect to add to the spell.
 	 * @return	This instance, for usage commodity.
