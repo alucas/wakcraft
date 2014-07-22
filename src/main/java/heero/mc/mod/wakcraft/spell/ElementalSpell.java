@@ -24,6 +24,9 @@ public class ElementalSpell extends Item implements IActiveSpell {
 	private final int movementCost;
 	private final int wakfuCost;
 
+	private int rangeMin;
+	private int rangeMax;
+
 	/**
 	 * Main constructor.
 	 * @param name	The name of the spell.
@@ -41,6 +44,9 @@ public class ElementalSpell extends Item implements IActiveSpell {
 		this.actionCost = actionCost;
 		this.movementCost = movementCost;
 		this.wakfuCost = wakfuCost;
+
+		this.rangeMin = 0;
+		this.rangeMax = 0;
 
 		setCreativeTab(WakcraftCreativeTabs.tabSpells);
 		setUnlocalizedName(name);
@@ -112,6 +118,29 @@ public class ElementalSpell extends Item implements IActiveSpell {
 	@Override
 	public int getWakfuCost() {
 		return wakfuCost;
+	}
+
+	@Override
+	public int getRangeMax(final int spellLevel) {
+		return rangeMax;
+	}
+
+	@Override
+	public int getRangeMin(final int spellLevel) {
+		return rangeMin;
+	}
+
+	/**
+	 * Initialize the range of the spell.
+	 * @param rangeMin	The minimal range.
+	 * @param rangeMax	The maximal range.
+	 * @return	This instance.
+	 */
+	public ElementalSpell setRange(final int rangeMin, final int rangeMax) {
+		this.rangeMin = rangeMin;
+		this.rangeMax = rangeMax;
+
+		return this;
 	}
 
 	@Override

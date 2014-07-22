@@ -108,6 +108,16 @@ public class ActiveSpecialitySpell extends Item implements IActiveSpell {
 	}
 
 	@Override
+	public int getRangeMax(int spellLevel) {
+		return 0;
+	}
+
+	@Override
+	public int getRangeMin(int spellLevel) {
+		return 0;
+	}
+
+	@Override
 	public String getUnlocalizedName() {
 		return "spell." + super.getUnlocalizedName().substring(5);
 	}

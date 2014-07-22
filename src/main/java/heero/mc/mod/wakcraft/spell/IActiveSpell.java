@@ -27,6 +27,20 @@ public interface IActiveSpell extends ISpell {
 	public int getWakfuCost();
 
 	/**
+	 * Returns the maximal range for the spell.
+	 * @param spellLevel	The level of the spell.
+	 * @return	The maximal range for the spell.
+	 */
+	public int getRangeMax(final int spellLevel);
+
+	/**
+	 * Returns the minimal range for the spell.
+	 * @param spellLevel	The level of the spell.
+	 * @return	The minimal range for the spell.
+	 */
+	public int getRangeMin(final int spellLevel);
+
+	/**
 	 * Add an effect to the spell.
 	 * @param effect	The effect to add to the spell.
 	 * @return	This instance, for usage commodity.
