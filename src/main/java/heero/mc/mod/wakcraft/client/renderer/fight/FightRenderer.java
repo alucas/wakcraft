@@ -290,13 +290,7 @@ public class FightRenderer extends IRenderHandler {
 				}
 			}
 
-			if (effectArea == EffectArea.POINT) {
-				displayBlocksArea(renderBlocks, WBlocks.fightDirection, world, target.blockX, target.blockY, target.blockZ, 0, 0);
-			} else if (effectArea == EffectArea.CROSS) {
-				displayBlocksArea(renderBlocks, WBlocks.fightDirection, world, target.blockX, target.blockY, target.blockZ, 0, 1);
-			} else if (effectArea == EffectArea.AROUND) {
-				displayBlocksSquare(renderBlocks, WBlocks.fightDirection, world, target.blockX, target.blockY, target.blockZ, 1, 1);
-			}
+			displayBlocks(renderBlocks, WBlocks.fightDirection, world, effectArea.getEffectCoors(currentPosition, target));
 		} while(false);
 
 		
@@ -367,20 +361,16 @@ public class FightRenderer extends IRenderHandler {
 		}
 	}
 
-	private void displayBlocksSquare(RenderBlocks renderBlocks, Block displayBlock, IBlockAccess blockAccess, int centerX, int centerY, int centerZ, int rangeMin, int rangeMax) {
-		for (int x = centerX - rangeMax; x <= centerX + rangeMax; x++) {
-			for (int z = centerZ - rangeMax; z <= centerZ + rangeMax; z++) {
-				if (Math.abs(centerX - x) < rangeMin && Math.abs(centerZ - z) < rangeMin) continue;
+	private void displayBlocks(RenderBlocks renderBlocks, Block displayBlock, IBlockAccess blockAccess, List<ChunkCoordinates> coordinatesList) {
+		for (ChunkCoordinates coordinates : coordinatesList) {
+			int y = getFirstAirBlockY(blockAccess, coordinates.posX, coordinates.posY - 1, coordinates.posZ) - 1;
 
-				int y = getFirstAirBlockY(blockAccess, x, centerY - 1, z) - 1;
-
-				// Do not display block outside the fighting zone
-				if (!blockAccess.getBlock(x, y + 1, z).equals(WBlocks.fightInsideWall)) {
-					continue;
-				}
-
-				renderBlocks.renderBlockByRenderType(displayBlock, x, y, z);
+			// Do not display block outside the fighting zone
+			if (!blockAccess.getBlock(coordinates.posX, y + 1, coordinates.posZ).equals(WBlocks.fightInsideWall)) {
+				continue;
 			}
+
+			renderBlocks.renderBlockByRenderType(displayBlock, coordinates.posX, y, coordinates.posZ);
 		}
 	}
 }
