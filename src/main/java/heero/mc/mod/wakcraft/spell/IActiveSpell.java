@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.spell;
 
 import heero.mc.mod.wakcraft.spell.effect.IEffect;
+import heero.mc.mod.wakcraft.spell.effect.IEffectArea;
 
 import java.util.List;
 
@@ -96,4 +97,10 @@ public interface IActiveSpell extends ISpell {
 	 * @return	The usage conditions of the spell.
 	 */
 	public List<ICondition> getConditions();
+
+	/**
+	 * Returns the effect area used for display purpose.
+	 * @return	The effect area.
+	 */
+	public IEffectArea getDisplayEffectArea();
 }

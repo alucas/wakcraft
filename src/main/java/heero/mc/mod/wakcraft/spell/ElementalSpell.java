@@ -2,7 +2,9 @@ package heero.mc.mod.wakcraft.spell;
 
 import heero.mc.mod.wakcraft.WInfo;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.mc.mod.wakcraft.spell.effect.EffectArea;
 import heero.mc.mod.wakcraft.spell.effect.IEffect;
+import heero.mc.mod.wakcraft.spell.effect.IEffectArea;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +32,17 @@ public class ElementalSpell extends Item implements IActiveSpell {
 	private boolean isRangeModifiable;
 	private IRangeMode rangeMode;
 
+	private final IEffectArea displayArea;
+
 	/**
 	 * Main constructor.
 	 * @param name	The name of the spell.
 	 * @param actionCost	The action point cost of the spell.
 	 * @param movementCost	The movement point cost of the spell.
 	 * @param wakfuCost		The wakfu point cost of the spell.
+	 * @param displayArea	The IEffectArea to display.
 	 */
-	public ElementalSpell(final String name, final int actionCost, final int movementCost, final int wakfuCost) {
+	public ElementalSpell(final String name, final int actionCost, final int movementCost, final int wakfuCost, final IEffectArea displayArea) {
 		this.spell = new Spell(name);
 
 		this.effects = new ArrayList<>();
@@ -54,9 +59,22 @@ public class ElementalSpell extends Item implements IActiveSpell {
 		this.isRangeViewRequired = true;
 		this.rangeMode = RangeMode.DEFAULT;
 
+		this.displayArea = displayArea;
+
 		setCreativeTab(WakcraftCreativeTabs.tabSpells);
 		setUnlocalizedName(name);
 		setTextureName(WInfo.MODID.toLowerCase() + ":spells/" + name.toLowerCase());
+	}
+
+	/**
+	 * Constructor with default IEffectArea : POINT.
+	 * @param name	The name of the spell.
+	 * @param actionCost	The action point cost of the spell.
+	 * @param movementCost	The movement point cost of the spell.
+	 * @param wakfuCost		The wakfu point cost of the spell.
+	 */
+	public ElementalSpell(final String name, final int actionCost, final int movementCost, final int wakfuCost) {
+		this(name, actionCost, movementCost, wakfuCost, EffectArea.POINT);
 	}
 
 	@Override
@@ -192,5 +210,10 @@ public class ElementalSpell extends Item implements IActiveSpell {
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		return "spell." + super.getUnlocalizedName(stack).substring(5);
+	}
+
+	@Override
+	public IEffectArea getDisplayEffectArea() {
+		return displayArea;
 	}
 }
