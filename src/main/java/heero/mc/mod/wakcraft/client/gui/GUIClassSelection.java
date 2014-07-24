@@ -8,10 +8,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiYesNo;
+import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GUIClassSelection extends GuiScreen {
+public class GUIClassSelection extends GuiScreen implements GuiYesNoCallback {
 	protected static final ResourceLocation background = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/background.png");
 
 	protected EntityPlayer player;
