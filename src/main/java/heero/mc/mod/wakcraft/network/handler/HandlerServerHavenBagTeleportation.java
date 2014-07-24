@@ -4,6 +4,7 @@ import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
+import heero.mc.mod.wakcraft.block.BlockSlab;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagGenerationHelper;
 import heero.mc.mod.wakcraft.helper.HavenBagHelper;
@@ -11,6 +12,7 @@ import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagTeleportation;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBag;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -51,8 +53,9 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 		int posY = MathHelper.floor_double(player.posY - player.yOffset);
 		int posZ = MathHelper.floor_double(player.posZ);
 
-		Block block = player.worldObj.getBlock(posX, posY - 1, posZ);
-		if (block == null || (block != null && !block.isOpaqueCube())) {
+		Block block = player.worldObj.getBlock(posX, posY, posZ);
+		Block blockUnder = player.worldObj.getBlock(posX, posY - 1, posZ);
+		if (!(block instanceof BlockSlab) && !(blockUnder.isOpaqueCube())) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.cantOpenHavenBagHere")));
 			return null;
 		}
@@ -74,6 +77,15 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 			if (!result) {
 				WLog.warning("Error during the generation of the havenbag : %d", properties.getUID());
 
+				return null;
+			}
+		}
+
+		while (!(player.worldObj.getBlock(posX, posY, posZ).getMaterial() == Material.air)) {
+			posY++;
+
+			if (posY >= player.worldObj.getHeight()) {
+				System.out.println("error: " + posY);
 				return null;
 			}
 		}
