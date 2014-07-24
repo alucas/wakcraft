@@ -9,9 +9,12 @@ import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.spell.IActiveSpell;
 import heero.mc.mod.wakcraft.spell.IRangeMode;
 import heero.mc.mod.wakcraft.spell.RangeMode;
+import heero.mc.mod.wakcraft.spell.effect.EffectArea;
+import heero.mc.mod.wakcraft.spell.effect.IEffectArea;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -22,6 +25,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.IRenderHandler;
 
 import org.lwjgl.opengl.GL11;
@@ -234,6 +240,7 @@ public class FightRenderer extends IRenderHandler {
 		int rangeMin = 0;
 		int rangeMax = 0;
 		IRangeMode rangeMode = RangeMode.DEFAULT;
+		IEffectArea effectArea = EffectArea.POINT;
 
 		if (stack != null && stack.getItem() instanceof IActiveSpell) {
 			IActiveSpell spell = (IActiveSpell) stack.getItem();
@@ -241,61 +248,58 @@ public class FightRenderer extends IRenderHandler {
 			rangeMin = spell.getRangeMin(spellLevel);
 			rangeMax = spell.getRangeMax(spellLevel);
 			rangeMode = spell.getRangeMode();
+			effectArea = spell.getDisplayEffectArea();
 		}
 
 		if (rangeMode == RangeMode.LINE) {
-			for (int x = currentPosition.posX - rangeMax; x <= currentPosition.posX + rangeMax; x++) {
-				if (Math.abs(currentPosition.posX - x) > rangeMax) continue;
-				if (Math.abs(currentPosition.posX - x) < rangeMin) continue;
-				
-				int z = currentPosition.posZ;
-				int y = currentPosition.posY - 1;
-				for (; y < world.getHeight() && !world.isAirBlock(x, y + 1, z); ++y);
-				for (; y >= 0 && world.isAirBlock(x, y, z); --y);
-				
-				if (!world.getBlock(x, y + 1, z).equals(WBlocks.fightInsideWall)) {
-					continue;
-				}
-				
-				renderBlocks.renderBlockByRenderType(WBlocks.fightMovement, x, y, z);
-			}
-
-			for (int z = currentPosition.posZ - rangeMax; z <= currentPosition.posZ + rangeMax; z++) {
-				if (Math.abs(currentPosition.posZ - z) > rangeMax) continue;
-				if (Math.abs(currentPosition.posZ - z) < rangeMin) continue;
-
-				int x = currentPosition.posX;
-				int y = currentPosition.posY - 1;
-				for (; y < world.getHeight() && !world.isAirBlock(x, y + 1, z); ++y);
-				for (; y >= 0 && world.isAirBlock(x, y, z); --y);
-
-				if (!world.getBlock(x, y + 1, z).equals(WBlocks.fightInsideWall)) {
-					continue;
-				}
-
-				renderBlocks.renderBlockByRenderType(WBlocks.fightMovement, x, y, z);
-			}
+			displayBlockCross(renderBlocks, WBlocks.fightMovement, world, currentPosition.posX, currentPosition.posY, currentPosition.posZ, rangeMin, rangeMax);
+		} else {
+			displayBlocksArea(renderBlocks, WBlocks.fightMovement, world, currentPosition.posX, currentPosition.posY, currentPosition.posZ, rangeMin, rangeMax);
 		}
+
+		do {
+			MovingObjectPosition target = player.rayTrace(rangeMax + 2, partialTicks);
+			if (target == null) {
+				break;
+			}
+
+			if (rangeMode == RangeMode.LINE) {
+				if (target.blockX != currentPosition.posX && target.blockZ != currentPosition.posZ) {
+					break;
+				}
+
+				int distanceX = MathHelper.abs_int(currentPosition.posX - target.blockX);
+				if (currentPosition.posZ == target.blockZ && (distanceX < rangeMin || distanceX > rangeMax)) {
+					break;
+				}
+
+				int distanceZ = MathHelper.abs_int(currentPosition.posZ - target.blockZ);
+				if (currentPosition.posX == target.blockX && (distanceZ < rangeMin || distanceZ > rangeMax)) {
+					break;
+				}
+			} else {
+				int distanceX = MathHelper.abs_int(currentPosition.posX - target.blockX);
+				int distanceZ = MathHelper.abs_int(currentPosition.posZ - target.blockZ);
+
+				if (distanceX + distanceZ > rangeMax) {
+					break;
+				}
+
+				if (distanceX + distanceZ < rangeMin) {
+					break;
+				}
+			}
+
+			if (effectArea == EffectArea.POINT) {
+				displayBlocksArea(renderBlocks, WBlocks.fightDirection, world, target.blockX, target.blockY, target.blockZ, 0, 0);
+			} else if (effectArea == EffectArea.CROSS) {
+				displayBlocksArea(renderBlocks, WBlocks.fightDirection, world, target.blockX, target.blockY, target.blockZ, 0, 1);
+			} else if (effectArea == EffectArea.AROUND) {
+				displayBlocksSquare(renderBlocks, WBlocks.fightDirection, world, target.blockX, target.blockY, target.blockZ, 1, 1);
+			}
+		} while(false);
+
 		
-		if (rangeMode == RangeMode.DEFAULT) {
-			for (int x = currentPosition.posX - rangeMax; x <= currentPosition.posX + rangeMax; x++) {
-				for (int z = currentPosition.posZ - rangeMax; z <= currentPosition.posZ + rangeMax; z++) {
-					if (Math.abs(currentPosition.posX - x) + Math.abs(currentPosition.posZ - z) > rangeMax) continue;
-					if (Math.abs(currentPosition.posX - x) + Math.abs(currentPosition.posZ - z) < rangeMin) continue;
-	
-					int y = currentPosition.posY - 1;
-					for (; y < world.getHeight() && !world.isAirBlock(x, y + 1, z); ++y);
-					for (; y >= 0 && world.isAirBlock(x, y, z); --y);
-	
-					if (!world.getBlock(x, y + 1, z).equals(WBlocks.fightInsideWall)) {
-						continue;
-					}
-	
-					renderBlocks.renderBlockByRenderType(WBlocks.fightMovement, x, y, z);
-				}
-			}
-		}
-
 		par1Tessellator.draw();
 		par1Tessellator.setTranslation(0.0D, 0.0D, 0.0D);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
@@ -304,5 +308,79 @@ public class FightRenderer extends IRenderHandler {
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glDepthMask(true);
 		GL11.glPopMatrix();
+	}
+
+	private int getFirstAirBlockY(IBlockAccess blockAccess, int posX, int posY, int posZ) {
+		for (; posY < blockAccess.getHeight() && !blockAccess.isAirBlock(posX, posY + 1, posZ); ++posY);
+		for (; posY >= 0 && blockAccess.isAirBlock(posX, posY, posZ); --posY);
+
+		return posY + 1;
+	}
+
+	private void displayBlocksArea(RenderBlocks renderBlocks, Block displayBlock, IBlockAccess blockAccess, int centerX, int centerY, int centerZ, int rangeMin, int rangeMax) {
+		for (int x = centerX - rangeMax; x <= centerX + rangeMax; x++) {
+			for (int z = centerZ - rangeMax; z <= centerZ + rangeMax; z++) {
+				if (Math.abs(centerX - x) + Math.abs(centerZ - z) > rangeMax) continue;
+				if (Math.abs(centerX - x) + Math.abs(centerZ - z) < rangeMin) continue;
+
+				int y = getFirstAirBlockY(blockAccess, x, centerY - 1, z) - 1;
+
+				// Do not display block outside the fighting zone
+				if (!blockAccess.getBlock(x, y + 1, z).equals(WBlocks.fightInsideWall)) {
+					continue;
+				}
+
+				renderBlocks.renderBlockByRenderType(displayBlock, x, y, z);
+			}
+		}
+	}
+
+	private void displayBlockCross(RenderBlocks renderBlocks, Block displayBlock, IBlockAccess blockAccess, int posX, int posY, int posZ, int rangeMin, int rangeMax) {
+		for (int x = posX - rangeMax; x <= posX + rangeMax; x++) {
+			if (Math.abs(posX - x) > rangeMax) continue;
+			if (Math.abs(posX - x) < rangeMin) continue;
+			
+			int z = posZ;
+			int y = getFirstAirBlockY(blockAccess, x, posY - 1, z) - 1;
+
+			// Do not display block outside the fighting zone
+			if (!blockAccess.getBlock(x, y + 1, z).equals(WBlocks.fightInsideWall)) {
+				continue;
+			}
+			
+			renderBlocks.renderBlockByRenderType(displayBlock, x, y, z);
+		}
+
+		for (int z = posZ - rangeMax; z <= posZ + rangeMax; z++) {
+			if (Math.abs(posZ - z) > rangeMax) continue;
+			if (Math.abs(posZ - z) < rangeMin) continue;
+
+			int x = posX;
+			int y = getFirstAirBlockY(blockAccess, x, posY - 1, z) - 1;
+
+			// Do not display block outside the fighting zone
+			if (!blockAccess.getBlock(x, y + 1, z).equals(WBlocks.fightInsideWall)) {
+				continue;
+			}
+
+			renderBlocks.renderBlockByRenderType(displayBlock, x, y, z);
+		}
+	}
+
+	private void displayBlocksSquare(RenderBlocks renderBlocks, Block displayBlock, IBlockAccess blockAccess, int centerX, int centerY, int centerZ, int rangeMin, int rangeMax) {
+		for (int x = centerX - rangeMax; x <= centerX + rangeMax; x++) {
+			for (int z = centerZ - rangeMax; z <= centerZ + rangeMax; z++) {
+				if (Math.abs(centerX - x) < rangeMin && Math.abs(centerZ - z) < rangeMin) continue;
+
+				int y = getFirstAirBlockY(blockAccess, x, centerY - 1, z) - 1;
+
+				// Do not display block outside the fighting zone
+				if (!blockAccess.getBlock(x, y + 1, z).equals(WBlocks.fightInsideWall)) {
+					continue;
+				}
+
+				renderBlocks.renderBlockByRenderType(displayBlock, x, y, z);
+			}
+		}
 	}
 }
