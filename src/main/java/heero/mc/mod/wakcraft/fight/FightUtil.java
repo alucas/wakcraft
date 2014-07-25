@@ -10,6 +10,14 @@ import net.minecraft.util.MovingObjectPosition;
 
 public class FightUtil {
 	public static boolean isAimingPositionValid(final ChunkCoordinates fighterPosition, final MovingObjectPosition target, final ItemStack spellStack) {
+		return isAimingPositionValid(fighterPosition, target.blockX, target.blockY, target.blockZ, spellStack);
+	}
+
+	public static boolean isAimingPositionValid(final ChunkCoordinates fighterPosition, final ChunkCoordinates target, final ItemStack spellStack) {
+		return isAimingPositionValid(fighterPosition, target.posX, target.posY, target.posZ, spellStack);
+	}
+
+	public static boolean isAimingPositionValid(final ChunkCoordinates fighterPosition, final int posX, final int posY, final int posZ, final ItemStack spellStack) {
 		int rangeMin = 1;
 		int rangeMax = 1;
 		IRangeMode rangeMode = RangeMode.DEFAULT;
@@ -23,22 +31,22 @@ public class FightUtil {
 		}
 
 		if (rangeMode == RangeMode.LINE) {
-			if (target.blockX != fighterPosition.posX && target.blockZ != fighterPosition.posZ) {
+			if (posX != fighterPosition.posX && posZ != fighterPosition.posZ) {
 				return false;
 			}
 
-			int distanceX = MathHelper.abs_int(fighterPosition.posX - target.blockX);
-			if (fighterPosition.posZ == target.blockZ && (distanceX < rangeMin || distanceX > rangeMax)) {
+			int distanceX = MathHelper.abs_int(fighterPosition.posX - posX);
+			if (fighterPosition.posZ == posZ && (distanceX < rangeMin || distanceX > rangeMax)) {
 				return false;
 			}
 
-			int distanceZ = MathHelper.abs_int(fighterPosition.posZ - target.blockZ);
-			if (fighterPosition.posX == target.blockX && (distanceZ < rangeMin || distanceZ > rangeMax)) {
+			int distanceZ = MathHelper.abs_int(fighterPosition.posZ - posZ);
+			if (fighterPosition.posX == posX && (distanceZ < rangeMin || distanceZ > rangeMax)) {
 				return false;
 			}
 		} else {
-			int distanceX = MathHelper.abs_int(fighterPosition.posX - target.blockX);
-			int distanceZ = MathHelper.abs_int(fighterPosition.posZ - target.blockZ);
+			int distanceX = MathHelper.abs_int(fighterPosition.posX - posX);
+			int distanceZ = MathHelper.abs_int(fighterPosition.posZ - posZ);
 
 			if (distanceX + distanceZ > rangeMax) {
 				return false;
