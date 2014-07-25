@@ -237,8 +237,8 @@ public class FightRenderer extends IRenderHandler {
 
 		ChunkCoordinates currentPosition = FightHelper.getCurrentPosition(player);
 		ItemStack stack = FightHelper.getCurrentSpell(player);
-		int rangeMin = 0;
-		int rangeMax = 0;
+		int rangeMin = 1;
+		int rangeMax = 1;
 		IRangeMode rangeMode = RangeMode.DEFAULT;
 		IEffectArea effectArea = EffectArea.POINT;
 
