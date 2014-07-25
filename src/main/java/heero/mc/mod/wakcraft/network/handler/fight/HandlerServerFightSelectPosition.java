@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.network.handler.fight;
 
-import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,7 +17,7 @@ public class HandlerServerFightSelectPosition implements IMessageHandler<PacketF
 			throw new RuntimeException("The entity " + player + " is not a valid fighter");
 		}
 
-		FightManager.INSTANCE.selectPosition((EntityLivingBase) player, message.selectedPosition);
+		FightHelper.selectPosition((EntityLivingBase) player, message.selectedPosition);
 
 		return null;
 	}

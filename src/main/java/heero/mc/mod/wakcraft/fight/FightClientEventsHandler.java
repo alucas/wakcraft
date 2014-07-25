@@ -78,12 +78,12 @@ public class FightClientEventsHandler {
 			}
 
 			if (FightHelper.getStartPosition(player) != null) {
-				FightManager.INSTANCE.selectPosition(player, null);
+				FightHelper.selectPosition(player, null);
 				return;
 			}
 
 			ChunkCoordinates position = new ChunkCoordinates(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY - player.yOffset), MathHelper.floor_double(player.posZ));
-			FightManager.INSTANCE.selectPosition(player, position);
+			FightHelper.selectPosition(player, position);
 		}
 	}
 

@@ -115,4 +115,8 @@ public class FightHelper {
 	public static List<List<FightBlockCoordinates>> getStartPositions(WorldClient world, int fightId) {
 		return FightManager.INSTANCE.getSartPositions(world, fightId);
 	}
+
+	public static void selectPosition(EntityLivingBase entity, @Nullable ChunkCoordinates position) {
+		FightManager.INSTANCE.selectPosition(entity, position);
+	}
 }
