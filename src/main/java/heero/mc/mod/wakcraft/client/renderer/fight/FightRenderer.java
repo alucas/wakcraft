@@ -5,6 +5,7 @@ import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.fight.FightManager;
+import heero.mc.mod.wakcraft.fight.FightUtil;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.spell.IActiveSpell;
 import heero.mc.mod.wakcraft.spell.IRangeMode;
@@ -25,7 +26,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.IRenderHandler;
@@ -236,15 +236,15 @@ public class FightRenderer extends IRenderHandler {
 		par1Tessellator.disableColor();
 
 		ChunkCoordinates currentPosition = FightHelper.getCurrentPosition(player);
-		ItemStack stack = FightHelper.getCurrentSpell(player);
+		ItemStack spellStack = FightHelper.getCurrentSpell(player);
 		int rangeMin = 1;
 		int rangeMax = 1;
 		IRangeMode rangeMode = RangeMode.DEFAULT;
 		IEffectArea effectArea = EffectArea.POINT;
 
-		if (stack != null && stack.getItem() instanceof IActiveSpell) {
-			IActiveSpell spell = (IActiveSpell) stack.getItem();
-			int spellLevel = spell.getLevel(stack.getItemDamage());
+		if (spellStack != null && spellStack.getItem() instanceof IActiveSpell) {
+			IActiveSpell spell = (IActiveSpell) spellStack.getItem();
+			int spellLevel = spell.getLevel(spellStack.getItemDamage());
 			rangeMin = spell.getRangeMin(spellLevel);
 			rangeMax = spell.getRangeMax(spellLevel);
 			rangeMode = spell.getRangeMode();
@@ -257,42 +257,10 @@ public class FightRenderer extends IRenderHandler {
 			displayBlocksArea(renderBlocks, WBlocks.fightMovement, world, currentPosition.posX, currentPosition.posY, currentPosition.posZ, rangeMin, rangeMax);
 		}
 
-		do {
-			MovingObjectPosition target = player.rayTrace(rangeMax + 2, partialTicks);
-			if (target == null) {
-				break;
-			}
-
-			if (rangeMode == RangeMode.LINE) {
-				if (target.blockX != currentPosition.posX && target.blockZ != currentPosition.posZ) {
-					break;
-				}
-
-				int distanceX = MathHelper.abs_int(currentPosition.posX - target.blockX);
-				if (currentPosition.posZ == target.blockZ && (distanceX < rangeMin || distanceX > rangeMax)) {
-					break;
-				}
-
-				int distanceZ = MathHelper.abs_int(currentPosition.posZ - target.blockZ);
-				if (currentPosition.posX == target.blockX && (distanceZ < rangeMin || distanceZ > rangeMax)) {
-					break;
-				}
-			} else {
-				int distanceX = MathHelper.abs_int(currentPosition.posX - target.blockX);
-				int distanceZ = MathHelper.abs_int(currentPosition.posZ - target.blockZ);
-
-				if (distanceX + distanceZ > rangeMax) {
-					break;
-				}
-
-				if (distanceX + distanceZ < rangeMin) {
-					break;
-				}
-			}
-
+		MovingObjectPosition target = player.rayTrace(rangeMax + 2, partialTicks);
+		if (target != null && FightUtil.isAimingPositionValid(currentPosition, target, spellStack)) {
 			displayBlocks(renderBlocks, WBlocks.fightDirection, world, effectArea.getEffectCoors(currentPosition, target));
-		} while(false);
-
+		}
 		
 		par1Tessellator.draw();
 		par1Tessellator.setTranslation(0.0D, 0.0D, 0.0D);
