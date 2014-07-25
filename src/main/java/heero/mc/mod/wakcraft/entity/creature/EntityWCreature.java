@@ -3,7 +3,6 @@ package heero.mc.mod.wakcraft.entity.creature;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.entity.ai.EntityAIFight;
 import heero.mc.mod.wakcraft.entity.ai.EntityAIMoveOutWater;
-import heero.mc.mod.wakcraft.fight.DamageUtil;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 
 import java.util.HashSet;
@@ -62,11 +61,9 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 
 	@Override
 	public void onAttacked(final EntityLivingBase attacker, final ItemStack stack) {
-		int damage = DamageUtil.computeDamage(attacker, this, stack);
 		int health = FightHelper.getFightCharacteristic(this, Characteristic.HEALTH);
 
-		if (health + damage > 0) {
-			FightHelper.setFightCharacteristic(this, Characteristic.HEALTH, health + damage);
+		if (health > 0) {
 			FightHelper.updateDisplayName(this);
 
 			this.worldObj.setEntityState(this, (byte) 2);

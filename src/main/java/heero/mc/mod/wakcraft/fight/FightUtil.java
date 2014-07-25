@@ -1,10 +1,17 @@
 package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
+import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.spell.IActiveSpell;
 import heero.mc.mod.wakcraft.spell.IRangeMode;
 import heero.mc.mod.wakcraft.spell.RangeMode;
+import heero.mc.mod.wakcraft.spell.effect.IEffect;
+import heero.mc.mod.wakcraft.spell.effect.IEffectDamage;
+
+import java.util.List;
+
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
@@ -143,6 +150,47 @@ public class FightUtil {
 			return;
 		}
 
-		// TODO : Cast spell
+		System.out.println("cast spell");
+		ChunkCoordinates fighterPosition = FightHelper.getCurrentPosition(fighter);
+		ItemStack spellStack = FightHelper.getCurrentSpell(fighter);
+		List<List<EntityLivingBase>> fighters = FightHelper.getFighers(fighter.worldObj, FightHelper.getFightId(fighter));
+
+		FightHelper.setFightCharacteristic(fighter, Characteristic.WAKFU, FightHelper.getFightCharacteristic(fighter, Characteristic.WAKFU) - getSpellWakfuCost(spellStack));
+		FightHelper.setFightCharacteristic(fighter, Characteristic.MOVEMENT, FightHelper.getFightCharacteristic(fighter, Characteristic.MOVEMENT) - getSpellMovementCost(spellStack));
+		FightHelper.setFightCharacteristic(fighter, Characteristic.ACTION, FightHelper.getFightCharacteristic(fighter, Characteristic.ACTION) - getSpellActionCost(spellStack));
+
+		if (spellStack == null || spellStack.getItem() == null) {
+			
+		} else if (spellStack.getItem() instanceof IActiveSpell) {
+			IActiveSpell spell = (IActiveSpell) spellStack.getItem();
+			for (IEffect effect : spell.getEffects()) {
+				if (!(effect instanceof IEffectDamage)) {
+					continue;
+				}
+
+				int damage = ((IEffectDamage) effect).getValue(spell.getLevel(spellStack.getItemDamage()));
+
+				List<ChunkCoordinates> targetBlocks = effect.getZone().getEffectCoors(fighterPosition, targetPosition.posX, targetPosition.posY, targetPosition.posZ);
+				for (List<EntityLivingBase> team : fighters) {
+					for (EntityLivingBase targetFighter : team) {
+						ChunkCoordinates position = FightHelper.getCurrentPosition(targetFighter);
+						for (ChunkCoordinates block : targetBlocks) {
+							System.out.println(block);
+							if (block.posX != position.posX || block.posZ != position.posZ) {
+								continue;
+							}
+
+							int health = FightHelper.getFightCharacteristic(targetFighter, Characteristic.HEALTH);
+							FightHelper.setFightCharacteristic(targetFighter, Characteristic.HEALTH, health + damage);
+
+							if (targetFighter instanceof IFighter) {
+								((IFighter) targetFighter).onAttacked(fighter, spellStack);
+							}
+						}
+					}
+				}
+
+			}
+		}
 	}
 }
