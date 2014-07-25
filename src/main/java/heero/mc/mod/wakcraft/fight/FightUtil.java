@@ -150,7 +150,6 @@ public class FightUtil {
 			return;
 		}
 
-		System.out.println("cast spell");
 		ChunkCoordinates fighterPosition = FightHelper.getCurrentPosition(fighter);
 		ItemStack spellStack = FightHelper.getCurrentSpell(fighter);
 		List<List<EntityLivingBase>> fighters = FightHelper.getFighers(fighter.worldObj, FightHelper.getFightId(fighter));
@@ -175,7 +174,6 @@ public class FightUtil {
 					for (EntityLivingBase targetFighter : team) {
 						ChunkCoordinates position = FightHelper.getCurrentPosition(targetFighter);
 						for (ChunkCoordinates block : targetBlocks) {
-							System.out.println(block);
 							if (block.posX != position.posX || block.posZ != position.posZ) {
 								continue;
 							}
