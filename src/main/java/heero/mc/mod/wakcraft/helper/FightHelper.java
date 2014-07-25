@@ -105,4 +105,8 @@ public class FightHelper {
 	public static List<List<EntityLivingBase>> getFighers(World world, int fightId) {
 		return FightManager.INSTANCE.getFighters(world, fightId);
 	}
+
+	public static EntityLivingBase getCurrentFighter(World world, int fightId) {
+		return FightManager.INSTANCE.getCurrentFighter(world, fightId);
+	}
 }

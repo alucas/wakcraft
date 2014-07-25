@@ -146,7 +146,7 @@ public class FightClientEventsHandler {
 			return;
 		}
 
-		if (FightManager.INSTANCE.getCurrentFighter(mc.theWorld, fightId) != player) {
+		if (FightHelper.getCurrentFighter(mc.theWorld, fightId) != player) {
 			return;
 		}
 

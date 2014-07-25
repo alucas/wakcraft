@@ -58,7 +58,7 @@ public class FightRenderer extends IRenderHandler {
 				renderStartPosition(partialTicks, world, mc, player, startBlocks);
 			}
 		} else if (fightStage == FightStage.FIGHT) {
-			EntityLivingBase currentFighter = FightManager.INSTANCE.getCurrentFighter(world, FightHelper.getFightId(player));
+			EntityLivingBase currentFighter = FightHelper.getCurrentFighter(world, FightHelper.getFightId(player));
 			if (currentFighter != player) {
 				return;
 			}

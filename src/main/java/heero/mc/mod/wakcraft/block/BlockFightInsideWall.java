@@ -60,7 +60,7 @@ public class BlockFightInsideWall extends BlockGeneric {
 			break;
 		case FIGHT:
 			ChunkCoordinates currentPosition = FightHelper.getCurrentPosition(entity);
-			EntityLivingBase currentFighter = FightManager.INSTANCE.getCurrentFighter(world, fightId);
+			EntityLivingBase currentFighter = FightHelper.getCurrentFighter(world, fightId);
 			int movementPoint = (currentFighter == entity) ? FightHelper.getFightCharacteristic(entity, Characteristic.MOVEMENT) : 0;
 			int distance = MathHelper.abs_int(currentPosition.posX - x) + MathHelper.abs_int(currentPosition.posZ - z);
 

@@ -93,7 +93,7 @@ public class FightEventsHandler {
 			return;
 		}
 
-		if (FightManager.INSTANCE.getCurrentFighter(world, fightId) != player) {
+		if (FightHelper.getCurrentFighter(world, fightId) != player) {
 			event.setCanceled(true);
 			return;
 		}
@@ -190,7 +190,7 @@ public class FightEventsHandler {
 			return;
 		}
 
-		EntityLivingBase currentFighter = FightManager.INSTANCE.getCurrentFighter(entity.worldObj, fightId);
+		EntityLivingBase currentFighter = FightHelper.getCurrentFighter(entity.worldObj, fightId);
 		if (currentFighter != entity) {
 			return;
 		}
