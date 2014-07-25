@@ -6,6 +6,7 @@ import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
+import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.fight.FightManager;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -108,5 +110,9 @@ public class FightHelper {
 
 	public static EntityLivingBase getCurrentFighter(World world, int fightId) {
 		return FightManager.INSTANCE.getCurrentFighter(world, fightId);
+	}
+
+	public static List<List<FightBlockCoordinates>> getStartPositions(WorldClient world, int fightId) {
+		return FightManager.INSTANCE.getSartPositions(world, fightId);
 	}
 }

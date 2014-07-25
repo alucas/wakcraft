@@ -4,7 +4,6 @@ import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
-import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.fight.FightUtil;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import heero.mc.mod.wakcraft.spell.IActiveSpell;
@@ -53,7 +52,7 @@ public class FightRenderer extends IRenderHandler {
 		FightStage fightStage = FightHelper.getFightStage(world, fightId);
 
 		if (fightStage == FightStage.PREFIGHT) {
-			List<List<FightBlockCoordinates>> startBlocks = FightManager.INSTANCE.getSartPositions(world, fightId);
+			List<List<FightBlockCoordinates>> startBlocks = FightHelper.getStartPositions(world, fightId);
 			if (startBlocks != null) {
 				renderStartPosition(partialTicks, world, mc, player, startBlocks);
 			}
