@@ -63,7 +63,7 @@ public class FightClientEventsHandler {
 	@SubscribeEvent
 	public void onKeyInput(InputEvent.KeyInputEvent event) {
 		if (KeyBindings.fightSelectPosition.isPressed()) {
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			EntityPlayer player = Wakcraft.proxy.getClientPlayer();
 			if (!FightHelper.isFighter(player) || !FightHelper.isFighting(player)) {
 				return;
 			}
