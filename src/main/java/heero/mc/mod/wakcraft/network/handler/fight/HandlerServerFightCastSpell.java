@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.network.handler.fight;
 
+import heero.mc.mod.wakcraft.fight.FightInfo;
 import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.fight.FightUtil;
 import heero.mc.mod.wakcraft.helper.FightHelper;
@@ -22,7 +23,12 @@ public class HandlerServerFightCastSpell implements IMessageHandler<PacketFightC
 			throw new RuntimeException("The entity " + player + " is not fighting");
 		}
 
-		if (FightManager.INSTANCE.getCurrentFighter(player.worldObj, FightHelper.getFightId(player)) != player) {
+		int fightId = FightHelper.getFightId(player);
+		if (FightHelper.getFightStage(player.worldObj, fightId) != FightInfo.FightStage.FIGHT) {
+			throw new RuntimeException("The entity " + player + " can't cast a spell, the fight is not in the right stage ( " + FightHelper.getFightStage(player.worldObj, fightId) + " )");
+		}
+
+		if (FightManager.INSTANCE.getCurrentFighter(player.worldObj, fightId) != player) {
 			throw new RuntimeException("The entity " + player + " can't cast a spell, it's not his turn");
 		}
 

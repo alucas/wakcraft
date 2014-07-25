@@ -73,7 +73,7 @@ public class FightClientEventsHandler {
 				return;
 			}
 
-			if (FightManager.INSTANCE.getFightStage(player.worldObj, FightHelper.getFightId(player)) != FightStage.PREFIGHT) {
+			if (FightHelper.getFightStage(player.worldObj, FightHelper.getFightId(player)) != FightStage.PREFIGHT) {
 				return;
 			}
 

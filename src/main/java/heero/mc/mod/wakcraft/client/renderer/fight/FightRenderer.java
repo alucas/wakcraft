@@ -50,7 +50,7 @@ public class FightRenderer extends IRenderHandler {
 		}
 
 		int fightId = FightHelper.getFightId(player);
-		FightStage fightStage = FightManager.INSTANCE.getFightStage(world, fightId);
+		FightStage fightStage = FightHelper.getFightStage(world, fightId);
 
 		if (fightStage == FightStage.PREFIGHT) {
 			List<List<FightBlockCoordinates>> startBlocks = FightManager.INSTANCE.getSartPositions(world, fightId);

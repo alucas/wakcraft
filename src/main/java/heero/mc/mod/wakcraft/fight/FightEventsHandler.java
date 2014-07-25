@@ -88,7 +88,7 @@ public class FightEventsHandler {
 			return;
 		}
 
-		if (FightManager.INSTANCE.getFightStage(world, fightId) != FightStage.FIGHT) {
+		if (FightHelper.getFightStage(world, fightId) != FightStage.FIGHT) {
 			event.setCanceled(true);
 			return;
 		}
@@ -186,7 +186,7 @@ public class FightEventsHandler {
 		}
 
 		int fightId = FightHelper.getFightId(entity);
-		if (FightManager.INSTANCE.getFightStage(entity.worldObj, fightId) != FightStage.FIGHT) {
+		if (FightHelper.getFightStage(entity.worldObj, fightId) != FightStage.FIGHT) {
 			return;
 		}
 

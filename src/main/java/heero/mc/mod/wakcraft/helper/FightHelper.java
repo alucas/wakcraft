@@ -6,6 +6,8 @@ import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
+import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
+import heero.mc.mod.wakcraft.fight.FightManager;
 
 import javax.annotation.Nullable;
 
@@ -15,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.world.World;
 
 public class FightHelper {
 	public static boolean isFighting(Entity entity) {
@@ -90,5 +93,9 @@ public class FightHelper {
 
 	public static void resetDisplayName(Entity entity) {
 		if (entity instanceof EntityLiving) ((EntityLiving) entity).setCustomNameTag("");
+	}
+
+	public static FightStage getFightStage(World world, int fightId) {
+		return FightManager.INSTANCE.getFightStage(world, fightId);
 	}
 }

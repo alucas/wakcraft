@@ -50,7 +50,7 @@ public class BlockFightInsideWall extends BlockGeneric {
 		}
 
 		int fightId = FightHelper.getFightId(entity);
-		switch (FightManager.INSTANCE.getFightStage(world, fightId)) {
+		switch (FightHelper.getFightStage(world, fightId)) {
 		case PREFIGHT:
 			ChunkCoordinates pos = FightHelper.getStartPosition(entity);
 			if (pos == null || (pos.posX == x && pos.posZ == z && (pos.posY == y || pos.posY == y - 1))) {
