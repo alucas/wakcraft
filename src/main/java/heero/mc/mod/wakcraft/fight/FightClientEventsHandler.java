@@ -141,6 +141,10 @@ public class FightClientEventsHandler {
 		}
 
 		Minecraft mc = Minecraft.getMinecraft();
+		if (FightManager.INSTANCE.getCurrentFighter(mc.theWorld, FightHelper.getFightId(player)) != player) {
+			return;
+		}
+
 		if (!GameSettings.isKeyDown(mc.gameSettings.keyBindAttack)) {
 			isAttackKeyDown = false;
 
