@@ -259,7 +259,7 @@ public class FightRenderer extends IRenderHandler {
 
 		MovingObjectPosition target = player.rayTrace(rangeMax + 2, partialTicks);
 		if (target != null && FightUtil.isAimingPositionValid(currentPosition, target, spellStack)) {
-			displayBlocks(renderBlocks, WBlocks.fightDirection, world, effectArea.getEffectCoors(currentPosition, target));
+			displayBlocks(renderBlocks, WBlocks.fightDirection, world, effectArea.getEffectCoors(currentPosition, target.blockX, target.blockY, target.blockZ));
 		}
 		
 		par1Tessellator.draw();

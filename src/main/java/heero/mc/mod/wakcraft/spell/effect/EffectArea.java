@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MovingObjectPosition;
 
 /**
  * Generic areas of effect.
@@ -13,7 +12,7 @@ public enum EffectArea implements IEffectArea {
 	/** The caster of the spell */
 	CASTER(1) {
 		@Override
-		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final MovingObjectPosition aimingPosition) {
+		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final int targetPosX, final int targetPosY, final int targetPosZ) {
 			coordinates.get(0).set(fighterPosition.posX, fighterPosition.posY, fighterPosition.posZ);
 
 			return this.coordinates;
@@ -23,8 +22,8 @@ public enum EffectArea implements IEffectArea {
 	/** Area of one block. */
 	POINT(1) {
 		@Override
-		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final MovingObjectPosition aimingPosition) {
-			coordinates.get(0).set(aimingPosition.blockX, aimingPosition.blockY, aimingPosition.blockZ);
+		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final int targetPosX, final int targetPosY, final int targetPosZ) {
+			coordinates.get(0).set(targetPosX, targetPosY, targetPosZ);
 
 			return this.coordinates;
 		}
@@ -33,15 +32,15 @@ public enum EffectArea implements IEffectArea {
 	/** All 8 blocks around the specified block. */
 	AROUND(8) {
 		@Override
-		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final MovingObjectPosition aimingPosition) {
-			coordinates.get(0).set(aimingPosition.blockX - 1, aimingPosition.blockY, aimingPosition.blockZ - 1);
-			coordinates.get(1).set(aimingPosition.blockX - 1, aimingPosition.blockY, aimingPosition.blockZ);
-			coordinates.get(2).set(aimingPosition.blockX - 1, aimingPosition.blockY, aimingPosition.blockZ + 1);
-			coordinates.get(3).set(aimingPosition.blockX    , aimingPosition.blockY, aimingPosition.blockZ - 1);
-			coordinates.get(4).set(aimingPosition.blockX    , aimingPosition.blockY, aimingPosition.blockZ + 1);
-			coordinates.get(5).set(aimingPosition.blockX + 1, aimingPosition.blockY, aimingPosition.blockZ - 1);
-			coordinates.get(6).set(aimingPosition.blockX + 1, aimingPosition.blockY, aimingPosition.blockZ);
-			coordinates.get(7).set(aimingPosition.blockX + 1, aimingPosition.blockY, aimingPosition.blockZ + 1);
+		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final int targetPosX, final int targetPosY, final int targetPosZ) {
+			coordinates.get(0).set(targetPosX - 1, targetPosY, targetPosZ - 1);
+			coordinates.get(1).set(targetPosX - 1, targetPosY, targetPosZ);
+			coordinates.get(2).set(targetPosX - 1, targetPosY, targetPosZ + 1);
+			coordinates.get(3).set(targetPosX    , targetPosY, targetPosZ - 1);
+			coordinates.get(4).set(targetPosX    , targetPosY, targetPosZ + 1);
+			coordinates.get(5).set(targetPosX + 1, targetPosY, targetPosZ - 1);
+			coordinates.get(6).set(targetPosX + 1, targetPosY, targetPosZ);
+			coordinates.get(7).set(targetPosX + 1, targetPosY, targetPosZ + 1);
 
 			return this.coordinates;
 		}
@@ -50,12 +49,12 @@ public enum EffectArea implements IEffectArea {
 	/** A cross, size 1. */
 	CROSS(5) {
 		@Override
-		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final MovingObjectPosition aimingPosition) {
-			coordinates.get(0).set(aimingPosition.blockX, aimingPosition.blockY, aimingPosition.blockZ);
-			coordinates.get(1).set(aimingPosition.blockX - 1, aimingPosition.blockY, aimingPosition.blockZ);
-			coordinates.get(2).set(aimingPosition.blockX + 1, aimingPosition.blockY, aimingPosition.blockZ);
-			coordinates.get(3).set(aimingPosition.blockX, aimingPosition.blockY, aimingPosition.blockZ - 1);
-			coordinates.get(4).set(aimingPosition.blockX, aimingPosition.blockY, aimingPosition.blockZ + 1);
+		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final int targetPosX, final int targetPosY, final int targetPosZ) {
+			coordinates.get(0).set(targetPosX, targetPosY, targetPosZ);
+			coordinates.get(1).set(targetPosX - 1, targetPosY, targetPosZ);
+			coordinates.get(2).set(targetPosX + 1, targetPosY, targetPosZ);
+			coordinates.get(3).set(targetPosX, targetPosY, targetPosZ - 1);
+			coordinates.get(4).set(targetPosX, targetPosY, targetPosZ + 1);
 
 			return this.coordinates;
 		}
@@ -64,10 +63,10 @@ public enum EffectArea implements IEffectArea {
 	/** Vertical line, size 3. */
 	LINE_V_3(3) {
 		@Override
-		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final MovingObjectPosition aimingPosition) {
-			coordinates.get(0).set(aimingPosition.blockX, aimingPosition.blockY, aimingPosition.blockZ);
-			coordinates.get(1).set(aimingPosition.blockX, aimingPosition.blockY, aimingPosition.blockZ + 1);
-			coordinates.get(2).set(aimingPosition.blockX, aimingPosition.blockY, aimingPosition.blockZ + 2);
+		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final int targetPosX, final int targetPosY, final int targetPosZ) {
+			coordinates.get(0).set(targetPosX, targetPosY, targetPosZ);
+			coordinates.get(1).set(targetPosX, targetPosY, targetPosZ + 1);
+			coordinates.get(2).set(targetPosX, targetPosY, targetPosZ + 2);
 
 			return this.coordinates;
 		}
@@ -76,20 +75,20 @@ public enum EffectArea implements IEffectArea {
 	/** The default area, size 2. */
 	AREA_2(13) {
 		@Override
-		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final MovingObjectPosition aimingPosition) {
-			coordinates.get( 0).set(aimingPosition.blockX - 2, aimingPosition.blockY, aimingPosition.blockZ);
-			coordinates.get( 1).set(aimingPosition.blockX - 1, aimingPosition.blockY, aimingPosition.blockZ - 1);
-			coordinates.get( 2).set(aimingPosition.blockX - 1, aimingPosition.blockY, aimingPosition.blockZ);
-			coordinates.get( 3).set(aimingPosition.blockX - 1, aimingPosition.blockY, aimingPosition.blockZ + 1);
-			coordinates.get( 4).set(aimingPosition.blockX    , aimingPosition.blockY, aimingPosition.blockZ - 2);
-			coordinates.get( 5).set(aimingPosition.blockX    , aimingPosition.blockY, aimingPosition.blockZ - 1);
-			coordinates.get( 6).set(aimingPosition.blockX    , aimingPosition.blockY, aimingPosition.blockZ);
-			coordinates.get( 7).set(aimingPosition.blockX    , aimingPosition.blockY, aimingPosition.blockZ + 1);
-			coordinates.get( 8).set(aimingPosition.blockX    , aimingPosition.blockY, aimingPosition.blockZ + 2);
-			coordinates.get( 9).set(aimingPosition.blockX + 1, aimingPosition.blockY, aimingPosition.blockZ - 1);
-			coordinates.get(10).set(aimingPosition.blockX + 1, aimingPosition.blockY, aimingPosition.blockZ);
-			coordinates.get(11).set(aimingPosition.blockX + 1, aimingPosition.blockY, aimingPosition.blockZ + 1);
-			coordinates.get(12).set(aimingPosition.blockX + 2, aimingPosition.blockY, aimingPosition.blockZ);
+		public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final int targetPosX, final int targetPosY, final int targetPosZ) {
+			coordinates.get( 0).set(targetPosX - 2, targetPosY, targetPosZ);
+			coordinates.get( 1).set(targetPosX - 1, targetPosY, targetPosZ - 1);
+			coordinates.get( 2).set(targetPosX - 1, targetPosY, targetPosZ);
+			coordinates.get( 3).set(targetPosX - 1, targetPosY, targetPosZ + 1);
+			coordinates.get( 4).set(targetPosX    , targetPosY, targetPosZ - 2);
+			coordinates.get( 5).set(targetPosX    , targetPosY, targetPosZ - 1);
+			coordinates.get( 6).set(targetPosX    , targetPosY, targetPosZ);
+			coordinates.get( 7).set(targetPosX    , targetPosY, targetPosZ + 1);
+			coordinates.get( 8).set(targetPosX    , targetPosY, targetPosZ + 2);
+			coordinates.get( 9).set(targetPosX + 1, targetPosY, targetPosZ - 1);
+			coordinates.get(10).set(targetPosX + 1, targetPosY, targetPosZ);
+			coordinates.get(11).set(targetPosX + 1, targetPosY, targetPosZ + 1);
+			coordinates.get(12).set(targetPosX + 2, targetPosY, targetPosZ);
 
 			return this.coordinates;
 		}
@@ -106,7 +105,7 @@ public enum EffectArea implements IEffectArea {
 	}
 
 	@Override
-	public List<ChunkCoordinates> getEffectCoors(ChunkCoordinates fighterPosition, MovingObjectPosition aimingPosition) {
+	public List<ChunkCoordinates> getEffectCoors(ChunkCoordinates fighterPosition, final int targetPosX, final int targetPosY, final int targetPosZ) {
 		return coordinates;
 	}
 }
