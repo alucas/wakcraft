@@ -141,7 +141,12 @@ public class FightClientEventsHandler {
 		}
 
 		Minecraft mc = Minecraft.getMinecraft();
-		if (FightManager.INSTANCE.getCurrentFighter(mc.theWorld, FightHelper.getFightId(player)) != player) {
+		int fightId = FightHelper.getFightId(player);
+		if (FightHelper.getFightStage(player.worldObj, fightId) != FightInfo.FightStage.FIGHT) {
+			return;
+		}
+
+		if (FightManager.INSTANCE.getCurrentFighter(mc.theWorld, fightId) != player) {
 			return;
 		}
 
