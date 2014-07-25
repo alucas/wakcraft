@@ -8,11 +8,15 @@ import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.helper.FightHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.client.IRenderHandler;
+import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.RenderHandEvent;
@@ -124,5 +128,37 @@ public class FightClientEventsHandler {
 		}
 
 		fighterRenderer.updateRenderer((EntityPlayerSP) player);
+	}
+
+	private boolean isAttackKeyDown = false;
+
+	@SubscribeEvent
+	public void onMouseEvent(MouseEvent event) {
+		EntityPlayer player = Wakcraft.proxy.getClientPlayer();
+		if (!FightHelper.isFighter(player) || !FightHelper.isFighting(player)) {
+			return;
+		}
+
+		Minecraft mc = Minecraft.getMinecraft();
+		if (!GameSettings.isKeyDown(mc.gameSettings.keyBindAttack)) {
+			isAttackKeyDown = false;
+
+			return;
+		}
+
+		if (isAttackKeyDown) {
+			return;
+		}
+
+		isAttackKeyDown = true;
+
+		ChunkCoordinates fighterPosition = FightHelper.getCurrentPosition(player);
+		MovingObjectPosition targetPosition = player.rayTrace(20, 1);
+		ItemStack spellStack = FightHelper.getCurrentSpell(player);
+		if (targetPosition == null || !FightUtil.isAimingPositionValid(fighterPosition, targetPosition, spellStack)) {
+			return;
+		}
+
+		event.setCanceled(true);
 	}
 }
