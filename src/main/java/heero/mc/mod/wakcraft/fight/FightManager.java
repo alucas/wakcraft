@@ -906,4 +906,26 @@ public enum FightManager {
 
 		return false;
 	}
+
+	/**
+	 * Returns the fighters list.
+	 * @param world		The work of the fight.
+	 * @param fightId	The id of the fight.
+	 * @return	The fighters list, null if the fight is not found.
+	 */
+	public List<List<EntityLivingBase>> getFighters(World world, int fightId) {
+		Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
+		if (fightsOfWorld == null) {
+			WLog.warning("Trying to get the fighters of a fight that does not exist (wrong world)");
+			return null;
+		}
+
+		FightInfo fight = fightsOfWorld.get(fightId);
+		if (fight == null) {
+			WLog.warning("Trying to get the fighters of a fight that does not exist (wrong id)");
+			return null;
+		}
+
+		return fight.getFightersByTeam();
+	}
 }

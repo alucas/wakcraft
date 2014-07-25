@@ -9,10 +9,13 @@ import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.fight.FightManager;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -97,5 +100,9 @@ public class FightHelper {
 
 	public static FightStage getFightStage(World world, int fightId) {
 		return FightManager.INSTANCE.getFightStage(world, fightId);
+	}
+
+	public static List<List<EntityLivingBase>> getFighers(World world, int fightId) {
+		return FightManager.INSTANCE.getFighters(world, fightId);
 	}
 }
