@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.fight;
 
 import heero.mc.mod.wakcraft.WBlocks;
+import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
@@ -47,9 +48,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public enum FightManager {
 	INSTANCE;
-
-	protected static final int PREFIGHT_DURATION = 60;
-	protected static final int FIGHTTURN_DURATION = 60;
 
 	protected Map<World, Map<Integer, FightInfo>> fights = new HashMap<World, Map<Integer, FightInfo>>();
 
@@ -614,7 +612,7 @@ public enum FightManager {
 			initFightersDisplayName(fightInfo.getFightersByTeam());
 
 			updateFightStage(world, fightId, FightStage.FIGHT);
-			fightInfo.setStage(FightStage.FIGHT, FIGHTTURN_DURATION);
+			fightInfo.setStage(FightStage.FIGHT, WConfig.getWakfuFightPrefightDuration());
 
 			startTurn(world, fightId, fightInfo.getCurrentFighter());
 
@@ -632,7 +630,7 @@ public enum FightManager {
 
 
 			fightInfo.setCurrentFighter(nextFighter);
-			fightInfo.updateStageDuration(FIGHTTURN_DURATION);
+			fightInfo.updateStageDuration(WConfig.getWakfuFightTurnDuration());
 
 			startTurn(world, fightId, fightInfo.getCurrentFighter());
 
