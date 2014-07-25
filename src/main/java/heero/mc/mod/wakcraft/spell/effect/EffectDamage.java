@@ -15,7 +15,7 @@ public class EffectDamage extends EffectCharacteristic implements IEffectDamage 
 	 * @param effectArea	The area of the effect.
 	 */
 	public EffectDamage(final int damageMin, final int damageMax, IEffectElement element, IEffectArea effectArea) {
-		super(Characteristic.HEALTH, -damageMin, - ((damageMax - damageMin) / 200.0F), 1, 0);
+		super(Characteristic.HEALTH, -damageMin, - ((damageMax - damageMin) / 200.0F), 1, 0, effectArea);
 
 		this.element = element;
 	}
