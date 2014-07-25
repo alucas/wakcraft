@@ -34,6 +34,7 @@ import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightSelectPosit
 import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightStart;
 import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightStartTurn;
 import heero.mc.mod.wakcraft.network.handler.fight.HandlerClientFightStop;
+import heero.mc.mod.wakcraft.network.handler.fight.HandlerServerFightCastSpell;
 import heero.mc.mod.wakcraft.network.handler.fight.HandlerServerFightSelectPosition;
 import heero.mc.mod.wakcraft.network.packet.PacketCloseWindow;
 import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
@@ -42,6 +43,7 @@ import heero.mc.mod.wakcraft.network.packet.PacketHavenBagTeleportation;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagVisitors;
 import heero.mc.mod.wakcraft.network.packet.PacketOpenWindow;
 import heero.mc.mod.wakcraft.network.packet.PacketProfession;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightCastSpell;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
@@ -174,6 +176,7 @@ public class CommonProxy {
 		packetPipeline.registerMessage(HandlerClientFightSelectPosition.class, PacketFightSelectPosition.class, 11, Side.CLIENT);
 		packetPipeline.registerMessage(HandlerServerFightSelectPosition.class, PacketFightSelectPosition.class, 12, Side.SERVER);
 		packetPipeline.registerMessage(HandlerClientFightStartTurn.class, PacketFightStartTurn.class, 13, Side.CLIENT);
+		packetPipeline.registerMessage(HandlerServerFightCastSpell.class, PacketFightCastSpell.class, 14, Side.SERVER);
 	}
 
 	public Object getGui(GuiId guiId, EntityPlayer player, World world, int x, int y, int z) {

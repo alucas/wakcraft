@@ -6,6 +6,7 @@ import heero.mc.mod.wakcraft.client.renderer.fight.FighterRenderer;
 import heero.mc.mod.wakcraft.client.setting.KeyBindings;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.network.packet.fight.PacketFightCastSpell;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.GameSettings;
@@ -159,6 +160,7 @@ public class FightClientEventsHandler {
 			return;
 		}
 
+		Wakcraft.packetPipeline.sendToServer(new PacketFightCastSpell(FightHelper.getFightId(player), new ChunkCoordinates(targetPosition.blockX, targetPosition.blockY, targetPosition.blockZ)));
 		event.setCanceled(true);
 	}
 }
