@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.spell.effect;
 
-import heero.mc.mod.wakcraft.characteristic.ICharacteristic;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import net.minecraft.util.StatCollector;
 
 /**
@@ -9,7 +9,7 @@ import net.minecraft.util.StatCollector;
 public class EffectCharacteristic implements IEffectCharacteristic, IEffectProbability {
 	private final IEffectArea effectArea;
 
-	private final ICharacteristic characteristic;
+	private final Characteristic characteristic;
 	private int amountBase;
 	private float amountFactor;
 
@@ -26,7 +26,7 @@ public class EffectCharacteristic implements IEffectCharacteristic, IEffectProba
 	 * @param probabilityFactor	The factor to increase the probability to apply a state, used with spell's level.
 	 * @param effectArea		The area of effect of the effect.
 	 */
-	public EffectCharacteristic(final ICharacteristic characteristic, final int amountBase, final float amountFactor, final float probabilityBase, final float probabilityFactor, IEffectArea effectArea) {
+	public EffectCharacteristic(final Characteristic characteristic, final int amountBase, final float amountFactor, final float probabilityBase, final float probabilityFactor, IEffectArea effectArea) {
 		this.characteristic = characteristic;
 		this.amountBase = amountBase;
 		this.amountFactor = amountFactor;
@@ -38,7 +38,7 @@ public class EffectCharacteristic implements IEffectCharacteristic, IEffectProba
 	/**
 	 * Constructor with default area : POINT. @see #EffectCharacteristic
 	 */
-	public EffectCharacteristic(final ICharacteristic characteristic, final int amountBase, final float amountFactor, final float probabilityBase, final float probabilityFactor) {
+	public EffectCharacteristic(final Characteristic characteristic, final int amountBase, final float amountFactor, final float probabilityBase, final float probabilityFactor) {
 		this(characteristic, amountBase, amountFactor, probabilityBase, probabilityFactor, EffectArea.POINT);
 	}
 
@@ -53,7 +53,7 @@ public class EffectCharacteristic implements IEffectCharacteristic, IEffectProba
 	}
 
 	@Override
-	public ICharacteristic getCharacteristic() {
+	public Characteristic getCharacteristic() {
 		return characteristic;
 	}
 

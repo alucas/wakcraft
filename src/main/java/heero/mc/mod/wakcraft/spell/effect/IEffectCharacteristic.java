@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.spell.effect;
 
-import heero.mc.mod.wakcraft.characteristic.ICharacteristic;
+import heero.mc.mod.wakcraft.characteristic.Characteristic;
 
 /**
  * Characteristic modification effect.
@@ -10,7 +10,7 @@ public interface IEffectCharacteristic extends IEffect {
 	 * Returns the affected characteristic.
 	 * @return	The affected characteristic.
 	 */
-	public ICharacteristic getCharacteristic();
+	public Characteristic getCharacteristic();
 
 	/**
 	 * Returns amount to add (if positive) to the characteristic.

@@ -7,6 +7,7 @@ import heero.mc.mod.wakcraft.spell.IActiveSpell;
 import heero.mc.mod.wakcraft.spell.IRangeMode;
 import heero.mc.mod.wakcraft.spell.RangeMode;
 import heero.mc.mod.wakcraft.spell.effect.IEffect;
+import heero.mc.mod.wakcraft.spell.effect.IEffectCharacteristic;
 import heero.mc.mod.wakcraft.spell.effect.IEffectDamage;
 
 import java.util.List;
@@ -163,11 +164,12 @@ public class FightUtil {
 		} else if (spellStack.getItem() instanceof IActiveSpell) {
 			IActiveSpell spell = (IActiveSpell) spellStack.getItem();
 			for (IEffect effect : spell.getEffects()) {
-				if (!(effect instanceof IEffectDamage)) {
+				if (!(effect instanceof IEffectCharacteristic)) {
 					continue;
 				}
 
-				int damage = ((IEffectDamage) effect).getValue(spell.getLevel(spellStack.getItemDamage()));
+				int characteristicValue = ((IEffectCharacteristic) effect).getValue(spell.getLevel(spellStack.getItemDamage()));
+				Characteristic characteristicType = ((IEffectCharacteristic) effect).getCharacteristic();
 
 				List<ChunkCoordinates> targetBlocks = effect.getZone().getEffectCoors(fighterPosition, targetPosition.posX, targetPosition.posY, targetPosition.posZ);
 				for (List<EntityLivingBase> team : fighters) {
@@ -178,8 +180,12 @@ public class FightUtil {
 								continue;
 							}
 
-							int health = FightHelper.getFightCharacteristic(targetFighter, Characteristic.HEALTH);
-							FightHelper.setFightCharacteristic(targetFighter, Characteristic.HEALTH, health + damage);
+							if (effect instanceof IEffectDamage) {
+								characteristicValue = DamageUtil.computeDamage(fighter, targetFighter, spellStack, (IEffectDamage) effect);
+							}
+
+							int oldValue = FightHelper.getFightCharacteristic(targetFighter, characteristicType);
+							FightHelper.setFightCharacteristic(targetFighter, characteristicType, oldValue + characteristicValue);
 
 							if (targetFighter instanceof IFighter) {
 								((IFighter) targetFighter).onAttacked(fighter, spellStack);

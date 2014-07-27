@@ -1,8 +1,10 @@
 package heero.mc.mod.wakcraft.fight;
 
-import heero.mc.mod.wakcraft.spell.IActiveSpell;
-import heero.mc.mod.wakcraft.spell.effect.IEffect;
+import heero.mc.mod.wakcraft.WLog;
+import heero.mc.mod.wakcraft.spell.ISpell;
+import heero.mc.mod.wakcraft.spell.effect.EffectElement;
 import heero.mc.mod.wakcraft.spell.effect.IEffectDamage;
+import heero.mc.mod.wakcraft.spell.effect.IEffectElement;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
@@ -10,26 +12,20 @@ public class DamageUtil {
 	private DamageUtil() {
 	}
 
-	public static int computeDamage(final EntityLivingBase attacker, final EntityLivingBase target, final ItemStack stack) {
-		int damage = 0;
-
-		if (stack == null) {
-			return damage;
+	public static int computeDamage(final EntityLivingBase attacker, final EntityLivingBase target, final ItemStack stackSpell, final IEffectDamage effect) {
+		if (!(stackSpell.getItem() instanceof ISpell)) {
+			WLog.warning("The stackSpell parameter is not a spell stack");
+			return 0;
 		}
 
-		if (stack.getItem() instanceof IActiveSpell) {
-			IActiveSpell spell = (IActiveSpell) stack.getItem();
-			for (IEffect effect : spell.getEffects()) {
-				if (!(effect instanceof IEffectDamage)) {
-					continue;
-				}
+		int spellLevel = ((ISpell) stackSpell.getItem()).getLevel(stackSpell.getItemDamage());
+		int damageValue = effect.getValue(spellLevel);
+		IEffectElement damageElement = effect.getElement();
 
-				damage += ((IEffectDamage) effect).getValue(spell.getLevel(stack.getItemDamage()));
-			}
-		} else {
-			damage = -1;
+		if (damageElement == EffectElement.EARTH) {
+			
 		}
 
-		return damage;
+		return damageValue;
 	}
 }
