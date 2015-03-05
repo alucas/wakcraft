@@ -14,3 +14,7 @@ MinecraftForge-Credits.txt
 MinecraftForge-License.txt
 README.txt
 
+# idea
+*.iml
+*.ipr
+*.iws
