@@ -9,10 +9,7 @@ import heero.mc.mod.wakcraft.entity.creature.gobball.Gobbette;
 import heero.mc.mod.wakcraft.entity.creature.gobball.WhiteGobbly;
 import heero.mc.mod.wakcraft.item.ItemBlockYRotation;
 import heero.mc.mod.wakcraft.item.ItemIkiakit;
-import heero.mc.mod.wakcraft.item.ItemOre1;
-import heero.mc.mod.wakcraft.item.ItemOre2;
 import heero.mc.mod.wakcraft.item.ItemWArmor;
-import heero.mc.mod.wakcraft.item.ItemWArmor.TYPE;
 import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import heero.mc.mod.wakcraft.item.ItemWithLevel;
 import heero.mc.mod.wakcraft.item.ItemWoollyKey;
@@ -29,7 +26,7 @@ import heero.mc.mod.wakcraft.spell.effect.EffectState;
 import heero.mc.mod.wakcraft.spell.state.State;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class WItems extends Items {
 	public static Item gobballWool, gobballSkin, gobballHorn, woollyKey,
@@ -45,8 +42,8 @@ public class WItems extends Items {
 			helmetofu,tofuBreastplate,tofuCloak,tofuEpaulettes,tofuBelt,tofuAmulet,tofuRing,tofuBoots;
 
 	// ItemBlock
-	public static Item sufokiaWave1, sufokiaWave2, sufokiaWave3,
-			ground1, ground2, carpet1, wood1;
+	public static Item sufokiaWave, sufokiaWave2, sufokiaWave3,
+            groundSlab, ground2Slab, carpet1, wood;
 
 	// Ikiakits
 	public static ItemIkiakit ikiakitSmall, ikiakitAdventurer, ikiakitKit,
@@ -64,74 +61,74 @@ public class WItems extends Items {
 			spellShowOff, spellLockingPro;
 
 	public static void registerItems() {
-		String modid = WInfo.MODID.toLowerCase() + ":";
+		final String modid_ = Reference.MODID.toLowerCase() + ".";
 
-		GameRegistry.registerItem(gobballWool = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GobballWool").setTextureName(modid + "gobballwool")), "GobballWool");
-		GameRegistry.registerItem(gobballSkin = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GobballSkin").setTextureName(modid + "gobballskin")), "GobballSkin");
-		GameRegistry.registerItem(gobballHorn = ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GobballHorn").setTextureName(modid + "gobballhorn")), "GobballHorn");
-		GameRegistry.registerItem(woollyKey = (new ItemWoollyKey()), "WoollyKey");
-		
-		GameRegistry.registerItem(tofuFeather = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("TofuFeather").setTextureName(modid + "tofufeather")), "TofuFeather");
-		GameRegistry.registerItem(tofuBlood = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("TofuBlood").setTextureName(modid + "tofublood")), "TofuBlood");
-		
-		GameRegistry.registerItem(itemOre1 = (new ItemOre1()), "ItemOre1");
-		GameRegistry.registerItem(itemOre2 = (new ItemOre2()), "ItemOre2");
-		GameRegistry.registerItem(canoonPowder = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("CanoonPowder").setTextureName(modid + "canoonpowder")), "ItemCanoonPowder");
-		GameRegistry.registerItem(clay = ((new ItemWithLevel(4)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("Clay").setTextureName(modid + "clay")), "ItemClay");
-		GameRegistry.registerItem(waterBucket = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("WaterBucket").setTextureName(modid + "waterbucket")), "ItemWaterBucket");
-		GameRegistry.registerItem(driedDung = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("DriedDung").setTextureName(modid + "drieddung")), "ItemDriedDung");
-		GameRegistry.registerItem(pearl = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("Pearl").setTextureName(modid + "pearl")), "ItemPearl");
-		GameRegistry.registerItem(moonstone = ((new ItemWithLevel(20)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("Moonstone").setTextureName(modid + "moonstone")), "ItemMoonstone");
-		GameRegistry.registerItem(bomb = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("Bomb").setTextureName(modid + "bomb")), "ItemBomb");
-		GameRegistry.registerItem(fossil = ((new ItemWithLevel(5)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("Fossil").setTextureName(modid + "fossil")), "ItemFossil");
-		GameRegistry.registerItem(shamPearl = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("ShamPearl").setTextureName(modid + "shampearl")), "ItemShamPearl");
-		GameRegistry.registerItem(verbalasalt = ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("VerbalaSalt").setTextureName(modid + "verbalasalt")), "ItemVerbalaSalt");
-		GameRegistry.registerItem(gumgum= ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GumGum").setTextureName(modid + "gumgum")), "ItemGumGum");
-		GameRegistry.registerItem(polishedmoonstone = ((new ItemWithLevel(20)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("PolishedMoonstone").setTextureName(modid + "polishedmoonstone")), "ItemPolishedMoonstone");
-		GameRegistry.registerItem(shadowyBlue = ((new ItemWithLevel(25)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("ShadowyBlue").setTextureName(modid + "shadowyblue")), "ItemShadowyBlue");
-		GameRegistry.registerItem(merchantHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("MerchantHG").setTextureName(modid + "merchanthg").setMaxStackSize(1)), "ItemMerchantHG");
-		GameRegistry.registerItem(decoHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("DecoHG").setTextureName(modid + "decohg").setMaxStackSize(1)), "ItemDecoHG");
-		GameRegistry.registerItem(craftHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("CraftHG").setTextureName(modid + "crafthg").setMaxStackSize(1)), "ItemCraftHG");
-		GameRegistry.registerItem(gardenHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName("GardenHG").setTextureName(modid + "gardenhg").setMaxStackSize(1)), "ItemGardenHG");
-		GameRegistry.registerItem(ikiakitSmall = new ItemIkiakit("SmallIkiakit"), "ItemSmallIkiakit");
-		GameRegistry.registerItem(ikiakitGolden = new ItemIkiakit("GoldenIkiakit"), "ItemGoldenIkiakit");
-		GameRegistry.registerItem(ikiakitKit = new ItemIkiakit("KitIkiakit"), "ItemKitIkiakit");
-		GameRegistry.registerItem(ikiakitAdventurer = new ItemIkiakit("AdventurerIkiakit"), "ItemAdventurerIkiakit");
-		GameRegistry.registerItem(ikiakitCollector = new ItemIkiakit("CollectorIkiakit"), "ItemCollectorIkiakit");
-		GameRegistry.registerItem(ikiakitEmerald = new ItemIkiakit("EmeraldIkiakit"), "ItemEmeraldIkiakit");
-		GameRegistry.registerItem(gobballSeed = new ItemWCreatureSeeds(0, "GobballSeed", "gobballseed").addCreature('G', Gobball.class).addCreature('B', BlackGobbly.class).addCreature('W', WhiteGobbly.class).addCreature('E', Gobbette.class).addCreature('C', GobballWC.class).addPatern("EWB", 0.5F), "ItemGobballSeed");
+		GameRegistry.registerItem(gobballWool = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "GobballWool")), "GobballWool");
+		GameRegistry.registerItem(gobballSkin = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "GobballSkin")), "GobballSkin");
+		GameRegistry.registerItem(gobballHorn = ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "GobballHorn")), "GobballHorn");
+		GameRegistry.registerItem(woollyKey = ((new ItemWoollyKey(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "WoollyKey")), "WoollyKey");
+
+		GameRegistry.registerItem(tofuFeather = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "TofuFeather")), "TofuFeather");
+		GameRegistry.registerItem(tofuBlood = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "TofuBlood")), "TofuBlood");
+
+//		GameRegistry.registerItem(itemOre1 = (new ItemOre1()), "ItemOre1");
+//		GameRegistry.registerItem(itemOre2 = (new ItemOre2()), "ItemOre2");
+		GameRegistry.registerItem(canoonPowder = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "CanoonPowder")), "CanoonPowder");
+		GameRegistry.registerItem(clay = ((new ItemWithLevel(4)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "Clay")), "Clay");
+		GameRegistry.registerItem(waterBucket = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "WaterBucket")), "WaterBucket");
+		GameRegistry.registerItem(driedDung = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "DriedDung")), "DriedDung");
+		GameRegistry.registerItem(pearl = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "Pearl")), "Pearl");
+		GameRegistry.registerItem(moonstone = ((new ItemWithLevel(20)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "Moonstone")), "Moonstone");
+		GameRegistry.registerItem(bomb = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "Bomb")), "Bomb");
+		GameRegistry.registerItem(fossil = ((new ItemWithLevel(5)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "Fossil")), "Fossil");
+		GameRegistry.registerItem(shamPearl = ((new ItemWithLevel(10)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "ShamPearl")), "ShamPearl");
+		GameRegistry.registerItem(verbalasalt = ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "VerbalaSalt")), "VerbalaSalt");
+		GameRegistry.registerItem(gumgum= ((new ItemWithLevel(15)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "GumGum")), "GumGum");
+		GameRegistry.registerItem(polishedmoonstone = ((new ItemWithLevel(20)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "PolishedMoonstone")), "PolishedMoonstone");
+		GameRegistry.registerItem(shadowyBlue = ((new ItemWithLevel(25)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "ShadowyBlue")), "ShadowyBlue");
+		GameRegistry.registerItem(merchantHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "MerchantHG").setMaxStackSize(1)), "MerchantHG");
+		GameRegistry.registerItem(decoHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "DecoHG").setMaxStackSize(1)), "DecoHG");
+		GameRegistry.registerItem(craftHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "CraftHG").setMaxStackSize(1)), "CraftHG");
+		GameRegistry.registerItem(gardenHG = ((new ItemWithLevel(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "GardenHG").setMaxStackSize(1)), "GardenHG");
+		GameRegistry.registerItem(ikiakitSmall = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "SmallIkiakit"), "SmallIkiakit");
+		GameRegistry.registerItem(ikiakitGolden = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "GoldenIkiakit"), "GoldenIkiakit");
+		GameRegistry.registerItem(ikiakitKit = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "KitIkiakit"), "KitIkiakit");
+		GameRegistry.registerItem(ikiakitAdventurer = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "AdventurerIkiakit"), "AdventurerIkiakit");
+		GameRegistry.registerItem(ikiakitCollector = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "CollectorIkiakit"), "CollectorIkiakit");
+		GameRegistry.registerItem(ikiakitEmerald = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WakcraftCreativeTabs.tabResource).setUnlocalizedName(modid_ + "EmeraldIkiakit"), "EmeraldIkiakit");
+		GameRegistry.registerItem(gobballSeed = new ItemWCreatureSeeds(0, "GobballSeed", "gobballseed").addCreature('G', Gobball.class).addCreature('B', BlackGobbly.class).addCreature('W', WhiteGobbly.class).addCreature('E', Gobbette.class).addCreature('C', GobballWC.class).addPatern("EWB", 0.5F), "GobballSeed");
 
 		// ItemBlock
-		GameRegistry.registerItem(sufokiaWave1 = new ItemBlockYRotation(WBlocks.sufokiaWave1NorthSlab, WBlocks.sufokiaWave1EastSlab, WBlocks.sufokiaWave1SouthSlab, WBlocks.sufokiaWave1WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemSufokiaWave1");
-		GameRegistry.registerItem(sufokiaWave2 = new ItemBlockYRotation(WBlocks.sufokiaWave2NorthSlab, WBlocks.sufokiaWave2EastSlab, WBlocks.sufokiaWave2SouthSlab, WBlocks.sufokiaWave2WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemSufokiaWave2");
-		GameRegistry.registerItem(sufokiaWave3 = new ItemBlockYRotation(WBlocks.sufokiaWave3NorthSlab, WBlocks.sufokiaWave3EastSlab, WBlocks.sufokiaWave3SouthSlab, WBlocks.sufokiaWave3WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemSufokiaWave3");
-		GameRegistry.registerItem(ground1 = new ItemBlockYRotation(WBlocks.ground1Slab, WBlocks.ground6Slab, WBlocks.ground5Slab, WBlocks.ground7Slab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemGround1");
-		GameRegistry.registerItem(ground2 = new ItemBlockYRotation(WBlocks.ground2Slab, WBlocks.ground9Slab, WBlocks.ground8Slab, WBlocks.ground10Slab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemGround2");
-		GameRegistry.registerItem(carpet1 = new ItemBlockYRotation(WBlocks.carpet1NorthSlab, WBlocks.carpet1EastSlab, WBlocks.carpet1SouthSlab, WBlocks.carpet1WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemCarpet1");
-		GameRegistry.registerItem(wood1 = new ItemBlockYRotation(WBlocks.wood1NorthSlab, WBlocks.wood1EastSlab, WBlocks.wood1SouthSlab, WBlocks.wood1WestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "ItemWood1");
+		GameRegistry.registerItem(sufokiaWave = new ItemBlockYRotation(WBlocks.sufokiaWaveNorthSlab, WBlocks.sufokiaWaveEastSlab, WBlocks.sufokiaWaveSouthSlab, WBlocks.sufokiaWaveWestSlab).setUnlocalizedName(modid_ + "SufokiaWaveSlab"), "blockSufokiaWaveSlab");
+		GameRegistry.registerItem(sufokiaWave2 = new ItemBlockYRotation(WBlocks.sufokiaWave2NorthSlab, WBlocks.sufokiaWave2EastSlab, WBlocks.sufokiaWave2SouthSlab, WBlocks.sufokiaWave2WestSlab).setUnlocalizedName(modid_ + "SufokiaWave2Slab"), "blockSufokiaWave2Slab");
+		GameRegistry.registerItem(sufokiaWave3 = new ItemBlockYRotation(WBlocks.sufokiaWave3NorthSlab, WBlocks.sufokiaWave3EastSlab, WBlocks.sufokiaWave3SouthSlab, WBlocks.sufokiaWave3WestSlab).setUnlocalizedName(modid_ + "SufokiaWave3Slab"), "blockSufokiaWave3Slab");
+		GameRegistry.registerItem(groundSlab = new ItemBlockYRotation(WBlocks.groundNorthSlab, WBlocks.groundEastSlab, WBlocks.groundSouthSlab, WBlocks.groundWestSlab).setUnlocalizedName(modid_ + "GroundSlab"), "blockGroundSlab");
+		GameRegistry.registerItem(ground2Slab = new ItemBlockYRotation(WBlocks.ground2NorthSlab, WBlocks.ground2EastSlab, WBlocks.ground2SouthSlab, WBlocks.ground2WestSlab).setUnlocalizedName(modid_ + "Ground2Slab"), "blockGround2Slab");
+//		GameRegistry.registerItem(carpet1 = new ItemBlockYRotation(WBlocks.carpetNorthSlab, WBlocks.carpetEastSlab, WBlocks.carpetSouthSlab, WBlocks.carpetWestSlab).setCreativeTab(WakcraftCreativeTabs.tabBlock), "Carpet1");
+		GameRegistry.registerItem(wood = new ItemBlockYRotation(WBlocks.woodNorthSlab, WBlocks.woodEastSlab, WBlocks.woodSouthSlab, WBlocks.woodWestSlab).setUnlocalizedName(modid_ + "WoodSlab"), "blockWoodSlab");
 
 		// ARMORS
-		
+
 		// Goball Armors
-		GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 15).setCharacteristic(Characteristic.INITIATIVE, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName("GobballBreastplate").setTextureName(modid + "gobball_breastplate")), "ItemGobballBreastplate");
-		GameRegistry.registerItem(gobboots = (new ItemWArmor(TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 10).setCharacteristic(Characteristic.LOCK, 8).setCharacteristic(Characteristic.INITIATIVE, 6).setUnlocalizedName("Gobboots").setTextureName(modid + "gobboots")), "ItemGobboots");
-		GameRegistry.registerItem(gobballEpaulettes = (new ItemWArmor(TYPE.EPAULET, 14).setCharacteristic(Characteristic.LOCK, 5).setCharacteristic(Characteristic.FIRE_ATT, 2).setCharacteristic(Characteristic.EARTH_ATT, 2).setUnlocalizedName("GobballEpaulettes").setTextureName(modid + "gobball_epaulettes")), "ItemGobballEpaulettes");
-		GameRegistry.registerItem(gobballCape = (new ItemWArmor(TYPE.CAPE, 14).setCharacteristic(Characteristic.HEALTH, 12).setCharacteristic(Characteristic.LOCK, 8).setCharacteristic(Characteristic.FIRE_ATT, 2).setCharacteristic(Characteristic.EARTH_ATT, 2).setUnlocalizedName("GobballCape").setTextureName(modid + "gobball_cape")), "ItemGobballCape");
-		GameRegistry.registerItem(gobballBelt = (new ItemWArmor(TYPE.BELT, 13).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName("GobballBelt").setTextureName(modid + "gobball_belt")), "ItemGobballBelt");
-		GameRegistry.registerItem(gobballHeadgear = (new ItemWArmor(TYPE.HELMET, 13).setCharacteristic(Characteristic.HEALTH, 13).setCharacteristic(Characteristic.LOCK, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName("GobballHeadgear").setTextureName(modid + "gobball_headgear")), "ItemGobballHeadgear");
-		GameRegistry.registerItem(gobballAmulet = (new ItemWArmor(TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.LOCK, 5).setUnlocalizedName("GobballAmulet").setTextureName(modid + "gobball_amulet")), "ItemGobballAmulet");
-		GameRegistry.registerItem(bouzeLiteYeahsRing = (new ItemWArmor(TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 6).setCharacteristic(Characteristic.INITIATIVE, 4).setUnlocalizedName("BouzeLiteYeahsRing").setTextureName(modid + "bouze_lite_yeahs_ring")), "ItemBouzeLiteYeahsRing");
-		
+		GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(ItemWArmor.TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 15).setCharacteristic(Characteristic.INITIATIVE, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName(modid_ + "GobballBreastplate")), "GobballBreastplate");
+		GameRegistry.registerItem(gobboots = (new ItemWArmor(ItemWArmor.TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 10).setCharacteristic(Characteristic.LOCK, 8).setCharacteristic(Characteristic.INITIATIVE, 6).setUnlocalizedName(modid_ + "Gobboots")), "Gobboots");
+		GameRegistry.registerItem(gobballEpaulettes = (new ItemWArmor(ItemWArmor.TYPE.EPAULET, 14).setCharacteristic(Characteristic.LOCK, 5).setCharacteristic(Characteristic.FIRE_ATT, 2).setCharacteristic(Characteristic.EARTH_ATT, 2).setUnlocalizedName(modid_ + "GobballEpaulettes")), "GobballEpaulettes");
+		GameRegistry.registerItem(gobballCape = (new ItemWArmor(ItemWArmor.TYPE.CAPE, 14).setCharacteristic(Characteristic.HEALTH, 12).setCharacteristic(Characteristic.LOCK, 8).setCharacteristic(Characteristic.FIRE_ATT, 2).setCharacteristic(Characteristic.EARTH_ATT, 2).setUnlocalizedName(modid_ + "GobballCape")), "GobballCape");
+		GameRegistry.registerItem(gobballBelt = (new ItemWArmor(ItemWArmor.TYPE.BELT, 13).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName(modid_ + "GobballBelt")), "GobballBelt");
+		GameRegistry.registerItem(gobballHeadgear = (new ItemWArmor(ItemWArmor.TYPE.HELMET, 13).setCharacteristic(Characteristic.HEALTH, 13).setCharacteristic(Characteristic.LOCK, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName(modid_ + "GobballHeadgear")), "GobballHeadgear");
+		GameRegistry.registerItem(gobballAmulet = (new ItemWArmor(ItemWArmor.TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.LOCK, 5).setUnlocalizedName(modid_ + "GobballAmulet")), "GobballAmulet");
+		GameRegistry.registerItem(bouzeLiteYeahsRing = (new ItemWArmor(ItemWArmor.TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 6).setCharacteristic(Characteristic.INITIATIVE, 4).setUnlocalizedName(modid_ + "BouzeLiteYeahsRing")), "BouzeLiteYeahsRing");
+
 		// Tofu Armors
-		GameRegistry.registerItem(helmetofu = (new ItemWArmor(TYPE.HELMET, 13).setCharacteristic(Characteristic.HEALTH, 9).setCharacteristic(Characteristic.INITIATIVE, 3).setCharacteristic(Characteristic.WATER_ATT, 4).setCharacteristic(Characteristic.AIR_ATT, 4).setUnlocalizedName("Helmetofu").setTextureName(modid + "helmetofu")), "ItemHelmetofu");
-		GameRegistry.registerItem(tofuBreastplate = (new ItemWArmor(TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 13).setCharacteristic(Characteristic.INITIATIVE, 6).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName("TofuBreastplate").setTextureName(modid + "tofu_breastplate")), "ItemTofuBreastplate");
-		GameRegistry.registerItem(tofuCloak = (new ItemWArmor(TYPE.CAPE, 14).setCharacteristic(Characteristic.HEALTH, 12).setCharacteristic(Characteristic.DODGE, 4).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName("TofuCloak").setTextureName(modid + "tofu_cloak")), "ItemTofuCloak");
-		GameRegistry.registerItem(tofuEpaulettes = (new ItemWArmor(TYPE.EPAULET, 14).setCharacteristic(Characteristic.DODGE, 5).setCharacteristic(Characteristic.WATER_ATT, 2).setCharacteristic(Characteristic.AIR_ATT, 2).setUnlocalizedName("TofuEpaulettes").setTextureName(modid + "tofu_epaulettes")), "ItemTofuEpaulettes");
-		GameRegistry.registerItem(tofuBelt = (new ItemWArmor(TYPE.BELT, 13).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName("TofuBelt").setTextureName(modid + "tofu_belt")), "ItemTofuBelt");
-		GameRegistry.registerItem(tofuAmulet = (new ItemWArmor(TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.DODGE, 5).setUnlocalizedName("TofuAmulet").setTextureName(modid + "tofu_amulet")), "ItemTofuAmulet");
-		GameRegistry.registerItem(tofuRing = (new ItemWArmor(TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.INITIATIVE, 3).setUnlocalizedName("TofuRing").setTextureName(modid + "tofu_ring")), "ItemTofuRing");
-		GameRegistry.registerItem(tofuBoots = (new ItemWArmor(TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.DODGE, 7).setCharacteristic(Characteristic.INITIATIVE, 8).setUnlocalizedName("TofuBoots").setTextureName(modid + "tofu_boots")), "ItemTofuBoots");
-		
+		GameRegistry.registerItem(helmetofu = (new ItemWArmor(ItemWArmor.TYPE.HELMET, 13).setCharacteristic(Characteristic.HEALTH, 9).setCharacteristic(Characteristic.INITIATIVE, 3).setCharacteristic(Characteristic.WATER_ATT, 4).setCharacteristic(Characteristic.AIR_ATT, 4).setUnlocalizedName(modid_ + "Helmetofu")), "Helmetofu");
+		GameRegistry.registerItem(tofuBreastplate = (new ItemWArmor(ItemWArmor.TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 13).setCharacteristic(Characteristic.INITIATIVE, 6).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName(modid_ + "TofuBreastplate")), "TofuBreastplate");
+		GameRegistry.registerItem(tofuCloak = (new ItemWArmor(ItemWArmor.TYPE.CAPE, 14).setCharacteristic(Characteristic.HEALTH, 12).setCharacteristic(Characteristic.DODGE, 4).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName(modid_ + "TofuCloak")), "TofuCloak");
+		GameRegistry.registerItem(tofuEpaulettes = (new ItemWArmor(ItemWArmor.TYPE.EPAULET, 14).setCharacteristic(Characteristic.DODGE, 5).setCharacteristic(Characteristic.WATER_ATT, 2).setCharacteristic(Characteristic.AIR_ATT, 2).setUnlocalizedName(modid_ + "TofuEpaulettes")), "TofuEpaulettes");
+		GameRegistry.registerItem(tofuBelt = (new ItemWArmor(ItemWArmor.TYPE.BELT, 13).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName(modid_ + "TofuBelt")), "TofuBelt");
+		GameRegistry.registerItem(tofuAmulet = (new ItemWArmor(ItemWArmor.TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.DODGE, 5).setUnlocalizedName(modid_ + "TofuAmulet")), "TofuAmulet");
+		GameRegistry.registerItem(tofuRing = (new ItemWArmor(ItemWArmor.TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.INITIATIVE, 3).setUnlocalizedName(modid_ + "TofuRing")), "TofuRing");
+		GameRegistry.registerItem(tofuBoots = (new ItemWArmor(ItemWArmor.TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.DODGE, 7).setCharacteristic(Characteristic.INITIATIVE, 8).setUnlocalizedName(modid_ + "TofuBoots")), "TofuBoots");
+
 		// SPELLS
 		// Iop spells
 		GameRegistry.registerItem(spellShaker = (new ElementalSpell("Shaker", 4, 0, 0).setRange(1, 1, true, false, RangeMode.LINE).setEffect(new EffectDamage(4, 134, EffectElement.EARTH)).setEffectCritical(new EffectDamage(7, 199, EffectElement.EARTH))), "SpellShaker");
@@ -159,5 +156,5 @@ public class WItems extends Items {
 		GameRegistry.registerItem(spellAuthority = (new PassiveSpecialitySpell("Authority")), "SpellAuthority");
 		GameRegistry.registerItem(spellShowOff = (new PassiveSpecialitySpell("ShowOff")), "SpellShowOff");
 		GameRegistry.registerItem(spellLockingPro = (new PassiveSpecialitySpell("LockingPro")), "SpellLockingPro");
-	}
+    }
 }

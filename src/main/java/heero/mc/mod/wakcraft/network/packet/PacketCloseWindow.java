@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.network.packet;
 
 import io.netty.buffer.ByteBuf;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketCloseWindow implements IMessage {
 	public static final int WINDOW_HB_VISITORS = 1;

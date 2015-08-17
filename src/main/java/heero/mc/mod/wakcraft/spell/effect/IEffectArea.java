@@ -1,8 +1,8 @@
 package heero.mc.mod.wakcraft.spell.effect;
 
-import java.util.List;
+import net.minecraft.util.BlockPos;
 
-import net.minecraft.util.ChunkCoordinates;
+import java.util.List;
 
 
 /**
@@ -17,5 +17,13 @@ public interface IEffectArea {
 	 * @param targetPosZ	The target Z position.
 	 * @return	The coordinates of the blocks affected by the effect.
 	 */
-	public List<ChunkCoordinates> getEffectCoors(final ChunkCoordinates fighterPosition, final int targetPosX, final int targetPosY, final int targetPosZ);
+	public List<BlockPos> getEffectCoors(final BlockPos fighterPosition, final int targetPosX, final int targetPosY, final int targetPosZ);
+
+    /**
+     * Return the coordinates of the blocks affected by the effect.
+     * @param fighterPosition   The Fighter coordinates.
+     * @param targetPosition    The Target coordinates.
+     * @return  The coordinates of the blocks affected by the effect.
+     */
+    public List<BlockPos> getEffectCoors(final BlockPos fighterPosition, final BlockPos targetPosition);
 }

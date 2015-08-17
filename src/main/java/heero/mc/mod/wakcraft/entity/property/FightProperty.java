@@ -1,22 +1,22 @@
 package heero.mc.mod.wakcraft.entity.property;
 
-import heero.mc.mod.wakcraft.WInfo;
-
-import javax.annotation.Nullable;
-
+import heero.mc.mod.wakcraft.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
+import javax.annotation.Nullable;
+
 public class FightProperty implements IExtendedEntityProperties {
-	public static final String IDENTIFIER = WInfo.MODID + "Fight";
+	public static final String IDENTIFIER = Reference.MODID + "Fight";
 
 	protected int fightId;
 	protected int teamId;
-	protected ChunkCoordinates startPosition;
-	protected ChunkCoordinates currentPosition;
+	protected BlockPos startPosition;
+	protected BlockPos currentPosition;
 
 	@Override
 	public void init(Entity entity, World world) {
@@ -52,19 +52,19 @@ public class FightProperty implements IExtendedEntityProperties {
 		this.teamId = teamId;
 	}
 
-	public ChunkCoordinates getStartPosition() {
+	public BlockPos getStartPosition() {
 		return startPosition;
 	}
 
-	public void setStartPosition(@Nullable ChunkCoordinates startPosition) {
+	public void setStartPosition(@Nullable BlockPos startPosition) {
 		this.startPosition = startPosition;
 	}
 
-	public ChunkCoordinates getCurrentPosition() {
+	public BlockPos getCurrentPosition() {
 		return currentPosition;
 	}
 
-	public void setCurrentPosition(ChunkCoordinates position) {
+	public void setCurrentPosition(BlockPos position) {
 		this.currentPosition = position;
 	}
 }

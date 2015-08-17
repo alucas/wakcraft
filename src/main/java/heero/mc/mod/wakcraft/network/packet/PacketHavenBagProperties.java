@@ -3,8 +3,8 @@ package heero.mc.mod.wakcraft.network.packet;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketHavenBagProperties implements IMessage {
 	public NBTTagCompound tagHavenBag;

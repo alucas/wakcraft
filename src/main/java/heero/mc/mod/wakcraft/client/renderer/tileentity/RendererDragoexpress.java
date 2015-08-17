@@ -1,20 +1,19 @@
 package heero.mc.mod.wakcraft.client.renderer.tileentity;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.client.model.ModelDragoexpress;
 import heero.mc.mod.wakcraft.tileentity.TileEntityDragoexpress;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 public class RendererDragoexpress extends TileEntitySpecialRenderer {
-	private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/dragoexpress.png");
+	private static final ResourceLocation texture = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/entity/dragoexpress.png");
     private ModelDragoexpress model = new ModelDragoexpress();
 	
-    public void renderTileEntityAt(TileEntityDragoexpress entity, double tileX, double tileY, double tileZ, float p_147539_8_)
+    public void renderTileEntityAt(TileEntityDragoexpress entity, double tileX, double tileY, double tileZ, float partialTicks, int destroyStage)
     {
     	this.bindTexture(texture);
     	
@@ -38,9 +37,7 @@ public class RendererDragoexpress extends TileEntitySpecialRenderer {
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity entity, double tileX, double tileY, double tileZ, float p_147500_8_)
-    {
-
-        this.renderTileEntityAt((TileEntityDragoexpress)entity, tileX, tileY, tileZ, p_147500_8_);
+    public void renderTileEntityAt(TileEntity entity, double tileX, double tileY, double tileZ, float partialTicks, int destroyStage) {
+        this.renderTileEntityAt((TileEntityDragoexpress)entity, tileX, tileY, tileZ, partialTicks, destroyStage);
     }
 }

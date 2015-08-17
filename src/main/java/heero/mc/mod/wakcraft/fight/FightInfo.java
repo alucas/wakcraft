@@ -2,7 +2,7 @@ package heero.mc.mod.wakcraft.fight;
 
 
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
-import heero.mc.mod.wakcraft.helper.CharacteristicsHelper;
+import heero.mc.mod.wakcraft.util.CharacteristicUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -132,8 +132,8 @@ public class FightInfo {
 			Collections.sort(team, new Comparator<EntityLivingBase>(){
 				@Override
 				public int compare(EntityLivingBase a, EntityLivingBase b) {
-					int initiativeA = CharacteristicsHelper.getCharacteristic(a, Characteristic.INITIATIVE);
-					int initiativeB = CharacteristicsHelper.getCharacteristic(b, Characteristic.INITIATIVE);
+					int initiativeA = CharacteristicUtil.getCharacteristic(a, Characteristic.INITIATIVE);
+					int initiativeB = CharacteristicUtil.getCharacteristic(b, Characteristic.INITIATIVE);
 					return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
 				}
 			} );
@@ -142,8 +142,8 @@ public class FightInfo {
 		Collections.sort(fightersTmp, new Comparator<List<EntityLivingBase>>(){
 			@Override
 			public int compare(List<EntityLivingBase> a, List<EntityLivingBase> b) {
-				int initiativeA = CharacteristicsHelper.getCharacteristic(a.get(0), Characteristic.INITIATIVE);
-				int initiativeB = CharacteristicsHelper.getCharacteristic(b.get(0), Characteristic.INITIATIVE);
+				int initiativeA = CharacteristicUtil.getCharacteristic(a.get(0), Characteristic.INITIATIVE);
+				int initiativeB = CharacteristicUtil.getCharacteristic(b.get(0), Characteristic.INITIATIVE);
 				return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
 			}
 		} );

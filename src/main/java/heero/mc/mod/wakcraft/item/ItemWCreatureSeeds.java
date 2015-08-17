@@ -1,18 +1,20 @@
 package heero.mc.mod.wakcraft.item;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.creature.EntityWCreature;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
-import heero.mc.mod.wakcraft.helper.ItemInUseHelper;
+import heero.mc.mod.wakcraft.util.ItemInUseUtil;
 import heero.mc.mod.wakcraft.profession.ProfessionManager;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import heero.mc.mod.wakcraft.util.WorldUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
@@ -31,19 +33,17 @@ public class ItemWCreatureSeeds extends ItemWithLevel {
 		paterns = new HashMap<String, Float>();
 
 		setCreativeTab(WakcraftCreativeTabs.tabResource);
-		setUnlocalizedName(name);
-		setTextureName(WInfo.MODID.toLowerCase() + ":" + textureName);
+		setUnlocalizedName(Reference.MODID.toLowerCase() + "_" + name);
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack,
-			EntityPlayer player, World world, int x, int y,
-			int z, int side, float hitX, float hitY, float hitZ) {
-		if (world.provider.dimensionId != 0) {
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world,
+                             BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (!WorldUtil.isMainWorld(world)) {
 			return false;
 		}
 
-		if (side != EnumFacing.UP.ordinal()) {
+		if (side != EnumFacing.UP) {
 			return false;
 		}
 
@@ -59,31 +59,33 @@ public class ItemWCreatureSeeds extends ItemWithLevel {
 		for (Object entity : world.loadedEntityList) {
 			if (entity instanceof EntitySeedsPile) {
 				EntitySeedsPile entitySeeds = (EntitySeedsPile) entity;
-				if (entitySeeds.posX == x && entitySeeds.posY == y + 1 && entitySeeds.posZ == z) {
+                if (entitySeeds.getPosition().equals(pos.offsetUp())) {
 					return false;
 				}
 			}
 		}
 
-		ItemInUseHelper.saveCoords(player, x, y + 1, z);
+		ItemInUseUtil.saveCoords(player, pos.offsetUp());
 		player.setItemInUse(stack, USE_DURATION);
 
 		return true;
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
 		if (!player.capabilities.isCreativeMode) {
 			stack.stackSize--;
 		}
 
 		if (!world.isRemote) {
-			int coords[] = ItemInUseHelper.getCoords(player);
+			int coords[] = ItemInUseUtil.getCoords(player);
 			world.spawnEntityInWorld(new EntitySeedsPile(world, coords[0], coords[1], coords[2], this));
 		}
 
 		return stack;
 	}
+
+
 
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {

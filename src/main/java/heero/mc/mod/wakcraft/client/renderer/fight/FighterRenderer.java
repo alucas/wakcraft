@@ -12,7 +12,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Project;
 
@@ -24,6 +23,7 @@ public class FighterRenderer {
 	private ItemRenderer itemRenderer;
 	private DynamicTexture lightmapTexture;
 	private ResourceLocation locationLightMap;
+    private boolean debugView = false;
 
 	public FighterRenderer (Minecraft minecraft, ItemRenderer itemRenderer) {
 		this.mc = minecraft;
@@ -33,7 +33,7 @@ public class FighterRenderer {
 	}
 
 	public void renderHand(float partialTick, int renderPass) {
-		if (mc.entityRenderer.debugViewDirection <= 0) {
+		if (!debugView) {
 			GL11.glMatrixMode(GL11.GL_PROJECTION);
 			GL11.glLoadIdentity();
 			float f1 = 0.07F;
@@ -64,7 +64,7 @@ public class FighterRenderer {
 			}
 
 			if (mc.gameSettings.thirdPersonView == 0
-					&& !mc.renderViewEntity.isPlayerSleeping()
+					&& !((EntityLivingBase)mc.getRenderViewEntity()).isPlayerSleeping()
 					&& !mc.gameSettings.hideGUI
 					&& !mc.playerController
 							.enableEverythingIsScrewedUpMode()) {
@@ -75,7 +75,7 @@ public class FighterRenderer {
 
 			GL11.glPopMatrix();
 
-			if (mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping()) {
+			if (mc.gameSettings.thirdPersonView == 0 && !((EntityLivingBase)mc.getRenderViewEntity()).isPlayerSleeping()) {
 				this.itemRenderer.renderOverlays(partialTick);
 				this.hurtCameraEffect(partialTick);
 			}
@@ -87,10 +87,10 @@ public class FighterRenderer {
 	}
 
 	private float getFOVModifier(float partialTick, boolean fov) {
-		if (mc.entityRenderer.debugViewDirection > 0) {
+		if (!debugView) {
 			return 90.0F;
 		} else {
-			EntityLivingBase entityplayer = (EntityLivingBase) mc.renderViewEntity;
+			EntityLivingBase entityplayer = (EntityLivingBase) mc.getRenderViewEntity();
 			float f1 = 70.0F;
 
 			if (fov) {
@@ -114,12 +114,14 @@ public class FighterRenderer {
 	}
 
 	public void updateFovModifierHand(EntityPlayerSP player) {
-		if (mc.renderViewEntity instanceof EntityPlayerSP) {
-			EntityPlayerSP entityplayersp = (EntityPlayerSP) mc.renderViewEntity;
-			this.fovMultiplierTemp = entityplayersp.getFOVMultiplier();
-		} else {
-			this.fovMultiplierTemp = player.getFOVMultiplier();
-		}
+//        TODO
+//		if (mc.getRenderViewEntity() instanceof EntityPlayerSP) {
+//			EntityPlayerSP entityplayersp = (EntityPlayerSP) mc.getRenderViewEntity();
+//			this.fovMultiplierTemp = entityplayersp.getFOVMultiplier();
+//		} else {
+//			this.fovMultiplierTemp = player.getFOVMultiplier();
+//		}
+        this.fovMultiplierTemp = 90;
 
 		this.fovModifierHandPrev = this.fovModifierHand;
 		this.fovModifierHand += (this.fovMultiplierTemp - this.fovModifierHand) * 0.5F;
@@ -134,7 +136,7 @@ public class FighterRenderer {
 	}
 
 	private void hurtCameraEffect(float par1) {
-		EntityLivingBase entitylivingbase = mc.renderViewEntity;
+		EntityLivingBase entitylivingbase = (EntityLivingBase) mc.getRenderViewEntity();
 		float f1 = (float) entitylivingbase.hurtTime - par1;
 		float f2;
 
@@ -154,8 +156,8 @@ public class FighterRenderer {
 	}
 
 	private void setupViewBobbing(float par1) {
-		if (mc.renderViewEntity instanceof EntityPlayer) {
-			EntityPlayer entityplayer = (EntityPlayer) mc.renderViewEntity;
+		if (mc.getRenderViewEntity() instanceof EntityPlayer) {
+			EntityPlayer entityplayer = (EntityPlayer) mc.getRenderViewEntity();
 			float f1 = entityplayer.distanceWalkedModified - entityplayer.prevDistanceWalkedModified;
 			float f2 = -(entityplayer.distanceWalkedModified + f1 * par1);
 			float f3 = entityplayer.prevCameraYaw + (entityplayer.cameraYaw - entityplayer.prevCameraYaw) * par1;

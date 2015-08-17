@@ -1,0 +1,8 @@
+{
+  "parent": "wakcraft:block/slab/template/b2s1",
+  "textures": {
+    "bottom": "wakcraft:blocks/pillarTop",
+    "top": "wakcraft:blocks/pillarTop",
+    "side": "wakcraft:blocks/pillarSide"
+  }
+}

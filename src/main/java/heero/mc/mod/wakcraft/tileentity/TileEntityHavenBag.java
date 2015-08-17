@@ -34,7 +34,7 @@ public class TileEntityHavenBag extends TileEntity {
 
 		writeToNBT(nbtTag);
 
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	/**
@@ -43,23 +43,11 @@ public class TileEntityHavenBag extends TileEntity {
 	 * be the remote server. On the server, it will be whomever is responsible
 	 * for sending the packet.
 	 * 
-	 * @param net
-	 *            The NetworkManager the packet originated from
-	 * @param pkt
-	 *            The data packet
+	 * @param net       The NetworkManager the packet originated from
+	 * @param packet    The data packet
 	 */
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-		readFromNBT(packet.func_148857_g());
-	}
-
-	/**
-	 * Determines if this TileEntity requires update calls.
-	 * 
-	 * @return True if you want updateEntity() to be called, false if not
-	 */
-	@Override
-	public boolean canUpdate() {
-		return false;
+		readFromNBT(packet.getNbtCompound());
 	}
 }

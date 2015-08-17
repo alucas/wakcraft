@@ -1,15 +1,16 @@
 package heero.mc.mod.wakcraft.entity.creature.gobball;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Gobbette extends GobballGeneric {
 	public Gobbette(World world) {
@@ -33,10 +34,10 @@ public class Gobbette extends GobballGeneric {
 
 	@SideOnly(Side.CLIENT)
 	public static class RenderGobette extends RendererWCreature {
-		private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID, "textures/mobs/bouffette.png");
+		private static final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/mobs/bouffette.png");
 
-		public RenderGobette(ModelBase model, float shadowSize) {
-			super(model, shadowSize);
+		public RenderGobette(final RenderManager renderManager, final ModelBase model, final float shadowSize) {
+			super(renderManager, model, shadowSize);
 		}
 
 		@Override

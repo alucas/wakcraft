@@ -15,7 +15,7 @@ public class EntityTextPopup extends Entity {
 		this.text = text;
 	}
 
-	public EntityTextPopup(World world, String text, int x, int y, int z, float colorRed, float colorGreen, float colorBlue) {
+	public EntityTextPopup(World world, String text, double x, double y, double z, float colorRed, float colorGreen, float colorBlue) {
 		super(world);
 
 		this.text = text;

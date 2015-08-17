@@ -1,37 +1,31 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFightStart extends BlockGeneric {
 
-	public BlockFightStart(int team) {
-		super(Material.gourd);
+    public BlockFightStart() {
+        super(Material.gourd);
 
-		setBlockTextureName("fightStart" + team);
-	}
+        setOpaque(false);
+    }
 
-	/**
-	 * Not opaque, render surrounding blocks
-	 */
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	/**
-	 * Only display the top texture, for player in fight (if the player is from
-	 * an other fight, that's not important)
-	 */
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-		return side == 1
-				&& FightHelper.isFighter(Minecraft.getMinecraft().thePlayer)
-				&& FightHelper.isFighting(Minecraft.getMinecraft().thePlayer);
-	}
+    /**
+     * Only display the top texture, for player in fight (if the player is from
+     * an other fight, that's not important)
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
+        return side == EnumFacing.UP
+                && FightUtil.isFighter(Minecraft.getMinecraft().thePlayer)
+                && FightUtil.isFighting(Minecraft.getMinecraft().thePlayer);
+    }
 }

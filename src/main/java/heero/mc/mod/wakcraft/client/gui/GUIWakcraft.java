@@ -4,15 +4,15 @@ import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.network.packet.PacketOpenWindow;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIWakcraft extends GUITabs {
@@ -24,8 +24,8 @@ public class GUIWakcraft extends GUITabs {
 		guis.add(GuiId.SPELLS);
 	}
 
-	public GUIWakcraft(GuiId guiId, GuiScreen guiScreen, EntityPlayer player, World world, int x, int y, int z) {
-		super(guiScreen, player, world, x, y, z, guis.indexOf(guiId), guis);
+	public GUIWakcraft(GuiId guiId, GuiScreen guiScreen, EntityPlayer player, World world, BlockPos pos) {
+		super(guiScreen, player, world, pos, guis.indexOf(guiId), guis);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class GUIWakcraft extends GUITabs {
 			break;
 
 		default:
-			player.openGui(Wakcraft.instance, guiId.ordinal(), world, x, y, z);
+			player.openGui(Wakcraft.instance, guiId.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
 		}
 	}
 

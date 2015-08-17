@@ -15,7 +15,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class GUIEventHandler {
 	@SubscribeEvent

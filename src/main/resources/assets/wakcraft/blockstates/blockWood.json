@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "propertyyrotation=north": { "model": "wakcraft:blockWood", "y": 0 },
+    "propertyyrotation=east": { "model": "wakcraft:blockWood", "y": 90 },
+    "propertyyrotation=south": { "model": "wakcraft:blockWood", "y": 180 },
+    "propertyyrotation=west": { "model": "wakcraft:blockWood", "y": 270 }
+  }
+}

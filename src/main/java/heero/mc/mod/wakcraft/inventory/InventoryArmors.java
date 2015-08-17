@@ -6,33 +6,23 @@ import heero.mc.mod.wakcraft.item.ItemWArmor.TYPE;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.IChatComponent;
 
-public class InventoryArmors implements IInventory {
+public class InventoryArmors extends InventoryBasic {
 	protected static TYPE[] types = new TYPE[] { TYPE.HELMET, TYPE.CHESTPLATE,
 			TYPE.BELT, TYPE.BOOTS, TYPE.AMULET, TYPE.CAPE, TYPE.RING,
 			TYPE.WEAPON, TYPE.EPAULET, TYPE.PET, TYPE.RING, TYPE.WEAPON };
 
-	protected boolean useCustomName;
-	protected String customName;
-	protected int slotsCount;
-	protected ItemStack[] inventoryContents;
 	protected Entity entity;
 
 	public InventoryArmors(Entity entity) {
-		this.customName = "Armors";
-		this.useCustomName = false;
-		this.slotsCount = 12;
-		this.inventoryContents = new ItemStack[slotsCount];
-		this.entity = entity;
-	}
+        super("Armors", false, 12);
 
-	/**
-	 * Returns the stack in slot i
-	 */
-	@Override
-	public ItemStack getStackInSlot(int slotId) {
-		return this.inventoryContents[slotId];
+		this.entity = entity;
 	}
 
 	/**
@@ -41,15 +31,18 @@ public class InventoryArmors implements IInventory {
 	 */
 	@Override
 	public ItemStack decrStackSize(int slotId, int quantity) {
-		if (quantity < 1 || this.inventoryContents[slotId] == null) {
+        if (quantity < 1) {
+            return null;
+        }
+
+        ItemStack itemstack = getStackInSlot(slotId);
+		if (itemstack == null) {
 			return null;
 		}
 
-		ItemStack itemstack = this.inventoryContents[slotId];
 		setInventorySlotContents(slotId, null);
 
 		this.markDirty();
-
 		return itemstack;
 	}
 
@@ -60,11 +53,11 @@ public class InventoryArmors implements IInventory {
 	 */
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slotId) {
-		if (this.inventoryContents[slotId] == null) {
+        ItemStack itemstack = getStackInSlot(slotId);
+		if (itemstack == null) {
 			return null;
 		}
 
-		ItemStack itemstack = this.inventoryContents[slotId];
 		setInventorySlotContents(slotId, null);
 
 		return itemstack;
@@ -80,8 +73,9 @@ public class InventoryArmors implements IInventory {
 			return;
 		}
 
-		if (this.inventoryContents[slotId] != null) {
-			ItemWArmor item = (ItemWArmor) this.inventoryContents[slotId].getItem();
+        ItemStack oldStack = getStackInSlot(slotId);
+		if (oldStack != null) {
+			ItemWArmor item = (ItemWArmor) oldStack.getItem();
 
 			CharacteristicsManager.unequipItem(entity, item);
 		}
@@ -92,42 +86,7 @@ public class InventoryArmors implements IInventory {
 			CharacteristicsManager.equipItem(entity, item);
 		}
 
-		this.inventoryContents[slotId] = stack;
-
-		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
-			stack.stackSize = this.getInventoryStackLimit();
-		}
-
-		this.markDirty();
-	}
-
-	/**
-	 * Returns the number of slots in the inventory.
-	 */
-	@Override
-	public int getSizeInventory() {
-		return this.slotsCount;
-	}
-
-	/**
-	 * Returns the name of the inventory
-	 */
-	@Override
-	public String getInventoryName() {
-		return this.customName;
-	}
-
-	/**
-	 * Returns if the inventory is named
-	 */
-	@Override
-	public boolean hasCustomInventoryName() {
-		return this.useCustomName;
-	}
-
-	public void func_110133_a(String customName) {
-		this.useCustomName = true;
-		this.customName = customName;
+		super.setInventorySlotContents(slotId, stack);
 	}
 
 	/**
@@ -136,31 +95,6 @@ public class InventoryArmors implements IInventory {
 	@Override
 	public int getInventoryStackLimit() {
 		return 1;
-	}
-
-	/**
-	 * For tile entities, ensures the chunk containing the tile entity is saved
-	 * to disk later - the game won't think it hasn't changed and skip it.
-	 */
-	@Override
-	public void markDirty() {
-	}
-
-	/**
-	 * Do not make give this method the name canInteractWith because it clashes
-	 * with Container
-	 */
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
-		return true;
-	}
-
-	@Override
-	public void openInventory() {
-	}
-
-	@Override
-	public void closeInventory() {
 	}
 
 	/**
@@ -180,7 +114,10 @@ public class InventoryArmors implements IInventory {
 		return ((ItemWArmor) (stack.getItem())).getArmorType() == types[slotId];
 	}
 
-	public TYPE getSlotType(int slotId) {
-		return types[slotId];
-	}
+    @Override
+    public void clear() {
+        for (int i = 0; i < getSizeInventory(); ++i) {
+            setInventorySlotContents(i, null);
+        }
+    }
 }

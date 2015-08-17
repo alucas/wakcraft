@@ -7,7 +7,7 @@ import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.block.BlockSlab;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagGenerationHelper;
-import heero.mc.mod.wakcraft.helper.HavenBagHelper;
+import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagTeleportation;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBag;
@@ -17,13 +17,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerServerHavenBagTeleportation implements IMessageHandler<PacketHavenBagTeleportation, IMessage> {
 	@Override
@@ -38,7 +39,7 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 
 		if (properties.isInHavenBag()) {
 			if (player instanceof EntityPlayerMP) {
-				HavenBagHelper.leaveHavenBag((EntityPlayerMP) player);
+				HavenBagUtil.leaveHavenBag((EntityPlayerMP) player);
 			}
 
 			return null;
@@ -49,12 +50,10 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 			return null;
 		}
 
-		int posX = MathHelper.floor_double(player.posX);
-		int posY = MathHelper.floor_double(player.posY - player.yOffset);
-		int posZ = MathHelper.floor_double(player.posZ);
+        BlockPos pos = new BlockPos(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY - player.getYOffset()), MathHelper.floor_double(player.posZ));
 
-		Block block = player.worldObj.getBlock(posX, posY, posZ);
-		Block blockUnder = player.worldObj.getBlock(posX, posY - 1, posZ);
+		Block block = player.worldObj.getBlockState(pos).getBlock();
+		Block blockUnder = player.worldObj.getBlockState(pos.offsetDown()).getBlock();
 		if (!(block instanceof BlockSlab) && !(blockUnder.isOpaqueCube())) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.cantOpenHavenBagHere")));
 			return null;
@@ -81,20 +80,20 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 			}
 		}
 
-		while (!(player.worldObj.getBlock(posX, posY, posZ).getMaterial() == Material.air)) {
-			posY++;
+		while (!(player.worldObj.getBlockState(pos).getBlock().getMaterial() == Material.air)) {
+			pos = pos.offsetUp();
 
-			if (posY >= player.worldObj.getHeight()) {
-				System.out.println("error: " + posY);
+			if (pos.getY() >= player.worldObj.getHeight()) {
+				System.out.println("error: " + pos.getY());
 				return null;
 			}
 		}
 
-		player.worldObj.setBlock(posX, posY, posZ, WBlocks.havenbag);
+		player.worldObj.setBlockState(pos, WBlocks.havenbag.getDefaultState());
 
-		TileEntity tileEntity = player.worldObj.getTileEntity(posX, posY, posZ);
+		TileEntity tileEntity = player.worldObj.getTileEntity(pos);
 		if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBag)) {
-			WLog.warning("Error while loading the tile entity (%d, %d, %d)", posX, posY, posZ);
+			WLog.warning("Error while loading the tile entity (%d, %d, %d)", pos.getX(), pos.getY(), pos.getZ());
 			return null;
 		}
 
@@ -106,7 +105,7 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 		if (player instanceof EntityPlayerMP) {
 			EntityPlayerMP playerMP = (EntityPlayerMP) player;
 
-			HavenBagHelper.teleportPlayerToHavenBag(playerMP, properties.getUID());
+			HavenBagUtil.teleportPlayerToHavenBag(playerMP, properties.getUID());
 
 			playerMP.playerNetServerHandler.sendPacket(tileHavenBag.getDescriptionPacket());
 			Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(playerMP, HavenBagProperty.IDENTIFIER), playerMP);

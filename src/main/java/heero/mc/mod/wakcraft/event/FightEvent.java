@@ -2,14 +2,13 @@ package heero.mc.mod.wakcraft.event;
 
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.world.World;
-import cpw.mods.fml.common.eventhandler.Event;
 
 public class FightEvent extends Event {
 	public enum Type {

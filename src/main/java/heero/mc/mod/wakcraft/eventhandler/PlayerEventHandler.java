@@ -8,13 +8,12 @@ import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagProperties;
 import heero.mc.mod.wakcraft.network.packet.PacketProfession;
 import net.minecraft.entity.player.EntityPlayerMP;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class PlayerEventHandler {
 	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
+	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		if (!event.player.worldObj.isRemote && event.player instanceof EntityPlayerMP) {
 			EntityPlayerMP playerMP = (EntityPlayerMP) event.player;
 
@@ -35,7 +34,7 @@ public class PlayerEventHandler {
 	}
 
 	@SubscribeEvent
-	public void onPlayerChangedDimension(PlayerChangedDimensionEvent event) {
+	public void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
 		if (!event.player.worldObj.isRemote && event.player instanceof EntityPlayerMP) {
 			Wakcraft.packetPipeline.sendTo(new PacketProfession(event.player), (EntityPlayerMP) event.player);
 			Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(event.player, HavenBagProperty.IDENTIFIER), (EntityPlayerMP) event.player);

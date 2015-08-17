@@ -1,45 +1,42 @@
 package heero.mc.mod.wakcraft.client.gui;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.network.GuiId;
-
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.io.IOException;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public abstract class GUITabs extends GuiScreen {
 	private static final ResourceLocation tabButtonsTexture = new ResourceLocation(
-			WInfo.MODID.toLowerCase(), "textures/gui/tabs.png");
+			Reference.MODID.toLowerCase(), "textures/gui/tabs.png");
 
 	protected GuiScreen currentScreen;
 	protected EntityPlayer player;
 	protected World world;
-	protected int x, y, z;
+	protected BlockPos pos;
 	protected List<GuiId> tabs;
 	protected int selectedTab;
 
 	protected int tabButtonLeft;
 	protected int tabButtonTop;
 
-	public GUITabs(GuiScreen currentScreen, EntityPlayer player, World world, int x, int y, int z, int selectedTab, List<GuiId> tabs) {
+	public GUITabs(GuiScreen currentScreen, EntityPlayer player, World world, BlockPos pos, int selectedTab, List<GuiId> tabs) {
 		super();
 
 		this.currentScreen = currentScreen;
 		this.player = player;
 		this.world = world;
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		this.pos = pos;
 		this.allowUserInput = true;
 		this.tabs = tabs;
 		this.selectedTab = selectedTab;
@@ -93,7 +90,7 @@ public abstract class GUITabs extends GuiScreen {
 	 * Handles mouse input.
 	 */
 	@Override
-	public void handleMouseInput() {
+	public void handleMouseInput() throws IOException {
 		currentScreen.handleMouseInput();
 
 		super.handleMouseInput();
@@ -103,7 +100,7 @@ public abstract class GUITabs extends GuiScreen {
 	 * Handles keyboard input.
 	 */
 	@Override
-	public void handleKeyboardInput() {
+	public void handleKeyboardInput() throws IOException {
 		currentScreen.handleKeyboardInput();
 
 		super.handleKeyboardInput();
@@ -114,8 +111,8 @@ public abstract class GUITabs extends GuiScreen {
 	 * (mouseX, mouseY, releasedButton)
 	 */
 	@Override
-	protected void mouseMovedOrUp(int mouseX, int mouseY, int releasedButton) {
-		if (releasedButton == 0) {
+	protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
+		if (clickedMouseButton == 0) {
 			int relativeMouseX = mouseX - tabButtonLeft;
 			int relativeMouseY = mouseY - tabButtonTop;
 

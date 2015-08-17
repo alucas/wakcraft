@@ -1,12 +1,12 @@
 package heero.mc.mod.wakcraft.crafting;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class RecipeWithLevel implements IExtendedRecipe {
 	public int recipeLevel;
@@ -75,7 +75,18 @@ public class RecipeWithLevel implements IExtendedRecipe {
 		return recipeResult;
 	}
 
-	@Override
+    /**
+     * getRemainingItems
+     *
+     * @param inv
+     * @return
+     */
+    @Override
+    public ItemStack[] func_179532_b(InventoryCrafting inv) {
+        return new ItemStack[0];
+    }
+
+    @Override
 	public List<ItemStack> getRecipeComponents() {
 		return recipeComponents;
 	}

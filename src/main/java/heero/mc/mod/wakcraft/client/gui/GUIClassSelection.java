@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.client.gui;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.entity.property.CharacterProperty;
 import heero.mc.mod.wakcraft.entity.property.CharacterProperty.CLASS;
@@ -13,7 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 public class GUIClassSelection extends GuiScreen implements GuiYesNoCallback {
-	protected static final ResourceLocation background = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/background.png");
+	protected static final ResourceLocation background = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/gui/background.png");
 
 	protected EntityPlayer player;
 	protected int guiWidth = 176;

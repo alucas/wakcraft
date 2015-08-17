@@ -6,21 +6,20 @@ import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
-import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class FightEventsHandler {
 	/**
@@ -34,7 +33,7 @@ public class FightEventsHandler {
 			return;
 		}
 
-		if (FightHelper.isFighter((EntityLivingBase) event.entity)) {
+		if (FightUtil.isFighter((EntityLivingBase) event.entity)) {
 			event.entity.registerExtendedProperties(FightProperty.IDENTIFIER, new FightProperty());
 			event.entity.registerExtendedProperties(FightCharacteristicsProperty.IDENTIFIER, new FightCharacteristicsProperty());
 			event.entity.registerExtendedProperties(SpellsProperty.IDENTIFIER, new SpellsProperty());
@@ -59,11 +58,11 @@ public class FightEventsHandler {
 			return;
 		}
 
-		if (!FightHelper.isFighter(event.entityPlayer)) {
+		if (!FightUtil.isFighter(event.entityPlayer)) {
 			return;
 		}
 
-		if (!FightHelper.isFighter(event.target) || !(event.target instanceof EntityLivingBase) || !(event.target instanceof IFighter)) {
+		if (!FightUtil.isFighter(event.target) || !(event.target instanceof EntityLivingBase) || !(event.target instanceof IFighter)) {
 			return;
 		}
 
@@ -75,37 +74,37 @@ public class FightEventsHandler {
 			return;
 		}
 
-		if (!FightHelper.isFighting(player) && !FightHelper.isFighting(target)) {
+		if (!FightUtil.isFighting(player) && !FightUtil.isFighting(target)) {
 			FightManager.INSTANCE.startServerFight(world, player, target);
 
 			event.setCanceled(true);
 			return;
 		}
 
-		int fightId = FightHelper.getFightId(player);
-		if (fightId != FightHelper.getFightId(target)) {
+		int fightId = FightUtil.getFightId(player);
+		if (fightId != FightUtil.getFightId(target)) {
 			event.setCanceled(true);
 			return;
 		}
 
-		if (FightHelper.getFightStage(world, fightId) != FightStage.FIGHT) {
+		if (FightUtil.getFightStage(world, fightId) != FightStage.FIGHT) {
 			event.setCanceled(true);
 			return;
 		}
 
-		if (FightHelper.getCurrentFighter(world, fightId) != player) {
+		if (FightUtil.getCurrentFighter(world, fightId) != player) {
 			event.setCanceled(true);
 			return;
 		}
 
-		ChunkCoordinates playerPosition = FightHelper.getCurrentPosition(player);
-		ChunkCoordinates targetPosition = FightHelper.getCurrentPosition(target);
-		if (MathHelper.abs(playerPosition.posX - targetPosition.posX) + MathHelper.abs(playerPosition.posZ - targetPosition.posZ) > 1) {
+        BlockPos playerPosition = FightUtil.getCurrentPosition(player);
+        BlockPos targetPosition = FightUtil.getCurrentPosition(target);
+		if (MathHelper.abs(playerPosition.getX() - targetPosition.getX()) + MathHelper.abs(playerPosition.getZ() - targetPosition.getZ()) > 1) {
 			event.setCanceled(true);
 			return;
 		}
 
-		targetFighter.onAttacked(player, FightHelper.getCurrentSpell(player));
+		targetFighter.onAttacked(player, FightUtil.getCurrentSpell(player));
 		event.setCanceled(true);
 	}
 
@@ -120,15 +119,15 @@ public class FightEventsHandler {
 			return;
 		}
 
-		if (!FightHelper.isFighter(event.entityLiving)) {
+		if (!FightUtil.isFighter(event.entityLiving)) {
 			return;
 		}
 
-		if (!FightHelper.isFighting(event.entityLiving)) {
+		if (!FightUtil.isFighting(event.entityLiving)) {
 			return;
 		}
 
-		int fightId = FightHelper.getFightId(event.entityLiving);
+		int fightId = FightUtil.getFightId(event.entityLiving);
 
 		int defeatedTeam = FightManager.INSTANCE.getDefeatedTeam(event.entityLiving.worldObj, fightId);
 		if (defeatedTeam <= 0) {
@@ -145,22 +144,22 @@ public class FightEventsHandler {
 	 * @param event	The Event object.
 	 */
 	@SubscribeEvent
-	public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
+	public void onPlayerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event) {
 		if (event.player.worldObj.isRemote) {
 			return;
 		}
 
-		if (!FightHelper.isFighter(event.player)) {
+		if (!FightUtil.isFighter(event.player)) {
 			return;
 		}
 
-		if (!FightHelper.isFighting(event.player)) {
+		if (!FightUtil.isFighting(event.player)) {
 			return;
 		}
 
 		event.player.setDead();
 
-		int fightId = FightHelper.getFightId(event.player);
+		int fightId = FightUtil.getFightId(event.player);
 
 		int defeatedTeam = FightManager.INSTANCE.getDefeatedTeam(event.player.worldObj, fightId);
 		if (defeatedTeam <= 0) {
@@ -171,8 +170,8 @@ public class FightEventsHandler {
 	}
 
 	@SubscribeEvent
-	public void onServerTickEvent(ServerTickEvent event) {
-		if (event.phase == Phase.END) {
+	public void onServerTickEvent(TickEvent.ServerTickEvent event) {
+		if (event.phase == TickEvent.Phase.END) {
 			FightManager.INSTANCE.updateFights(MinecraftServer.getServer().getTickCounter());
 		}
 	}
@@ -181,16 +180,16 @@ public class FightEventsHandler {
 	public void onLivingUpdateEvent(LivingUpdateEvent event) {
 		EntityLivingBase entity = event.entityLiving;
 
-		if (!FightHelper.isFighter(entity) || !FightHelper.isFighting(entity)) {
+		if (!FightUtil.isFighter(entity) || !FightUtil.isFighting(entity)) {
 			return;
 		}
 
-		int fightId = FightHelper.getFightId(entity);
-		if (FightHelper.getFightStage(entity.worldObj, fightId) != FightStage.FIGHT) {
+		int fightId = FightUtil.getFightId(entity);
+		if (FightUtil.getFightStage(entity.worldObj, fightId) != FightStage.FIGHT) {
 			return;
 		}
 
-		EntityLivingBase currentFighter = FightHelper.getCurrentFighter(entity.worldObj, fightId);
+		EntityLivingBase currentFighter = FightUtil.getCurrentFighter(entity.worldObj, fightId);
 		if (currentFighter != entity) {
 			return;
 		}

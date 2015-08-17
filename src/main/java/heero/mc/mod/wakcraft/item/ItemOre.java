@@ -1,15 +1,14 @@
 package heero.mc.mod.wakcraft.item;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
-
-import java.util.List;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemOre extends ItemWithLevel {
 	protected String[] names;
@@ -19,8 +18,7 @@ public class ItemOre extends ItemWithLevel {
 		super(0);
 
 		setCreativeTab(WakcraftCreativeTabs.tabResource);
-		setUnlocalizedName("Ore");
-		setTextureName(WInfo.MODID.toLowerCase() + ":ore");
+		setUnlocalizedName(Reference.MODID.toLowerCase() + "_Ore");
 		setHasSubtypes(true);
 	}
 

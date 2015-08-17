@@ -1,11 +1,11 @@
 package heero.mc.mod.wakcraft.fight;
 
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.BlockPos;
 
-public class FightBlockCoordinates extends ChunkCoordinates {
+public class FightBlockCoordinates extends BlockPos {
 	public static enum TYPE {
 		NORMAL, WALL
-	};
+	}
 
 	protected TYPE type;
 	// NORMAL
@@ -27,7 +27,7 @@ public class FightBlockCoordinates extends ChunkCoordinates {
 	}
 
 	public int hashCode() {
-		return (this.posX & 0xFF) + ((this.posZ & 0xFF) << 8) + ((this.posY & 0xFF) << 16);
+		return (this.getX() & 0xFF) + ((this.getZ() & 0xFF) << 8) + ((this.getY() & 0xFF) << 16);
 	}
 
 	public TYPE getType() {

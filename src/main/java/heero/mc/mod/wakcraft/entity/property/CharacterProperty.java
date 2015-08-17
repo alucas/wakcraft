@@ -1,13 +1,13 @@
 package heero.mc.mod.wakcraft.entity.property;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class CharacterProperty implements IExtendedEntityProperties, ISynchProperties {
-	public static final String IDENTIFIER = WInfo.MODID + "Character";
+	public static final String IDENTIFIER = Reference.MODID + "Character";
 
 	protected static String TAG_CLASS = "WClass";
 	protected static String TAG_LEVEL = "WLevel";

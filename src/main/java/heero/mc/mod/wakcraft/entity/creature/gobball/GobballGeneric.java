@@ -2,19 +2,19 @@ package heero.mc.mod.wakcraft.entity.creature.gobball;
 
 import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.entity.creature.EntityWCreature;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.AnimalChest;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public abstract class GobballGeneric extends EntityWCreature {
@@ -38,14 +38,6 @@ public abstract class GobballGeneric extends EntityWCreature {
 		this.inventory.setInventorySlotContents(1, new ItemStack(WItems.gobballHorn, 1, 0));
 		this.inventory.setInventorySlotContents(2, new ItemStack(WItems.gobballSkin, 1, 0));
 		this.inventory.setInventorySlotContents(3, new ItemStack(WItems.woollyKey, 1, 0));
-	}
-
-	/**
-	 * Returns true if the newer Entity AI code should be run
-	 */
-	@Override
-	protected boolean isAIEnabled() {
-		return true;
 	}
 
 	@Override
@@ -145,7 +137,7 @@ public abstract class GobballGeneric extends EntityWCreature {
 	 * Play step sound.
 	 */
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
+	protected void playStepSound(BlockPos blockPos, Block block) {
 		this.playSound("mob.sheep.step", 0.15F, 1.0F);
 	}
 }

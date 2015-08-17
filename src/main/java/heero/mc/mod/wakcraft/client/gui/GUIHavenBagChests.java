@@ -5,14 +5,14 @@ import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenBagChest;
 import heero.mc.mod.wakcraft.havenbag.ChestType;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
 import heero.mc.mod.wakcraft.network.GuiId;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIHavenBagChests extends GUITabs {
@@ -29,13 +29,11 @@ public class GUIHavenBagChests extends GUITabs {
 
 	protected ContainerHavenBagChest container;
 
-	public GUIHavenBagChests(GuiId guiId, ContainerHavenBagChest container, EntityPlayer player, World world, int x, int y, int z) {
+	public GUIHavenBagChests(GuiId guiId, ContainerHavenBagChest container, EntityPlayer player, World world, BlockPos pos) {
 		super(new GUIHavenBagChest(container, ChestType.CHEST_NORMAL),
 				player,
 				world,
-				x,
-				y,
-				z,
+				pos,
 				havenBagChestGuiIds.indexOf(GuiId.HAVEN_BAG_CHEST_NORMAL),
 				havenBagChestGuiIds);
 

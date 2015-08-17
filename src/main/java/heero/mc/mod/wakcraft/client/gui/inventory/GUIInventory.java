@@ -1,16 +1,16 @@
 package heero.mc.mod.wakcraft.client.gui.inventory;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIInventory extends InventoryEffectRenderer {
-	private static final ResourceLocation background = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/inventory.png");
+	private static final ResourceLocation background = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/gui/inventory.png");
 
 	public GUIInventory(Container container) {
 		super(container);
@@ -38,9 +38,9 @@ public class GUIInventory extends InventoryEffectRenderer {
 
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-		GuiInventory.func_147046_a(guiLeft + 51, guiTop + 75, 30,
-				(float) (guiLeft + 51) - mouseX, (float) (guiTop + 75 - 50)
-						- mouseY, mc.thePlayer);
+		GuiInventory.drawEntityOnScreen(guiLeft + 51, guiTop + 75, 30,
+                (float) (guiLeft + 51) - mouseX, (float) (guiTop + 75 - 50)
+                        - mouseY, mc.thePlayer);
 	}
 
 	/**

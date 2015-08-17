@@ -1,0 +1,8 @@
+{
+  "parent": "wakcraft:block/slab/template/b0s2",
+  "textures": {
+    "bottom": "wakcraft:blocks/hbstand",
+    "top": "wakcraft:blocks/hbstand",
+    "side": "wakcraft:blocks/hbstand"
+  }
+}

@@ -12,11 +12,10 @@ import net.minecraft.item.ItemStack;
 public class ContainerHavenBagChest extends Container {
 	private TileEntityHavenBagChest tileEntity;
 
-	public ContainerHavenBagChest(InventoryPlayer inventory,
-			TileEntityHavenBagChest tileEntity) {
+	public ContainerHavenBagChest(InventoryPlayer inventory, TileEntityHavenBagChest tileEntity, EntityPlayer player) {
 		this.tileEntity = tileEntity;
 
-		tileEntity.openInventory();
+		tileEntity.openInventory(player);
 
 		int havenBagChestId = 0;
 		for (ChestType chestId : ChestType.values()) {
@@ -110,7 +109,7 @@ public class ContainerHavenBagChest extends Container {
 	public void onContainerClosed(EntityPlayer player) {
 		super.onContainerClosed(player);
 
-		tileEntity.closeInventory();
+		tileEntity.closeInventory(player);
 	}
 
 	public class HavenBagChestSlot extends Slot {

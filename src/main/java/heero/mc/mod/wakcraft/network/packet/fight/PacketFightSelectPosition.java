@@ -1,23 +1,23 @@
 package heero.mc.mod.wakcraft.network.packet.fight;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.BlockPos;
 
 import javax.annotation.Nullable;
-
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ChunkCoordinates;
 
 public class PacketFightSelectPosition implements IPacketFight {
 	protected IPacketFight packetFight;
 
 	public Integer fighterId;
-	public @Nullable ChunkCoordinates selectedPosition;
+	public @Nullable
+    BlockPos selectedPosition;
 
 	public PacketFightSelectPosition() {
 		this.packetFight = new PacketFight();
 	}
 
-	public PacketFightSelectPosition(int fightId, EntityLivingBase fighter, @Nullable ChunkCoordinates selectedPosition) {
+	public PacketFightSelectPosition(int fightId, EntityLivingBase fighter, @Nullable BlockPos selectedPosition) {
 		this.packetFight = new PacketFight(fightId);
 		this.fighterId = fighter.getEntityId();
 		this.selectedPosition = selectedPosition;
@@ -34,9 +34,9 @@ public class PacketFightSelectPosition implements IPacketFight {
 			buffer.writeInt(Integer.MAX_VALUE);
 			buffer.writeInt(Integer.MAX_VALUE);
 		} else {
-			buffer.writeInt(selectedPosition.posX);
-			buffer.writeInt(selectedPosition.posY);
-			buffer.writeInt(selectedPosition.posZ);
+			buffer.writeInt(selectedPosition.getX());
+			buffer.writeInt(selectedPosition.getY());
+			buffer.writeInt(selectedPosition.getZ());
 		}
 	}
 
@@ -51,7 +51,7 @@ public class PacketFightSelectPosition implements IPacketFight {
 		int posZ = buffer.readInt();
 
 		if (posX != Integer.MAX_VALUE || posY != Integer.MAX_VALUE || posZ != Integer.MAX_VALUE) {
-			selectedPosition = new ChunkCoordinates(posX, posY, posZ);
+			selectedPosition = new BlockPos(posX, posY, posZ);
 		} else {
 			selectedPosition = null;
 		}

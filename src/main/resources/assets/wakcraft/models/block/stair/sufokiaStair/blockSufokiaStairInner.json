@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "wakcraft:blocks/sufokiaColor1",
+    "top": "wakcraft:blocks/sufokiaColor1",
+    "side": "wakcraft:blocks/sufokiaColor1"
+  }
+}

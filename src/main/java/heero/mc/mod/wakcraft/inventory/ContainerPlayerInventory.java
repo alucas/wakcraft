@@ -2,15 +2,11 @@ package heero.mc.mod.wakcraft.inventory;
 
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.entity.property.InventoryProperty;
-import heero.mc.mod.wakcraft.item.ItemWArmor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerPlayerInventory extends Container {
 
@@ -106,14 +102,15 @@ public class ContainerPlayerInventory extends Container {
 		/**
 		 * Returns the placeholder icon
 		 */
-		@SideOnly(Side.CLIENT)
-		@Override
-		public IIcon getBackgroundIconIndex() {
-			if (!(inventory instanceof InventoryArmors)) {
-				return null;
-			}
-
-			return ItemWArmor.getPlaceholderIcon(((InventoryArmors) inventory).getSlotType(slotNumber));
-		}
+//        TODO
+//		@SideOnly(Side.CLIENT)
+//		@Override
+//		public IIcon getBackgroundIconIndex() {
+//			if (!(inventory instanceof InventoryArmors)) {
+//				return null;
+//			}
+//
+//			return ItemWArmor.getPlaceholderIcon(((InventoryArmors) inventory).getSlotType(slotNumber));
+//		}
 	}
 }

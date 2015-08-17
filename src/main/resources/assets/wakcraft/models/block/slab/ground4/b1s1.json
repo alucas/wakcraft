@@ -1,0 +1,6 @@
+{
+  "parent": "wakcraft:block/slab/templateAll/b1s1",
+  "textures": {
+    "all": "wakcraft:blocks/ground4"
+  }
+}

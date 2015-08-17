@@ -1,15 +1,15 @@
 package heero.mc.mod.wakcraft.entity.ai;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraftforge.fluids.IFluidBlock;
+
+import java.util.Random;
 
 public class EntityAIMoveOutWater extends EntityAIBase {
 	protected EntityCreature entity;
@@ -36,14 +36,14 @@ public class EntityAIMoveOutWater extends EntityAIBase {
 			return false;
 		}
 
-		Vec3 blockCoords = getNearestRandomCoast(entity, 10);
+		BlockPos blockPos = getNearestRandomCoast(entity, 10);
 
-		if (blockCoords == null) {
+		if (blockPos == null) {
 			return false;
 		} else {
-			this.destinationX = blockCoords.xCoord;
-			this.destinationY = blockCoords.yCoord;
-			this.destinationZ = blockCoords.zCoord;
+			this.destinationX = blockPos.getX();
+			this.destinationY = blockPos.getY();
+			this.destinationZ = blockPos.getZ();
 
 			return true;
 		}
@@ -59,21 +59,18 @@ public class EntityAIMoveOutWater extends EntityAIBase {
 		entity.getNavigator().tryMoveToXYZ(this.destinationX, this.destinationY, this.destinationZ, this.speed);
 	}
 
-	protected Vec3 getNearestRandomCoast(EntityCreature entity, int distanceMax) {
+	protected BlockPos getNearestRandomCoast(EntityCreature entity, int distanceMax) {
 		Random random = entity.getRNG();
-		boolean blockFound = false;
-		int selectedPosX = 0;
-		int selectedPosY = 0;
-		int selectedPosZ = 0;
+		BlockPos blockPosFound = null;
 		double pathWeightMax = Double.MAX_VALUE;
 		boolean isInHomeRange;
 
 		if (entity.hasHome()) {
-			double distanceToHomeSquared = entity.getHomePosition().getDistanceSquared(
-					MathHelper.floor_double(entity.posX),
-					MathHelper.floor_double(entity.posY),
-					MathHelper.floor_double(entity.posZ)) + 4.0;
-			double distanceToHomeMax = entity.func_110174_bM() + distanceMax;
+			double distanceToHomeSquared = entity.func_180486_cf().distanceSq(
+                    MathHelper.floor_double(entity.posX),
+                    MathHelper.floor_double(entity.posY),
+                    MathHelper.floor_double(entity.posZ)) + 4.0;
+			double distanceToHomeMax = entity.getMaximumHomeDistance() + distanceMax;
 
 			isInHomeRange = distanceToHomeSquared < distanceToHomeMax * distanceToHomeMax;
 		} else {
@@ -84,8 +81,10 @@ public class EntityAIMoveOutWater extends EntityAIBase {
 			int posX = MathHelper.floor_double(entity.posX) + random.nextInt(2 * distanceMax) - distanceMax;
 			int posY = MathHelper.floor_double(entity.posY);
 			int posZ = MathHelper.floor_double(entity.posZ) + random.nextInt(2 * distanceMax) - distanceMax;
+            BlockPos blockPos = new BlockPos(posX, posY, posZ);
 
-			if (!isInHomeRange && !entity.isWithinHomeDistance(posX, posY, posZ)) {
+            // func_180485_d = isWithinHomeDistanceFromPosition
+			if (!isInHomeRange && !entity.func_180485_d(blockPos)) {
 				continue;
 			}
 
@@ -94,24 +93,17 @@ public class EntityAIMoveOutWater extends EntityAIBase {
 				continue;
 			}
 
-			Block block = entity.worldObj.getBlock(posX, posY, posZ);
+			Block block = entity.worldObj.getBlockState(blockPos).getBlock();
 			if (block instanceof BlockLiquid
 					|| block instanceof IFluidBlock
-					|| !entity.worldObj.getBlock(posX, posY + 1, posZ).equals(Blocks.air)) {
+					|| !entity.worldObj.getBlockState(blockPos.offsetUp()).getBlock().equals(Blocks.air)) {
 				continue;
 			}
 
 			pathWeightMax = pathWeight;
-			selectedPosX = posX;
-			selectedPosY = posY + 1;
-			selectedPosZ = posZ;
-			blockFound = true;
+            blockPosFound = blockPos;
 		}
 
-		if (!blockFound) {
-			return null;
-		}
-
-		return Vec3.createVectorHelper((double) selectedPosX, (double) selectedPosY, (double) selectedPosZ);
+		return blockPosFound;
 	}
 }

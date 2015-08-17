@@ -1,0 +1,1032 @@
+[19:31:07] [main/DEBUG] [FML/]: Injecting tracing printstreams for STDOUT/STDERR.
+[19:31:07] [main/INFO] [FML/]: Forge Mod Loader version 8.99.192.1497 for Minecraft 1.8 loading
+[19:31:07] [main/INFO] [FML/]: Java is OpenJDK 64-Bit Server VM, version 1.7.0_79, running on Linux:amd64:3.16.0-0.bpo.4-amd64, installed at /usr/lib/jvm/java-7-openjdk-amd64/jre
+[19:31:07] [main/DEBUG] [FML/]: Java classpath at launch is /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/javazic.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/management-agent.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/compilefontconfig.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/dnsns.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/icedtea-sound.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/localedata.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/java-atk-wrapper.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/sunjce_provider.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/zipfs.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/sunpkcs11.jar:/home/heero/src/wakcraft/build/classes/main:/home/heero/src/wakcraft/build/resources/main:/home/heero/src/wakcraft/build/dirtyArtifacts/forgeSrc-1.8-11.14.3.1497.jar:/home/heero/.gradle/caches/modules-2/files-2.1/net.minecraft/launchwrapper/1.12/111e7bea9c968cdb3d06ef4632bf7ff0824d0f36/launchwrapper-1.12.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-debug-all/5.0.3/f9e364ae2a66ce2a543012a4668856e84e5dab74/asm-debug-all-5.0.3.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.typesafe.akka/akka-actor_2.11/2.3.3/ed62e9fc709ca0f2ff1a3220daa8b70a2870078e/akka-actor_2.11-2.3.3.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.typesafe/config/1.2.1/f771f71fdae3df231bcd54d5ca2d57f0bf93f467/config-1.2.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors-migration_2.11/1.1.0/dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f/scala-actors-migration_2.11-1.1.0.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-compiler/2.11.1/56ea2e6c025e0821f28d73ca271218b8dd04926a/scala-compiler-2.11.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-library_2.11/1.0.2/e517c53a7e9acd6b1668c5a35eccbaa3bab9aac/scala-continuations-library_2.11-1.0.2.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-plugin_2.11.1/1.0.2/f361a3283452c57fa30c1ee69448995de23c60f7/scala-continuations-plugin_2.11.1-1.0.2.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.11.1/e11da23da3eabab9f4777b9220e60d44c1aab6a/scala-library-2.11.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.1/f05d7345bf5a58924f2837c6c1f4d73a938e1ff0/scala-parser-combinators_2.11-1.0.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-reflect/2.11.1/6580347e61cc7f8e802941e7fde40fa83b8badeb/scala-reflect-2.11.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-swing_2.11/1.0.1/b1cdd92bd47b1e1837139c1c53020e86bb9112ae/scala-swing_2.11-1.0.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-xml_2.11/1.0.2/820fbca7e524b530fdadc594c39d49a21ea0337e/scala-xml_2.11-1.0.2.jar:/home/heero/.gradle/caches/modules-2/files-2.1/lzma/lzma/0.0.1/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/java3d/vecmath/1.5.2/79846ba34cbd89e2422d74d53752f993dcc2ccaf/vecmath-1.5.2.jar:/home/heero/.gradle/caches/modules-2/files-2.1/net.sf.trove4j/trove4j/3.0.3/42ccaf4761f0dfdfa805c9e340d99a755907e2dd/trove4j-3.0.3.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.ibm.icu/icu4j-core-mojang/51.2/63d216a9311cca6be337c1e458e587f99d382b84/icu4j-core-mojang-51.2.jar:/home/heero/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.6/306816fb57cf94f108a43c95731b08934dcae15c/jopt-simple-4.6.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.paulscode/codecjorbis/20101023/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.paulscode/codecwav/20101023/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.paulscode/libraryjavasound/20101123/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.paulscode/librarylwjglopenal/20100824/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.paulscode/soundsystem/20120107/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar:/home/heero/.gradle/caches/modules-2/files-2.1/io.netty/netty-all/4.0.15.Final/85cad5eb4fc8ae2ecc990dc7c411771a091ded5/netty-all-4.0.15.Final.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/17.0/9c6ef172e8de35fd8d4d8783e4821e57cdef7445/guava-17.0.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.3.2/90a3822c38ec8c996e84c16a3477ef632cbc87a3/commons-lang3-3.3.2.jar:/home/heero/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar:/home/heero/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/9ce04e34240f674bc72680f8b843b1457383161a/commons-codec-1.9.jar:/home/heero/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar:/home/heero/.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.mojang/authlib/1.5.17/893a8c553c0cfc9b6fbdff023747e30152ab09ec/authlib-1.5.17.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.mojang/realms/1.6.1/5655f6fb44aece10e5b3ad7cfee3e6936031c068/realms-1.6.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.8.1/a698750c16740fd5b3871425f4cb3bbaa87f529d/commons-compress-1.8.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.3.3/18f4247ff4572a074444572cee34647c43e7c9c7/httpclient-4.3.3.jar:/home/heero/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.3/f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f/commons-logging-1.1.3.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.3.2/31fbbff1ddbf98f3aa7377c94d33b0447c646b6e/httpcore-4.3.2.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.0-beta9/1dd66e68cccd907880229f9e2de1314bd13ff785/log4j-api-2.0-beta9.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.0-beta9/678861ba1b2e1fccb594bb0ca03114bb05da9695/log4j-core-2.0-beta9.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.1/f58c5aabcef0e41718a564be9f8e412fff8db847/lwjgl-2.9.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.1/290d7ba8a1bd9566f5ddf16ad06f09af5ec9b20e/lwjgl_util-2.9.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch/6.5/320a2dfd18513a5f41b4e75729df684488cbd925/twitch-6.5.jar:/home/heero/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/aa9aae879af8eb378e22cfc64db56ec2ca9a44d1/lwjgl-platform-2.9.1-natives-linux.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/2d12c83fdfbc04ecabf02c7bc8cc54d034f0daac/lwjgl-platform-2.9.1-natives-osx.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/4c517eca808522457dd95ee8fc1fbcdbb602efbe/lwjgl-platform-2.9.1-natives-windows.jar:/home/heero/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar:/home/heero/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar:/home/heero/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar:/home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors/2.11.0/8ccfb6541de179bb1c4d45cf414acee069b7f78b/scala-actors-2.11.0.jar:/home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/5f9d1ee26257b3a33f0ca06fed335ef462af659f/twitch-platform-6.5-natives-osx.jar:/home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/206c4ccaecdbcfd2a1631150c69a97bbc9c20c11/twitch-platform-6.5-natives-windows-32.jar:/home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/9fdd0fd5aed0817063dcf95b69349a171f447ebd/twitch-platform-6.5-natives-windows-64.jar:/home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/18215140f010c05b9f86ef6f0f8871954d2ccebf/twitch-external-platform-4.5-natives-windows-32.jar:/home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/c3cde57891b935d41b6680a9c5e1502eeab76d86/twitch-external-platform-4.5-natives-windows-64.jar:/home/heero/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1497/start:/home/heero/.usr/share/idea-IC-139.1117.1/lib/idea_rt.jar:/home/heero/.usr/share/idea-IC-139.1117.1/plugins/Groovy/lib/agent/gragent.jar
+[19:31:07] [main/DEBUG] [FML/]: Java library path at launch is /home/heero/.usr/share/idea-IC-139.1117.1/bin::/home/heero/.usr/lib:/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib:/home/heero/.gradle/caches/minecraft/net/minecraft/minecraft_natives/1.8
+[19:31:07] [main/INFO] [FML/]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[19:31:07] [main/DEBUG] [FML/]: Instantiating coremod class FMLCorePlugin
+[19:31:07] [main/DEBUG] [FML/]: Added access transformer class net.minecraftforge.fml.common.asm.transformers.AccessTransformer to enqueued access transformers
+[19:31:07] [main/DEBUG] [FML/]: Enqueued coremod FMLCorePlugin
+[19:31:07] [main/DEBUG] [FML/]: Instantiating coremod class FMLForgePlugin
+[19:31:07] [main/DEBUG] [FML/]: Added access transformer class net.minecraftforge.transformers.ForgeAccessTransformer to enqueued access transformers
+[19:31:07] [main/DEBUG] [FML/]: Enqueued coremod FMLForgePlugin
+[19:31:07] [main/DEBUG] [FML/]: All fundamental core mods are successfully located
+[19:31:07] [main/DEBUG] [FML/]: Attempting to load commandline specified mods, relative to /home/heero/src/wakcraft/.
+[19:31:07] [main/DEBUG] [FML/]: Discovering coremods
+[19:31:07] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[19:31:07] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[19:31:07] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[19:31:07] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[19:31:07] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[19:31:07] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[19:31:07] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[19:31:07] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[19:31:07] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[19:31:07] [main/DEBUG] [FML/]: Injecting coremod FMLCorePlugin {net.minecraftforge.fml.relauncher.FMLCorePlugin} class transformers
+[19:31:07] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.BlamingTransformer
+[19:31:07] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.MarkerTransformer
+[19:31:07] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.SideTransformer
+[19:31:07] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriptionTransformer
+[19:31:07] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriberTransformer
+[19:31:07] [main/DEBUG] [FML/]: Injection complete
+[19:31:07] [main/DEBUG] [FML/]: Running coremod plugin for FMLCorePlugin {net.minecraftforge.fml.relauncher.FMLCorePlugin}
+[19:31:07] [main/DEBUG] [FML/]: Running coremod plugin FMLCorePlugin
+[19:31:07] [main/ERROR] [FML/]: The binary patch set is missing. Either you are in a development environment, or things are not going to work!
+[19:31:09] [main/ERROR] [FML/]: FML appears to be missing any signature data. This is not a good thing
+[19:31:09] [main/DEBUG] [FML/]: Coremod plugin class FMLCorePlugin run successfully
+[19:31:09] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[19:31:09] [main/DEBUG] [FML/]: Injecting coremod FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin} class transformers
+[19:31:09] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.classloading.FluidIdTransformer
+[19:31:09] [main/DEBUG] [FML/]: Injection complete
+[19:31:09] [main/DEBUG] [FML/]: Running coremod plugin for FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin}
+[19:31:09] [main/DEBUG] [FML/]: Running coremod plugin FMLForgePlugin
+[19:31:09] [main/DEBUG] [FML/]: Coremod plugin class FMLForgePlugin run successfully
+[19:31:09] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[19:31:09] [main/DEBUG] [FML/]: Loaded 60 rules from AccessTransformer config file fml_at.cfg
+[19:31:09] [main/DEBUG] [FML/]: Loaded 121 rules from AccessTransformer config file forge_at.cfg
+[19:31:09] [main/DEBUG] [FML/]: Validating minecraft
+[19:31:09] [main/DEBUG] [FML/]: Minecraft validated, launching...
+[19:31:09] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[19:31:09] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[19:31:09] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[19:31:09] [main/INFO] [LaunchWrapper/]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[19:31:16] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - LanguageManager took 0.006s
+[19:31:16] [Client thread/INFO] [STDOUT/]: [net.minecraftforge.fml.client.SplashProgress:start:235]: ---- Minecraft Crash Report ----
+// Quite honestly, I wouldn't worry myself about that.
+
+Time: 8/15/15 7:31 PM
+Description: Loading screen debug info
+
+This is just a prompt for computer specs to be printed. THIS IS NOT A ERROR
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8
+	Operating System: Linux (amd64) version 3.16.0-0.bpo.4-amd64
+	Java Version: 1.7.0_79, Oracle Corporation
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 708092184 bytes (675 MB) / 1038876672 bytes (990 MB) up to 1038876672 bytes (990 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: 
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'NVIDIA Corporation' Version: '4.4.0 NVIDIA 340.65' Renderer: 'GeForce GTX 750 Ti/PCIe/SSE2'
+[19:31:16] [Client thread/INFO] [MinecraftForge/]: Attempting early MinecraftForge initialization
+[19:31:16] [Client thread/INFO] [FML/]: MinecraftForge v11.14.3.1497 Initialized
+[19:31:16] [Client thread/INFO] [FML/]: Replaced 204 ore recipies
+[19:31:16] [Client thread/INFO] [MinecraftForge/]: Completed early MinecraftForge initialization
+[19:31:16] [Client thread/DEBUG] [FML/]: File /home/heero/src/wakcraft/config/injectedDependencies.json not found. No dependencies injected
+[19:31:16] [Client thread/DEBUG] [FML/]: Building injected Mod Containers [net.minecraftforge.fml.common.FMLContainer, net.minecraftforge.common.ForgeModContainer]
+[19:31:16] [Client thread/DEBUG] [FML/]: Attempting to load mods contained in the minecraft jar file and associated classes
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/javazic.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/management-agent.jar, examining for mod candidates
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/compilefontconfig.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/dnsns.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/icedtea-sound.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/localedata.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/java-atk-wrapper.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/sunjce_provider.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/zipfs.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/sunpkcs11.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related directory at /home/heero/src/wakcraft/build/classes/main, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related directory at /home/heero/src/wakcraft/build/resources/main, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /home/heero/src/wakcraft/build/dirtyArtifacts/forgeSrc-1.8-11.14.3.1497.jar, examining for mod candidates
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/net.minecraft/launchwrapper/1.12/111e7bea9c968cdb3d06ef4632bf7ff0824d0f36/launchwrapper-1.12.jar
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /home/heero/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-debug-all/5.0.3/f9e364ae2a66ce2a543012a4668856e84e5dab74/asm-debug-all-5.0.3.jar, examining for mod candidates
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/com.typesafe.akka/akka-actor_2.11/2.3.3/ed62e9fc709ca0f2ff1a3220daa8b70a2870078e/akka-actor_2.11-2.3.3.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/com.typesafe/config/1.2.1/f771f71fdae3df231bcd54d5ca2d57f0bf93f467/config-1.2.1.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors-migration_2.11/1.1.0/dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f/scala-actors-migration_2.11-1.1.0.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-compiler/2.11.1/56ea2e6c025e0821f28d73ca271218b8dd04926a/scala-compiler-2.11.1.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-library_2.11/1.0.2/e517c53a7e9acd6b1668c5a35eccbaa3bab9aac/scala-continuations-library_2.11-1.0.2.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-plugin_2.11.1/1.0.2/f361a3283452c57fa30c1ee69448995de23c60f7/scala-continuations-plugin_2.11.1-1.0.2.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.11.1/e11da23da3eabab9f4777b9220e60d44c1aab6a/scala-library-2.11.1.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.1/f05d7345bf5a58924f2837c6c1f4d73a938e1ff0/scala-parser-combinators_2.11-1.0.1.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-reflect/2.11.1/6580347e61cc7f8e802941e7fde40fa83b8badeb/scala-reflect-2.11.1.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-swing_2.11/1.0.1/b1cdd92bd47b1e1837139c1c53020e86bb9112ae/scala-swing_2.11-1.0.1.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-xml_2.11/1.0.2/820fbca7e524b530fdadc594c39d49a21ea0337e/scala-xml_2.11-1.0.2.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/lzma/lzma/0.0.1/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/java3d/vecmath/1.5.2/79846ba34cbd89e2422d74d53752f993dcc2ccaf/vecmath-1.5.2.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/net.sf.trove4j/trove4j/3.0.3/42ccaf4761f0dfdfa805c9e340d99a755907e2dd/trove4j-3.0.3.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/com.ibm.icu/icu4j-core-mojang/51.2/63d216a9311cca6be337c1e458e587f99d382b84/icu4j-core-mojang-51.2.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.6/306816fb57cf94f108a43c95731b08934dcae15c/jopt-simple-4.6.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/com.paulscode/codecjorbis/20101023/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/com.paulscode/codecwav/20101023/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /home/heero/.gradle/caches/modules-2/files-2.1/com.paulscode/libraryjavasound/20101123/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar, examining for mod candidates
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/com.paulscode/librarylwjglopenal/20100824/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/com.paulscode/soundsystem/20120107/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/io.netty/netty-all/4.0.15.Final/85cad5eb4fc8ae2ecc990dc7c411771a091ded5/netty-all-4.0.15.Final.jar
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /home/heero/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/17.0/9c6ef172e8de35fd8d4d8783e4821e57cdef7445/guava-17.0.jar, examining for mod candidates
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.3.2/90a3822c38ec8c996e84c16a3477ef632cbc87a3/commons-lang3-3.3.2.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/9ce04e34240f674bc72680f8b843b1457383161a/commons-codec-1.9.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/com.mojang/authlib/1.5.17/893a8c553c0cfc9b6fbdff023747e30152ab09ec/authlib-1.5.17.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/com.mojang/realms/1.6.1/5655f6fb44aece10e5b3ad7cfee3e6936031c068/realms-1.6.1.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.8.1/a698750c16740fd5b3871425f4cb3bbaa87f529d/commons-compress-1.8.1.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.3.3/18f4247ff4572a074444572cee34647c43e7c9c7/httpclient-4.3.3.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.3/f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f/commons-logging-1.1.3.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.3.2/31fbbff1ddbf98f3aa7377c94d33b0447c646b6e/httpcore-4.3.2.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.0-beta9/1dd66e68cccd907880229f9e2de1314bd13ff785/log4j-api-2.0-beta9.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.0-beta9/678861ba1b2e1fccb594bb0ca03114bb05da9695/log4j-core-2.0-beta9.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.1/f58c5aabcef0e41718a564be9f8e412fff8db847/lwjgl-2.9.1.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.1/290d7ba8a1bd9566f5ddf16ad06f09af5ec9b20e/lwjgl_util-2.9.1.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch/6.5/320a2dfd18513a5f41b4e75729df684488cbd925/twitch-6.5.jar
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /home/heero/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar, examining for mod candidates
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/aa9aae879af8eb378e22cfc64db56ec2ca9a44d1/lwjgl-platform-2.9.1-natives-linux.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/2d12c83fdfbc04ecabf02c7bc8cc54d034f0daac/lwjgl-platform-2.9.1-natives-osx.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/4c517eca808522457dd95ee8fc1fbcdbb602efbe/lwjgl-platform-2.9.1-natives-windows.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors/2.11.0/8ccfb6541de179bb1c4d45cf414acee069b7f78b/scala-actors-2.11.0.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/5f9d1ee26257b3a33f0ca06fed335ef462af659f/twitch-platform-6.5-natives-osx.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/206c4ccaecdbcfd2a1631150c69a97bbc9c20c11/twitch-platform-6.5-natives-windows-32.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/9fdd0fd5aed0817063dcf95b69349a171f447ebd/twitch-platform-6.5-natives-windows-64.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/18215140f010c05b9f86ef6f0f8871954d2ccebf/twitch-external-platform-4.5-natives-windows-32.jar
+[19:31:16] [Client thread/TRACE] [FML/]: Skipping known library file /home/heero/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/c3cde57891b935d41b6680a9c5e1502eeab76d86/twitch-external-platform-4.5-natives-windows-64.jar
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related directory at /home/heero/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1497/start, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /home/heero/.usr/share/idea-IC-139.1117.1/lib/idea_rt.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /home/heero/.usr/share/idea-IC-139.1117.1/plugins/Groovy/lib/agent/gragent.jar, examining for mod candidates
+[19:31:16] [Client thread/DEBUG] [FML/]: Minecraft jar mods loaded successfully
+[19:31:16] [Client thread/INFO] [FML/]: Found 0 mods from the command line. Injecting into mod discoverer
+[19:31:16] [Client thread/INFO] [FML/]: Searching /home/heero/src/wakcraft/mods for mods
+[19:31:16] [Client thread/DEBUG] [FML/]: Examining file rhino.jar for potential mods
+[19:31:16] [Client thread/DEBUG] [FML/]: The mod container rhino.jar appears to be missing an mcmod.info file
+[19:31:17] [Client thread/DEBUG] [FML/]: Examining file resources.jar for potential mods
+[19:31:17] [Client thread/DEBUG] [FML/]: The mod container resources.jar appears to be missing an mcmod.info file
+[19:31:17] [Client thread/DEBUG] [FML/]: Examining file javazic.jar for potential mods
+[19:31:17] [Client thread/DEBUG] [FML/]: The mod container javazic.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file management-agent.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container management-agent.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file charsets.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container charsets.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file jsse.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container jsse.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file jce.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container jce.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file compilefontconfig.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container compilefontconfig.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file dnsns.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container dnsns.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file icedtea-sound.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container icedtea-sound.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file localedata.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container localedata.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file java-atk-wrapper.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container java-atk-wrapper.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file sunjce_provider.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container sunjce_provider.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file zipfs.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container zipfs.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file sunpkcs11.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container sunpkcs11.jar appears to be missing an mcmod.info file
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining directory main for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: No mcmod.info file found in directory main
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.blockstates
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.lang
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.corner
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.corner.carpet
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.corner.sufokiaWave3
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.corner.template
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.fence
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.fence.sufokiaColor
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.debug
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.dirt
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.grass
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground11
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground12
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground13
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground14
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground2
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground3
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground4
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.hbstand
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.pillar
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.sufokiaGround
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.sufokiaGround2
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.sufokiaSun
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.sufokiaWave
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.sufokiaWave2
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.template
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.templateAll
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.wood
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.stair
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.stair.sufokiaStair
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.item
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.blocks
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.entity
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.environment
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.gui
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.gui.container
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.items
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.mobs
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.spells
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft
+[19:31:18] [Client thread/DEBUG] [FML/]: Identified a mod of type Lnet/minecraftforge/fml/common/Mod; (heero.mc.mod.wakcraft.Wakcraft) - loading
+[19:31:18] [Client thread/TRACE] [wakcraft/]: Parsed dependency info : [] [] []
+[19:31:18] [Client thread/DEBUG] [wakcraft/]: Attempting to load the file version.properties from main to locate a version number for wakcraft
+[19:31:18] [Client thread/WARN] [wakcraft/]: Mod wakcraft is missing the required element 'version' and no fallback can be found. Substituting '1.0'.
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.block
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.block.material
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.characteristic
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.gui
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.gui.fight
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.gui.inventory
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.model
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.renderer
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.renderer.block
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.renderer.entity
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.renderer.fight
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.renderer.item
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.renderer.tileentity
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.renderer.world
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.client.setting
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.crafting
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.creativetab
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.entity
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.entity.ai
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.entity.creature
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.entity.creature.gobball
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.entity.creature.meow
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.entity.creature.tofu
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.entity.misc
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.entity.property
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.event
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.eventhandler
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.fight
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.havenbag
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.helper
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.inventory
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.item
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.network
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.network.handler
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.network.handler.fight
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.network.packet
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.network.packet.fight
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.profession
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.proxy
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.spell
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.spell.effect
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.spell.state
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.tileentity
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.util
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.world
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package heero.mc.mod.wakcraft.world.gen
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining directory main for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: Found an mcmod.info file in directory main
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.blockstates
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.lang
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.corner
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.corner.carpet
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.corner.sufokiaWave3
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.corner.template
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.fence
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.fence.sufokiaColor
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.debug
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.dirt
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.grass
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground11
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground12
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground13
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground14
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground2
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground3
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.ground4
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.hbstand
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.pillar
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.sufokiaGround
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.sufokiaGround2
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.sufokiaSun
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.sufokiaWave
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.sufokiaWave2
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.template
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.templateAll
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.slab.wood
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.stair
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.block.stair.sufokiaStair
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.models.item
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.blocks
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.entity
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.environment
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.gui
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.gui.container
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.items
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.mobs
+[19:31:18] [Client thread/TRACE] [FML/]: Recursing into package assets.wakcraft.textures.spells
+[19:31:18] [Client thread/DEBUG] [FML/]: Examining file forgeSrc-1.8-11.14.3.1497.jar for potential mods
+[19:31:18] [Client thread/DEBUG] [FML/]: The mod container forgeSrc-1.8-11.14.3.1497.jar appears to be missing an mcmod.info file
+[19:31:19] [Client thread/DEBUG] [FML/]: Examining file asm-debug-all-5.0.3.jar for potential mods
+[19:31:19] [Client thread/DEBUG] [FML/]: The mod container asm-debug-all-5.0.3.jar appears to be missing an mcmod.info file
+[19:31:19] [Client thread/DEBUG] [FML/]: Examining file libraryjavasound-20101123.jar for potential mods
+[19:31:19] [Client thread/DEBUG] [FML/]: The mod container libraryjavasound-20101123.jar appears to be missing an mcmod.info file
+[19:31:19] [Client thread/DEBUG] [FML/]: Examining file guava-17.0.jar for potential mods
+[19:31:19] [Client thread/DEBUG] [FML/]: The mod container guava-17.0.jar appears to be missing an mcmod.info file
+[19:31:20] [Client thread/DEBUG] [FML/]: Examining file jsr305-2.0.1.jar for potential mods
+[19:31:20] [Client thread/DEBUG] [FML/]: The mod container jsr305-2.0.1.jar appears to be missing an mcmod.info file
+[19:31:20] [Client thread/DEBUG] [FML/]: Examining directory start for potential mods
+[19:31:20] [Client thread/DEBUG] [FML/]: No mcmod.info file found in directory start
+[19:31:20] [Client thread/TRACE] [FML/]: Recursing into package net
+[19:31:20] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge
+[19:31:20] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge.gradle
+[19:31:20] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge.gradle.tweakers
+[19:31:20] [Client thread/DEBUG] [FML/]: Examining file idea_rt.jar for potential mods
+[19:31:20] [Client thread/DEBUG] [FML/]: The mod container idea_rt.jar appears to be missing an mcmod.info file
+[19:31:20] [Client thread/DEBUG] [FML/]: Examining file gragent.jar for potential mods
+[19:31:20] [Client thread/DEBUG] [FML/]: The mod container gragent.jar appears to be missing an mcmod.info file
+[19:31:20] [Client thread/INFO] [FML/]: Forge Mod Loader has identified 4 mods to load
+[19:31:20] [Client thread/TRACE] [FML/]: Received a system property request ''
+[19:31:20] [Client thread/TRACE] [FML/]: System property request managing the state of 0 mods
+[19:31:20] [Client thread/DEBUG] [FML/]: After merging, found state information for 0 mods
+[19:31:20] [Client thread/DEBUG] [FML/]: Found translations in forgeSrc-1.8-11.14.3.1497.jar [lt_LT, ro_RO, nl_NL, fr_FR, ca_ES, vi_VN, ru_RU, fi_FI, br_FR, fa_IR, tr_TR, pl_PL, zh_CN, ja_JP, ar_SA, nb_NO, cs_CZ, af_ZA, da_DK, ko_KR, uk_UA, nn_NO, sr_SP, de_DE, sv_SE, pt_PT, no_NO, sl_SI, el_GR, pt_BR, it_IT, hu_HU, es_ES, en_US, he_IL, zh_TW, en_US, en_US]
+[19:31:20] [Client thread/DEBUG] [FML/]: Found translations in forgeSrc-1.8-11.14.3.1497.jar [lt_LT, ro_RO, nl_NL, fr_FR, ca_ES, vi_VN, ru_RU, fi_FI, br_FR, fa_IR, tr_TR, pl_PL, zh_CN, ja_JP, ar_SA, nb_NO, cs_CZ, af_ZA, da_DK, ko_KR, uk_UA, nn_NO, sr_SP, de_DE, sv_SE, pt_PT, no_NO, sl_SI, el_GR, pt_BR, it_IT, hu_HU, es_ES, en_US, he_IL, zh_TW, en_US, en_US]
+[19:31:20] [Client thread/DEBUG] [wakcraft/]: Enabling mod wakcraft
+[19:31:20] [Client thread/DEBUG] [FML/]: Injecting found translation assets for lang fr_FR at assets/wakcraft/lang/fr_FR.lang into language system
+[19:31:20] [Client thread/DEBUG] [FML/]: Injecting found translation assets for lang en_US at assets/wakcraft/lang/en_US.lang into language system
+[19:31:20] [Client thread/TRACE] [FML/]: Verifying mod requirements are satisfied
+[19:31:20] [Client thread/TRACE] [FML/]: All mod requirements are satisfied
+[19:31:20] [Client thread/TRACE] [FML/]: Sorting mods into an ordered list
+[19:31:20] [Client thread/TRACE] [FML/]: Mod sorting completed successfully
+[19:31:20] [Client thread/DEBUG] [FML/]: Mod sorting data
+[19:31:20] [Client thread/DEBUG] [FML/]: 	wakcraft(Wakcraft:1.0): main ()
+[19:31:20] [Client thread/TRACE] [mcp/mcp]: Sending event FMLConstructionEvent to mod mcp
+[19:31:20] [Client thread/TRACE] [mcp/mcp]: Sent event FMLConstructionEvent to mod mcp
+[19:31:20] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Minecraft Coder Pack took 0.003s
+[19:31:20] [Client thread/TRACE] [FML/FML]: Sending event FMLConstructionEvent to mod FML
+[19:31:20] [Client thread/TRACE] [FML/FML]: Mod FML is using network checker : Invoking method checkModLists
+[19:31:20] [Client thread/TRACE] [FML/FML]: Testing mod FML to verify it accepts its own version in a remote connection
+[19:31:20] [Client thread/TRACE] [FML/FML]: The mod FML accepts its own version (8.0.99.99)
+[19:31:20] [Client thread/INFO] [FML/FML]: Attempting connection with missing mods [mcp, FML, Forge, wakcraft] at CLIENT
+[19:31:20] [Client thread/INFO] [FML/FML]: Attempting connection with missing mods [mcp, FML, Forge, wakcraft] at SERVER
+[19:31:20] [Client thread/TRACE] [FML/FML]: Sent event FMLConstructionEvent to mod FML
+[19:31:20] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Forge Mod Loader took 0.480s
+[19:31:20] [Client thread/TRACE] [Forge/Forge]: Sending event FMLConstructionEvent to mod Forge
+[19:31:20] [Client thread/TRACE] [FML/Forge]: Mod Forge is using network checker : No network checking performed
+[19:31:20] [Client thread/TRACE] [FML/Forge]: Testing mod Forge to verify it accepts its own version in a remote connection
+[19:31:20] [Client thread/TRACE] [FML/Forge]: The mod Forge accepts its own version (11.14.3.1497)
+[19:31:20] [Client thread/TRACE] [Forge/Forge]: Sent event FMLConstructionEvent to mod Forge
+[19:31:20] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Minecraft Forge took 0.016s
+[19:31:20] [Client thread/TRACE] [wakcraft/wakcraft]: Sending event FMLConstructionEvent to mod wakcraft
+[19:31:20] [Client thread/TRACE] [FML/wakcraft]: Mod wakcraft is using network checker : Accepting version 1.0
+[19:31:20] [Client thread/TRACE] [FML/wakcraft]: Testing mod wakcraft to verify it accepts its own version in a remote connection
+[19:31:20] [Client thread/TRACE] [FML/wakcraft]: The mod wakcraft accepts its own version (1.0)
+[19:31:20] [Client thread/DEBUG] [FML/wakcraft]: Attempting to inject @SidedProxy classes into wakcraft
+[19:31:21] [Client thread/TRACE] [wakcraft/wakcraft]: Sent event FMLConstructionEvent to mod wakcraft
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Wakcraft took 0.145s
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Finished: Construction took 0.644s
+[19:31:21] [Client thread/DEBUG] [FML/]: Mod signature data
+[19:31:21] [Client thread/DEBUG] [FML/]:  	Valid Signatures:
+[19:31:21] [Client thread/DEBUG] [FML/]:  	Missing Signatures:
+[19:31:21] [Client thread/DEBUG] [FML/]: 		mcp	(Minecraft Coder Pack	9.05)	minecraft.jar
+[19:31:21] [Client thread/DEBUG] [FML/]: 		FML	(Forge Mod Loader	8.0.99.99)	forgeSrc-1.8-11.14.3.1497.jar
+[19:31:21] [Client thread/DEBUG] [FML/]: 		Forge	(Minecraft Forge	11.14.3.1497)	forgeSrc-1.8-11.14.3.1497.jar
+[19:31:21] [Client thread/DEBUG] [FML/]: 		wakcraft	(Wakcraft	1.0)	main
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Default took 0.009s
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Forge Mod Loader took 0.018s
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Minecraft Forge took 0.017s
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Wakcraft took 0.004s
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading - LanguageManager took 0.176s
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Reloading listeners took 0.179s
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resources took 0.227s
+[19:31:21] [Client thread/DEBUG] [Forge Mod Loader/]: Mod Forge Mod Loader is missing a pack.mcmeta file, substituting a dummy one
+[19:31:21] [Client thread/DEBUG] [Minecraft Forge/]: Mod Minecraft Forge is missing a pack.mcmeta file, substituting a dummy one
+[19:31:21] [Client thread/DEBUG] [Wakcraft/]: Mod Wakcraft is missing a pack.mcmeta file, substituting a dummy one
+[19:31:21] [Client thread/INFO] [FML/]: Processing ObjectHolder annotations
+[19:31:21] [Client thread/INFO] [FML/]: Found 384 ObjectHolder annotations
+[19:31:21] [Client thread/INFO] [FML/]: Identifying ItemStackHolder annotations
+[19:31:21] [Client thread/INFO] [FML/]: Found 0 ItemStackHolder annotations
+[19:31:21] [Client thread/TRACE] [mcp/mcp]: Sending event FMLPreInitializationEvent to mod mcp
+[19:31:21] [Client thread/TRACE] [mcp/mcp]: Sent event FMLPreInitializationEvent to mod mcp
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Coder Pack took 0.001s
+[19:31:21] [Client thread/TRACE] [FML/FML]: Sending event FMLPreInitializationEvent to mod FML
+[19:31:21] [Client thread/TRACE] [FML/FML]: Sent event FMLPreInitializationEvent to mod FML
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Forge Mod Loader took 0.028s
+[19:31:21] [Client thread/TRACE] [Forge/Forge]: Sending event FMLPreInitializationEvent to mod Forge
+[19:31:21] [Client thread/INFO] [FML/Forge]: Configured a dormant chunk cache size of 0
+[19:31:21] [Client thread/TRACE] [Forge/Forge]: Sent event FMLPreInitializationEvent to mod Forge
+[19:31:21] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Forge took 0.049s
+[19:31:21] [Client thread/TRACE] [wakcraft/wakcraft]: Sending event FMLPreInitializationEvent to mod wakcraft
+[19:31:21] [Client thread/DEBUG] [wakcraft/wakcraft]: Attempting to load the file version.properties from main to locate a version number for wakcraft
+[19:31:21] [Client thread/DEBUG] [FML/wakcraft]: Skipping automatic mod wakcraft entity registration for already registered class heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile
+[19:31:22] [Client thread/TRACE] [wakcraft/wakcraft]: Sent event FMLPreInitializationEvent to mod wakcraft
+[19:31:22] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Wakcraft took 0.821s
+[19:31:22] [Client thread/DEBUG] [FML/]: Bar Finished: PreInitialization took 0.899s
+[19:31:22] [Client thread/INFO] [FML/]: Applying holder lookups
+[19:31:22] [Client thread/INFO] [FML/]: Holder lookups applied
+[19:31:22] [Client thread/INFO] [FML/]: Injecting itemstacks
+[19:31:22] [Client thread/INFO] [FML/]: Itemstack injection complete
+[19:31:22] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - TextureManager took 0.000s
+[19:31:22] [Client thread/INFO] [STDOUT/]: [tv.twitch.StandardCoreAPI:<init>:16]: If on Windows, make sure to provide all of the necessary dll's as specified in the twitchsdk README. Also, make sure to set the PATH environment variable to point to the directory containing the dll's.
+[19:31:23] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - SoundHandler took 0.820s
+[19:31:23] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.005s
+[19:31:23] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.015s
+[19:31:23] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - GrassColorReloadListener took 0.013s
+[19:31:23] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FoliageColorReloadListener took 0.014s
+[19:31:23] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - GL Setup took 0.000s
+[19:31:23] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Texture Map took 0.008s
+[19:31:23] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
+[19:31:23] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
+[19:31:23] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
+[19:31:25] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockHBBridge#inventory', trying to load the variant from the blockstate json
+[19:31:25] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockSufokiaWave3EastSlab#inventory', trying to load the variant from the blockstate json
+[19:31:25] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockSufokiaWave3NorthSlab#inventory', trying to load the variant from the blockstate json
+[19:31:25] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockSufokiaWave3SouthSlab#inventory', trying to load the variant from the blockstate json
+[19:31:25] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockSufokiaWave3WestSlab#inventory', trying to load the variant from the blockstate json
+[19:31:25] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockSufokiaWave3Slab#inventory', trying to load the variant from the blockstate json
+[19:31:25] [Client thread/INFO] [FML/]: Max texture size: 16384
+[19:31:25] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching - missingno took 0.002s
+[19:31:25] [Client thread/DEBUG] [FML/]: Bar Finished: Texture creation took 0.004s
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=2,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=2,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=1,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=1,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=1,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=1,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=2,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=1,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=0,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=0,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=0,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=3,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=3,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=3,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=2,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3Slab#inventory not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=2,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=1,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=1,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#inventory not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#inventory not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockHBBridge#inventory not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=1,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=1,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=2,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=1,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=0,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=2,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=2,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=0,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=0,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#inventory not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=3,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=3,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=3,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#inventory not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=3,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=3,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=3,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=3,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=0,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=0,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=0,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=0,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockHBBridge#normal not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=0,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=0,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=2,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=2,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=2,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=1,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=2,propertysize=0 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=1,propertysize=1 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=3,propertysize=2 not found
+[19:31:26] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=3,propertysize=1 not found
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelManager took 3.774s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Model Manager took 3.793s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - RenderItem took 0.007s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Item Renderer took 0.304s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - EntityRenderer took 0.000s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - BlockRendererDispatcher took 0.000s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - RenderGlobal took 0.000s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Entity Renderer took 0.308s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Finished: Rendering Setup took 4.413s
+[19:31:27] [Client thread/TRACE] [mcp/mcp]: Sending event FMLInitializationEvent to mod mcp
+[19:31:27] [Client thread/TRACE] [mcp/mcp]: Sent event FMLInitializationEvent to mod mcp
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Minecraft Coder Pack took 0.001s
+[19:31:27] [Client thread/TRACE] [FML/FML]: Sending event FMLInitializationEvent to mod FML
+[19:31:27] [Client thread/TRACE] [FML/FML]: Sent event FMLInitializationEvent to mod FML
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Forge Mod Loader took 0.001s
+[19:31:27] [Client thread/TRACE] [Forge/Forge]: Sending event FMLInitializationEvent to mod Forge
+[19:31:27] [Client thread/TRACE] [Forge/Forge]: Sent event FMLInitializationEvent to mod Forge
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Minecraft Forge took 0.001s
+[19:31:27] [Client thread/TRACE] [wakcraft/wakcraft]: Sending event FMLInitializationEvent to mod wakcraft
+[19:31:27] [Client thread/TRACE] [wakcraft/wakcraft]: Sent event FMLInitializationEvent to mod wakcraft
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Wakcraft took 0.038s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Finished: Initialization took 0.040s
+[19:31:27] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod mcp
+[19:31:27] [Client thread/TRACE] [mcp/mcp]: Sending event IMCEvent to mod mcp
+[19:31:27] [Client thread/TRACE] [mcp/mcp]: Sent event IMCEvent to mod mcp
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Minecraft Coder Pack took 0.006s
+[19:31:27] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod FML
+[19:31:27] [Client thread/TRACE] [FML/FML]: Sending event IMCEvent to mod FML
+[19:31:27] [Client thread/TRACE] [FML/FML]: Sent event IMCEvent to mod FML
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Forge Mod Loader took 0.001s
+[19:31:27] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod Forge
+[19:31:27] [Client thread/TRACE] [Forge/Forge]: Sending event IMCEvent to mod Forge
+[19:31:27] [Client thread/TRACE] [Forge/Forge]: Sent event IMCEvent to mod Forge
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Minecraft Forge took 0.001s
+[19:31:27] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod wakcraft
+[19:31:27] [Client thread/TRACE] [wakcraft/wakcraft]: Sending event IMCEvent to mod wakcraft
+[19:31:27] [Client thread/TRACE] [wakcraft/wakcraft]: Sent event IMCEvent to mod wakcraft
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Wakcraft took 0.001s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Finished: InterModComms$IMC took 0.009s
+[19:31:27] [Client thread/INFO] [FML/]: Injecting itemstacks
+[19:31:27] [Client thread/INFO] [FML/]: Itemstack injection complete
+[19:31:27] [Client thread/TRACE] [mcp/mcp]: Sending event FMLPostInitializationEvent to mod mcp
+[19:31:27] [Client thread/TRACE] [mcp/mcp]: Sent event FMLPostInitializationEvent to mod mcp
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Minecraft Coder Pack took 0.001s
+[19:31:27] [Client thread/TRACE] [FML/FML]: Sending event FMLPostInitializationEvent to mod FML
+[19:31:27] [Client thread/TRACE] [FML/FML]: Sent event FMLPostInitializationEvent to mod FML
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Forge Mod Loader took 0.001s
+[19:31:27] [Client thread/TRACE] [Forge/Forge]: Sending event FMLPostInitializationEvent to mod Forge
+[19:31:27] [Client thread/TRACE] [Forge/Forge]: Sent event FMLPostInitializationEvent to mod Forge
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Minecraft Forge took 0.133s
+[19:31:27] [Client thread/TRACE] [wakcraft/wakcraft]: Sending event FMLPostInitializationEvent to mod wakcraft
+[19:31:27] [Client thread/TRACE] [wakcraft/wakcraft]: Sent event FMLPostInitializationEvent to mod wakcraft
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Wakcraft took 0.001s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Finished: PostInitialization took 0.136s
+[19:31:27] [Client thread/TRACE] [mcp/mcp]: Sending event FMLLoadCompleteEvent to mod mcp
+[19:31:27] [Client thread/TRACE] [mcp/mcp]: Sent event FMLLoadCompleteEvent to mod mcp
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Minecraft Coder Pack took 0.001s
+[19:31:27] [Client thread/TRACE] [FML/FML]: Sending event FMLLoadCompleteEvent to mod FML
+[19:31:27] [Client thread/TRACE] [FML/FML]: Sent event FMLLoadCompleteEvent to mod FML
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Forge Mod Loader took 0.001s
+[19:31:27] [Client thread/TRACE] [Forge/Forge]: Sending event FMLLoadCompleteEvent to mod Forge
+[19:31:27] [Client thread/DEBUG] [FML/Forge]: Forge RecipeSorter Baking:
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   14: RecipeEntry("Before", UNKNOWN, )
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   13: RecipeEntry("minecraft:shaped", SHAPED, net.minecraft.item.crafting.ShapedRecipes) Before: minecraft:shapeless
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   12: RecipeEntry("minecraft:mapextending", SHAPED, net.minecraft.item.crafting.RecipesMapExtending) Before: minecraft:shapeless After: minecraft:shaped
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   11: RecipeEntry("forge:shapedore", SHAPED, net.minecraftforge.oredict.ShapedOreRecipe) Before: minecraft:shapeless After: minecraft:shaped
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   10: RecipeEntry("minecraft:shapeless", SHAPELESS, net.minecraft.item.crafting.ShapelessRecipes) After: minecraft:shaped
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   9: RecipeEntry("forge:shapelessore", SHAPELESS, net.minecraftforge.oredict.ShapelessOreRecipe) After: minecraft:shapeless
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   8: RecipeEntry("minecraft:pattern_add", SHAPELESS, net.minecraft.item.crafting.RecipesBanners$RecipeAddPattern) After: minecraft:shapeless
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   7: RecipeEntry("minecraft:pattern_dupe", SHAPELESS, net.minecraft.item.crafting.RecipesBanners$RecipeDuplicatePattern) After: minecraft:shapeless
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   6: RecipeEntry("minecraft:armordyes", SHAPELESS, net.minecraft.item.crafting.RecipesArmorDyes) After: minecraft:shapeless
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   5: RecipeEntry("minecraft:bookcloning", SHAPELESS, net.minecraft.item.crafting.RecipeBookCloning) After: minecraft:shapeless
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   4: RecipeEntry("minecraft:mapcloning", SHAPELESS, net.minecraft.item.crafting.RecipesMapCloning) After: minecraft:shapeless
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   3: RecipeEntry("minecraft:repair", SHAPELESS, net.minecraft.item.crafting.RecipeRepairItem) After: minecraft:shapeless
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   2: RecipeEntry("minecraft:fireworks", SHAPELESS, net.minecraft.item.crafting.RecipeFireworks) After: minecraft:shapeless
+[19:31:27] [Client thread/DEBUG] [FML/Forge]:   1: RecipeEntry("After", UNKNOWN, )
+[19:31:27] [Client thread/DEBUG] [FML/Forge]: Sorting recipies
+[19:31:27] [Client thread/TRACE] [Forge/Forge]: Sent event FMLLoadCompleteEvent to mod Forge
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Minecraft Forge took 0.018s
+[19:31:27] [Client thread/TRACE] [wakcraft/wakcraft]: Sending event FMLLoadCompleteEvent to mod wakcraft
+[19:31:27] [Client thread/TRACE] [wakcraft/wakcraft]: Sent event FMLLoadCompleteEvent to mod wakcraft
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Wakcraft took 0.001s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Finished: LoadComplete took 0.022s
+[19:31:27] [Client thread/DEBUG] [FML/]: Freezing block and item id maps
+[19:31:27] [Client thread/DEBUG] [FML/]: Registry consistency check successful
+[19:31:27] [Client thread/DEBUG] [FML/]: Registry consistency check successful
+[19:31:27] [Client thread/INFO] [FML/]: Forge Mod Loader has successfully loaded 4 mods
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Default took 0.000s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Forge Mod Loader took 0.014s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Minecraft Forge took 0.019s
+[19:31:27] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Wakcraft took 0.001s
+[19:31:28] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:dynamic/lightMap_2 took 0.000s
+[19:31:28] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/atlas/blocks.png took 0.001s
+[19:31:28] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/font/ascii.png took 0.009s
+[19:31:28] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/font/ascii_sga.png took 0.010s
+[19:31:28] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/misc/forcefield.png took 0.006s
+[19:31:28] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:dynamic/lightMap_1 took 0.000s
+[19:31:28] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading Texture Manager took 0.027s
+[19:31:29] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockHBBridge#inventory', trying to load the variant from the blockstate json
+[19:31:29] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockSufokiaWave3EastSlab#inventory', trying to load the variant from the blockstate json
+[19:31:29] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockSufokiaWave3NorthSlab#inventory', trying to load the variant from the blockstate json
+[19:31:29] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockSufokiaWave3SouthSlab#inventory', trying to load the variant from the blockstate json
+[19:31:29] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockSufokiaWave3WestSlab#inventory', trying to load the variant from the blockstate json
+[19:31:29] [Client thread/DEBUG] [FML/]: Item json isn't found for 'wakcraft:blockSufokiaWave3Slab#inventory', trying to load the variant from the blockstate json
+[19:31:29] [Client thread/INFO] [FML/]: Max texture size: 16384
+[19:31:30] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching took 0.633s
+[19:31:30] [Client thread/DEBUG] [FML/]: Bar Finished: Mipmap generation took 0.346s
+[19:31:30] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching took 0.127s
+[19:31:30] [Client thread/DEBUG] [FML/]: Bar Finished: Texture creation took 0.193s
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=2,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=2,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=1,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=1,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=1,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=1,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=2,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=1,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=0,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=0,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=0,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=3,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=3,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=3,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=2,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3Slab#inventory not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=2,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=1,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=1,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#inventory not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#inventory not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockHBBridge#inventory not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=1,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=1,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3SouthSlab#propertybottomposition=2,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=1,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=0,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=2,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=2,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=0,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=0,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#inventory not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=3,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=3,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=3,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#inventory not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=3,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=3,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=3,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=3,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=0,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=0,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=0,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=0,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockHBBridge#normal not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=0,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3NorthSlab#propertybottomposition=0,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=2,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=2,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=2,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=1,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=2,propertysize=0 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3WestSlab#propertybottomposition=1,propertysize=1 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=3,propertysize=2 not found
+[19:31:31] [Client thread/ERROR] [FML/]: Model definition for location wakcraft:blockSufokiaWave3EastSlab#propertybottomposition=3,propertysize=1 not found
+[19:31:31] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading took 3.313s
+[19:31:31] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Reloading listeners took 3.313s
+[19:31:31] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resources took 3.347s
+[19:31:31] [Client thread/DEBUG] [Forge Mod Loader/]: Mod Forge Mod Loader is missing a pack.mcmeta file, substituting a dummy one
+[19:31:31] [Client thread/DEBUG] [Minecraft Forge/]: Mod Minecraft Forge is missing a pack.mcmeta file, substituting a dummy one
+[19:31:31] [Client thread/DEBUG] [Wakcraft/]: Mod Wakcraft is missing a pack.mcmeta file, substituting a dummy one
+[19:31:31] [Client thread/DEBUG] [FML/]: Bar Finished: Loading took 14.782s
+[19:31:34] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerAboutToStartEvent to mod mcp
+[19:31:34] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerAboutToStartEvent to mod mcp
+[19:31:34] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - Minecraft Coder Pack took 0.001s
+[19:31:34] [Server thread/TRACE] [FML/FML]: Sending event FMLServerAboutToStartEvent to mod FML
+[19:31:34] [Server thread/TRACE] [FML/FML]: Sent event FMLServerAboutToStartEvent to mod FML
+[19:31:34] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - Forge Mod Loader took 0.001s
+[19:31:34] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerAboutToStartEvent to mod Forge
+[19:31:34] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerAboutToStartEvent to mod Forge
+[19:31:34] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - Minecraft Forge took 0.001s
+[19:31:34] [Server thread/TRACE] [wakcraft/wakcraft]: Sending event FMLServerAboutToStartEvent to mod wakcraft
+[19:31:34] [Server thread/TRACE] [wakcraft/wakcraft]: Sent event FMLServerAboutToStartEvent to mod wakcraft
+[19:31:34] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - Wakcraft took 0.001s
+[19:31:34] [Server thread/DEBUG] [FML/]: Bar Finished: ServerAboutToStart took 0.004s
+[19:31:34] [Server thread/INFO] [FML/]: Injecting existing block and item data into this server instance
+[19:31:34] [Server thread/DEBUG] [FML/]: Registry consistency check successful
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaStair: 253 (init) -> 205 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGroundNorthSlab: 213 (init) -> 235 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround13: 230 (init) -> 252 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround12: 228 (init) -> 250 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround11: 226 (init) -> 248 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWave2WestSlab: 440 (init) -> 438 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround14: 232 (init) -> 254 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockHBDeco: 237 (init) -> 222 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockFightStart2: 209 (init) -> 232 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockPillarSlab: 244 (init) -> 212 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockHBMerchant: 240 (init) -> 226 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGrass: 210 (init) -> 216 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWaveNorthSlab: 433 (init) -> 435 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaColor: 248 (init) -> 198 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockFightDirection: 206 (init) -> 230 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround4Slab: 225 (init) -> 247 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockHBStand: 241 (init) -> 214 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround2EastSlab: 219 (init) -> 241 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaGround: 249 (init) -> 206 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockPlank: 245 (init) -> 432 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockPillar: 243 (init) -> 211 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockPlant: 246 (init) -> 451 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockDebug: 201 (init) -> 227 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockDebugSlab: 202 (init) -> 228 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround13Slab: 231 (init) -> 253 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockHBDeco2: 238 (init) -> 223 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockBox: 198 (init) -> 426 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockHBCraft: 235 (init) -> 224 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround3Slab: 223 (init) -> 245 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround: 212 (init) -> 234 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockWoodNorthSlab: 449 (init) -> 445 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround11Slab: 227 (init) -> 249 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockClassConsole: 200 (init) -> 233 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround2WestSlab: 221 (init) -> 243 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWave2: 436 (init) -> 202 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWave3: 441 (init) -> 203 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWave4: 446 (init) -> 204 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWave2EastSlab: 437 (init) -> 440 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaGround2: 251 (init) -> 207 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockPlant2: 247 (init) -> 449 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockHBBridge: 234 (init) -> 450 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaSunSlab: 255 (init) -> 200 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWave3WestSlab: 445 (init) -> 442 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockFence: 205 (init) -> 220 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockDirt: 203 (init) -> 218 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockHBStandSlab: 242 (init) -> 215 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockHBGarden: 239 (init) -> 221 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround2NorthSlab: 218 (init) -> 240 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockWoodWestSlab: 451 (init) -> 448 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWaveWestSlab: 435 (init) -> 434 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround14Slab: 233 (init) -> 255 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaGroundSlab: 250 (init) -> 208 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWave: 426 (init) -> 201 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockDirtSlab: 204 (init) -> 219 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGroundEastSlab: 214 (init) -> 236 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWaveSouthSlab: 434 (init) -> 433 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockWoodEastSlab: 448 (init) -> 447 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockFightStart: 208 (init) -> 231 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockWood: 447 (init) -> 213 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockHBCraft2: 236 (init) -> 225 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround12Slab: 229 (init) -> 251 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWaveEastSlab: 432 (init) -> 436 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGroundSouthSlab: 215 (init) -> 237 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGroundWestSlab: 216 (init) -> 238 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWave3EastSlab: 442 (init) -> 444 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGrassSlab: 211 (init) -> 217 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWave2NorthSlab: 438 (init) -> 439 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWave2SouthSlab: 439 (init) -> 437 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockWoodSouthSlab: 450 (init) -> 446 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaSun: 254 (init) -> 199 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround2: 217 (init) -> 239 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround4: 224 (init) -> 246 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround3: 222 (init) -> 244 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaGround2Slab: 252 (init) -> 209 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockGround2SouthSlab: 220 (init) -> 242 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockFightMovement: 207 (init) -> 229 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockSufokiaWave3SouthSlab: 444 (init) -> 441 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed block id mismatch wakcraft:blockCarpet: 199 (init) -> 210 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellShaker: 4148 (init) -> 4145 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellCharge: 4151 (init) -> 4148 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround13: 230 (init) -> 252 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround12: 228 (init) -> 250 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround11: 226 (init) -> 248 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave2WestSlab: 440 (init) -> 438 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround14: 232 (init) -> 254 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:GobballBelt: 4136 (init) -> 4133 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:GobballBreastplate: 4132 (init) -> 4129 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:GobballEpaulettes: 4134 (init) -> 4131 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWaveNorthSlab: 433 (init) -> 435 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockFightDirection: 206 (init) -> 230 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockHBStand: 241 (init) -> 214 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockPlank: 245 (init) -> 432 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellAuthority: 4170 (init) -> 4167 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:TofuCloak: 4142 (init) -> 4139 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockPillar: 243 (init) -> 211 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockPlant: 246 (init) -> 451 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockHBDeco2: 238 (init) -> 223 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockBox: 198 (init) -> 426 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockWoodNorthSlab: 449 (init) -> 445 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround: 212 (init) -> 234 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave3Slab: 4128 (init) -> 4171 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround11Slab: 227 (init) -> 249 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockClassConsole: 200 (init) -> 233 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround2WestSlab: 221 (init) -> 243 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave2: 436 (init) -> 202 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave3: 441 (init) -> 203 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave4: 446 (init) -> 204 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaGround2: 251 (init) -> 207 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockWoodSlab: 4131 (init) -> 4172 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave3WestSlab: 445 (init) -> 442 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:TofuEpaulettes: 4143 (init) -> 4140 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockHBGarden: 239 (init) -> 221 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround2NorthSlab: 218 (init) -> 240 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockWoodWestSlab: 451 (init) -> 448 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellFlurry: 4159 (init) -> 4156 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround14Slab: 233 (init) -> 255 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWaveWestSlab: 435 (init) -> 434 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave2Slab: 4127 (init) -> 4170 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellIntimidation: 4160 (init) -> 4157 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGroundEastSlab: 214 (init) -> 236 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:Helmetofu: 4140 (init) -> 4137 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockWoodEastSlab: 448 (init) -> 447 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellDefensiveStance: 4164 (init) -> 4161 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:TofuBelt: 4144 (init) -> 4141 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockFightStart: 208 (init) -> 231 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockWood: 447 (init) -> 213 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockHBCraft2: 236 (init) -> 225 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellJabs: 4158 (init) -> 4155 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGroundSouthSlab: 215 (init) -> 237 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGroundWestSlab: 216 (init) -> 238 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave3EastSlab: 442 (init) -> 444 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGrassSlab: 211 (init) -> 217 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave2NorthSlab: 438 (init) -> 439 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockWoodSouthSlab: 450 (init) -> 446 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave2SouthSlab: 439 (init) -> 437 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:GobballHeadgear: 4137 (init) -> 4134 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:GobballCape: 4135 (init) -> 4132 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround2: 217 (init) -> 239 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround4: 224 (init) -> 246 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround3: 222 (init) -> 244 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:TofuBoots: 4147 (init) -> 4144 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaGround2Slab: 252 (init) -> 209 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:TofuRing: 4146 (init) -> 4143 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGroundSlab: 4129 (init) -> 4127 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave3SouthSlab: 444 (init) -> 441 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellThunderbolt: 4153 (init) -> 4150 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellIncrease: 4167 (init) -> 4164 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaStair: 253 (init) -> 205 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGroundNorthSlab: 213 (init) -> 235 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockHBDeco: 237 (init) -> 222 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockFightStart2: 209 (init) -> 232 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockPillarSlab: 244 (init) -> 212 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockHBMerchant: 240 (init) -> 226 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGrass: 210 (init) -> 216 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaColor: 248 (init) -> 198 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround4Slab: 225 (init) -> 247 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround2EastSlab: 219 (init) -> 241 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaGround: 249 (init) -> 206 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockDebugSlab: 202 (init) -> 228 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockDebug: 201 (init) -> 227 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellCelestialSword: 4156 (init) -> 4153 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround13Slab: 231 (init) -> 253 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellFlatten: 4165 (init) -> 4162 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellGuttingGust: 4161 (init) -> 4158 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellRocknoceros: 4149 (init) -> 4146 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockHBCraft: 235 (init) -> 224 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround3Slab: 223 (init) -> 245 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave2EastSlab: 437 (init) -> 440 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellCompulsion: 4169 (init) -> 4166 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellJudgment: 4154 (init) -> 4151 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockPlant2: 247 (init) -> 449 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockHBBridge: 234 (init) -> 450 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaSunSlab: 255 (init) -> 200 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockFence: 205 (init) -> 220 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockDirt: 203 (init) -> 218 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockHBStandSlab: 242 (init) -> 215 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellSuperIopPunch: 4155 (init) -> 4152 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaGroundSlab: 250 (init) -> 208 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellUppercut: 4162 (init) -> 4159 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:BouzeLiteYeahsRing: 4139 (init) -> 4136 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWave: 426 (init) -> 201 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockDirtSlab: 204 (init) -> 219 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellLockingPro: 4172 (init) -> 4169 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWaveSouthSlab: 434 (init) -> 433 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:GobballAmulet: 4138 (init) -> 4135 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellJump: 4163 (init) -> 4160 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellImpact: 4150 (init) -> 4147 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellIopsWrath: 4157 (init) -> 4154 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround12Slab: 229 (init) -> 251 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaWaveEastSlab: 432 (init) -> 436 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:Gobboots: 4133 (init) -> 4130 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:TofuBreastplate: 4141 (init) -> 4138 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround2Slab: 4130 (init) -> 4128 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockSufokiaSun: 254 (init) -> 199 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellShowOff: 4171 (init) -> 4168 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:TofuAmulet: 4145 (init) -> 4142 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellBraveryStandard: 4166 (init) -> 4163 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockGround2SouthSlab: 220 (init) -> 242 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockFightMovement: 207 (init) -> 229 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellVirility: 4168 (init) -> 4165 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:blockCarpet: 199 (init) -> 210 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Fixed item id mismatch wakcraft:SpellDevastate: 4152 (init) -> 4149 (map).
+[19:31:34] [Server thread/DEBUG] [FML/]: Registry consistency check successful
+[19:31:34] [Server thread/TRACE] [mcp/mcp]: Sending event FMLModIdMappingEvent to mod mcp
+[19:31:34] [Server thread/TRACE] [mcp/mcp]: Sent event FMLModIdMappingEvent to mod mcp
+[19:31:34] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - Minecraft Coder Pack took 0.001s
+[19:31:34] [Server thread/TRACE] [FML/FML]: Sending event FMLModIdMappingEvent to mod FML
+[19:31:34] [Server thread/TRACE] [FML/FML]: Sent event FMLModIdMappingEvent to mod FML
+[19:31:34] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - Forge Mod Loader took 0.001s
+[19:31:34] [Server thread/TRACE] [Forge/Forge]: Sending event FMLModIdMappingEvent to mod Forge
+[19:31:34] [Server thread/TRACE] [Forge/Forge]: Sent event FMLModIdMappingEvent to mod Forge
+[19:31:34] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - Minecraft Forge took 0.001s
+[19:31:34] [Server thread/TRACE] [wakcraft/wakcraft]: Sending event FMLModIdMappingEvent to mod wakcraft
+[19:31:34] [Server thread/TRACE] [wakcraft/wakcraft]: Sent event FMLModIdMappingEvent to mod wakcraft
+[19:31:34] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - Wakcraft took 0.001s
+[19:31:34] [Server thread/DEBUG] [FML/]: Bar Finished: ModIdMapping took 0.004s
+[19:31:34] [Server thread/INFO] [FML/]: Applying holder lookups
+[19:31:34] [Server thread/INFO] [FML/]: Holder lookups applied
+[19:31:34] [Server thread/DEBUG] [FML/]: Loading persistent fluid defaults from world
+[19:31:34] [Server thread/DEBUG] [FML/]: The fluid minecraft:water has been selected as the default fluid for water
+[19:31:34] [Server thread/DEBUG] [FML/]: The fluid minecraft:lava has been selected as the default fluid for lava
+[19:31:34] [Server thread/INFO] [FML/]: Loading dimension 0 (Wakcraft_1) (net.minecraft.server.integrated.IntegratedServer@6310c161)
+[19:31:34] [Server thread/INFO] [FML/]: Loading dimension 2 (Wakcraft_1) (net.minecraft.server.integrated.IntegratedServer@6310c161)
+[19:31:34] [Server thread/INFO] [FML/]: Loading dimension 1 (Wakcraft_1) (net.minecraft.server.integrated.IntegratedServer@6310c161)
+[19:31:34] [Server thread/INFO] [FML/]: Loading dimension -1 (Wakcraft_1) (net.minecraft.server.integrated.IntegratedServer@6310c161)
+[19:31:35] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerStartingEvent to mod mcp
+[19:31:35] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerStartingEvent to mod mcp
+[19:31:35] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - Minecraft Coder Pack took 0.001s
+[19:31:35] [Server thread/TRACE] [FML/FML]: Sending event FMLServerStartingEvent to mod FML
+[19:31:35] [Server thread/TRACE] [FML/FML]: Sent event FMLServerStartingEvent to mod FML
+[19:31:35] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - Forge Mod Loader took 0.001s
+[19:31:35] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerStartingEvent to mod Forge
+[19:31:35] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStartingEvent to mod Forge
+[19:31:35] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - Minecraft Forge took 0.004s
+[19:31:35] [Server thread/TRACE] [wakcraft/wakcraft]: Sending event FMLServerStartingEvent to mod wakcraft
+[19:31:35] [Server thread/TRACE] [wakcraft/wakcraft]: Sent event FMLServerStartingEvent to mod wakcraft
+[19:31:35] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - Wakcraft took 0.001s
+[19:31:35] [Server thread/DEBUG] [FML/]: Bar Finished: ServerStarting took 0.007s
+[19:31:35] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerStartedEvent to mod mcp
+[19:31:35] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerStartedEvent to mod mcp
+[19:31:35] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Minecraft Coder Pack took 0.001s
+[19:31:35] [Server thread/TRACE] [FML/FML]: Sending event FMLServerStartedEvent to mod FML
+[19:31:35] [Server thread/TRACE] [FML/FML]: Sent event FMLServerStartedEvent to mod FML
+[19:31:35] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Forge Mod Loader took 0.001s
+[19:31:35] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerStartedEvent to mod Forge
+[19:31:35] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStartedEvent to mod Forge
+[19:31:35] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Minecraft Forge took 0.001s
+[19:31:35] [Server thread/TRACE] [wakcraft/wakcraft]: Sending event FMLServerStartedEvent to mod wakcraft
+[19:31:35] [Server thread/TRACE] [wakcraft/wakcraft]: Sent event FMLServerStartedEvent to mod wakcraft
+[19:31:35] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Wakcraft took 0.002s
+[19:31:35] [Server thread/DEBUG] [FML/]: Bar Finished: ServerStarted took 0.005s
+[19:31:36] [Netty Local Client IO #0/TRACE] [FML/]: Handshake channel activating
+[19:31:36] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: null->FMLHandshakeClientState$1:START
+[19:31:36] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: HELLO
+[19:31:36] [Netty Server IO #1/TRACE] [FML/]: Handshake channel activating
+[19:31:36] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: null->FMLHandshakeServerState$1:START
+[19:31:37] [Netty Server IO #1/DEBUG] [FML/]:   Next: HELLO
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]: Server FML protocol version 2, 4 byte dimension received 0
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $ServerHello->FMLHandshakeClientState$2:HELLO
+[19:31:37] [Netty Local Client IO #0/INFO] [FML/]: Server protocol version 2
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]: Received override dimension 0
+[19:31:37] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $ClientHello->FMLHandshakeServerState$2:HELLO
+[19:31:37] [Netty Server IO #1/INFO] [FML/]: Client protocol version 2
+[19:31:37] [Netty Server IO #1/DEBUG] [FML/]:   Next: HELLO
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: WAITINGSERVERDATA
+[19:31:37] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $ModList:4 mods->FMLHandshakeServerState$2:HELLO
+[19:31:37] [Netty Server IO #1/INFO] [FML/]: Client attempting to join with 4 mods : mcp@9.05,FML@8.0.99.99,wakcraft@1.0,Forge@11.14.3.1497
+[19:31:37] [Netty Server IO #1/DEBUG] [FML/]:   Next: WAITINGCACK
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $ModList:4 mods->FMLHandshakeClientState$3:WAITINGSERVERDATA
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: PENDINGCOMPLETE
+[19:31:37] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $HandshakeAck:{2}->FMLHandshakeServerState$3:WAITINGCACK
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $HandshakeAck:{2}->FMLHandshakeClientState$5:PENDINGCOMPLETE
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: COMPLETE
+[19:31:37] [Netty Server IO #1/DEBUG] [FML/]:   Next: COMPLETE
+[19:31:37] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $HandshakeAck:{4}->FMLHandshakeServerState$4:COMPLETE
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]: The fluid minecraft:water has been selected as the default fluid for water
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]: The fluid minecraft:lava has been selected as the default fluid for lava
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $HandshakeAck:{3}->FMLHandshakeClientState$6:COMPLETE
+[19:31:37] [Netty Server IO #1/DEBUG] [FML/]:   Next: DONE
+[19:31:37] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: DONE
+[19:31:37] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $HandshakeAck:{5}->FMLHandshakeServerState$5:DONE
+[19:31:37] [Netty Server IO #1/DEBUG] [FML/]:   Next: DONE
+[19:31:37] [Netty Local Client IO #0/INFO] [FML/]: [Netty Local Client IO #0] Client side modded connection established
+[19:31:37] [Server thread/INFO] [FML/]: [Server thread] Server side modded connection established
+[19:31:37] [Client thread/DEBUG] [FML/]: Overriding dimension: using 0
+[19:32:20] [Server thread/DEBUG] [FML/]: Gathering id map for writing to world save Wakcraft_1
+[19:33:05] [Server thread/DEBUG] [FML/]: Gathering id map for writing to world save Wakcraft_1
+[19:33:50] [Server thread/DEBUG] [FML/]: Gathering id map for writing to world save Wakcraft_1
+[19:34:35] [Server thread/DEBUG] [FML/]: Gathering id map for writing to world save Wakcraft_1
+[19:34:54] [Server thread/DEBUG] [FML/]: Gathering id map for writing to world save Wakcraft_1
+[19:34:56] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerStoppingEvent to mod mcp
+[19:34:56] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerStoppingEvent to mod mcp
+[19:34:56] [Server thread/DEBUG] [FML/]: Bar Step: ServerStopping - Minecraft Coder Pack took 0.001s
+[19:34:56] [Server thread/TRACE] [FML/FML]: Sending event FMLServerStoppingEvent to mod FML
+[19:34:56] [Server thread/TRACE] [FML/FML]: Sent event FMLServerStoppingEvent to mod FML
+[19:34:56] [Server thread/DEBUG] [FML/]: Bar Step: ServerStopping - Forge Mod Loader took 0.001s
+[19:34:56] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerStoppingEvent to mod Forge
+[19:34:56] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStoppingEvent to mod Forge
+[19:34:56] [Server thread/DEBUG] [FML/]: Bar Step: ServerStopping - Minecraft Forge took 0.002s
+[19:34:56] [Server thread/TRACE] [wakcraft/wakcraft]: Sending event FMLServerStoppingEvent to mod wakcraft
+[19:34:56] [Server thread/TRACE] [wakcraft/wakcraft]: Sent event FMLServerStoppingEvent to mod wakcraft
+[19:34:56] [Server thread/DEBUG] [FML/]: Bar Step: ServerStopping - Wakcraft took 0.002s
+[19:34:56] [Server thread/DEBUG] [FML/]: Bar Finished: ServerStopping took 0.005s
+[19:34:56] [Server thread/DEBUG] [FML/]: Gathering id map for writing to world save Wakcraft_1
+[19:34:56] [Server thread/INFO] [FML/]: Unloading dimension 0
+[19:34:56] [Server thread/INFO] [FML/]: Unloading dimension -1
+[19:34:56] [Server thread/INFO] [FML/]: Unloading dimension 1
+[19:34:56] [Server thread/INFO] [FML/]: Unloading dimension 2
+[19:34:56] [Server thread/DEBUG] [FML/]: Reverting to frozen data state.
+[19:34:56] [Server thread/INFO] [FML/]: Applying holder lookups
+[19:34:56] [Server thread/INFO] [FML/]: Holder lookups applied
+[19:34:56] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerStoppedEvent to mod mcp
+[19:34:56] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerStoppedEvent to mod mcp
+[19:34:56] [Server thread/DEBUG] [FML/]: Bar Step: ServerStopped - Minecraft Coder Pack took 0.001s
+[19:34:56] [Server thread/TRACE] [FML/FML]: Sending event FMLServerStoppedEvent to mod FML
+[19:34:56] [Server thread/TRACE] [FML/FML]: Sent event FMLServerStoppedEvent to mod FML
+[19:34:56] [Server thread/DEBUG] [FML/]: Bar Step: ServerStopped - Forge Mod Loader took 0.001s
+[19:34:56] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerStoppedEvent to mod Forge
+[19:34:56] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStoppedEvent to mod Forge
+[19:34:56] [Server thread/DEBUG] [FML/]: Bar Step: ServerStopped - Minecraft Forge took 0.001s
+[19:34:56] [Server thread/TRACE] [wakcraft/wakcraft]: Sending event FMLServerStoppedEvent to mod wakcraft
+[19:34:56] [Server thread/TRACE] [wakcraft/wakcraft]: Sent event FMLServerStoppedEvent to mod wakcraft
+[19:34:56] [Server thread/DEBUG] [FML/]: Bar Step: ServerStopped - Wakcraft took 0.001s
+[19:34:56] [Server thread/DEBUG] [FML/]: Bar Finished: ServerStopped took 0.003s

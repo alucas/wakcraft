@@ -5,14 +5,14 @@ import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
-import heero.mc.mod.wakcraft.helper.HavenBagHelper;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagProperties;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagVisitors;
+import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerServerHavenBagVisitors implements IMessageHandler<PacketHavenBagVisitors, IMessage> {
 	@Override
@@ -25,7 +25,7 @@ public class HandlerServerHavenBagVisitors implements IMessageHandler<PacketHave
 			return null;
 		}
 
-		int havenBagUid = HavenBagHelper.getUIDFromCoord((int)player.posX, (int)player.posY, (int)player.posZ);
+		int havenBagUid = HavenBagUtil.getUIDFromCoord(player.getPosition());
 		if (properties.getUID() != havenBagUid) {
 			WLog.warning("Player (%s) tried to update the permission of havenbag %d", player.getDisplayName(), havenBagUid);
 			return null;

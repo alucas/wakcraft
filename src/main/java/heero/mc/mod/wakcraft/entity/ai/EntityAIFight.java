@@ -1,9 +1,9 @@
 package heero.mc.mod.wakcraft.entity.ai;
 
-import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.BlockPos;
 
 public class EntityAIFight extends EntityAIBase {
 	protected EntityLiving entity;
@@ -15,25 +15,25 @@ public class EntityAIFight extends EntityAIBase {
 
 		setMutexBits(1);
 
-		if (!FightHelper.isFighter(entity)) {
+		if (!FightUtil.isFighter(entity)) {
 			throw new RuntimeException("This AI can't be assigned to a non-fighter");
 		}
 	}
 
 	@Override
 	public boolean shouldExecute() {
-		return FightHelper.isFighting(entity);
+		return FightUtil.isFighting(entity);
 	}
 
 	@Override
 	public void startExecuting() {
-		ChunkCoordinates position = FightHelper.getStartPosition(entity);
+        BlockPos position = FightUtil.getStartPosition(entity);
 		if (position == null) {
 			return;
 		}
 
-		if (!entity.getNavigator().tryMoveToXYZ(position.posX + 0.5, position.posY, position.posZ + 0.5, this.speed)) {
-			entity.setPositionAndUpdate(position.posX + 0.5, position.posY, position.posZ + 0.5);
+		if (!entity.getNavigator().tryMoveToXYZ(position.getX() + 0.5, position.getY(), position.getZ() + 0.5, this.speed)) {
+			entity.setPositionAndUpdate(position.getX() + 0.5, position.getY(), position.getZ() + 0.5);
 		}
 	}
 }

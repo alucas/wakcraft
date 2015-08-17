@@ -4,27 +4,25 @@ import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
-import heero.mc.mod.wakcraft.helper.HavenBagHelper;
 import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
-
-import java.util.Random;
-
-import net.minecraft.block.Block;
+import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class BlockHavenBagChest extends BlockContainer {
 	private final Random rand = new Random();
@@ -37,7 +35,7 @@ public class BlockHavenBagChest extends BlockContainer {
 	public BlockHavenBagChest(int chestType) {
 		super(Material.wood);
 		this.chestType = chestType;
-		this.setBlockName("HavenBagChest");
+//		this.setBlockName("HavenBagChest");
 		this.setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
 		this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
 		this.setBlockUnbreakable();
@@ -54,15 +52,6 @@ public class BlockHavenBagChest extends BlockContainer {
 	}
 
 	/**
-	 * If this block doesn't render as an ordinary block it will return False
-	 * (examples: signs, buttons, stairs, etc)
-	 */
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	/**
 	 * The type of render function that is called for this block
 	 */
 	@Override
@@ -75,7 +64,7 @@ public class BlockHavenBagChest extends BlockContainer {
 	 * coordinates. Args: world, x, y, z
 	 */
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
 		if (world.isRemote) {
 			Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
 		}
@@ -84,8 +73,8 @@ public class BlockHavenBagChest extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int metadata) {
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		TileEntity tileEntity = world.getTileEntity(pos);
 		if (tileEntity != null && tileEntity instanceof TileEntityHavenBagChest) {
 			TileEntityHavenBagChest tileEntityChest = (TileEntityHavenBagChest) tileEntity;
 			for (int i1 = 0; i1 < tileEntityChest.getSizeInventory(); ++i1) {
@@ -105,9 +94,9 @@ public class BlockHavenBagChest extends BlockContainer {
 
 						itemstack.stackSize -= j1;
 						entityitem = new EntityItem(world,
-								(double) ((float) x + f),
-								(double) ((float) y + f1),
-								(double) ((float) z + f2),
+								(double) ((float) pos.getX() + f),
+								(double) ((float) pos.getY() + f1),
+								(double) ((float) pos.getZ() + f2),
 								new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 						float f3 = 0.05F;
@@ -121,18 +110,16 @@ public class BlockHavenBagChest extends BlockContainer {
 					}
 				}
 			}
-
-			world.func_147453_f(x, y, z, block);
 		}
 
-		super.breakBlock(world, x, y, z, block, metadata);
+		super.breakBlock(world, pos, state);
 	}
 
 	/**
 	 * Called upon block activation (right click on the block.)
 	 */
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int hitX, float hitY, float hitZ, float partialTick) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (world.isRemote) {
 			return true;
 		}
@@ -144,19 +131,19 @@ public class BlockHavenBagChest extends BlockContainer {
 			return true;
 		}
 
-		int havenBagUID = HavenBagHelper.getUIDFromCoord(x, y, z);
+		int havenBagUID = HavenBagUtil.getUIDFromCoord(pos);
 		if (((HavenBagProperty)properties).getUID() != havenBagUID) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
 			return true;
 		}
 
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		TileEntity tileEntity = world.getTileEntity(pos);
 		if (tileEntity == null && !(tileEntity instanceof TileEntityHavenBagChest)) {
-			WLog.warning("Error while loading the haven bag chest tile entity (%d, %d, %d)", x, y, z);
+			WLog.warning("Error while loading the haven bag chest tile entity (%d, %d, %d)", pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 
-		player.openGui(Wakcraft.instance, GuiId.HAVEN_BAG_CHEST_NORMAL.ordinal(), world, x, y, z);
+		player.openGui(Wakcraft.instance, GuiId.HAVEN_BAG_CHEST_NORMAL.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
 
 		return true;
 	}
@@ -170,9 +157,10 @@ public class BlockHavenBagChest extends BlockContainer {
 		return new TileEntityHavenBagChest();
 	}
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerBlockIcons(IIconRegister p_149651_1_) {
-		this.blockIcon = p_149651_1_.registerIcon("planks_oak");
-	}
+//    TODO
+//	@SideOnly(Side.CLIENT)
+//	@Override
+//	public void registerBlockIcons(IIconRegister p_149651_1_) {
+//		this.blockIcon = p_149651_1_.registerIcon("planks_oak");
+//	}
 }

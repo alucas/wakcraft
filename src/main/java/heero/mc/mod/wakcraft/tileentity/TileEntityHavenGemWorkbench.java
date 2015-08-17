@@ -2,7 +2,7 @@ package heero.mc.mod.wakcraft.tileentity;
 
 import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.havenbag.HavenBagGenerationHelper;
-import heero.mc.mod.wakcraft.helper.HavenBagHelper;
+import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IChatComponent;
 
 public class TileEntityHavenGemWorkbench extends TileEntity implements IInventory {
 	private static final String TAG_GEMS = "Gems";
@@ -130,22 +131,6 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 	}
 
 	/**
-	 * Returns the name of the inventory
-	 */
-	@Override
-	public String getInventoryName() {
-		return havenGems.getInventoryName();
-	}
-
-	/**
-	 * Returns if the inventory is named
-	 */
-	@Override
-	public boolean hasCustomInventoryName() {
-		return havenGems.hasCustomInventoryName();
-	}
-
-	/**
 	 * Returns the maximum stack size for a inventory slot.
 	 */
 	@Override
@@ -162,15 +147,15 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 		return havenGems.isUseableByPlayer(player);
 	}
 
-	@Override
-	public void openInventory() {
-		havenGems.openInventory();
-	}
+    @Override
+    public void openInventory(EntityPlayer playerIn) {
+        havenGems.openInventory(playerIn);
+    }
 
-	@Override
-	public void closeInventory() {
-		havenGems.closeInventory();
-	}
+    @Override
+    public void closeInventory(EntityPlayer playerIn) {
+        havenGems.closeInventory(playerIn);
+    }
 
 	/**
 	 * Returns true if automation is allowed to insert the given stack (ignoring
@@ -197,22 +182,47 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
 		return false;
 	}
 
-	public void onSlotChanged(int slotId) {
+    @Override
+    public int getField(int id) {
+        return havenGems.getField(id);
+    }
+
+    @Override
+    public void setField(int id, int value) {
+        havenGems.setField(id, value);
+    }
+
+    @Override
+    public int getFieldCount() {
+        return havenGems.getFieldCount();
+    }
+
+    @Override
+    public void clear() {
+        havenGems.clear();
+    }
+
+    public void onSlotChanged(int slotId) {
 		if (!worldObj.isRemote) {
-			int uid = HavenBagHelper.getUIDFromCoord(xCoord, yCoord, zCoord);
+			int uid = HavenBagUtil.getUIDFromCoord(pos);
 
 			HavenBagGenerationHelper.updateGem(worldObj, uid, getStackInSlot(slotId), slotId);
 			HavenBagGenerationHelper.updateBridge(worldObj, uid, havenGems);
 		}
 	}
 
-	/**
-	 * Determines if this TileEntity requires update calls.
-	 * 
-	 * @return True if you want updateEntity() to be called, false if not
-	 */
-	@Override
-	public boolean canUpdate() {
-		return false;
-	}
+    @Override
+    public String getName() {
+        return havenGems.getName();
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return havenGems.hasCustomName();
+    }
+
+    @Override
+    public IChatComponent getDisplayName() {
+        return havenGems.getDisplayName();
+    }
 }

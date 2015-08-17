@@ -7,7 +7,7 @@ import heero.mc.mod.wakcraft.entity.property.ItemInUseProperty;
 import heero.mc.mod.wakcraft.entity.property.ProfessionProperty;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityEventHandler {
 	@SubscribeEvent

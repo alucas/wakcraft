@@ -12,8 +12,9 @@ import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 	@Override
@@ -32,7 +33,7 @@ public class GuiHandler implements IGuiHandler {
 		case INVENTORY:
 			return new ContainerPlayerInventory(player);
 		case HAVEN_GEM_WORKBENCH:
-			tileEntity = (TileEntityHavenGemWorkbench)world.getTileEntity(x, y, z);
+			tileEntity = (TileEntityHavenGemWorkbench)world.getTileEntity(new BlockPos(x, y, z));
 			if (tileEntity == null || !(tileEntity instanceof TileEntityHavenGemWorkbench)) {
 				return null;
 			}
@@ -45,12 +46,12 @@ public class GuiHandler implements IGuiHandler {
 		case HAVEN_BAG_CHEST_COLLECTOR:
 		case HAVEN_BAG_CHEST_GOLDEN:
 		case HAVEN_BAG_CHEST_EMERALD:
-			tileEntity = world.getTileEntity(x, y, z);
+			tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagChest)) {
 				return null;
 			}
 
-			return new ContainerHavenBagChest(player.inventory, (TileEntityHavenBagChest) tileEntity);
+			return new ContainerHavenBagChest(player.inventory, (TileEntityHavenBagChest) tileEntity, player);
 		case SPELLS:
 			return new ContainerSpells(player);
 		default:
@@ -68,6 +69,6 @@ public class GuiHandler implements IGuiHandler {
 			return null;
 		}
 
-		return Wakcraft.proxy.getGui(guiId, player, world, x, y, z);
+		return Wakcraft.proxy.getGui(guiId, player, world, new BlockPos(x, y, z));
 	}
 }

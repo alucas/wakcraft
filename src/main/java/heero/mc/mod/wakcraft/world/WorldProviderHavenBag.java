@@ -7,8 +7,8 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderFlat;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderHavenBag extends WorldProvider {
 	public static final String NAME = "WakcraftHavenBag";
@@ -36,7 +36,12 @@ public class WorldProviderHavenBag extends WorldProvider {
 		return NAME;
 	}
 
-	/**
+    @Override
+    public String getInternalNameSuffix() {
+        return "_HavenBag";
+    }
+
+    /**
 	 * A message to display to the user when they transfer to this dimension.
 	 *
 	 * @return The message to be displayed
@@ -126,13 +131,14 @@ public class WorldProviderHavenBag extends WorldProvider {
 		f3 *= f2 * 0.0F + 0.15F;
 		f4 *= f2 * 0.0F + 0.15F;
 		f5 *= f2 * 0.0F + 0.15F;
-		return Vec3.createVectorHelper((double) f3, (double) f4, (double) f5);
+		return new Vec3((double) f3, (double) f4, (double) f5);
 	}
 
 	/**
 	 * Returns a new chunk provider which generates chunks for this world
 	 */
-	public IChunkProvider createChunkGenerator() {
-		return new ChunkProviderFlat(worldObj, worldObj.getSeed(), false, field_82913_c);
-	}
+    @Override
+    public IChunkProvider createChunkGenerator() {
+        return new ChunkProviderFlat(worldObj, worldObj.getSeed(), false, worldObj.getWorldInfo().getGeneratorOptions());
+    }
 }

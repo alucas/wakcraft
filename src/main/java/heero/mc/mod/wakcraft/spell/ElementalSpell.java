@@ -1,16 +1,15 @@
 package heero.mc.mod.wakcraft.spell;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.spell.effect.EffectArea;
 import heero.mc.mod.wakcraft.spell.effect.IEffect;
 import heero.mc.mod.wakcraft.spell.effect.IEffectArea;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 /**
  * Elemental spell implementation.
@@ -62,8 +61,7 @@ public class ElementalSpell extends Item implements IActiveSpell {
 		this.displayArea = displayArea;
 
 		setCreativeTab(WakcraftCreativeTabs.tabSpells);
-		setUnlocalizedName(name);
-		setTextureName(WInfo.MODID.toLowerCase() + ":spells/" + name.toLowerCase());
+		setUnlocalizedName(Reference.MODID + "_" + name);
 	}
 
 	/**
@@ -204,12 +202,12 @@ public class ElementalSpell extends Item implements IActiveSpell {
 
 	@Override
 	public String getUnlocalizedName() {
-		return "spell." + super.getUnlocalizedName().substring(5);
+		return "spell." + super.getUnlocalizedName().substring(Reference.MODID.length() + 6);
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return "spell." + super.getUnlocalizedName(stack).substring(5);
+		return "spell." + super.getUnlocalizedName(stack).substring(Reference.MODID.length() + 6);
 	}
 
 	@Override

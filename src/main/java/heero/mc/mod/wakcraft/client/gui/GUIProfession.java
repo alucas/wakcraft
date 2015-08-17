@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.client.gui;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.profession.ProfessionManager;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import net.minecraft.client.Minecraft;
@@ -9,13 +9,13 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIProfession extends GuiScreen {
 	private static final ResourceLocation professionBackground = new ResourceLocation(
-			WInfo.MODID.toLowerCase(), "textures/gui/profession.png");
+			Reference.MODID.toLowerCase(), "textures/gui/profession.png");
 
 	/**
 	 * The X size of the window in pixels.

@@ -2,7 +2,7 @@ package heero.mc.mod.wakcraft.eventhandler;
 
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
 import net.minecraftforge.event.world.WorldEvent.Load;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class WorldEventHandler {
 	@SubscribeEvent

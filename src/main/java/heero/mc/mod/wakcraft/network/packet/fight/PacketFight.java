@@ -3,16 +3,15 @@ package heero.mc.mod.wakcraft.network.packet.fight;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
-import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.util.FightUtil;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.world.World;
 
 public class PacketFight implements IPacketFight {
 	public int fightId = 0;
@@ -55,7 +54,7 @@ public class PacketFight implements IPacketFight {
 					continue;
 				}
 
-				if (!FightHelper.isFighter(entity)) {
+				if (!FightUtil.isFighter(entity)) {
 					WLog.warning("The entity " + entity + " is not a valid fighter");
 					continue;
 				}
@@ -123,9 +122,9 @@ public class PacketFight implements IPacketFight {
 			buffer.writeInt(startPositionOfTeam.size());
 
 			for (FightBlockCoordinates block : startPositionOfTeam) {
-				buffer.writeInt(block.posX);
-				buffer.writeInt(block.posY);
-				buffer.writeInt(block.posZ);
+				buffer.writeInt(block.getX());
+				buffer.writeInt(block.getY());
+				buffer.writeInt(block.getZ());
 			}
 		}
 	}

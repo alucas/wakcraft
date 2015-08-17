@@ -1,80 +1,70 @@
 package heero.mc.mod.wakcraft.item;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBlockYRotation extends Item implements IBlockProvider {
-	protected final Block block;
+    protected final Block block;
 
-	protected final ItemBlock itemBlockNorth;
-	protected final ItemBlock itemBlockEast;
-	protected final ItemBlock itemBlockSouth;
-	protected final ItemBlock itemBlockWest;
+    protected final ItemBlock itemBlockNorth;
+    protected final ItemBlock itemBlockEast;
+    protected final ItemBlock itemBlockSouth;
+    protected final ItemBlock itemBlockWest;
 
-	public ItemBlockYRotation(Block blockNorth, Block blockEast, Block blockSouth, Block blockWest) {
-		super();
+    public ItemBlockYRotation(Block blockNorth, Block blockEast, Block blockSouth, Block blockWest) {
+        super();
 
-		this.block = blockNorth;
+        this.block = blockNorth;
 
-		this.itemBlockNorth = (ItemBlock) Item.getItemFromBlock(blockNorth);
-		this.itemBlockEast = (ItemBlock) Item.getItemFromBlock(blockEast);
-		this.itemBlockSouth = (ItemBlock) Item.getItemFromBlock(blockSouth);
-		this.itemBlockWest = (ItemBlock) Item.getItemFromBlock(blockWest);
+        this.itemBlockNorth = (ItemBlock) Item.getItemFromBlock(blockNorth);
+        this.itemBlockEast = (ItemBlock) Item.getItemFromBlock(blockEast);
+        this.itemBlockSouth = (ItemBlock) Item.getItemFromBlock(blockSouth);
+        this.itemBlockWest = (ItemBlock) Item.getItemFromBlock(blockWest);
 
-		setTextureName(WInfo.MODID.toLowerCase() + ":no_icon");
+        setCreativeTab(WakcraftCreativeTabs.tabBlock);
+        blockNorth.setCreativeTab(null);
+        blockEast.setCreativeTab(null);
+        blockSouth.setCreativeTab(null);
+        blockWest.setCreativeTab(null);
 
-		if (itemBlockNorth == null || itemBlockEast == null || itemBlockSouth == null || itemBlockWest == null) {
-			throw new RuntimeException("Failed to initialize " + this.getClass().getCanonicalName());
-		}
-	}
+        if (itemBlockNorth == null || itemBlockEast == null || itemBlockSouth == null || itemBlockWest == null) {
+            throw new RuntimeException("Failed to initialize " + this.getClass().getCanonicalName());
+        }
+    }
 
-	/**
-	 * Returns 0 for /terrain.png, 1 for /gui/items.png
-	 */
-	@SideOnly(Side.CLIENT)
-	public int getSpriteNumber() {
-		return 0;
-	}
+    @Override
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos,
+                             EnumFacing side, float hitX, float hitY, float hitZ) {
+        EnumFacing direction = RotationUtil.getYRotationFromYaw(player.rotationYaw);
 
-	/**
-	 * Callback for item usage. If the item does something special on right
-	 * clicking, he will have one of those. Return True if something happen and
-	 * false if it don't. Args : stack, player, world, x, y, z, side, hitX,
-	 * hitY, hitZ
-	 */
-	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player,
-			World world, int x, int y, int z, int side, float hitX, float hitY,
-			float hitZ) {
-		ForgeDirection direction = RotationUtil.getYRotationFromYaw(player.rotationYaw);
+        switch (direction) {
+            case NORTH:
+                return itemBlockNorth.onItemUse(stack, player, world, pos, side, hitX, hitY, hitZ);
+            case EAST:
+                return itemBlockEast.onItemUse(stack, player, world, pos, side, hitX, hitY, hitZ);
+            case SOUTH:
+                return itemBlockSouth.onItemUse(stack, player, world, pos, side, hitX, hitY, hitZ);
+            case WEST:
+                return itemBlockWest.onItemUse(stack, player, world, pos, side, hitX, hitY, hitZ);
+            default:
+                break;
+        }
 
-		switch (direction) {
-		case NORTH:
-			return itemBlockNorth.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
-		case EAST:
-			return itemBlockEast.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
-		case SOUTH:
-			return itemBlockSouth.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
-		case WEST:
-			return itemBlockWest.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
-		default:
-			break;
-		}
+        return false;
+    }
 
-		return false;
-	}
-
-	@Override
-	public Block getBlock() {
-		return block;
-	}
+    @Override
+    public Block getBlock() {
+        return block;
+    }
 }

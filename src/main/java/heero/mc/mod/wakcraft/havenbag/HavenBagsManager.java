@@ -1,13 +1,13 @@
 package heero.mc.mod.wakcraft.havenbag;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HavenBagsManager extends WorldSavedData {
 	// Constants
@@ -38,10 +38,10 @@ public class HavenBagsManager extends WorldSavedData {
 
 	public static void init(World world) {
 		if (instance == null) {
-			instance = (HavenBagsManager) world.mapStorage.loadData(HavenBagsManager.class, "havenbags");
+			instance = (HavenBagsManager) world.loadItemData(HavenBagsManager.class, "havenbags");
 
 			if (instance == null) {
-				world.mapStorage.setData("havenbags", new HavenBagsManager("havenbags"));
+				world.setItemData("havenbags", new HavenBagsManager("havenbags"));
 			}
 		}
 	}
@@ -77,7 +77,7 @@ public class HavenBagsManager extends WorldSavedData {
 	public HavenBagsManager(String name) {
 		super(name);
 
-		havenbags = new HashMap<Integer, HavenBagProperties>();
+		havenbags = new HashMap<>();
 	}
 
 	@Override

@@ -1,14 +1,19 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.tileentity.TileEntityDragoexpress;
+import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -16,58 +21,40 @@ public class BlockDragoexpress extends BlockContainer {
 
 	public BlockDragoexpress() {
 		super(Material.wood);
-		
-		setBlockTextureName(WInfo.MODID.toLowerCase() + ":dragoexpress");
+
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
-		setBlockName("dragoexpress");
+        setUnlocalizedName(Reference.MODID + "_dragoexpress");
 		setLightOpacity(0);
 		setBlockUnbreakable();
+        setDefaultState(blockState.getBaseState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH));
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntityDragoexpress();
 	}
-	
-	/**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
-	@Override
-    public void onBlockAdded(World world, int x, int y, int z)
-    {
-        super.onBlockAdded(world, x, y, z);
 
-        if (!world.isRemote)
-        {
-            world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-        }
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        EnumFacing yRotation = RotationUtil.getYRotationFromMetadata(meta);
+
+        return getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, yRotation);
     }
-	
-	/**
-     * Called when the block is placed in the world.
-     */
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        EnumFacing yRotation = (EnumFacing) state.getValue(RotationUtil.PROP_Y_ROTATION);
+
+        return RotationUtil.getMetadataFromYRotation(yRotation);
+    }
+
 	@Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemBlock)
-    {
-        int l = MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-		switch (l) {
-		case 0:
-			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-			break;
-		case 1:
-			world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-			break;
-		case 3:
-			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
-			break;
-		default:
-			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-		}
-
-		if (itemBlock.hasDisplayName()) {
-			((TileEntityFurnace) world.getTileEntity(x, y, z))
-					.func_145951_a(itemBlock.getDisplayName());
-		}
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        RotationUtil.setYRotationFromYaw(world, pos, state, placer.rotationYaw);
 	}
+
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, RotationUtil.PROP_Y_ROTATION);
+    }
 }

@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.entity.property;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class FightCharacteristicsProperty implements IExtendedEntityProperties, ISynchProperties {
-	public static final String IDENTIFIER = WInfo.MODID + "FightCharacteristics";
+	public static final String IDENTIFIER = Reference.MODID + "FightCharacteristics";
 
 	protected static String TAG_CHARACTERISTICS = "characteristics";
 	protected static String TAG_NAME = "Name";

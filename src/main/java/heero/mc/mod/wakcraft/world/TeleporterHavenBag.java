@@ -2,7 +2,7 @@ package heero.mc.mod.wakcraft.world;
 
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
-import heero.mc.mod.wakcraft.helper.HavenBagHelper;
+import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.Teleporter;
@@ -31,7 +31,7 @@ public class TeleporterHavenBag extends Teleporter {
 	 */
 	public void placeInPortal(Entity entity, double oldPosX, double oldPosY, double oldPosZ, float oldYaw) {
 		if (entity.dimension == WConfig.getHavenBagDimensionId() && uid != -1) {
-			int[] coords = HavenBagHelper.getCoordFromUID(uid);
+			int[] coords = HavenBagUtil.getCoordFromUID(uid);
 
 			entity.motionX = entity.motionY = entity.motionZ = 0;
 			entity.rotationYaw = -90;

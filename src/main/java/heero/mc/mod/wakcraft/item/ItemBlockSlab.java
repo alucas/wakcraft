@@ -1,198 +1,208 @@
 package heero.mc.mod.wakcraft.item;
 
 import heero.mc.mod.wakcraft.block.BlockSlab;
-import heero.mc.mod.wakcraft.block.IBlockProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- *	This blocks represent a demi slab block (1/4 block)
- *	The metadata is :
- *	2 lower bits : position (0, 1, 2, 3)
- *	2 higher bits : size (0 : 1/4, 1 : 1/2, 2 : 1/3)
+ * This blocks represent a demi slab block (1/4 block)
+ * The metadata is :
+ * 2 lower bits : position (0, 1, 2, 3)
+ * 2 higher bits : size (0 : 1/4, 1 : 1/2, 2 : 1/3)
  */
 public class ItemBlockSlab extends ItemBlock {
-	// Opaque version of the slab block
-	protected Block blockOpaque;
-	protected int blockOpaqueMetadata;
+    // Opaque version of the slab block
+    protected final IBlockState blockStateOpaque;
+    protected final BlockSlab blockSlab;
 
-	public ItemBlockSlab(Block block) {
-		super(block);
+    public ItemBlockSlab(final Block block) {
+        super(block);
 
-		if (!(block instanceof IBlockProvider)) {
-			throw new IllegalArgumentException("The block " + block.getUnlocalizedName() + " must implement " + IBlockProvider.class.getName());
-		}
+        if (!(block instanceof BlockSlab)) {
+            throw new IllegalArgumentException("The block " + block.getUnlocalizedName() + " must extends " + BlockSlab.class.getName());
+        }
 
-		this.blockOpaque = ((IBlockProvider) block).getBlock();
-		this.blockOpaqueMetadata = ((IBlockProvider) block).getBlockMetadata();
-	}
+        this.blockSlab = (BlockSlab) block;
+        this.blockStateOpaque = ((BlockSlab) block).getSubBlockState();
+    }
 
-	/**
-	 * Callback for item usage. If the item does something special on right
-	 * clicking, he will have one of those. Return True if something happen and
-	 * false if it don't. Args : stack, player, world, x, y, z, side, hitX,
-	 * hitY, hitZ
-	 */
-	@Override
-	public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer,
-			World world, int x, int y, int z, int side, float hitX, float hitY,
-			float hitZ) {
-		switch (side) {
-		case 0: // Bottom
-			if (world.getBlock(x, y, z) == field_150939_a) {
-				int metadata = world.getBlockMetadata(x, y, z);
-				int size = BlockSlab.getSize(metadata);
-				int pos = BlockSlab.getBottomPosition(metadata);
+    /**
+     * Callback for item usage. If the item does something special on right
+     * clicking, he will have one of those. Return True if something happen and
+     * false if it don't. Args : stack, player, world, x, y, z, side, hitX,
+     * hitY, hitZ
+     */
+    @Override
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos blockPos, EnumFacing side, float hitX, float hitY, float hitZ) {
+        BlockPos blockPosDown = blockPos.offsetDown();
+        BlockPos blockPosUp = blockPos.offsetUp();
 
-				if (pos == 1 && size == 2) {
-					playSoundPlaced(world, x, y, z);
-					world.setBlock(x, y, z, blockOpaque, blockOpaqueMetadata, 2);
-					return true;
-				} else if (pos > 0) {
-					playSoundPlaced(world, x, y, z);
-					world.setBlockMetadataWithNotify(x, y, z, ((size + 1) << 2) + pos - 1, 2);
-					return true;
-				}
-			}
+        IBlockState blockState = world.getBlockState(blockPos);
 
-			Block block = world.getBlock(x, y - 1, z);
-			if (block == field_150939_a) {
-				int metadata = world.getBlockMetadata(x, y - 1, z);
-				int size = BlockSlab.getSize(metadata);
-				int pos = BlockSlab.getBottomPosition(metadata);
+        switch (side) {
+            case DOWN:
+                if (blockState.getBlock() == this.blockSlab) {
+                    int size = BlockSlab.getSize(blockState);
+                    int bottom = BlockSlab.getBottomPosition(blockState);
 
-				if (pos == 0 && size == 2) {
-					playSoundPlaced(world, x, y - 1, z);
-					world.setBlock(x, y - 1, z, blockOpaque, blockOpaqueMetadata, 2);
-					return true;
-				} else if (size + pos == 2) {
-					playSoundPlaced(world, x, y - 1, z);
-					world.setBlockMetadataWithNotify(x, y - 1, z, ((size + 1) << 2) + pos, 2);
-					return true;
-				}
-			} else if (block.isReplaceable(world, x, y - 1, z)) {
-				playSoundPlaced(world, x, y - 1, z);
-				world.setBlock(x, y - 1, z, field_150939_a, 3, 2);
-			}
+                    if (bottom == 1 && size == 2) {
+                        playSoundPlaced(world, blockPos);
+                        world.setBlockState(blockPos, this.blockStateOpaque);
+                        return true;
+                    } else if (bottom > 0) {
+                        playSoundPlaced(world, blockPos);
+                        world.setBlockState(blockPos, BlockSlab.setSize(BlockSlab.setBottomPosition(blockState, bottom - 1), size + 1));
+                        return true;
+                    }
+                }
 
-			break;
-		case 1: // Top
-			if (world.getBlock(x, y, z) == field_150939_a) {
-				int metadata = world.getBlockMetadata(x, y, z);
-				int size = BlockSlab.getSize(metadata);
-				int pos = BlockSlab.getBottomPosition(metadata);
+                IBlockState blockStateDown = world.getBlockState(blockPosDown);
+                if (blockStateDown.getBlock() == this.blockSlab) {
+                    int size = BlockSlab.getSize(blockStateDown);
+                    int bottom = BlockSlab.getBottomPosition(blockStateDown);
+                    int top = bottom + size;
 
-				if (pos == 0 && size == 2) {
-					playSoundPlaced(world, x, y, z);
-					world.setBlock(x, y, z, blockOpaque, blockOpaqueMetadata, 2);
-					return true;
-				} else if (size + pos < 3) {
-					playSoundPlaced(world, x, y, z);
-					world.setBlockMetadataWithNotify(x, y, z, ((size + 1) << 2) + pos, 2);
-					return true;
-				}
-			}
+                    if (bottom == 0 && size == 2) {
+                        playSoundPlaced(world, blockPosDown);
+                        world.setBlockState(blockPosDown, this.blockStateOpaque);
+                        return true;
+                    } else if (top == 2) {
+                        playSoundPlaced(world, blockPosDown);
+                        world.setBlockState(blockPosDown, BlockSlab.setSize(blockStateDown, size + 1));
+                        return true;
+                    }
+                } else if (blockStateDown.getBlock().isReplaceable(world, blockPosDown)) {
+                    playSoundPlaced(world, blockPosDown);
 
-			if (world.getBlock(x, y + 1, z) == field_150939_a) {
-				int metadata = world.getBlockMetadata(x, y, z);
-				int size = BlockSlab.getSize(metadata);
-				int pos = BlockSlab.getBottomPosition(metadata);
+                    IBlockState blockStateTmp = this.blockSlab.getDefaultState();
+                    world.setBlockState(blockPosDown, BlockSlab.setBottomPosition(blockStateTmp, 3));
+                    return true;
+                }
 
-				if (size == 2 && pos == 1) {
-					playSoundPlaced(world, x, y + 1, z);
-					world.setBlock(x, y + 1, z, blockOpaque, blockOpaqueMetadata, 2);
-					return true;
-				} else if (pos == 1) {
-					playSoundPlaced(world, x, y + 1, z);
-					world.setBlockMetadataWithNotify(x, y + 1, z, ((size + 1) << 2) + pos, 2);
-					return true;
-				}
-			}
+                break;
+            case UP:
+                if (blockState.getBlock() == this.blockSlab) {
+                    int size = BlockSlab.getSize(blockState);
+                    int bottom = BlockSlab.getBottomPosition(blockState);
+                    int top = bottom + size;
 
-			break;
-		default:
-			int posX = x + ((side == 5) ? 1 : (side == 4) ? -1 : 0);
-			int posZ = z + ((side == 3) ? 1 : (side == 2) ? -1 : 0);
+                    if (bottom == 0 && size == 2) {
+                        playSoundPlaced(world, blockPos);
+                        world.setBlockState(blockPos, this.blockStateOpaque);
+                        return true;
+                    } else if (size + bottom < 3) {
+                        playSoundPlaced(world, blockPos);
+                        world.setBlockState(blockPos, BlockSlab.setSize(blockState, size + 1));
+                        return true;
+                    }
+                }
 
-			if (world.getBlock(posX, y, posZ) == field_150939_a) {
-				int metadata = world.getBlockMetadata(posX, y, posZ);
-				int size = BlockSlab.getSize(metadata);
-				int pos = BlockSlab.getBottomPosition(metadata);
+                IBlockState blockStateUp = world.getBlockState(blockPosUp);
+                if (blockStateUp.getBlock() == this.blockSlab) {
+                    int size = BlockSlab.getSize(blockStateUp);
+                    int pos = BlockSlab.getBottomPosition(blockStateUp);
 
-				int sectionY = (int) (hitY * 4);
-				int sum = size + pos;
+                    if (size == 2 && pos == 1) {
+                        playSoundPlaced(world, blockPosUp);
+                        world.setBlockState(blockPosUp, this.blockStateOpaque);
+                        return true;
+                    } else if (pos == 1) {
+                        playSoundPlaced(world, blockPosUp);
+                        world.setBlockState(blockPosUp, BlockSlab.setSize(blockStateUp, size + 1));
+                        return true;
+                    }
+                }
 
-				if (size == 2 && ((sectionY == 0 && pos == 1) || (sectionY == 3 && pos == 0))) {
-					playSoundPlaced(world, posX, y, posZ);
-					world.setBlock(posX, y, posZ,blockOpaque, blockOpaqueMetadata, 2);
-				}
+                break;
+            default: // NORTH, SOUTH, EAST, WEST
+                int posX = blockPos.getX() + ((side == EnumFacing.EAST) ? 1 : (side == EnumFacing.WEST) ? -1 : 0);
+                int posZ = blockPos.getZ() + ((side == EnumFacing.SOUTH) ? 1 : (side == EnumFacing.NORTH) ? -1 : 0);
+                int sectionY = (int) (hitY * 4);
 
-				if ((sectionY == 0 && pos == 1) || (sectionY == 1 && pos == 2) || (sectionY == 2 && pos == 3)) {
-					playSoundPlaced(world, posX, y, posZ);
-					world.setBlockMetadataWithNotify(posX, y, posZ, ((size + 1) << 2) + pos - 1, 2);
-					return true;
-				}
+                BlockPos blockPosSide = new BlockPos(posX, blockPos.getY(), posZ);
+                IBlockState blockStateSide = world.getBlockState(blockPosSide);
+                if (blockStateSide.getBlock() == this.blockSlab) {
+                    int size = BlockSlab.getSize(blockStateSide);
+                    int bottom = BlockSlab.getBottomPosition(blockStateSide);
+                    int top = size + bottom;
 
-				if ((sectionY == 3 && sum == 2) || (sectionY == 2 && sum == 1) || (sectionY == 1 && sum == 0)) {
-					playSoundPlaced(world, posX, y, posZ);
-					world.setBlockMetadataWithNotify(posX, y, posZ, ((size + 1) << 2) + pos, 2);
-					return true;
-				}
-			} else if (world.getBlock(posX, y, posZ).isReplaceable(world, posX, y, posZ)) {
-				playSoundPlaced(world, posX, y, posZ);
-				world.setBlock(posX, y, posZ, field_150939_a, (int) (hitY * 4), 2);
+                    if (size == 2 && ((sectionY == 0 && bottom == 1) || (sectionY == 3 && bottom == 0))) {
+                        playSoundPlaced(world, blockPosSide);
+                        world.setBlockState(blockPosSide, this.blockStateOpaque);
+                        return true;
+                    }
 
-				return true;
-			}
-		}
+                    if ((sectionY == 0 && bottom == 1) || (sectionY == 1 && bottom == 2) || (sectionY == 2 && bottom == 3)) {
+                        playSoundPlaced(world, blockPosSide);
+                        world.setBlockState(blockPosSide, BlockSlab.setSize(BlockSlab.setBottomPosition(blockStateSide, bottom - 1), size + 1));
+                        return true;
+                    }
 
-		super.onItemUse(itemStack, entityPlayer, world, x, y, z, side, hitX,
-				hitY, hitZ);
+                    if ((sectionY == 3 && top == 2) || (sectionY == 2 && top == 1) || (sectionY == 1 && top == 0)) {
+                        playSoundPlaced(world, blockPosSide);
+                        world.setBlockState(blockPosSide, BlockSlab.setSize(blockStateSide, size + 1));
+                        return true;
+                    }
+                } else if (blockStateSide.getBlock().isReplaceable(world, blockPosSide)) {
+                    playSoundPlaced(world, blockPosSide);
 
-		return false;
-	}
+                    IBlockState blockStateTmp = this.blockSlab.getDefaultState();
+                    world.setBlockState(blockPosSide, BlockSlab.setBottomPosition(blockStateTmp, sectionY));
+                    return true;
+                }
+        }
 
-	// canPlaceEntityOnSide ?
-	@SideOnly(Side.CLIENT)
-	@Override
-	public boolean func_150936_a(World world, int x, int y, int z, int side,
-			EntityPlayer player, ItemStack itemStack) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		int size = BlockSlab.getSize(metadata);
-		int pos = BlockSlab.getBottomPosition(metadata);
+        super.onItemUse(stack, player, world, blockPos, side, hitX, hitY, hitZ);
 
-		int posX = x + ((side == 5) ? 1 : (side == 4) ? -1 : 0);
-		int posZ = z + ((side == 3) ? 1 : (side == 2) ? -1 : 0);
+        return false;
+    }
 
-		Block block = world.getBlock(posX, y, posZ);
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean canPlaceBlockOnSide(World world, BlockPos blockPos, EnumFacing side, EntityPlayer player, ItemStack itemStack) {
+        return true;
+//        final IBlockState blockState = world.getBlockState(blockPos);
+//        if (!(blockState.getBlock() instanceof BlockSlab)) {
+//            return true;
+//        }
+//
+//        final int size = BlockSlab.getSize(blockState);
+//        final int bottom = BlockSlab.getBottomPosition(blockState);
+//        final int top = size + bottom;
+//
+//        final int posX = blockPos.getX() + ((side == EnumFacing.EAST) ? 1 : (side == EnumFacing.WEST) ? -1 : 0);
+//        final int posZ = blockPos.getZ() + ((side == EnumFacing.SOUTH) ? 1 : (side == EnumFacing.NORTH) ? -1 : 0);
+//
+//        final IBlockState blockStateSide = world.getBlockState(new BlockPos(posX, blockPos.getY(), posZ));
+//
+//        final int posY = blockPos.getY()
+//                + ((side == EnumFacing.UP && (top == 3 || blockStateSide.getBlock() != this.blockSlab)) ? 1
+//                : (side == EnumFacing.DOWN && (bottom == 0 || blockStateSide.getBlock() != this.blockSlab)) ? -1
+//                : 0);
+//
+//        final IBlockState blockStateSide2 = world.getBlockState(new BlockPos(posX, posY, posZ));
+//        if (blockStateSide2.getBlock() == this.blockSlab) {
+//            final int size2 = BlockSlab.getSize(blockStateSide2);
+//            final int bottom2 = BlockSlab.getBottomPosition(blockStateSide2);
+//            final int top2 = bottom + size;
+//
+//            if ((side == EnumFacing.DOWN && bottom2 > 0) || (side == EnumFacing.UP && top2 < 3) || size2 > 1) {
+//                return true;
+//            }
+//        }
+//
+//        return super.canPlaceBlockOnSide(world, blockPos, side, player, itemStack);
+    }
 
-		int posY = y
-				+ ((side == 1 && (size + pos == 3 || block != this.field_150939_a)) ? 1
-						: (side == 0 && (pos == 0 || block != this.field_150939_a)) ? -1
-								: 0);
-
-		block = world.getBlock(posX, posY, posZ);
-		if (block == this.field_150939_a) {
-			metadata = world.getBlockMetadata(posX, posY, posZ);
-			size = BlockSlab.getSize(metadata);
-			pos = BlockSlab.getBottomPosition(metadata);
-
-			int sum = pos + size;
-
-			if ((side == 0 && pos > 0) || (side == 1 && sum < 3) || side > 1) {
-				return true;
-			}
-		}
-
-		return super.func_150936_a(world, x, y, z, side, player, itemStack);
-	}
-
-	public void playSoundPlaced(World world, double x, double y, double z) {
-		world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, this.field_150939_a.stepSound.func_150496_b(), (this.field_150939_a.stepSound.getVolume() + 1.0F) / 2.0F, this.field_150939_a.stepSound.getPitch() * 0.8F);
-	}
+    public void playSoundPlaced(World world, BlockPos pos) {
+        world.playSoundEffect(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, this.blockSlab.stepSound.getPlaceSound(), (this.blockSlab.stepSound.getVolume() + 1.0F) / 2.0F, this.blockSlab.stepSound.getFrequency() * 0.8F);
+    }
 }

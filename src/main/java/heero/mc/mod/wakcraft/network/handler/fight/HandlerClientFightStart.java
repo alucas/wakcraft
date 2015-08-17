@@ -5,9 +5,9 @@ import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFight;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerClientFightStart implements IMessageHandler<PacketFightStart, IMessage> {
 	@Override

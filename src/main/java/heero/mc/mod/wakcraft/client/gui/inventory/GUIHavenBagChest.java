@@ -1,26 +1,23 @@
 package heero.mc.mod.wakcraft.client.gui.inventory;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.havenbag.ChestType;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest.HavenBagChestSlot;
-
-import java.util.List;
-
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GUIHavenBagChest extends GUIContainer {
-	private static final ResourceLocation textureBackground = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/havenbagchest.png");
-	private static final ResourceLocation textureBackground_locked = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/havenbagchest_locked.png");
+	private static final ResourceLocation textureBackground = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/gui/havenbagchest.png");
+	private static final ResourceLocation textureBackground_locked = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/gui/havenbagchest_locked.png");
 
 	public ChestType chestId;
 
@@ -45,7 +42,7 @@ public class GUIHavenBagChest extends GUIContainer {
 
 			drawString(fontRendererObj, ikiakitStack.getDisplayName(), guiLeft + 50, guiTop + 50, 0xFFFFFF);
 
-			func_146977_a(ikiakitSlot);
+			drawSlot(ikiakitSlot);
 
 			if (isMouseOverSlot(ikiakitSlot, mouseX + guiLeft, mouseY + guiTop)) {
 				drawSlotOverlay(ikiakitSlot);
@@ -95,7 +92,7 @@ public class GUIHavenBagChest extends GUIContainer {
 		for (int i = 0; i < inventorySlots.inventorySlots.size(); ++i) {
 			Slot slot = (Slot) inventorySlots.inventorySlots.get(i);
 
-			if (isMouseOverSlot(slot, mouseX, mouseY) && slot.func_111238_b() && (!(slot instanceof HavenBagChestSlot) || !((HavenBagChestSlot) slot).conceal)) {
+			if (isMouseOverSlot(slot, mouseX, mouseY) && slot.canBeHovered() && (!(slot instanceof HavenBagChestSlot) || !((HavenBagChestSlot) slot).conceal)) {
 				return slot;
 			}
 		}
@@ -112,7 +109,7 @@ public class GUIHavenBagChest extends GUIContainer {
 				continue;
 			}
 
-			func_146977_a(slot);
+			drawSlot(slot);
 
 			if (slot.slotNumber == hoveredSlotId) {
 				drawSlotOverlay(slot);

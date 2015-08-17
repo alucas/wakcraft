@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "side": "wakcraft:blocks/hbmerchant_side",
+    "end": "wakcraft:blocks/hbmerchant_top"
+  }
+}

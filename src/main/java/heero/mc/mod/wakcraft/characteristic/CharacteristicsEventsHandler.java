@@ -1,9 +1,9 @@
 package heero.mc.mod.wakcraft.characteristic;
 
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
-import heero.mc.mod.wakcraft.helper.CharacteristicsHelper;
+import heero.mc.mod.wakcraft.util.CharacteristicUtil;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class CharacteristicsEventsHandler {
 	/**
@@ -13,12 +13,12 @@ public class CharacteristicsEventsHandler {
 	 */
 	@SubscribeEvent
 	public void onEntityConstructing(EntityConstructing event) {
-		if (!CharacteristicsHelper.haveCharacteristics(event.entity)) {
+		if (!CharacteristicUtil.haveCharacteristics(event.entity)) {
 			return;
 		}
 
 		event.entity.registerExtendedProperties(CharacteristicsProperty.IDENTIFIER, new CharacteristicsProperty());
 
-		CharacteristicsHelper.initCharacteristics(event.entity);
+		CharacteristicUtil.initCharacteristics(event.entity);
 	}
 }

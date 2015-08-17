@@ -3,25 +3,25 @@ package heero.mc.mod.wakcraft;
 import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
 import heero.mc.mod.wakcraft.proxy.CommonProxy;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
-import cpw.mods.fml.common.event.FMLServerStoppedEvent;
-import cpw.mods.fml.common.event.FMLServerStoppingEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
-@Mod(modid = WInfo.MODID, name = WInfo.READABLE_NAME)
+@Mod(modid = Reference.MODID, name = Reference.READABLE_NAME)
 public class Wakcraft {
-	@Instance(value = WInfo.MODID)
+	@Instance(value = Reference.MODID)
 	public static Wakcraft instance;
 
-	@SidedProxy(clientSide = WInfo.PROXY_CLIENT_PATH, serverSide = WInfo.PROXY_SERVER_PATH)
+	@SidedProxy(clientSide = Reference.PROXY_CLIENT_PATH, serverSide = Reference.PROXY_SERVER_PATH)
 	public static CommonProxy proxy;
 
 	public static final SimpleNetworkWrapper packetPipeline = NetworkRegistry.INSTANCE.newSimpleChannel("Wakcraft");
@@ -46,7 +46,7 @@ public class Wakcraft {
 	}
 
 	@EventHandler
-	public void load(FMLInitializationEvent event) {
+	public void init(FMLInitializationEvent event) {
 		proxy.registerInitEvents();
 		proxy.registerKeyBindings();
 	}

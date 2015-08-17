@@ -9,7 +9,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class SlotComplexCrafting extends SlotCrafting {
 	private InventoryCrafting inventoryCrafting;

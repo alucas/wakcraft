@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.entity.property;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.inventory.InventoryArmors;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.IInventory;
@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class InventoryProperty implements IExtendedEntityProperties, ISynchProperties {
-	public static final String IDENTIFIER = WInfo.MODID + "Inventory";
+	public static final String IDENTIFIER = Reference.MODID + "Inventory";
 
 	protected static String TAG_WINVENTORY = "WIventory";
 	protected static String TAG_ARMOR = "Armor";

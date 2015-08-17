@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "propertycenter=false,propertycorner=false,propertyyrotation=north": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3", "y": 0 },
+    "propertycenter=false,propertycorner=false,propertyyrotation=east": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3", "y": 90 },
+    "propertycenter=false,propertycorner=false,propertyyrotation=south": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3", "y": 180 },
+    "propertycenter=false,propertycorner=false,propertyyrotation=west": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3", "y": 270 },
+    "propertycenter=false,propertycorner=true,propertyyrotation=north": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Corner", "y": 0 },
+    "propertycenter=false,propertycorner=true,propertyyrotation=east": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Corner", "y": 90 },
+    "propertycenter=false,propertycorner=true,propertyyrotation=south": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Corner", "y": 180 },
+    "propertycenter=false,propertycorner=true,propertyyrotation=west": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Corner", "y": 270 },
+    "propertycenter=true,propertycorner=false,propertyyrotation=north": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Center", "y": 0 },
+    "propertycenter=true,propertycorner=false,propertyyrotation=east": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Center", "y": 90 },
+    "propertycenter=true,propertycorner=false,propertyyrotation=south": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Center", "y": 180 },
+    "propertycenter=true,propertycorner=false,propertyyrotation=west": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Center", "y": 270 },
+    "propertycenter=true,propertycorner=true,propertyyrotation=north": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Center", "y": 0 },
+    "propertycenter=true,propertycorner=true,propertyyrotation=east": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Center", "y": 90 },
+    "propertycenter=true,propertycorner=true,propertyyrotation=south": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Center", "y": 180 },
+    "propertycenter=true,propertycorner=true,propertyyrotation=west": { "model": "wakcraft:corner/sufokiaWave3/blockSufokiaWave3Center", "y": 270 }
+  }
+}

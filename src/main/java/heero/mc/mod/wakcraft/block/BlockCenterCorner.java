@@ -1,88 +1,55 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.util.RotationUtil;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCenterCorner extends BlockYRotation implements ICenterCorner {
-	private String nameCorner, nameCenter;
-	private IIcon iconCorner, iconCenter;
+public class BlockCenterCorner extends BlockYRotation {
+    public static final IProperty PROP_CORNER = PropertyBool.create("propertyCorner");
+    public static final IProperty PROP_CENTER = PropertyBool.create("propertyCenter");
 
-	public BlockCenterCorner(Material material) {
-		super(material);
-	}
+    public BlockCenterCorner(Material material) {
+        super(material);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		switch (side) {
-		case 0:
-		case 1:
-			boolean t1 = (world.getBlock(x + 1, y, z) instanceof ICenterCorner);
-			boolean t2 = (world.getBlock(x, y, z + 1) instanceof ICenterCorner);
-			boolean t3 = (world.getBlock(x - 1, y, z) instanceof ICenterCorner);
-			boolean t4 = (world.getBlock(x, y, z - 1) instanceof ICenterCorner);
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, RotationUtil.PROP_Y_ROTATION, PROP_CENTER, PROP_CORNER);
+    }
 
-			int neighbor = (t1 ? 1 : 0) + (t2 ? 2 : 0) + (t3 ? 4 : 0)
-					+ (t4 ? 8 : 0);
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        BlockPos posSouth = pos.offsetSouth();
+        BlockPos posWest = pos.offsetWest();
+        BlockPos posNorth = pos.offsetNorth();
+        BlockPos posEast = pos.offsetEast();
 
-			if (neighbor == 15) {
-				return getCenterIcon(side, metadata);
-			} else if (neighbor == 12 || neighbor == 9 || neighbor == 03
-					|| neighbor == 6) {
-				return getCornerIcon(side, metadata);
-			}
-		}
+        Block blockSouth = worldIn.getBlockState(posSouth).getBlock();
+        Block blockWest = worldIn.getBlockState(posWest).getBlock();
+        Block blockNorth = worldIn.getBlockState(posNorth).getBlock();
+        Block blockEast = worldIn.getBlockState(posEast).getBlock();
 
-		return getIcon(side, metadata);
-	}
+        Boolean propertyCenterNew = blockSouth == this && blockWest == this && blockNorth == this && blockEast == this;
 
-	public BlockCenterCorner setBlockCornerTextureName(String nameCorner) {
-		this.nameCorner = nameCorner;
+        state = state.withProperty(PROP_CENTER, propertyCenterNew);
 
-		return this;
-	}
+        if (propertyCenterNew) {
+            return state;
+        }
 
-	public BlockCenterCorner setBlockCenterTextureName(String nameCenter) {
-		this.nameCenter = nameCenter;
+        EnumFacing yRotation = (EnumFacing) state.getValue(RotationUtil.PROP_Y_ROTATION);
+        Boolean propertyCornerSouth = yRotation == EnumFacing.SOUTH && blockSouth != this && blockWest != this && blockNorth == this && blockEast == this;
+        Boolean propertyCornerWest = yRotation == EnumFacing.WEST && blockSouth == this && blockWest != this && blockNorth != this && blockEast == this;
+        Boolean propertyCornerNorth = yRotation == EnumFacing.NORTH && blockSouth == this && blockWest == this && blockNorth != this && blockEast != this;
+        Boolean propertyCornerEast = yRotation == EnumFacing.EAST && blockSouth != this && blockWest == this && blockNorth == this && blockEast != this;
 
-		return this;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getCornerIcon(int side, int metadata) {
-		if (iconCorner == null) {
-			return getIcon(side, metadata);
-		}
-
-		return iconCorner;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getCenterIcon(int side, int metadata) {
-		if (iconCenter == null) {
-			return getIcon(side, metadata);
-		}
-
-		return iconCenter;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister registerer) {
-		super.registerBlockIcons(registerer);
-
-		if (nameCorner != null) {
-			iconCorner = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + nameCorner);
-		}
-
-		if (nameCenter != null) {
-			iconCenter = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":" + nameCenter);
-		}
-	}
+        return state.withProperty(PROP_CORNER, propertyCornerSouth || propertyCornerWest || propertyCornerNorth || propertyCornerEast);
+    }
 }

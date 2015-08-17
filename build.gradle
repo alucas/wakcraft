@@ -22,8 +22,8 @@ apply plugin: 'forge'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-mcVersion="1.7.10"
-forgeVersion="${mcVersion}-10.13.0.1186"
+mcVersion="1.8"
+forgeVersion="${mcVersion}-11.14.3.1497"
 
 def versionInfo = getGitVersion()
 version = "${forgeVersion}-${versionInfo['Wakcraft.version']}"

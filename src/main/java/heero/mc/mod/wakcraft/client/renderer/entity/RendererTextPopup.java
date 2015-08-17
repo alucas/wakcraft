@@ -1,19 +1,20 @@
 package heero.mc.mod.wakcraft.client.renderer.entity;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RendererTextPopup extends Render {
-	private static final ResourceLocation texture = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/ascii.png");
+	private static final ResourceLocation texture = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/entity/ascii.png");
 
-	public RendererTextPopup() {
+	public RendererTextPopup(RenderManager renderManager) {
+        super(renderManager);
 	}
 
 	/**
@@ -43,7 +44,7 @@ public class RendererTextPopup extends Render {
 		float scale = 0.3f;
 		GL11.glScalef(scale, scale, scale);
 
-		Tessellator tessellator = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
 
 		double point = 1D / 16;
 
@@ -60,12 +61,13 @@ public class RendererTextPopup extends Render {
 			GL11.glPushMatrix();
 			GL11.glRotatef(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
 			GL11.glColor4f(entityText.colorRed, entityText.colorGreen, entityText.colorBlue, 1.0F);
-			tessellator.startDrawingQuads();
-			tessellator.setNormal(0.0F, 1.0F, 0.0F);
-			tessellator.addVertexWithUV((double) (0.0F - offsetX), 0.0D - offsetY, 0.0D, (double) minU, (double) maxV);
-			tessellator.addVertexWithUV((double) (1.0F - offsetX), 0.0D - offsetY, 0.0D, (double) maxU, (double) maxV);
-			tessellator.addVertexWithUV((double) (1.0F - offsetX), 1.0D - offsetY, 0.0D, (double) maxU, (double) minV);
-			tessellator.addVertexWithUV((double) (0.0F - offsetX), 1.0D - offsetY, 0.0D, (double) minU, (double) minV);
+//            TODO
+//			tessellator.startDrawingQuads();
+//			tessellator.setNormal(0.0F, 1.0F, 0.0F);
+//			tessellator.addVertexWithUV((double) (0.0F - offsetX), 0.0D - offsetY, 0.0D, (double) minU, (double) maxV);
+//			tessellator.addVertexWithUV((double) (1.0F - offsetX), 0.0D - offsetY, 0.0D, (double) maxU, (double) maxV);
+//			tessellator.addVertexWithUV((double) (1.0F - offsetX), 1.0D - offsetY, 0.0D, (double) maxU, (double) minV);
+//			tessellator.addVertexWithUV((double) (0.0F - offsetX), 1.0D - offsetY, 0.0D, (double) minU, (double) minV);
 			tessellator.draw();
 			GL11.glPopMatrix();
 		}

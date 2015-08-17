@@ -1,20 +1,22 @@
 package heero.mc.mod.wakcraft.block;
 
 
-public interface ILevelBlock {
-	/**
-	 * Get the level of the block.
-	 * 
-	 * @param metadata Metadata of the block.
-	 * @return The level of the block.
-	 */
-	public int getLevel(int metadata);
+import net.minecraft.block.state.IBlockState;
 
-	/**
-	 * Gathers how much experience this block drops when broken.
-	 * 
-	 * @param metadata
-	 * @return Amount of XP from breaking this block.
-	 */
-	public int getProfessionExp(int metadata);
+public interface ILevelBlock {
+    /**
+     * Get the level of the block.
+     *
+     * @param state State of the block.
+     * @return The level of the block.
+     */
+    public int getLevel(final IBlockState state);
+
+    /**
+     * Gathers how much experience this block drops when broken.
+     *
+     * @param state State of the block.
+     * @return Amount of XP from breaking this block.
+     */
+    public int getProfessionExp(final IBlockState state);
 }

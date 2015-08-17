@@ -1,39 +1,36 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
-import heero.mc.mod.wakcraft.helper.HavenBagHelper;
 import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
+import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockHavenGemWorkbench extends BlockContainer {
-	private IIcon iconSide;
-	private IIcon iconTop;
-
 	public BlockHavenGemWorkbench() {
 		super(Material.wood);
+
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
-		setBlockName("HavenGemWorkbench");
+		setUnlocalizedName(Reference.MODID + "_HavenGemWorkbench");
 		setBlockUnbreakable();
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (world.isRemote) {
 			return true;
 		}
@@ -44,18 +41,18 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 			return true;
 		}
 
-		if (((HavenBagProperty) properties).getUID() != HavenBagHelper.getUIDFromCoord(x, y, z)) {
+		if (((HavenBagProperty) properties).getUID() != HavenBagUtil.getUIDFromCoord(pos)) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
 			return true;
 		}
 
-		TileEntity tile = world.getTileEntity(x, y, z);
-		if (tile == null && !(tile instanceof TileEntityHavenGemWorkbench)) {
-			WLog.warning("Error while loading the tile entity (%d, %d, %d)", x, y, z);
+		TileEntity tile = world.getTileEntity(pos);
+		if (tile == null || !(tile instanceof TileEntityHavenGemWorkbench)) {
+			WLog.warning("Error while loading the tile entity (%d, %d, %d)", pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 
-		player.openGui(Wakcraft.instance, GuiId.HAVEN_GEM_WORKBENCH.ordinal(), world, x, y, z);
+		player.openGui(Wakcraft.instance, GuiId.HAVEN_GEM_WORKBENCH.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
 
 		return true;
 	}
@@ -70,7 +67,7 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+	public boolean canPlaceBlockAt(World world, BlockPos pos) {
 		if (world.isRemote) {
 			Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
 		}
@@ -78,23 +75,23 @@ public class BlockHavenGemWorkbench extends BlockContainer {
 		return false;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister registerer) {
-		iconSide = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":havengemworkbench");
-		iconTop = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":havengemworkbench_top");
-	}
-
-	/**
-	 * Gets the block's texture. Args: side, meta
-	 */
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata) {
-		if (side == 1) {
-			return iconTop;
-		}
-
-		return iconSide;
-	}
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public void registerBlockIcons(IIconRegister registerer) {
+//		iconSide = registerer.registerIcon(Reference.MODID.toLowerCase() + ":havengemworkbench");
+//		iconTop = registerer.registerIcon(Reference.MODID.toLowerCase() + ":havengemworkbench_top");
+//	}
+//
+//	/**
+//	 * Gets the block's texture. Args: side, meta
+//	 */
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public IIcon getIcon(int side, int metadata) {
+//		if (side == 1) {
+//			return iconTop;
+//		}
+//
+//		return iconSide;
+//	}
 }

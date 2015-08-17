@@ -3,12 +3,11 @@ package heero.mc.mod.wakcraft.network.packet;
 import heero.mc.mod.wakcraft.profession.ProfessionManager;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class PacketProfession implements IMessage {
 	public Map<PROFESSION, Integer> xps;

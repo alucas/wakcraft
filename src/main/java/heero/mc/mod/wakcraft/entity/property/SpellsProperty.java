@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.entity.property;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.IInventory;
@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class SpellsProperty implements IExtendedEntityProperties, ISynchProperties {
-	public static final String IDENTIFIER = WInfo.MODID + "Spells";
+	public static final String IDENTIFIER = Reference.MODID + "Spells";
 
 	protected static String TAG_SPELLS = "Spells";
 	protected static String TAG_SLOT = "Slot";

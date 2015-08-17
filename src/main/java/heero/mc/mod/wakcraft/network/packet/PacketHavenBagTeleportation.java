@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.network.packet;
 
 import io.netty.buffer.ByteBuf;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketHavenBagTeleportation implements IMessage {
 	@Override

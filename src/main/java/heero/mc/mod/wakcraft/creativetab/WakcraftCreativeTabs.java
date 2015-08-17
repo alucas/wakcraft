@@ -3,10 +3,11 @@ package heero.mc.mod.wakcraft.creativetab;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WItems;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WakcraftCreativeTabs {
 
@@ -14,25 +15,34 @@ public class WakcraftCreativeTabs {
 			"buildingBlocks") {
 		@SideOnly(Side.CLIENT)
 		@Override
-		public Item getTabIconItem() {
-			return Item.getItemFromBlock(WBlocks.sufokiaWave);
-		}
+//		public Item getTabIconItem() {
+//			return Item.getItemFromBlock(WBlocks.sufokiaWave);
+//		}
+        public Item getTabIconItem() {
+            return Item.getItemFromBlock(Blocks.dirt);
+        }
 	};
 	public static final CreativeTabs tabSpecialBlock = new CreativeTabs(
 			"specialBlocks") {
 		@Override
 		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem() {
-			return Item.getItemFromBlock(WBlocks.dragoexpress);
-		}
+//		public Item getTabIconItem() {
+//			return Item.getItemFromBlock(WBlocks.dragoexpress);
+//		}
+        public Item getTabIconItem() {
+            return Item.getItemFromBlock(Blocks.dirt);
+        }
 	};
 	public static final CreativeTabs tabOreBlock = new CreativeTabs(
 			"oreBlocks") {
 		@Override
 		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem() {
-			return Item.getItemFromBlock(WBlocks.ore1);
-		}
+//		public Item getTabIconItem() {
+//			return Item.getItemFromBlock(WBlocks.ore1);
+//		}
+        public Item getTabIconItem() {
+            return Item.getItemFromBlock(Blocks.dirt);
+        }
 	};
 	public static final CreativeTabs tabResource = new CreativeTabs("resources") {
 		@SideOnly(Side.CLIENT)

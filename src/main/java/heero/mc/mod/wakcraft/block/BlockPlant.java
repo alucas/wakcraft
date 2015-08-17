@@ -1,40 +1,43 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockPlant;
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.block.material.Material;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockPlant extends BlockGeneric {
-	public BlockPlant() {
-		super(Material.ground);
+    public static final IProperty PRO_BOTTOM_POSITION = PropertyInteger.create("propertyBottomPosition", 0, 3);
 
-		setCreativeTab(WakcraftCreativeTabs.tabBlock);
-	}
+    public BlockPlant(Material material) {
+        super(material);
 
-	/**
-	 * If this block doesn't render as an ordinary block it will return False
-	 * (examples: signs, buttons, stairs, etc)
-	 */
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
+        setOpaque(false);
+        setFull(false);
+        setLayer(EnumWorldBlockLayer.CUTOUT);
+    }
 
-	/**
-	 * The type of render function that is called for this block
-	 */
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderType() {
-		return RendererBlockPlant.renderId;
-	}
+    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
+        return null;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean isOpaqueCube() {
-		return false;
-	}
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, PRO_BOTTOM_POSITION);
+    }
+
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        IBlockState stateDown = worldIn.getBlockState(pos.offsetSouth());
+        if (!(stateDown.getBlock() instanceof BlockSlab)) {
+            return state;
+        }
+
+        return state.withProperty(PRO_BOTTOM_POSITION, 4 - BlockSlab.getTopPosition(stateDown));
+    }
 }

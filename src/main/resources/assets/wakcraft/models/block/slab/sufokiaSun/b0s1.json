@@ -1,0 +1,6 @@
+{
+  "parent": "wakcraft:block/slab/templateAll/b0s1",
+  "textures": {
+    "all": "wakcraft:blocks/sufokiaSun"
+  }
+}

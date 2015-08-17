@@ -1,12 +1,12 @@
 package heero.mc.mod.wakcraft.network.handler.fight;
 
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.util.FightUtil;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
 import net.minecraft.entity.Entity;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerClientFightSelectPosition implements IMessageHandler<PacketFightSelectPosition, IMessage> {
 	@Override
@@ -16,11 +16,11 @@ public class HandlerClientFightSelectPosition implements IMessageHandler<PacketF
 			throw new RuntimeException("No entity found for id " + message.fighterId);
 		}
 
-		if (!FightHelper.isFighter(entity)) {
+		if (!FightUtil.isFighter(entity)) {
 			throw new RuntimeException("The entity " + entity + " is not a valid fighter");
 		}
 
-		FightHelper.setStartPosition(entity, message.selectedPosition);
+		FightUtil.setStartPosition(entity, message.selectedPosition);
 
 		return null;
 	}

@@ -60,15 +60,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class CommonProxy {
 
@@ -179,7 +180,7 @@ public class CommonProxy {
 		packetPipeline.registerMessage(HandlerServerFightCastSpell.class, PacketFightCastSpell.class, 14, Side.SERVER);
 	}
 
-	public Object getGui(GuiId guiId, EntityPlayer player, World world, int x, int y, int z) {
+	public Object getGui(GuiId guiId, EntityPlayer player, World world, BlockPos pos) {
 		return null;
 	}
 }

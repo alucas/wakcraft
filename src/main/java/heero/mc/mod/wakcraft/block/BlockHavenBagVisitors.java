@@ -1,34 +1,30 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
-import heero.mc.mod.wakcraft.helper.HavenBagHelper;
+import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockHavenBagVisitors extends BlockGeneric {
-	private IIcon iconSide;
-	private IIcon iconTop;
-
 	public BlockHavenBagVisitors() {
 		super(Material.wood);
 		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
-		setBlockName("HavenBagVisitors");
+		setUnlocalizedName(Reference.MODID + "_HavenBagVisitors");
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
 			return true;
 		}
@@ -40,7 +36,7 @@ public class BlockHavenBagVisitors extends BlockGeneric {
 		}
 
 		HavenBagProperty propertiesHB = (HavenBagProperty) properties;
-		if (propertiesHB.getUID() != HavenBagHelper.getUIDFromCoord(x, y, z)) {
+		if (propertiesHB.getUID() != HavenBagUtil.getUIDFromCoord(pos)) {
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
 			return true;
 		}
@@ -51,7 +47,7 @@ public class BlockHavenBagVisitors extends BlockGeneric {
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+	public boolean canPlaceBlockAt(World world, BlockPos pos) {
 		if (world.isRemote) {
 			Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
 		}
@@ -59,23 +55,24 @@ public class BlockHavenBagVisitors extends BlockGeneric {
 		return false;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister registerer) {
-		iconSide = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":havenbagvisitors");
-		iconTop = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":havenbagvisitors_top");
-	}
-
-	/**
-	 * Gets the block's texture. Args: side, meta
-	 */
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata) {
-		if (side == 1) {
-			return iconTop;
-		}
-
-		return iconSide;
-	}
+//    TODO
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public void registerBlockIcons(IIconRegister registerer) {
+//		iconSide = registerer.registerIcon(Reference.MODID.toLowerCase() + ":havenbagvisitors");
+//		iconTop = registerer.registerIcon(Reference.MODID.toLowerCase() + ":havenbagvisitors_top");
+//	}
+//
+//	/**
+//	 * Gets the block's texture. Args: side, meta
+//	 */
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public IIcon getIcon(int side, int metadata) {
+//		if (side == 1) {
+//			return iconTop;
+//		}
+//
+//		return iconSide;
+//	}
 }

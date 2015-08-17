@@ -3,71 +3,71 @@ package heero.mc.mod.wakcraft.block;
 import heero.mc.mod.wakcraft.client.renderer.block.RendererBlockRotation;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockYRotation extends BlockGeneric implements IRotation {
 	public BlockYRotation(Material material) {
 		super(material);
 	}
 
-	/**
-	 * If this block doesn't render as an ordinary block it will return False
-	 * (examples: signs, buttons, stairs, etc)
-	 */
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, RotationUtil.PROP_Y_ROTATION);
+    }
 
-	/**
-	 * The type of render function that is called for this block
-	 */
-	@Override
-	public int getRenderType() {
-		return RendererBlockRotation.renderId;
-	}
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return RotationUtil.getMetadataFromYRotation((EnumFacing) state.getValue(RotationUtil.PROP_Y_ROTATION));
+    }
 
-	/**
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return super.getStateFromMeta(meta).withProperty(RotationUtil.PROP_Y_ROTATION, RotationUtil.getYRotationFromMetadata(meta));
+    }
+
+    /**
 	 * Called when the block is placed in the world.
 	 */
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z,
-			EntityLivingBase player, ItemStack itemBlock) {
-		super.onBlockPlacedBy(world, x, y, z, player, itemBlock);
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		super.onBlockPlacedBy(world, pos, state, placer, stack);
 
-		RotationUtil.setYRotationFromYaw(world, x, y, z, player.rotationYaw);
+		RotationUtil.setYRotationFromYaw(world, pos, state, placer.rotationYaw);
 	}
 
 	@Override
-	public ForgeDirection getTopRotation(int metadata) {
+	public EnumFacing getTopRotation(int metadata) {
 		return RotationUtil.getYRotationFromMetadata(metadata);
 	}
 
 	@Override
-	public ForgeDirection getBottomRotation(int metadata) {
+	public EnumFacing getBottomRotation(int metadata) {
 		return RotationUtil.getYRotationFromMetadata(metadata);
 	}
 
 	@Override
-	public ForgeDirection getEastRotation(int metadata) {
-		return ForgeDirection.UP;
+	public EnumFacing getEastRotation(int metadata) {
+		return EnumFacing.UP;
 	}
 
 	@Override
-	public ForgeDirection getWestRotation(int metadata) {
-		return ForgeDirection.UP;
+	public EnumFacing getWestRotation(int metadata) {
+		return EnumFacing.UP;
 	}
 
 	@Override
-	public ForgeDirection getNorthRotation(int metadata) {
-		return ForgeDirection.UP;
+	public EnumFacing getNorthRotation(int metadata) {
+		return EnumFacing.UP;
 	}
 
 	@Override
-	public ForgeDirection getSouthRotation(int metadata) {
-		return ForgeDirection.UP;
+	public EnumFacing getSouthRotation(int metadata) {
+		return EnumFacing.UP;
 	}
 }

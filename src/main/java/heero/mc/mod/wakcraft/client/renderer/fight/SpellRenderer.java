@@ -1,8 +1,8 @@
 package heero.mc.mod.wakcraft.client.renderer.fight;
 
-import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.ItemStack;
 
@@ -15,10 +15,10 @@ public class SpellRenderer extends ItemRenderer {
 	public void updateEquippedItem() {
 		this.prevEquippedProgress = this.equippedProgress;
 
-		EntityClientPlayerMP player = this.mc.thePlayer;
+        EntityPlayerSP player = this.mc.thePlayer;
 		int currentItemId = player.inventory.currentItem;
 
-		ItemStack itemstack = FightHelper.getSpellsInventory(player).getStackInSlot(25 + currentItemId);
+		ItemStack itemstack = FightUtil.getSpellsInventory(player).getStackInSlot(25 + currentItemId);
 		boolean flag = this.equippedItemSlot == currentItemId && itemstack == this.itemToRender;
 
 		if (this.itemToRender == null && itemstack == null) {

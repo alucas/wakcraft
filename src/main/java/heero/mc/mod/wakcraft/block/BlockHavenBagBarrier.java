@@ -1,40 +1,37 @@
 package heero.mc.mod.wakcraft.block;
 
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
-import heero.mc.mod.wakcraft.helper.HavenBagHelper;
-
-import java.util.List;
-
+import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+
+import java.util.List;
 
 public class BlockHavenBagBarrier extends BlockGeneric {
 
 	public BlockHavenBagBarrier() {
 		super(Material.air);
 
-		setBlockName("HavenBagBarrier");
+		setUnlocalizedName(Reference.MODID + "_HavenBagBarrier");
 	}
 
 	@Override
 	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
@@ -44,12 +41,12 @@ public class BlockHavenBagBarrier extends BlockGeneric {
 	}
 
 	@Override
-	public boolean canCollideCheck(int p_149678_1_, boolean p_149678_2_) {
+	public boolean canCollideCheck(IBlockState state, boolean stopOnLiquid) {
 		return false;
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+	public boolean canPlaceBlockAt(World world, BlockPos pos) {
 		if (world.isRemote) {
 			Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
 		}
@@ -64,8 +61,7 @@ public class BlockHavenBagBarrier extends BlockGeneric {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void addCollisionBoxesToList(World world, int x, int y, int z,
-			AxisAlignedBB mask, List list, Entity entity) {
+	public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity entity) {
 		do {
 			if (!(entity instanceof EntityPlayer)) {
 				return;
@@ -73,7 +69,7 @@ public class BlockHavenBagBarrier extends BlockGeneric {
 
 			EntityPlayer player = (EntityPlayer) entity;
 
-			int havenBagUID = HavenBagHelper.getUIDFromCoord((int)entity.posX, (int)entity.posY, (int)entity.posZ);
+			int havenBagUID = HavenBagUtil.getUIDFromCoord(entity.getPosition());
 			IExtendedEntityProperties properties = entity.getExtendedProperties(HavenBagProperty.IDENTIFIER);
 			if (properties == null || !(properties instanceof HavenBagProperty)) {
 				WLog.warning("Error while loading the player (%s) properties", player.getDisplayName());
@@ -92,34 +88,34 @@ public class BlockHavenBagBarrier extends BlockGeneric {
 
 			Integer rightAll = hbProperties.getRight(HavenBagProperties.ACL_KEY_ALL);
 			Integer rightGuild = hbProperties.getRight(HavenBagProperties.ACL_KEY_GUILD);
-			Integer right = hbProperties.getRight(player.getDisplayName());
+			Integer right = hbProperties.getRight(player.getDisplayName().getUnformattedText());
 
 			if (rightAll == 0 && rightGuild == 0 && (right == null || right == 0)) {
 				break;
 			}
 
 			Block[] blocks = new Block[4];
-			blocks[0] = world.getBlock(x, 19, z + 1);
-			blocks[1] = world.getBlock(x, 19, z - 1);
-			blocks[2] = world.getBlock(x + 1, 19, z);
-			blocks[3] = world.getBlock(x - 1, 19, z);
+			blocks[0] = world.getBlockState(new BlockPos(pos.getX(), 19, pos.getZ() + 1)).getBlock();
+            blocks[1] = world.getBlockState(new BlockPos(pos.getX(), 19, pos.getZ() - 1)).getBlock();
+            blocks[2] = world.getBlockState(new BlockPos(pos.getX() + 1, 19, pos.getZ())).getBlock();
+            blocks[3] = world.getBlockState(new BlockPos(pos.getX() - 1, 19, pos.getZ())).getBlock();
 
-			for (int i = 0; i < blocks.length; i++) {
-				if ((blocks[i].equals(WBlocks.hbGarden) && (rightAll & HavenBagHelper.R_GARDEN) == 0)
-						|| (blocks[i].equals(WBlocks.hbMerchant) && (rightAll & HavenBagHelper.R_MERCHANT) == 0)
-						|| (blocks[i].equals(WBlocks.hbDeco) && (rightAll & HavenBagHelper.R_DECO) == 0)
-						|| (blocks[i].equals(WBlocks.hbCraft) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
-						|| (blocks[i].equals(WBlocks.hbDeco2) && (rightAll & HavenBagHelper.R_DECO) == 0)
-						|| (blocks[i].equals(WBlocks.hbCraft2) && (rightAll & HavenBagHelper.R_CRAFT) == 0)
-						) {
-					break;
-				}
-			}
+            for (Block block : blocks) {
+                if ((block.equals(WBlocks.hbGarden) && (rightAll & HavenBagUtil.R_GARDEN) == 0)
+                        || (block.equals(WBlocks.hbMerchant) && (rightAll & HavenBagUtil.R_MERCHANT) == 0)
+                        || (block.equals(WBlocks.hbDeco) && (rightAll & HavenBagUtil.R_DECO) == 0)
+                        || (block.equals(WBlocks.hbCraft) && (rightAll & HavenBagUtil.R_CRAFT) == 0)
+                        || (block.equals(WBlocks.hbDeco2) && (rightAll & HavenBagUtil.R_DECO) == 0)
+                        || (block.equals(WBlocks.hbCraft2) && (rightAll & HavenBagUtil.R_CRAFT) == 0)
+                        ) {
+                    break;
+                }
+            }
 
 			return;
 		} while(false);
 
-		AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBoxFromPool(world, x, y, z);
+		AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBox(world, pos, state);
 
 		if (axisalignedbb1 != null && mask.intersectsWith(axisalignedbb1)) {
 			list.add(axisalignedbb1);

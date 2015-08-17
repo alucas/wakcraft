@@ -1,92 +1,89 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
-import heero.mc.mod.wakcraft.helper.HavenBagHelper;
+import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockHavenBagLock extends BlockGeneric {
-	private IIcon iconSide;
-	private IIcon iconTop;
+    public BlockHavenBagLock() {
+        super(Material.wood);
 
-	public BlockHavenBagLock() {
-		super(Material.wood);
-		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
-		setBlockName("HavenBagLock");
-	}
+        setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
+        setUnlocalizedName(Reference.MODID + "_HavenBagLock");
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (world.isRemote) {
-			return true;
-		}
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (world.isRemote) {
+            return true;
+        }
 
-		IExtendedEntityProperties properties = player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
-		if (properties == null || !(properties instanceof HavenBagProperty)) {
-			WLog.warning("Error while loading the player (%s) extended properties", player.getDisplayName());
-			return true;
-		}
+        IExtendedEntityProperties properties = player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+        if (properties == null || !(properties instanceof HavenBagProperty)) {
+            WLog.warning("Error while loading the player (%s) extended properties", player.getDisplayName());
+            return true;
+        }
 
-		HavenBagProperty propertiesHB = (HavenBagProperty) properties;
-		if (propertiesHB.getUID() != HavenBagHelper.getUIDFromCoord(x, y, z)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
-			return true;
-		}
+        HavenBagProperty propertiesHB = (HavenBagProperty) properties;
+        if (propertiesHB.getUID() != HavenBagUtil.getUIDFromCoord(pos)) {
+            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
+            return true;
+        }
 
-		HavenBagProperties havenBagProperties = HavenBagsManager.getProperties(propertiesHB.getUID());
-		if (havenBagProperties == null) {
-			return true;
-		}
+        HavenBagProperties havenBagProperties = HavenBagsManager.getProperties(propertiesHB.getUID());
+        if (havenBagProperties == null) {
+            return true;
+        }
 
-		havenBagProperties.setLock(!havenBagProperties.isLocked());
+        havenBagProperties.setLock(!havenBagProperties.isLocked());
 
-		HavenBagsManager.setProperties(propertiesHB.getUID(), havenBagProperties);
+        HavenBagsManager.setProperties(propertiesHB.getUID(), havenBagProperties);
 
-		player.addChatMessage(new ChatComponentText(havenBagProperties.isLocked() ? StatCollector.translateToLocal("message.lockHavenBag") : StatCollector.translateToLocal("message.unlockHavenBag")));
+        player.addChatMessage(new ChatComponentText(havenBagProperties.isLocked() ? StatCollector.translateToLocal("message.lockHavenBag") : StatCollector.translateToLocal("message.unlockHavenBag")));
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		if (world.isRemote) {
-			Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
-		}
+    @Override
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        if (world.isRemote) {
+            Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister registerer) {
-		iconSide = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":havenbaglock");
-		iconTop = registerer.registerIcon(WInfo.MODID.toLowerCase() + ":havenbaglock_top");
-	}
-
-	/**
-	 * Gets the block's texture. Args: side, meta
-	 */
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata) {
-		if (side == 1) {
-			return iconTop;
-		}
-
-		return iconSide;
-	}
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public void registerBlockIcons(IIconRegister registerer) {
+//		iconSide = registerer.registerIcon(Reference.MODID.toLowerCase() + ":havenbaglock");
+//		iconTop = registerer.registerIcon(Reference.MODID.toLowerCase() + ":havenbaglock_top");
+//	}
+//
+//	/**
+//	 * Gets the block's texture. Args: side, meta
+//	 */
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public IIcon getIcon(int side, int metadata) {
+//		if (side == 1) {
+//			return iconTop;
+//		}
+//
+//		return iconSide;
+//	}
 }

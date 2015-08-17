@@ -1,16 +1,16 @@
 package heero.mc.mod.wakcraft.client.gui.inventory;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUISpells extends InventoryEffectRenderer {
-	private static final ResourceLocation background = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/gui/spells.png");
+	private static final ResourceLocation background = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/gui/spells.png");
 
 	public GUISpells(Container container) {
 		super(container);

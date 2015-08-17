@@ -1,19 +1,16 @@
 package heero.mc.mod.wakcraft.client.renderer.tileentity;
 
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
-
-import java.util.Calendar;
-
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Calendar;
 
 @SideOnly(Side.CLIENT)
 public class RendererHavenBagChest extends TileEntitySpecialRenderer {
@@ -31,8 +28,7 @@ public class RendererHavenBagChest extends TileEntitySpecialRenderer {
 		}
 	}
 
-	public void renderTileEntityAt(TileEntityHavenBagChest entity, double x,
-			double y, double z, float partialTick) {
+	public void renderTileEntityAt(TileEntityHavenBagChest entity, double x, double y, double z, float partialTicks, int destroyStage) {
 		ModelChest modelchest = this.simpleChest;
 
 		// 1 == trapped chest
@@ -53,7 +49,7 @@ public class RendererHavenBagChest extends TileEntitySpecialRenderer {
 		GL11.glRotatef((float) -90, 0.0F, 1.0F, 0.0F);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
-		float lidAngle = entity.prevLidAngle + (entity.lidAngle - entity.prevLidAngle) * partialTick;
+		float lidAngle = entity.prevLidAngle + (entity.lidAngle - entity.prevLidAngle) * partialTicks;
 
 		lidAngle = 1.0F - lidAngle;
 		lidAngle = 1.0F - lidAngle * lidAngle * lidAngle;
@@ -65,7 +61,8 @@ public class RendererHavenBagChest extends TileEntitySpecialRenderer {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float partialTick) {
-		this.renderTileEntityAt((TileEntityHavenBagChest) entity, x, y, z, partialTick);
+    @Override
+	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float partialTicks, int destroyStage) {
+		this.renderTileEntityAt((TileEntityHavenBagChest) entity, x, y, z, partialTicks, destroyStage);
 	}
 }

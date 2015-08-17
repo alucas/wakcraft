@@ -1,23 +1,27 @@
 package heero.mc.mod.wakcraft.client.renderer.entity;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RendererSeedsPile extends Render {
-	private static final ResourceLocation generic = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/seedpile.png");
-	private static final ResourceLocation gobball = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/gobballSeedPile.png");
+	private static final ResourceLocation generic = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/entity/seedpile.png");
+	private static final ResourceLocation gobball = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/entity/gobballSeedPile.png");
 
-	@Override
+    public RendererSeedsPile(RenderManager renderManager) {
+        super(renderManager);
+    }
+
+    @Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		if (entity instanceof EntitySeedsPile) {
 			ItemWCreatureSeeds seeds = ((EntitySeedsPile) entity).getItemSeeds();
@@ -52,7 +56,7 @@ public class RendererSeedsPile extends Render {
 	}
 
 	private void renderSeedPile(EntitySeedsPile par1EntityItem, float partialTickTime) {
-		Tessellator tessellator = Tessellator.instance;
+		Tessellator tessellator = Tessellator.getInstance();
 
 		float xOffset = 0.5F;
 		float yOffset = 0.25F;
@@ -66,7 +70,7 @@ public class RendererSeedsPile extends Render {
 			GL11.glTranslatef(-xOffset, -yOffset, -thickness / 2);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-			ItemRenderer.renderItemIn2D(tessellator, 1, 0, 0, 1, 16, 16, thickness);
+//			ItemRenderer.renderItemIn2D(tessellator, 1, 0, 0, 1, 16, 16, thickness);
 
 			GL11.glPopMatrix();
 		} else {
@@ -74,12 +78,13 @@ public class RendererSeedsPile extends Render {
 			GL11.glRotatef(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-			tessellator.startDrawingQuads();
-			tessellator.setNormal(0.0F, 1.0F, 0.0F);
-			tessellator.addVertexWithUV((double)(0.0F - xOffset), (double)(0.0F - yOffset), 0.0D, (double)0, (double)1);
-			tessellator.addVertexWithUV((double)(1.0F - xOffset), (double)(0.0F - yOffset), 0.0D, (double)1, (double)1);
-			tessellator.addVertexWithUV((double)(1.0F - xOffset), (double)(1.0F - yOffset), 0.0D, (double)1, (double)0);
-			tessellator.addVertexWithUV((double)(0.0F - xOffset), (double)(1.0F - yOffset), 0.0D, (double)0, (double)0);
+//            TODO
+//			tessellator.startDrawingQuads();
+//			tessellator.setNormal(0.0F, 1.0F, 0.0F);
+//			tessellator.addVertexWithUV((double)(0.0F - xOffset), (double)(0.0F - yOffset), 0.0D, (double)0, (double)1);
+//			tessellator.addVertexWithUV((double)(1.0F - xOffset), (double)(0.0F - yOffset), 0.0D, (double)1, (double)1);
+//			tessellator.addVertexWithUV((double)(1.0F - xOffset), (double)(1.0F - yOffset), 0.0D, (double)1, (double)0);
+//			tessellator.addVertexWithUV((double)(0.0F - xOffset), (double)(1.0F - yOffset), 0.0D, (double)0, (double)0);
 			tessellator.draw();
 
 			GL11.glPopMatrix();

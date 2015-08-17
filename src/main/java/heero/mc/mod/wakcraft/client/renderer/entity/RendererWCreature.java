@@ -1,26 +1,26 @@
 package heero.mc.mod.wakcraft.client.renderer.entity;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.client.model.ModelFightArrow;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
-import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public abstract class RendererWCreature extends RendererLivingEntity {
 	static final float PIXEL_SIZE = 0.0625F;
-	static final ResourceLocation TEXTURE = new ResourceLocation(WInfo.MODID.toLowerCase(), "textures/entity/fightarrow.png");
+	static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/entity/fightarrow.png");
 
 	ModelBase fightArrow = new ModelFightArrow();
 
-	public RendererWCreature(ModelBase model, float shadowSize) {
-		super(model, shadowSize);
+	public RendererWCreature(RenderManager renderManager, ModelBase model, float shadowSize) {
+		super(renderManager, model, shadowSize);
 	}
 
 	@Override
@@ -28,9 +28,9 @@ public abstract class RendererWCreature extends RendererLivingEntity {
 			double relativeZ, float rotationYaw, float partialTickTime) {
 		super.doRender(entity, relativeX, relativeY, relativeZ, rotationYaw, partialTickTime);
 
-		if (FightHelper.isFighter(entity)
-				&& FightHelper.isFighting(entity)
-				&& FightHelper.getFightStage(entity.worldObj, FightHelper.getFightId(entity)) == FightStage.PREFIGHT) {
+		if (FightUtil.isFighter(entity)
+				&& FightUtil.isFighting(entity)
+				&& FightUtil.getFightStage(entity.worldObj, FightUtil.getFightId(entity)) == FightStage.PREFIGHT) {
 			doRenderFightArrow(entity, relativeX, relativeY, relativeZ, partialTickTime);
 		}
 	}

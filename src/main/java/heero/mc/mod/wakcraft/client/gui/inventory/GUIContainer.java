@@ -1,7 +1,5 @@
 package heero.mc.mod.wakcraft.client.gui.inventory;
 
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
@@ -14,12 +12,12 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public abstract class GUIContainer extends GuiContainer {
@@ -50,7 +48,7 @@ public abstract class GUIContainer extends GuiContainer {
 		}
 
 		for (k = 0; k < this.labelList.size(); ++k) {
-			((GuiLabel) this.labelList.get(k)).func_146159_a(this.mc, mouseX, mouseY);
+			((GuiLabel) this.labelList.get(k)).drawLabel(this.mc, mouseX, mouseY);
 		}
 		// GuiScreen code end
 
@@ -85,9 +83,9 @@ public abstract class GUIContainer extends GuiContainer {
 			if (this.draggedStack != null && this.isRightMouseClick) {
 				itemstack = itemstack.copy();
 				itemstack.stackSize = MathHelper.ceiling_float_int((float) itemstack.stackSize / 2.0F);
-			} else if (this.field_147007_t && this.field_147008_s.size() > 1) {
+			} else if (this.dragSplitting && this.dragSplittingSlots.size() > 1) {
 				itemstack = itemstack.copy();
-				itemstack.stackSize = this.field_146996_I;
+				itemstack.stackSize = this.dragSplittingRemnant;
 
 				if (itemstack.stackSize == 0) {
 					format = "" + EnumChatFormatting.YELLOW + "0";
@@ -105,11 +103,11 @@ public abstract class GUIContainer extends GuiContainer {
 				this.returningStack = null;
 			}
 
-			int k1 = this.returningStackDestSlot.xDisplayPosition - this.field_147011_y;
-			int j2 = this.returningStackDestSlot.yDisplayPosition - this.field_147010_z;
-			int l1 = this.field_147011_y + (int) ((float) k1 * f1);
-			int i2 = this.field_147010_z + (int) ((float) j2 * f1);
-			this.drawItemStack(this.returningStack, l1, i2, (String) null);
+			int k1 = this.returningStackDestSlot.xDisplayPosition - this.touchUpX;
+			int j2 = this.returningStackDestSlot.yDisplayPosition - this.touchUpY;
+			int l1 = this.touchUpX + (int) ((float) k1 * f1);
+			int i2 = this.touchUpY + (int) ((float) j2 * f1);
+			this.drawItemStack(this.returningStack, l1, i2, null);
 		}
 
 		GL11.glPopMatrix();
@@ -129,7 +127,7 @@ public abstract class GUIContainer extends GuiContainer {
 		for (int i = 0; i < inventorySlots.inventorySlots.size(); ++i) {
 			Slot slot = (Slot) inventorySlots.inventorySlots.get(i);
 
-			func_146977_a(slot);
+			drawSlot(slot);
 
 			if (slot.slotNumber == hoveredSlotId) {
 				drawSlotOverlay(slot);
@@ -157,7 +155,7 @@ public abstract class GUIContainer extends GuiContainer {
 		for (int i = 0; i < inventorySlots.inventorySlots.size(); ++i) {
 			Slot slot = (Slot) inventorySlots.inventorySlots.get(i);
 
-			if (isMouseOverSlot(slot, mouseX, mouseY) && slot.func_111238_b()) {
+			if (isMouseOverSlot(slot, mouseX, mouseY) && slot.canBeHovered()) {
 				return slot;
 			}
 		}

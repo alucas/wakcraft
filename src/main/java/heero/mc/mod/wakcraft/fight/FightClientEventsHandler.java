@@ -5,7 +5,7 @@ import heero.mc.mod.wakcraft.client.gui.fight.GuiFightOverlay;
 import heero.mc.mod.wakcraft.client.renderer.fight.FighterRenderer;
 import heero.mc.mod.wakcraft.client.setting.KeyBindings;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
-import heero.mc.mod.wakcraft.helper.FightHelper;
+import heero.mc.mod.wakcraft.util.FightUtil;
 import heero.mc.mod.wakcraft.network.packet.fight.PacketFightCastSpell;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -13,7 +13,7 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.client.IRenderHandler;
@@ -23,13 +23,10 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
-
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 
 public class FightClientEventsHandler {
 	protected IRenderHandler fightWorldRender;
@@ -54,11 +51,11 @@ public class FightClientEventsHandler {
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 		EntityLivingBase entity = event.entity;
 
-		if (!FightHelper.isFighter(player) || !FightHelper.isFighting(player)) {
+		if (!FightUtil.isFighter(player) || !FightUtil.isFighting(player)) {
 			return;
 		}
 
-		if (FightHelper.isFighter(entity) && FightHelper.getFightId(entity) == FightHelper.getFightId(player)) {
+		if (FightUtil.isFighter(entity) && FightUtil.getFightId(entity) == FightUtil.getFightId(player)) {
 			return;
 		}
 
@@ -69,21 +66,21 @@ public class FightClientEventsHandler {
 	public void onKeyInput(InputEvent.KeyInputEvent event) {
 		if (KeyBindings.fightSelectPosition.isPressed()) {
 			EntityPlayer player = Wakcraft.proxy.getClientPlayer();
-			if (!FightHelper.isFighter(player) || !FightHelper.isFighting(player)) {
+			if (!FightUtil.isFighter(player) || !FightUtil.isFighting(player)) {
 				return;
 			}
 
-			if (FightHelper.getFightStage(player.worldObj, FightHelper.getFightId(player)) != FightStage.PREFIGHT) {
+			if (FightUtil.getFightStage(player.worldObj, FightUtil.getFightId(player)) != FightStage.PREFIGHT) {
 				return;
 			}
 
-			if (FightHelper.getStartPosition(player) != null) {
-				FightHelper.selectPosition(player, null);
+			if (FightUtil.getStartPosition(player) != null) {
+				FightUtil.selectPosition(player, null);
 				return;
 			}
 
-			ChunkCoordinates position = new ChunkCoordinates(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY - player.yOffset), MathHelper.floor_double(player.posZ));
-			FightHelper.selectPosition(player, position);
+            BlockPos position = new BlockPos(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY - player.getYOffset()), MathHelper.floor_double(player.posZ));
+			FightUtil.selectPosition(player, position);
 		}
 	}
 
@@ -91,22 +88,21 @@ public class FightClientEventsHandler {
 	public void onRenderGameOverlayEventPre(RenderGameOverlayEvent.Pre event) {
 		if (event.type == ElementType.HOTBAR) {
 			EntityPlayer player = Wakcraft.proxy.getClientPlayer();
-			if (!FightHelper.isFighter(player) || !FightHelper.isFighting(player)) {
+			if (!FightUtil.isFighter(player) || !FightUtil.isFighting(player)) {
 				return;
 			}
 
 			guiFightOverlay.renderFighterHotbar(player, event.resolution, event.partialTicks);
-			guiFightOverlay.renderCharacteristics(player, event.resolution, event.partialTicks);
+			guiFightOverlay.renderCharacteristics(player, event.resolution);
 
 			event.setCanceled(true);
-			return;
 		}
 	}
 
 	@SubscribeEvent
 	public void onRenderHandEvent(RenderHandEvent event) {
 		EntityPlayer player = Wakcraft.proxy.getClientPlayer();
-		if (!FightHelper.isFighter(player) || !FightHelper.isFighting(player)) {
+		if (!FightUtil.isFighter(player) || !FightUtil.isFighting(player)) {
 			return;
 		}
 
@@ -114,17 +110,16 @@ public class FightClientEventsHandler {
 		fighterRenderer.renderHand(event.partialTicks, event.renderPass);
 
 		event.setCanceled(true);
-		return;
 	}
 
 	@SubscribeEvent
-	public void onServerTickEvent(ServerTickEvent event) {
-		if (event.phase != Phase.END) {
+	public void onServerTickEvent(TickEvent.ServerTickEvent event) {
+		if (event.phase != TickEvent.Phase.END) {
 			return;
 		}
 
 		EntityPlayer player = Wakcraft.proxy.getClientPlayer();
-		if (!FightHelper.isFighter(player) || !FightHelper.isFighting(player) || !(player instanceof EntityPlayerSP)) {
+		if (!FightUtil.isFighter(player) || !FightUtil.isFighting(player) || !(player instanceof EntityPlayerSP)) {
 			return;
 		}
 
@@ -136,17 +131,17 @@ public class FightClientEventsHandler {
 	@SubscribeEvent
 	public void onMouseEvent(MouseEvent event) {
 		EntityPlayer player = Wakcraft.proxy.getClientPlayer();
-		if (!FightHelper.isFighter(player) || !FightHelper.isFighting(player)) {
+		if (!FightUtil.isFighter(player) || !FightUtil.isFighting(player)) {
 			return;
 		}
 
 		Minecraft mc = Minecraft.getMinecraft();
-		int fightId = FightHelper.getFightId(player);
-		if (FightHelper.getFightStage(player.worldObj, fightId) != FightInfo.FightStage.FIGHT) {
+		int fightId = FightUtil.getFightId(player);
+		if (FightUtil.getFightStage(player.worldObj, fightId) != FightInfo.FightStage.FIGHT) {
 			return;
 		}
 
-		if (FightHelper.getCurrentFighter(mc.theWorld, fightId) != player) {
+		if (FightUtil.getCurrentFighter(mc.theWorld, fightId) != player) {
 			return;
 		}
 
@@ -162,14 +157,14 @@ public class FightClientEventsHandler {
 
 		isAttackKeyDown = true;
 
-		ChunkCoordinates fighterPosition = FightHelper.getCurrentPosition(player);
+		BlockPos fighterPosition = FightUtil.getCurrentPosition(player);
 		MovingObjectPosition targetPosition = player.rayTrace(20, 1);
-		ItemStack spellStack = FightHelper.getCurrentSpell(player);
-		if (targetPosition == null || !FightUtil.isAimingPositionValid(fighterPosition, targetPosition, spellStack)) {
+		ItemStack spellStack = FightUtil.getCurrentSpell(player);
+		if (targetPosition == null || !heero.mc.mod.wakcraft.fight.FightUtil.isAimingPositionValid(fighterPosition, targetPosition, spellStack)) {
 			return;
 		}
 
-		Wakcraft.packetPipeline.sendToServer(new PacketFightCastSpell(FightHelper.getFightId(player), new ChunkCoordinates(targetPosition.blockX, targetPosition.blockY, targetPosition.blockZ)));
+		Wakcraft.packetPipeline.sendToServer(new PacketFightCastSpell(FightUtil.getFightId(player), targetPosition.func_178782_a()));
 		event.setCanceled(true);
 	}
 }

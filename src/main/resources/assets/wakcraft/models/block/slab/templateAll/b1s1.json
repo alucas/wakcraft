@@ -1,0 +1,8 @@
+{
+  "parent": "wakcraft:block/slab/template/b1s1",
+  "textures": {
+    "bottom": "#all",
+    "top": "#all",
+    "side": "#all"
+  }
+}

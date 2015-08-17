@@ -1,18 +1,18 @@
 package heero.mc.mod.wakcraft.network.packet.fight;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.BlockPos;
 
 public class PacketFightCastSpell implements IPacketFight {
 	protected PacketFight packetFight;
 
-	public ChunkCoordinates targetPosition;
+	public BlockPos targetPosition;
 
 	public PacketFightCastSpell() {
 		this.packetFight = new PacketFight();
 	}
 
-	public PacketFightCastSpell(final int fightId, ChunkCoordinates targetPosition) {
+	public PacketFightCastSpell(final int fightId, BlockPos targetPosition) {
 		this.packetFight = new PacketFight(fightId);
 
 		this.targetPosition = targetPosition;
@@ -22,16 +22,16 @@ public class PacketFightCastSpell implements IPacketFight {
 	public void toBytes(ByteBuf buffer) {
 		this.packetFight.toBytes(buffer);
 
-		buffer.writeInt(targetPosition.posX);
-		buffer.writeInt(targetPosition.posY);
-		buffer.writeInt(targetPosition.posZ);
+		buffer.writeInt(targetPosition.getX());
+		buffer.writeInt(targetPosition.getY());
+		buffer.writeInt(targetPosition.getZ());
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buffer) {
 		this.packetFight.fromBytes(buffer);
 
-		this.targetPosition = new ChunkCoordinates(buffer.readInt(), buffer.readInt(), buffer.readInt());
+		this.targetPosition = new BlockPos(buffer.readInt(), buffer.readInt(), buffer.readInt());
 	}
 
 	@Override

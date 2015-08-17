@@ -3,12 +3,12 @@ package heero.mc.mod.wakcraft.client.renderer.item;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.item.IBlockProvider;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 public class RendererItemBlock implements IItemRenderer {
-	private RenderBlocks renderBlocksIr = new RenderBlocks();
+//    TODO
+//	private RenderBlocks renderBlocksIr = new RenderBlocks();
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -31,6 +31,6 @@ public class RendererItemBlock implements IItemRenderer {
 		Block block = ((IBlockProvider) stack.getItem()).getBlock();
 		block.setBlockBoundsForItemRender();
 
-		this.renderBlocksIr.renderBlockAsItem(block, 0, 1.0F);
+//		this.renderBlocksIr.renderBlockAsItem(block, 0, 1.0F);
 	}
 }

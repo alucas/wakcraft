@@ -1,21 +1,24 @@
 package heero.mc.mod.wakcraft.block;
 
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.helper.FightHelper;
-
-import java.util.List;
-
+import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class BlockFightWall extends BlockGeneric {
 
@@ -27,8 +30,7 @@ public class BlockFightWall extends BlockGeneric {
 			}
 		});
 
-		setBlockTextureName("fightWall");
-		setBlockName("FightWall");
+		setUnlocalizedName(Reference.MODID + "_FightWall");
 		setBlockUnbreakable();
 	}
 
@@ -39,9 +41,8 @@ public class BlockFightWall extends BlockGeneric {
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world,
-			int x, int y, int z, int side) {
-		return FightHelper.isFighter(Minecraft.getMinecraft().thePlayer) && FightHelper.isFighting(Minecraft.getMinecraft().thePlayer);
+	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side) {
+		return FightUtil.isFighter(Minecraft.getMinecraft().thePlayer) && FightUtil.isFighting(Minecraft.getMinecraft().thePlayer);
 	}
 
 	/**
@@ -55,23 +56,23 @@ public class BlockFightWall extends BlockGeneric {
 	}
 
 	@Override
-	public MovingObjectPosition collisionRayTrace(World world, int posX, int posY, int posZ, Vec3 vec1, Vec3 vec2) {
+	public MovingObjectPosition collisionRayTrace(World world, BlockPos pos, Vec3 vec1, Vec3 vec2) {
 		if (world.isRemote) {
-			if (!FightHelper.isFighter(Wakcraft.proxy.getClientPlayer()) || !FightHelper.isFighting(Wakcraft.proxy.getClientPlayer())) {
+			if (!FightUtil.isFighter(Wakcraft.proxy.getClientPlayer()) || !FightUtil.isFighting(Wakcraft.proxy.getClientPlayer())) {
 				return null;
 			}
 		}
 
-		return super.collisionRayTrace(world, posX, posY, posZ, vec1, vec2);
+		return super.collisionRayTrace(world, pos, vec1, vec2);
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public void addCollisionBoxesToList(World world, int posX, int posY, int posZ, AxisAlignedBB mask, List list, Entity entity) {
-		if (!FightHelper.isFighter(entity) || !FightHelper.isFighting(entity)) {
+	public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity entity) {
+		if (!FightUtil.isFighter(entity) || !FightUtil.isFighting(entity)) {
 			return;
 		}
 
-		super.addCollisionBoxesToList(world, posX, posY, posZ, mask, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
 	}
 }

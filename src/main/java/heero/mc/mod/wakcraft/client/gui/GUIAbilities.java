@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.client.gui;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager;
@@ -10,13 +10,13 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIAbilities extends GuiScreen {
 	private static final ResourceLocation background = new ResourceLocation(
-			WInfo.MODID.toLowerCase(), "textures/gui/ability.png");
+			Reference.MODID.toLowerCase(), "textures/gui/ability.png");
 
 	protected static final int BUTTON_DOWN = 0;
 	protected static final int BUTTON_UP = 1;
@@ -55,11 +55,11 @@ public class GUIAbilities extends GuiScreen {
 
 		buttonList.clear();
 		buttonList.add(new GuiButton(BUTTON_DOWN, guiLeft + (guiWidth / 2) - 25, guiTop + 140, 20, 20, "<"));
-		buttonList.add(new GuiButton(BUTTON_UP, guiLeft + (guiWidth / 2) + 5, guiTop + 140, 20, 20, ">"));
+		buttonList.add(new GuiButton(BUTTON_UP,   guiLeft + (guiWidth / 2) + 5,  guiTop + 140, 20, 20, ">"));
 
 		for (int i = 0; i < NB_LINE; i++) {
-			GuiButton buttonRemove = new GuiButton(100 + i * 2 + 0, guiLeft + 110, guiTop + 20 + i * 20, 20, 20, "-");
-			GuiButton buttonAdd = new GuiButton(100 + i * 2 + 1, guiLeft + 150, guiTop + 20 + i * 20, 20, 20, "+");
+			GuiButton buttonRemove = new GuiButton(100 + i * 2,     guiLeft + 110, guiTop + 20 + i * 20, 20, 20, "-");
+			GuiButton buttonAdd    = new GuiButton(100 + i * 2 + 1, guiLeft + 150, guiTop + 20 + i * 20, 20, 20, "+");
 
 			buttonList.add(buttonRemove);
 			buttonList.add(buttonAdd);
@@ -83,7 +83,7 @@ public class GUIAbilities extends GuiScreen {
 		// Profession levels
 		Characteristic[] abilities = Characteristic.values();
 		for (int i = scroll; i < scroll + NB_LINE && i >= 0 && i < abilities.length; i++) {
-			drawString(fontRendererObj, I18n.format("abilities." + abilities[i], new Object[0]), guiLeft + 5, guiTop + 25 + (i - scroll) * 20, 0xFFFFFF);
+			drawString(fontRendererObj, I18n.format("abilities." + abilities[i]), guiLeft + 5, guiTop + 25 + (i - scroll) * 20, 0xFFFFFF);
 
 			if (abilitiesManager != null) {
 				drawCenteredString(fontRendererObj, Integer.toString(abilitiesManager.get(abilities[i])), guiLeft + 140, guiTop + 25 + (i - scroll) * 20, 0xFFFFFF);
@@ -91,7 +91,7 @@ public class GUIAbilities extends GuiScreen {
 		}
 
 		// Titles
-		drawString(fontRendererObj, I18n.format("title.abilities", new Object[0]), guiLeft + 5, guiTop + 5, 0xFFFFFF);
+		drawString(fontRendererObj, I18n.format("title.abilities"), guiLeft + 5, guiTop + 5, 0xFFFFFF);
 
 		super.drawScreen(mouseX, mouseY, renderPartialTicks);
 	}
@@ -119,7 +119,7 @@ public class GUIAbilities extends GuiScreen {
 		Characteristic[] abilities = Characteristic.values();
 		for (int i = 0; i < NB_LINE; i++) {
 			Boolean enabled = CharacteristicsManager.isCustomizable(abilities[scroll + i]);
-			((GuiButton) (buttonList.get(2 + i * 2 + 0))).visible = enabled;
+			((GuiButton) (buttonList.get(2 + i * 2    ))).visible = enabled;
 			((GuiButton) (buttonList.get(2 + i * 2 + 1))).visible = enabled;
 		}
 	}

@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.entity.property;
 
-import heero.mc.mod.wakcraft.WInfo;
+import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 
 import java.util.EnumSet;
@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class CharacteristicsProperty implements IExtendedEntityProperties, ISynchProperties {
-	public static final String IDENTIFIER = WInfo.MODID + "Characteristics";
+	public static final String IDENTIFIER = Reference.MODID + "Characteristics";
 
 	protected static String TAG_CHARACTERISTICS = "characteristics";
 	protected static String TAG_NAME = "Name";

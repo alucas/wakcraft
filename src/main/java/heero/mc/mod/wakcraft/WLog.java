@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class WLog {
-	public static Logger wLog = LogManager.getLogger(WInfo.MODID);
+	public static Logger wLog = LogManager.getLogger(Reference.MODID);
 
 	public static Logger getLogger() {
 		return wLog;
