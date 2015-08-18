@@ -20,6 +20,7 @@ public class BlockPlant extends BlockGeneric {
         setOpaque(false);
         setFull(false);
         setLayer(EnumWorldBlockLayer.CUTOUT);
+        setDefaultState(blockState.getBaseState().withProperty(PRO_BOTTOM_POSITION, 0));
     }
 
     public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
@@ -33,11 +34,16 @@ public class BlockPlant extends BlockGeneric {
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        IBlockState stateDown = worldIn.getBlockState(pos.offsetSouth());
+        IBlockState stateDown = worldIn.getBlockState(pos.offsetDown());
         if (!(stateDown.getBlock() instanceof BlockSlab)) {
-            return state;
+            return state.withProperty(PRO_BOTTOM_POSITION, 0);
         }
 
-        return state.withProperty(PRO_BOTTOM_POSITION, 4 - BlockSlab.getTopPosition(stateDown));
+        return state.withProperty(PRO_BOTTOM_POSITION, 3 - BlockSlab.getTopPosition(stateDown));
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return 0;
     }
 }

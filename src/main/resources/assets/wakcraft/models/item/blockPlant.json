@@ -1,5 +1,5 @@
 {
-  "parent": "wakcraft:block/blockPlant",
+  "parent": "wakcraft:block/plant/1/b0",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

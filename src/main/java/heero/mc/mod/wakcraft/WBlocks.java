@@ -15,7 +15,6 @@ import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class WBlocks {
@@ -118,8 +117,8 @@ public class WBlocks {
         GameRegistry.registerBlock(pillar = (new BlockGeneric(Material.wood).setUnlocalizedName(modid_ + "Pillar")), "blockPillar");
         GameRegistry.registerBlock(pillarSlab = (new BlockSlab(Material.wood, WBlocks.pillar.getDefaultState()).setUnlocalizedName(modid_ + "PillarSlab")), ItemBlockSlab.class, "blockPillarSlab");
         GameRegistry.registerBlock(plank = (new BlockGeneric(Material.wood).setUnlocalizedName(modid_ + "Plank")), "blockPlank");
-        GameRegistry.registerBlock(plant = (new BlockGeneric(Material.plants).setOpaque(false).setFull(false).setLayer(EnumWorldBlockLayer.CUTOUT).setUnlocalizedName(modid_ + "Plant")), "blockPlant");
-        GameRegistry.registerBlock(plant2 = (new BlockGeneric(Material.plants).setOpaque(false).setFull(false).setLayer(EnumWorldBlockLayer.CUTOUT).setUnlocalizedName(modid_ + "Plant2")), "blockPlant2");
+        GameRegistry.registerBlock(plant = (new BlockPlant(Material.plants).setUnlocalizedName(modid_ + "Plant")), "blockPlant");
+        GameRegistry.registerBlock(plant2 = (new BlockPlant(Material.plants).setUnlocalizedName(modid_ + "Plant2")), "blockPlant2");
         GameRegistry.registerBlock(sufokiaColor = (new BlockGeneric(Material.sand).setUnlocalizedName(modid_ + "SufokiaColor")), "blockSufokiaColor");
         GameRegistry.registerBlock(sufokiaGround = (new BlockGeneric(Material.ground).setUnlocalizedName(modid_ + "SufokiaGround")), "blockSufokiaGround");
         GameRegistry.registerBlock(sufokiaGroundSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround.getDefaultState()).setUnlocalizedName(modid_ + "SufokiaGroundSlab")), ItemBlockSlab.class, "blockSufokiaGroundSlab");

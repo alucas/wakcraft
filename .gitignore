@@ -4,6 +4,11 @@
 bin/
 build/
 eclipse/
+logs/
+crash-reports/
+saves/
+config/
+screenshots/
 
 .classpath
 .project

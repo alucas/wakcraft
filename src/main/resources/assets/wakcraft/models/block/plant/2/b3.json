@@ -1,0 +1,6 @@
+{
+  "parent": "wakcraft:block/plant/template/b3",
+  "textures": {
+    "plant": "wakcraft:blocks/plant2"
+  }
+}

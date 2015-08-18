@@ -1,7 +1,8 @@
 {
   "variants": {
-    "normal": {
-      "model": "wakcraft:blockPlant"
-    }
+    "propertybottomposition=0": {"model": "wakcraft:plant/1/b0"},
+    "propertybottomposition=1": {"model": "wakcraft:plant/1/b1"},
+    "propertybottomposition=2": {"model": "wakcraft:plant/1/b2"},
+    "propertybottomposition=3": {"model": "wakcraft:plant/1/b3"}
   }
 }
