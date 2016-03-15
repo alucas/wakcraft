@@ -7,6 +7,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
@@ -14,6 +15,10 @@ import net.minecraft.world.IBlockAccess;
 public class BlockCenterCorner extends BlockYRotation {
     public static final IProperty PROP_CORNER = PropertyBool.create("propertyCorner");
     public static final IProperty PROP_CENTER = PropertyBool.create("propertyCenter");
+
+    public BlockCenterCorner(Material material, CreativeTabs tab) {
+        super(material, tab);
+    }
 
     public BlockCenterCorner(Material material) {
         super(material);
@@ -26,10 +31,10 @@ public class BlockCenterCorner extends BlockYRotation {
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        BlockPos posSouth = pos.offsetSouth();
-        BlockPos posWest = pos.offsetWest();
-        BlockPos posNorth = pos.offsetNorth();
-        BlockPos posEast = pos.offsetEast();
+        BlockPos posSouth = pos.south();
+        BlockPos posWest = pos.west();
+        BlockPos posNorth = pos.north();
+        BlockPos posEast = pos.east();
 
         Block blockSouth = worldIn.getBlockState(posSouth).getBlock();
         Block blockWest = worldIn.getBlockState(posWest).getBlock();

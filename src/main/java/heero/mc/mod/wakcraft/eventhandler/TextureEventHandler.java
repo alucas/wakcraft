@@ -4,8 +4,8 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class TextureEventHandler {
-	@SubscribeEvent
-	public void onTextureStitchEvent(TextureStitchEvent.Pre event) {
+    @SubscribeEvent
+    public void onTextureStitchEvent(TextureStitchEvent.Pre event) {
 //        TODO
 //		TextureMap map = event.map;
 //		if (map.getTextureType() == 1) { // Items
@@ -21,7 +21,7 @@ public class TextureEventHandler {
 //			ItemWArmor.weaponIcon = map.registerIcon(modid + "empty_armor_slot_weapon");
 //			ItemWArmor.petIcon = map.registerIcon(modid + "empty_armor_slot_pet");
 //		}
-	}
+    }
 
     @SubscribeEvent
     public void onRegisterItems(TextureStitchEvent.Pre event) {

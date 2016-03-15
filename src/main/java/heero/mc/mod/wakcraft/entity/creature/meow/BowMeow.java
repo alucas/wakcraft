@@ -13,38 +13,38 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BowMeow extends MeowGeneric {
-		public BowMeow(World world) {
-			super(world);
-		}
+    public BowMeow(World world) {
+        super(world);
+    }
 
-		@Override
-		public void initCharacteristics(CharacteristicsProperty property) {
-			property.set(Characteristic.HEALTH, 26);
-			property.set(Characteristic.ACTION, 4);
-			property.set(Characteristic.MOVEMENT, 4);
-			property.set(Characteristic.WAKFU, 2);
-			property.set(Characteristic.INITIATIVE, 15);
-			property.set(Characteristic.LOCK, -20);
-			property.set(Characteristic.DODGE, -10);
+    @Override
+    public void initCharacteristics(CharacteristicsProperty property) {
+        property.set(Characteristic.HEALTH, 26);
+        property.set(Characteristic.ACTION, 4);
+        property.set(Characteristic.MOVEMENT, 4);
+        property.set(Characteristic.WAKFU, 2);
+        property.set(Characteristic.INITIATIVE, 15);
+        property.set(Characteristic.LOCK, -20);
+        property.set(Characteristic.DODGE, -10);
 
-			property.set(Characteristic.WATER_RES, -10);
-			property.set(Characteristic.EARTH_ATT, 10);
-			property.set(Characteristic.EARTH_RES, 5);
-			property.set(Characteristic.AIR_RES, 5);
-			property.set(Characteristic.FIRE_RES, 5);
-		}
+        property.set(Characteristic.WATER_RES, -10);
+        property.set(Characteristic.EARTH_ATT, 10);
+        property.set(Characteristic.EARTH_RES, 5);
+        property.set(Characteristic.AIR_RES, 5);
+        property.set(Characteristic.FIRE_RES, 5);
+    }
 
-		@SideOnly(Side.CLIENT)
-		public static class RenderBowMeow extends RendererWCreature {
-			private static final ResourceLocation texture = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/mobs/chachanoir.png");
+    @SideOnly(Side.CLIENT)
+    public static class RenderBowMeow extends RendererWCreature {
+        private static final ResourceLocation texture = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/mobs/chachanoir.png");
 
-			public RenderBowMeow(final RenderManager renderManager, final ModelBase model, final float shadowSize) {
-				super(renderManager, model, shadowSize);
-			}
+        public RenderBowMeow(final RenderManager renderManager, final ModelBase model, final float shadowSize) {
+            super(renderManager, model, shadowSize);
+        }
 
-			@Override
-			protected ResourceLocation getEntityTexture(Entity entity) {
-				return texture;
-			}
-		}
-	}
+        @Override
+        protected ResourceLocation getEntityTexture(Entity entity) {
+            return texture;
+        }
+    }
+}

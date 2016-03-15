@@ -12,45 +12,45 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class SlotComplexCrafting extends SlotCrafting {
-	private InventoryCrafting inventoryCrafting;
-	private World world;
-	private PROFESSION profession;
+    private InventoryCrafting inventoryCrafting;
+    private World world;
+    private PROFESSION profession;
 
-	public SlotComplexCrafting(EntityPlayer player, World world, PROFESSION profession, InventoryCrafting inventoryCrafting, IInventory inventory, int slotId, int x, int y) {
-		super(player, inventoryCrafting, inventory, slotId, x, y);
+    public SlotComplexCrafting(EntityPlayer player, World world, PROFESSION profession, InventoryCrafting inventoryCrafting, IInventory inventory, int slotId, int x, int y) {
+        super(player, inventoryCrafting, inventory, slotId, x, y);
 
-		this.inventoryCrafting = inventoryCrafting;
-		this.world = world;
-		this.profession = profession;
-	}
+        this.inventoryCrafting = inventoryCrafting;
+        this.world = world;
+        this.profession = profession;
+    }
 
-	@Override
-	public void onPickupFromSlot(EntityPlayer player, ItemStack stack) {
-		FMLCommonHandler.instance().firePlayerCraftingEvent(player, stack, inventoryCrafting);
-		this.onCrafting(stack);
+    @Override
+    public void onPickupFromSlot(EntityPlayer player, ItemStack stack) {
+        FMLCommonHandler.instance().firePlayerCraftingEvent(player, stack, inventoryCrafting);
+        this.onCrafting(stack);
 
-		IExtendedRecipe recipe = CraftingManager.getInstance().getMatchingRecipe(profession, inventoryCrafting, world);
-		if (recipe == null) {
-			// Something is not right !
-			return;
-		}
+        IExtendedRecipe recipe = CraftingManager.getInstance().getMatchingRecipe(profession, inventoryCrafting, world);
+        if (recipe == null) {
+            // Something is not right !
+            return;
+        }
 
-		ItemStack result = recipe.getCraftingResult(inventoryCrafting);
-		if (result.getItem() != stack.getItem()) {
-			// Something is not right !
-			return;
-		}
+        ItemStack result = recipe.getCraftingResult(inventoryCrafting);
+        if (result.getItem() != stack.getItem()) {
+            // Something is not right !
+            return;
+        }
 
-		for (int i = 0; i < this.inventoryCrafting.getSizeInventory(); ++i) {
-			ItemStack itemstack1 = this.inventoryCrafting.getStackInSlot(i);
+        for (int i = 0; i < this.inventoryCrafting.getSizeInventory(); ++i) {
+            ItemStack itemstack1 = this.inventoryCrafting.getStackInSlot(i);
 
-			if (itemstack1 != null) {
-				for (ItemStack recipeStack : recipe.getRecipeComponents()) {
-					if (recipeStack.getItem() == itemstack1.getItem()) {
-						this.inventoryCrafting.decrStackSize(i, recipeStack.stackSize);
-					}
-				}
-			}
-		}
-	}
+            if (itemstack1 != null) {
+                for (ItemStack recipeStack : recipe.getRecipeComponents()) {
+                    if (recipeStack.getItem() == itemstack1.getItem()) {
+                        this.inventoryCrafting.decrStackSize(i, recipeStack.stackSize);
+                    }
+                }
+            }
+        }
+    }
 }

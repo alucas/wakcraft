@@ -14,38 +14,38 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public class FightRenderer extends IRenderHandler {
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void render(float partialTicks, WorldClient world, Minecraft mc) {
-		EntityPlayer player = mc.thePlayer;
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void render(float partialTicks, WorldClient world, Minecraft mc) {
+        EntityPlayer player = mc.thePlayer;
 
-		if (!FightUtil.isFighter(player)) {
-			return;
-		}
+        if (!FightUtil.isFighter(player)) {
+            return;
+        }
 
-		if (!FightUtil.isFighting(player)) {
-			return;
-		}
+        if (!FightUtil.isFighting(player)) {
+            return;
+        }
 
-		int fightId = FightUtil.getFightId(player);
-		FightStage fightStage = FightUtil.getFightStage(world, fightId);
+        int fightId = FightUtil.getFightId(player);
+        FightStage fightStage = FightUtil.getFightStage(world, fightId);
 
-		if (fightStage == FightStage.PREFIGHT) {
-			List<List<FightBlockCoordinates>> startBlocks = FightUtil.getStartPositions(world, fightId);
-			if (startBlocks != null) {
-//				renderStartPosition(partialTicks, world, mc, player, startBlocks);
-			}
-		} else if (fightStage == FightStage.FIGHT) {
-			EntityLivingBase currentFighter = FightUtil.getCurrentFighter(world, FightUtil.getFightId(player));
-			if (currentFighter != player) {
-				return;
-			}
+        if (fightStage == FightStage.PREFIGHT) {
+            List<List<FightBlockCoordinates>> startBlocks = FightUtil.getStartPositions(world, fightId);
+            if (startBlocks != null) {
+                //renderStartPosition(partialTicks, world, mc, player, startBlocks);
+            }
+        } else if (fightStage == FightStage.FIGHT) {
+            EntityLivingBase currentFighter = FightUtil.getCurrentFighter(world, FightUtil.getFightId(player));
+            if (currentFighter != player) {
+                return;
+            }
 
-			//renderMovement(partialTicks, world, mc, player);
-			//renderDirection(partialTicks, world, mc, player);
-//			renderSpellRange(partialTicks, world, mc, player);
-		}
-	}
+            //renderMovement(partialTicks, world, mc, player);
+            //renderDirection(partialTicks, world, mc, player);
+            //renderSpellRange(partialTicks, world, mc, player);
+        }
+    }
 
 //	public void renderStartPosition(float partialTicks, WorldClient world, Minecraft mc, EntityPlayer player, List<List<FightBlockCoordinates>> startBlocks) {
 //		RenderBlocks renderBlocks = new RenderBlocks(world);

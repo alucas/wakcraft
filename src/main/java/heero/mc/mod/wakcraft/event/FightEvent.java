@@ -11,65 +11,65 @@ import java.util.Collections;
 import java.util.List;
 
 public class FightEvent extends Event {
-	public enum Type {
-		UNKNOW, START, STOP, CHANGE_STAGE, START_TURN,
-	}
+    public enum Type {
+        UNKNOW, START, STOP, CHANGE_STAGE, START_TURN,
+    }
 
-	public final World world;
-	public final Type type;
-	public final int fightId;
+    public final World world;
+    public final Type type;
+    public final int fightId;
 
-	public FightEvent(final Type type, final World world, final int fightId) {
-		super();
+    public FightEvent(final Type type, final World world, final int fightId) {
+        super();
 
-		this.world = world;
-		this.type = type;
-		this.fightId = fightId;
-	}
+        this.world = world;
+        this.type = type;
+        this.fightId = fightId;
+    }
 
-	public static class FightStartEvent extends FightEvent {
-		public final List<List<EntityLivingBase>> fighters;
-		public final List<List<FightBlockCoordinates>> startBlocks;
+    public static class FightStartEvent extends FightEvent {
+        public final List<List<EntityLivingBase>> fighters;
+        public final List<List<FightBlockCoordinates>> startBlocks;
 
-		public FightStartEvent(World world, int fightId, List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
-			super(Type.START, world, fightId);
+        public FightStartEvent(World world, int fightId, List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
+            super(Type.START, world, fightId);
 
-			this.startBlocks = startBlocks;
-			this.fighters = new ArrayList<List<EntityLivingBase>>();
-			this.fighters.add(Collections.unmodifiableList(fighters.get(0)));
-			this.fighters.add(Collections.unmodifiableList(fighters.get(1)));
-		}
-	}
+            this.startBlocks = startBlocks;
+            this.fighters = new ArrayList<List<EntityLivingBase>>();
+            this.fighters.add(Collections.unmodifiableList(fighters.get(0)));
+            this.fighters.add(Collections.unmodifiableList(fighters.get(1)));
+        }
+    }
 
-	public static class FightStopEvent extends FightEvent {
-		public final List<List<EntityLivingBase>> fighters;
+    public static class FightStopEvent extends FightEvent {
+        public final List<List<EntityLivingBase>> fighters;
 
-		public FightStopEvent(World world, int fightId, List<List<EntityLivingBase>> fighters) {
-			super(Type.STOP, world, fightId);
+        public FightStopEvent(World world, int fightId, List<List<EntityLivingBase>> fighters) {
+            super(Type.STOP, world, fightId);
 
-			this.fighters = new ArrayList<List<EntityLivingBase>>();
-			this.fighters.add(Collections.unmodifiableList(fighters.get(0)));
-			this.fighters.add(Collections.unmodifiableList(fighters.get(1)));
-		}
-	}
+            this.fighters = new ArrayList<List<EntityLivingBase>>();
+            this.fighters.add(Collections.unmodifiableList(fighters.get(0)));
+            this.fighters.add(Collections.unmodifiableList(fighters.get(1)));
+        }
+    }
 
-	public static class FightChangeStageEvent extends FightEvent {
-		public final FightStage stage;
+    public static class FightChangeStageEvent extends FightEvent {
+        public final FightStage stage;
 
-		public FightChangeStageEvent(World world, int fightId, FightStage stage) {
-			super(Type.CHANGE_STAGE, world, fightId);
+        public FightChangeStageEvent(World world, int fightId, FightStage stage) {
+            super(Type.CHANGE_STAGE, world, fightId);
 
-			this.stage = stage;
-		}
-	}
+            this.stage = stage;
+        }
+    }
 
-	public static class FightStartTurnEvent extends FightEvent {
-		public final EntityLivingBase fighter;
+    public static class FightStartTurnEvent extends FightEvent {
+        public final EntityLivingBase fighter;
 
-		public FightStartTurnEvent(World world, int fightId, EntityLivingBase fighter) {
-			super(Type.START_TURN, world, fightId);
+        public FightStartTurnEvent(World world, int fightId, EntityLivingBase fighter) {
+            super(Type.START_TURN, world, fightId);
 
-			this.fighter = fighter;
-		}
-	}
+            this.fighter = fighter;
+        }
+    }
 }

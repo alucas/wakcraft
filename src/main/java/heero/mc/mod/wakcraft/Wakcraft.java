@@ -7,66 +7,61 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 @Mod(modid = Reference.MODID, name = Reference.READABLE_NAME)
 public class Wakcraft {
-	@Instance(value = Reference.MODID)
-	public static Wakcraft instance;
+    @Instance(value = Reference.MODID)
+    public static Wakcraft instance;
 
-	@SidedProxy(clientSide = Reference.PROXY_CLIENT_PATH, serverSide = Reference.PROXY_SERVER_PATH)
-	public static CommonProxy proxy;
+    @SidedProxy(clientSide = Reference.PROXY_CLIENT_PATH, serverSide = Reference.PROXY_SERVER_PATH)
+    public static CommonProxy proxy;
 
-	public static final SimpleNetworkWrapper packetPipeline = NetworkRegistry.INSTANCE.newSimpleChannel("Wakcraft");
+    public static final SimpleNetworkWrapper packetPipeline = NetworkRegistry.INSTANCE.newSimpleChannel("Wakcraft");
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		// Server mod version
-		Version.init(event.getVersionProperties());
-		event.getModMetadata().version = Version.fullVersionString();
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        // Server mod version
+        Version.init(event.getVersionProperties());
+        event.getModMetadata().version = Version.fullVersionString();
 
-		WConfig.loadConfig(event.getSuggestedConfigurationFile());
+        WConfig.loadConfig(event.getSuggestedConfigurationFile());
 
-		proxy.registerPreInitEvents();
-		proxy.registerBlocks();
-		proxy.registerItems();
-		proxy.registerEntities();
-		proxy.registerTileEntities();
-		proxy.registerRenderers();
-		proxy.registerGui(this);
-		proxy.registerDimensions();
-		proxy.registerPackets(packetPipeline);
-	}
+        proxy.registerPreInitEvents();
+        proxy.registerBlocks();
+        proxy.registerItems();
+        proxy.registerEntities();
+        proxy.registerTileEntities();
+        proxy.registerRenderers();
+        proxy.registerGui(this);
+        proxy.registerDimensions();
+        proxy.registerPackets(packetPipeline);
+    }
 
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		proxy.registerInitEvents();
-		proxy.registerKeyBindings();
-	}
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+        proxy.registerInitEvents();
+        proxy.registerKeyBindings();
+    }
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-	}
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+    }
 
-	@EventHandler
-	public void onFMLServerStartedEvent(FMLServerStartedEvent event) {
-		HavenBagsManager.setup();
-	}
+    @EventHandler
+    public void onFMLServerStartedEvent(FMLServerStartedEvent event) {
+        HavenBagsManager.setup();
+    }
 
-	@EventHandler
-	public void onFMLServerStoppingEvent(FMLServerStoppingEvent event) {
-		FightManager.INSTANCE.teardown();
-	}
+    @EventHandler
+    public void onFMLServerStoppingEvent(FMLServerStoppingEvent event) {
+        FightManager.INSTANCE.teardown();
+    }
 
-	@EventHandler
-	public void onFMLServerStoppedEvent(FMLServerStoppedEvent event) {
-		HavenBagsManager.teardown();
-	}
+    @EventHandler
+    public void onFMLServerStoppedEvent(FMLServerStoppedEvent event) {
+        HavenBagsManager.teardown();
+    }
 }

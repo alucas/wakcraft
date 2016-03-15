@@ -8,10 +8,10 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerClientFightStop implements IMessageHandler<PacketFightStop, IMessage> {
-	@Override
-	public IMessage onMessage(PacketFightStop message, MessageContext ctx) {
-		FightManager.INSTANCE.stopFight(Wakcraft.proxy.getClientWorld(), message.getFightId());
+    @Override
+    public IMessage onMessage(PacketFightStop message, MessageContext ctx) {
+        FightManager.INSTANCE.stopFight(Wakcraft.proxy.getClientWorld(), message.getFightId());
 
-		return null;
-	}
+        return null;
+    }
 }

@@ -7,10 +7,10 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerClientHavenBagProperties implements IMessageHandler<PacketHavenBagProperties, IMessage> {
-	@Override
-	public IMessage onMessage(PacketHavenBagProperties message, MessageContext ctx) {
-		HavenBagsManager.setHavenBagNBT(message.tagHavenBag);
+    @Override
+    public IMessage onMessage(PacketHavenBagProperties message, MessageContext ctx) {
+        HavenBagsManager.setHavenBagNBT(message.tagHavenBag);
 
-		return null;
-	}
+        return null;
+    }
 }

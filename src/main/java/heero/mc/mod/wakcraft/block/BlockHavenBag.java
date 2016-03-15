@@ -4,7 +4,7 @@ import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBag;
@@ -26,7 +26,7 @@ public class BlockHavenBag extends BlockContainer {
     public BlockHavenBag() {
         super(Material.wood);
 
-        setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
+        setCreativeTab(WCreativeTabs.tabSpecialBlock);
         setUnlocalizedName(Reference.MODID + "_HavenBag");
         setBlockUnbreakable();
     }

@@ -18,75 +18,76 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class GUIEventHandler {
-	@SubscribeEvent
-	public void onGuiOpen(GuiOpenEvent event) {
-		if (event.gui != null && event.gui instanceof GuiInventory) {
-			Minecraft mc = Minecraft.getMinecraft();
+    @SubscribeEvent
+    public void onGuiOpen(GuiOpenEvent event) {
+        if (event.gui != null && event.gui instanceof GuiInventory) {
+            Minecraft mc = Minecraft.getMinecraft();
 
-			if (mc.playerController.isInCreativeMode()) {
-				return;
-			}
+            if (mc.playerController.isInCreativeMode()) {
+                return;
+            }
 
-			Wakcraft.packetPipeline.sendToServer(new PacketOpenWindow(GuiId.INVENTORY));
+            Wakcraft.packetPipeline.sendToServer(new PacketOpenWindow(GuiId.INVENTORY));
 
-			event.setCanceled(true);
-		}
-	}
+            event.setCanceled(true);
+        }
+    }
 
-	private static final String stringEffects = StatCollector.translateToLocal("spell.category.effects");
-	private static final String stringCriticalEffects = StatCollector.translateToLocal("spell.category.effectsCritical");
-	private static final String stringConditions = StatCollector.translateToLocal("spell.category.conditions");
-	@SubscribeEvent
-	public void onItemTooltipEvent(ItemTooltipEvent event) {
-		if (event.itemStack.getItem() instanceof ISpell) {
-			final ISpell spell = (ISpell) event.itemStack.getItem();
-			final int spellLevel = spell.getLevel(event.itemStack.getItemDamage());
+    private static final String stringEffects = StatCollector.translateToLocal("spell.category.effects");
+    private static final String stringCriticalEffects = StatCollector.translateToLocal("spell.category.effectsCritical");
+    private static final String stringConditions = StatCollector.translateToLocal("spell.category.conditions");
 
-			if (spell instanceof IPassiveSpell) {
-				event.toolTip.add(EnumChatFormatting.BLUE + stringEffects);
+    @SubscribeEvent
+    public void onItemTooltipEvent(ItemTooltipEvent event) {
+        if (event.itemStack.getItem() instanceof ISpell) {
+            final ISpell spell = (ISpell) event.itemStack.getItem();
+            final int spellLevel = spell.getLevel(event.itemStack.getItemDamage());
 
-				for (IEffect effect : ((IPassiveSpell) spell).getEffects()) {
-					event.toolTip.add(effect.getDescription(spellLevel));
-				}
+            if (spell instanceof IPassiveSpell) {
+                event.toolTip.add(EnumChatFormatting.BLUE + stringEffects);
 
-				event.toolTip.add("");
-			} else if (spell instanceof IActiveSpell) {
-				IActiveSpell activeSpell = (IActiveSpell) spell;
+                for (IEffect effect : ((IPassiveSpell) spell).getEffects()) {
+                    event.toolTip.add(effect.getDescription(spellLevel));
+                }
 
-				event.toolTip.add(StatCollector.translateToLocalFormatted("spell.category.active", activeSpell.getActionCost(), activeSpell.getMovementCost(), activeSpell.getWakfuCost()));
-				event.toolTip.add("");
+                event.toolTip.add("");
+            } else if (spell instanceof IActiveSpell) {
+                IActiveSpell activeSpell = (IActiveSpell) spell;
 
-				event.toolTip.add(EnumChatFormatting.BLUE + stringEffects);
+                event.toolTip.add(StatCollector.translateToLocalFormatted("spell.category.active", activeSpell.getActionCost(), activeSpell.getMovementCost(), activeSpell.getWakfuCost()));
+                event.toolTip.add("");
 
-				for (IEffect effect : activeSpell.getEffects()) {
-					event.toolTip.add(effect.getDescription(spellLevel));
-				}
+                event.toolTip.add(EnumChatFormatting.BLUE + stringEffects);
 
-				event.toolTip.add("");
-				event.toolTip.add(EnumChatFormatting.BLUE + stringCriticalEffects);
+                for (IEffect effect : activeSpell.getEffects()) {
+                    event.toolTip.add(effect.getDescription(spellLevel));
+                }
 
-				for (IEffect effect : activeSpell.getEffectsCritical()) {
-					event.toolTip.add(effect.getDescription(spellLevel));
-				}
+                event.toolTip.add("");
+                event.toolTip.add(EnumChatFormatting.BLUE + stringCriticalEffects);
 
-				event.toolTip.add("");
+                for (IEffect effect : activeSpell.getEffectsCritical()) {
+                    event.toolTip.add(effect.getDescription(spellLevel));
+                }
 
-				if (activeSpell.getConditions().size() > 0) {
-					event.toolTip.add(EnumChatFormatting.BLUE + stringConditions);
+                event.toolTip.add("");
 
-					for (ICondition condition : activeSpell.getConditions()) {
-						event.toolTip.add(condition.getDescription(spellLevel));
-					}
+                if (activeSpell.getConditions().size() > 0) {
+                    event.toolTip.add(EnumChatFormatting.BLUE + stringConditions);
 
-					event.toolTip.add("");
-				}
-			}
+                    for (ICondition condition : activeSpell.getConditions()) {
+                        event.toolTip.add(condition.getDescription(spellLevel));
+                    }
 
-			String description  = StatCollector.translateToLocal(spell.getDescription());
+                    event.toolTip.add("");
+                }
+            }
 
-			for (String string : StringUtil.warpString(description, 26)) {
-				event.toolTip.add(string);
-			}
-		}
-	}
+            String description = StatCollector.translateToLocal(spell.getDescription());
+
+            for (String string : StringUtil.warpString(description, 26)) {
+                event.toolTip.add(string);
+            }
+        }
+    }
 }

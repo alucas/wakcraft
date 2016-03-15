@@ -10,12 +10,12 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerClientFightStart implements IMessageHandler<PacketFightStart, IMessage> {
-	@Override
-	public IMessage onMessage(PacketFightStart message, MessageContext ctx) {
-		World world = Wakcraft.proxy.getClientWorld();
+    @Override
+    public IMessage onMessage(PacketFightStart message, MessageContext ctx) {
+        World world = Wakcraft.proxy.getClientWorld();
 
-		FightManager.INSTANCE.startClientFight(world, message.getFightId(), PacketFight.getEntities(world, message.fightersId), message.startPositions);
+        FightManager.INSTANCE.startClientFight(world, message.getFightId(), PacketFight.getEntities(world, message.fightersId), message.startPositions);
 
-		return null;
-	}
+        return null;
+    }
 }

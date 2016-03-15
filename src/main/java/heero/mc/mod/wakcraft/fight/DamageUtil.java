@@ -9,23 +9,23 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
 public class DamageUtil {
-	private DamageUtil() {
-	}
+    private DamageUtil() {
+    }
 
-	public static int computeDamage(final EntityLivingBase attacker, final EntityLivingBase target, final ItemStack stackSpell, final IEffectDamage effect) {
-		if (!(stackSpell.getItem() instanceof ISpell)) {
-			WLog.warning("The stackSpell parameter is not a spell stack");
-			return 0;
-		}
+    public static int computeDamage(final EntityLivingBase attacker, final EntityLivingBase target, final ItemStack stackSpell, final IEffectDamage effect) {
+        if (!(stackSpell.getItem() instanceof ISpell)) {
+            WLog.warning("The stackSpell parameter is not a spell stack");
+            return 0;
+        }
 
-		int spellLevel = ((ISpell) stackSpell.getItem()).getLevel(stackSpell.getItemDamage());
-		int damageValue = effect.getValue(spellLevel);
-		IEffectElement damageElement = effect.getElement();
+        int spellLevel = ((ISpell) stackSpell.getItem()).getLevel(stackSpell.getItemDamage());
+        int damageValue = effect.getValue(spellLevel);
+        IEffectElement damageElement = effect.getElement();
 
-		if (damageElement == EffectElement.EARTH) {
-			
-		}
+        if (damageElement == EffectElement.EARTH) {
 
-		return damageValue;
-	}
+        }
+
+        return damageValue;
+    }
 }

@@ -10,43 +10,43 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIInventory extends InventoryEffectRenderer {
-	private static final ResourceLocation background = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/gui/inventory.png");
+    private static final ResourceLocation background = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/gui/inventory.png");
 
-	public GUIInventory(Container container) {
-		super(container);
+    public GUIInventory(Container container) {
+        super(container);
 
-		allowUserInput = true;
-	}
+        allowUserInput = true;
+    }
 
-	/**
-	 * Draw the foreground layer for the GuiContainer (everything in front of
-	 * the items)
-	 */
-	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+    /**
+     * Draw the foreground layer for the GuiContainer (everything in front of
+     * the items)
+     */
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 //		fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 86, 16, 0x404040);
-	}
+    }
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float renderPartialTicks,
-			int mouseX, int mouseY) {
-		drawInventoryBackground(mouseX, mouseY);
-	}
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float renderPartialTicks,
+                                                   int mouseX, int mouseY) {
+        drawInventoryBackground(mouseX, mouseY);
+    }
 
-	protected void drawInventoryBackground(int mouseX, int mouseY) {
-		mc.getTextureManager().bindTexture(background);
+    protected void drawInventoryBackground(int mouseX, int mouseY) {
+        mc.getTextureManager().bindTexture(background);
 
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-		GuiInventory.drawEntityOnScreen(guiLeft + 51, guiTop + 75, 30,
+        GuiInventory.drawEntityOnScreen(guiLeft + 51, guiTop + 75, 30,
                 (float) (guiLeft + 51) - mouseX, (float) (guiTop + 75 - 50)
                         - mouseY, mc.thePlayer);
-	}
+    }
 
-	/**
-	 * Draws either a gradient over the background screen (when it exists) or a
-	 * flat gradient over background.png
-	 */
-	public void drawDefaultBackground() {
-	}
+    /**
+     * Draws either a gradient over the background screen (when it exists) or a
+     * flat gradient over background.png
+     */
+    public void drawDefaultBackground() {
+    }
 }

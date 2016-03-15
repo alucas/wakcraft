@@ -1,8 +1,8 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -12,6 +12,12 @@ public class BlockGeneric extends Block {
     private boolean full;
     private EnumWorldBlockLayer layer;
 
+    public BlockGeneric(Material material, CreativeTabs tab) {
+        this(material);
+
+        setCreativeTab(tab);
+    }
+
     public BlockGeneric(Material material) {
         super(material);
 
@@ -20,7 +26,6 @@ public class BlockGeneric extends Block {
         this.layer = EnumWorldBlockLayer.SOLID;
 
         setBlockUnbreakable();
-        setCreativeTab(WakcraftCreativeTabs.tabBlock);
     }
 
     public BlockGeneric setOpaque(final boolean opaque) {
@@ -52,8 +57,7 @@ public class BlockGeneric extends Block {
     }
 
     @SideOnly(Side.CLIENT)
-    public EnumWorldBlockLayer getBlockLayer()
-    {
+    public EnumWorldBlockLayer getBlockLayer() {
         return layer;
     }
 }

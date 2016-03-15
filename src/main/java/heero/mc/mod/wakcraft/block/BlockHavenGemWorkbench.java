@@ -3,7 +3,7 @@ package heero.mc.mod.wakcraft.block;
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
@@ -21,59 +21,59 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class BlockHavenGemWorkbench extends BlockContainer {
-	public BlockHavenGemWorkbench() {
-		super(Material.wood);
+    public BlockHavenGemWorkbench() {
+        super(Material.wood);
 
-		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
-		setUnlocalizedName(Reference.MODID + "_HavenGemWorkbench");
-		setBlockUnbreakable();
-	}
+        setCreativeTab(WCreativeTabs.tabSpecialBlock);
+        setUnlocalizedName(Reference.MODID + "_HavenGemWorkbench");
+        setBlockUnbreakable();
+    }
 
-	@Override
+    @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (world.isRemote) {
-			return true;
-		}
+        if (world.isRemote) {
+            return true;
+        }
 
-		IExtendedEntityProperties properties = player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
-		if (properties == null || !(properties instanceof HavenBagProperty)) {
-			WLog.warning("Error while loading the player (%s) extended properties", player.getDisplayName());
-			return true;
-		}
+        IExtendedEntityProperties properties = player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+        if (properties == null || !(properties instanceof HavenBagProperty)) {
+            WLog.warning("Error while loading the player (%s) extended properties", player.getDisplayName());
+            return true;
+        }
 
-		if (((HavenBagProperty) properties).getUID() != HavenBagUtil.getUIDFromCoord(pos)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
-			return true;
-		}
+        if (((HavenBagProperty) properties).getUID() != HavenBagUtil.getUIDFromCoord(pos)) {
+            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
+            return true;
+        }
 
-		TileEntity tile = world.getTileEntity(pos);
-		if (tile == null || !(tile instanceof TileEntityHavenGemWorkbench)) {
-			WLog.warning("Error while loading the tile entity (%d, %d, %d)", pos.getX(), pos.getY(), pos.getZ());
-			return true;
-		}
+        TileEntity tile = world.getTileEntity(pos);
+        if (tile == null || !(tile instanceof TileEntityHavenGemWorkbench)) {
+            WLog.warning("Error while loading the tile entity (%d, %d, %d)", pos.getX(), pos.getY(), pos.getZ());
+            return true;
+        }
 
-		player.openGui(Wakcraft.instance, GuiId.HAVEN_GEM_WORKBENCH.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
+        player.openGui(Wakcraft.instance, GuiId.HAVEN_GEM_WORKBENCH.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * Returns a new instance of a block's tile entity class. Called on placing
-	 * the block.
-	 */
-	@Override
-	public TileEntity createNewTileEntity(World world, int var2) {
-		return new TileEntityHavenGemWorkbench();
-	}
+    /**
+     * Returns a new instance of a block's tile entity class. Called on placing
+     * the block.
+     */
+    @Override
+    public TileEntity createNewTileEntity(World world, int var2) {
+        return new TileEntityHavenGemWorkbench();
+    }
 
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos) {
-		if (world.isRemote) {
-			Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
-		}
+    @Override
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        if (world.isRemote) {
+            Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
+        }
 
-		return false;
-	}
+        return false;
+    }
 
 //	@Override
 //	@SideOnly(Side.CLIENT)

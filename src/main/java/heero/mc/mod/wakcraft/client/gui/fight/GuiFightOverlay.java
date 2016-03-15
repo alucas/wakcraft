@@ -83,13 +83,13 @@ public class GuiFightOverlay extends Gui {
                         (float) (-(y + 12)), 0.0F);
             }
 
-            itemRenderer.func_175030_a(this.minecraft.fontRendererObj, itemstack, x, y);
+            itemRenderer.renderItemOverlays(this.minecraft.fontRendererObj, itemstack, x, y);
 
             if (f1 > 0.0F) {
                 GL11.glPopMatrix();
             }
 
-            itemRenderer.func_175030_a(this.minecraft.fontRendererObj, itemstack, x, y);
+            itemRenderer.renderItemOverlays(this.minecraft.fontRendererObj, itemstack, x, y);
         }
     }
 

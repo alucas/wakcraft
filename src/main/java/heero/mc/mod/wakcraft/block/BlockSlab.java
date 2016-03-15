@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WLog;
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -10,7 +10,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,10 +25,7 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
     private final IBlockState blockStateOpaque;
 
     public BlockSlab(final Material material, final IBlockState blockStateOpaque) {
-        super(material);
-
-        setCreativeTab(WakcraftCreativeTabs.tabBlock);
-        blockStateOpaque.getBlock().setCreativeTab(null);
+        super(material, WCreativeTabs.tabBlock);
 
         if (!blockStateOpaque.getBlock().isOpaqueCube()) {
             WLog.warning("The slab block " + this.getClass().getName() + " use a non opaque block : " + blockStateOpaque.getBlock().getLocalizedName());
@@ -42,11 +38,11 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
     }
 
     public static int getSize(final IBlockState state) {
-        return (int) state.getValue(PROP_SIZE);
+        return state.getValue(PROP_SIZE);
     }
 
     public static int getBottomPosition(final IBlockState state) {
-        return (int) state.getValue(PROP_BOTTOM_POSITION);
+        return state.getValue(PROP_BOTTOM_POSITION);
     }
 
     public static int getTopPosition(final IBlockState state) {
@@ -84,8 +80,8 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
             return 0;
         }
 
-        int bottomPosition = (int) state.getValue(PROP_BOTTOM_POSITION);
-        int size = (int) state.getValue(PROP_SIZE);
+        int bottomPosition = state.getValue(PROP_BOTTOM_POSITION);
+        int size = state.getValue(PROP_SIZE);
 
         return ((size << 2) & 0b1100) | (bottomPosition & 0b0011);
     }
@@ -143,14 +139,13 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
         int l = super.getMixedBrightnessForBlock(world, pos);
 
         if (l == 0) {
-            BlockPos posDown = pos.offsetDown();
+            BlockPos posDown = pos.down();
             Block block = world.getBlockState(posDown).getBlock();
             l = world.getCombinedLight(posDown, block.getLightValue(world, posDown));
         }
 
         return l;
     }
-
 
     @Override
     public IBlockState getSubBlockState() {

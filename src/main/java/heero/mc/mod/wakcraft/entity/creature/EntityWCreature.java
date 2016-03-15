@@ -34,7 +34,7 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 
         enablePersistence();
 
-        ((PathNavigateGround) this.getNavigator()).func_179690_a(true);
+        ((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
 
         this.tasks.addTask(00, new EntityAIFight(this, 1.0D));
         this.tasks.addTask(10, new EntityAISwimming(this));

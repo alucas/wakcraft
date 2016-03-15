@@ -8,9 +8,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerClientFightChangeStage implements IMessageHandler<PacketFightChangeStage, IMessage> {
-	@Override
-	public IMessage onMessage(PacketFightChangeStage message, MessageContext ctx) {
-		FightManager.INSTANCE.changeFightStage(Wakcraft.proxy.getClientWorld(), message.getFightId(), message.stage);
-		return null;
-	}
+    @Override
+    public IMessage onMessage(PacketFightChangeStage message, MessageContext ctx) {
+        FightManager.INSTANCE.changeFightStage(Wakcraft.proxy.getClientWorld(), message.getFightId(), message.stage);
+        return null;
+    }
 }

@@ -3,7 +3,7 @@ package heero.mc.mod.wakcraft.block;
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
@@ -22,7 +22,7 @@ public class BlockHavenBagLock extends BlockGeneric {
     public BlockHavenBagLock() {
         super(Material.wood);
 
-        setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
+        setCreativeTab(WCreativeTabs.tabSpecialBlock);
         setUnlocalizedName(Reference.MODID + "_HavenBagLock");
     }
 

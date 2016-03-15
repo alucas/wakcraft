@@ -10,42 +10,42 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PacketProfession implements IMessage {
-	public Map<PROFESSION, Integer> xps;
+    public Map<PROFESSION, Integer> xps;
 
-	public PacketProfession() {
-		xps = new HashMap<PROFESSION, Integer>();
-	}
+    public PacketProfession() {
+        xps = new HashMap<PROFESSION, Integer>();
+    }
 
-	public PacketProfession(EntityPlayer player) {
-		xps = new HashMap<PROFESSION, Integer>();
-		
-		for (PROFESSION profession : PROFESSION.values()) {
-			xps.put(profession, ProfessionManager.getXp(player, profession));
-		}
-	}
+    public PacketProfession(EntityPlayer player) {
+        xps = new HashMap<PROFESSION, Integer>();
 
-	public PacketProfession(EntityPlayer player, PROFESSION profession) {
-		xps = new HashMap<PROFESSION, Integer>();
-		xps.put(profession, ProfessionManager.getXp(player, profession));
-	}
+        for (PROFESSION profession : PROFESSION.values()) {
+            xps.put(profession, ProfessionManager.getXp(player, profession));
+        }
+    }
 
-	@Override
-	public void toBytes(ByteBuf buffer) {
-		buffer.writeByte(xps.size());
-		for (PROFESSION profession : xps.keySet()) {
-			buffer.writeByte(profession.getValue());
-			buffer.writeInt(xps.get(profession));
-		}
-	}
+    public PacketProfession(EntityPlayer player, PROFESSION profession) {
+        xps = new HashMap<PROFESSION, Integer>();
+        xps.put(profession, ProfessionManager.getXp(player, profession));
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buffer) {
-		int nbProfession = buffer.readByte();
-		for (int i = 0; i < nbProfession; i++) {
-			PROFESSION profession = PROFESSION.getProfession(buffer.readByte());
-			int xp = buffer.readInt();
+    @Override
+    public void toBytes(ByteBuf buffer) {
+        buffer.writeByte(xps.size());
+        for (PROFESSION profession : xps.keySet()) {
+            buffer.writeByte(profession.getValue());
+            buffer.writeInt(xps.get(profession));
+        }
+    }
 
-			xps.put(profession, xp);
-		}
-	}
+    @Override
+    public void fromBytes(ByteBuf buffer) {
+        int nbProfession = buffer.readByte();
+        for (int i = 0; i < nbProfession; i++) {
+            PROFESSION profession = PROFESSION.getProfession(buffer.readByte());
+            int xp = buffer.readInt();
+
+            xps.put(profession, xp);
+        }
+    }
 }

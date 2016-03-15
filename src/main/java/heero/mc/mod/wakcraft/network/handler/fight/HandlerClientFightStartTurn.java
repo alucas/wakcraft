@@ -11,18 +11,18 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerClientFightStartTurn implements IMessageHandler<PacketFightStartTurn, IMessage> {
-	@Override
-	public IMessage onMessage(PacketFightStartTurn message, MessageContext ctx) {
-		World world = Wakcraft.proxy.getClientWorld();
+    @Override
+    public IMessage onMessage(PacketFightStartTurn message, MessageContext ctx) {
+        World world = Wakcraft.proxy.getClientWorld();
 
-		EntityLivingBase entity = (EntityLivingBase) world.getEntityByID(message.fighterId);
-		if (entity == null) {
-			WLog.warning("No loaded entity found with the id : " + message.fighterId);
-			return null;
-		}
+        EntityLivingBase entity = (EntityLivingBase) world.getEntityByID(message.fighterId);
+        if (entity == null) {
+            WLog.warning("No loaded entity found with the id : " + message.fighterId);
+            return null;
+        }
 
-		FightManager.INSTANCE.setCurrentFighter(world, message.getFightId(), entity);
+        FightManager.INSTANCE.setCurrentFighter(world, message.getFightId(), entity);
 
-		return null;
-	}
+        return null;
+    }
 }

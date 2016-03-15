@@ -3,7 +3,7 @@ package heero.mc.mod.wakcraft.block;
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.block.material.Material;
@@ -17,43 +17,43 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class BlockHavenBagVisitors extends BlockGeneric {
-	public BlockHavenBagVisitors() {
-		super(Material.wood);
-		setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
-		setUnlocalizedName(Reference.MODID + "_HavenBagVisitors");
-	}
+    public BlockHavenBagVisitors() {
+        super(Material.wood);
+        setCreativeTab(WCreativeTabs.tabSpecialBlock);
+        setUnlocalizedName(Reference.MODID + "_HavenBagVisitors");
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			return true;
-		}
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote) {
+            return true;
+        }
 
-		IExtendedEntityProperties properties = player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
-		if (properties == null || !(properties instanceof HavenBagProperty)) {
-			WLog.warning("Error while loading the player (%s) extended properties", player.getDisplayName());
-			return true;
-		}
+        IExtendedEntityProperties properties = player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+        if (properties == null || !(properties instanceof HavenBagProperty)) {
+            WLog.warning("Error while loading the player (%s) extended properties", player.getDisplayName());
+            return true;
+        }
 
-		HavenBagProperty propertiesHB = (HavenBagProperty) properties;
-		if (propertiesHB.getUID() != HavenBagUtil.getUIDFromCoord(pos)) {
-			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
-			return true;
-		}
+        HavenBagProperty propertiesHB = (HavenBagProperty) properties;
+        if (propertiesHB.getUID() != HavenBagUtil.getUIDFromCoord(pos)) {
+            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
+            return true;
+        }
 
-		Wakcraft.proxy.openHBVisitorsGui(player);
+        Wakcraft.proxy.openHBVisitorsGui(player);
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos) {
-		if (world.isRemote) {
-			Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
-		}
+    @Override
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        if (world.isRemote) {
+            Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
+        }
 
-		return false;
-	}
+        return false;
+    }
 
 //    TODO
 //	@Override

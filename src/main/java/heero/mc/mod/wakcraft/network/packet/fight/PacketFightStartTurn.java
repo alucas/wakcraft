@@ -4,35 +4,35 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.EntityLivingBase;
 
 public class PacketFightStartTurn implements IPacketFight {
-	protected IPacketFight packetFight;
+    protected IPacketFight packetFight;
 
-	public Integer fighterId;
+    public Integer fighterId;
 
-	public PacketFightStartTurn() {
-		this.packetFight = new PacketFight();
-	}
+    public PacketFightStartTurn() {
+        this.packetFight = new PacketFight();
+    }
 
-	public PacketFightStartTurn(int fightId, EntityLivingBase fighter) {
-		this.packetFight = new PacketFight(fightId);
-		this.fighterId = fighter.getEntityId();
-	}
+    public PacketFightStartTurn(int fightId, EntityLivingBase fighter) {
+        this.packetFight = new PacketFight(fightId);
+        this.fighterId = fighter.getEntityId();
+    }
 
-	@Override
-	public void toBytes(ByteBuf buffer) {
-		packetFight.toBytes(buffer);
+    @Override
+    public void toBytes(ByteBuf buffer) {
+        packetFight.toBytes(buffer);
 
-		buffer.writeInt(fighterId);
-	}
+        buffer.writeInt(fighterId);
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buffer) {
-		packetFight.fromBytes(buffer);
+    @Override
+    public void fromBytes(ByteBuf buffer) {
+        packetFight.fromBytes(buffer);
 
-		fighterId = buffer.readInt();
-	}
+        fighterId = buffer.readInt();
+    }
 
-	@Override
-	public int getFightId() {
-		return packetFight.getFightId();
-	}
+    @Override
+    public int getFightId() {
+        return packetFight.getFightId();
+    }
 }

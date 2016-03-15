@@ -13,68 +13,68 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 public class GUIClassSelection extends GuiScreen implements GuiYesNoCallback {
-	protected static final ResourceLocation background = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/gui/background.png");
+    protected static final ResourceLocation background = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/gui/background.png");
 
-	protected EntityPlayer player;
-	protected int guiWidth = 176;
-	protected int guiHeight = 166;
-	protected int guiLeft;
-	protected int guiTop;
+    protected EntityPlayer player;
+    protected int guiWidth = 176;
+    protected int guiHeight = 166;
+    protected int guiLeft;
+    protected int guiTop;
 
-	public GUIClassSelection(EntityPlayer player) {
-		super();
+    public GUIClassSelection(EntityPlayer player) {
+        super();
 
-		this.player = player;
-	}
+        this.player = player;
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void initGui() {
-		super.initGui();
+    @SuppressWarnings("unchecked")
+    @Override
+    public void initGui() {
+        super.initGui();
 
-		guiLeft = (width - guiWidth) / 2;
-		guiTop = (height - guiHeight) / 2;
+        guiLeft = (width - guiWidth) / 2;
+        guiTop = (height - guiHeight) / 2;
 
-		CLASS[] classes = CharacterProperty.CLASS.values();
-		for (int i = 0; i < classes.length - 1; i++) {
-			buttonList.add(new GuiButton(i, guiLeft + 5 + 85 * (i % 2), guiTop + 7 + 19 * (i / 2), 80, 20, classes[i + 1].toString()));
-		}
-	}
+        CLASS[] classes = CharacterProperty.CLASS.values();
+        for (int i = 0; i < classes.length - 1; i++) {
+            buttonList.add(new GuiButton(i, guiLeft + 5 + 85 * (i % 2), guiTop + 7 + 19 * (i / 2), 80, 20, classes[i + 1].toString()));
+        }
+    }
 
-	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTick) {
-		Minecraft.getMinecraft().getTextureManager().bindTexture(background);
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTick) {
+        Minecraft.getMinecraft().getTextureManager().bindTexture(background);
 
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, guiWidth, guiHeight);
+        drawTexturedModalRect(guiLeft, guiTop, 0, 0, guiWidth, guiHeight);
 
-		super.drawScreen(mouseX, mouseY, partialTick);
-	}
+        super.drawScreen(mouseX, mouseY, partialTick);
+    }
 
-	@Override
-	protected void actionPerformed(GuiButton button) {
-		Minecraft.getMinecraft().displayGuiScreen(new GuiYesNo(this, "You have selected the class : " + CLASS.values()[button.id + 1], "If you confirm, your character will be reset !", button.id));
-	}
+    @Override
+    protected void actionPerformed(GuiButton button) {
+        Minecraft.getMinecraft().displayGuiScreen(new GuiYesNo(this, "You have selected the class : " + CLASS.values()[button.id + 1], "If you confirm, your character will be reset !", button.id));
+    }
 
-	@Override
-	public void confirmClicked(boolean result, int buttonId) {
-		do {
-			if (!result) {
-				break;
-			}
+    @Override
+    public void confirmClicked(boolean result, int buttonId) {
+        do {
+            if (!result) {
+                break;
+            }
 
-			CharacterProperty properties = (CharacterProperty) player.getExtendedProperties(CharacterProperty.IDENTIFIER);
-			if (properties == null) {
-				WLog.warning("Error while loading the character properties of the player : " + player.getDisplayName());
-				break;
-			}
+            CharacterProperty properties = (CharacterProperty) player.getExtendedProperties(CharacterProperty.IDENTIFIER);
+            if (properties == null) {
+                WLog.warning("Error while loading the character properties of the player : " + player.getDisplayName());
+                break;
+            }
 
-			properties.setCharacterClass(CLASS.values()[buttonId + 1]);
+            properties.setCharacterClass(CLASS.values()[buttonId + 1]);
 
-			Minecraft.getMinecraft().displayGuiScreen(null);
+            Minecraft.getMinecraft().displayGuiScreen(null);
 
-			return;
-		} while(false);
+            return;
+        } while (false);
 
-		Minecraft.getMinecraft().displayGuiScreen(this);
-	}
+        Minecraft.getMinecraft().displayGuiScreen(this);
+    }
 }

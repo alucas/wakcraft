@@ -5,9 +5,9 @@ import net.minecraft.block.material.Material;
 
 public class AventureMaterial extends Material {
 
-	public AventureMaterial(MapColor color) {
-		super(color);
+    public AventureMaterial(MapColor color) {
+        super(color);
 
-		setAdventureModeExempt();
-	}
+        setAdventureModeExempt();
+    }
 }

@@ -11,136 +11,126 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class MeowGeneric extends EntityWCreature {
-	protected final AnimalChest inventory = new AnimalChest("Inventory", 10);
+    protected final AnimalChest inventory = new AnimalChest("Inventory", 10);
 
-	protected static final Map<Integer, Integer> dropRate = new HashMap<Integer, Integer>();
-	static {
-		dropRate.put(Item.getIdFromItem(WItems.gobballWool), 50);
-		dropRate.put(Item.getIdFromItem(WItems.gobballSkin), 50);
-		dropRate.put(Item.getIdFromItem(WItems.gobballHorn), 50);
-		dropRate.put(Item.getIdFromItem(WItems.woollyKey), 5);
-	}
+    protected static final Map<Integer, Integer> dropRate = new HashMap<>();
 
-	public MeowGeneric(World world) {
-		super(world);
+    static {
+        dropRate.put(Item.getIdFromItem(WItems.gobballWool), 50);
+        dropRate.put(Item.getIdFromItem(WItems.gobballSkin), 50);
+        dropRate.put(Item.getIdFromItem(WItems.gobballHorn), 50);
+        dropRate.put(Item.getIdFromItem(WItems.woollyKey), 5);
+    }
 
-		// 1.2 block wide/tall
-		this.setSize(0.6F, 0.6F);
+    public MeowGeneric(World world) {
+        super(world);
 
-		this.inventory.setInventorySlotContents(0, new ItemStack(WItems.gobballWool, 1, 0));
-		this.inventory.setInventorySlotContents(1, new ItemStack(WItems.gobballHorn, 1, 0));
-		this.inventory.setInventorySlotContents(2, new ItemStack(WItems.gobballSkin, 1, 0));
-		this.inventory.setInventorySlotContents(3, new ItemStack(WItems.woollyKey, 1, 0));
-	}
+        // 1.2 block wide/tall
+        this.setSize(0.6F, 0.6F);
 
-	@Override
-	protected void updateAITasks() {
-		super.updateAITasks();
-	}
+        this.inventory.setInventorySlotContents(0, new ItemStack(WItems.gobballWool, 1, 0));
+        this.inventory.setInventorySlotContents(1, new ItemStack(WItems.gobballHorn, 1, 0));
+        this.inventory.setInventorySlotContents(2, new ItemStack(WItems.gobballSkin, 1, 0));
+        this.inventory.setInventorySlotContents(3, new ItemStack(WItems.woollyKey, 1, 0));
+    }
 
-	/**
-	 * Called frequently so the entity can update its state every tick as
-	 * required. For example, zombies and skeletons use this to react to
-	 * sunlight and start to burn.
-	 */
-	@Override
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
-	}
+    @Override
+    protected void updateAITasks() {
+        super.updateAITasks();
+    }
 
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
+    /**
+     * Called frequently so the entity can update its state every tick as
+     * required. For example, zombies and skeletons use this to react to
+     * sunlight and start to burn.
+     */
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+    }
 
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
-	}
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
 
-	@Override
-	protected void entityInit() {
-		super.entityInit();
-	}
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
+    }
 
-	/**
-	 * Drop 0-2 items of this living's type. @param par1 - Whether this entity
-	 * has recently been hit by a player. @param par2 - Level of Looting used to
-	 * kill this mob.
-	 */
-	@Override
-	protected void dropFewItems(boolean hitByPlayer, int lootingLevel) {
-		for (int i = 0; i < inventory.getSizeInventory(); i++) {
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+    }
 
-			ItemStack itemStack = inventory.getStackInSlot(i);
-			if (itemStack == null)
-				continue;
+    /**
+     * Drop 0-2 items of this living's type. @param par1 - Whether this entity
+     * has recently been hit by a player. @param par2 - Level of Looting used to
+     * kill this mob.
+     */
+    @Override
+    protected void dropFewItems(boolean hitByPlayer, int lootingLevel) {
+        for (int i = 0; i < inventory.getSizeInventory(); i++) {
 
-			Integer rate = (Integer) dropRate.get(Item.getIdFromItem(itemStack.getItem()));
-			if (rate == null) {
-				System.out.println("This item (" + (itemStack.getItem().getUnlocalizedName()) + ") has no registered drop rate.");
-				
-				this.entityDropItem(itemStack, 0.0F);
-			} else {
-				if (rate > this.worldObj.rand.nextInt(100)) {
-					this.entityDropItem(itemStack, 0.0F);
-				}
-			}
-		}
-	}
+            ItemStack itemStack = inventory.getStackInSlot(i);
+            if (itemStack == null)
+                continue;
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void handleHealthUpdate(byte type) {
-		System.out.println("HandleHealthUpdate : " + type); // 2 : hurt, 3 : die
-															// ?
+            Integer rate = (Integer) dropRate.get(Item.getIdFromItem(itemStack.getItem()));
+            if (rate == null) {
+                System.out.println("This item (" + (itemStack.getItem().getUnlocalizedName()) + ") has no registered drop rate.");
 
-		super.handleHealthUpdate(type);
-	}
+                this.entityDropItem(itemStack, 0.0F);
+            } else {
+                if (rate > this.worldObj.rand.nextInt(100)) {
+                    this.entityDropItem(itemStack, 0.0F);
+                }
+            }
+        }
+    }
 
-	/**
-	 * Called when a player interacts with a mob. e.g. gets milk from a cow,
-	 * gets into the saddle on a pig.
-	 */
-	@Override
-	public boolean interact(EntityPlayer player) {
-		return super.interact(player);
-	}
+    /**
+     * Called when a player interacts with a mob. e.g. gets milk from a cow,
+     * gets into the saddle on a pig.
+     */
+    @Override
+    public boolean interact(EntityPlayer player) {
+        return super.interact(player);
+    }
 
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	@Override
-	protected String getLivingSound() {
-		return "mob.sheep.say";
-	}
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return "mob.sheep.say";
+    }
 
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
-	protected String getHurtSound() {
-		return "mob.sheep.say";
-	}
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound() {
+        return "mob.sheep.say";
+    }
 
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
-	@Override
-	protected String getDeathSound() {
-		return "mob.sheep.say";
-	}
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    @Override
+    protected String getDeathSound() {
+        return "mob.sheep.say";
+    }
 
-	/**
-	 * Play step sound.
-	 */
-	@Override
-	protected void playStepSound(BlockPos blockPos, Block block) {
-		this.playSound("mob.sheep.step", 0.15F, 1.0F);
-	}
+    /**
+     * Play step sound.
+     */
+    @Override
+    protected void playStepSound(BlockPos blockPos, Block block) {
+        this.playSound("mob.sheep.step", 0.15F, 1.0F);
+    }
 }

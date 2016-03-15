@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.block;
 
+import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -15,7 +16,7 @@ public class BlockPlant extends BlockGeneric {
     public static final IProperty PRO_BOTTOM_POSITION = PropertyInteger.create("propertyBottomPosition", 0, 3);
 
     public BlockPlant(Material material) {
-        super(material);
+        super(material, WCreativeTabs.tabBlock);
 
         setOpaque(false);
         setFull(false);
@@ -34,7 +35,7 @@ public class BlockPlant extends BlockGeneric {
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        IBlockState stateDown = worldIn.getBlockState(pos.offsetDown());
+        IBlockState stateDown = worldIn.getBlockState(pos.down());
         if (!(stateDown.getBlock() instanceof BlockSlab)) {
             return state.withProperty(PRO_BOTTOM_POSITION, 0);
         }

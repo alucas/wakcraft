@@ -16,65 +16,66 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GUIHavenBagChests extends GUITabs {
-	protected static List<GuiId> havenBagChestGuiIds = new ArrayList<GuiId>();
-	static {
-		havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_NORMAL);
-		havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_SMALL);
-		havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_ADVENTURER);
-		havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_KIT);
-		havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_COLLECTOR);
-		havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_GOLDEN);
-		havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_EMERALD);
-	}
+    protected static List<GuiId> havenBagChestGuiIds = new ArrayList<GuiId>();
 
-	protected ContainerHavenBagChest container;
+    static {
+        havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_NORMAL);
+        havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_SMALL);
+        havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_ADVENTURER);
+        havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_KIT);
+        havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_COLLECTOR);
+        havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_GOLDEN);
+        havenBagChestGuiIds.add(GuiId.HAVEN_BAG_CHEST_EMERALD);
+    }
 
-	public GUIHavenBagChests(GuiId guiId, ContainerHavenBagChest container, EntityPlayer player, World world, BlockPos pos) {
-		super(new GUIHavenBagChest(container, ChestType.CHEST_NORMAL),
-				player,
-				world,
-				pos,
-				havenBagChestGuiIds.indexOf(GuiId.HAVEN_BAG_CHEST_NORMAL),
-				havenBagChestGuiIds);
+    protected ContainerHavenBagChest container;
 
-		this.container = container;
-	}
+    public GUIHavenBagChests(GuiId guiId, ContainerHavenBagChest container, EntityPlayer player, World world, BlockPos pos) {
+        super(new GUIHavenBagChest(container, ChestType.CHEST_NORMAL),
+                player,
+                world,
+                pos,
+                havenBagChestGuiIds.indexOf(GuiId.HAVEN_BAG_CHEST_NORMAL),
+                havenBagChestGuiIds);
 
-	/**
-	 * Adds the buttons (and other controls) to the screen in question.
-	 */
-	@Override
-	public void initGui() {
-		super.initGui();
+        this.container = container;
+    }
 
-		tabButtonTop = height / 2 - 105;
-	}
+    /**
+     * Adds the buttons (and other controls) to the screen in question.
+     */
+    @Override
+    public void initGui() {
+        super.initGui();
 
-	@Override
-	public boolean doesGuiPauseGame() {
-		return false;
-	}
+        tabButtonTop = height / 2 - 105;
+    }
 
-	/**
-	 * Called when the screen is unloaded. Used to disable keyboard repeat
-	 * events
-	 */
-	@Override
-	public void onGuiClosed() {
-		if (this.mc.thePlayer != null) {
-			container.onContainerClosed(this.mc.thePlayer);
-		}
-	}
+    @Override
+    public boolean doesGuiPauseGame() {
+        return false;
+    }
 
-	@Override
-	protected void onSelectTab(int tabId) {
-		ChestType chestTypes[] = ChestType.values();
-		if (tabId < 0 || tabId >= chestTypes.length) {
-			WLog.warning("Cannot convert tabId %d to chestTypeId");
-			return;
-		}
+    /**
+     * Called when the screen is unloaded. Used to disable keyboard repeat
+     * events
+     */
+    @Override
+    public void onGuiClosed() {
+        if (this.mc.thePlayer != null) {
+            container.onContainerClosed(this.mc.thePlayer);
+        }
+    }
 
-		((GUIHavenBagChest) currentScreen).chestId = chestTypes[tabId];
-		container.updateHBSlots(chestTypes[tabId]);
-	}
+    @Override
+    protected void onSelectTab(int tabId) {
+        ChestType chestTypes[] = ChestType.values();
+        if (tabId < 0 || tabId >= chestTypes.length) {
+            WLog.warning("Cannot convert tabId %d to chestTypeId");
+            return;
+        }
+
+        ((GUIHavenBagChest) currentScreen).chestId = chestTypes[tabId];
+        container.updateHBSlots(chestTypes[tabId]);
+    }
 }

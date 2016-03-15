@@ -16,39 +16,40 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GUIWakcraft extends GUITabs {
-	protected static List<GuiId> guis = new ArrayList<GuiId>();
-	static {
-		guis.add(GuiId.INVENTORY);
-		guis.add(GuiId.ABILITIES);
-		guis.add(GuiId.PROFESSION);
-		guis.add(GuiId.SPELLS);
-	}
+    protected static List<GuiId> guis = new ArrayList<GuiId>();
 
-	public GUIWakcraft(GuiId guiId, GuiScreen guiScreen, EntityPlayer player, World world, BlockPos pos) {
-		super(guiScreen, player, world, pos, guis.indexOf(guiId), guis);
-	}
+    static {
+        guis.add(GuiId.INVENTORY);
+        guis.add(GuiId.ABILITIES);
+        guis.add(GuiId.PROFESSION);
+        guis.add(GuiId.SPELLS);
+    }
 
-	@Override
-	protected void onSelectTab(int tabId) {
-		if (tabId < 0 || tabId >= tabs.size()) {
-			WLog.warning("Cannot convert tabId %d to guiId");
-			return;
-		}
+    public GUIWakcraft(GuiId guiId, GuiScreen guiScreen, EntityPlayer player, World world, BlockPos pos) {
+        super(guiScreen, player, world, pos, guis.indexOf(guiId), guis);
+    }
 
-		GuiId guiId = tabs.get(tabId);
-		switch (guiId) {
-		case INVENTORY:
-		case SPELLS:
-			Wakcraft.packetPipeline.sendToServer(new PacketOpenWindow(tabs.get(tabId)));
-			break;
+    @Override
+    protected void onSelectTab(int tabId) {
+        if (tabId < 0 || tabId >= tabs.size()) {
+            WLog.warning("Cannot convert tabId %d to guiId");
+            return;
+        }
 
-		default:
-			player.openGui(Wakcraft.instance, guiId.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
-		}
-	}
+        GuiId guiId = tabs.get(tabId);
+        switch (guiId) {
+            case INVENTORY:
+            case SPELLS:
+                Wakcraft.packetPipeline.sendToServer(new PacketOpenWindow(tabs.get(tabId)));
+                break;
 
-	@Override
-	public boolean doesGuiPauseGame() {
-		return false;
-	}
+            default:
+                player.openGui(Wakcraft.instance, guiId.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
+        }
+    }
+
+    @Override
+    public boolean doesGuiPauseGame() {
+        return false;
+    }
 }

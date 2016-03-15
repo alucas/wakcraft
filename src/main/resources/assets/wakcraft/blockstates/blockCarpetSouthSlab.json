@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "propertybottomposition=0,propertysize=0": {"model": "wakcraft:slab/carpet/b0s0", "y":180},
+    "propertybottomposition=0,propertysize=1": {"model": "wakcraft:slab/carpet/b0s1", "y":180},
+    "propertybottomposition=0,propertysize=2": {"model": "wakcraft:slab/carpet/b0s2", "y":180},
+    "propertybottomposition=1,propertysize=0": {"model": "wakcraft:slab/carpet/b1s0", "y":180},
+    "propertybottomposition=1,propertysize=1": {"model": "wakcraft:slab/carpet/b1s1", "y":180},
+    "propertybottomposition=1,propertysize=2": {"model": "wakcraft:slab/carpet/b1s2", "y":180},
+    "propertybottomposition=2,propertysize=0": {"model": "wakcraft:slab/carpet/b2s0", "y":180},
+    "propertybottomposition=2,propertysize=1": {"model": "wakcraft:slab/carpet/b2s1", "y":180},
+    "propertybottomposition=2,propertysize=2": {"model": "wakcraft:corner/carpet/blockCarpet", "y":180},
+    "propertybottomposition=3,propertysize=0": {"model": "wakcraft:slab/carpet/b3s0", "y":180},
+    "propertybottomposition=3,propertysize=1": {"model": "wakcraft:corner/carpet/blockCarpet", "y":180},
+    "propertybottomposition=3,propertysize=2": {"model": "wakcraft:corner/carpet/blockCarpet", "y":180}
+  }
+}

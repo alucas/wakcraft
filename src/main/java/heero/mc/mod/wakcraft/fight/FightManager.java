@@ -10,22 +10,14 @@ import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
-import heero.mc.mod.wakcraft.util.FightUtil;
 import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
-import heero.mc.mod.wakcraft.network.packet.fight.PacketFightChangeStage;
-import heero.mc.mod.wakcraft.network.packet.fight.PacketFightSelectPosition;
-import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStart;
-import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStartTurn;
-import heero.mc.mod.wakcraft.network.packet.fight.PacketFightStop;
+import heero.mc.mod.wakcraft.network.packet.fight.*;
+import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -33,16 +25,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public enum FightManager {
     INSTANCE;
@@ -144,7 +127,7 @@ public enum FightManager {
 
         BlockPos tmpBlockPos = blockPos;
         while (chunks.getBlockState(tmpBlockPos).equals(Blocks.air) && tmpBlockPos.getY() > 0) {
-            tmpBlockPos = tmpBlockPos.offsetDown();
+            tmpBlockPos = tmpBlockPos.down();
         }
 
         getMapAtPos_rec(chunks, tmpBlockPos, 0, 0, 0, fightBlocks, new BitSet(), radius * radius);
@@ -200,12 +183,12 @@ public enum FightManager {
             }
 
             direction = 1;
-        // same height
-        //
-        // ??
-        // o?
-        // |
-        // XX
+            // same height
+            //
+            // ??
+            // o?
+            // |
+            // XX
         } else if (!world.getBlockState(new BlockPos(centerPos.getX() + offsetX, centerPos.getY() + offsetY, centerPos.getZ() + offsetZ)).getBlock().equals(Blocks.air)) {
             // not enough space
             //
@@ -217,13 +200,13 @@ public enum FightManager {
                 fightBlocks.add(new FightBlockCoordinates(centerPos.getX() + offsetX, centerPos.getY() + offsetY + 1, centerPos.getZ() + offsetZ, TYPE.WALL));
                 return;
             }
-        // down
-        //
-        // ??
-        // o?
-        // |
-        // X
-        // ??
+            // down
+            //
+            // ??
+            // o?
+            // |
+            // X
+            // ??
         } else {
             // too deep
             //
@@ -321,7 +304,7 @@ public enum FightManager {
                     }
                 }
 
-                if (fightBlocksList.contains(coords.offsetDown())) {
+                if (fightBlocksList.contains(coords.down())) {
                     continue;
                 }
 

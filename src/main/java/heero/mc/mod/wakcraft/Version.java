@@ -9,24 +9,24 @@ package heero.mc.mod.wakcraft;
 import java.util.Properties;
 
 public class Version {
-	private static String major;
-	private static String minor;
-	private static String rev;
-	private static String build;
-	@SuppressWarnings("unused")
-	private static String mcversion;
+    private static String major;
+    private static String minor;
+    private static String rev;
+    private static String build;
+    @SuppressWarnings("unused")
+    private static String mcversion;
 
-	static void init(Properties properties) {
-		if (properties != null) {
-			major = properties.getProperty("Wakcraft.build.major.number");
-			minor = properties.getProperty("Wakcraft.build.minor.number");
-			rev = properties.getProperty("Wakcraft.build.revision.number");
-			build = properties.getProperty("Wakcraft.build.number");
-			mcversion = properties.getProperty("Wakcraft.build.mcversion");
-		}
-	}
+    static void init(Properties properties) {
+        if (properties != null) {
+            major = properties.getProperty("Wakcraft.build.major.number");
+            minor = properties.getProperty("Wakcraft.build.minor.number");
+            rev = properties.getProperty("Wakcraft.build.revision.number");
+            build = properties.getProperty("Wakcraft.build.number");
+            mcversion = properties.getProperty("Wakcraft.build.mcversion");
+        }
+    }
 
-	public static String fullVersionString() {
-		return String.format("%s.%s.%s build %s", major, minor, rev, build);
-	}
+    public static String fullVersionString() {
+        return String.format("%s.%s.%s build %s", major, minor, rev, build);
+    }
 }

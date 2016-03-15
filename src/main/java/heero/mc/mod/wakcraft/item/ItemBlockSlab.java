@@ -42,8 +42,8 @@ public class ItemBlockSlab extends ItemBlock {
      */
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos blockPos, EnumFacing side, float hitX, float hitY, float hitZ) {
-        BlockPos blockPosDown = blockPos.offsetDown();
-        BlockPos blockPosUp = blockPos.offsetUp();
+        BlockPos blockPosDown = blockPos.down();
+        BlockPos blockPosUp = blockPos.up();
 
         IBlockState blockState = world.getBlockState(blockPos);
 

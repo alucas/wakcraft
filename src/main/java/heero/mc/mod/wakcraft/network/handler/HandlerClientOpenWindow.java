@@ -10,16 +10,16 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerClientOpenWindow implements IMessageHandler<PacketOpenWindow, IMessage> {
-	@Override
-	public IMessage onMessage(PacketOpenWindow message, MessageContext ctx) {
-		EntityPlayer player = Wakcraft.proxy.getClientPlayer();
+    @Override
+    public IMessage onMessage(PacketOpenWindow message, MessageContext ctx) {
+        EntityPlayer player = Wakcraft.proxy.getClientPlayer();
 
-		if (message.windowId == GuiId.HAVEN_BAG_VISITORS) {
-			Wakcraft.proxy.openHBVisitorsGui(player);
-		} else {
-			WLog.warning("Unknow window ID : %d", message.windowId);
-		}
+        if (message.windowId == GuiId.HAVEN_BAG_VISITORS) {
+            Wakcraft.proxy.openHBVisitorsGui(player);
+        } else {
+            WLog.warning("Unknow window ID : %d", message.windowId);
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

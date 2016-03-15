@@ -7,102 +7,108 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class HavenBagProperty implements IExtendedEntityProperties, ISynchProperties {
-	public static final String IDENTIFIER = Reference.MODID + "HavenBag";
+    public static final String IDENTIFIER = Reference.MODID + "HavenBag";
 
-	private static final String TAG_HAVENBAG = "HavenBag";
-	private static final String TAG_UID = "UID";
-	private static final String TAG_IN_HAVENBAG = "InHavenBag";
-	private static final String TAG_POS_X = "PosX";
-	private static final String TAG_POS_Y = "PosY";
-	private static final String TAG_POS_Z = "PosZ";
+    private static final String TAG_HAVENBAG = "HavenBag";
+    private static final String TAG_UID = "UID";
+    private static final String TAG_IN_HAVENBAG = "InHavenBag";
+    private static final String TAG_POS_X = "PosX";
+    private static final String TAG_POS_Y = "PosY";
+    private static final String TAG_POS_Z = "PosZ";
 
-	/** Unique Identifier used to know which haven bag belong to the player (0 = no haven bag attributed yet) */
-	private int uid;
-	/** The uid of the haven bag the player is currently in (0 = not in an haven bag) */
-	private int havenbag;
-	/** Coordinates of the player before he was teleported to the haven bag */
-	private double posX;
-	private double posY;
-	private double posZ;
+    /**
+     * Unique Identifier used to know which haven bag belong to the player (0 = no haven bag attributed yet)
+     */
+    private int uid;
+    /**
+     * The uid of the haven bag the player is currently in (0 = not in an haven bag)
+     */
+    private int havenbag;
+    /**
+     * Coordinates of the player before he was teleported to the haven bag
+     */
+    private double posX;
+    private double posY;
+    private double posZ;
 
-	@Override
-	public void init(Entity entity, World world) {
-		uid = -1;
-		havenbag = -1;
-		posX = 0;
-		posY = 0;
-		posZ = 0;
-	}
+    @Override
+    public void init(Entity entity, World world) {
+        uid = -1;
+        havenbag = -1;
+        posX = 0;
+        posY = 0;
+        posZ = 0;
+    }
 
-	@Override
-	public void saveNBTData(NBTTagCompound tagRoot) {
-		NBTTagCompound tagHavenBag = new NBTTagCompound();
+    @Override
+    public void saveNBTData(NBTTagCompound tagRoot) {
+        NBTTagCompound tagHavenBag = new NBTTagCompound();
 
-		tagHavenBag.setInteger(TAG_UID, uid);
-		tagHavenBag.setInteger(TAG_IN_HAVENBAG, havenbag);
-		tagHavenBag.setDouble(TAG_POS_X, posX);
-		tagHavenBag.setDouble(TAG_POS_Y, posY);
-		tagHavenBag.setDouble(TAG_POS_Z, posZ);
+        tagHavenBag.setInteger(TAG_UID, uid);
+        tagHavenBag.setInteger(TAG_IN_HAVENBAG, havenbag);
+        tagHavenBag.setDouble(TAG_POS_X, posX);
+        tagHavenBag.setDouble(TAG_POS_Y, posY);
+        tagHavenBag.setDouble(TAG_POS_Z, posZ);
 
-		tagRoot.setTag(TAG_HAVENBAG, tagHavenBag);
-	}
+        tagRoot.setTag(TAG_HAVENBAG, tagHavenBag);
+    }
 
-	@Override
-	public void loadNBTData(NBTTagCompound tagRoot) {
-		NBTTagCompound tagHavenBag = tagRoot.getCompoundTag(TAG_HAVENBAG);
+    @Override
+    public void loadNBTData(NBTTagCompound tagRoot) {
+        NBTTagCompound tagHavenBag = tagRoot.getCompoundTag(TAG_HAVENBAG);
 
-		uid = tagHavenBag.getInteger(TAG_UID);
-		havenbag = tagHavenBag.getInteger(TAG_IN_HAVENBAG);
-		posX = tagHavenBag.getDouble(TAG_POS_X);
-		posY = tagHavenBag.getDouble(TAG_POS_Y);
-		posZ = tagHavenBag.getDouble(TAG_POS_Z);
-	}
+        uid = tagHavenBag.getInteger(TAG_UID);
+        havenbag = tagHavenBag.getInteger(TAG_IN_HAVENBAG);
+        posX = tagHavenBag.getDouble(TAG_POS_X);
+        posY = tagHavenBag.getDouble(TAG_POS_Y);
+        posZ = tagHavenBag.getDouble(TAG_POS_Z);
+    }
 
-	@Override
-	public NBTTagCompound getClientPacket() {
-		NBTTagCompound tagRoot = new NBTTagCompound();
+    @Override
+    public NBTTagCompound getClientPacket() {
+        NBTTagCompound tagRoot = new NBTTagCompound();
 
-		saveNBTData(tagRoot);
+        saveNBTData(tagRoot);
 
-		return tagRoot;
-	}
+        return tagRoot;
+    }
 
-	@Override
-	public void onClientPacket(NBTTagCompound tagRoot) {
-		loadNBTData(tagRoot);
-	}
+    @Override
+    public void onClientPacket(NBTTagCompound tagRoot) {
+        loadNBTData(tagRoot);
+    }
 
-	public void setEnterHavenBag(double posX, double posY, double posZ, int havenbag) {
-		this.posX = posX;
-		this.posY = posY;
-		this.posZ = posZ;
-		this.havenbag = havenbag;
-	}
+    public void setEnterHavenBag(double posX, double posY, double posZ, int havenbag) {
+        this.posX = posX;
+        this.posY = posY;
+        this.posZ = posZ;
+        this.havenbag = havenbag;
+    }
 
-	public void setLeaveHavenBag() {
-		posX = 0;
-		posY = 0;
-		posZ = 0;
-		havenbag = -1;
-	}
+    public void setLeaveHavenBag() {
+        posX = 0;
+        posY = 0;
+        posZ = 0;
+        havenbag = -1;
+    }
 
-	public double[] getOldCoords() {
-		return new double[]{posX, posY, posZ};
-	}
+    public double[] getOldCoords() {
+        return new double[]{posX, posY, posZ};
+    }
 
-	public boolean isInHavenBag() {
-		return havenbag != -1;
-	}
+    public boolean isInHavenBag() {
+        return havenbag != -1;
+    }
 
-	public int getHavenBag() {
-		return havenbag;
-	}
+    public int getHavenBag() {
+        return havenbag;
+    }
 
-	public int getUID() {
-		return uid;
-	}
+    public int getUID() {
+        return uid;
+    }
 
-	public void setUID(int uid) {
-		this.uid = uid;
-	}
+    public void setUID(int uid) {
+        this.uid = uid;
+    }
 }

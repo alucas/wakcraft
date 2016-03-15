@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.item;
 
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,8 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBlockYRotation extends Item implements IBlockProvider {
     protected final Block block;
@@ -31,7 +29,7 @@ public class ItemBlockYRotation extends Item implements IBlockProvider {
         this.itemBlockSouth = (ItemBlock) Item.getItemFromBlock(blockSouth);
         this.itemBlockWest = (ItemBlock) Item.getItemFromBlock(blockWest);
 
-        setCreativeTab(WakcraftCreativeTabs.tabBlock);
+        setCreativeTab(WCreativeTabs.tabBlock);
         blockNorth.setCreativeTab(null);
         blockEast.setCreativeTab(null);
         blockSouth.setCreativeTab(null);

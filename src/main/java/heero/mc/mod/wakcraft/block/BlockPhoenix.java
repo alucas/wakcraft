@@ -1,7 +1,7 @@
 package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.Reference;
-import heero.mc.mod.wakcraft.creativetab.WakcraftCreativeTabs;
+import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.tileentity.TileEntityPhoenix;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.BlockContainer;
@@ -13,13 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -29,7 +23,7 @@ public class BlockPhoenix extends BlockContainer {
     public BlockPhoenix() {
         super(Material.wood);
 
-        setCreativeTab(WakcraftCreativeTabs.tabSpecialBlock);
+        setCreativeTab(WCreativeTabs.tabSpecialBlock);
         setUnlocalizedName(Reference.MODID + "_Phoenix");
         setBlockUnbreakable();
         setDefaultState(blockState.getBaseState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH));

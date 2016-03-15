@@ -10,18 +10,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class KeyInputHandler {
-	private long havenBagTimer = 0;
+    private long havenBagTimer = 0;
 
-	@SubscribeEvent
-	public void onKeyInput(InputEvent.KeyInputEvent event) {
-		if (KeyBindings.havenBag.isPressed()) {
-			long time = System.currentTimeMillis();
+    @SubscribeEvent
+    public void onKeyInput(InputEvent.KeyInputEvent event) {
+        if (KeyBindings.havenBag.isPressed()) {
+            long time = System.currentTimeMillis();
 
-			if (time < havenBagTimer + 1000) {
-				return;
-			}
+            if (time < havenBagTimer + 1000) {
+                return;
+            }
 
-			Wakcraft.packetPipeline.sendToServer(new PacketHavenBagTeleportation());
-		}
-	}
+            Wakcraft.packetPipeline.sendToServer(new PacketHavenBagTeleportation());
+        }
+    }
 }

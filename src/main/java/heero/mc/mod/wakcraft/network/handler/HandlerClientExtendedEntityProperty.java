@@ -11,27 +11,27 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerClientExtendedEntityProperty implements IMessageHandler<PacketExtendedEntityProperty, IMessage> {
-	@Override
-	public IMessage onMessage(PacketExtendedEntityProperty message, MessageContext ctx) {
-		Entity entity = Wakcraft.proxy.getClientWorld().getEntityByID(message.entityId);
-		if (entity == null) {
-			WLog.warning("Error while loading entity %d, entity not found", message.entityId);
-			return null;
-		}
+    @Override
+    public IMessage onMessage(PacketExtendedEntityProperty message, MessageContext ctx) {
+        Entity entity = Wakcraft.proxy.getClientWorld().getEntityByID(message.entityId);
+        if (entity == null) {
+            WLog.warning("Error while loading entity %d, entity not found", message.entityId);
+            return null;
+        }
 
-		IExtendedEntityProperties properties = entity.getExtendedProperties(message.identifier);
-		if (properties == null) {
-			WLog.warning("Error while loading %s properties of entity %d, properties not found", message.identifier, message.entityId);
-			return null;
-		}
+        IExtendedEntityProperties properties = entity.getExtendedProperties(message.identifier);
+        if (properties == null) {
+            WLog.warning("Error while loading %s properties of entity %d, properties not found", message.identifier, message.entityId);
+            return null;
+        }
 
-		if (!(properties instanceof ISynchProperties)) {
-			WLog.warning("Properties %s are not synchronisable", message.identifier);
-			return null;
-		}
+        if (!(properties instanceof ISynchProperties)) {
+            WLog.warning("Properties %s are not synchronisable", message.identifier);
+            return null;
+        }
 
-		((ISynchProperties) properties).onClientPacket(message.tagProperties);
+        ((ISynchProperties) properties).onClientPacket(message.tagProperties);
 
-		return null;
-	}
+        return null;
+    }
 }

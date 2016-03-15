@@ -7,14 +7,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerServerCloseWindow implements IMessageHandler<PacketCloseWindow, IMessage> {
-	@Override
-	public IMessage onMessage(PacketCloseWindow message, MessageContext ctx) {
-		if (message.windowId == PacketCloseWindow.WINDOW_HB_VISITORS) {
-			return null;
-		}
+    @Override
+    public IMessage onMessage(PacketCloseWindow message, MessageContext ctx) {
+        if (message.windowId == PacketCloseWindow.WINDOW_HB_VISITORS) {
+            return null;
+        }
 
-		WLog.warning("Unknow window ID : %d", message.windowId);
+        WLog.warning("Unknow window ID : %d", message.windowId);
 
-		return null;
-	}
+        return null;
+    }
 }

@@ -12,7 +12,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
@@ -23,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TileEntityHavenBagChest extends TileEntity implements IInventory, IUpdatePlayerListBox {
+public class TileEntityHavenBagChest extends TileEntity implements IInventory {
     private static final String TAG_CHEST_NORMAL = "ChestNormal";
     private static final String TAG_CHEST_SMALL = "ChestSmall";
     private static final String TAG_CHEST_ADVENTURER = "ChestAdventurer";
@@ -71,8 +70,8 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory, I
 
     public TileEntityHavenBagChest(int chestType) {
         cachedChestType = chestType;
-        chestContents = new HashMap<>();
-        chestUnlocked = new HashMap<>();
+        chestContents = new HashMap<Integer, ItemStack>();
+        chestUnlocked = new HashMap<ChestType, Boolean>();
         inventorySize = 0;
         customName = "container.chest";
         hasCustomName = true;
@@ -133,13 +132,8 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory, I
         }
     }
 
-    /**
-     * When some containers are closed they call this on each slot, then drop
-     * whatever it returns as an EntityItem - like when you close a workbench
-     * GUI.
-     */
     @Override
-    public ItemStack getStackInSlotOnClosing(int slotId) {
+    public ItemStack removeStackFromSlot(int slotId) {
         ItemStack currentStack = chestContents.get(slotId);
         if (currentStack != null) {
             chestContents.remove(slotId);
@@ -263,7 +257,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory, I
         return this.worldObj.getTileEntity(pos) != this ? false : player.getDistanceSq((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D) <= 64.0D;
     }
 
-    @Override
+    //@Override
     public void update() {
         ++this.ticksSinceSync;
         float f;
@@ -349,7 +343,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory, I
         ++this.numPlayersUsing;
         this.worldObj.addBlockEvent(pos, this.getBlockType(), 1, this.numPlayersUsing);
         this.worldObj.notifyNeighborsOfStateChange(pos, this.getBlockType());
-        this.worldObj.notifyNeighborsOfStateChange(pos.offsetDown(), this.getBlockType());
+        this.worldObj.notifyNeighborsOfStateChange(pos.down(), this.getBlockType());
     }
 
     @Override
@@ -361,7 +355,7 @@ public class TileEntityHavenBagChest extends TileEntity implements IInventory, I
         --this.numPlayersUsing;
         this.worldObj.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
         this.worldObj.notifyNeighborsOfStateChange(this.pos, this.getBlockType());
-        this.worldObj.notifyNeighborsOfStateChange(this.pos.offsetDown(), this.getBlockType());
+        this.worldObj.notifyNeighborsOfStateChange(this.pos.down(), this.getBlockType());
     }
 
     /**

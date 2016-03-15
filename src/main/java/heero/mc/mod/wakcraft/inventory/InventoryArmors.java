@@ -4,115 +4,93 @@ import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager;
 import heero.mc.mod.wakcraft.item.ItemWArmor;
 import heero.mc.mod.wakcraft.item.ItemWArmor.TYPE;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
 
 public class InventoryArmors extends InventoryBasic {
-	protected static TYPE[] types = new TYPE[] { TYPE.HELMET, TYPE.CHESTPLATE,
-			TYPE.BELT, TYPE.BOOTS, TYPE.AMULET, TYPE.CAPE, TYPE.RING,
-			TYPE.WEAPON, TYPE.EPAULET, TYPE.PET, TYPE.RING, TYPE.WEAPON };
+    protected static TYPE[] types = new TYPE[]{TYPE.HELMET, TYPE.CHESTPLATE,
+            TYPE.BELT, TYPE.BOOTS, TYPE.AMULET, TYPE.CAPE, TYPE.RING,
+            TYPE.WEAPON, TYPE.EPAULET, TYPE.PET, TYPE.RING, TYPE.WEAPON};
 
-	protected Entity entity;
+    protected Entity entity;
 
-	public InventoryArmors(Entity entity) {
+    public InventoryArmors(Entity entity) {
         super("Armors", false, 12);
 
-		this.entity = entity;
-	}
+        this.entity = entity;
+    }
 
-	/**
-	 * Removes from an inventory slot (first arg) up to a specified number
-	 * (second arg) of items and returns them in a new stack.
-	 */
-	@Override
-	public ItemStack decrStackSize(int slotId, int quantity) {
+    /**
+     * Removes from an inventory slot (first arg) up to a specified number
+     * (second arg) of items and returns them in a new stack.
+     */
+    @Override
+    public ItemStack decrStackSize(int slotId, int quantity) {
         if (quantity < 1) {
             return null;
         }
 
         ItemStack itemstack = getStackInSlot(slotId);
-		if (itemstack == null) {
-			return null;
-		}
+        if (itemstack == null) {
+            return null;
+        }
 
-		setInventorySlotContents(slotId, null);
+        setInventorySlotContents(slotId, null);
 
-		this.markDirty();
-		return itemstack;
-	}
+        this.markDirty();
+        return itemstack;
+    }
 
-	/**
-	 * When some containers are closed they call this on each slot, then drop
-	 * whatever it returns as an EntityItem - like when you close a workbench
-	 * GUI.
-	 */
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slotId) {
-        ItemStack itemstack = getStackInSlot(slotId);
-		if (itemstack == null) {
-			return null;
-		}
-
-		setInventorySlotContents(slotId, null);
-
-		return itemstack;
-	}
-
-	/**
-	 * Sets the given item stack to the specified slot in the inventory (can be
-	 * crafting or armor sections).
-	 */
-	@Override
-	public void setInventorySlotContents(int slotId, ItemStack stack) {
-		if (stack != null && !(stack.getItem() instanceof ItemWArmor)) {
-			return;
-		}
+    /**
+     * Sets the given item stack to the specified slot in the inventory (can be
+     * crafting or armor sections).
+     */
+    @Override
+    public void setInventorySlotContents(int slotId, ItemStack stack) {
+        if (stack != null && !(stack.getItem() instanceof ItemWArmor)) {
+            return;
+        }
 
         ItemStack oldStack = getStackInSlot(slotId);
-		if (oldStack != null) {
-			ItemWArmor item = (ItemWArmor) oldStack.getItem();
+        if (oldStack != null) {
+            ItemWArmor item = (ItemWArmor) oldStack.getItem();
 
-			CharacteristicsManager.unequipItem(entity, item);
-		}
+            CharacteristicsManager.unequipItem(entity, item);
+        }
 
-		if (stack != null) {
-			ItemWArmor item = (ItemWArmor) stack.getItem();
+        if (stack != null) {
+            ItemWArmor item = (ItemWArmor) stack.getItem();
 
-			CharacteristicsManager.equipItem(entity, item);
-		}
+            CharacteristicsManager.equipItem(entity, item);
+        }
 
-		super.setInventorySlotContents(slotId, stack);
-	}
+        super.setInventorySlotContents(slotId, stack);
+    }
 
-	/**
-	 * Returns the maximum stack size for a inventory slot.
-	 */
-	@Override
-	public int getInventoryStackLimit() {
-		return 1;
-	}
+    /**
+     * Returns the maximum stack size for a inventory slot.
+     */
+    @Override
+    public int getInventoryStackLimit() {
+        return 1;
+    }
 
-	/**
-	 * Returns true if automation is allowed to insert the given stack (ignoring
-	 * stack size) into the given slot.
-	 */
-	@Override
-	public boolean isItemValidForSlot(int slotId, ItemStack stack) {
-		if (stack == null) {
-			return false;
-		}
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring
+     * stack size) into the given slot.
+     */
+    @Override
+    public boolean isItemValidForSlot(int slotId, ItemStack stack) {
+        if (stack == null) {
+            return false;
+        }
 
-		if (!(stack.getItem() instanceof ItemWArmor)) {
-			return false;
-		}
+        if (!(stack.getItem() instanceof ItemWArmor)) {
+            return false;
+        }
 
-		return ((ItemWArmor) (stack.getItem())).getArmorType() == types[slotId];
-	}
+        return ((ItemWArmor) (stack.getItem())).getArmorType() == types[slotId];
+    }
 
     @Override
     public void clear() {

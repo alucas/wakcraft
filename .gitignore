@@ -5,6 +5,7 @@ bin/
 build/
 eclipse/
 logs/
+saves/
 crash-reports/
 saves/
 config/
@@ -18,6 +19,7 @@ LICENSE-fml.txt
 MinecraftForge-Credits.txt
 MinecraftForge-License.txt
 README.txt
+usernamecache.json
 
 # idea
 *.iml

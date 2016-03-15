@@ -7,47 +7,47 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityHavenBag extends TileEntity {
-	private static final String TAG_UID = "UID";
+    private static final String TAG_UID = "UID";
 
-	public int uid;
+    public int uid;
 
-	@Override
-	public void readFromNBT(NBTTagCompound tagRoot) {
-		super.readFromNBT(tagRoot);
+    @Override
+    public void readFromNBT(NBTTagCompound tagRoot) {
+        super.readFromNBT(tagRoot);
 
-		uid = tagRoot.getInteger(TAG_UID);
-	}
+        uid = tagRoot.getInteger(TAG_UID);
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound tagRoot) {
-		super.writeToNBT(tagRoot);
+    @Override
+    public void writeToNBT(NBTTagCompound tagRoot) {
+        super.writeToNBT(tagRoot);
 
-		tagRoot.setInteger(TAG_UID, uid);
-	}
+        tagRoot.setInteger(TAG_UID, uid);
+    }
 
-	/**
-	 * Overriden in a sign to provide the text.
-	 */
-	@Override
-	public Packet getDescriptionPacket() {
-		NBTTagCompound nbtTag = new NBTTagCompound();
+    /**
+     * Overriden in a sign to provide the text.
+     */
+    @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound nbtTag = new NBTTagCompound();
 
-		writeToNBT(nbtTag);
+        writeToNBT(nbtTag);
 
-		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
-	}
+        return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
+    }
 
-	/**
-	 * Called when you receive a TileEntityData packet for the location this
-	 * TileEntity is currently in. On the client, the NetworkManager will always
-	 * be the remote server. On the server, it will be whomever is responsible
-	 * for sending the packet.
-	 * 
-	 * @param net       The NetworkManager the packet originated from
-	 * @param packet    The data packet
-	 */
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-		readFromNBT(packet.getNbtCompound());
-	}
+    /**
+     * Called when you receive a TileEntityData packet for the location this
+     * TileEntity is currently in. On the client, the NetworkManager will always
+     * be the remote server. On the server, it will be whomever is responsible
+     * for sending the packet.
+     *
+     * @param net    The NetworkManager the packet originated from
+     * @param packet The data packet
+     */
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+        readFromNBT(packet.getNbtCompound());
+    }
 }

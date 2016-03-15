@@ -24,78 +24,78 @@ import java.util.List;
 
 public class BlockHavenBagBarrier extends BlockGeneric {
 
-	public BlockHavenBagBarrier() {
-		super(Material.air);
+    public BlockHavenBagBarrier() {
+        super(Material.air);
 
-		setUnlocalizedName(Reference.MODID + "_HavenBagBarrier");
-	}
+        setUnlocalizedName(Reference.MODID + "_HavenBagBarrier");
+    }
 
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
 
-	@Override
-	public int getRenderType() {
-		return -1;
-	}
+    @Override
+    public int getRenderType() {
+        return -1;
+    }
 
-	@Override
-	public boolean canCollideCheck(IBlockState state, boolean stopOnLiquid) {
-		return false;
-	}
+    @Override
+    public boolean canCollideCheck(IBlockState state, boolean stopOnLiquid) {
+        return false;
+    }
 
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos) {
-		if (world.isRemote) {
-			Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
-		}
+    @Override
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        if (world.isRemote) {
+            Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	/**
-	 * Adds all intersecting collision boxes to a list. (Be sure to only add
-	 * boxes to the list if they intersect the mask.) Parameters: World, X, Y,
-	 * Z, mask, list, colliding entity
-	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
-	public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity entity) {
-		do {
-			if (!(entity instanceof EntityPlayer)) {
-				return;
-			}
+    /**
+     * Adds all intersecting collision boxes to a list. (Be sure to only add
+     * boxes to the list if they intersect the mask.) Parameters: World, X, Y,
+     * Z, mask, list, colliding entity
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    @Override
+    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity entity) {
+        do {
+            if (!(entity instanceof EntityPlayer)) {
+                return;
+            }
 
-			EntityPlayer player = (EntityPlayer) entity;
+            EntityPlayer player = (EntityPlayer) entity;
 
-			int havenBagUID = HavenBagUtil.getUIDFromCoord(entity.getPosition());
-			IExtendedEntityProperties properties = entity.getExtendedProperties(HavenBagProperty.IDENTIFIER);
-			if (properties == null || !(properties instanceof HavenBagProperty)) {
-				WLog.warning("Error while loading the player (%s) properties", player.getDisplayName());
-				break;
-			}
+            int havenBagUID = HavenBagUtil.getUIDFromCoord(entity.getPosition());
+            IExtendedEntityProperties properties = entity.getExtendedProperties(HavenBagProperty.IDENTIFIER);
+            if (properties == null || !(properties instanceof HavenBagProperty)) {
+                WLog.warning("Error while loading the player (%s) properties", player.getDisplayName());
+                break;
+            }
 
-			HavenBagProperty havenBagProperties = (HavenBagProperty) properties;
-			if (havenBagUID == havenBagProperties.getUID()) {
-				return;
-			}
+            HavenBagProperty havenBagProperties = (HavenBagProperty) properties;
+            if (havenBagUID == havenBagProperties.getUID()) {
+                return;
+            }
 
-			HavenBagProperties hbProperties = HavenBagsManager.getProperties(havenBagUID);
-			if (hbProperties == null) {
-				break;
-			}
+            HavenBagProperties hbProperties = HavenBagsManager.getProperties(havenBagUID);
+            if (hbProperties == null) {
+                break;
+            }
 
-			Integer rightAll = hbProperties.getRight(HavenBagProperties.ACL_KEY_ALL);
-			Integer rightGuild = hbProperties.getRight(HavenBagProperties.ACL_KEY_GUILD);
-			Integer right = hbProperties.getRight(player.getDisplayName().getUnformattedText());
+            Integer rightAll = hbProperties.getRight(HavenBagProperties.ACL_KEY_ALL);
+            Integer rightGuild = hbProperties.getRight(HavenBagProperties.ACL_KEY_GUILD);
+            Integer right = hbProperties.getRight(player.getDisplayName().getUnformattedText());
 
-			if (rightAll == 0 && rightGuild == 0 && (right == null || right == 0)) {
-				break;
-			}
+            if (rightAll == 0 && rightGuild == 0 && (right == null || right == 0)) {
+                break;
+            }
 
-			Block[] blocks = new Block[4];
-			blocks[0] = world.getBlockState(new BlockPos(pos.getX(), 19, pos.getZ() + 1)).getBlock();
+            Block[] blocks = new Block[4];
+            blocks[0] = world.getBlockState(new BlockPos(pos.getX(), 19, pos.getZ() + 1)).getBlock();
             blocks[1] = world.getBlockState(new BlockPos(pos.getX(), 19, pos.getZ() - 1)).getBlock();
             blocks[2] = world.getBlockState(new BlockPos(pos.getX() + 1, 19, pos.getZ())).getBlock();
             blocks[3] = world.getBlockState(new BlockPos(pos.getX() - 1, 19, pos.getZ())).getBlock();
@@ -112,13 +112,13 @@ public class BlockHavenBagBarrier extends BlockGeneric {
                 }
             }
 
-			return;
-		} while(false);
+            return;
+        } while (false);
 
-		AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBox(world, pos, state);
+        AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBox(world, pos, state);
 
-		if (axisalignedbb1 != null && mask.intersectsWith(axisalignedbb1)) {
-			list.add(axisalignedbb1);
-		}
-	}
+        if (axisalignedbb1 != null && mask.intersectsWith(axisalignedbb1)) {
+            list.add(axisalignedbb1);
+        }
+    }
 }

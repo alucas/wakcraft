@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "propertycorner=false,propertyyrotation=north": { "model": "wakcraft:palisade/1/side", "y": 0 },
+    "propertycorner=false,propertyyrotation=east": { "model": "wakcraft:palisade/1/side", "y": 90 },
+    "propertycorner=false,propertyyrotation=south": { "model": "wakcraft:palisade/1/side", "y": 180 },
+    "propertycorner=false,propertyyrotation=west": { "model": "wakcraft:palisade/1/side", "y": 270 },
+    "propertycorner=true,propertyyrotation=north": { "model": "wakcraft:palisade/1/corner", "y": 0 },
+    "propertycorner=true,propertyyrotation=east": { "model": "wakcraft:palisade/1/corner", "y": 90 },
+    "propertycorner=true,propertyyrotation=south": { "model": "wakcraft:palisade/1/corner", "y": 180 },
+    "propertycorner=true,propertyyrotation=west": { "model": "wakcraft:palisade/1/corner", "y": 270 }
+  }
+}

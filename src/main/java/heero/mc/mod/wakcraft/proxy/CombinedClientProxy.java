@@ -3,52 +3,28 @@ package heero.mc.mod.wakcraft.proxy;
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WItems;
-import heero.mc.mod.wakcraft.client.gui.GUIAbilities;
-import heero.mc.mod.wakcraft.client.gui.GUIClassSelection;
-import heero.mc.mod.wakcraft.client.gui.GUIHavenBagChests;
-import heero.mc.mod.wakcraft.client.gui.GUIHavenBagVisitors;
-import heero.mc.mod.wakcraft.client.gui.GUIProfession;
-import heero.mc.mod.wakcraft.client.gui.GUIWakcraft;
+import heero.mc.mod.wakcraft.client.gui.*;
 import heero.mc.mod.wakcraft.client.gui.fight.GuiFightOverlay;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIInventory;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUISpells;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIWorkbench;
-import heero.mc.mod.wakcraft.client.model.ModelBabyTofu;
-import heero.mc.mod.wakcraft.client.model.ModelBowMeow;
-import heero.mc.mod.wakcraft.client.model.ModelGobball;
-import heero.mc.mod.wakcraft.client.model.ModelGobballWC;
-import heero.mc.mod.wakcraft.client.model.ModelGobbette;
-import heero.mc.mod.wakcraft.client.model.ModelGobbly;
-import heero.mc.mod.wakcraft.client.model.ModelTofurby;
-import heero.mc.mod.wakcraft.client.renderer.entity.RendererSeedsPile;
-import heero.mc.mod.wakcraft.client.renderer.entity.RendererTextPopup;
+import heero.mc.mod.wakcraft.client.renderer.entity.RenderFactory;
 import heero.mc.mod.wakcraft.client.renderer.fight.FightRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.FighterRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.SpellRenderer;
+import heero.mc.mod.wakcraft.client.renderer.item.RendererItemBlock;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererDragoexpress;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererHavenBagChest;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererPhoenix;
 import heero.mc.mod.wakcraft.client.setting.KeyBindings;
-import heero.mc.mod.wakcraft.entity.creature.gobball.BlackGobbly;
-import heero.mc.mod.wakcraft.entity.creature.gobball.Gobball;
-import heero.mc.mod.wakcraft.entity.creature.gobball.GobballWC;
-import heero.mc.mod.wakcraft.entity.creature.gobball.Gobbette;
-import heero.mc.mod.wakcraft.entity.creature.gobball.WhiteGobbly;
-import heero.mc.mod.wakcraft.entity.creature.meow.BowMeow;
-import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
-import heero.mc.mod.wakcraft.entity.creature.tofu.Tofurby;
-import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.eventhandler.GUIEventHandler;
 import heero.mc.mod.wakcraft.eventhandler.KeyInputHandler;
 import heero.mc.mod.wakcraft.eventhandler.TextureEventHandler;
 import heero.mc.mod.wakcraft.fight.FightClientEventsHandler;
-import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
-import heero.mc.mod.wakcraft.inventory.ContainerHavenGemWorkbench;
-import heero.mc.mod.wakcraft.inventory.ContainerPlayerInventory;
-import heero.mc.mod.wakcraft.inventory.ContainerSpells;
-import heero.mc.mod.wakcraft.inventory.ContainerWorkbench;
+import heero.mc.mod.wakcraft.inventory.*;
+import heero.mc.mod.wakcraft.item.EnumOre;
 import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import heero.mc.mod.wakcraft.tileentity.TileEntityDragoexpress;
@@ -58,7 +34,6 @@ import heero.mc.mod.wakcraft.tileentity.TileEntityPhoenix;
 import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -76,25 +51,25 @@ public class CombinedClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
-        RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
-        RenderingRegistry.registerEntityRenderingHandler(Gobball.class, new Gobball.RenderGobball(renderManager, new ModelGobball(), 0.5f));
-        RenderingRegistry.registerEntityRenderingHandler(Gobbette.class, new Gobbette.RenderGobette(renderManager, new ModelGobbette(), 0.5f));
-        RenderingRegistry.registerEntityRenderingHandler(WhiteGobbly.class, new WhiteGobbly.RenderWhiteGobbly(renderManager, new ModelGobbly(), 0.5f));
-        RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderBlackGobbly(renderManager, new ModelGobbly(), 0.5f));
-        RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderGobballWC(renderManager, new ModelGobballWC(), 0.5f));
-        RenderingRegistry.registerEntityRenderingHandler(BowMeow.class, new BowMeow.RenderBowMeow(renderManager, new ModelBowMeow(), 0.5f));
-        RenderingRegistry.registerEntityRenderingHandler(BabyTofu.class, new BabyTofu.RenderBabyTofu(renderManager, new ModelBabyTofu(), 0.5f));
-        RenderingRegistry.registerEntityRenderingHandler(Tofurby.class, new Tofurby.RenderTofurby(renderManager, new ModelTofurby(), 0.5f));
+        RenderFactory renderFactory = new RenderFactory();
+//        RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
+//        RenderingRegistry.registerEntityRenderingHandler(Gobball.class, new Gobball.RenderGobball(renderManager, new ModelGobball(), 0.5f));
+//        RenderingRegistry.registerEntityRenderingHandler(Gobbette.class, new Gobbette.RenderGobette(renderManager, new ModelGobbette(), 0.5f));
+//        RenderingRegistry.registerEntityRenderingHandler(WhiteGobbly.class, new WhiteGobbly.RenderWhiteGobbly(renderManager, new ModelGobbly(), 0.5f));
+//        RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderBlackGobbly(renderManager, new ModelGobbly(), 0.5f));
+//        RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderGobballWC(renderManager, new ModelGobballWC(), 0.5f));
+//        RenderingRegistry.registerEntityRenderingHandler(BowMeow.class, new BowMeow.RenderBowMeow(renderManager, new ModelBowMeow(), 0.5f));
+//        RenderingRegistry.registerEntityRenderingHandler(BabyTofu.class, new BabyTofu.RenderBabyTofu(renderManager, new ModelBabyTofu(), 0.5f));
+//        RenderingRegistry.registerEntityRenderingHandler(Tofurby.class, new Tofurby.RenderTofurby(renderManager, new ModelTofurby(), 0.5f));
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new RendererTextPopup(renderManager));
-        RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new RendererSeedsPile(renderManager));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, renderFactory);
+//        RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new RendererSeedsPile(renderManager));
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RendererDragoexpress());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RendererPhoenix());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHavenBagChest.class, new RendererHavenBagChest());
 
 //		RenderingRegistry.registerBlockHandler(new RendererBlockRotation(RenderingRegistry.getNextAvailableRenderId()));
-//		RenderingRegistry.registerBlockHandler(new RendererBlockOre(RenderingRegistry.getNextAvailableRenderId()));
 //		RenderingRegistry.registerBlockHandler(new RendererBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
 //		RenderingRegistry.registerBlockHandler(new RendererBlockPlant(RenderingRegistry.getNextAvailableRenderId()));
 //		RenderingRegistry.registerBlockHandler(new RendererBlockScree(RenderingRegistry.getNextAvailableRenderId()));
@@ -106,8 +81,15 @@ public class CombinedClientProxy extends CommonProxy {
 //		MinecraftForgeClient.registerItemRenderer(WItems.sufokiaWave3, rendererItemBlock);
 //		MinecraftForgeClient.registerItemRenderer(WItems.groundSlab, rendererItemBlock);
 //		MinecraftForgeClient.registerItemRenderer(WItems.ground2Slab, rendererItemBlock);
-//		MinecraftForgeClient.registerItemRenderer(WItems.carpet1, rendererItemBlock);
+//		MinecraftForgeClient.registerItemRenderer(WItems.carpet, rendererItemBlock);
 //		MinecraftForgeClient.registerItemRenderer(WItems.wood, rendererItemBlock);
+
+        Block[] blockOres = {WBlocks.ore1, WBlocks.ore2, WBlocks.ore3, WBlocks.ore4};
+        for (int i = 0; i < blockOres.length; i++) {
+            for (int j = 0; j < 8 && j < EnumOre.values().length - i * 8; j++) {
+                registerItemBlockModel(blockOres[i], j << 1, Reference.MODID.toLowerCase() + ":block_ore_" + EnumOre.values()[i * 8 + j].getName());
+            }
+        }
 
         registerItemBlockModel(WBlocks.box);
         registerItemBlockModel(WBlocks.carpet);
@@ -144,6 +126,7 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.classConsole);
 
         // Haven Bag
+        registerItemBlockModel(WBlocks.hbBridge);
         registerItemBlockModel(WBlocks.hbCraft);
         registerItemBlockModel(WBlocks.hbCraft2);
         registerItemBlockModel(WBlocks.hbDeco);
@@ -153,11 +136,12 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.hbStand);
 
         // Slabs
+        registerItemBlockModel(WItems.carpet);
         registerItemBlockModel(WBlocks.debugSlab);
         registerItemBlockModel(WBlocks.dirtSlab);
         registerItemBlockModel(WBlocks.grassSlab);
-        registerItemBlockModel(WItems .groundSlab);
-        registerItemBlockModel(WItems .ground2Slab);
+        registerItemBlockModel(WItems.groundSlab);
+        registerItemBlockModel(WItems.ground2Slab);
         registerItemBlockModel(WBlocks.ground3Slab);
         registerItemBlockModel(WBlocks.ground4Slab);
         registerItemBlockModel(WBlocks.ground11Slab);
@@ -169,13 +153,17 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.sufokiaGroundSlab);
         registerItemBlockModel(WBlocks.sufokiaGround2Slab);
         registerItemBlockModel(WBlocks.sufokiaSunSlab);
-        registerItemBlockModel(WItems .sufokiaWave);
-        registerItemBlockModel(WItems .sufokiaWave2);
-        registerItemBlockModel(WItems .sufokiaWave3);
-        registerItemBlockModel(WItems .wood);
+        registerItemBlockModel(WItems.sufokiaWave);
+        registerItemBlockModel(WItems.sufokiaWave2);
+        registerItemBlockModel(WItems.sufokiaWave3);
+        registerItemBlockModel(WItems.wood);
 
         // Fences
         registerItemBlockModel(WBlocks.fence);
+
+        // Palisade
+        registerItemBlockModel(WBlocks.palisade);
+        registerItemBlockModel(WBlocks.palisade2);
 
         // Items
         registerItemModel(WItems.woollyKey);
@@ -198,6 +186,15 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemModel(WItems.polishedmoonstone);
         registerItemModel(WItems.shadowyBlue);
 
+        Item[] ores = {WItems.ore1, WItems.ore2};
+        for (int i = 0; i < ores.length; i++) {
+            for (int j = 0; j < 16 && j < EnumOre.values().length - i * 16; j++) {
+                registerItemModel(ores[i], j, Reference.MODID.toLowerCase() + ":ore_" + EnumOre.values()[i * 16 + j].getName());
+            }
+        }
+
+        registerItemModel(WItems.gobballSeed);
+
         registerItemModel(WItems.merchantHG);
         registerItemModel(WItems.decoHG);
         registerItemModel(WItems.craftHG);
@@ -209,8 +206,8 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemModel(WItems.ikiakitAdventurer);
         registerItemModel(WItems.ikiakitCollector);
         registerItemModel(WItems.ikiakitEmerald);
-        registerItemModel(WItems.gobballSeed);
 
+        registerItemModel(WItems.bouzeLiteYeahsRing);
         registerItemModel(WItems.gobballBreastplate);
         registerItemModel(WItems.gobboots);
         registerItemModel(WItems.gobballEpaulettes);
@@ -218,7 +215,6 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemModel(WItems.gobballBelt);
         registerItemModel(WItems.gobballHeadgear);
         registerItemModel(WItems.gobballAmulet);
-        registerItemModel(WItems.bouzeLiteYeahsRing);
 
         registerItemModel(WItems.helmetofu);
         registerItemModel(WItems.tofuBreastplate);
@@ -262,12 +258,24 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(Item.getItemFromBlock(block));
     }
 
+    protected void registerItemBlockModel(final Block block, final int metadata, final String name) {
+        registerItemBlockModel(Item.getItemFromBlock(block), metadata, name);
+    }
+
     protected void registerItemBlockModel(final Item itemBlock) {
-        ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getUnlocalizedName().substring(5).replaceFirst("\\.", ":block"), "inventory"));
+        registerItemBlockModel(itemBlock, 0, itemBlock.getUnlocalizedName().substring(5).replaceFirst("\\.", ":block"));
+    }
+
+    protected void registerItemBlockModel(final Item itemBlock, final int metadata, final String name) {
+        ModelLoader.setCustomModelResourceLocation(itemBlock, metadata, new ModelResourceLocation(name, "inventory"));
     }
 
     protected void registerItemModel(final Item item) {
-        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getUnlocalizedName().substring(5).replace('.', ':'), "inventory"));
+        registerItemModel(item, 0, item.getUnlocalizedName().substring(5).replace('.', ':'));
+    }
+
+    protected void registerItemModel(final Item item, final int metadata, final String name) {
+        ModelLoader.setCustomModelResourceLocation(item, metadata, new ModelResourceLocation(name, "inventory"));
     }
 
     protected void registerSpellModel(final Item spell) {
