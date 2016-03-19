@@ -9,6 +9,7 @@ import heero.mc.mod.wakcraft.world.WorldProviderHavenBag;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -29,20 +30,6 @@ public class HavenBagGenerationHelper {
         int y = coords[1];
         int z = coords[2];
 
-        // Console blocks groundSlab
-        ItemStack stack = new ItemStack(WItems.craftHG);
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                Block block = getHBBlockFromStack(stack);
-                world.setBlockState(new BlockPos(x + 2 + i, y - 1, z + j), block.getDefaultState());
-            }
-        }
-
-        // Console blocks bridge
-        for (int i = 0; i < 2; i++) {
-            world.setBlockState(new BlockPos(x + 3 + i, y - 1, z + 4), WBlocks.hbBridge.getStateFromMeta(8));
-        }
-
         // Start bridge
         world.setBlockState(new BlockPos(x + 0, y - 1, z + 7), WBlocks.hbCraft2.getDefaultState());
         world.setBlockState(new BlockPos(x + 1, y - 1, z + 7), WBlocks.hbCraft.getDefaultState());
@@ -50,14 +37,13 @@ public class HavenBagGenerationHelper {
         world.setBlockState(new BlockPos(x + 1, y + 1, z + 7), WBlocks.hbBarrier.getDefaultState());
         world.setBlockState(new BlockPos(x + 1, y + 2, z + 7), WBlocks.hbBarrier.getDefaultState());
 
-        // First gem groundSlab
+        // Console blocks ground
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                world.setBlockState(new BlockPos(x + 2 + i, y - 1, z + 5 + j), WBlocks.hbMerchant.getDefaultState());
+                Block block = getRandomHBBlock(WItems.craftHG);
+                world.setBlockState(new BlockPos(x + 2 + i, y - 1, z + j), block.getDefaultState());
             }
         }
-
-        generateWalls(world, x - 1, y - 1, z - 1, WBlocks.invisiblewall, 0);
 
         // Console blocks
         world.setBlockState(new BlockPos(x + 2, y, z), WBlocks.hbLock.getDefaultState());
@@ -65,15 +51,31 @@ public class HavenBagGenerationHelper {
         world.setBlockState(new BlockPos(x + 4, y, z), WBlocks.hbGemWorkbench.getDefaultState());
         world.setBlockState(new BlockPos(x + 2, y, z + 3), WBlocks.hbChest.getDefaultState());
 
+        // Console blocks bridge
+        for (int i = 0; i < 2; i++) {
+            world.setBlockState(new BlockPos(x + 3 + i, y - 1, z + 4), WBlocks.hbBridge.getStateFromMeta(8));
+        }
+
+        // First gem ground
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                Block block = getRandomHBBlock(WItems.merchantHG);
+                world.setBlockState(new BlockPos(x + 2 + i, y - 1, z + 5 + j), block.getDefaultState());
+            }
+        }
+
+        generateWalls(world, x - 1, y - 1, z - 1, WBlocks.invisibleWall, 0);
+
         return true;
     }
 
-    private static void generateWalls(World world, int x, int y, int z, Block block, int metadata) {
+    protected static void generateWalls(World world, int x, int y, int z, Block block, int metadata) {
         for (int i = 0; i < HB_WIDTH; i++) {
             for (int j = 0; j < HB_LENGTH; j++) {
-                if (world.getBlockState(new BlockPos(x + i, y, z + j)).equals(Blocks.air)) {
-                    for (int k = 0; k < HB_HEIGHT; k++) {
-                        world.setBlockState(new BlockPos(x + i, y + k, z + j), block.getStateFromMeta(metadata), 2);
+                BlockPos pos = new BlockPos(x + i, y, z + j);
+                if (world.getBlockState(pos).getBlock().isAir(world, pos)) {
+                    for (int k = 1; k < HB_HEIGHT; k++) {
+                        world.setBlockState(pos.up(k), block.getStateFromMeta(metadata));
                     }
                 }
             }
@@ -94,8 +96,13 @@ public class HavenBagGenerationHelper {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 if ((gemPosition % 2 == 1) && (i == 4 || j == 4) || (gemPosition % 2 == 0 && i != 4 && j != 4)) {
-                    Block block = getHBBlockFromStack(stack);
-                    setHBBBlock(world, x + 2 + i + ((gemPosition / 2) % 3) * 6, y - 1, z + 5 + j + (gemPosition / 6) * 6, block, 0);
+                    Block block = getRandomHBBlock(stack);
+                    setHBBBlock(world,
+                            x + 2 + i + ((gemPosition / 2) % 3) * 6,
+                            y - 1,
+                            z + 5 + j + (gemPosition / 6) * 6,
+                            block,
+                            0);
                 }
             }
         }
@@ -122,11 +129,16 @@ public class HavenBagGenerationHelper {
 
                 if (stack1Upper != null && stack2Upper != null && stack1Upper.getItem().equals(stack2Upper.getItem())) {
                     for (int i = 0; i < 5; i++) {
-                        Block block = getHBBlockFromStack(stack1Lower);
-                        setHBBBlock(world, x + 2 + i + column * 6, y - 1, z + 4 + row * 6, block, 0);
+                        Block block = getRandomHBBlock(stack1Lower);
+                        setHBBBlock(world,
+                                x + 2 + i + column * 6,
+                                y - 1,
+                                z + 4 + row * 6,
+                                block,
+                                0);
                     }
                 } else if (stack1Lower == null || stack2Lower == null) {
-                    Block block = getHBBlockFromStack(null);
+                    Block block = getRandomHBBlock();
                     for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
                         for (int i = 0; i < 5; i++) {
                             setHBBBlock(world, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, block, 0);
@@ -138,7 +150,7 @@ public class HavenBagGenerationHelper {
                             if (i == 1 || i == 2) {
                                 setHBBBlock(world, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, WBlocks.hbBridge, 0);
                             } else {
-                                setHBBBlock(world, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, WBlocks.invisiblewall, 0);
+                                setHBBBlock(world, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, WBlocks.invisibleWall, 0);
                             }
                         }
                     }
@@ -156,11 +168,11 @@ public class HavenBagGenerationHelper {
 
                 if (stack1Upper != null && stack2Upper != null && stack1Upper.getItem().equals(stack2Upper.getItem())) {
                     for (int i = 0; i < 5; i++) {
-                        Block block = getHBBlockFromStack(stack1Lower);
+                        Block block = getRandomHBBlock(stack1Lower);
                         setHBBBlock(world, x + 1 + column * 6, y - 1, z + 5 + i + row * 6, block, 0);
                     }
                 } else if (stack1Lower == null || stack2Lower == null) {
-                    Block block = getHBBlockFromStack(null);
+                    Block block = getRandomHBBlock();
                     for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
                         for (int i = 0; i < 5; i++) {
                             setHBBBlock(world, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, block, 0);
@@ -172,7 +184,7 @@ public class HavenBagGenerationHelper {
                             if (i == 1 || i == 2) {
                                 setHBBBlock(world, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, WBlocks.hbBridge, 0);
                             } else {
-                                setHBBBlock(world, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, WBlocks.invisiblewall, 0);
+                                setHBBBlock(world, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, WBlocks.invisibleWall, 0);
                             }
                         }
                     }
@@ -189,24 +201,32 @@ public class HavenBagGenerationHelper {
             ItemStack stack3 = slots.getStackInSlot((i + 3) * 2 + 1);
             ItemStack stack4 = slots.getStackInSlot((i + 4) * 2 + 1);
             if (stack1 != null && stack2 != null && stack3 != null && stack4 != null && stack1.getItem().equals(stack2.getItem()) && stack1.getItem().equals(stack3.getItem()) && stack1.getItem().equals(stack4.getItem())) {
-                setHBBBlock(world, x + 7 + (i % 3) * 6, y - 1, z + 10 + (i / 3) * 6, getHBBlockFromStack(slots.getStackInSlot(i * 2)), 0);
+                setHBBBlock(world, x + 7 + (i % 3) * 6, y - 1, z + 10 + (i / 3) * 6, getRandomHBBlock(slots.getStackInSlot(i * 2)), 0);
             } else {
-                setHBBBlock(world, x + 7 + (i % 3) * 6, y - 1, z + 10 + (i / 3) * 6, WBlocks.invisiblewall, 0);
+                setHBBBlock(world, x + 7 + (i % 3) * 6, y - 1, z + 10 + (i / 3) * 6, WBlocks.invisibleWall, 0);
             }
         }
     }
 
-    private static Block getHBBlockFromStack(ItemStack stack) {
-        return (stack == null) ? WBlocks.invisiblewall
-                : (stack.getItem() == WItems.craftHG) ? ((int) (Math.random() * 2)) == 0 ? WBlocks.hbCraft : WBlocks.hbCraft2
-                : (stack.getItem() == WItems.merchantHG) ? WBlocks.hbMerchant
-                : (stack.getItem() == WItems.decoHG) ? ((int) (Math.random() * 2)) == 0 ? WBlocks.hbDeco : WBlocks.hbDeco2
-                : (stack.getItem() == WItems.gardenHG) ? WBlocks.hbGarden
+    protected static Block getRandomHBBlock() {
+        return WBlocks.invisibleWall;
+    }
+
+    protected static Block getRandomHBBlock(ItemStack stack) {
+        return (stack == null) ? WBlocks.invisibleWall : getRandomHBBlock(stack.getItem());
+    }
+
+    protected static Block getRandomHBBlock(Item item) {
+        return (item == null) ? WBlocks.invisibleWall
+                : (item == WItems.craftHG) ? ((int) (Math.random() * 2)) == 0 ? WBlocks.hbCraft : WBlocks.hbCraft2
+                : (item == WItems.merchantHG) ? WBlocks.hbMerchant
+                : (item == WItems.decoHG) ? ((int) (Math.random() * 2)) == 0 ? WBlocks.hbDeco : WBlocks.hbDeco2
+                : (item == WItems.gardenHG) ? WBlocks.hbGarden
                 : Blocks.lapis_block;
     }
 
     private static void setHBBBlock(World world, int x, int y, int z, Block hbBlock, int metadata) {
-        if (hbBlock.equals(WBlocks.invisiblewall)) {
+        if (hbBlock.equals(WBlocks.invisibleWall)) {
             for (int i = 0; i < 4; i++) {
                 world.setBlockState(new BlockPos(x, y + i, z), hbBlock.getDefaultState(), 2);
             }
@@ -227,7 +247,7 @@ public class HavenBagGenerationHelper {
 
     private static boolean isHavenBagWorld(World world) {
         if (!WorldUtil.isHavenBagWorld(world)) {
-            WLog.warning("The received world is not the %s world : %s", WorldProviderHavenBag.NAME, world.provider.getDimensionName());
+            WLog.warning("The received world is not the {} world : {}", WorldProviderHavenBag.NAME, world.provider.getDimensionName());
 
             return false;
         }

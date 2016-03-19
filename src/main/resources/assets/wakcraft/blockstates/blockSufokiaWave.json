@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "propertyyrotation=north": { "model": "wakcraft:blockSufokiaWave", "y": 0 },
-    "propertyyrotation=east": { "model": "wakcraft:blockSufokiaWave", "y": 90 },
-    "propertyyrotation=south": { "model": "wakcraft:blockSufokiaWave", "y": 180 },
-    "propertyyrotation=west": { "model": "wakcraft:blockSufokiaWave", "y": 270 }
-  }
-}

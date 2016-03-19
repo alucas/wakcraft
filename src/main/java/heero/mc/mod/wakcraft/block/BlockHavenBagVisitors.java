@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
@@ -18,9 +17,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class BlockHavenBagVisitors extends BlockGeneric {
     public BlockHavenBagVisitors() {
-        super(Material.wood);
-        setCreativeTab(WCreativeTabs.tabSpecialBlock);
-        setUnlocalizedName(Reference.MODID + "_HavenBagVisitors");
+        super(Material.wood, WCreativeTabs.tabSpecialBlock);
     }
 
     @Override

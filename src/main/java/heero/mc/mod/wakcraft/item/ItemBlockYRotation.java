@@ -30,10 +30,10 @@ public class ItemBlockYRotation extends Item implements IBlockProvider {
         this.itemBlockWest = (ItemBlock) Item.getItemFromBlock(blockWest);
 
         setCreativeTab(WCreativeTabs.tabBlock);
-        blockNorth.setCreativeTab(null);
-        blockEast.setCreativeTab(null);
-        blockSouth.setCreativeTab(null);
-        blockWest.setCreativeTab(null);
+        blockNorth.setCreativeTab(WCreativeTabs.tabOther);
+        blockEast.setCreativeTab(WCreativeTabs.tabOther);
+        blockSouth.setCreativeTab(WCreativeTabs.tabOther);
+        blockWest.setCreativeTab(WCreativeTabs.tabOther);
 
         if (itemBlockNorth == null || itemBlockEast == null || itemBlockSouth == null || itemBlockWest == null) {
             throw new RuntimeException("Failed to initialize " + this.getClass().getCanonicalName());

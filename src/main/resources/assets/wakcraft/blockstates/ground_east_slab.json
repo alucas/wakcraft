@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "propertybottomposition=0,propertysize=0": {"model": "wakcraft:slab/ground/b0s0", "y":90},
+    "propertybottomposition=0,propertysize=1": {"model": "wakcraft:slab/ground/b0s1", "y":90},
+    "propertybottomposition=0,propertysize=2": {"model": "wakcraft:slab/ground/b0s2", "y":90},
+    "propertybottomposition=1,propertysize=0": {"model": "wakcraft:slab/ground/b1s0", "y":90},
+    "propertybottomposition=1,propertysize=1": {"model": "wakcraft:slab/ground/b1s1", "y":90},
+    "propertybottomposition=1,propertysize=2": {"model": "wakcraft:slab/ground/b1s2", "y":90},
+    "propertybottomposition=2,propertysize=0": {"model": "wakcraft:slab/ground/b2s0", "y":90},
+    "propertybottomposition=2,propertysize=1": {"model": "wakcraft:slab/ground/b2s1", "y":90},
+    "propertybottomposition=2,propertysize=2": {"model": "wakcraft:ground", "y":90},
+    "propertybottomposition=3,propertysize=0": {"model": "wakcraft:slab/ground/b3s0", "y":90},
+    "propertybottomposition=3,propertysize=1": {"model": "wakcraft:ground", "y":90},
+    "propertybottomposition=3,propertysize=2": {"model": "wakcraft:ground", "y":90}
+  }
+}

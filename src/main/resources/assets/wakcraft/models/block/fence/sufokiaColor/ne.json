@@ -1,6 +1,0 @@
-{
-    "parent": "block/fence_ne",
-    "textures": {
-        "texture": "wakcraft:blocks/sufokiaColor1"
-    }
-}

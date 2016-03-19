@@ -34,8 +34,8 @@ public class BlockHavenBagChest extends BlockContainer {
 
     public BlockHavenBagChest(int chestType) {
         super(Material.wood);
+
         this.chestType = chestType;
-//		this.setBlockName("HavenBagChest");
         this.setCreativeTab(WCreativeTabs.tabSpecialBlock);
         this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
         this.setBlockUnbreakable();

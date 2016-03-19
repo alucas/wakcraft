@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "propertyyrotation=north": { "model": "wakcraft:sufokia_wave", "y": 0 },
+    "propertyyrotation=east": { "model": "wakcraft:sufokia_wave", "y": 90 },
+    "propertyyrotation=south": { "model": "wakcraft:sufokia_wave", "y": 180 },
+    "propertyyrotation=west": { "model": "wakcraft:sufokia_wave", "y": 270 }
+  }
+}

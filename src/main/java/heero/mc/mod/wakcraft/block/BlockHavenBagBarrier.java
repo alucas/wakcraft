@@ -1,9 +1,7 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WLog;
-import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
@@ -15,8 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
@@ -27,30 +23,13 @@ public class BlockHavenBagBarrier extends BlockGeneric {
     public BlockHavenBagBarrier() {
         super(Material.air);
 
-        setUnlocalizedName(Reference.MODID + "_HavenBagBarrier");
-    }
-
-    @Override
-    public boolean isOpaqueCube() {
-        return false;
-    }
-
-    @Override
-    public int getRenderType() {
-        return -1;
+        setCanBePlacedManually(false);
+        setRenderType(-1);
+        setOpaque(false);
     }
 
     @Override
     public boolean canCollideCheck(IBlockState state, boolean stopOnLiquid) {
-        return false;
-    }
-
-    @Override
-    public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        if (world.isRemote) {
-            Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
-        }
-
         return false;
     }
 
@@ -115,10 +94,10 @@ public class BlockHavenBagBarrier extends BlockGeneric {
             return;
         } while (false);
 
-        AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBox(world, pos, state);
+        AxisAlignedBB axisAlignedBB = this.getCollisionBoundingBox(world, pos, state);
 
-        if (axisalignedbb1 != null && mask.intersectsWith(axisalignedbb1)) {
-            list.add(axisalignedbb1);
+        if (axisAlignedBB != null && mask.intersectsWith(axisAlignedBB)) {
+            list.add(axisAlignedBB);
         }
     }
 }

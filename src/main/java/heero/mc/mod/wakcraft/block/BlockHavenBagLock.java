@@ -1,8 +1,6 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WLog;
-import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
@@ -20,10 +18,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class BlockHavenBagLock extends BlockGeneric {
     public BlockHavenBagLock() {
-        super(Material.wood);
+        super(Material.wood, WCreativeTabs.tabSpecialBlock);
 
-        setCreativeTab(WCreativeTabs.tabSpecialBlock);
-        setUnlocalizedName(Reference.MODID + "_HavenBagLock");
+        setCanBePlacedManually(false);
     }
 
     @Override
@@ -57,33 +54,4 @@ public class BlockHavenBagLock extends BlockGeneric {
 
         return true;
     }
-
-    @Override
-    public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        if (world.isRemote) {
-            Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
-        }
-
-        return false;
-    }
-
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public void registerBlockIcons(IIconRegister registerer) {
-//		iconSide = registerer.registerIcon(Reference.MODID.toLowerCase() + ":havenbaglock");
-//		iconTop = registerer.registerIcon(Reference.MODID.toLowerCase() + ":havenbaglock_top");
-//	}
-//
-//	/**
-//	 * Gets the block's texture. Args: side, meta
-//	 */
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public IIcon getIcon(int side, int metadata) {
-//		if (side == 1) {
-//			return iconTop;
-//		}
-//
-//		return iconSide;
-//	}
 }

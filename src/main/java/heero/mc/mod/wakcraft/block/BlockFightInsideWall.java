@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.util.FightUtil;
@@ -20,17 +19,8 @@ public class BlockFightInsideWall extends BlockGeneric {
     public BlockFightInsideWall() {
         super(Material.air);
 
-        setUnlocalizedName(Reference.MODID + "_FightInsideWall");
-    }
-
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
-     * or not to render the shared face of two adjacent blocks and also whether
-     * the player can attach torches, redstone wire, etc to this block.
-     */
-    @Override
-    public boolean isOpaqueCube() {
-        return false;
+        setOpaque(false);
+        setCanBePlacedManually(false);
     }
 
     /**

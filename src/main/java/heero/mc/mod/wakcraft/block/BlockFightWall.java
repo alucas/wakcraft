@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.block.material.MapColor;
@@ -26,8 +25,9 @@ public class BlockFightWall extends BlockGeneric {
             }
         });
 
-        setUnlocalizedName(Reference.MODID + "_FightWall");
         setBlockUnbreakable();
+        setCanBePlacedManually(false);
+        setOpaque(false);
     }
 
     /**
@@ -39,16 +39,6 @@ public class BlockFightWall extends BlockGeneric {
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side) {
         return FightUtil.isFighter(Minecraft.getMinecraft().thePlayer) && FightUtil.isFighting(Minecraft.getMinecraft().thePlayer);
-    }
-
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
-     * or not to render the shared face of two adjacent blocks and also whether
-     * the player can attach torches, redstone wire, etc to this block.
-     */
-    @Override
-    public boolean isOpaqueCube() {
-        return false;
     }
 
     @Override

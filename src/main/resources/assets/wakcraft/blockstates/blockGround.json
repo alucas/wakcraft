@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "propertyyrotation=north": { "model": "wakcraft:blockGround", "y": 0 },
-    "propertyyrotation=east": { "model": "wakcraft:blockGround", "y": 90 },
-    "propertyyrotation=south": { "model": "wakcraft:blockGround", "y": 180 },
-    "propertyyrotation=west": { "model": "wakcraft:blockGround", "y": 270 }
-  }
-}

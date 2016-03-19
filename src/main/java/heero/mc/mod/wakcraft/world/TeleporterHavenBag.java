@@ -29,7 +29,8 @@ public class TeleporterHavenBag extends Teleporter {
     /**
      * Place an entity in a nearby portal, creating one if necessary.
      */
-    public void placeInPortal(Entity entity, double oldPosX, double oldPosY, double oldPosZ, float oldYaw) {
+    @Override
+    public void placeInPortal(Entity entity, float rotationYaw) {
         if (entity.dimension == WConfig.getHavenBagDimensionId() && uid != -1) {
             int[] coords = HavenBagUtil.getCoordFromUID(uid);
 
@@ -38,11 +39,11 @@ public class TeleporterHavenBag extends Teleporter {
             entity.rotationPitch = 0;
 
             if (entity instanceof EntityLivingBase) {
-                ((EntityLivingBase) entity).setPositionAndUpdate(coords[0] + 0.5, coords[1], coords[2] + 7.5);
+                entity.setPositionAndUpdate(coords[0] + 0.5, coords[1], coords[2] + 7.5);
             }
         } else if (entity.dimension == 0 && properties != null && entity instanceof EntityLivingBase) {
             double[] oldCoords = properties.getOldCoords();
-            ((EntityLivingBase) entity).setPositionAndUpdate(oldCoords[0], oldCoords[1], oldCoords[2]);
+            entity.setPositionAndUpdate(oldCoords[0], oldCoords[1], oldCoords[2]);
         }
     }
 

@@ -1,8 +1,8 @@
 {
   "parent": "wakcraft:block/slab/template/b0s0",
   "textures": {
-    "bottom": "wakcraft:blocks/pillarTop",
-    "top": "wakcraft:blocks/pillarTop",
-    "side": "wakcraft:blocks/pillarSide"
+    "bottom": "wakcraft:blocks/pillar_top",
+    "top": "wakcraft:blocks/pillar_top",
+    "side": "wakcraft:blocks/pillar_side"
   }
 }

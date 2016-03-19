@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "propertybottomposition=0,propertysize=0": {"model": "wakcraft:slab/grass/b0s0"},
+    "propertybottomposition=0,propertysize=1": {"model": "wakcraft:slab/grass/b0s1"},
+    "propertybottomposition=0,propertysize=2": {"model": "wakcraft:slab/grass/b0s2"},
+    "propertybottomposition=1,propertysize=0": {"model": "wakcraft:slab/grass/b1s0"},
+    "propertybottomposition=1,propertysize=1": {"model": "wakcraft:slab/grass/b1s1"},
+    "propertybottomposition=1,propertysize=2": {"model": "wakcraft:slab/grass/b1s2"},
+    "propertybottomposition=2,propertysize=0": {"model": "wakcraft:slab/grass/b2s0"},
+    "propertybottomposition=2,propertysize=1": {"model": "wakcraft:slab/grass/b2s1"},
+    "propertybottomposition=2,propertysize=2": {"model": "wakcraft:grass"},
+    "propertybottomposition=3,propertysize=0": {"model": "wakcraft:slab/grass/b3s0"},
+    "propertybottomposition=3,propertysize=1": {"model": "wakcraft:grass"},
+    "propertybottomposition=3,propertysize=2": {"model": "wakcraft:grass"}
+  }
+}

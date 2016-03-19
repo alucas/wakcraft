@@ -14,26 +14,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GUIProfession extends GuiScreen {
-    private static final ResourceLocation professionBackground = new ResourceLocation(
-            Reference.MODID.toLowerCase(), "textures/gui/profession.png");
+    private static final ResourceLocation professionBackground = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/gui/profession.png");
 
-    /**
-     * The X size of the window in pixels.
-     */
-    protected int xSize = 176;
-    /**
-     * The Y size of the window in pixels.
-     */
-    protected int ySize = 166;
-    /**
-     * Starting X position for the Gui. Inconsistent use for Gui backgrounds.
-     */
+    protected final int windowX = 176;
+    protected final int windowY = 166;
     protected int guiLeft;
-    /**
-     * Starting Y position for the Gui. Inconsistent use for Gui backgrounds.
-     */
     protected int guiTop;
-    protected EntityPlayer player;
+    protected final EntityPlayer player;
     protected PROFESSION currentProfession;
 
     public GUIProfession(EntityPlayer player, PROFESSION defaultProfession) {
@@ -49,8 +36,8 @@ public class GUIProfession extends GuiScreen {
     @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
-        guiLeft = (width - xSize) / 2;
-        guiTop = (height - ySize) / 2;
+        guiLeft = (width - windowX) / 2;
+        guiTop = (height - windowY) / 2;
 
         buttonList.clear();
 
@@ -79,7 +66,7 @@ public class GUIProfession extends GuiScreen {
         mc.getTextureManager().bindTexture(professionBackground);
 
         // Background
-        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+        drawTexturedModalRect(guiLeft, guiTop, 0, 0, windowX, windowY);
 
         int xp = ProfessionManager.getXp(player, currentProfession);
         int level = ProfessionManager.getLevelFromXp(xp);
@@ -87,7 +74,7 @@ public class GUIProfession extends GuiScreen {
         int xpNextLevel = ProfessionManager.getXpFromLevel(level + 1);
 
         // Experience bar
-        drawTexturedModalRect(guiLeft, guiTop + 95, 0, ySize + 1, (int) (xSize - (170 * (1 - (xp - xpLevel) / (float) (xpNextLevel - xpLevel)))), 6);
+        drawTexturedModalRect(guiLeft, guiTop + 95, 0, windowY + 1, (int) (windowX - (170 * (1 - (xp - xpLevel) / (float) (xpNextLevel - xpLevel)))), 6);
 
         // Profession levels
         int i = 0;
@@ -113,7 +100,7 @@ public class GUIProfession extends GuiScreen {
         drawString(fontRendererObj, I18n.format("title.harvesting", new Object[0]), guiLeft + 5, guiTop + 55, 0xFFFFFF);
         drawString(fontRendererObj, I18n.format("profession." + currentProfession.toString().toLowerCase(), new Object[0]), guiLeft + 5, guiTop + 85, 0xFFFFFF);
 
-        drawString(fontRendererObj, "Lvl 5, Xp : " + Integer.toString(xp - xpLevel) + "/" + Integer.toString(xpNextLevel - xpLevel), guiLeft + 5, guiTop + 105, 0xFFFFFF);
+        drawString(fontRendererObj, "Lvl " + level + ", Xp : " + Integer.toString(xp - xpLevel) + "/" + Integer.toString(xpNextLevel - xpLevel), guiLeft + 5, guiTop + 105, 0xFFFFFF);
 
         super.drawScreen(mouseX, mouseY, renderPartialTicks);
     }

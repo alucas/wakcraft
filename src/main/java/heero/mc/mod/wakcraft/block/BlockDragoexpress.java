@@ -21,7 +21,6 @@ public class BlockDragoexpress extends BlockContainer {
         super(Material.wood);
 
         setCreativeTab(WCreativeTabs.tabSpecialBlock);
-        setUnlocalizedName(Reference.MODID + "_dragoexpress");
         setLightOpacity(0);
         setBlockUnbreakable();
         setDefaultState(blockState.getBaseState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH));

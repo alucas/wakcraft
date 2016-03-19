@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "side": "wakcraft:blocks/pillar_side",
+    "end": "wakcraft:blocks/pillar_top"
+  }
+}

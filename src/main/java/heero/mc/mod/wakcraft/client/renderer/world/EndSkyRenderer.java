@@ -3,10 +3,11 @@ package heero.mc.mod.wakcraft.client.renderer.world;
 import heero.mc.mod.wakcraft.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -19,52 +20,44 @@ public class EndSkyRenderer extends IRenderHandler {
     @Override
     @SideOnly(Side.CLIENT)
     public void render(float partialTicks, WorldClient world, Minecraft mc) {
-        GL11.glDisable(GL11.GL_FOG);
-        GL11.glDisable(GL11.GL_ALPHA_TEST);
-        GL11.glEnable(GL11.GL_BLEND);
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        GlStateManager.disableFog();
+        GlStateManager.disableAlpha();
+        GlStateManager.enableBlend();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         RenderHelper.disableStandardItemLighting();
-        GL11.glDepthMask(false);
+        GlStateManager.depthMask(false);
+        //this.renderEngine.bindTexture(locationEndSkyPng);
         mc.getTextureManager().bindTexture(locationEndSkyPng);
         Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
 
         for (int i = 0; i < 6; ++i) {
-            GL11.glPushMatrix();
+            GlStateManager.pushMatrix();
 
             if (i == 1) {
-                GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
+                GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
+            } else if (i == 2) {
+                GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
+            } else if (i == 3) {
+                GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
+            } else if (i == 4) {
+                GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
+            } else if (i == 5) {
+                GlStateManager.rotate(-90.0F, 0.0F, 0.0F, 1.0F);
             }
 
-            if (i == 2) {
-                GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
-            }
-
-            if (i == 3) {
-                GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
-            }
-
-            if (i == 4) {
-                GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-            }
-
-            if (i == 5) {
-                GL11.glRotatef(-90.0F, 0.0F, 0.0F, 1.0F);
-            }
-
-//            TODO
-//            worldRenderer.putColor4(0x282828);
-//            worldRenderer.addVertexWithUV(-100.0D, -100.0D, -100.0D, 0.0D, 0.0D);
-//            worldRenderer.addVertexWithUV(-100.0D, -100.0D, 100.0D, 0.0D, 16.0D);
-//            worldRenderer.addVertexWithUV(100.0D, -100.0D, 100.0D, 16.0D, 16.0D);
-//            worldRenderer.addVertexWithUV(100.0D, -100.0D, -100.0D, 16.0D, 0.0D);
+            worldrenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
+            worldrenderer.color(0x28, 0x28, 0x28, 0x28);
+            worldrenderer.pos(-100.0D, -100.0D, -100.0D).tex(0.0D, 0.0D).color(40, 40, 40, 255).endVertex();
+            worldrenderer.pos(-100.0D, -100.0D, 100.0D).tex(0.0D, 16.0D).color(40, 40, 40, 255).endVertex();
+            worldrenderer.pos(100.0D, -100.0D, 100.0D).tex(16.0D, 16.0D).color(40, 40, 40, 255).endVertex();
+            worldrenderer.pos(100.0D, -100.0D, -100.0D).tex(16.0D, 0.0D).color(40, 40, 40, 255).endVertex();
             tessellator.draw();
-            GL11.glPopMatrix();
+            GlStateManager.popMatrix();
         }
 
-        GL11.glDepthMask(true);
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GlStateManager.depthMask(true);
+        GlStateManager.enableTexture2D();
+        GlStateManager.enableAlpha();
     }
-
 }

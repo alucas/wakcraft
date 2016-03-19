@@ -198,12 +198,14 @@ public class TileEntityHavenGemWorkbench extends TileEntity implements IInventor
     }
 
     public void onSlotChanged(int slotId) {
-        if (!worldObj.isRemote) {
-            int uid = HavenBagUtil.getUIDFromCoord(pos);
-
-            HavenBagGenerationHelper.updateGem(worldObj, uid, getStackInSlot(slotId), slotId);
-            HavenBagGenerationHelper.updateBridge(worldObj, uid, havenGems);
+        if (worldObj.isRemote) {
+            return;
         }
+
+        int uid = HavenBagUtil.getUIDFromCoord(pos);
+
+        HavenBagGenerationHelper.updateGem(worldObj, uid, getStackInSlot(slotId), slotId);
+        HavenBagGenerationHelper.updateBridge(worldObj, uid, havenGems);
     }
 
     @Override

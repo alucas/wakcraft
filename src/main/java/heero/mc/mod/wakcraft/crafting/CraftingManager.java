@@ -27,9 +27,9 @@ public class CraftingManager {
         addRecipe(PROFESSION.MINER, 0, new ItemStack(WItems.bomb), new ItemStack(WItems.canoonPowder), new ItemStack(WItems.clay, 3), new ItemStack(WItems.ore1, 3));
         addRecipe(PROFESSION.MINER, 0, new ItemStack(WItems.fossil), new ItemStack(WItems.waterBucket, 2), new ItemStack(WItems.driedDung, 3));
         addRecipe(PROFESSION.MINER, 10, new ItemStack(WItems.shamPearl), new ItemStack(WItems.pearl, 3), new ItemStack(WItems.waterBucket, 2));
-        addRecipe(PROFESSION.MINER, 15, new ItemStack(WItems.verbalasalt), new ItemStack(WItems.ore1, 3, 2));
+        addRecipe(PROFESSION.MINER, 15, new ItemStack(WItems.verbalaSalt), new ItemStack(WItems.ore1, 3, 2));
         addRecipe(PROFESSION.MINER, 20, new ItemStack(WItems.gumgum), new ItemStack(WItems.ore1, 15, 3));
-        addRecipe(PROFESSION.MINER, 20, new ItemStack(WItems.polishedmoonstone), new ItemStack(WItems.waterBucket, 2), new ItemStack(WItems.moonstone, 3));
+        addRecipe(PROFESSION.MINER, 20, new ItemStack(WItems.polishedMoonstone), new ItemStack(WItems.waterBucket, 2), new ItemStack(WItems.moonstone, 3));
         addRecipe(PROFESSION.MINER, 25, new ItemStack(WItems.shadowyBlue), new ItemStack(WItems.ore1, 3, 5));
     }
 

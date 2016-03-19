@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "side": "wakcraft:blocks/hb_gem_workbench_side",
+    "end": "wakcraft:blocks/hb_gem_workbench_top"
+  }
+}

@@ -3,6 +3,7 @@ package heero.mc.mod.wakcraft.proxy;
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WItems;
+import heero.mc.mod.wakcraft.block.vein.BlockVein;
 import heero.mc.mod.wakcraft.client.gui.*;
 import heero.mc.mod.wakcraft.client.gui.fight.GuiFightOverlay;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
@@ -13,7 +14,6 @@ import heero.mc.mod.wakcraft.client.renderer.entity.RenderFactory;
 import heero.mc.mod.wakcraft.client.renderer.fight.FightRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.FighterRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.SpellRenderer;
-import heero.mc.mod.wakcraft.client.renderer.item.RendererItemBlock;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererDragoexpress;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererHavenBagChest;
 import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererPhoenix;
@@ -38,6 +38,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -46,6 +47,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CombinedClientProxy extends CommonProxy {
 
@@ -75,24 +79,23 @@ public class CombinedClientProxy extends CommonProxy {
 //		RenderingRegistry.registerBlockHandler(new RendererBlockScree(RenderingRegistry.getNextAvailableRenderId()));
 //		RenderingRegistry.registerBlockHandler(new RendererBlockFence(RenderingRegistry.getNextAvailableRenderId()));
 
-//		RendererItemBlock rendererItemBlock = new RendererItemBlock();
-//		MinecraftForgeClient.registerItemRenderer(WItems.sufokiaWave, rendererItemBlock);
-//		MinecraftForgeClient.registerItemRenderer(WItems.sufokiaWave2, rendererItemBlock);
-//		MinecraftForgeClient.registerItemRenderer(WItems.sufokiaWave3, rendererItemBlock);
-//		MinecraftForgeClient.registerItemRenderer(WItems.groundSlab, rendererItemBlock);
-//		MinecraftForgeClient.registerItemRenderer(WItems.ground2Slab, rendererItemBlock);
-//		MinecraftForgeClient.registerItemRenderer(WItems.carpet, rendererItemBlock);
-//		MinecraftForgeClient.registerItemRenderer(WItems.wood, rendererItemBlock);
-
-        Block[] blockOres = {WBlocks.ore1, WBlocks.ore2, WBlocks.ore3, WBlocks.ore4};
-        for (int i = 0; i < blockOres.length; i++) {
-            for (int j = 0; j < 8 && j < EnumOre.values().length - i * 8; j++) {
-                registerItemBlockModel(blockOres[i], j << 1, Reference.MODID.toLowerCase() + ":block_ore_" + EnumOre.values()[i * 8 + j].getName());
+        BlockVein[] blockOres = {WBlocks.vein1, WBlocks.vein2, WBlocks.vein3, WBlocks.vein4};
+        List<ItemStack> stacks = new ArrayList<>(8);
+        for (BlockVein blockVein : blockOres) {
+            Item itemBlock = Item.getItemFromBlock(blockVein);
+            stacks.clear();
+            blockVein.getSubBlocks(itemBlock, null, stacks);
+            for (ItemStack stack : stacks) {
+                registerItemBlockModel(blockVein, stack.getMetadata(), stack.getUnlocalizedName().substring(5).replaceFirst("\\.", ":block_"));
             }
         }
 
         registerItemBlockModel(WBlocks.box);
         registerItemBlockModel(WBlocks.carpet);
+        registerItemBlockModel(WBlocks.carpetEastSlab);
+        registerItemBlockModel(WBlocks.carpetNorthSlab);
+        registerItemBlockModel(WBlocks.carpetSouthSlab);
+        registerItemBlockModel(WBlocks.carpetWestSlab);
         registerItemBlockModel(WBlocks.debug);
         registerItemBlockModel(WBlocks.dirt);
         registerItemBlockModel(WBlocks.fightDirection);
@@ -101,13 +104,22 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.fightStart2);
         registerItemBlockModel(WBlocks.grass);
         registerItemBlockModel(WBlocks.ground);
+        registerItemBlockModel(WBlocks.groundEastSlab);
+        registerItemBlockModel(WBlocks.groundNorthSlab);
+        registerItemBlockModel(WBlocks.groundSouthSlab);
+        registerItemBlockModel(WBlocks.groundWestSlab);
         registerItemBlockModel(WBlocks.ground2);
+        registerItemBlockModel(WBlocks.ground2EastSlab);
+        registerItemBlockModel(WBlocks.ground2NorthSlab);
+        registerItemBlockModel(WBlocks.ground2SouthSlab);
+        registerItemBlockModel(WBlocks.ground2WestSlab);
         registerItemBlockModel(WBlocks.ground3);
         registerItemBlockModel(WBlocks.ground4);
         registerItemBlockModel(WBlocks.ground11);
         registerItemBlockModel(WBlocks.ground12);
         registerItemBlockModel(WBlocks.ground13);
         registerItemBlockModel(WBlocks.ground14);
+        registerItemBlockModel(WBlocks.invisibleWall);
         registerItemBlockModel(WBlocks.pillar);
         registerItemBlockModel(WBlocks.plank);
         registerItemBlockModel(WBlocks.plant);
@@ -117,23 +129,46 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.sufokiaGround2);
         registerItemBlockModel(WBlocks.sufokiaStair);
         registerItemBlockModel(WBlocks.sufokiaSun);
+        registerItemBlockModel(WBlocks.sufokiaWave);
+        registerItemBlockModel(WBlocks.sufokiaWaveEastSlab);
+        registerItemBlockModel(WBlocks.sufokiaWaveNorthSlab);
+        registerItemBlockModel(WBlocks.sufokiaWaveSouthSlab);
+        registerItemBlockModel(WBlocks.sufokiaWaveWestSlab);
         registerItemBlockModel(WBlocks.sufokiaWave2);
+        registerItemBlockModel(WBlocks.sufokiaWave2EastSlab);
+        registerItemBlockModel(WBlocks.sufokiaWave2NorthSlab);
+        registerItemBlockModel(WBlocks.sufokiaWave2SouthSlab);
+        registerItemBlockModel(WBlocks.sufokiaWave2WestSlab);
         registerItemBlockModel(WBlocks.sufokiaWave3);
+        registerItemBlockModel(WBlocks.sufokiaWave3EastSlab);
+        registerItemBlockModel(WBlocks.sufokiaWave3NorthSlab);
+        registerItemBlockModel(WBlocks.sufokiaWave3SouthSlab);
+        registerItemBlockModel(WBlocks.sufokiaWave3WestSlab);
         registerItemBlockModel(WBlocks.sufokiaWave4);
         registerItemBlockModel(WBlocks.wood);
+        registerItemBlockModel(WBlocks.woodEastSlab);
+        registerItemBlockModel(WBlocks.woodNorthSlab);
+        registerItemBlockModel(WBlocks.woodSouthSlab);
+        registerItemBlockModel(WBlocks.woodWestSlab);
 
         // Special
         registerItemBlockModel(WBlocks.classConsole);
+        registerItemBlockModel(WBlocks.jobPolisher);
 
         // Haven Bag
+        registerItemBlockModel(WBlocks.havenbag);
         registerItemBlockModel(WBlocks.hbBridge);
+        registerItemBlockModel(WBlocks.hbChest);
         registerItemBlockModel(WBlocks.hbCraft);
         registerItemBlockModel(WBlocks.hbCraft2);
         registerItemBlockModel(WBlocks.hbDeco);
         registerItemBlockModel(WBlocks.hbDeco2);
         registerItemBlockModel(WBlocks.hbGarden);
+        registerItemBlockModel(WBlocks.hbGemWorkbench);
+        registerItemBlockModel(WBlocks.hbLock);
         registerItemBlockModel(WBlocks.hbMerchant);
         registerItemBlockModel(WBlocks.hbStand);
+        registerItemBlockModel(WBlocks.hbVisitors);
 
         // Slabs
         registerItemBlockModel(WItems.carpet);
@@ -181,9 +216,9 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemModel(WItems.bomb);
         registerItemModel(WItems.fossil);
         registerItemModel(WItems.shamPearl);
-        registerItemModel(WItems.verbalasalt);
+        registerItemModel(WItems.verbalaSalt);
         registerItemModel(WItems.gumgum);
-        registerItemModel(WItems.polishedmoonstone);
+        registerItemModel(WItems.polishedMoonstone);
         registerItemModel(WItems.shadowyBlue);
 
         Item[] ores = {WItems.ore1, WItems.ore2};
@@ -263,7 +298,7 @@ public class CombinedClientProxy extends CommonProxy {
     }
 
     protected void registerItemBlockModel(final Item itemBlock) {
-        registerItemBlockModel(itemBlock, 0, itemBlock.getUnlocalizedName().substring(5).replaceFirst("\\.", ":block"));
+        registerItemBlockModel(itemBlock, 0, itemBlock.getUnlocalizedName().substring(5).replaceFirst("\\.", ":block_"));
     }
 
     protected void registerItemBlockModel(final Item itemBlock, final int metadata, final String name) {

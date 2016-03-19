@@ -15,6 +15,7 @@ public class BlockFightStart extends BlockGeneric {
         super(Material.gourd);
 
         setOpaque(false);
+        setCanBePlacedManually(false);
     }
 
     /**

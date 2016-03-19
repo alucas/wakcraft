@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "propertyyrotation=north": { "model": "wakcraft:ground_2", "y": 0 },
+    "propertyyrotation=east": { "model": "wakcraft:ground_2", "y": 90 },
+    "propertyyrotation=south": { "model": "wakcraft:ground_2", "y": 180 },
+    "propertyyrotation=west": { "model": "wakcraft:ground_2", "y": 270 }
+  }
+}

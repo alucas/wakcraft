@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "wakcraft:blocks/sufokia_wave_4"
+  }
+}

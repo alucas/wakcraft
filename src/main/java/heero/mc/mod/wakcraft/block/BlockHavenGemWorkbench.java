@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
@@ -25,7 +24,6 @@ public class BlockHavenGemWorkbench extends BlockContainer {
         super(Material.wood);
 
         setCreativeTab(WCreativeTabs.tabSpecialBlock);
-        setUnlocalizedName(Reference.MODID + "_HavenGemWorkbench");
         setBlockUnbreakable();
     }
 
@@ -75,23 +73,8 @@ public class BlockHavenGemWorkbench extends BlockContainer {
         return false;
     }
 
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public void registerBlockIcons(IIconRegister registerer) {
-//		iconSide = registerer.registerIcon(Reference.MODID.toLowerCase() + ":havengemworkbench");
-//		iconTop = registerer.registerIcon(Reference.MODID.toLowerCase() + ":havengemworkbench_top");
-//	}
-//
-//	/**
-//	 * Gets the block's texture. Args: side, meta
-//	 */
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public IIcon getIcon(int side, int metadata) {
-//		if (side == 1) {
-//			return iconTop;
-//		}
-//
-//		return iconSide;
-//	}
+    @Override
+    public int getRenderType() {
+        return 3;
+    }
 }

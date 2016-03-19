@@ -1,6 +1,0 @@
-{
-  "parent": "wakcraft:block/slab/templateAll/b1s0",
-  "textures": {
-    "all": "wakcraft:blocks/sufokiaWave2"
-  }
-}

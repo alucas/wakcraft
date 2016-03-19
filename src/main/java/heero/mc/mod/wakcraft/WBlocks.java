@@ -1,22 +1,22 @@
 package heero.mc.mod.wakcraft;
 
 import heero.mc.mod.wakcraft.block.*;
-import heero.mc.mod.wakcraft.block.ore.BlockOre1;
-import heero.mc.mod.wakcraft.block.ore.BlockOre2;
-import heero.mc.mod.wakcraft.block.ore.BlockOre3;
-import heero.mc.mod.wakcraft.block.ore.BlockOre4;
+import heero.mc.mod.wakcraft.block.vein.*;
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
-import heero.mc.mod.wakcraft.item.ItemBlockOre;
 import heero.mc.mod.wakcraft.item.ItemBlockSlab;
+import heero.mc.mod.wakcraft.item.ItemBlockVein;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class WBlocks {
+    protected static final String MODID_ = Reference.MODID.toLowerCase() + ".";
 
     public static Block debug, debugSlab;
+    public static BlockVein vein1, vein2, vein3, vein4;
     public static Block
             box,
             carpet, carpetEastSlab, carpetNorthSlab, carpetSouthSlab, carpetWestSlab,
@@ -60,11 +60,7 @@ public class WBlocks {
             hbMerchant,
             hbStand, hbStandSlab,
             hbVisitors,
-            invisiblewall,
-            ore1,
-            ore2,
-            ore3,
-            ore4,
+            invisibleWall,
             palisade,
             palisade2,
             phoenix,
@@ -73,7 +69,7 @@ public class WBlocks {
             plank,
             plant,
             plant2,
-            polisher,
+            jobPolisher,
             scree1,
             sufokiaColor,
             sufokiaGround, sufokiaGroundSlab,
@@ -87,124 +83,132 @@ public class WBlocks {
             wood, woodNorthSlab, woodEastSlab, woodSouthSlab, woodWestSlab;
 
     public static void registerBlocks() {
-
-        String modid_ = Reference.MODID.toLowerCase() + ".";
-
-        GameRegistry.registerBlock(ore1 = (new BlockOre1()), ItemBlockOre.class, "block_ore_1");
-        GameRegistry.registerBlock(ore2 = (new BlockOre2()), ItemBlockOre.class, "block_ore_2");
-        GameRegistry.registerBlock(ore3 = (new BlockOre3()), ItemBlockOre.class, "block_ore_3");
-        GameRegistry.registerBlock(ore4 = (new BlockOre4()), ItemBlockOre.class, "block_ore_4");
-//        GameRegistry.registerBlock(invisiblewall = (new BlockInvisibleWall()), "blockInvisibleWall");
-//        GameRegistry.registerBlock(havenbag = (new BlockHavenBag()), "blockHavenBag");
-//        GameRegistry.registerBlock(hbChest = (new BlockHavenBagChest()), "blockHavenBagChest");
-//        GameRegistry.registerBlock(hbLock = (new BlockHavenBagLock()), "blockHavenBagLock");
-//        GameRegistry.registerBlock(hbVisitors = (new BlockHavenBagVisitors()), "blockHavenBagVisitors");
-//        GameRegistry.registerBlock(fightWall = (new BlockFightWall()), "blockFightWall");
-//        GameRegistry.registerBlock(fightInsideWall = (new BlockFightInsideWall()), "blockFightInsideWall");
-//        GameRegistry.registerBlock(scree1 = (new BlockScree()), "blockScree1");
-
         // Debug Blocks
-        GameRegistry.registerBlock(debug = (new BlockGeneric(Material.wood).setUnlocalizedName(modid_ + "Debug")), "blockDebug");
-        GameRegistry.registerBlock(debugSlab = (new BlockSlab(Material.wood, WBlocks.debug.getDefaultState()).setUnlocalizedName(modid_ + "DebugSlab")), ItemBlockSlab.class, "blockDebugSlab");
+        registerBlock(debug = (new BlockGeneric(Material.wood).setUnlocalizedName(MODID_ + "debug")));
+        registerBlock(debugSlab = (new BlockSlab(Material.wood, WBlocks.debug.getDefaultState()).setUnlocalizedName(MODID_ + "debug_slab")), ItemBlockSlab.class);
 
-        // Special blocks
-        GameRegistry.registerBlock(classConsole = (new BlockClassConsole().setUnlocalizedName(modid_ + "ClassConsole")), "blockClassConsole");
+        // Ore
+        registerBlock(vein1 = (BlockVein) new BlockVein1().setUnlocalizedName(MODID_ + "vein"), ItemBlockVein.class);
+        registerBlock(vein2 = (BlockVein) new BlockVein2().setUnlocalizedName(MODID_ + "vein_2"), ItemBlockVein.class);
+        registerBlock(vein3 = (BlockVein) new BlockVein3().setUnlocalizedName(MODID_ + "vein_3"), ItemBlockVein.class);
+        registerBlock(vein4 = (BlockVein) new BlockVein4().setUnlocalizedName(MODID_ + "vein_4"), ItemBlockVein.class);
 
         // Fight Blocks
-        GameRegistry.registerBlock(fightDirection = (new BlockGeneric(Material.ground).setOpaque(false).setUnlocalizedName(modid_ + "FightDirection")), "blockFightDirection");
-        GameRegistry.registerBlock(fightMovement = (new BlockGeneric(Material.ground).setOpaque(false).setUnlocalizedName(modid_ + "FightMovement")), "blockFightMovement");
-        GameRegistry.registerBlock(fightStart = (new BlockFightStart().setUnlocalizedName(modid_ + "FightStart")), "blockFightStart");
-        GameRegistry.registerBlock(fightStart2 = (new BlockFightStart().setUnlocalizedName(modid_ + "FightStart2")), "blockFightStart2");
+        registerBlock(fightDirection = (new BlockGeneric(Material.ground).setOpaque(false).setUnlocalizedName(MODID_ + "fight_direction")));
+//        GameRegistry.registerBlock(fightInsideWall = (new BlockFightInsideWall()), "blockFightInsideWall");
+        registerBlock(fightMovement = (new BlockGeneric(Material.ground).setOpaque(false).setUnlocalizedName(MODID_ + "fight_movement")));
+        registerBlock(fightStart = (new BlockFightStart().setUnlocalizedName(MODID_ + "fight_start")));
+        registerBlock(fightStart2 = (new BlockFightStart().setUnlocalizedName(MODID_ + "fight_start_2")));
+//        GameRegistry.registerBlock(fightWall = (new BlockFightWall()), "blockFightWall");
+        registerBlock(invisibleWall = (new BlockInvisibleWall().setUnlocalizedName(MODID_ + "invisible_wall")));
 
         // HavenBag
-//        GameRegistry.registerBlock(hbBarrier = (new BlockHavenBagBarrier()), "blockHavenBagBarrier");
-        GameRegistry.registerBlock(hbBridge = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setOpaque(false).setUnlocalizedName(modid_ + "HBBridge")), "blockHBBridge");
-        GameRegistry.registerBlock(hbCraft = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(modid_ + "HBCraft")), "blockHBCraft");
-        GameRegistry.registerBlock(hbCraft2 = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(modid_ + "HBCraft2")), "blockHBCraft2");
-        GameRegistry.registerBlock(hbDeco = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(modid_ + "HBDeco")), "blockHBDeco");
-        GameRegistry.registerBlock(hbDeco2 = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(modid_ + "HBDeco2")), "blockHBDeco2");
-        GameRegistry.registerBlock(hbGarden = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(modid_ + "HBGarden")), "blockHBGarden");
-        GameRegistry.registerBlock(hbMerchant = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(modid_ + "HBMerchant")), "blockHBMerchant");
-        GameRegistry.registerBlock(hbStand = (new BlockGeneric(Material.wood, WCreativeTabs.tabBlock).setUnlocalizedName(modid_ + "HBStand")), "blockHBStand");
+        registerBlock(havenbag = (new BlockHavenBag().setUnlocalizedName(MODID_ + "haven_bag")));
+        registerBlock(hbBarrier = (new BlockHavenBagBarrier().setUnlocalizedName(MODID_ + "hb_barrier")));
+        registerBlock(hbBridge = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setOpaque(false).setUnlocalizedName(MODID_ + "hb_bridge")));
+        registerBlock(hbChest = (new BlockHavenBagChest().setUnlocalizedName(MODID_ + "hb_chest")));
+        registerBlock(hbCraft = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "hb_craft")));
+        registerBlock(hbCraft2 = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "hb_craft_2")));
+        registerBlock(hbDeco = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "hb_deco")));
+        registerBlock(hbDeco2 = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "hb_deco_2")));
+        registerBlock(hbGarden = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "hb_garden")));
+        registerBlock(hbGemWorkbench = (new BlockHavenGemWorkbench().setUnlocalizedName(MODID_ + "hb_gem_workbench")));
+        registerBlock(hbLock = (new BlockHavenBagLock().setUnlocalizedName(MODID_ + "hb_lock")));
+        registerBlock(hbMerchant = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "hb_merchant")));
+        registerBlock(hbVisitors = (new BlockHavenBagVisitors().setUnlocalizedName(MODID_ + "hb_visitors")));
 
-        // Basic blocks
-        GameRegistry.registerBlock(box = (new BlockGeneric(Material.wood, WCreativeTabs.tabBlock).setUnlocalizedName(modid_ + "Box")), "blockBox");
-        GameRegistry.registerBlock(fence = (new BlockWFence(Material.wood).setUnlocalizedName(modid_ + "SufokiaFence")), "blockSufokiaFence");
-
-        // Basic slabs
-        GameRegistry.registerBlock(carpet = (new BlockCenterCorner(Material.cloth).setUnlocalizedName(modid_ + "Carpet")), "blockCarpet");
-        GameRegistry.registerBlock(carpetNorthSlab = (new BlockSlab(Material.cloth, WBlocks.carpet.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(modid_ + "CarpetNorthSlab")), ItemBlockSlab.class, "blockCarpetNorthSlab");
-        GameRegistry.registerBlock(carpetSouthSlab = (new BlockSlab(Material.cloth, WBlocks.carpet.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(modid_ + "CarpetSouthSlab")), ItemBlockSlab.class, "blockCarpetSouthSlab");
-        GameRegistry.registerBlock(carpetEastSlab = (new BlockSlab(Material.cloth, WBlocks.carpet.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(modid_ + "CarpetEastSlab")), ItemBlockSlab.class, "blockCarpetEastSlab");
-        GameRegistry.registerBlock(carpetWestSlab = (new BlockSlab(Material.cloth, WBlocks.carpet.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(modid_ + "CarpetWestSlab")), ItemBlockSlab.class, "blockCarpetWestSlab");
-        GameRegistry.registerBlock(dirt = (new BlockGeneric(Material.ground).setUnlocalizedName(modid_ + "Dirt")), "blockDirt");
-        GameRegistry.registerBlock(dirtSlab = (new BlockSlab(Material.ground, WBlocks.dirt.getDefaultState()).setUnlocalizedName(modid_ + "DirtSlab")), ItemBlockSlab.class, "blockDirtSlab");
-        GameRegistry.registerBlock(grass = (new BlockGeneric(Material.grass).setUnlocalizedName(modid_ + "Grass")), "blockGrass");
-        GameRegistry.registerBlock(grassSlab = (new BlockSlab(Material.grass, WBlocks.grass.getDefaultState()).setUnlocalizedName(modid_ + "GrassSlab")), ItemBlockSlab.class, "blockGrassSlab");
-        GameRegistry.registerBlock(ground = (new BlockYRotation(Material.ground).setUnlocalizedName(modid_ + "Ground")), "blockGround");
-        GameRegistry.registerBlock(groundEastSlab = (new BlockSlab(Material.ground, WBlocks.ground.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(modid_ + "GroundEastSlab")), ItemBlockSlab.class, "blockGroundEastSlab");
-        GameRegistry.registerBlock(groundNorthSlab = (new BlockSlab(Material.ground, WBlocks.ground.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(modid_ + "GroundNorthSlab")), ItemBlockSlab.class, "blockGroundNorthSlab");
-        GameRegistry.registerBlock(groundSouthSlab = (new BlockSlab(Material.ground, WBlocks.ground.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(modid_ + "GroundSouthSlab")), ItemBlockSlab.class, "blockGroundSouthSlab");
-        GameRegistry.registerBlock(groundWestSlab = (new BlockSlab(Material.ground, WBlocks.ground.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(modid_ + "GroundWestSlab")), ItemBlockSlab.class, "blockGroundWestSlab");
-        GameRegistry.registerBlock(ground2 = (new BlockYRotation(Material.ground).setUnlocalizedName(modid_ + "Ground2")), "blockGround2");
-        GameRegistry.registerBlock(ground2EastSlab = (new BlockSlab(Material.ground, WBlocks.ground2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(modid_ + "Ground2EastSlab")), ItemBlockSlab.class, "blockGround2EastSlab");
-        GameRegistry.registerBlock(ground2NorthSlab = (new BlockSlab(Material.ground, WBlocks.ground2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(modid_ + "Ground2NorthSlab")), ItemBlockSlab.class, "blockGround2NorthSlab");
-        GameRegistry.registerBlock(ground2SouthSlab = (new BlockSlab(Material.ground, WBlocks.ground2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(modid_ + "Ground2SouthSlab")), ItemBlockSlab.class, "blockGround2SouthSlab");
-        GameRegistry.registerBlock(ground2WestSlab = (new BlockSlab(Material.ground, WBlocks.ground2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(modid_ + "Ground2WestSlab")), ItemBlockSlab.class, "blockGround2WestSlab");
-        GameRegistry.registerBlock(ground3 = (new BlockGeneric(Material.ground).setUnlocalizedName(modid_ + "Ground3")), "blockGround3");
-        GameRegistry.registerBlock(ground3Slab = (new BlockSlab(Material.ground, WBlocks.ground3.getDefaultState()).setUnlocalizedName(modid_ + "Ground3Slab")), ItemBlockSlab.class, "blockGround3Slab");
-        GameRegistry.registerBlock(ground4 = (new BlockGeneric(Material.ground).setUnlocalizedName(modid_ + "Ground4")), "blockGround4");
-        GameRegistry.registerBlock(ground4Slab = (new BlockSlab(Material.ground, WBlocks.ground4.getDefaultState()).setUnlocalizedName(modid_ + "Ground4Slab")), ItemBlockSlab.class, "blockGround4Slab");
-        GameRegistry.registerBlock(ground11 = (new BlockGeneric(Material.ground).setUnlocalizedName(modid_ + "Ground11")), "blockGround11");
-        GameRegistry.registerBlock(ground11Slab = (new BlockSlab(Material.ground, WBlocks.ground11.getDefaultState()).setUnlocalizedName(modid_ + "Ground11Slab")), ItemBlockSlab.class, "blockGround11Slab");
-        GameRegistry.registerBlock(ground12 = (new BlockGeneric(Material.ground).setUnlocalizedName(modid_ + "Ground12")), "blockGround12");
-        GameRegistry.registerBlock(ground12Slab = (new BlockSlab(Material.ground, WBlocks.ground12.getDefaultState()).setUnlocalizedName(modid_ + "Ground12Slab")), ItemBlockSlab.class, "blockGround12Slab");
-        GameRegistry.registerBlock(ground13 = (new BlockGeneric(Material.ground).setUnlocalizedName(modid_ + "Ground13")), "blockGround13");
-        GameRegistry.registerBlock(ground13Slab = (new BlockSlab(Material.ground, WBlocks.ground13.getDefaultState()).setUnlocalizedName(modid_ + "Ground13Slab")), ItemBlockSlab.class, "blockGround13Slab");
-        GameRegistry.registerBlock(ground14 = (new BlockGeneric(Material.ground).setUnlocalizedName(modid_ + "Ground14")), "blockGround14");
-        GameRegistry.registerBlock(ground14Slab = (new BlockSlab(Material.ground, WBlocks.ground14.getDefaultState()).setUnlocalizedName(modid_ + "Ground14Slab")), ItemBlockSlab.class, "blockGround14Slab");
-        GameRegistry.registerBlock(hbStandSlab = (new BlockSlab(Material.wood, WBlocks.hbStand.getDefaultState()).setUnlocalizedName(modid_ + "HBStandSlab")), ItemBlockSlab.class, "blockHBStandSlab");
-        GameRegistry.registerBlock(palisade = (new BlockPalisade(Material.wood).setUnlocalizedName(modid_ + "Palisade")), "blockPalisade");
-        GameRegistry.registerBlock(palisade2 = (new BlockPalisade(Material.wood).setUnlocalizedName(modid_ + "Palisade2")), "blockPalisade2");
-        GameRegistry.registerBlock(pillar = (new BlockGeneric(Material.wood).setUnlocalizedName(modid_ + "Pillar")), "blockPillar");
-        GameRegistry.registerBlock(pillarSlab = (new BlockSlab(Material.wood, WBlocks.pillar.getDefaultState()).setUnlocalizedName(modid_ + "PillarSlab")), ItemBlockSlab.class, "blockPillarSlab");
-        GameRegistry.registerBlock(plank = (new BlockGeneric(Material.wood, WCreativeTabs.tabBlock).setUnlocalizedName(modid_ + "Plank")), "blockPlank");
-        GameRegistry.registerBlock(plant = (new BlockPlant(Material.plants).setUnlocalizedName(modid_ + "Plant")), "blockPlant");
-        GameRegistry.registerBlock(plant2 = (new BlockPlant(Material.plants).setUnlocalizedName(modid_ + "Plant2")), "blockPlant2");
-        GameRegistry.registerBlock(sufokiaColor = (new BlockGeneric(Material.sand, WCreativeTabs.tabBlock).setUnlocalizedName(modid_ + "SufokiaColor")), "blockSufokiaColor");
-        GameRegistry.registerBlock(sufokiaGround = (new BlockGeneric(Material.ground).setUnlocalizedName(modid_ + "SufokiaGround")), "blockSufokiaGround");
-        GameRegistry.registerBlock(sufokiaGroundSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround.getDefaultState()).setUnlocalizedName(modid_ + "SufokiaGroundSlab")), ItemBlockSlab.class, "blockSufokiaGroundSlab");
-        GameRegistry.registerBlock(sufokiaGround2 = (new BlockGeneric(Material.ground).setUnlocalizedName(modid_ + "SufokiaGround2")), "blockSufokiaGround2");
-        GameRegistry.registerBlock(sufokiaGround2Slab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround2.getDefaultState()).setUnlocalizedName(modid_ + "SufokiaGround2Slab")), ItemBlockSlab.class, "blockSufokiaGround2Slab");
-        GameRegistry.registerBlock(sufokiaStair = ((new BlockStairs2(WBlocks.sufokiaColor.getDefaultState())).setUnlocalizedName(modid_ + "SufokiaStair")), "blockSufokiaStair");
-        GameRegistry.registerBlock(sufokiaSun = (new BlockGeneric(Material.sand).setUnlocalizedName(modid_ + "SufokiaSun")), "blockSufokiaSun");
-        GameRegistry.registerBlock(sufokiaSunSlab = (new BlockSlab(Material.sand, WBlocks.sufokiaSun.getDefaultState()).setUnlocalizedName(modid_ + "SufokiaSunSlab")), ItemBlockSlab.class, "blockSufokiaSunSlab");
-        GameRegistry.registerBlock(sufokiaWave = (new BlockYRotation(Material.sand).setUnlocalizedName(modid_ + "SufokiaWave")), "blockSufokiaWave");
-        GameRegistry.registerBlock(sufokiaWaveEastSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(modid_ + "SufokiaWaveEastSlab")), ItemBlockSlab.class, "blockSufokiaWaveEastSlab");
-        GameRegistry.registerBlock(sufokiaWaveNorthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(modid_ + "SufokiaWaveNorthSlab")), ItemBlockSlab.class, "blockSufokiaWaveNorthSlab");
-        GameRegistry.registerBlock(sufokiaWaveSouthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(modid_ + "SufokiaWaveSouthSlab")), ItemBlockSlab.class, "blockSufokiaWaveSouthSlab");
-        GameRegistry.registerBlock(sufokiaWaveWestSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(modid_ + "SufokiaWaveWestSlab")), ItemBlockSlab.class, "blockSufokiaWaveWestSlab");
-        GameRegistry.registerBlock(sufokiaWave2 = (new BlockYRotation(Material.sand).setUnlocalizedName(modid_ + "SufokiaWave2")), "blockSufokiaWave2");
-        GameRegistry.registerBlock(sufokiaWave2EastSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(modid_ + "SufokiaWave2EastSlab")), ItemBlockSlab.class, "blockSufokiaWave2EastSlab");
-        GameRegistry.registerBlock(sufokiaWave2NorthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(modid_ + "SufokiaWave2NorthSlab")), ItemBlockSlab.class, "blockSufokiaWave2NorthSlab");
-        GameRegistry.registerBlock(sufokiaWave2SouthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(modid_ + "SufokiaWave2SouthSlab")), ItemBlockSlab.class, "blockSufokiaWave2SouthSlab");
-        GameRegistry.registerBlock(sufokiaWave2WestSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(modid_ + "SufokiaWave2WestSlab")), ItemBlockSlab.class, "blockSufokiaWave2WestSlab");
-        GameRegistry.registerBlock(sufokiaWave3 = (new BlockCenterCorner(Material.sand).setUnlocalizedName(modid_ + "SufokiaWave3")), "blockSufokiaWave3");
-        GameRegistry.registerBlock(sufokiaWave3EastSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave3.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(modid_ + "SufokiaWave3EastSlab")), ItemBlockSlab.class, "blockSufokiaWave3EastSlab");
-        GameRegistry.registerBlock(sufokiaWave3NorthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave3.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(modid_ + "SufokiaWave3NorthSlab")), ItemBlockSlab.class, "blockSufokiaWave3NorthSlab");
-        GameRegistry.registerBlock(sufokiaWave3SouthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave3.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(modid_ + "SufokiaWave3SouthSlab")), ItemBlockSlab.class, "blockSufokiaWave3SouthSlab");
-        GameRegistry.registerBlock(sufokiaWave3WestSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave3.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(modid_ + "SufokiaWave3WestSlab")), ItemBlockSlab.class, "blockSufokiaWave3WestSlab");
-        GameRegistry.registerBlock(sufokiaWave4 = (new BlockGeneric(Material.sand, WCreativeTabs.tabBlock).setUnlocalizedName(modid_ + "SufokiaWave4")), "blockSufokiaWave4");
-        GameRegistry.registerBlock(wood = (new BlockYRotation(Material.wood).setUnlocalizedName(modid_ + "Wood")), "blockWood");
-        GameRegistry.registerBlock(woodEastSlab = (new BlockSlab(Material.wood, WBlocks.wood.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(modid_ + "WoodEastSlab")), ItemBlockSlab.class, "blockWoodEastSlab");
-        GameRegistry.registerBlock(woodNorthSlab = (new BlockSlab(Material.wood, WBlocks.wood.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(modid_ + "WoodNorthSlab")), ItemBlockSlab.class, "blockWoodNorthSlab");
-        GameRegistry.registerBlock(woodSouthSlab = (new BlockSlab(Material.wood, WBlocks.wood.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(modid_ + "WoodSouthSlab")), ItemBlockSlab.class, "blockWoodSouthSlab");
-        GameRegistry.registerBlock(woodWestSlab = (new BlockSlab(Material.wood, WBlocks.wood.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(modid_ + "WoodWestSlab")), ItemBlockSlab.class, "blockWoodWestSlab");
-
-//        // Special blocks
-//        GameRegistry.registerBlock(polisher = (new BlockPolisher()), "blockPolisher");
+        // Special blocks
+        registerBlock(classConsole = (new BlockClassConsole().setUnlocalizedName(MODID_ + "class_console")));
+        registerBlock(jobPolisher = (new BlockPolisher().setUnlocalizedName(MODID_ + "job_polisher")));
 //        GameRegistry.registerBlock(dragoexpress = (new BlockDragoexpress()), "blockDragoexpress");
 //        GameRegistry.registerBlock(phoenix = (new BlockPhoenix()), "blockPhoenix");
-//        GameRegistry.registerBlock(hbGemWorkbench = (new BlockHavenGemWorkbench()), "blockHavenGemWorkbench");
+
+        // Basic blocks
+        registerBlock(box = (new BlockGeneric(Material.wood, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "box")));
+        registerBlock(fence = (new BlockWFence(Material.wood).setUnlocalizedName(MODID_ + "sufokia_fence")));
+
+        // Basic slabs
+        registerBlock(carpet = (new BlockCenterCorner(Material.cloth).setUnlocalizedName(MODID_ + "carpet")));
+        registerBlock(carpetNorthSlab = (new BlockSlab(Material.cloth, WBlocks.carpet.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(MODID_ + "carpet_north_slab")), ItemBlockSlab.class);
+        registerBlock(carpetSouthSlab = (new BlockSlab(Material.cloth, WBlocks.carpet.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(MODID_ + "carpet_south_slab")), ItemBlockSlab.class);
+        registerBlock(carpetEastSlab = (new BlockSlab(Material.cloth, WBlocks.carpet.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(MODID_ + "carpet_east_slab")), ItemBlockSlab.class);
+        registerBlock(carpetWestSlab = (new BlockSlab(Material.cloth, WBlocks.carpet.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(MODID_ + "carpet_west_slab")), ItemBlockSlab.class);
+        registerBlock(dirt = (new BlockGeneric(Material.ground).setUnlocalizedName(MODID_ + "dirt")));
+        registerBlock(dirtSlab = (new BlockSlab(Material.ground, WBlocks.dirt.getDefaultState()).setUnlocalizedName(MODID_ + "dirt_slab")), ItemBlockSlab.class);
+        registerBlock(grass = (new BlockGeneric(Material.grass).setUnlocalizedName(MODID_ + "grass")));
+        registerBlock(grassSlab = (new BlockSlab(Material.grass, WBlocks.grass.getDefaultState()).setUnlocalizedName(MODID_ + "grass_slab")), ItemBlockSlab.class);
+        registerBlock(ground = (new BlockYRotation(Material.ground).setUnlocalizedName(MODID_ + "ground")));
+        registerBlock(groundEastSlab = (new BlockSlab(Material.ground, WBlocks.ground.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(MODID_ + "ground_east_slab")), ItemBlockSlab.class);
+        registerBlock(groundNorthSlab = (new BlockSlab(Material.ground, WBlocks.ground.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(MODID_ + "ground_north_slab")), ItemBlockSlab.class);
+        registerBlock(groundSouthSlab = (new BlockSlab(Material.ground, WBlocks.ground.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(MODID_ + "ground_south_slab")), ItemBlockSlab.class);
+        registerBlock(groundWestSlab = (new BlockSlab(Material.ground, WBlocks.ground.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(MODID_ + "ground_west_slab")), ItemBlockSlab.class);
+        registerBlock(ground2 = (new BlockYRotation(Material.ground).setUnlocalizedName(MODID_ + "ground_2")));
+        registerBlock(ground2EastSlab = (new BlockSlab(Material.ground, WBlocks.ground2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(MODID_ + "ground_2_east_slab")), ItemBlockSlab.class);
+        registerBlock(ground2NorthSlab = (new BlockSlab(Material.ground, WBlocks.ground2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(MODID_ + "ground_2_north_slab")), ItemBlockSlab.class);
+        registerBlock(ground2SouthSlab = (new BlockSlab(Material.ground, WBlocks.ground2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(MODID_ + "ground_2_south_slab")), ItemBlockSlab.class);
+        registerBlock(ground2WestSlab = (new BlockSlab(Material.ground, WBlocks.ground2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(MODID_ + "ground_2_west_slab")), ItemBlockSlab.class);
+        registerBlock(ground3 = (new BlockGeneric(Material.ground).setUnlocalizedName(MODID_ + "ground_3")));
+        registerBlock(ground3Slab = (new BlockSlab(Material.ground, WBlocks.ground3.getDefaultState()).setUnlocalizedName(MODID_ + "ground_3_slab")), ItemBlockSlab.class);
+        registerBlock(ground4 = (new BlockGeneric(Material.ground).setUnlocalizedName(MODID_ + "ground_4")));
+        registerBlock(ground4Slab = (new BlockSlab(Material.ground, WBlocks.ground4.getDefaultState()).setUnlocalizedName(MODID_ + "ground_4_slab")), ItemBlockSlab.class);
+        registerBlock(ground11 = (new BlockGeneric(Material.ground).setUnlocalizedName(MODID_ + "ground_11")));
+        registerBlock(ground11Slab = (new BlockSlab(Material.ground, WBlocks.ground11.getDefaultState()).setUnlocalizedName(MODID_ + "ground_11_slab")), ItemBlockSlab.class);
+        registerBlock(ground12 = (new BlockGeneric(Material.ground).setUnlocalizedName(MODID_ + "ground_12")));
+        registerBlock(ground12Slab = (new BlockSlab(Material.ground, WBlocks.ground12.getDefaultState()).setUnlocalizedName(MODID_ + "ground_12_slab")), ItemBlockSlab.class);
+        registerBlock(ground13 = (new BlockGeneric(Material.ground).setUnlocalizedName(MODID_ + "ground_13")));
+        registerBlock(ground13Slab = (new BlockSlab(Material.ground, WBlocks.ground13.getDefaultState()).setUnlocalizedName(MODID_ + "ground_13_slab")), ItemBlockSlab.class);
+        registerBlock(ground14 = (new BlockGeneric(Material.ground).setUnlocalizedName(MODID_ + "ground_14")));
+        registerBlock(ground14Slab = (new BlockSlab(Material.ground, WBlocks.ground14.getDefaultState()).setUnlocalizedName(MODID_ + "ground_14_slab")), ItemBlockSlab.class);
+        registerBlock(hbStand = (new BlockGeneric(Material.wood).setUnlocalizedName(MODID_ + "hb_stand")));
+        registerBlock(hbStandSlab = (new BlockSlab(Material.wood, WBlocks.hbStand.getDefaultState()).setUnlocalizedName(MODID_ + "hb_stand_slab")), ItemBlockSlab.class);
+        registerBlock(palisade = (new BlockPalisade(Material.wood).setUnlocalizedName(MODID_ + "palisade")));
+        registerBlock(palisade2 = (new BlockPalisade(Material.wood).setUnlocalizedName(MODID_ + "palisade_2")));
+        registerBlock(pillar = (new BlockGeneric(Material.wood).setUnlocalizedName(MODID_ + "pillar")));
+        registerBlock(pillarSlab = (new BlockSlab(Material.wood, WBlocks.pillar.getDefaultState()).setUnlocalizedName(MODID_ + "pillar_slab")), ItemBlockSlab.class);
+        registerBlock(plank = (new BlockGeneric(Material.wood, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "plank")));
+        registerBlock(plant = (new BlockPlant(Material.plants).setUnlocalizedName(MODID_ + "plant")));
+        registerBlock(plant2 = (new BlockPlant(Material.plants).setUnlocalizedName(MODID_ + "plant_2")));
+//        GameRegistry.registerBlock(scree1 = (new BlockScree()), "blockScree1");
+        registerBlock(sufokiaColor = (new BlockGeneric(Material.sand, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "sufokia_color")));
+        registerBlock(sufokiaGround = (new BlockGeneric(Material.ground).setUnlocalizedName(MODID_ + "sufokia_ground")));
+        registerBlock(sufokiaGroundSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround.getDefaultState()).setUnlocalizedName(MODID_ + "sufokia_ground_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaGround2 = (new BlockGeneric(Material.ground).setUnlocalizedName(MODID_ + "sufokia_ground_2")));
+        registerBlock(sufokiaGround2Slab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround2.getDefaultState()).setUnlocalizedName(MODID_ + "sufokia_ground_2_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaStair = ((new BlockStairs2(WBlocks.sufokiaColor.getDefaultState())).setUnlocalizedName(MODID_ + "sufokia_stair")));
+        registerBlock(sufokiaSun = (new BlockGeneric(Material.sand).setUnlocalizedName(MODID_ + "sufokia_sun")));
+        registerBlock(sufokiaSunSlab = (new BlockSlab(Material.sand, WBlocks.sufokiaSun.getDefaultState()).setUnlocalizedName(MODID_ + "sufokia_sun_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWave = (new BlockYRotation(Material.sand).setUnlocalizedName(MODID_ + "sufokia_wave")));
+        registerBlock(sufokiaWaveEastSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(MODID_ + "sufokia_wave_east_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWaveNorthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(MODID_ + "sufokia_wave_north_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWaveSouthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(MODID_ + "sufokia_wave_south_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWaveWestSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(MODID_ + "sufokia_wave_west_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWave2 = (new BlockYRotation(Material.sand).setUnlocalizedName(MODID_ + "sufokia_wave_2")));
+        registerBlock(sufokiaWave2EastSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(MODID_ + "sufokia_wave_2_east_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWave2NorthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(MODID_ + "sufokia_wave_2_north_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWave2SouthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(MODID_ + "sufokia_wave_2_south_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWave2WestSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave2.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(MODID_ + "sufokia_wave_2_west_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWave3 = (new BlockCenterCorner(Material.sand).setUnlocalizedName(MODID_ + "sufokia_wave_3")));
+        registerBlock(sufokiaWave3EastSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave3.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(MODID_ + "sufokia_wave_3_east_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWave3NorthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave3.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(MODID_ + "sufokia_wave_3_north_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWave3SouthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave3.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(MODID_ + "sufokia_wave_3_south_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWave3WestSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave3.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(MODID_ + "sufokia_wave_3_west_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaWave4 = (new BlockGeneric(Material.sand, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "sufokia_wave_4")));
+        registerBlock(wood = (new BlockYRotation(Material.wood).setUnlocalizedName(MODID_ + "wood")));
+        registerBlock(woodEastSlab = (new BlockSlab(Material.wood, WBlocks.wood.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(MODID_ + "wood_east_slab")), ItemBlockSlab.class);
+        registerBlock(woodNorthSlab = (new BlockSlab(Material.wood, WBlocks.wood.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(MODID_ + "wood_north_slab")), ItemBlockSlab.class);
+        registerBlock(woodSouthSlab = (new BlockSlab(Material.wood, WBlocks.wood.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(MODID_ + "wood_south_slab")), ItemBlockSlab.class);
+        registerBlock(woodWestSlab = (new BlockSlab(Material.wood, WBlocks.wood.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(MODID_ + "wood_west_slab")), ItemBlockSlab.class);
+    }
+
+    public static String makeRegistryName(final Block block) {
+        return block.getUnlocalizedName().substring("tile.".length() + MODID_.length());
+    }
+
+    public static void registerBlock(final Block block) {
+        GameRegistry.registerBlock(block, makeRegistryName(block));
+    }
+
+    public static void registerBlock(final Block block, final Class<? extends ItemBlock> itemBlockClass) {
+        GameRegistry.registerBlock(block, itemBlockClass, makeRegistryName(block));
     }
 }

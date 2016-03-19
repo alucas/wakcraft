@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,west=false": { "model": "wakcraft:fence/sufokia_color/post" },
+    "east=false,north=true,south=false,west=false": { "model": "wakcraft:fence/sufokia_color/n", "uvlock": true },
+    "east=true,north=false,south=false,west=false": { "model": "wakcraft:fence/sufokia_color/n", "y": 90, "uvlock": true },
+    "east=false,north=false,south=true,west=false": { "model": "wakcraft:fence/sufokia_color/n", "y": 180, "uvlock": true },
+    "east=false,north=false,south=false,west=true": { "model": "wakcraft:fence/sufokia_color/n", "y": 270, "uvlock": true },
+    "east=true,north=true,south=false,west=false": { "model": "wakcraft:fence/sufokia_color/ne", "uvlock": true },
+    "east=true,north=false,south=true,west=false": { "model": "wakcraft:fence/sufokia_color/ne", "y": 90, "uvlock": true },
+    "east=false,north=false,south=true,west=true": { "model": "wakcraft:fence/sufokia_color/ne", "y": 180, "uvlock": true },
+    "east=false,north=true,south=false,west=true": { "model": "wakcraft:fence/sufokia_color/ne", "y": 270, "uvlock": true },
+    "east=false,north=true,south=true,west=false": { "model": "wakcraft:fence/sufokia_color/ns", "uvlock": true },
+    "east=true,north=false,south=false,west=true": { "model": "wakcraft:fence/sufokia_color/ns", "y": 90, "uvlock": true },
+    "east=true,north=true,south=true,west=false": { "model": "wakcraft:fence/sufokia_color/nse", "uvlock": true },
+    "east=true,north=false,south=true,west=true": { "model": "wakcraft:fence/sufokia_color/nse", "y": 90, "uvlock": true },
+    "east=false,north=true,south=true,west=true": { "model": "wakcraft:fence/sufokia_color/nse", "y": 180, "uvlock": true },
+    "east=true,north=true,south=false,west=true": { "model": "wakcraft:fence/sufokia_color/nse", "y": 270, "uvlock": true },
+    "east=true,north=true,south=true,west=true": { "model": "wakcraft:fence/sufokia_color/nsew", "uvlock": true }
+  }
+}

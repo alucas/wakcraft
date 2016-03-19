@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
@@ -27,7 +26,6 @@ public class BlockHavenBag extends BlockContainer {
         super(Material.wood);
 
         setCreativeTab(WCreativeTabs.tabSpecialBlock);
-        setUnlocalizedName(Reference.MODID + "_HavenBag");
         setBlockUnbreakable();
     }
 
@@ -83,5 +81,10 @@ public class BlockHavenBag extends BlockContainer {
         }
 
         return false;
+    }
+
+    @Override
+    public int getRenderType() {
+        return 3;
     }
 }

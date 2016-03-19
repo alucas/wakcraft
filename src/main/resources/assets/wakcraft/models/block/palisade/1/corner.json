@@ -1,6 +1,6 @@
 {
   "parent": "wakcraft:block/palisade/template/corner",
   "textures": {
-    "all": "wakcraft:blocks/palisade1"
+    "all": "wakcraft:blocks/palisade_1"
   }
 }
