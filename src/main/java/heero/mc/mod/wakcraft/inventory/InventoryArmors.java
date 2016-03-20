@@ -8,16 +8,21 @@ import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 
 public class InventoryArmors extends InventoryBasic {
-    protected static TYPE[] types = new TYPE[]{TYPE.HELMET, TYPE.CHESTPLATE,
-            TYPE.BELT, TYPE.BOOTS, TYPE.AMULET, TYPE.CAPE, TYPE.RING,
-            TYPE.WEAPON, TYPE.EPAULET, TYPE.PET, TYPE.RING, TYPE.WEAPON};
+    protected static TYPE[] types = new TYPE[]{
+            TYPE.HELMET, TYPE.CHESTPLATE, TYPE.BELT, TYPE.BOOTS,
+            TYPE.AMULET, TYPE.CAPE, TYPE.RING, TYPE.WEAPON,
+            TYPE.EPAULET, TYPE.PET, TYPE.RING, TYPE.WEAPON};
 
     protected Entity entity;
 
-    public InventoryArmors(Entity entity) {
+    public InventoryArmors(final Entity entity) {
         super("Armors", false, 12);
 
         this.entity = entity;
+    }
+
+    public TYPE getSlotType(final int slotId) {
+        return types[slotId];
     }
 
     /**
@@ -25,7 +30,7 @@ public class InventoryArmors extends InventoryBasic {
      * (second arg) of items and returns them in a new stack.
      */
     @Override
-    public ItemStack decrStackSize(int slotId, int quantity) {
+    public ItemStack decrStackSize(final int slotId, final int quantity) {
         if (quantity < 1) {
             return null;
         }
@@ -46,20 +51,20 @@ public class InventoryArmors extends InventoryBasic {
      * crafting or armor sections).
      */
     @Override
-    public void setInventorySlotContents(int slotId, ItemStack stack) {
+    public void setInventorySlotContents(final int slotId, final ItemStack stack) {
         if (stack != null && !(stack.getItem() instanceof ItemWArmor)) {
             return;
         }
 
         ItemStack oldStack = getStackInSlot(slotId);
         if (oldStack != null) {
-            ItemWArmor item = (ItemWArmor) oldStack.getItem();
+            final ItemWArmor item = (ItemWArmor) oldStack.getItem();
 
             CharacteristicsManager.unequipItem(entity, item);
         }
 
         if (stack != null) {
-            ItemWArmor item = (ItemWArmor) stack.getItem();
+            final ItemWArmor item = (ItemWArmor) stack.getItem();
 
             CharacteristicsManager.equipItem(entity, item);
         }
@@ -80,7 +85,7 @@ public class InventoryArmors extends InventoryBasic {
      * stack size) into the given slot.
      */
     @Override
-    public boolean isItemValidForSlot(int slotId, ItemStack stack) {
+    public boolean isItemValidForSlot(final int slotId, final ItemStack stack) {
         if (stack == null) {
             return false;
         }

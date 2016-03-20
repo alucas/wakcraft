@@ -2,13 +2,15 @@ package heero.mc.mod.wakcraft.entity.creature.tofu;
 
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
+import heero.mc.mod.wakcraft.client.model.ModelBabyTofu;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -39,7 +41,7 @@ public class BabyTofu extends TofuGeneric {
     }
 
     @SideOnly(Side.CLIENT)
-    public static class RenderBabyTofu extends RendererWCreature {
+    public static class RenderBabyTofu extends RendererWCreature<BabyTofu> {
         private static final ResourceLocation texture = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/mobs/babytofu.png");
 
         public RenderBabyTofu(final RenderManager renderManager, final ModelBase model, final float shadowSize) {
@@ -47,9 +49,16 @@ public class BabyTofu extends TofuGeneric {
         }
 
         @Override
-        protected ResourceLocation getEntityTexture(Entity entity) {
+        protected ResourceLocation getEntityTexture(BabyTofu entity) {
             return texture;
         }
     }
 
+    @SideOnly(Side.CLIENT)
+    public static class RenderFactoryBabyTofu implements IRenderFactory<BabyTofu> {
+        @Override
+        public Render<? super BabyTofu> createRenderFor(RenderManager manager) {
+            return new BabyTofu.RenderBabyTofu(manager, new ModelBabyTofu(), 0.5f);
+        }
+    }
 }

@@ -24,15 +24,11 @@ import heero.mc.mod.wakcraft.network.packet.fight.*;
 import heero.mc.mod.wakcraft.tileentity.*;
 import heero.mc.mod.wakcraft.world.WorldProviderHavenBag;
 import heero.mc.mod.wakcraft.world.gen.WorldGenHavenBag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -45,16 +41,11 @@ public class CommonProxy {
     }
 
     public void registerPreInitEvents() {
-        FightEventsHandler fightsHandler = new FightEventsHandler();
-
         MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
         MinecraftForge.EVENT_BUS.register(new CharacteristicsEventsHandler());
-        MinecraftForge.EVENT_BUS.register(fightsHandler);
-
-        FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
-        FMLCommonHandler.instance().bus().register(fightsHandler);
+        MinecraftForge.EVENT_BUS.register(new FightEventsHandler());
     }
 
     public void registerInitEvents() {
@@ -77,28 +68,19 @@ public class CommonProxy {
     }
 
     public void registerEntities() {
-        registerEntity(Gobball.class, "Gobball", 0xeaeaea, 0xc99a03);
-        registerEntity(Gobbette.class, "Gobbette", 0xeaeaea, 0xc99ab3);
-        registerEntity(WhiteGobbly.class, "WhiteGobbly", 0xeaeaea, 0xc29ab3);
-        registerEntity(BlackGobbly.class, "BlackGobbly", 0xeaeaea, 0xc22ab3);
-        registerEntity(GobballWC.class, "GobballWarChief", 0xeaeaea, 0xc22a23);
-        registerEntity(BowMeow.class, "BowMeow", 0xeaeaea, 0x000000);
-        registerEntity(BabyTofu.class, "BabyTofu", 0xeaeaea, 0xffa500);
-        registerEntity(Tofurby.class, "Tofurby", 0xeaeaea, 0xffa500);
+        EntityRegistry.registerModEntity(EntityTextPopup.class, "TextPopup", 1, Wakcraft.instance, 10, 1, false);
+        EntityRegistry.registerModEntity(EntitySeedsPile.class, "SeedPile", 2, Wakcraft.instance, 24, 1, false);
 
-        EntityRegistry.registerGlobalEntityID(EntityTextPopup.class, "TextPopup", EntityRegistry.findGlobalUniqueEntityId());
-        EntityRegistry.registerGlobalEntityID(EntitySeedsPile.class, "SeedPile", EntityRegistry.findGlobalUniqueEntityId());
+        // Monsters
+        EntityRegistry.registerModEntity(Gobball.class, "Gobball", 1000, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xc99a03);
+        EntityRegistry.registerModEntity(Gobbette.class, "Gobbette", 1001, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xc99ab3);
+        EntityRegistry.registerModEntity(WhiteGobbly.class, "WhiteGobbly", 1002, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xc29ab3);
+        EntityRegistry.registerModEntity(BlackGobbly.class, "BlackGobbly", 1003, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xc22ab3);
+        EntityRegistry.registerModEntity(GobballWC.class, "GobballWarChief", 1004, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xc22a23);
+        EntityRegistry.registerModEntity(BowMeow.class, "BowMeow", 1005, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0x000000);
+        EntityRegistry.registerModEntity(BabyTofu.class, "BabyTofu", 1006, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xffa500);
+        EntityRegistry.registerModEntity(Tofurby.class, "Tofurby", 1007, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xffa500);
 
-        EntityRegistry.registerModEntity(EntitySeedsPile.class, "SeedPile", EntityRegistry.findGlobalUniqueEntityId(), Wakcraft.instance, 20, 5, false);
-    }
-
-    @SuppressWarnings("unchecked")
-    private void registerEntity(Class<? extends Entity> entityClass,
-                                String entityName, int bkEggColor, int fgEggColor) {
-        int id = EntityRegistry.findGlobalUniqueEntityId();
-
-        EntityRegistry.registerGlobalEntityID(entityClass, entityName, id);
-        EntityList.entityEggs.put(Integer.valueOf(id), new EntityEggInfo(id, bkEggColor, fgEggColor));
     }
 
     public void registerGui(Wakcraft wc) {

@@ -10,13 +10,27 @@ import heero.mc.mod.wakcraft.network.packet.PacketHavenBagVisitors;
 import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.IThreadListener;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerServerHavenBagVisitors implements IMessageHandler<PacketHavenBagVisitors, IMessage> {
     @Override
-    public IMessage onMessage(PacketHavenBagVisitors message, MessageContext ctx) {
+    public IMessage onMessage(final PacketHavenBagVisitors message, final MessageContext ctx) {
+        IThreadListener mainThread = (WorldServer) ctx.getServerHandler().playerEntity.worldObj;
+        mainThread.addScheduledTask(new Runnable() {
+            @Override
+            public void run() {
+                onMessageHandler(message, ctx);
+            }
+        });
+
+        return null;
+    }
+
+    protected IMessage onMessageHandler(final PacketHavenBagVisitors message, final MessageContext ctx) {
         EntityPlayer player = ctx.getServerHandler().playerEntity;
 
         HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);

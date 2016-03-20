@@ -46,6 +46,7 @@ public class WorldProviderHavenBag extends WorldProvider {
      *
      * @return The message to be displayed
      */
+    @Override
     public String getWelcomeMessage() {
         return "Entering your HavenBag";
     }
@@ -56,6 +57,7 @@ public class WorldProviderHavenBag extends WorldProvider {
      *
      * @return The message to be displayed
      */
+    @Override
     public String getDepartMessage() {
         return "Leaving your HavenBag";
     }
@@ -64,6 +66,7 @@ public class WorldProviderHavenBag extends WorldProvider {
      * Returns 'true' if in the "main surface world", but 'false' if in the
      * Nether or End dimensions.
      */
+    @Override
     public boolean isSurfaceWorld() {
         return false;
     }
@@ -72,6 +75,7 @@ public class WorldProviderHavenBag extends WorldProvider {
      * Calculates the angle of sun and moon in the sky relative to a specified
      * time (usually worldTime)
      */
+    @Override
     public float calculateCelestialAngle(long par1, float par3) {
         return 0.0F;
     }
@@ -80,11 +84,13 @@ public class WorldProviderHavenBag extends WorldProvider {
      * Returns array with sunrise/sunset colors
      */
     @SideOnly(Side.CLIENT)
+    @Override
     public float[] calcSunriseSunsetColors(float par1, float par2) {
         return null;
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public boolean isSkyColored() {
         return false;
     }
@@ -93,10 +99,12 @@ public class WorldProviderHavenBag extends WorldProvider {
      * True if the player can respawn in this dimension (true = overworld, false
      * = nether).
      */
+    @Override
     public boolean canRespawnHere() {
         return false;
     }
 
+    @Override
     public int getAverageGroundLevel() {
         return 10;
     }
@@ -105,6 +113,7 @@ public class WorldProviderHavenBag extends WorldProvider {
      * Returns true if the given X,Z coordinate should show environmental fog.
      */
     @SideOnly(Side.CLIENT)
+    @Override
     public boolean doesXZShowFog(int x, int z) {
         return true;
     }
@@ -113,6 +122,7 @@ public class WorldProviderHavenBag extends WorldProvider {
      * Return Vec3D with biome specific fog color
      */
     @SideOnly(Side.CLIENT)
+    @Override
     public Vec3 getFogColor(float par1, float par2) {
         int i = 10518688;
         float f2 = MathHelper.cos(par1 * (float) Math.PI * 2.0F) * 2.0F + 0.5F;

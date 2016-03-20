@@ -14,45 +14,24 @@ public enum Characteristic {
     // Battle
     INITIATIVE("Initiative"),
     HEAL("Heal"),
-    /**
-     * Probability to do a critical hit (in %)
-     */
-    CRITICAL("Critical"),
-    /**
-     * Critical damage bonus (in %)
-     */
-    CRITICAL_DAMAGE("Critical_Damage"),
-    /**
-     * Probability to do a critical failure (in %)
-     */
-    CRITICAL_FAILURE("Critical_Failure"),
+    CRITICAL("Critical"), // Probability to do a critical hit (in %)
+    CRITICAL_DAMAGE("Critical_Damage"), // Critical damage bonus (in %)
+    CRITICAL_FAILURE("Critical_Failure"), // Probability to do a critical failure (in %)
     BACKSTAB("Backstab"),
     BACKSTAB_RESISTANCE("Backstab_Resistance"),
     DODGE("Dodge"),
     LOCK("Lock"),
     BLOCK("Block"),
-    /**
-     * Increase the chance to apply a state
-     */
-    WILLPOWER("Willpower"),
+    WILLPOWER("Willpower"), // Increase the chance to apply a state
     RANGE("Range"),
 
     // Secondary
-    /**
-     * Increase the number of creatures you can control
-     */
-    CONTROL("Control"),
-    /**
-     * Increases the damages of the creatures and mechanisms you control
-     */
-    CMC_DAMAGE("CMC_Damage"),
+    CONTROL("Control"), // Increase the number of creatures you can control
+    CMC_DAMAGE("CMC_Damage"), // Increases the damages of the creatures and mechanisms you control
     WISDOM("Wisdom"),
-    PROSPECTION("Prospection"),
+    PROSPECT("Prospect"),
     PERCEPTION("Perception"),
-    /**
-     * Decrease the required level to equip an item
-     */
-    KIT("Kit"),
+    KIT("Kit"), // Decrease the required level to equip an item
 
     // Mastery
     WATER_RES("Water_Res"),

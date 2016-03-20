@@ -21,7 +21,7 @@ public class GUIEventHandler {
     @SubscribeEvent
     public void onGuiOpen(GuiOpenEvent event) {
         if (event.gui != null && event.gui instanceof GuiInventory) {
-            Minecraft mc = Minecraft.getMinecraft();
+            final Minecraft mc = Minecraft.getMinecraft();
 
             if (mc.playerController.isInCreativeMode()) {
                 return;

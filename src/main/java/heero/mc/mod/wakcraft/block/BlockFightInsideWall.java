@@ -14,12 +14,11 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class BlockFightInsideWall extends BlockGeneric {
+public class BlockFightInsideWall extends BlockGenericTransparent {
 
     public BlockFightInsideWall() {
         super(Material.air);
 
-        setOpaque(false);
         setCanBePlacedManually(false);
     }
 

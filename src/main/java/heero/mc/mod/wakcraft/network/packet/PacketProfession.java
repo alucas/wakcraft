@@ -13,11 +13,11 @@ public class PacketProfession implements IMessage {
     public Map<PROFESSION, Integer> xps;
 
     public PacketProfession() {
-        xps = new HashMap<PROFESSION, Integer>();
+        xps = new HashMap<>();
     }
 
     public PacketProfession(EntityPlayer player) {
-        xps = new HashMap<PROFESSION, Integer>();
+        this();
 
         for (PROFESSION profession : PROFESSION.values()) {
             xps.put(profession, ProfessionManager.getXp(player, profession));
@@ -25,7 +25,8 @@ public class PacketProfession implements IMessage {
     }
 
     public PacketProfession(EntityPlayer player, PROFESSION profession) {
-        xps = new HashMap<PROFESSION, Integer>();
+        this();
+
         xps.put(profession, ProfessionManager.getXp(player, profession));
     }
 

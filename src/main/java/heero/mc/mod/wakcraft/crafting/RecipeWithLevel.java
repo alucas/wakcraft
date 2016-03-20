@@ -5,13 +5,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class RecipeWithLevel implements IExtendedRecipe {
-    public int recipeLevel;
-    public ItemStack recipeResult;
-    public List<ItemStack> recipeComponents;
+    public final int recipeLevel;
+    public final ItemStack recipeResult;
+    public final List<ItemStack> recipeComponents;
 
     public RecipeWithLevel(ItemStack result, List<ItemStack> components, int level) {
         this.recipeLevel = level;
@@ -28,25 +27,23 @@ public class RecipeWithLevel implements IExtendedRecipe {
 
         for (int i = 0; i < inventory.getSizeInventory(); ++i) {
             ItemStack itemstack = inventory.getStackInSlot(i);
-            if (itemstack != null) {
-                boolean flag = false;
-                Iterator<ItemStack> iterator = components.iterator();
+            if (itemstack == null) {
+                continue;
+            }
 
-                while (iterator.hasNext()) {
-                    ItemStack itemstack1 = (ItemStack) iterator.next();
-
-                    if (itemstack.getItem() == itemstack1.getItem()
-                            && itemstack.getItemDamage() == itemstack1.getItemDamage()
-                            && itemstack.stackSize >= itemstack1.stackSize) {
-                        flag = true;
-                        components.remove(itemstack1);
-                        break;
-                    }
+            boolean flag = false;
+            for (ItemStack stack : components) {
+                if (itemstack.getItem() == stack.getItem()
+                        && itemstack.getItemDamage() == stack.getItemDamage()
+                        && itemstack.stackSize >= stack.stackSize) {
+                    flag = true;
+                    components.remove(stack);
+                    break;
                 }
+            }
 
-                if (!flag) {
-                    return false;
-                }
+            if (!flag) {
+                return false;
             }
         }
 

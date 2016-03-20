@@ -19,7 +19,7 @@ public class Wakcraft {
     @SidedProxy(clientSide = Reference.PROXY_CLIENT_PATH, serverSide = Reference.PROXY_SERVER_PATH)
     public static CommonProxy proxy;
 
-    public static final SimpleNetworkWrapper packetPipeline = NetworkRegistry.INSTANCE.newSimpleChannel("Wakcraft");
+    public static final SimpleNetworkWrapper packetPipeline = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MODID);
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

@@ -10,14 +10,15 @@ import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIInventory;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUISpells;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIWorkbench;
-import heero.mc.mod.wakcraft.client.renderer.entity.RenderFactory;
+import heero.mc.mod.wakcraft.client.renderer.factory.RenderFactoryTextPopup;
 import heero.mc.mod.wakcraft.client.renderer.fight.FightRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.FighterRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.SpellRenderer;
-import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererDragoexpress;
-import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererHavenBagChest;
-import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererPhoenix;
 import heero.mc.mod.wakcraft.client.setting.KeyBindings;
+import heero.mc.mod.wakcraft.entity.creature.gobball.*;
+import heero.mc.mod.wakcraft.entity.creature.meow.BowMeow;
+import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
+import heero.mc.mod.wakcraft.entity.creature.tofu.Tofurby;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.eventhandler.GUIEventHandler;
 import heero.mc.mod.wakcraft.eventhandler.KeyInputHandler;
@@ -27,10 +28,8 @@ import heero.mc.mod.wakcraft.inventory.*;
 import heero.mc.mod.wakcraft.item.EnumOre;
 import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
-import heero.mc.mod.wakcraft.tileentity.TileEntityDragoexpress;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
-import heero.mc.mod.wakcraft.tileentity.TileEntityPhoenix;
 import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -44,7 +43,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -55,23 +53,21 @@ public class CombinedClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
-        RenderFactory renderFactory = new RenderFactory();
-//        RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
-//        RenderingRegistry.registerEntityRenderingHandler(Gobball.class, new Gobball.RenderGobball(renderManager, new ModelGobball(), 0.5f));
-//        RenderingRegistry.registerEntityRenderingHandler(Gobbette.class, new Gobbette.RenderGobette(renderManager, new ModelGobbette(), 0.5f));
-//        RenderingRegistry.registerEntityRenderingHandler(WhiteGobbly.class, new WhiteGobbly.RenderWhiteGobbly(renderManager, new ModelGobbly(), 0.5f));
-//        RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderBlackGobbly(renderManager, new ModelGobbly(), 0.5f));
-//        RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderGobballWC(renderManager, new ModelGobballWC(), 0.5f));
-//        RenderingRegistry.registerEntityRenderingHandler(BowMeow.class, new BowMeow.RenderBowMeow(renderManager, new ModelBowMeow(), 0.5f));
-//        RenderingRegistry.registerEntityRenderingHandler(BabyTofu.class, new BabyTofu.RenderBabyTofu(renderManager, new ModelBabyTofu(), 0.5f));
-//        RenderingRegistry.registerEntityRenderingHandler(Tofurby.class, new Tofurby.RenderTofurby(renderManager, new ModelTofurby(), 0.5f));
+        RenderingRegistry.registerEntityRenderingHandler(Gobball.class, new Gobball.RenderFactoryGobball());
+        RenderingRegistry.registerEntityRenderingHandler(Gobbette.class, new Gobbette.RenderFactoryGobbette());
+        RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderFactoryBlackGobbly());
+        RenderingRegistry.registerEntityRenderingHandler(WhiteGobbly.class, new WhiteGobbly.RenderFactoryWhiteGobbly());
+        RenderingRegistry.registerEntityRenderingHandler(GobballWC.class, new GobballWC.RenderFactoryGobballWC());
+        RenderingRegistry.registerEntityRenderingHandler(BowMeow.class, new BowMeow.RenderFactoryBowMeow());
+        RenderingRegistry.registerEntityRenderingHandler(BabyTofu.class, new BabyTofu.RenderFactoryBabyTofu());
+        RenderingRegistry.registerEntityRenderingHandler(Tofurby.class, new Tofurby.RenderFactoryTofurby());
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, renderFactory);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new RenderFactoryTextPopup());
 //        RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new RendererSeedsPile(renderManager));
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RendererDragoexpress());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RendererPhoenix());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHavenBagChest.class, new RendererHavenBagChest());
+//        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RendererDragoexpress());
+//        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RendererPhoenix());
+//        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHavenBagChest.class, new RendererHavenBagChest());
 
 //		RenderingRegistry.registerBlockHandler(new RendererBlockRotation(RenderingRegistry.getNextAvailableRenderId()));
 //		RenderingRegistry.registerBlockHandler(new RendererBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
@@ -336,8 +332,6 @@ public class CombinedClientProxy extends CommonProxy {
         FightClientEventsHandler fightEventHandler = new FightClientEventsHandler(fighteRenderer, guiFightOverlay, fighterRenderer);
 
         MinecraftForge.EVENT_BUS.register(fightEventHandler);
-
-        FMLCommonHandler.instance().bus().register(fightEventHandler);
     }
 
     @Override
@@ -346,7 +340,7 @@ public class CombinedClientProxy extends CommonProxy {
 
         KeyBindings.init();
 
-        FMLCommonHandler.instance().bus().register(new KeyInputHandler());
+        MinecraftForge.EVENT_BUS.register(new KeyInputHandler());
     }
 
     @Override

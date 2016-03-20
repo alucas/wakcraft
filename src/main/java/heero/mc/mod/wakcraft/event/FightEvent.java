@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FightEvent extends Event {
     public enum Type {
-        UNKNOW, START, STOP, CHANGE_STAGE, START_TURN,
+        UNKNOWN, START, STOP, CHANGE_STAGE, START_TURN,
     }
 
     public final World world;
@@ -35,7 +35,7 @@ public class FightEvent extends Event {
             super(Type.START, world, fightId);
 
             this.startBlocks = startBlocks;
-            this.fighters = new ArrayList<List<EntityLivingBase>>();
+            this.fighters = new ArrayList<>();
             this.fighters.add(Collections.unmodifiableList(fighters.get(0)));
             this.fighters.add(Collections.unmodifiableList(fighters.get(1)));
         }
@@ -47,7 +47,7 @@ public class FightEvent extends Event {
         public FightStopEvent(World world, int fightId, List<List<EntityLivingBase>> fighters) {
             super(Type.STOP, world, fightId);
 
-            this.fighters = new ArrayList<List<EntityLivingBase>>();
+            this.fighters = new ArrayList<>();
             this.fighters.add(Collections.unmodifiableList(fighters.get(0)));
             this.fighters.add(Collections.unmodifiableList(fighters.get(1)));
         }

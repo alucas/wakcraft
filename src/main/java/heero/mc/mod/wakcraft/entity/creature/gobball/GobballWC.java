@@ -2,13 +2,15 @@ package heero.mc.mod.wakcraft.entity.creature.gobball;
 
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
+import heero.mc.mod.wakcraft.client.model.ModelGobballWC;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -37,7 +39,7 @@ public class GobballWC extends GobballGeneric {
     }
 
     @SideOnly(Side.CLIENT)
-    public static class RenderGobballWC extends RendererWCreature {
+    public static class RenderGobballWC extends RendererWCreature<GobballWC> {
         private static final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/mobs/bouftoucg.png");
 
         public RenderGobballWC(final RenderManager renderManager, final ModelBase model, final float shadowSize) {
@@ -45,8 +47,16 @@ public class GobballWC extends GobballGeneric {
         }
 
         @Override
-        protected ResourceLocation getEntityTexture(Entity entity) {
+        protected ResourceLocation getEntityTexture(GobballWC entity) {
             return texture;
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static class RenderFactoryGobballWC implements IRenderFactory<GobballWC> {
+        @Override
+        public Render<? super GobballWC> createRenderFor(RenderManager manager) {
+            return new GobballWC.RenderGobballWC(manager, new ModelGobballWC(), 0.5f);
         }
     }
 }

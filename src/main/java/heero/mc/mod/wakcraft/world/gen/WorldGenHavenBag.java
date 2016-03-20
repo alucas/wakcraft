@@ -7,9 +7,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.Random;
 
 public class WorldGenHavenBag implements IWorldGenerator {
-
     @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world,
-                         IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
     }
 }

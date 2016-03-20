@@ -4,7 +4,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.block.state.IBlockState;
 
-public class BlockInvisibleWall extends BlockGeneric {
+public class BlockInvisibleWall extends BlockGenericTransparent {
 
     public BlockInvisibleWall() {
         super(new MaterialTransparent(MapColor.airColor) {
@@ -17,7 +17,6 @@ public class BlockInvisibleWall extends BlockGeneric {
         setCanBePlacedManually(false);
         setRenderType(-1);
         setLightLevel(1);
-        setOpaque(true);
     }
 
     @Override

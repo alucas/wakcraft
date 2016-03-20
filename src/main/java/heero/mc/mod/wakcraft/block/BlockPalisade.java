@@ -19,13 +19,12 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class BlockPalisade extends BlockGeneric {
+public class BlockPalisade extends BlockGenericTransparent {
     public static final IProperty PROP_CORNER = PropertyBool.create("propertyCorner");
 
     public BlockPalisade(Material material) {
         super(material, WCreativeTabs.tabBlock);
 
-        setOpaque(false);
         setDefaultState(blockState.getBaseState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH));
     }
 

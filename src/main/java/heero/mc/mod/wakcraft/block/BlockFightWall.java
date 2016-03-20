@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockFightWall extends BlockGeneric {
+public class BlockFightWall extends BlockGenericTransparent {
 
     public BlockFightWall() {
         super(new Material(MapColor.emeraldColor) {
@@ -27,7 +27,6 @@ public class BlockFightWall extends BlockGeneric {
 
         setBlockUnbreakable();
         setCanBePlacedManually(false);
-        setOpaque(false);
     }
 
     /**

@@ -39,6 +39,8 @@ public class GUIHavenBagChests extends GUITabs {
                 havenBagChestGuiIds);
 
         this.container = container;
+
+        onSelectTab(havenBagChestGuiIds.indexOf(GuiId.HAVEN_BAG_CHEST_NORMAL));
     }
 
     /**

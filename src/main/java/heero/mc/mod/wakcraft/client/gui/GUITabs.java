@@ -106,13 +106,9 @@ public abstract class GUITabs extends GuiScreen {
         super.handleKeyboardInput();
     }
 
-    /**
-     * Called when the mouse is moved or a mouse button is released. Signature:
-     * (mouseX, mouseY, releasedButton)
-     */
     @Override
-    protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-        if (clickedMouseButton == 0) {
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        if (mouseButton == 0) {
             int relativeMouseX = mouseX - tabButtonLeft;
             int relativeMouseY = mouseY - tabButtonTop;
 

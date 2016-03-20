@@ -26,9 +26,9 @@ public class CharacteristicsManager {
             return;
         }
 
-        CharacteristicsProperty properties = (CharacteristicsProperty) ((EntityPlayer) entity).getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
+        CharacteristicsProperty properties = (CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
         if (properties == null) {
-            WLog.warning("Error while loading the characteristics properties of player : " + ((EntityPlayer) entity).getDisplayName());
+            WLog.warning("Error while loading the characteristics properties of player : " + entity.getDisplayName());
             return;
         }
 
@@ -42,9 +42,9 @@ public class CharacteristicsManager {
             return;
         }
 
-        CharacteristicsProperty properties = (CharacteristicsProperty) ((EntityPlayer) entity).getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
+        CharacteristicsProperty properties = (CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
         if (properties == null) {
-            WLog.warning("Error while loading the characteristics properties of player : " + ((EntityPlayer) entity).getDisplayName());
+            WLog.warning("Error while loading the characteristics properties of player : " + entity.getDisplayName());
             return;
         }
 

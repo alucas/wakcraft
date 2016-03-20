@@ -7,18 +7,22 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerPlayerInventory extends Container {
 
     public ContainerPlayerInventory(EntityPlayer player) {
-        InventoryProperty properties = (InventoryProperty) player.getExtendedProperties(InventoryProperty.IDENTIFIER);
+        final InventoryProperty properties = (InventoryProperty) player.getExtendedProperties(InventoryProperty.IDENTIFIER);
         if (properties == null) {
             WLog.warning("Error while loading the inventory of player " + player.getDisplayName());
             return;
         }
 
         for (int i = 0; i < properties.getInventoryArmors().getSizeInventory(); ++i) {
-            this.addSlotToContainer(new SlotArmor(properties.getInventoryArmors(), i, 8 + (i / 4) * 18 + (i >= 4 ? 61 : 0), 8 + (i % 4) * 18));
+            final SlotArmor slot = new SlotArmor(properties.getInventoryArmors(), i, 8 + (i / 4) * 18 + (i >= 4 ? 61 : 0), 8 + (i % 4) * 18);
+            this.addSlotToContainer(slot);
         }
 
         bindPlayerInventory(player.inventory);
@@ -102,15 +106,15 @@ public class ContainerPlayerInventory extends Container {
         /**
          * Returns the placeholder icon
          */
-//        TODO
-//		@SideOnly(Side.CLIENT)
-//		@Override
-//		public IIcon getBackgroundIconIndex() {
-//			if (!(inventory instanceof InventoryArmors)) {
-//				return null;
-//			}
-//
-//			return ItemWArmor.getPlaceholderIcon(((InventoryArmors) inventory).getSlotType(slotNumber));
-//		}
+        @SideOnly(Side.CLIENT)
+        @Override
+        public ResourceLocation getBackgroundLocation() {
+//            TODO
+//            if (inventory instanceof InventoryArmors) {
+//                return ((InventoryArmors) inventory).getSlotType(slotNumber).placeHolderResource;
+//            }
+
+            return null;
+        }
     }
 }

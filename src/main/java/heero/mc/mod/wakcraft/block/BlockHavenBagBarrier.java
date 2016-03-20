@@ -18,14 +18,13 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 import java.util.List;
 
-public class BlockHavenBagBarrier extends BlockGeneric {
+public class BlockHavenBagBarrier extends BlockGenericTransparent {
 
     public BlockHavenBagBarrier() {
         super(Material.air);
 
         setCanBePlacedManually(false);
         setRenderType(-1);
-        setOpaque(false);
     }
 
     @Override

@@ -97,12 +97,7 @@ public class HavenBagGenerationHelper {
             for (int j = 0; j < 5; j++) {
                 if ((gemPosition % 2 == 1) && (i == 4 || j == 4) || (gemPosition % 2 == 0 && i != 4 && j != 4)) {
                     Block block = getRandomHBBlock(stack);
-                    setHBBBlock(world,
-                            x + 2 + i + ((gemPosition / 2) % 3) * 6,
-                            y - 1,
-                            z + 5 + j + (gemPosition / 6) * 6,
-                            block,
-                            0);
+                    setHBBBlock(world, x + 2 + i + ((gemPosition / 2) % 3) * 6, y - 1, z + 5 + j + (gemPosition / 6) * 6, block, 0);
                 }
             }
         }
@@ -130,15 +125,10 @@ public class HavenBagGenerationHelper {
                 if (stack1Upper != null && stack2Upper != null && stack1Upper.getItem().equals(stack2Upper.getItem())) {
                     for (int i = 0; i < 5; i++) {
                         Block block = getRandomHBBlock(stack1Lower);
-                        setHBBBlock(world,
-                                x + 2 + i + column * 6,
-                                y - 1,
-                                z + 4 + row * 6,
-                                block,
-                                0);
+                        setHBBBlock(world, x + 2 + i + column * 6, y - 1, z + 4 + row * 6, block, 0);
                     }
                 } else if (stack1Lower == null || stack2Lower == null) {
-                    Block block = getRandomHBBlock();
+                    Block block = Blocks.air;
                     for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
                         for (int i = 0; i < 5; i++) {
                             setHBBBlock(world, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, block, 0);
@@ -150,7 +140,7 @@ public class HavenBagGenerationHelper {
                             if (i == 1 || i == 2) {
                                 setHBBBlock(world, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, WBlocks.hbBridge, 0);
                             } else {
-                                setHBBBlock(world, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, WBlocks.invisibleWall, 0);
+                                setHBBBlock(world, x + 2 + i + column * 6, y - 1, z + 4 - j + row * 6, Blocks.air, 0);
                             }
                         }
                     }
@@ -172,7 +162,7 @@ public class HavenBagGenerationHelper {
                         setHBBBlock(world, x + 1 + column * 6, y - 1, z + 5 + i + row * 6, block, 0);
                     }
                 } else if (stack1Lower == null || stack2Lower == null) {
-                    Block block = getRandomHBBlock();
+                    Block block = Blocks.air;
                     for (int j = 0; j < ((stack2Upper == null) ? 2 : 1); j++) {
                         for (int i = 0; i < 5; i++) {
                             setHBBBlock(world, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, block, 0);
@@ -184,7 +174,7 @@ public class HavenBagGenerationHelper {
                             if (i == 1 || i == 2) {
                                 setHBBBlock(world, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, WBlocks.hbBridge, 0);
                             } else {
-                                setHBBBlock(world, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, WBlocks.invisibleWall, 0);
+                                setHBBBlock(world, x + 1 - j + column * 6, y - 1, z + 5 + i + row * 6, Blocks.air, 0);
                             }
                         }
                     }
@@ -203,21 +193,17 @@ public class HavenBagGenerationHelper {
             if (stack1 != null && stack2 != null && stack3 != null && stack4 != null && stack1.getItem().equals(stack2.getItem()) && stack1.getItem().equals(stack3.getItem()) && stack1.getItem().equals(stack4.getItem())) {
                 setHBBBlock(world, x + 7 + (i % 3) * 6, y - 1, z + 10 + (i / 3) * 6, getRandomHBBlock(slots.getStackInSlot(i * 2)), 0);
             } else {
-                setHBBBlock(world, x + 7 + (i % 3) * 6, y - 1, z + 10 + (i / 3) * 6, WBlocks.invisibleWall, 0);
+                setHBBBlock(world, x + 7 + (i % 3) * 6, y - 1, z + 10 + (i / 3) * 6, Blocks.air, 0);
             }
         }
     }
 
-    protected static Block getRandomHBBlock() {
-        return WBlocks.invisibleWall;
-    }
-
     protected static Block getRandomHBBlock(ItemStack stack) {
-        return (stack == null) ? WBlocks.invisibleWall : getRandomHBBlock(stack.getItem());
+        return (stack == null) ? Blocks.air : getRandomHBBlock(stack.getItem());
     }
 
     protected static Block getRandomHBBlock(Item item) {
-        return (item == null) ? WBlocks.invisibleWall
+        return (item == null) ? Blocks.air
                 : (item == WItems.craftHG) ? ((int) (Math.random() * 2)) == 0 ? WBlocks.hbCraft : WBlocks.hbCraft2
                 : (item == WItems.merchantHG) ? WBlocks.hbMerchant
                 : (item == WItems.decoHG) ? ((int) (Math.random() * 2)) == 0 ? WBlocks.hbDeco : WBlocks.hbDeco2
@@ -225,27 +211,39 @@ public class HavenBagGenerationHelper {
                 : Blocks.lapis_block;
     }
 
-    private static void setHBBBlock(World world, int x, int y, int z, Block hbBlock, int metadata) {
-        if (hbBlock.equals(WBlocks.invisibleWall)) {
-            for (int i = 0; i < 4; i++) {
-                world.setBlockState(new BlockPos(x, y + i, z), hbBlock.getDefaultState(), 2);
+    protected static boolean isHBBlock(Block block) {
+        return WBlocks.hbCraft.equals(block)
+                || WBlocks.hbCraft2.equals(block)
+                || WBlocks.hbDeco.equals(block)
+                || WBlocks.hbDeco2.equals(block)
+                || WBlocks.hbGarden.equals(block)
+                || WBlocks.hbMerchant.equals(block)
+                ;
+    }
+
+    protected static void setHBBBlock(World world, int x, int y, int z, Block block, int metadata) {
+        if (isHBBlock(block)) {
+            world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(metadata), 2);
+
+            for (int i = 1; i < HB_HEIGHT; i++) {
+                world.setBlockState(new BlockPos(x, y + i, z), Blocks.air.getDefaultState(), 2);
             }
-        } else if (hbBlock.equals(WBlocks.hbBridge)) {
+        } else if (WBlocks.hbBridge.equals(block)) {
             world.setBlockState(new BlockPos(x, y, z), WBlocks.hbBridge.getDefaultState(), 2);
 
-            for (int i = 1; i < 4; i++) {
+            for (int i = 1; i < HB_HEIGHT; i++) {
                 world.setBlockState(new BlockPos(x, y + i, z), WBlocks.hbBarrier.getDefaultState(), 2);
             }
         } else {
-            world.setBlockState(new BlockPos(x, y, z), hbBlock.getStateFromMeta(metadata), 2);
+            world.setBlockState(new BlockPos(x, y, z), Blocks.air.getDefaultState(), 2);
 
-            for (int i = 1; i < 4; i++) {
-                world.setBlockState(new BlockPos(x, y + i, z), Blocks.air.getDefaultState(), 2);
+            for (int i = 1; i < HB_HEIGHT; i++) {
+                world.setBlockState(new BlockPos(x, y + i, z), WBlocks.invisibleWall.getDefaultState(), 2);
             }
         }
     }
 
-    private static boolean isHavenBagWorld(World world) {
+    protected static boolean isHavenBagWorld(World world) {
         if (!WorldUtil.isHavenBagWorld(world)) {
             WLog.warning("The received world is not the {} world : {}", WorldProviderHavenBag.NAME, world.provider.getDimensionName());
 

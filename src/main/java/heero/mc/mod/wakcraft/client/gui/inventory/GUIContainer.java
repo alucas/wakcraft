@@ -126,6 +126,7 @@ public abstract class GUIContainer extends GuiContainer {
         for (int i = 0; i < inventorySlots.inventorySlots.size(); ++i) {
             Slot slot = (Slot) inventorySlots.inventorySlots.get(i);
 
+            System.out.println("draw slot");
             drawSlot(slot);
 
             if (slot.slotNumber == hoveredSlotId) {

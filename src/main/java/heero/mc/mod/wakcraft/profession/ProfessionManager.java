@@ -35,8 +35,7 @@ public class ProfessionManager {
     }
 
     public static void setXp(EntityPlayer player, PROFESSION profession, int xpValue) {
-        ProfessionProperty properties = (ProfessionProperty) player
-                .getExtendedProperties(ProfessionProperty.IDENTIFIER);
+        ProfessionProperty properties = (ProfessionProperty) player.getExtendedProperties(ProfessionProperty.IDENTIFIER);
 
         if (properties != null) {
             properties.setXp(profession, xpValue);

@@ -1,10 +1,11 @@
-entity.Gobball.name=Gobball
-entity.Gobbette.name=Gobbette
-entity.WhiteGobbly.name=White Gobbly
-entity.BlackGobbly.name=Black Gobbly
-entity.GobballWarChief.name=Gobball War Chief
-entity.BowMeow.name=Bow Meow
-entity.BabyTofu.name=Baby Tofu
+entity.wakcraft.Gobball.name=Gobball
+entity.wakcraft.Gobbette.name=Gobbette
+entity.wakcraft.WhiteGobbly.name=White Gobbly
+entity.wakcraft.BlackGobbly.name=Black Gobbly
+entity.wakcraft.GobballWarChief.name=Gobball War Chief
+entity.wakcraft.BowMeow.name=Bow Meow
+entity.wakcraft.BabyTofu.name=Baby Tofu
+entity.wakcraft.Tofurby.name=Tofurby
 
 # Item
 item.wakcraft.AdventurerIkiakit.name=Adventurer Ikiakit

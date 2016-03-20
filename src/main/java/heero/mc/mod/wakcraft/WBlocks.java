@@ -23,7 +23,7 @@ public class WBlocks {
             classConsole,
             dirt,
             dirtSlab,
-            dragoexpress,
+            dragoExpress,
             fence,
             fightDirection,
             fightInsideWall,
@@ -94,9 +94,9 @@ public class WBlocks {
         registerBlock(vein4 = (BlockVein) new BlockVein4().setUnlocalizedName(MODID_ + "vein_4"), ItemBlockVein.class);
 
         // Fight Blocks
-        registerBlock(fightDirection = (new BlockGeneric(Material.ground).setOpaque(false).setUnlocalizedName(MODID_ + "fight_direction")));
+        registerBlock(fightDirection = (new BlockGenericTransparent(Material.ground).setUnlocalizedName(MODID_ + "fight_direction")));
 //        GameRegistry.registerBlock(fightInsideWall = (new BlockFightInsideWall()), "blockFightInsideWall");
-        registerBlock(fightMovement = (new BlockGeneric(Material.ground).setOpaque(false).setUnlocalizedName(MODID_ + "fight_movement")));
+        registerBlock(fightMovement = (new BlockGenericTransparent(Material.ground).setUnlocalizedName(MODID_ + "fight_movement")));
         registerBlock(fightStart = (new BlockFightStart().setUnlocalizedName(MODID_ + "fight_start")));
         registerBlock(fightStart2 = (new BlockFightStart().setUnlocalizedName(MODID_ + "fight_start_2")));
 //        GameRegistry.registerBlock(fightWall = (new BlockFightWall()), "blockFightWall");
@@ -105,7 +105,7 @@ public class WBlocks {
         // HavenBag
         registerBlock(havenbag = (new BlockHavenBag().setUnlocalizedName(MODID_ + "haven_bag")));
         registerBlock(hbBarrier = (new BlockHavenBagBarrier().setUnlocalizedName(MODID_ + "hb_barrier")));
-        registerBlock(hbBridge = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setOpaque(false).setUnlocalizedName(MODID_ + "hb_bridge")));
+        registerBlock(hbBridge = (new BlockGenericTransparent(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "hb_bridge")));
         registerBlock(hbChest = (new BlockHavenBagChest().setUnlocalizedName(MODID_ + "hb_chest")));
         registerBlock(hbCraft = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "hb_craft")));
         registerBlock(hbCraft2 = (new BlockGeneric(Material.iron, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "hb_craft_2")));
@@ -120,7 +120,7 @@ public class WBlocks {
         // Special blocks
         registerBlock(classConsole = (new BlockClassConsole().setUnlocalizedName(MODID_ + "class_console")));
         registerBlock(jobPolisher = (new BlockPolisher().setUnlocalizedName(MODID_ + "job_polisher")));
-//        GameRegistry.registerBlock(dragoexpress = (new BlockDragoexpress()), "blockDragoexpress");
+//        GameRegistry.registerBlock(dragoExpress = (new BlockDragoexpress()), "blockDragoexpress");
 //        GameRegistry.registerBlock(phoenix = (new BlockPhoenix()), "blockPhoenix");
 
         // Basic blocks

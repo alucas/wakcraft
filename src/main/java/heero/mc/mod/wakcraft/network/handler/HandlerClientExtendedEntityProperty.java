@@ -4,7 +4,9 @@ import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.property.ISynchProperties;
 import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.IThreadListener;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -12,7 +14,19 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerClientExtendedEntityProperty implements IMessageHandler<PacketExtendedEntityProperty, IMessage> {
     @Override
-    public IMessage onMessage(PacketExtendedEntityProperty message, MessageContext ctx) {
+    public IMessage onMessage(final PacketExtendedEntityProperty message, final MessageContext ctx) {
+        IThreadListener mainThread = Minecraft.getMinecraft();
+        mainThread.addScheduledTask(new Runnable() {
+            @Override
+            public void run() {
+                onMessageHandler(message, ctx);
+            }
+        });
+
+        return null;
+    }
+
+    protected IMessage onMessageHandler(final PacketExtendedEntityProperty message, final MessageContext ctx) {
         Entity entity = Wakcraft.proxy.getClientWorld().getEntityByID(message.entityId);
         if (entity == null) {
             WLog.warning("Error while loading entity %d, entity not found", message.entityId);

@@ -1,9 +1,9 @@
 package heero.mc.mod.wakcraft.block.vein;
 
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.block.BlockGeneric;
+import heero.mc.mod.wakcraft.block.BlockGenericTransparent;
 import heero.mc.mod.wakcraft.block.ILevelBlock;
-import heero.mc.mod.wakcraft.block.material.AventureMaterial;
+import heero.mc.mod.wakcraft.block.material.AdventureMaterial;
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.item.EnumOre;
@@ -31,7 +31,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public abstract class BlockVein extends BlockGeneric implements ILevelBlock {
+public abstract class BlockVein extends BlockGenericTransparent implements ILevelBlock {
 
     /**
      * Wakfu Ore block.
@@ -40,12 +40,11 @@ public abstract class BlockVein extends BlockGeneric implements ILevelBlock {
      * - Bit 2, 3, 4 : Mineral type
      */
     public BlockVein() {
-        super(new AventureMaterial(MapColor.brownColor), WCreativeTabs.tabOreBlock);
+        super(new AdventureMaterial(MapColor.brownColor), WCreativeTabs.tabOreBlock);
 
         setDefaultState(blockState.getBaseState().withProperty(getPropExtractable(), EnumExtractable.NOT_MINED));
         setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
         setHardness(6.66f); // 6.66 = 10s
-        setOpaque(false);
     }
 
     public abstract PropertyEnum<EnumExtractable> getPropExtractable();

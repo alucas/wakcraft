@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public abstract class RendererWCreature extends RendererLivingEntity {
+public abstract class RendererWCreature<T extends EntityLivingBase> extends RendererLivingEntity<T> {
     static final float PIXEL_SIZE = 0.0625F;
     static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/entity/fightarrow.png");
 
@@ -24,7 +24,7 @@ public abstract class RendererWCreature extends RendererLivingEntity {
     }
 
     @Override
-    public void doRender(EntityLivingBase entity, double relativeX, double relativeY,
+    public void doRender(T entity, double relativeX, double relativeY,
                          double relativeZ, float rotationYaw, float partialTickTime) {
         super.doRender(entity, relativeX, relativeY, relativeZ, rotationYaw, partialTickTime);
 
@@ -35,7 +35,7 @@ public abstract class RendererWCreature extends RendererLivingEntity {
         }
     }
 
-    public void doRenderFightArrow(EntityLivingBase entity,
+    public void doRenderFightArrow(T entity,
                                    double relativeX, double relativeY, double relativeZ, float partialTickTime) {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_CULL_FACE);

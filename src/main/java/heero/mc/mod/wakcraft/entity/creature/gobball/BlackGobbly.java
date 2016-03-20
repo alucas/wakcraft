@@ -2,13 +2,15 @@ package heero.mc.mod.wakcraft.entity.creature.gobball;
 
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
+import heero.mc.mod.wakcraft.client.model.ModelGobbly;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -36,7 +38,7 @@ public class BlackGobbly extends GobballGeneric {
     }
 
     @SideOnly(Side.CLIENT)
-    public static class RenderBlackGobbly extends RendererWCreature {
+    public static class RenderBlackGobbly extends RendererWCreature<BlackGobbly> {
         private static final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/mobs/bouftonnoir.png");
 
         public RenderBlackGobbly(final RenderManager renderManager, final ModelBase model, final float shadowSize) {
@@ -44,8 +46,16 @@ public class BlackGobbly extends GobballGeneric {
         }
 
         @Override
-        protected ResourceLocation getEntityTexture(Entity entity) {
+        protected ResourceLocation getEntityTexture(BlackGobbly entity) {
             return texture;
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static class RenderFactoryBlackGobbly implements IRenderFactory<BlackGobbly> {
+        @Override
+        public Render<? super BlackGobbly> createRenderFor(RenderManager manager) {
+            return new BlackGobbly.RenderBlackGobbly(manager, new ModelGobbly(), 0.5f);
         }
     }
 }

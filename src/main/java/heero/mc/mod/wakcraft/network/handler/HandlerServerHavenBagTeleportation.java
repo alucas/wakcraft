@@ -16,35 +16,45 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class HandlerServerHavenBagTeleportation implements IMessageHandler<PacketHavenBagTeleportation, IMessage> {
     @Override
-    public IMessage onMessage(PacketHavenBagTeleportation message, MessageContext ctx) {
+    public IMessage onMessage(final PacketHavenBagTeleportation message, final MessageContext ctx) {
+        IThreadListener mainThread = (WorldServer) ctx.getServerHandler().playerEntity.worldObj;
+        mainThread.addScheduledTask(new Runnable() {
+            @Override
+            public void run() {
+                onMessageHandler(message, ctx);
+            }
+        });
+
+        return null;
+    }
+
+    protected void onMessageHandler(final PacketHavenBagTeleportation message, final MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().playerEntity;
 
         HavenBagProperty properties = (HavenBagProperty) player.getExtendedProperties(HavenBagProperty.IDENTIFIER);
         if (properties == null) {
             WLog.warning("Error while loading player ({}) havenbag properties", player.getDisplayName());
-            return null;
+            return;
         }
 
         if (properties.isInHavenBag()) {
             HavenBagUtil.leaveHavenBag(player);
 
-            return null;
+            return;
         }
 
         if (!player.onGround) {
             player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.cantOpenHavenBagInAir")));
-            return null;
+            return;
         }
 
         BlockPos pos = new BlockPos(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY - player.getYOffset()), MathHelper.floor_double(player.posZ));
@@ -53,7 +63,7 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
         Block blockUnder = player.worldObj.getBlockState(pos.down()).getBlock();
         if (!(block instanceof BlockSlab) && !(blockUnder.isOpaqueCube())) {
             player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.cantOpenHavenBagHere")));
-            return null;
+            return;
         }
 
         // Initialization
@@ -64,7 +74,7 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
             if (havenBagWorld == null) {
                 WLog.warning("Error while loading the havenbag world : {}", WConfig.getHavenBagDimensionId());
 
-                return null;
+                return;
             }
 
             properties.setUID(player.worldObj.getUniqueDataId("havenbag"));
@@ -75,11 +85,8 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
             if (!result) {
                 WLog.warning("Error during the generation of the havenbag : {}", properties.getUID());
 
-                return null;
+                return;
             }
-
-            player.addChatMessage(new ChatComponentText("Haven bag genere"));
-            return null;
         }
 
         while (!(player.worldObj.getBlockState(pos).getBlock().getMaterial() == Material.air)) {
@@ -87,7 +94,7 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 
             if (pos.getY() >= player.worldObj.getHeight()) {
                 System.out.println("error: " + pos.getY());
-                return null;
+                return;
             }
         }
 
@@ -96,7 +103,7 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
         TileEntity tileEntity = player.worldObj.getTileEntity(pos);
         if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBag)) {
             WLog.warning("Error while loading the tile entity ({}, {}, {})", pos.getX(), pos.getY(), pos.getZ());
-            return null;
+            return;
         }
 
         TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tileEntity;
@@ -107,7 +114,5 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
 
 //        player.playerNetServerHandler.sendPacket(tileHavenBag.getDescriptionPacket());
         Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(player, HavenBagProperty.IDENTIFIER), player);
-
-        return null;
     }
 }

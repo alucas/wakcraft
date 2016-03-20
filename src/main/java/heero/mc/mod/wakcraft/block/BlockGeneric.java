@@ -14,10 +14,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockGeneric extends Block {
-    protected boolean opaque;
-    protected boolean canBePlacedManually;
-    protected int renderType;
-    protected EnumWorldBlockLayer layer;
+    protected boolean canBePlacedManually = true;
+    protected int renderType = 3;
+    protected EnumWorldBlockLayer layer = EnumWorldBlockLayer.SOLID;
 
     public BlockGeneric(Material material, CreativeTabs tab) {
         this(material);
@@ -27,11 +26,6 @@ public class BlockGeneric extends Block {
 
     public BlockGeneric(Material material) {
         super(material);
-
-        this.opaque = true;
-        this.canBePlacedManually = true;
-        this.renderType = 3;
-        this.layer = EnumWorldBlockLayer.SOLID;
 
         setBlockUnbreakable();
         setCreativeTab(WCreativeTabs.tabOther);
@@ -45,18 +39,8 @@ public class BlockGeneric extends Block {
 
     @Override
     public int getRenderType() {
+        super.getRenderType();
         return renderType;
-    }
-
-    public BlockGeneric setOpaque(final boolean opaque) {
-        this.opaque = opaque;
-
-        return this;
-    }
-
-    @Override
-    public boolean isOpaqueCube() {
-        return opaque;
     }
 
     public BlockGeneric setFull(final boolean full) {
@@ -65,11 +49,7 @@ public class BlockGeneric extends Block {
         return this;
     }
 
-    @Override
-    public boolean isFullBlock() {
-        return fullBlock;
-    }
-
+    @SideOnly(Side.CLIENT)
     public BlockGeneric setLayer(final EnumWorldBlockLayer layer) {
         this.layer = layer;
 

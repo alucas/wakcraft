@@ -9,12 +9,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockFightStart extends BlockGeneric {
+public class BlockFightStart extends BlockGenericTransparent {
 
     public BlockFightStart() {
         super(Material.gourd);
 
-        setOpaque(false);
         setCanBePlacedManually(false);
     }
 

@@ -2,13 +2,15 @@ package heero.mc.mod.wakcraft.entity.creature.meow;
 
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
+import heero.mc.mod.wakcraft.client.model.ModelBowMeow;
 import heero.mc.mod.wakcraft.client.renderer.entity.RendererWCreature;
 import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -35,7 +37,7 @@ public class BowMeow extends MeowGeneric {
     }
 
     @SideOnly(Side.CLIENT)
-    public static class RenderBowMeow extends RendererWCreature {
+    public static class RenderBowMeow extends RendererWCreature<BowMeow> {
         private static final ResourceLocation texture = new ResourceLocation(Reference.MODID.toLowerCase(), "textures/mobs/chachanoir.png");
 
         public RenderBowMeow(final RenderManager renderManager, final ModelBase model, final float shadowSize) {
@@ -43,8 +45,16 @@ public class BowMeow extends MeowGeneric {
         }
 
         @Override
-        protected ResourceLocation getEntityTexture(Entity entity) {
+        protected ResourceLocation getEntityTexture(BowMeow entity) {
             return texture;
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static class RenderFactoryBowMeow implements IRenderFactory<BowMeow> {
+        @Override
+        public Render<? super BowMeow> createRenderFor(RenderManager manager) {
+            return new BowMeow.RenderBowMeow(manager, new ModelBowMeow(), 0.5f);
         }
     }
 }

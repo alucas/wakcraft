@@ -16,7 +16,7 @@ import java.util.Map;
 public class CraftingManager {
     private static final CraftingManager instance = new CraftingManager();
 
-    private Map<PROFESSION, List<IExtendedRecipe>> recipes = new HashMap<PROFESSION, List<IExtendedRecipe>>();
+    private final Map<PROFESSION, List<IExtendedRecipe>> recipes = new HashMap<>();
 
 
     private CraftingManager() {
@@ -33,17 +33,14 @@ public class CraftingManager {
         addRecipe(PROFESSION.MINER, 25, new ItemStack(WItems.shadowyBlue), new ItemStack(WItems.ore1, 3, 5));
     }
 
-    public static final CraftingManager getInstance() {
+    public static CraftingManager getInstance() {
         return instance;
     }
 
     public void addRecipe(PROFESSION profession, int level, ItemStack result, Object... recipe) {
-        ArrayList<ItemStack> recipeList = new ArrayList<ItemStack>();
+        final ArrayList<ItemStack> recipeList = new ArrayList<>();
 
-        int nbIngredients = recipe.length;
-        for (int i = 0; i < nbIngredients; i++) {
-            Object ingredient = recipe[i];
-
+        for (Object ingredient : recipe) {
             if (ingredient instanceof ItemStack) {
                 recipeList.add(((ItemStack) ingredient).copy());
             } else if (ingredient instanceof Item) {
@@ -51,7 +48,7 @@ public class CraftingManager {
             } else if (ingredient instanceof Block) {
                 recipeList.add(new ItemStack((Block) ingredient));
             } else {
-                throw new RuntimeException("Invalid shapeless recipy!");
+                throw new RuntimeException("Invalid shapeless recipe!");
             }
         }
 
@@ -59,7 +56,7 @@ public class CraftingManager {
     }
 
     public ItemStack findMatchingRecipe(PROFESSION profession, InventoryCrafting inventory, World world) {
-        IExtendedRecipe recipe = getMatchingRecipe(profession, inventory, world);
+        final IExtendedRecipe recipe = getMatchingRecipe(profession, inventory, world);
         if (recipe != null) {
             return recipe.getCraftingResult(inventory);
         }
@@ -68,9 +65,8 @@ public class CraftingManager {
     }
 
     public IExtendedRecipe getMatchingRecipe(PROFESSION profession, InventoryCrafting inventory, World world) {
-        List<IExtendedRecipe> professionRecipes = getRecipeList(profession);
-        for (int i = 0; i < professionRecipes.size(); ++i) {
-            IExtendedRecipe IExtendedRecipe = (IExtendedRecipe) professionRecipes.get(i);
+        final List<IExtendedRecipe> professionRecipes = getRecipeList(profession);
+        for (heero.mc.mod.wakcraft.crafting.IExtendedRecipe IExtendedRecipe : professionRecipes) {
             if (IExtendedRecipe.matches(inventory, world)) {
                 return IExtendedRecipe;
             }

@@ -12,13 +12,12 @@ import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockPlant extends BlockGeneric {
+public class BlockPlant extends BlockGenericTransparent {
     public static final IProperty PRO_BOTTOM_POSITION = PropertyInteger.create("propertyBottomPosition", 0, 3);
 
     public BlockPlant(Material material) {
         super(material, WCreativeTabs.tabBlock);
 
-        setOpaque(false);
         setFull(false);
         setLayer(EnumWorldBlockLayer.CUTOUT);
         setDefaultState(blockState.getBaseState().withProperty(PRO_BOTTOM_POSITION, 0));

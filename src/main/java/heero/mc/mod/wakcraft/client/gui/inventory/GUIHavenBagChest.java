@@ -4,13 +4,13 @@ import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.havenbag.ChestType;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest;
 import heero.mc.mod.wakcraft.inventory.ContainerHavenBagChest.HavenBagChestSlot;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 
@@ -57,13 +57,13 @@ public class GUIHavenBagChest extends GUIContainer {
 
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        GL11.glEnable(GL11.GL_BLEND);
+        GlStateManager.enableBlend();
 
         for (int i = chestId.chestSize; i < 54; i++) {
             drawTexturedModalRect(guiLeft + 8 + (i % 9) * 18, guiTop + 18 + (i / 9) * 18, xSize, 0, 16, 16);
         }
 
-        GL11.glDisable(GL11.GL_BLEND);
+        GlStateManager.disableBlend();
     }
 
     /**

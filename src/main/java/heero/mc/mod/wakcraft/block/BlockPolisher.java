@@ -1,5 +1,6 @@
-package heero.mc.mod.wakcraft;
+package heero.mc.mod.wakcraft.block;
 
+import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.block.BlockGeneric;
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.network.GuiId;
