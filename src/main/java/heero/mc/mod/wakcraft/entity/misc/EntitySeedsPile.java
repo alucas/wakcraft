@@ -1,13 +1,21 @@
 package heero.mc.mod.wakcraft.entity.misc;
 
+import heero.mc.mod.wakcraft.client.renderer.entity.RendererSeedsPile;
 import heero.mc.mod.wakcraft.entity.creature.EntityWCreature;
 import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
@@ -22,15 +30,15 @@ public class EntitySeedsPile extends Entity implements IEntityAdditionalSpawnDat
     protected int age;
     protected ItemWCreatureSeeds itemSeeds;
 
-    public EntitySeedsPile(World world) {
+    public EntitySeedsPile(final World world) {
         super(world);
     }
 
-    public EntitySeedsPile(World world, int x, int y, int z, ItemWCreatureSeeds itemSeeds) {
+    public EntitySeedsPile(final World world, final BlockPos pos, ItemWCreatureSeeds itemSeeds) {
         super(world);
 
         this.setSize(1, 1);
-        this.setPosition(x, y, z);
+        this.setPosition(pos.getX(), pos.getY(), pos.getZ());
 
         this.itemSeeds = itemSeeds;
     }
@@ -63,30 +71,34 @@ public class EntitySeedsPile extends Entity implements IEntityAdditionalSpawnDat
     }
 
     protected void spawnGroup() {
-        if (!worldObj.isRemote) {
-            for (String patern : itemSeeds.paterns.keySet()) {
-                if (rand.nextFloat() < itemSeeds.paterns.get(patern)) {
-                    Set<UUID> group = new HashSet<UUID>();
+        if (worldObj.isRemote) {
+            return;
+        }
 
-                    for (Character c : patern.toCharArray()) {
-                        Class<? extends EntityWCreature> creatureClass = itemSeeds.creatures.get(c);
+        for (String pattern : itemSeeds.patterns.keySet()) {
+            if (rand.nextFloat() >= itemSeeds.patterns.get(pattern)) {
+                continue;
+            }
 
-                        try {
-                            EntityWCreature creature = creatureClass.getConstructor(World.class).newInstance(worldObj);
-                            group.add(creature.getUniqueID());
+            Set<UUID> group = new HashSet<>();
 
-                            creature.setGroup(group);
-                            creature.setPositionAndUpdate(posX - 3 + rand.nextInt(7), posY, posZ - 3 + rand.nextInt(7));
-                            worldObj.spawnEntityInWorld(creature);
-                        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                            e.printStackTrace();
-                            break;
-                        }
-                    }
+            for (Character c : pattern.toCharArray()) {
+                Class<? extends EntityWCreature> creatureClass = itemSeeds.creatures.get(c);
 
+                try {
+                    EntityWCreature creature = creatureClass.getConstructor(World.class).newInstance(worldObj);
+                    group.add(creature.getUniqueID());
+
+                    creature.setGroup(group);
+                    creature.setPositionAndUpdate(posX - 3 + rand.nextInt(7), posY, posZ - 3 + rand.nextInt(7));
+                    worldObj.spawnEntityInWorld(creature);
+                } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
                     break;
                 }
             }
+
+            break;
         }
     }
 
@@ -102,5 +114,13 @@ public class EntitySeedsPile extends Entity implements IEntityAdditionalSpawnDat
 
     public ItemWCreatureSeeds getItemSeeds() {
         return itemSeeds;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static class RenderFactorySeedPile implements IRenderFactory<EntitySeedsPile> {
+        @Override
+        public Render<? super EntitySeedsPile> createRenderFor(RenderManager manager) {
+            return new RendererSeedsPile(manager, Minecraft.getMinecraft().getRenderItem());
+        }
     }
 }

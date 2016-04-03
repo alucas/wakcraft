@@ -33,6 +33,7 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
 
         this.blockStateOpaque = blockStateOpaque;
         this.useNeighborBrightness = true;
+        this.setFullCube(false);
         this.setLightOpacity(255);
         this.setDefaultState(this.blockState.getBaseState().withProperty(PROP_BOTTOM_POSITION, 0).withProperty(PROP_SIZE, 0));
     }

@@ -16,6 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockGeneric extends Block {
     protected boolean canBePlacedManually = true;
     protected int renderType = 3;
+    protected boolean fullCube = true;
     protected EnumWorldBlockLayer layer = EnumWorldBlockLayer.SOLID;
 
     public BlockGeneric(Material material, CreativeTabs tab) {
@@ -43,10 +44,24 @@ public class BlockGeneric extends Block {
         return renderType;
     }
 
-    public BlockGeneric setFull(final boolean full) {
-        this.fullBlock = full;
+    public BlockGeneric setFullBlock(final boolean fullBlock) {
+        this.fullBlock = fullBlock;
 
         return this;
+    }
+
+    /**
+     * If entity get damages when inside the block
+     */
+    public BlockGeneric setFullCube(final boolean fullCube) {
+        this.fullCube = fullCube;
+
+        return this;
+    }
+
+    @Override
+    public boolean isFullCube() {
+        return fullCube;
     }
 
     @SideOnly(Side.CLIENT)

@@ -1,8 +1,12 @@
 package heero.mc.mod.wakcraft.entity.misc;
 
+import heero.mc.mod.wakcraft.client.renderer.entity.RendererTextPopup;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 public class EntityTextPopup extends Entity {
     public String text;
@@ -54,5 +58,12 @@ public class EntityTextPopup extends Entity {
         this.colorRed = colorRed;
         this.colorGreen = colorGreen;
         this.colorBlue = colorBlue;
+    }
+
+    public static class RenderFactoryTextPopup implements IRenderFactory<EntityTextPopup> {
+        @Override
+        public Render<? super EntityTextPopup> createRenderFor(RenderManager manager) {
+            return new RendererTextPopup(manager);
+        }
     }
 }

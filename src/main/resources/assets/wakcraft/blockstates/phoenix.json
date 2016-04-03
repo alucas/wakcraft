@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "propertyyrotation=east": {"model": "wakcraft:phoenix"},
+    "propertyyrotation=north": {"model": "wakcraft:phoenix"},
+    "propertyyrotation=south": {"model": "wakcraft:phoenix"},
+    "propertyyrotation=west": {"model": "wakcraft:phoenix"}
+  }
+}

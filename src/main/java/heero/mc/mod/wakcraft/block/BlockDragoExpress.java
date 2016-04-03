@@ -1,8 +1,7 @@
 package heero.mc.mod.wakcraft.block;
 
-import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
-import heero.mc.mod.wakcraft.tileentity.TileEntityDragoexpress;
+import heero.mc.mod.wakcraft.tileentity.TileEntityDragoExpress;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -15,9 +14,9 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public class BlockDragoexpress extends BlockContainer {
+public class BlockDragoExpress extends BlockContainer {
 
-    public BlockDragoexpress() {
+    public BlockDragoExpress() {
         super(Material.wood);
 
         setCreativeTab(WCreativeTabs.tabSpecialBlock);
@@ -27,8 +26,13 @@ public class BlockDragoexpress extends BlockContainer {
     }
 
     @Override
+    public int getRenderType() {
+        return 3;
+    }
+
+    @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileEntityDragoexpress();
+        return new TileEntityDragoExpress();
     }
 
     @Override

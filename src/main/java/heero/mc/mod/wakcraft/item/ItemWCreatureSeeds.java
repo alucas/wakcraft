@@ -9,10 +9,7 @@ import heero.mc.mod.wakcraft.util.ItemInUseUtil;
 import heero.mc.mod.wakcraft.util.WorldUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import java.util.HashMap;
@@ -22,13 +19,13 @@ public class ItemWCreatureSeeds extends ItemWithLevel {
     protected static final int USE_DURATION = 100;
 
     public Map<Character, Class<? extends EntityWCreature>> creatures;
-    public Map<String, Float> paterns;
+    public Map<String, Float> patterns;
 
     public ItemWCreatureSeeds(int level) {
         super(level);
 
         creatures = new HashMap<>();
-        paterns = new HashMap<>();
+        patterns = new HashMap<>();
 
         setCreativeTab(WCreativeTabs.tabResource);
     }
@@ -47,7 +44,7 @@ public class ItemWCreatureSeeds extends ItemWithLevel {
         int trapperLevel = ProfessionManager.getLevel(player, PROFESSION.TRAPPER);
         if (trapperLevel < getLevel(0)) {
             if (world.isRemote) {
-                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("message.seed.insufficientLevel", new Object[]{getItemStackDisplayName(stack), getLevel(0)})));
+                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("message.seed.insufficientLevel", getItemStackDisplayName(stack), getLevel(0))));
             }
 
             return false;
@@ -62,10 +59,25 @@ public class ItemWCreatureSeeds extends ItemWithLevel {
             }
         }
 
-        ItemInUseUtil.saveCoords(player, pos.up());
+        ItemInUseUtil.saveCoords(player, pos);
+        player.stopUsingItem();
         player.setItemInUse(stack, USE_DURATION);
 
         return true;
+    }
+
+    @Override
+    public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
+        MovingObjectPosition mop = player.rayTrace(10, 1.0F);
+        BlockPos previousPos = ItemInUseUtil.getCoords(player);
+        if (mop == null || mop.sideHit != EnumFacing.UP || !mop.getBlockPos().equals(previousPos)) {
+            player.stopUsingItem();
+            return;
+        }
+
+        if (player.motionX != 0 || Math.abs(player.motionY) > 0.1 || player.motionZ != 0) {
+            player.stopUsingItem();
+        }
     }
 
     @Override
@@ -74,20 +86,10 @@ public class ItemWCreatureSeeds extends ItemWithLevel {
             stack.stackSize--;
         }
 
-        if (!world.isRemote) {
-            int coords[] = ItemInUseUtil.getCoords(player);
-            world.spawnEntityInWorld(new EntitySeedsPile(world, coords[0], coords[1], coords[2], this));
-        }
+        final BlockPos pos = ItemInUseUtil.getCoords(player);
+        world.spawnEntityInWorld(new EntitySeedsPile(world, pos.up(), this));
 
         return stack;
-    }
-
-
-    @Override
-    public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-        if (player.motionX != 0 || Math.abs(player.motionY) > 0.1 || player.motionZ != 0) {
-            player.stopUsingItem();
-        }
     }
 
     @Override
@@ -102,7 +104,7 @@ public class ItemWCreatureSeeds extends ItemWithLevel {
     }
 
     public ItemWCreatureSeeds addPatern(String patern, Float probability) {
-        paterns.put(patern, probability);
+        patterns.put(patern, probability);
 
         return this;
     }

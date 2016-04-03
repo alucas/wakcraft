@@ -10,7 +10,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelDragoexpress extends ModelBase {
+public class ModelDragoExpress extends ModelBase {
     // fields
     ModelRenderer Chariot;
     ModelRenderer Roue_BL;
@@ -20,7 +20,7 @@ public class ModelDragoexpress extends ModelBase {
     ModelRenderer Poutre_L;
     ModelRenderer Poutre_R;
 
-    public ModelDragoexpress() {
+    public ModelDragoExpress() {
         textureWidth = 128;
         textureHeight = 256;
 

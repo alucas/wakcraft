@@ -24,8 +24,8 @@ import java.util.UUID;
 
 public abstract class EntityWCreature extends EntityCreature implements IWMob, IFighter {
     protected static final String TAG_GROUP = "Group";
-    protected static final String TAG_UUIDMOST = "UUIDMost";
-    protected static final String TAG_UUIDLEAST = "UUIDLeast";
+    protected static final String TAG_UUID_MOST = "UUIDMost";
+    protected static final String TAG_UUID_LEAST = "UUIDLeast";
 
     protected Set<UUID> group;
 
@@ -36,7 +36,7 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 
         ((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
 
-        this.tasks.addTask(00, new EntityAIFight(this, 1.0D));
+        this.tasks.addTask(0, new EntityAIFight(this, 1.0D));
         this.tasks.addTask(10, new EntityAISwimming(this));
         this.tasks.addTask(20, new EntityAIMoveOutWater(this, 0.9D));
         this.tasks.addTask(30, new EntityAIWander(this, 1.0D));
@@ -47,7 +47,7 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
     @Override
     public Set<UUID> getGroup() {
         if (group == null) {
-            group = new HashSet<UUID>();
+            group = new HashSet<>();
             group.add(getUniqueID());
         }
 
@@ -78,14 +78,25 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
     }
 
     @Override
+    public void setHealth(float health) {
+//        for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+//            System.out.println(element);
+//        }
+
+
+        System.out.println("Set health " + health);
+        super.setHealth(health);
+    }
+
+    @Override
     public void writeToNBT(NBTTagCompound tagRoot) {
         super.writeToNBT(tagRoot);
 
         NBTTagList tagGroup = new NBTTagList();
         for (UUID fighterUUID : getGroup()) {
             NBTTagCompound tagFighter = new NBTTagCompound();
-            tagFighter.setLong(TAG_UUIDMOST, fighterUUID.getMostSignificantBits());
-            tagFighter.setLong(TAG_UUIDLEAST, fighterUUID.getLeastSignificantBits());
+            tagFighter.setLong(TAG_UUID_MOST, fighterUUID.getMostSignificantBits());
+            tagFighter.setLong(TAG_UUID_LEAST, fighterUUID.getLeastSignificantBits());
 
             tagGroup.appendTag(tagFighter);
         }
@@ -101,7 +112,7 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
         NBTTagList tagGroup = tagRoot.getTagList(TAG_GROUP, 10);
         for (int i = 0; i < tagGroup.tagCount(); i++) {
             NBTTagCompound tagFighter = tagGroup.getCompoundTagAt(i);
-            getGroup().add(new UUID(tagFighter.getLong(TAG_UUIDMOST), tagFighter.getLong(TAG_UUIDLEAST)));
+            getGroup().add(new UUID(tagFighter.getLong(TAG_UUID_MOST), tagFighter.getLong(TAG_UUID_LEAST)));
         }
     }
 
@@ -122,7 +133,6 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 
     protected void playSoundDeath() {
         String sound = getDeathSound();
-
         if (sound != null) {
             playSound(sound, getSoundVolume(), getSoundPitch());
         }
@@ -130,7 +140,6 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 
     protected void playSoundHurt() {
         String sound = getHurtSound();
-
         if (sound != null) {
             this.playSound(sound, getSoundVolume(), getSoundPitch());
         }

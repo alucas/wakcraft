@@ -10,15 +10,17 @@ import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIInventory;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUISpells;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIWorkbench;
-import heero.mc.mod.wakcraft.client.renderer.factory.RenderFactoryTextPopup;
 import heero.mc.mod.wakcraft.client.renderer.fight.FightRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.FighterRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.SpellRenderer;
+import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererDragoExpress;
+import heero.mc.mod.wakcraft.client.renderer.tileentity.RendererPhoenix;
 import heero.mc.mod.wakcraft.client.setting.KeyBindings;
 import heero.mc.mod.wakcraft.entity.creature.gobball.*;
 import heero.mc.mod.wakcraft.entity.creature.meow.BowMeow;
 import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
 import heero.mc.mod.wakcraft.entity.creature.tofu.Tofurby;
+import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.eventhandler.GUIEventHandler;
 import heero.mc.mod.wakcraft.eventhandler.KeyInputHandler;
@@ -28,8 +30,10 @@ import heero.mc.mod.wakcraft.inventory.*;
 import heero.mc.mod.wakcraft.item.EnumOre;
 import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
+import heero.mc.mod.wakcraft.tileentity.TileEntityDragoExpress;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
+import heero.mc.mod.wakcraft.tileentity.TileEntityPhoenix;
 import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -43,8 +47,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,11 +66,11 @@ public class CombinedClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(BabyTofu.class, new BabyTofu.RenderFactoryBabyTofu());
         RenderingRegistry.registerEntityRenderingHandler(Tofurby.class, new Tofurby.RenderFactoryTofurby());
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new RenderFactoryTextPopup());
-//        RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new RendererSeedsPile(renderManager));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new EntityTextPopup.RenderFactoryTextPopup());
+        RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new EntitySeedsPile.RenderFactorySeedPile());
 
-//        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoexpress.class, new RendererDragoexpress());
-//        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RendererPhoenix());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoExpress.class, new RendererDragoExpress());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RendererPhoenix());
 //        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHavenBagChest.class, new RendererHavenBagChest());
 
 //		RenderingRegistry.registerBlockHandler(new RendererBlockRotation(RenderingRegistry.getNextAvailableRenderId()));
@@ -149,7 +153,9 @@ public class CombinedClientProxy extends CommonProxy {
 
         // Special
         registerItemBlockModel(WBlocks.classConsole);
+        registerItemBlockModel(WBlocks.dragoExpress);
         registerItemBlockModel(WBlocks.jobPolisher);
+        registerItemBlockModel(WBlocks.phoenix);
 
         // Haven Bag
         registerItemBlockModel(WBlocks.havenbag);

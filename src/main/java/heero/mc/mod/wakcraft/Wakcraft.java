@@ -51,6 +51,11 @@ public class Wakcraft {
     }
 
     @EventHandler
+    public void onFMLServerStartedEvent(FMLServerStartingEvent event) {
+        proxy.registerCommand(event);
+    }
+
+    @EventHandler
     public void onFMLServerStartedEvent(FMLServerStartedEvent event) {
         HavenBagsManager.setup();
     }

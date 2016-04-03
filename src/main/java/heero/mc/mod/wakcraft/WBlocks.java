@@ -119,9 +119,9 @@ public class WBlocks {
 
         // Special blocks
         registerBlock(classConsole = (new BlockClassConsole().setUnlocalizedName(MODID_ + "class_console")));
+        registerBlock(dragoExpress = (new BlockDragoExpress().setUnlocalizedName(MODID_ + "drago_express")));
         registerBlock(jobPolisher = (new BlockPolisher().setUnlocalizedName(MODID_ + "job_polisher")));
-//        GameRegistry.registerBlock(dragoExpress = (new BlockDragoexpress()), "blockDragoexpress");
-//        GameRegistry.registerBlock(phoenix = (new BlockPhoenix()), "blockPhoenix");
+        registerBlock(phoenix = (new BlockPhoenix().setUnlocalizedName(MODID_ + "phoenix")));
 
         // Basic blocks
         registerBlock(box = (new BlockGeneric(Material.wood, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "box")));

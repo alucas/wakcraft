@@ -5,6 +5,7 @@ import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.characteristic.CharacteristicsEventsHandler;
+import heero.mc.mod.wakcraft.command.CommandInitWorld;
 import heero.mc.mod.wakcraft.entity.creature.gobball.*;
 import heero.mc.mod.wakcraft.entity.creature.meow.BowMeow;
 import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
@@ -29,6 +30,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -41,11 +43,12 @@ public class CommonProxy {
     }
 
     public void registerPreInitEvents() {
-        MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
-        MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
-        MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
         MinecraftForge.EVENT_BUS.register(new CharacteristicsEventsHandler());
+        MinecraftForge.EVENT_BUS.register(new CommandInitWorld());
+        MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
         MinecraftForge.EVENT_BUS.register(new FightEventsHandler());
+        MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
+        MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
     }
 
     public void registerInitEvents() {
@@ -60,7 +63,7 @@ public class CommonProxy {
     }
 
     public void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileEntityDragoexpress.class, "tile_entity_dragoexpress");
+        GameRegistry.registerTileEntity(TileEntityDragoExpress.class, "tile_entity_dragoexpress");
         GameRegistry.registerTileEntity(TileEntityPhoenix.class, "tile_entity_phoenix");
         GameRegistry.registerTileEntity(TileEntityHavenGemWorkbench.class, "tileEntityHavenGemWorkbench");
         GameRegistry.registerTileEntity(TileEntityHavenBag.class, "tileEntityHavenBag");
@@ -131,5 +134,9 @@ public class CommonProxy {
 
     public Object getGui(GuiId guiId, EntityPlayer player, World world, BlockPos pos) {
         return null;
+    }
+
+    public void registerCommand(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandInitWorld());
     }
 }

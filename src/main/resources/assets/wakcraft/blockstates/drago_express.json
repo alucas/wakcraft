@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "propertyyrotation=east": {"model": "wakcraft:drago_express"},
+    "propertyyrotation=north": {"model": "wakcraft:drago_express"},
+    "propertyyrotation=south": {"model": "wakcraft:drago_express"},
+    "propertyyrotation=west": {"model": "wakcraft:drago_express"}
+  }
+}

@@ -34,7 +34,7 @@ public class RotationUtil {
             return null;
         }
 
-        return (EnumFacing) state.getValue(PROP_Y_ROTATION);
+        return state.getValue(PROP_Y_ROTATION);
     }
 
     public static int getNorthRotation(final EnumFacing direction) {
