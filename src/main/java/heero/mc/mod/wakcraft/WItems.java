@@ -120,7 +120,7 @@ public class WItems extends Items {
         GameRegistry.registerItem(tofuFeather = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "TofuFeather")), "TofuFeather");
         GameRegistry.registerItem(verbalaSalt = ((new ItemWithLevel(15)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "VerbalaSalt")), "VerbalaSalt");
         GameRegistry.registerItem(waterBucket = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "WaterBucket")), "WaterBucket");
-        GameRegistry.registerItem(woollyKey = ((new ItemWoollyKey(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "WoollyKey")), "WoollyKey");
+        GameRegistry.registerItem(woollyKey = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "WoollyKey")), "WoollyKey");
 
         // Seed
         GameRegistry.registerItem(gobballSeed = new ItemWCreatureSeeds(0).addCreature('G', Gobball.class).addCreature('B', BlackGobbly.class).addCreature('W', WhiteGobbly.class).addCreature('E', Gobbette.class).addCreature('C', GobballWC.class).addPatern("EWB", 0.5F).setUnlocalizedName(modid_ + "GobballSeed"), "GobballSeed");
