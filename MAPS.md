@@ -23,16 +23,15 @@ e6 ff ff ff // -26
 28 ff ff ff // -216
 fd ff // -23
 
-01 // nb groups
+01 00 // nb groups
 
 00 00 00 00 // group info 1
 00 // group info 2
 00 00 00 00 // group info 3
 
-00 01 // nb color
+01 00// nb color
 
 00 // color type
-00 // ??
 
 e6 ff ff ff // min element y, -26
 28 ff ff ff // min element x, -216
@@ -46,10 +45,9 @@ e6 ff ff ff // min element y, -26
 
 01 // nb height ??
 
-fd ff // height or z ??, -3
-00 // height
-00 // element type // GROUND !!!
-
+fd ff // tplg height, -3
+00 // gfx height
+00 // element type // 0 = GROUND !!!
 80 // flags
 ab 82 00 00 // element id // 33451
 
