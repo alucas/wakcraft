@@ -1,5 +1,5 @@
 {
-  "parent": "wakcraft:block/slab/templateAll/b1s2",
+  "parent": "wakcraft:block/slab/template_all/b1s2",
   "textures": {
     "all": "wakcraft:blocks/wood"
   }

@@ -8,8 +8,7 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -18,8 +17,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public class BlockSlab extends BlockGeneric implements IBlockProvider {
-    public static final PropertyInteger PROP_BOTTOM_POSITION = PropertyInteger.create("propertyBottomPosition", 0, 3);
-    public static final PropertyInteger PROP_SIZE = PropertyInteger.create("propertySize", 0, 2);
+    protected static final PropertyInteger PROP_BOTTOM_POSITION = PropertyInteger.create("bottom_position", 0, 3);
+    protected static final PropertyInteger PROP_SIZE = PropertyInteger.create("size", 1, 3);
 
     // Opaque version of the slab block
     private final IBlockState blockStateOpaque;
@@ -35,7 +34,7 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
         this.useNeighborBrightness = true;
         this.setFullCube(false);
         this.setLightOpacity(255);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(PROP_BOTTOM_POSITION, 0).withProperty(PROP_SIZE, 0));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(PROP_BOTTOM_POSITION, 0).withProperty(PROP_SIZE, 1));
     }
 
     public static int getSize(final IBlockState state) {
@@ -64,7 +63,7 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        int size = (meta & 0b1100) >> 2;
+        int size = ((meta & 0b1100) >> 2) + 1;
         int bottomPosition = meta & 0b0011;
 
         return getDefaultState().withProperty(PROP_BOTTOM_POSITION, bottomPosition).withProperty(PROP_SIZE, size);
@@ -84,7 +83,7 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
         int bottomPosition = state.getValue(PROP_BOTTOM_POSITION);
         int size = state.getValue(PROP_SIZE);
 
-        return ((size << 2) & 0b1100) | (bottomPosition & 0b0011);
+        return (((size - 1) << 2) & 0b1100) | (bottomPosition & 0b0011);
     }
 
     /**
@@ -96,7 +95,7 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
         int size = getSize(blockState);
         int bottomPosition = getBottomPosition(blockState);
 
-        setBlockBounds(0, bottomPosition * 0.25F, 0, 1, bottomPosition * 0.25F + (size + 1) * 0.25F, 1);
+        setBlockBounds(0, bottomPosition * 0.25F, 0, 1, bottomPosition * 0.25F + size * 0.25F, 1);
     }
 
     /**
@@ -146,6 +145,27 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
         }
 
         return l;
+    }
+
+    @Override
+    public MovingObjectPosition collisionRayTrace(World worldIn, BlockPos pos, Vec3 start, Vec3 end) {
+        final MovingObjectPosition mop = super.collisionRayTrace(worldIn, pos, start, end);
+        if (mop != null && mop.sideHit != EnumFacing.UP) {
+            return mop;
+        }
+
+        final BlockPos posUp = pos.up();
+        final IBlockState stateUp = worldIn.getBlockState(posUp);
+        if (!(stateUp.getBlock() instanceof IOverSlab)) {
+            return mop;
+        }
+
+        final MovingObjectPosition mopUp = stateUp.getBlock().collisionRayTrace(worldIn, posUp, start, end);
+        if (mopUp == null) {
+            return mop;
+        }
+
+        return mopUp;
     }
 
     @Override

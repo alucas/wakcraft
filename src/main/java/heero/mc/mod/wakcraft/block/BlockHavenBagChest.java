@@ -132,7 +132,7 @@ public class BlockHavenBagChest extends BlockContainer {
         }
 
         int havenBagUID = HavenBagUtil.getUIDFromCoord(pos);
-        if (((HavenBagProperty) properties).getUID() != havenBagUID) {
+        if (((HavenBagProperty) properties).getPlayerHavenBagId() != havenBagUID) {
             player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
             return true;
         }

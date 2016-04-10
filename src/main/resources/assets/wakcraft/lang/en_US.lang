@@ -47,6 +47,10 @@ item.wakcraft.VerbalaSalt.name=Verbala Salt
 item.wakcraft.WaterBucket.name=Bucket o' Water
 item.wakcraft.WoollyKey.name=Woolly Key
 
+# Crop
+item.wakcraft.artichoke_seed.name=Artichoke seed
+item.wakcraft.wheat_grain.name=Wheat grain
+
 # ItemBlock
 item.wakcraft.carpet_slab.name=Carpet Slab
 item.wakcraft.ground_slab.name=Ground Slab
@@ -257,6 +261,8 @@ tile.wakcraft.sufokia_color.name=Sufokia Block
 tile.wakcraft.sufokia_fence.name=Sufokia Fence
 tile.wakcraft.sufokia_ground_slab.name=Sufokia Ground Slab
 tile.wakcraft.sufokia_ground_2_slab.name=Sufokia Ground 2 Slab
+tile.wakcraft.sufokia_sand_block.name=Sufokia Sand Block
+tile.wakcraft.sufokia_sand_slab.name=Sufokia Sand Slab
 tile.wakcraft.sufokia_stair.name=Sufokia Stair Block
 tile.wakcraft.sufokia_sun_block.name=Sufokia Sun Block
 tile.wakcraft.sufokia_sun_slab.name=Sufokia Sun Slab
@@ -266,22 +272,32 @@ tile.wakcraft.sufokia_wave_3_slab.name=Sufokia Wave 3 Slab
 tile.wakcraft.sufokia_wave_4.name=Sufokia Wave 4 Block
 tile.wakcraft.wood_slab.name=Sufokia Wood Slab
 
+# Crop block
+tile.wakcraft.artichoke.name=Artichoke
+tile.wakcraft.wheat.name=Wheat
+
 itemGroup.specialBlocks=Special Blocks
 itemGroup.resources=Resources
 itemGroup.oreBlocks=Ore Blocks
 itemGroup.spells=Spells
 
-message.blockOre.insufficientLevel=Insufficient level to mine : %s (lvl. %d)
+message.havenbag.cantOpenHere=You can't open your Haven Bag here
+message.havenbag.cantOpenInAir=You must be on ground to enter in your haven bag
+message.miner.insufficientLevel=Insufficient level to mine : %s (lvl. %d)
+message.farmer.insufficientLevel=Insufficient level to harvest : %s (lvl. %d)
 message.itemAndLevel=%s, lvl. %d
 message.chestAlreadyUnlocked=Chest already unlocked
 message.notYourBag=This is not your haven bag!
 message.canPlaceBlockManualy=Can't place this block manualy
 message.unlockHavenBag=Haven Bag Unlocked
 message.lockHavenBag=Haven Bag Locked
-message.cantOpenHavenBagHere=You can't open your Haven Bag here
-message.cantOpenHavenBagInAir=You must be on ground to enter in your haven bag
 message.phoenixRegister=Your spawn position has been updated
-message.seed.insufficientLevel=Insufficient level to use : %d (lvl. %d)
+message.seed.insufficientLevel=Insufficient level to use : %s (lvl. %d)
+message.cropSeed.insufficientLevel=Insufficient level to use : %s (lvl. %d)
+message.cropSeed.cantUseHere=Can't use here
+message.profession.level=%s (lvl. %d)
+message.profession.unknown=Unknown profession : %s
+message.profession.notANumber=%s is not a number
 
 profession.herbalist=Herbalist
 profession.lumberjack=Lumberjack

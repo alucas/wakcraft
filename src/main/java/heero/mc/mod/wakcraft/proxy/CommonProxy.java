@@ -5,16 +5,18 @@ import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.characteristic.CharacteristicsEventsHandler;
+import heero.mc.mod.wakcraft.command.CommandGfxAt;
 import heero.mc.mod.wakcraft.command.CommandInitWorld;
+import heero.mc.mod.wakcraft.command.CommandJobLevel;
 import heero.mc.mod.wakcraft.entity.creature.gobball.*;
 import heero.mc.mod.wakcraft.entity.creature.meow.BowMeow;
 import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
 import heero.mc.mod.wakcraft.entity.creature.tofu.Tofurby;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
-import heero.mc.mod.wakcraft.eventhandler.EntityEventHandler;
-import heero.mc.mod.wakcraft.eventhandler.PlayerEventHandler;
-import heero.mc.mod.wakcraft.eventhandler.WorldEventHandler;
+import heero.mc.mod.wakcraft.event.handler.EntityEventHandler;
+import heero.mc.mod.wakcraft.event.handler.PlayerEventHandler;
+import heero.mc.mod.wakcraft.event.handler.WorldEventHandler;
 import heero.mc.mod.wakcraft.fight.FightEventsHandler;
 import heero.mc.mod.wakcraft.network.GuiHandler;
 import heero.mc.mod.wakcraft.network.GuiId;
@@ -72,7 +74,8 @@ public class CommonProxy {
 
     public void registerEntities() {
         EntityRegistry.registerModEntity(EntityTextPopup.class, "TextPopup", 1, Wakcraft.instance, 10, 1, false);
-        EntityRegistry.registerModEntity(EntitySeedsPile.class, "SeedPile", 2, Wakcraft.instance, 24, 1, false);
+        EntityRegistry.registerModEntity(EntitySeedsPile.class, "SeedPile", 2, Wakcraft.instance, 24, 3, false);
+        EntityRegistry.registerModEntity(EntitySeedsPile.class, "HavenBag", 3, Wakcraft.instance, 24, 30, false);
 
         // Monsters
         EntityRegistry.registerModEntity(Gobball.class, "Gobball", 1000, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xc99a03);
@@ -137,6 +140,8 @@ public class CommonProxy {
     }
 
     public void registerCommand(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandGfxAt());
+        event.registerServerCommand(new CommandJobLevel());
         event.registerServerCommand(new CommandInitWorld());
     }
 }

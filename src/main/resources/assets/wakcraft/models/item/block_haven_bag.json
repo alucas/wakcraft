@@ -1,5 +1,5 @@
 {
-  "parent": "wakcraft:block/haven_bag",
+  "parent": "wakcraft:block/overslab/haven_bag/0",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

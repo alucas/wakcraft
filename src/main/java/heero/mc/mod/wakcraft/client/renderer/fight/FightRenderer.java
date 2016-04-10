@@ -222,7 +222,7 @@ public class FightRenderer extends IRenderHandler {
 //
 //		if (spellStack != null && spellStack.getItem() instanceof IActiveSpell) {
 //			IActiveSpell spell = (IActiveSpell) spellStack.getItem();
-//			int spellLevel = spell.getLevel(spellStack.getItemDamage());
+//			int spellLevel = spell.getItemLevel(spellStack.getItemDamage());
 //			rangeMin = spell.getRangeMin(spellLevel);
 //			rangeMax = spell.getRangeMax(spellLevel);
 //			rangeMode = spell.getRangeMode();

@@ -1,14 +1,17 @@
 package heero.mc.mod.wakcraft.command;
 
-import heero.mc.mod.wakcraft.WBlocks;
+import heero.mc.mod.wakcraft.Reference;
+import heero.mc.mod.wakcraft.block.BlockSlab;
 import net.minecraft.block.Block;
 import net.minecraft.command.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.apache.commons.io.IOUtils;
 import org.lwjgl.input.Keyboard;
 
 import java.io.File;
@@ -17,13 +20,15 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+import java.util.TreeMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
 public class CommandInitWorld extends CommandBase implements ICommand {
+    private static final String BLOCK_DEFAULT_NAME = "default";
     private static final int MC_OFFSET_Y = 51;
     private static final int WAKFU_OFFSET_Y = MC_OFFSET_Y * 4;
     private static final int WAKFU_SEA_LEVEL_DEFAULT = 0;
@@ -32,7 +37,9 @@ public class CommandInitWorld extends CommandBase implements ICommand {
 
     private static boolean isMapping = false;
     private static int wakfuOffsetY = 0;
+    private static Properties blocks = null;
     private static Map<Long, Integer> gfxsId;
+    private static Map<Integer, Integer> unknownGfxsId = new TreeMap<>();
     private static JarFile tplgMapJar = null;
     private static Enumeration<JarEntry> tplgMapEntries = null;
 
@@ -70,7 +77,7 @@ public class CommandInitWorld extends CommandBase implements ICommand {
 
     private static void log(final Entity player, final String message) {
 //        System.out.println(message);
-//        player.addChatMessage(new ChatComponentText(message));
+        player.addChatMessage(new ChatComponentText(message));
     }
 
     private static void mappingStart(final World world, final Entity player, final int mapId) {
@@ -83,40 +90,45 @@ public class CommandInitWorld extends CommandBase implements ICommand {
             return;
         }
 
-        File baseFolder = new File(world.getSaveHandler().getWorldDirectory().getParentFile().getAbsolutePath() + "/wakfu_map");
-        if (!baseFolder.exists()) {
-            log(player, "No '" + baseFolder.getAbsolutePath() + "' folder");
+        File baseFolder = Decode.getBaseFolder(player, world);
+        if (baseFolder == null) {
             return;
         }
+
+        blocks = Decode.decodeBlockFile(player, baseFolder);
+        if (blocks == null) {
+            return;
+        }
+
+        Map<Integer, Integer> elementsIdToGfxId = Decode.decodeElementsLib(player, baseFolder);
+        if (elementsIdToGfxId == null) {
+            return;
+        }
+
+        gfxsId = Decode.decodeGfxFiles(player, elementsIdToGfxId, blocks, baseFolder, mapId, null, null);
+        if (gfxsId == null) {
+            return;
+        }
+
+        log(player, "Load TPLG");
 
         File tplgFolder = new File(baseFolder.getAbsolutePath() + "/tplg");
         if (!tplgFolder.exists()) {
-            log(player, "No '" + tplgFolder.getAbsolutePath() + "' folder");
-            return;
-        }
+            log(player, tplgFolder.getAbsolutePath() + " not found");
 
-        File gfxFolder = new File(baseFolder.getAbsolutePath() + "/gfx");
-        if (!gfxFolder.exists()) {
-            log(player, "No '" + gfxFolder.getAbsolutePath() + "' folder");
             return;
         }
 
         try {
             tplgMapJar = new JarFile(tplgFolder.getAbsolutePath() + "/" + mapId + ".jar");
-            JarFile gfxMapJar = new JarFile(gfxFolder.getAbsolutePath() + "/" + mapId + ".jar");
 
             tplgMapEntries = tplgMapJar.entries();
-
-            log(player, "Load gfx");
-
-            gfxsId = decodeGfxFiles(player, world, gfxMapJar);
         } catch (Exception e) {
             e.printStackTrace();
 
             log(player, "Invalid map id : " + mapId);
             return;
         }
-
 
         log(player, "Start mapping");
 
@@ -156,8 +168,11 @@ public class CommandInitWorld extends CommandBase implements ICommand {
     }
 
     private static void mappingStop() {
-        System.out.println("mapping end"); // TODO remove
         isMapping = false;
+
+        for (Integer gfxId : unknownGfxsId.keySet()) {
+            System.out.println(gfxId + " not found, used " + unknownGfxsId.get(gfxId) + " times");
+        }
 
         try {
             tplgMapJar.close();
@@ -169,143 +184,27 @@ public class CommandInitWorld extends CommandBase implements ICommand {
         tplgMapJar = null;
     }
 
-    private static Map<Long, Integer> decodeGfxFiles(final Entity entity, final World world, final JarFile gfxMapJar) {
-        Map<Long, Integer> gfxsId = new HashMap<>();
-        byte[] bufferTmp = new byte[30000];
-
-        Enumeration<JarEntry> entries = gfxMapJar.entries();
-        while (entries.hasMoreElements()) {
-            JarEntry entry = entries.nextElement();
-            String fileName = entry.getName();
-
-            String[] coords = fileName.split("_");
-            if (coords.length != 2) {
-                continue;
-            }
-
-//            System.out.println("Decode file : " + entry.getName());
-
-            ByteBuffer buffer;
-            try {
-                InputStream fileIS = gfxMapJar.getInputStream(entry);
-                int size = fileIS.read(bufferTmp);
-                fileIS.close();
-                buffer = ByteBuffer.wrap(bufferTmp);
-                buffer.order(ByteOrder.LITTLE_ENDIAN);
-            } catch (IOException e) {
-                e.printStackTrace();
-                continue;
-            }
-
-            buffer.getInt();
-            buffer.getInt();
-            buffer.getShort();
-
-            buffer.getInt();
-            buffer.getInt();
-            buffer.getShort();
-
-            int nbGroup = buffer.getShort();
-            for (int j = 0; j < nbGroup; j++) {
-                int var1 = buffer.getInt();
-                int var2 = buffer.get();
-                int var3 = buffer.getInt();
-//                System.out.println("grp " + j + " : " + var1 + ", " + var2 + ", " + var3);
-            }
-
-            int nbColor = buffer.getShort();
-            for (int j = 0; j < nbColor; j++) {
-                int colorType = buffer.get();
-
-                if ((colorType & 0x1) == 1) {
-                    buffer.get();
-                    buffer.get();
-                    buffer.get();
-                }
-
-                if ((colorType & 0x2) == 2) {
-                    buffer.get();
-                }
-
-                if ((colorType & 0x4) == 4) {
-                    if ((colorType & 0x1) == 1) {
-                        buffer.get();
-                        buffer.get();
-                        buffer.get();
-                    }
-
-                    if ((colorType & 0x2) == 2) {
-                        buffer.get();
-                    }
-                }
-            }
-
-            int minElementY = buffer.getInt();
-            int minElementX = buffer.getInt();
-//            System.out.println("min element y : " + minElementY);
-//            System.out.println("min element x : " + minElementX);
-
-            int nbElement = buffer.getShort();
-//            System.out.println("nb element : " + nbElement);
-            for (int i1 = 0; i1 < nbElement; i1++) {
-                int min_y = minElementY + buffer.get();
-                int max_y = minElementY + buffer.get();
-                int min_x = minElementX + buffer.get();
-                int max_x = minElementX + buffer.get();
-//                System.out.println("New Element : (" + min_y + " -> " + max_y + "), (" + min_x + " -> " + max_x + ")");
-
-                for (int index_y = min_y; index_y < max_y; index_y++) {
-                    for (int index_x = min_x; index_x < max_x; index_x++) {
-                        int nbHeight = buffer.get();
-                        for (int index_height = 0; index_height < nbHeight; index_height++) {
-                            short tplg_height = buffer.getShort();
-                            byte gfx_height = buffer.get();
-                            byte elementType = buffer.get();
-                            byte flags = buffer.get();
-                            int elementId = buffer.getInt();
-
-                            short indexGroup = buffer.getShort();
-                            short indexColor = buffer.getShort();
-
-                            if (elementType == 0) { // ground
-//                            System.out.println("Element ID : " + elementId + ", z : " + tplg_height + ", height : " + gfx_height + ", flags : " + flags + ", grp : " + indexGroup);
-                                gfxsId.put(getIdFromWakfuCoords(index_x, index_y, tplg_height), elementId);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return gfxsId;
-    }
-
-    private static long getIdFromWakfuCoords(final int x, final int y, final short height) {
-        if (x == -397 && y == 126) {
-            System.out.println("h : " + height);
-        }
-        return (((long) x) << 32) + (((long) y) << 16) + height;
-    }
-
     private static void decodeTplgFile(final Entity entity, final World world, final ZipEntry fileEntry, final int mapX, final int mapY) {
-//        if (!(mapX == 29 && mapY == -4)) {
-//            return;
-//        }
-
 //        log(entity, "Decode file map (" + mapX + ", " + mapY + ")");
 
+        InputStream fileIS = null;
+        byte bufferBytes[] = null;
         try {
-            InputStream fileIS = tplgMapJar.getInputStream(fileEntry);
-            byte bufferTmp[] = new byte[3000];
-            int size = fileIS.read(bufferTmp);
-            fileIS.close();
-            ByteBuffer buffer = ByteBuffer.wrap(bufferTmp);
-            buffer.order(ByteOrder.LITTLE_ENDIAN);
-
-            generateMap(buffer, entity, world, mapX, mapY);
+            fileIS = tplgMapJar.getInputStream(fileEntry);
+            bufferBytes = IOUtils.toByteArray(fileIS);
         } catch (IOException e) {
             e.printStackTrace();
+            log(entity, "Error");
+
+            return;
+        } finally {
+            IOUtils.closeQuietly(fileIS);
         }
+
+        ByteBuffer buffer = ByteBuffer.wrap(bufferBytes);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
+
+        generateMap(buffer, entity, world, mapX, mapY);
     }
 
     private static int getBitRequired(final int nbTilesPlus1) {
@@ -337,16 +236,39 @@ public class CommandInitWorld extends CommandBase implements ICommand {
         setBlock(world, x, y, z, Blocks.air, 0, 0);
     }
 
-    private static void setFullBlock(final World world, final int x, final int y, final int z) {
-        long coordId = getIdFromWakfuCoords((short) x, (short) z, (short) (y * 4 - wakfuOffsetY));
-        Integer elementId = gfxsId.get(coordId);
-        setBlock(world, x, y, z, (elementId != null && elementId == 33451) ? WBlocks.grass : WBlocks.debug, 0, 0);
+    private static boolean setWaterBlock(final World world, final int x, final int y, final int z, final int blockHeight) {
+        int pos = getWakfuYFromBlockY(y);
+        for (int i = 3; i >= 0; i--) {
+            long coordId = Decode.getIdFromWakfuCoords((short) x, (short) z, (short) (pos + i));
+            Integer gfxId = gfxsId.get(coordId);
+            if (blocks == null || gfxId == null) {
+                continue;
+            }
+
+            String blockName = blocks.getProperty(gfxId.toString());
+            if (blockName == null || !blockName.startsWith("water")) {
+                continue;
+            }
+
+            int depth = Integer.parseInt(blockName.substring("water".length()));
+            for (int j = 0; j < 3; j++) {
+                if (j < depth) {
+                    setBlock(world, x, y - j, z, Blocks.water, 0, 0);
+                } else {
+                    setBlock(world, x, y - j, z, Block.getBlockFromName("wakcraft:" + blocks.getProperty(BLOCK_DEFAULT_NAME)), 0, 0);
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
-    private static void setSlabBlock(final World world, final int x, final int y, final int z, final int metadata) {
-        long coordId = getIdFromWakfuCoords((short) x, (short) z, (short) (y * 4 - wakfuOffsetY + (metadata >> 2)));
-        Integer elementId = gfxsId.get(coordId);
-        setBlock(world, x, y, z, (elementId != null && elementId == 33451) ? WBlocks.grassSlab : WBlocks.debugSlab, metadata, 0);
+    private static void setSlabBlock(final World world, final int x, final int y, final int z, final int bottomPos, final int height) {
+        Block block = getBlockName(x, y, z, bottomPos, height);
+
+        setBlock(world, x, y, z, block, (block instanceof BlockSlab) ? height << 2 + bottomPos : 0, 0);
     }
 
     private static void generateBaseColumn(final World world, final int x, final int y, final int z, final int blockHeight) {
@@ -354,33 +276,74 @@ public class CommandInitWorld extends CommandBase implements ICommand {
             return;
         }
 
-        if (blockHeight == 3) {
-            setFullBlock(world, x, y, z);
-        } else {
-            setSlabBlock(world, x, y, z, blockHeight << 2);
+        if (!setWaterBlock(world, x, y, z, blockHeight)) {
+            setSlabBlock(world, x, y, z, 0, blockHeight);
+
+            for (int y2 = y - 1; y2 >= MC_OFFSET_Y - 3; y2--) {
+                setSlabBlock(world, x, y2, z, 0, 3);
+            }
         }
 
         for (int y2 = y + 1; y2 <= MC_OFFSET_Y - 1; y2++) {
             setAirBlock(world, x, y2, z);
         }
+    }
 
-        for (int y2 = y - 1; y2 >= MC_OFFSET_Y - 3; y2--) {
-            setFullBlock(world, x, y2, z);
-        }
+    private static Block getBlockName(final int x, final int y, final int z, final int blockBottomPos, final int blockHeight) {
+        int blockTop = blockBottomPos + blockHeight;
+        long coordId = Decode.getIdFromWakfuCoords((short) x, (short) z, (short) (getWakfuYFromBlockY(y) + blockTop));
+
+        do {
+            Integer gfxId = gfxsId.get(coordId);
+            if (blocks == null || gfxId == null) {
+                break;
+            }
+
+            String blockName = blocks.getProperty(gfxId.toString());
+            if (blockName == null) {
+//                System.out.println("x : " + x + ", y : " + z + ", h : " + blockHeight + ", gfxId : " + gfxId); // TODO remove
+                final Integer count = unknownGfxsId.get(gfxId);
+                unknownGfxsId.put(gfxId, (count == null) ? 1 : count + 1);
+
+                break;
+            }
+
+            if (blockName.startsWith("water")) {
+                // Water block not at the bottom
+                break;
+            }
+
+            Block block;
+            if (blockTop != 3) {
+                block = Block.getBlockFromName(Reference.MODID + ":" + blockName + "_slab");
+            } else if (blockName.endsWith("_north") || blockName.endsWith("_east") || blockName.endsWith("_south") || blockName.endsWith("_west")) {
+                block = Block.getBlockFromName(Reference.MODID + ":" + blockName.substring(0, blockName.lastIndexOf('_')));
+            } else {
+                block = Block.getBlockFromName(Reference.MODID + ":" + blockName);
+            }
+
+            if (block == null) {
+                System.out.println("Incorrect block name " + blockName);
+                break;
+            }
+
+            return block;
+        } while (true);
+
+        return blockTop == 3 ? Block.getBlockFromName("wakcraft:" + blocks.getProperty(BLOCK_DEFAULT_NAME)) : Block.getBlockFromName("wakcraft:" + blocks.getProperty(BLOCK_DEFAULT_NAME) + "_slab");
     }
 
     private static int getBlockYFromWakfuY(final int height) {
         return (wakfuOffsetY + height) / 4;
-//        final int mcBlockY = (wakfuOffsetY + height) / 4;
-//        return (height != -3) ? (height != -2) ? (height != -1) ? mcBlockY : MC_OFFSET_Y - 2 : MC_OFFSET_Y - 3 : MC_OFFSET_Y - 4;
     }
 
     private static int getBlockHFromWakfuY(final int height) {
         return (wakfuOffsetY + height) % 4;
-//        final int mcBlockH = (wakfuOffsetY + height) % 4;
-//        return (height != -3) ? (height != -2) ? (height != -1) ? mcBlockH : 3 : 3 : 3;
     }
 
+    private static int getWakfuYFromBlockY(final int height) {
+        return height * 4 - wakfuOffsetY;
+    }
 
     private static void generateMap(final ByteBuffer buffer, final Entity entity, final World world, final int mapX, final int mapY) {
         final byte encodingType = buffer.get();
@@ -434,7 +397,7 @@ public class CommandInitWorld extends CommandBase implements ICommand {
         byte var2 = buffer.get();
         byte vat3 = buffer.get();
 
-        log(entity, "Flat map, PosX : " + mapX + ", PosY : " + mapY + ", Default height : " + defaultHeight);
+//        log(entity, "Flat map, PosX : " + mapX + ", PosY : " + mapY + ", Default height : " + defaultHeight);
 
         final int mcBlockY = getBlockYFromWakfuY(defaultHeight);
         final int mcBlockH = getBlockHFromWakfuY(defaultHeight);
@@ -459,7 +422,7 @@ public class CommandInitWorld extends CommandBase implements ICommand {
 
         final short defaultHeight = buffer.getShort();
 
-        log(entity, "Flat map (2), PosX : " + mapX + ", PosY : " + mapY + ", Default height : " + defaultHeight);
+//        log(entity, "Flat map (2), PosX : " + mapX + ", PosY : " + mapY + ", Default height : " + defaultHeight);
 
         if (defaultHeight == -3) {
             return;
@@ -495,7 +458,7 @@ public class CommandInitWorld extends CommandBase implements ICommand {
 
         final short defaultHeight = buffer.getShort();
 
-        log(entity, "Flat map (3), PosX : " + mapX + ", PosY : " + mapY + ", Default height : " + defaultHeight);
+//        log(entity, "Flat map (3), PosX : " + mapX + ", PosY : " + mapY + ", Default height : " + defaultHeight);
 
         if (defaultHeight == -3) {
             return;
@@ -545,7 +508,7 @@ public class CommandInitWorld extends CommandBase implements ICommand {
 
         final short defaultHeight = buffer.getShort();
 
-        log(entity, "Simple map, PosX : " + mapX + ", PosY : " + mapY);
+//        log(entity, "Simple map, PosX : " + mapX + ", PosY : " + mapY);
 
         final byte[] unknownArray = new byte[100];
         buffer.get(unknownArray, 0, ((MAP_H * MAP_W) + 7) >> 3); // 41
@@ -593,7 +556,7 @@ public class CommandInitWorld extends CommandBase implements ICommand {
 
         final short defaultHeight = buffer.getShort();
 
-        log(entity, "Simple map (2), PosX : " + mapX + ", PosY : " + mapY);
+//        log(entity, "Simple map (2), PosX : " + mapX + ", PosY : " + mapY);
 
         final byte[] unknownArray = new byte[100];
         buffer.get(unknownArray, 0, ((MAP_H * MAP_W) + 7) >> 3); // 41
@@ -650,7 +613,7 @@ public class CommandInitWorld extends CommandBase implements ICommand {
 
         final short defaultHeight = buffer.getShort();
 
-        log(entity, "Complex map, PosX : " + mapX + ", PosY : " + mapY);
+//        log(entity, "Complex map, PosX : " + mapX + ", PosY : " + mapY);
 
         final byte[] unknownArray = new byte[100];
         buffer.get(unknownArray, 0, ((MAP_H * MAP_W) + 7) >> 3); // 41
@@ -715,7 +678,7 @@ public class CommandInitWorld extends CommandBase implements ICommand {
 
             int height = tilesHeight[tileType];
 
-            setSlabBlock(world, mapX * MAP_W + x, (wakfuOffsetY + height) / 4, mapY * MAP_H + y, (wakfuOffsetY + height) % 4);
+            setSlabBlock(world, mapX * MAP_W + x, (wakfuOffsetY + height) / 4, mapY * MAP_H + y, (wakfuOffsetY + height) % 4, 0);
         }
     }
 }

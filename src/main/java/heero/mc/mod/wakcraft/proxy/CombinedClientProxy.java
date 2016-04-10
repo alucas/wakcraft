@@ -22,9 +22,9 @@ import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
 import heero.mc.mod.wakcraft.entity.creature.tofu.Tofurby;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
-import heero.mc.mod.wakcraft.eventhandler.GUIEventHandler;
-import heero.mc.mod.wakcraft.eventhandler.KeyInputHandler;
-import heero.mc.mod.wakcraft.eventhandler.TextureEventHandler;
+import heero.mc.mod.wakcraft.event.handler.GUIEventHandler;
+import heero.mc.mod.wakcraft.event.handler.KeyInputHandler;
+import heero.mc.mod.wakcraft.event.handler.TextureEventHandler;
 import heero.mc.mod.wakcraft.fight.FightClientEventsHandler;
 import heero.mc.mod.wakcraft.inventory.*;
 import heero.mc.mod.wakcraft.item.EnumOre;
@@ -97,12 +97,15 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.carpetSouthSlab);
         registerItemBlockModel(WBlocks.carpetWestSlab);
         registerItemBlockModel(WBlocks.debug);
+        registerItemBlockModel(WBlocks.debugSlab);
         registerItemBlockModel(WBlocks.dirt);
+        registerItemBlockModel(WBlocks.dirtSlab);
         registerItemBlockModel(WBlocks.fightDirection);
         registerItemBlockModel(WBlocks.fightMovement);
         registerItemBlockModel(WBlocks.fightStart);
         registerItemBlockModel(WBlocks.fightStart2);
         registerItemBlockModel(WBlocks.grass);
+        registerItemBlockModel(WBlocks.grassSlab);
         registerItemBlockModel(WBlocks.ground);
         registerItemBlockModel(WBlocks.groundEastSlab);
         registerItemBlockModel(WBlocks.groundNorthSlab);
@@ -114,21 +117,35 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.ground2SouthSlab);
         registerItemBlockModel(WBlocks.ground2WestSlab);
         registerItemBlockModel(WBlocks.ground3);
+        registerItemBlockModel(WBlocks.ground3Slab);
         registerItemBlockModel(WBlocks.ground4);
+        registerItemBlockModel(WBlocks.ground4Slab);
         registerItemBlockModel(WBlocks.ground11);
+        registerItemBlockModel(WBlocks.ground11Slab);
         registerItemBlockModel(WBlocks.ground12);
+        registerItemBlockModel(WBlocks.ground12Slab);
         registerItemBlockModel(WBlocks.ground13);
+        registerItemBlockModel(WBlocks.ground13Slab);
         registerItemBlockModel(WBlocks.ground14);
+        registerItemBlockModel(WBlocks.ground14Slab);
+        registerItemBlockModel(WBlocks.hbStand);
+        registerItemBlockModel(WBlocks.hbStandSlab);
         registerItemBlockModel(WBlocks.invisibleWall);
         registerItemBlockModel(WBlocks.pillar);
+        registerItemBlockModel(WBlocks.pillarSlab);
         registerItemBlockModel(WBlocks.plank);
         registerItemBlockModel(WBlocks.plant);
         registerItemBlockModel(WBlocks.plant2);
         registerItemBlockModel(WBlocks.sufokiaColor);
         registerItemBlockModel(WBlocks.sufokiaGround);
+        registerItemBlockModel(WBlocks.sufokiaGroundSlab);
         registerItemBlockModel(WBlocks.sufokiaGround2);
+        registerItemBlockModel(WBlocks.sufokiaGround2Slab);
+        registerItemBlockModel(WBlocks.sufokiaSand);
+        registerItemBlockModel(WBlocks.sufokiaSandSlab);
         registerItemBlockModel(WBlocks.sufokiaStair);
         registerItemBlockModel(WBlocks.sufokiaSun);
+        registerItemBlockModel(WBlocks.sufokiaSunSlab);
         registerItemBlockModel(WBlocks.sufokiaWave);
         registerItemBlockModel(WBlocks.sufokiaWaveEastSlab);
         registerItemBlockModel(WBlocks.sufokiaWaveNorthSlab);
@@ -151,6 +168,10 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.woodSouthSlab);
         registerItemBlockModel(WBlocks.woodWestSlab);
 
+        // Crop
+        registerItemBlockModel(WBlocks.wheat);
+        registerItemBlockModel(WBlocks.artichoke);
+
         // Special
         registerItemBlockModel(WBlocks.classConsole);
         registerItemBlockModel(WBlocks.dragoExpress);
@@ -159,6 +180,7 @@ public class CombinedClientProxy extends CommonProxy {
 
         // Haven Bag
         registerItemBlockModel(WBlocks.havenbag);
+        registerItemBlockModel(WBlocks.hbBarrier);
         registerItemBlockModel(WBlocks.hbBridge);
         registerItemBlockModel(WBlocks.hbChest);
         registerItemBlockModel(WBlocks.hbCraft);
@@ -169,27 +191,12 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.hbGemWorkbench);
         registerItemBlockModel(WBlocks.hbLock);
         registerItemBlockModel(WBlocks.hbMerchant);
-        registerItemBlockModel(WBlocks.hbStand);
         registerItemBlockModel(WBlocks.hbVisitors);
 
-        // Slabs
+        // Orientation item slab
         registerItemBlockModel(WItems.carpet);
-        registerItemBlockModel(WBlocks.debugSlab);
-        registerItemBlockModel(WBlocks.dirtSlab);
-        registerItemBlockModel(WBlocks.grassSlab);
         registerItemBlockModel(WItems.groundSlab);
         registerItemBlockModel(WItems.ground2Slab);
-        registerItemBlockModel(WBlocks.ground3Slab);
-        registerItemBlockModel(WBlocks.ground4Slab);
-        registerItemBlockModel(WBlocks.ground11Slab);
-        registerItemBlockModel(WBlocks.ground12Slab);
-        registerItemBlockModel(WBlocks.ground13Slab);
-        registerItemBlockModel(WBlocks.ground14Slab);
-        registerItemBlockModel(WBlocks.hbStandSlab);
-        registerItemBlockModel(WBlocks.pillarSlab);
-        registerItemBlockModel(WBlocks.sufokiaGroundSlab);
-        registerItemBlockModel(WBlocks.sufokiaGround2Slab);
-        registerItemBlockModel(WBlocks.sufokiaSunSlab);
         registerItemBlockModel(WItems.sufokiaWave);
         registerItemBlockModel(WItems.sufokiaWave2);
         registerItemBlockModel(WItems.sufokiaWave3);
@@ -229,6 +236,14 @@ public class CombinedClientProxy extends CommonProxy {
                 registerItemModel(ores[i], j, Reference.MODID.toLowerCase() + ":ore_" + EnumOre.values()[i * 16 + j].getName());
             }
         }
+
+        Item[] farmerSeeds = {
+                WItems.artichokeSeed, WItems.babbageSeed, WItems.beanSeed, WItems.blackberrySeed, WItems.blackCawwotSeed,
+                WItems.cawwotSeed, WItems.chiliSeed, WItems.cornSeed, WItems.curarareSeed, WItems.desertTruffleSeed,
+                WItems.grainOfBarley, WItems.grainOfVanillaRice, WItems.jollyflowerSeed, WItems.juteySeed, WItems.makoffeeSeed,
+                WItems.melonSeed, WItems.mushraySeed, WItems.oatGrain, WItems.palmCaneSeed, WItems.pumpkinSeed,
+                WItems.ryeGrain, WItems.sunflowerSeed, WItems.tuberbulbSeed, WItems.watermelonSeed, WItems.wheatSeed};
+        registerItemModel(farmerSeeds);
 
         registerItemModel(WItems.gobballSeed);
 
@@ -307,6 +322,12 @@ public class CombinedClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(itemBlock, metadata, new ModelResourceLocation(name, "inventory"));
     }
 
+    protected void registerItemModel(final Item[] items) {
+        for (Item item : items) {
+            registerItemModel(item);
+        }
+    }
+
     protected void registerItemModel(final Item item) {
         registerItemModel(item, 0, item.getUnlocalizedName().substring(5).replace('.', ':'));
     }
@@ -316,7 +337,7 @@ public class CombinedClientProxy extends CommonProxy {
     }
 
     protected void registerSpellModel(final Item spell) {
-        ModelLoader.setCustomModelResourceLocation(spell, 0, new ModelResourceLocation(Reference.MODID + ":Spell" + spell.getUnlocalizedName().substring(6), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(spell, 0, new ModelResourceLocation(Reference.MODID + ":spell_" + spell.getUnlocalizedName().substring(6), "inventory"));
     }
 
     @Override

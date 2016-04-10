@@ -36,19 +36,19 @@ public class BlockHavenBagLock extends BlockGeneric {
         }
 
         HavenBagProperty propertiesHB = (HavenBagProperty) properties;
-        if (propertiesHB.getUID() != HavenBagUtil.getUIDFromCoord(pos)) {
+        if (propertiesHB.getPlayerHavenBagId() != HavenBagUtil.getUIDFromCoord(pos)) {
             player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
             return true;
         }
 
-        HavenBagProperties havenBagProperties = HavenBagsManager.getProperties(propertiesHB.getUID());
+        HavenBagProperties havenBagProperties = HavenBagsManager.getProperties(propertiesHB.getPlayerHavenBagId());
         if (havenBagProperties == null) {
             return true;
         }
 
         havenBagProperties.setLock(!havenBagProperties.isLocked());
 
-        HavenBagsManager.setProperties(propertiesHB.getUID(), havenBagProperties);
+        HavenBagsManager.setProperties(propertiesHB.getPlayerHavenBagId(), havenBagProperties);
 
         player.addChatMessage(new ChatComponentText(havenBagProperties.isLocked() ? StatCollector.translateToLocal("message.lockHavenBag") : StatCollector.translateToLocal("message.unlockHavenBag")));
 

@@ -1,16 +1,16 @@
 {
   "variants": {
-    "propertybottomposition=0,propertysize=0": {"model": "wakcraft:slab/sufokia_ground/b0s0"},
-    "propertybottomposition=0,propertysize=1": {"model": "wakcraft:slab/sufokia_ground/b0s1"},
-    "propertybottomposition=0,propertysize=2": {"model": "wakcraft:slab/sufokia_ground/b0s2"},
-    "propertybottomposition=1,propertysize=0": {"model": "wakcraft:slab/sufokia_ground/b1s0"},
-    "propertybottomposition=1,propertysize=1": {"model": "wakcraft:slab/sufokia_ground/b1s1"},
-    "propertybottomposition=1,propertysize=2": {"model": "wakcraft:slab/sufokia_ground/b1s2"},
-    "propertybottomposition=2,propertysize=0": {"model": "wakcraft:slab/sufokia_ground/b2s0"},
-    "propertybottomposition=2,propertysize=1": {"model": "wakcraft:slab/sufokia_ground/b2s1"},
-    "propertybottomposition=2,propertysize=2": {"model": "wakcraft:sufokia_ground"},
-    "propertybottomposition=3,propertysize=0": {"model": "wakcraft:slab/sufokia_ground/b3s0"},
-    "propertybottomposition=3,propertysize=1": {"model": "wakcraft:sufokia_ground"},
-    "propertybottomposition=3,propertysize=2": {"model": "wakcraft:sufokia_ground"}
+    "bottom_position=0,size=1": {"model": "wakcraft:slab/sufokia_ground/b0s0"},
+    "bottom_position=0,size=2": {"model": "wakcraft:slab/sufokia_ground/b0s1"},
+    "bottom_position=0,size=3": {"model": "wakcraft:slab/sufokia_ground/b0s2"},
+    "bottom_position=1,size=1": {"model": "wakcraft:slab/sufokia_ground/b1s0"},
+    "bottom_position=1,size=2": {"model": "wakcraft:slab/sufokia_ground/b1s1"},
+    "bottom_position=1,size=3": {"model": "wakcraft:slab/sufokia_ground/b1s2"},
+    "bottom_position=2,size=1": {"model": "wakcraft:slab/sufokia_ground/b2s0"},
+    "bottom_position=2,size=2": {"model": "wakcraft:slab/sufokia_ground/b2s1"},
+    "bottom_position=2,size=3": {"model": "wakcraft:sufokia_ground"},
+    "bottom_position=3,size=1": {"model": "wakcraft:slab/sufokia_ground/b3s0"},
+    "bottom_position=3,size=2": {"model": "wakcraft:sufokia_ground"},
+    "bottom_position=3,size=3": {"model": "wakcraft:sufokia_ground"}
   }
 }

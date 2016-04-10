@@ -236,6 +236,8 @@ itemGroup.specialBlocks=Bloc sp�cial
 itemGroup.resources=Ressources
 itemGroup.oreBlocks=Bloc de Minerai
 
+message.havenbag.cantOpenHere=Vous ne pouvez pas ouvrir votre havre sac ici !
+message.havenbag.cantOpenInAir=Vous devez �tre sur le sol pour ouvrir votre Havre Sac !
 message.blockOre.insufficientLevel=Niveau insuffisant pour Miner : %s (lvl. %d)
 message.itemAndLevel=%s, lvl. %d
 message.chestAlreadyUnlocked=Coffre d�j� ouvert !
@@ -243,10 +245,9 @@ message.notYourBag=Ce n'est pas votre Havre Sac !
 message.canPlaceBlockManualy=Vous ne pouvez pas placez ce bloc manuellement !
 message.unlockHavenBag=Havre sac ouvert.
 message.lockHavenBag=Havre sac ferm�.
-message.cantOpenHavenBagHere=Vous ne pouvez pas ouvrir votre havre sac ici !
-message.cantOpenHavenBagInAir=Vous devez �tre sur le sol pour ouvrir votre Havre Sac !
 message.phoenixRegister=Votre point de r�surection a �t� modifi�.
 message.seed.insufficientLevel=Niveau insuffisant pour utilis� : %d (lvl. %d)
+message.profession.level=%s (lvl. %d)
 
 profession.herbalist=Herboriste
 profession.lumberjack=Bucheron

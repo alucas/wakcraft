@@ -1,0 +1,6 @@
+{
+  "parent": "wakcraft:block/overslab/template/1",
+  "textures": {
+    "all": "wakcraft:blocks/haven_bag"
+  }
+}

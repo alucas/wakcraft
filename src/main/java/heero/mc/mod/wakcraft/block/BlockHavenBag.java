@@ -2,31 +2,25 @@ package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WLog;
-import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBag;
 import heero.mc.mod.wakcraft.util.HavenBagUtil;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-public class BlockHavenBag extends BlockContainer {
+public class BlockHavenBag extends BlockContainerOverSlab {
     public BlockHavenBag() {
-        super(Material.wood);
+        super(Material.wood, WCreativeTabs.tabSpecialBlock);
 
-        setCreativeTab(WCreativeTabs.tabSpecialBlock);
-        setBlockUnbreakable();
+        setCanBePlacedManually(false);
     }
 
     @Override
@@ -59,7 +53,7 @@ public class BlockHavenBag extends BlockContainer {
         }
 
         if (player instanceof EntityPlayerMP) {
-            HavenBagUtil.teleportPlayerToHavenBag((EntityPlayerMP) player, ((TileEntityHavenBag) tile).uid);
+            HavenBagUtil.teleportPlayerToHavenBag((EntityPlayerMP) player, ((TileEntityHavenBag) tile).uid, pos);
         }
 
         return true;
@@ -75,16 +69,7 @@ public class BlockHavenBag extends BlockContainer {
     }
 
     @Override
-    public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        if (world.isRemote) {
-            Wakcraft.proxy.getClientPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.canPlaceBlockManualy")));
-        }
-
-        return false;
-    }
-
-    @Override
-    public int getRenderType() {
-        return 3;
+    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
+        return null;
     }
 }

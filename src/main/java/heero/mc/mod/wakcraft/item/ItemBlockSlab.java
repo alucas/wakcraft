@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.item;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.block.BlockSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * This blocks represent a demi slab block (1/4 block)
  * The metadata is :
  * 2 lower bits : position (0, 1, 2, 3)
- * 2 higher bits : size (0 : 1/4, 1 : 1/2, 2 : 1/3)
+ * 2 higher bits : size (1 : 1/4, 2 : 1/2, 3 : 1/3)
  */
 public class ItemBlockSlab extends ItemBlock {
     // Opaque version of the slab block
@@ -42,6 +43,11 @@ public class ItemBlockSlab extends ItemBlock {
      */
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos blockPos, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (hitY < 0) {
+            WLog.warning("HitY négatif");
+            return false;
+        }
+
         BlockPos blockPosDown = blockPos.down();
         BlockPos blockPosUp = blockPos.up();
 
@@ -53,7 +59,7 @@ public class ItemBlockSlab extends ItemBlock {
                     int size = BlockSlab.getSize(blockState);
                     int bottom = BlockSlab.getBottomPosition(blockState);
 
-                    if (bottom == 1 && size == 2) {
+                    if (bottom == 1 && size == 3) {
                         playSoundPlaced(world, blockPos);
                         world.setBlockState(blockPos, this.blockStateOpaque);
                         return true;
@@ -68,13 +74,13 @@ public class ItemBlockSlab extends ItemBlock {
                 if (blockStateDown.getBlock() == this.blockSlab) {
                     int size = BlockSlab.getSize(blockStateDown);
                     int bottom = BlockSlab.getBottomPosition(blockStateDown);
-                    int top = bottom + size;
+                    int top = BlockSlab.getTopPosition(blockStateDown);
 
-                    if (bottom == 0 && size == 2) {
+                    if (bottom == 0 && size == 3) {
                         playSoundPlaced(world, blockPosDown);
                         world.setBlockState(blockPosDown, this.blockStateOpaque);
                         return true;
-                    } else if (top == 2) {
+                    } else if (top == 3) {
                         playSoundPlaced(world, blockPosDown);
                         world.setBlockState(blockPosDown, BlockSlab.setSize(blockStateDown, size + 1));
                         return true;
@@ -92,13 +98,13 @@ public class ItemBlockSlab extends ItemBlock {
                 if (blockState.getBlock() == this.blockSlab) {
                     int size = BlockSlab.getSize(blockState);
                     int bottom = BlockSlab.getBottomPosition(blockState);
-                    int top = bottom + size;
+                    int top = BlockSlab.getTopPosition(blockState);
 
-                    if (bottom == 0 && size == 2) {
+                    if (bottom == 0 && size == 3) {
                         playSoundPlaced(world, blockPos);
                         world.setBlockState(blockPos, this.blockStateOpaque);
                         return true;
-                    } else if (size + bottom < 3) {
+                    } else if (top < 4) {
                         playSoundPlaced(world, blockPos);
                         world.setBlockState(blockPos, BlockSlab.setSize(blockState, size + 1));
                         return true;
@@ -132,9 +138,9 @@ public class ItemBlockSlab extends ItemBlock {
                 if (blockStateSide.getBlock() == this.blockSlab) {
                     int size = BlockSlab.getSize(blockStateSide);
                     int bottom = BlockSlab.getBottomPosition(blockStateSide);
-                    int top = size + bottom;
+                    int top = BlockSlab.getTopPosition(blockStateSide);
 
-                    if (size == 2 && ((sectionY == 0 && bottom == 1) || (sectionY == 3 && bottom == 0))) {
+                    if (size == 3 && ((sectionY == 0 && bottom == 1) || (sectionY == 3 && bottom == 0))) {
                         playSoundPlaced(world, blockPosSide);
                         world.setBlockState(blockPosSide, this.blockStateOpaque);
                         return true;
@@ -146,7 +152,7 @@ public class ItemBlockSlab extends ItemBlock {
                         return true;
                     }
 
-                    if ((sectionY == 3 && top == 2) || (sectionY == 2 && top == 1) || (sectionY == 1 && top == 0)) {
+                    if ((sectionY == 3 && top == 3) || (sectionY == 2 && top == 2) || (sectionY == 1 && top == 1)) {
                         playSoundPlaced(world, blockPosSide);
                         world.setBlockState(blockPosSide, BlockSlab.setSize(blockStateSide, size + 1));
                         return true;

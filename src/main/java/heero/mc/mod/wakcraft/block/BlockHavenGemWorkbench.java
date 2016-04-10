@@ -39,7 +39,7 @@ public class BlockHavenGemWorkbench extends BlockContainer {
             return true;
         }
 
-        if (((HavenBagProperty) properties).getUID() != HavenBagUtil.getUIDFromCoord(pos)) {
+        if (((HavenBagProperty) properties).getPlayerHavenBagId() != HavenBagUtil.getUIDFromCoord(pos)) {
             player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
             return true;
         }

@@ -42,9 +42,9 @@ public class ItemWCreatureSeeds extends ItemWithLevel {
         }
 
         int trapperLevel = ProfessionManager.getLevel(player, PROFESSION.TRAPPER);
-        if (trapperLevel < getLevel(0)) {
+        if (trapperLevel < getItemLevel(0)) {
             if (world.isRemote) {
-                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("message.seed.insufficientLevel", getItemStackDisplayName(stack), getLevel(0))));
+                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("message.seed.insufficientLevel", getItemStackDisplayName(stack), getItemLevel(0))));
             }
 
             return false;

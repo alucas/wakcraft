@@ -1,0 +1,6 @@
+{
+  "parent": "wakcraft:block/crop/template_crop/2",
+  "textures": {
+    "crop": "wakcraft:blocks/crop/artichoke_stage_1"
+  }
+}

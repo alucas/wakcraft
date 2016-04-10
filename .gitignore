@@ -3,6 +3,8 @@
 .settings
 bin/
 build/
+maps/
+out/
 run/
 eclipse/
 logs/

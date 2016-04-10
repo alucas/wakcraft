@@ -1,8 +1,8 @@
 {
   "variants": {
-    "propertybottomposition=0": {"model": "wakcraft:plant/2/b0"},
-    "propertybottomposition=1": {"model": "wakcraft:plant/2/b1"},
-    "propertybottomposition=2": {"model": "wakcraft:plant/2/b2"},
-    "propertybottomposition=3": {"model": "wakcraft:plant/2/b3"}
+    "bottom_position=0": {"model": "wakcraft:plant/2/b0"},
+    "bottom_position=1": {"model": "wakcraft:plant/2/b1"},
+    "bottom_position=2": {"model": "wakcraft:plant/2/b2"},
+    "bottom_position=3": {"model": "wakcraft:plant/2/b3"}
   }
 }

@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "wakcraft:items/adventurerikiakit"
+    "layer0": "wakcraft:items/adventurer_ikiakit"
   },
   "display": {
     "thirdperson": {

@@ -40,7 +40,7 @@ public class HandlerServerHavenBagVisitors implements IMessageHandler<PacketHave
         }
 
         int havenBagUid = HavenBagUtil.getUIDFromCoord(player.getPosition());
-        if (properties.getUID() != havenBagUid) {
+        if (properties.getPlayerHavenBagId() != havenBagUid) {
             WLog.warning("Player (%s) tried to update the permission of havenbag %d", player.getDisplayName(), havenBagUid);
             return null;
         }
@@ -70,7 +70,7 @@ public class HandlerServerHavenBagVisitors implements IMessageHandler<PacketHave
                     continue;
                 }
 
-                if (properties.getHavenBag() != havenBagUid) {
+                if (properties.getCurrentHavenBagId() != havenBagUid) {
                     continue;
                 }
 

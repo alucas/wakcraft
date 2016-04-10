@@ -1,27 +1,22 @@
 package heero.mc.mod.wakcraft.block.vein;
 
-import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.block.BlockGenericTransparent;
+import heero.mc.mod.wakcraft.block.BlockHarvesting;
 import heero.mc.mod.wakcraft.block.ILevelBlock;
 import heero.mc.mod.wakcraft.block.material.AdventureMaterial;
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
-import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.item.EnumOre;
-import heero.mc.mod.wakcraft.network.packet.PacketProfession;
-import heero.mc.mod.wakcraft.profession.ProfessionManager;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -31,8 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public abstract class BlockVein extends BlockGenericTransparent implements ILevelBlock {
-
+public abstract class BlockVein extends BlockHarvesting implements ILevelBlock {
     /**
      * Wakfu Ore block.
      * Metadata :
@@ -40,10 +34,9 @@ public abstract class BlockVein extends BlockGenericTransparent implements ILeve
      * - Bit 2, 3, 4 : Mineral type
      */
     public BlockVein() {
-        super(new AdventureMaterial(MapColor.brownColor), WCreativeTabs.tabOreBlock);
+        super(new AdventureMaterial(MapColor.brownColor), PROFESSION.MINER, WCreativeTabs.tabOreBlock);
 
         setDefaultState(blockState.getBaseState().withProperty(getPropExtractable(), EnumExtractable.NOT_MINED));
-        setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
         setHardness(6.66f); // 6.66 = 10s
     }
 
@@ -66,7 +59,12 @@ public abstract class BlockVein extends BlockGenericTransparent implements ILeve
 
     @Override
     protected BlockState createBlockState() {
-        return new BlockState(this, getPropExtractable(), getPropOre());
+        final BlockState state = super.createBlockState();
+        final IProperty[] properties = state.getProperties().toArray(new IProperty[state.getProperties().size() + 2]);
+        properties[properties.length - 2] = getPropExtractable();
+        properties[properties.length - 1] = getPropOre();
+
+        return new BlockState(this, properties);
     }
 
     @Override
@@ -89,6 +87,17 @@ public abstract class BlockVein extends BlockGenericTransparent implements ILeve
         return getDefaultState()
                 .withProperty(getPropExtractable(), EnumExtractable.values()[metaExtractable])
                 .withProperty(getPropOre(), (EnumOre) getPropOre().getAllowedValues().toArray()[metaOre]);
+    }
+
+    @Override
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
+        super.updateTick(world, pos, state, random);
+
+        if (state.getValue(getPropExtractable()) == EnumExtractable.NOT_MINED) {
+            return;
+        }
+
+        world.setBlockState(pos, state.withProperty(getPropExtractable(), EnumExtractable.NOT_MINED), 2);
     }
 
     @Override
@@ -130,110 +139,34 @@ public abstract class BlockVein extends BlockGenericTransparent implements ILeve
         return 3;
     }
 
-    /**
-     * Gets the hardness of block at the given coordinates in the given world,
-     * relative to the ability of the given EntityPlayer.
-     */
     @Override
-    public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, BlockPos pos) {
-        if (pos == BlockPos.ORIGIN) {
-            return 0;
-        } else if (world.getBlockState(pos).getValue(getPropExtractable()) == EnumExtractable.MINED) {
-            return 0;
-        } else if (ProfessionManager.getLevel(player, PROFESSION.MINER) < getLevel(world.getBlockState(pos))) {
-            return 0;
-        }
-
-        return super.getPlayerRelativeBlockHardness(player, world, pos);
+    public boolean canHarvest(final EntityPlayer player, final World world, final BlockPos pos) {
+        return world.getBlockState(pos).getValue(getPropExtractable()) == EnumExtractable.NOT_MINED;
     }
 
-    /**
-     * Called when a player removes a block.  This is responsible for
-     * actually destroying the block, and the block is intact at time of call.
-     * This is called regardless of whether the player can harvest the block or
-     * not.
-     * <p/>
-     * Return true if the block is actually destroyed.
-     * <p/>
-     * Note: When used in multiplayer, this is called on both client and
-     * server sides!
-     *
-     * @param world       The current world
-     * @param player      The player damaging the block, may be null
-     * @param pos         Block position in world
-     * @param willHarvest True if Block.harvestBlock will be called after this, if the return in true.
-     *                    Can be useful to delay the destruction of tile entities till after harvestBlock
-     * @return True if the block is actually destroyed.
-     */
     @Override
-    public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-        if (player.capabilities.isCreativeMode) {
-            return world.setBlockToAir(pos);
-        }
-
-        IBlockState state = world.getBlockState(pos);
-        if (state.getValue(getPropExtractable()) == EnumExtractable.MINED) {
-            return false;
-        }
+    public void onBlockHarvested(final World world, final BlockPos pos) {
+        final IBlockState state = world.getBlockState(pos);
 
         world.setBlockState(pos, state.withProperty(getPropExtractable(), EnumExtractable.MINED), 2);
         world.scheduleBlockUpdate(pos, this, 1200, 0); // 20 = 1s, 1200 = 1min
 
         dropBlockAsItemWithChance(world, pos, state, 0.5f, 0);
-
-        int currentLevel = ProfessionManager.getLevel(player, PROFESSION.MINER);
-        int xp = ProfessionManager.addXpFromBlock(player, world, pos, PROFESSION.MINER);
-        if (xp <= 0) {
-            return false;
-        }
-
-        if (world.isRemote) {
-            int levelDiff = ProfessionManager.getLevel(player, PROFESSION.MINER) - currentLevel;
-            if (levelDiff > 0) {
-                world.spawnEntityInWorld(new EntityTextPopup(world, "+" + levelDiff + " niveau", pos.getX(), pos.getY() + 1, pos.getZ(), 1.0F, 0.21F, 0.21F));
-                world.playRecord(pos, "random.levelup");
-            } else {
-                world.spawnEntityInWorld(new EntityTextPopup(world, "+" + xp + "xp", pos.getX(), pos.getY() + 1, pos.getZ(), 0.21F, 0.21F, 1.0F));
-                world.playRecord(pos, "random.orb");
-            }
-        } else if (player instanceof EntityPlayerMP) {
-            Wakcraft.packetPipeline.sendTo(new PacketProfession(player, PROFESSION.MINER), (EntityPlayerMP) player);
-        }
-
-        return false;
     }
 
-    /**
-     * Ticks the block if it's been scheduled
-     */
     @Override
-    public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
-        if (state.getValue(getPropExtractable()) == EnumExtractable.NOT_MINED) {
-            return;
-        }
-
-        world.setBlockState(pos, state.withProperty(getPropExtractable(), EnumExtractable.NOT_MINED), 2);
+    public boolean canCollideCheck(IBlockState state, boolean stopOnLiquid) {
+        return state.getValue(getPropExtractable()) != EnumExtractable.MINED;
     }
 
-    /**
-     * Called when a player hits the block. Args: world, x, y, z, player
-     */
     @Override
-    public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
-        if (!world.isRemote) {
-            return;
-        }
+    public EnumWorldBlockLayer getBlockLayer() {
+        return EnumWorldBlockLayer.CUTOUT;
+    }
 
-        IBlockState state = world.getBlockState(pos);
-        int blockLevel = getLevel(state);
-        if (ProfessionManager.getLevel(player, PROFESSION.MINER) >= blockLevel) {
-            return;
-        }
-
-        Item item = getItemDropped(state, null, 0);
-        ItemStack itemStack = new ItemStack(item, 1, damageDropped(state));
-        String itemName = item.getItemStackDisplayName(itemStack);
-        player.addChatMessage(new ChatComponentText(I18n.format("message.blockOre.insufficientLevel", itemName, blockLevel)));
+    @Override
+    public float getBlockHeight() {
+        return (1F / 16) * 3;
     }
 
     public enum EnumExtractable implements IStringSerializable {

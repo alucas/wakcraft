@@ -29,6 +29,7 @@ public class BlockGeneric extends Block {
         super(material);
 
         setBlockUnbreakable();
+        setResistance(600000);
         setCreativeTab(WCreativeTabs.tabOther);
     }
 

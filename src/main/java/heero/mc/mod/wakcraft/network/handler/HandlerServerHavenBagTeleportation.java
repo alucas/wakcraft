@@ -53,21 +53,20 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
         }
 
         if (!player.onGround) {
-            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.cantOpenHavenBagInAir")));
+            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.havenbag.cantOpenInAir")));
             return;
         }
 
-        BlockPos pos = new BlockPos(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY - player.getYOffset()), MathHelper.floor_double(player.posZ));
+        BlockPos pos = new BlockPos(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ));
 
         Block block = player.worldObj.getBlockState(pos).getBlock();
         Block blockUnder = player.worldObj.getBlockState(pos.down()).getBlock();
         if (!(block instanceof BlockSlab) && !(blockUnder.isOpaqueCube())) {
-            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.cantOpenHavenBagHere")));
+            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.havenbag.cantOpenHere")));
             return;
         }
 
-        // Initialization
-        if (properties.getUID() == -1) {
+        if (!properties.isInitialized()) {
             WLog.info("Init HavenBag");
 
             World havenBagWorld = MinecraftServer.getServer().worldServerForDimension(WConfig.getHavenBagDimensionId());
@@ -77,13 +76,13 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
                 return;
             }
 
-            properties.setUID(player.worldObj.getUniqueDataId("havenbag"));
+            properties.setPlayerHavenBagId(player.worldObj.getUniqueDataId("havenbag"));
 
-            WLog.info("New HavenBag attribution : {}, uid = {}", player.getDisplayName(), properties.getUID());
+            WLog.info("New HavenBag attribution : {}, uid = {}", player.getDisplayName(), properties.getPlayerHavenBagId());
 
-            boolean result = HavenBagGenerationHelper.generateHavenBag(havenBagWorld, properties.getUID());
+            boolean result = HavenBagGenerationHelper.generateHavenBag(havenBagWorld, properties.getPlayerHavenBagId());
             if (!result) {
-                WLog.warning("Error during the generation of the havenbag : {}", properties.getUID());
+                WLog.warning("Error during the generation of the havenbag : {}", properties.getPlayerHavenBagId());
 
                 return;
             }
@@ -93,7 +92,7 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
             pos = pos.up();
 
             if (pos.getY() >= player.worldObj.getHeight()) {
-                System.out.println("error: " + pos.getY());
+                WLog.error("No available position to create the havenbag");
                 return;
             }
         }
@@ -107,10 +106,10 @@ public class HandlerServerHavenBagTeleportation implements IMessageHandler<Packe
         }
 
         TileEntityHavenBag tileHavenBag = (TileEntityHavenBag) tileEntity;
-        tileHavenBag.uid = properties.getUID();
+        tileHavenBag.uid = properties.getPlayerHavenBagId();
         tileHavenBag.markDirty();
 
-        HavenBagUtil.teleportPlayerToHavenBag(player, properties.getUID());
+        HavenBagUtil.teleportPlayerToHavenBag(player, properties.getPlayerHavenBagId(), pos);
 
 //        player.playerNetServerHandler.sendPacket(tileHavenBag.getDescriptionPacket());
         Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(player, HavenBagProperty.IDENTIFIER), player);

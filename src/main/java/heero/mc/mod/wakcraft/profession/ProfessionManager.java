@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.profession;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.block.ILevelBlock;
 import heero.mc.mod.wakcraft.entity.property.ProfessionProperty;
 import net.minecraft.block.state.IBlockState;
@@ -8,10 +9,13 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 public class ProfessionManager {
-    private static final float[] xpFactor = new float[]{0.99f, 0.98f, 0.95f,
+    protected static final float[] XP_FACTOR = new float[]{0.99f, 0.98f, 0.95f,
             0.90f, 0.85f, 0.79f, 0.73f, 0.65f, 0.58f, 0.50f, 0.42f, 0.35f,
             0.27f, 0.21f, 0.15f, 0.10f, 0.05f, 0.02f, 0.01f};
 
+    /**
+     * @return Added XP
+     */
     public static int addXpFromBlock(EntityPlayer player, World world, BlockPos pos, PROFESSION profession) {
         IBlockState state = world.getBlockState(pos);
         if (!(state.getBlock() instanceof ILevelBlock)) {
@@ -36,20 +40,22 @@ public class ProfessionManager {
 
     public static void setXp(EntityPlayer player, PROFESSION profession, int xpValue) {
         ProfessionProperty properties = (ProfessionProperty) player.getExtendedProperties(ProfessionProperty.IDENTIFIER);
-
-        if (properties != null) {
-            properties.setXp(profession, xpValue);
+        if (properties == null) {
+            WLog.error("Player " + player.getName() + " without profession properties");
+            return;
         }
+
+        properties.setXp(profession, xpValue);
     }
 
     public static int getXp(EntityPlayer player, PROFESSION profession) {
         ProfessionProperty properties = (ProfessionProperty) player.getExtendedProperties(ProfessionProperty.IDENTIFIER);
-
-        if (properties != null) {
-            return properties.getXp(profession);
+        if (properties == null) {
+            WLog.error("Player " + player.getName() + " without profession properties");
+            return 0;
         }
 
-        return 0;
+        return properties.getXp(profession);
     }
 
     public static int getLevel(EntityPlayer player, PROFESSION profession) {
@@ -67,7 +73,7 @@ public class ProfessionManager {
     private static int getPonderedXp(int professionLvl, int recipeLvl, int recipeXp) {
         return (int) ((professionLvl <= recipeLvl + 10) ? recipeXp
                 : (professionLvl >= recipeLvl + 30) ? 0 : recipeXp
-                * xpFactor[professionLvl - (recipeLvl + 11)]);
+                * XP_FACTOR[professionLvl - (recipeLvl + 11)]);
     }
 
     public static enum PROFESSION {

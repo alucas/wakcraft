@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockPlant extends BlockGenericTransparent {
-    public static final IProperty PRO_BOTTOM_POSITION = PropertyInteger.create("propertyBottomPosition", 0, 3);
+    public static final IProperty PRO_BOTTOM_POSITION = PropertyInteger.create("bottom_position", 0, 3);
 
     public BlockPlant(Material material) {
         super(material, WCreativeTabs.tabBlock);
@@ -39,7 +39,7 @@ public class BlockPlant extends BlockGenericTransparent {
             return state.withProperty(PRO_BOTTOM_POSITION, 0);
         }
 
-        return state.withProperty(PRO_BOTTOM_POSITION, 3 - BlockSlab.getTopPosition(stateDown));
+        return state.withProperty(PRO_BOTTOM_POSITION, 4 - BlockSlab.getTopPosition(stateDown));
     }
 
     @Override

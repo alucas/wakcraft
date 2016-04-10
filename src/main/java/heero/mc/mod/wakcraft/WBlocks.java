@@ -17,6 +17,7 @@ public class WBlocks {
 
     public static Block debug, debugSlab;
     public static BlockVein vein1, vein2, vein3, vein4;
+    public static Block artichoke, wheat;
     public static Block
             box,
             carpet, carpetEastSlab, carpetNorthSlab, carpetSouthSlab, carpetWestSlab,
@@ -74,6 +75,7 @@ public class WBlocks {
             sufokiaColor,
             sufokiaGround, sufokiaGroundSlab,
             sufokiaGround2, sufokiaGround2Slab,
+            sufokiaSand, sufokiaSandSlab,
             sufokiaStair,
             sufokiaSun, sufokiaSunSlab,
             sufokiaWave, sufokiaWaveEastSlab, sufokiaWaveNorthSlab, sufokiaWaveSouthSlab, sufokiaWaveWestSlab,
@@ -92,6 +94,10 @@ public class WBlocks {
         registerBlock(vein2 = (BlockVein) new BlockVein2().setUnlocalizedName(MODID_ + "vein_2"), ItemBlockVein.class);
         registerBlock(vein3 = (BlockVein) new BlockVein3().setUnlocalizedName(MODID_ + "vein_3"), ItemBlockVein.class);
         registerBlock(vein4 = (BlockVein) new BlockVein4().setUnlocalizedName(MODID_ + "vein_4"), ItemBlockVein.class);
+
+        // Farmer
+        registerBlock(wheat = (new BlockCrop(0, 100).setUnlocalizedName(MODID_ + "wheat")));
+        registerBlock(artichoke = (new BlockCrop(10, 100).setUnlocalizedName(MODID_ + "artichoke")));
 
         // Fight Blocks
         registerBlock(fightDirection = (new BlockGenericTransparent(Material.ground).setUnlocalizedName(MODID_ + "fight_direction")));
@@ -174,6 +180,8 @@ public class WBlocks {
         registerBlock(sufokiaGroundSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround.getDefaultState()).setUnlocalizedName(MODID_ + "sufokia_ground_slab")), ItemBlockSlab.class);
         registerBlock(sufokiaGround2 = (new BlockGeneric(Material.ground).setUnlocalizedName(MODID_ + "sufokia_ground_2")));
         registerBlock(sufokiaGround2Slab = (new BlockSlab(Material.ground, WBlocks.sufokiaGround2.getDefaultState()).setUnlocalizedName(MODID_ + "sufokia_ground_2_slab")), ItemBlockSlab.class);
+        registerBlock(sufokiaSand = (new BlockGeneric(Material.sand).setUnlocalizedName(MODID_ + "sufokia_sand")));
+        registerBlock(sufokiaSandSlab = (new BlockSlab(Material.sand, WBlocks.sufokiaSand.getDefaultState()).setUnlocalizedName(MODID_ + "sufokia_sand_slab")), ItemBlockSlab.class);
         registerBlock(sufokiaStair = ((new BlockStairs2(WBlocks.sufokiaColor.getDefaultState())).setUnlocalizedName(MODID_ + "sufokia_stair")));
         registerBlock(sufokiaSun = (new BlockGeneric(Material.sand).setUnlocalizedName(MODID_ + "sufokia_sun")));
         registerBlock(sufokiaSunSlab = (new BlockSlab(Material.sand, WBlocks.sufokiaSun.getDefaultState()).setUnlocalizedName(MODID_ + "sufokia_sun_slab")), ItemBlockSlab.class);

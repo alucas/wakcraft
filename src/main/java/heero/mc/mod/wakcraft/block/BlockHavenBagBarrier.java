@@ -55,7 +55,7 @@ public class BlockHavenBagBarrier extends BlockGenericTransparent {
             }
 
             HavenBagProperty havenBagProperties = (HavenBagProperty) properties;
-            if (havenBagUID == havenBagProperties.getUID()) {
+            if (havenBagUID == havenBagProperties.getPlayerHavenBagId()) {
                 return;
             }
 

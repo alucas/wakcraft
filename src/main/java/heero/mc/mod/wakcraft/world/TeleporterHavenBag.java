@@ -42,7 +42,7 @@ public class TeleporterHavenBag extends Teleporter {
                 entity.setPositionAndUpdate(coords[0] + 0.5, coords[1], coords[2] + 7.5);
             }
         } else if (entity.dimension == 0 && properties != null && entity instanceof EntityLivingBase) {
-            double[] oldCoords = properties.getOldCoords();
+            double[] oldCoords = properties.getOldPlayerPos();
             entity.setPositionAndUpdate(oldCoords[0], oldCoords[1], oldCoords[2]);
         }
     }

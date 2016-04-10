@@ -11,7 +11,7 @@ public class ItemWithLevel extends Item implements ILeveled {
         this.level = level;
     }
 
-    public int getLevel(int metadata) {
+    public int getItemLevel(int metadata) {
         return level;
     }
 }

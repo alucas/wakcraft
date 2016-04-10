@@ -33,7 +33,7 @@ public class BlockHavenBagVisitors extends BlockGeneric {
         }
 
         HavenBagProperty propertiesHB = (HavenBagProperty) properties;
-        if (propertiesHB.getUID() != HavenBagUtil.getUIDFromCoord(pos)) {
+        if (propertiesHB.getPlayerHavenBagId() != HavenBagUtil.getUIDFromCoord(pos)) {
             player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.notYourBag")));
             return true;
         }
