@@ -1,4 +1,4 @@
-package heero.mc.mod.wakcraft.event.handler;
+package heero.mc.mod.wakcraft.client.event.handler;
 
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

@@ -1,4 +1,4 @@
-package heero.mc.mod.wakcraft.event.handler;
+package heero.mc.mod.wakcraft.client.event.handler;
 
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.network.GuiId;
