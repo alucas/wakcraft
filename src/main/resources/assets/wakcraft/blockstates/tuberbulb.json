@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "age=0,bottom_position=0": { "model": "wakcraft:crop/tuberbulb/b0a0" },
+        "age=1,bottom_position=0": { "model": "wakcraft:crop/tuberbulb/b0a1" },
+        "age=2,bottom_position=0": { "model": "wakcraft:crop/tuberbulb/b0a2" },
+        "age=0,bottom_position=1": { "model": "wakcraft:crop/tuberbulb/b1a0" },
+        "age=1,bottom_position=1": { "model": "wakcraft:crop/tuberbulb/b1a1" },
+        "age=2,bottom_position=1": { "model": "wakcraft:crop/tuberbulb/b1a2" },
+        "age=0,bottom_position=2": { "model": "wakcraft:crop/tuberbulb/b2a0" },
+        "age=1,bottom_position=2": { "model": "wakcraft:crop/tuberbulb/b2a1" },
+        "age=2,bottom_position=2": { "model": "wakcraft:crop/tuberbulb/b2a2" },
+        "age=0,bottom_position=3": { "model": "wakcraft:crop/tuberbulb/b3a0" },
+        "age=1,bottom_position=3": { "model": "wakcraft:crop/tuberbulb/b3a1" },
+        "age=2,bottom_position=3": { "model": "wakcraft:crop/tuberbulb/b3a2" }
+    }
+}

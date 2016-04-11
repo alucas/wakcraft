@@ -203,7 +203,7 @@ public class WItems extends Items {
         GameRegistry.registerItem(pumpkinSeed = ((new ItemWithLevel(30)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "pumpkin_seed")), "pumpkin_seed");
         GameRegistry.registerItem(ryeGrain = ((new ItemWithLevel(50)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "rye_grain")), "rye_grain");
         GameRegistry.registerItem(sunflowerSeed = ((new ItemWithLevel(80)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "sunflower_seed")), "sunflower_seed");
-        GameRegistry.registerItem(tuberbulbSeed = ((new ItemWithLevel(15)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tuberbulb_seed")), "tuberbulb_seed");
+        GameRegistry.registerItem(tuberbulbSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.tuberbulb)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tuberbulb_seed")), "tuberbulb_seed");
         GameRegistry.registerItem(watermelonSeed = ((new ItemWithLevel(85)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "watermelon_seed")), "watermelon_seed");
         GameRegistry.registerItem(wheatSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.wheat)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "wheat_grain")), "wheat_grain");
 

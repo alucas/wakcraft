@@ -17,7 +17,7 @@ public class WBlocks {
 
     public static Block debug, debugSlab;
     public static BlockVein vein1, vein2, vein3, vein4;
-    public static Block artichoke, wheat;
+    public static Block artichoke, tuberbulb, wheat;
     public static Block
             box,
             carpet, carpetEastSlab, carpetNorthSlab, carpetSouthSlab, carpetWestSlab,
@@ -98,6 +98,7 @@ public class WBlocks {
         // Farmer
         registerBlock(wheat = (new BlockCrop(0, 100).setUnlocalizedName(MODID_ + "wheat")));
         registerBlock(artichoke = (new BlockCrop(10, 100).setUnlocalizedName(MODID_ + "artichoke")));
+        registerBlock(tuberbulb = (new BlockCrop(0, 100).setUnlocalizedName(MODID_ + "tuberbulb")));
 
         // Fight Blocks
         registerBlock(fightDirection = (new BlockGenericTransparent(Material.ground).setUnlocalizedName(MODID_ + "fight_direction")));

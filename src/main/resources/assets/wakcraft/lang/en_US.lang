@@ -49,6 +49,7 @@ item.wakcraft.WoollyKey.name=Woolly Key
 
 # Crop
 item.wakcraft.artichoke_seed.name=Artichoke seed
+item.wakcraft.buberbulb_seed.name=Tuberbulb seed
 item.wakcraft.wheat_grain.name=Wheat grain
 
 # ItemBlock
@@ -274,6 +275,7 @@ tile.wakcraft.wood_slab.name=Sufokia Wood Slab
 
 # Crop block
 tile.wakcraft.artichoke.name=Artichoke
+tile.wakcraft.tuberbulb.name=Tuberbulb
 tile.wakcraft.wheat.name=Wheat
 
 itemGroup.specialBlocks=Special Blocks

@@ -169,8 +169,9 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.woodWestSlab);
 
         // Crop
-        registerItemBlockModel(WBlocks.wheat);
         registerItemBlockModel(WBlocks.artichoke);
+        registerItemBlockModel(WBlocks.tuberbulb);
+        registerItemBlockModel(WBlocks.wheat);
 
         // Special
         registerItemBlockModel(WBlocks.classConsole);
