@@ -154,7 +154,7 @@ public class WItems extends Items {
         GameRegistry.registerItem(waterBucket = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "water_bucket")), "water_bucket");
         GameRegistry.registerItem(woollyKey = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "woolly_key")), "woolly_key");
 
-        // Seed
+        // Monster Seed
         GameRegistry.registerItem(gobballSeed = new ItemWCreatureSeeds(0).addCreature('G', Gobball.class).addCreature('B', BlackGobbly.class).addCreature('W', WhiteGobbly.class).addCreature('E', Gobbette.class).addCreature('C', GobballWC.class).addPatern("EWB", 0.5F).setUnlocalizedName(modid_ + "gobball_seed"), "gobball_seed");
 
         // HG
@@ -181,7 +181,7 @@ public class WItems extends Items {
         GameRegistry.registerItem(wood = new ItemBlockYRotation(WBlocks.woodNorthSlab, WBlocks.woodEastSlab, WBlocks.woodSouthSlab, WBlocks.woodWestSlab).setUnlocalizedName(modid_ + "wood_slab"), "block_wood_slab");
 
         // Farmer Seed
-        GameRegistry.registerItem(artichokeSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 10, WBlocks.wheat)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "artichoke_seed")), "artichoke_seed");
+        GameRegistry.registerItem(artichokeSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 10, WBlocks.artichoke)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "artichoke_seed")), "artichoke_seed");
         GameRegistry.registerItem(babbageSeed = ((new ItemWithLevel(40)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "babbage_seed")), "babbage_seed");
         GameRegistry.registerItem(beanSeed = ((new ItemWithLevel(45)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "bean_seed")), "bean_seed");
         GameRegistry.registerItem(blackberrySeed = ((new ItemWithLevel(160)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "blackberry_seed")), "blackberry_seed");
