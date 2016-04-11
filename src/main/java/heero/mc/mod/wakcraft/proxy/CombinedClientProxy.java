@@ -4,6 +4,10 @@ import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.block.vein.BlockVein;
+import heero.mc.mod.wakcraft.client.event.handler.GUIEventHandler;
+import heero.mc.mod.wakcraft.client.event.handler.KeyInputHandler;
+import heero.mc.mod.wakcraft.client.event.handler.RenderEventHandler;
+import heero.mc.mod.wakcraft.client.event.handler.TextureEventHandler;
 import heero.mc.mod.wakcraft.client.gui.*;
 import heero.mc.mod.wakcraft.client.gui.fight.GuiFightOverlay;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
@@ -22,9 +26,6 @@ import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
 import heero.mc.mod.wakcraft.entity.creature.tofu.Tofurby;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
-import heero.mc.mod.wakcraft.client.event.handler.GUIEventHandler;
-import heero.mc.mod.wakcraft.client.event.handler.KeyInputHandler;
-import heero.mc.mod.wakcraft.client.event.handler.TextureEventHandler;
 import heero.mc.mod.wakcraft.fight.FightClientEventsHandler;
 import heero.mc.mod.wakcraft.inventory.*;
 import heero.mc.mod.wakcraft.item.EnumOre;
@@ -347,6 +348,7 @@ public class CombinedClientProxy extends CommonProxy {
 
         MinecraftForge.EVENT_BUS.register(new GUIEventHandler());
         MinecraftForge.EVENT_BUS.register(new TextureEventHandler());
+        MinecraftForge.EVENT_BUS.register(new RenderEventHandler());
     }
 
     @Override
