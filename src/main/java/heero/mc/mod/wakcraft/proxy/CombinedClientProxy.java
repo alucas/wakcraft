@@ -212,28 +212,28 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.palisade2);
 
         // Items
-        registerItemModel(WItems.woollyKey);
-        registerItemModel(WItems.gobballWool);
-        registerItemModel(WItems.gobballSkin);
-        registerItemModel(WItems.gobballHorn);
-        registerItemModel(WItems.tofuFeather);
-        registerItemModel(WItems.tofuBlood);
+        registerItemModel(WItems.artichoke);
+        registerItemModel(WItems.bomb);
         registerItemModel(WItems.canoonPowder);
         registerItemModel(WItems.clay);
-        registerItemModel(WItems.waterBucket);
         registerItemModel(WItems.driedDung);
-        registerItemModel(WItems.pearl);
-        registerItemModel(WItems.moonstone);
-        registerItemModel(WItems.bomb);
         registerItemModel(WItems.fossil);
-        registerItemModel(WItems.shamPearl);
-        registerItemModel(WItems.verbalaSalt);
+        registerItemModel(WItems.gobballHorn);
+        registerItemModel(WItems.gobballSkin);
+        registerItemModel(WItems.gobballWool);
         registerItemModel(WItems.gumgum);
+        registerItemModel(WItems.moonstone);
+        registerItemModel(WItems.pearl);
         registerItemModel(WItems.polishedMoonstone);
         registerItemModel(WItems.shadowyBlue);
-        registerItemModel(WItems.wheat);
+        registerItemModel(WItems.shamPearl);
+        registerItemModel(WItems.tofuBlood);
+        registerItemModel(WItems.tofuFeather);
         registerItemModel(WItems.tuberbulb);
-        registerItemModel(WItems.artichoke);
+        registerItemModel(WItems.verbalaSalt);
+        registerItemModel(WItems.waterBucket);
+        registerItemModel(WItems.wheat);
+        registerItemModel(WItems.woollyKey);
 
         Item[] ores = {WItems.ore1, WItems.ore2};
         for (int i = 0; i < ores.length; i++) {
@@ -252,35 +252,35 @@ public class CombinedClientProxy extends CommonProxy {
 
         registerItemModel(WItems.gobballSeed);
 
-        registerItemModel(WItems.merchantHG);
-        registerItemModel(WItems.decoHG);
         registerItemModel(WItems.craftHG);
+        registerItemModel(WItems.decoHG);
         registerItemModel(WItems.gardenHG);
+        registerItemModel(WItems.merchantHG);
 
-        registerItemModel(WItems.ikiakitSmall);
-        registerItemModel(WItems.ikiakitGolden);
-        registerItemModel(WItems.ikiakitKit);
         registerItemModel(WItems.ikiakitAdventurer);
         registerItemModel(WItems.ikiakitCollector);
         registerItemModel(WItems.ikiakitEmerald);
+        registerItemModel(WItems.ikiakitGolden);
+        registerItemModel(WItems.ikiakitKit);
+        registerItemModel(WItems.ikiakitSmall);
 
         registerItemModel(WItems.bouzeLiteYeahsRing);
-        registerItemModel(WItems.gobballBreastplate);
-        registerItemModel(WItems.gobboots);
-        registerItemModel(WItems.gobballEpaulettes);
-        registerItemModel(WItems.gobballCape);
-        registerItemModel(WItems.gobballBelt);
-        registerItemModel(WItems.gobballHeadgear);
         registerItemModel(WItems.gobballAmulet);
+        registerItemModel(WItems.gobballBelt);
+        registerItemModel(WItems.gobballBreastplate);
+        registerItemModel(WItems.gobballCape);
+        registerItemModel(WItems.gobballEpaulettes);
+        registerItemModel(WItems.gobballHeadgear);
+        registerItemModel(WItems.gobboots);
 
         registerItemModel(WItems.helmetofu);
-        registerItemModel(WItems.tofuBreastplate);
-        registerItemModel(WItems.tofuCloak);
-        registerItemModel(WItems.tofuEpaulettes);
-        registerItemModel(WItems.tofuBelt);
         registerItemModel(WItems.tofuAmulet);
-        registerItemModel(WItems.tofuRing);
+        registerItemModel(WItems.tofuCloak);
+        registerItemModel(WItems.tofuBelt);
         registerItemModel(WItems.tofuBoots);
+        registerItemModel(WItems.tofuBreastplate);
+        registerItemModel(WItems.tofuEpaulettes);
+        registerItemModel(WItems.tofuRing);
 
         // Spells
         // Iop
