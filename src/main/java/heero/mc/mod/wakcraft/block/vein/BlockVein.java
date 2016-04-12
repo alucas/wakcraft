@@ -145,7 +145,7 @@ public abstract class BlockVein extends BlockHarvesting implements ILevelBlock {
     }
 
     @Override
-    public void onBlockHarvested(final World world, final BlockPos pos) {
+    public void onHarvestingAction(final World world, final BlockPos pos, final EntityPlayer player) {
         final IBlockState state = world.getBlockState(pos);
 
         world.setBlockState(pos, state.withProperty(getPropExtractable(), EnumExtractable.MINED), 2);

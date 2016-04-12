@@ -14,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
@@ -24,15 +25,18 @@ public class ItemSeed extends ItemWithLevel {
     protected final PROFESSION profession;
     protected final BlockCrop blockCrop;
 
-    public ItemSeed(final PROFESSION profession, final int level, final Block blockCrop) {
+    public ItemSeed(final PROFESSION profession, final int level, final Block blockCrop, final Item itemResource) {
         super(level);
 
-        if (!(blockCrop instanceof BlockCrop)) {
-            throw new IllegalArgumentException(blockCrop + " must be an instance of " + BlockCrop.class.getName());
-        }
+        assert (blockCrop != null) : "The blockCrop must not be null";
+        assert (blockCrop instanceof BlockCrop) : blockCrop + " must be an instance of " + BlockCrop.class.getName();
+        assert (itemResource != null) : "The itemResource must not be null";
 
         this.profession = profession;
         this.blockCrop = (BlockCrop) blockCrop;
+
+        this.blockCrop.setItemResource(itemResource);
+        this.blockCrop.setItemSeed(this);
 
         setCreativeTab(WCreativeTabs.tabResource);
     }

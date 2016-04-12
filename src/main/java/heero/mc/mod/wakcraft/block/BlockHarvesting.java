@@ -91,7 +91,7 @@ public abstract class BlockHarvesting extends BlockOverSlab implements ILevelBlo
         int currentLevel = ProfessionManager.getLevel(player, profession);
         int xpAdded = ProfessionManager.addXpFromBlock(player, world, pos, profession);
 
-        onBlockHarvested(world, pos);
+        onHarvestingAction(world, pos, player);
 
         if (xpAdded <= 0) {
             return false;
@@ -113,5 +113,5 @@ public abstract class BlockHarvesting extends BlockOverSlab implements ILevelBlo
         return false;
     }
 
-    public abstract void onBlockHarvested(final World world, final BlockPos pos);
+    public abstract void onHarvestingAction(final World world, final BlockPos pos, final EntityPlayer player);
 }

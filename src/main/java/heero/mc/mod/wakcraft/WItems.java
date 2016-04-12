@@ -20,6 +20,7 @@ import java.util.Map;
 public class WItems extends Items {
     // Resource
     public static Item
+            artichoke,
             bomb,
             canoonPowder,
             clay,
@@ -38,9 +39,11 @@ public class WItems extends Items {
             shadowyBlue,
             shamPearl,
             tofuBlood,
+            tuberbulb,
             tofuFeather,
             verbalaSalt,
             waterBucket,
+            wheat,
             woollyKey;
 
     // Farmer seeds
@@ -132,6 +135,7 @@ public class WItems extends Items {
     public static void registerItems() {
         final String modid_ = Reference.MODID.toLowerCase() + ".";
 
+        GameRegistry.registerItem(artichoke = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "artichoke")), "artichoke");
         GameRegistry.registerItem(bomb = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "bomb")), "bom");
         GameRegistry.registerItem(canoonPowder = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "canoon_powder")), "canoon_powder");
         GameRegistry.registerItem(clay = ((new ItemWithLevel(4)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "clay")), "clay");
@@ -150,8 +154,10 @@ public class WItems extends Items {
         GameRegistry.registerItem(shamPearl = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "sham_pearl")), "sham_pearl");
         GameRegistry.registerItem(tofuBlood = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tofu_blood")), "tofu_blood");
         GameRegistry.registerItem(tofuFeather = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tofu_feather")), "tofu_feather");
+        GameRegistry.registerItem(tuberbulb = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tuberbulb")), "tuberbulb");
         GameRegistry.registerItem(verbalaSalt = ((new ItemWithLevel(15)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "verbala_salt")), "verbala_salt");
         GameRegistry.registerItem(waterBucket = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "water_bucket")), "water_bucket");
+        GameRegistry.registerItem(wheat = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "wheat")), "wheat");
         GameRegistry.registerItem(woollyKey = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "woolly_key")), "woolly_key");
 
         // Monster Seed
@@ -180,8 +186,10 @@ public class WItems extends Items {
         GameRegistry.registerItem(sufokiaWave3 = new ItemBlockYRotation(WBlocks.sufokiaWave3NorthSlab, WBlocks.sufokiaWave3EastSlab, WBlocks.sufokiaWave3SouthSlab, WBlocks.sufokiaWave3WestSlab).setUnlocalizedName(modid_ + "sufokia_wave_3_slab"), "block_sufokia_wave_3_slab");
         GameRegistry.registerItem(wood = new ItemBlockYRotation(WBlocks.woodNorthSlab, WBlocks.woodEastSlab, WBlocks.woodSouthSlab, WBlocks.woodWestSlab).setUnlocalizedName(modid_ + "wood_slab"), "block_wood_slab");
 
+        // JOBS
+
         // Farmer Seed
-        GameRegistry.registerItem(artichokeSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 10, WBlocks.artichoke)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "artichoke_seed")), "artichoke_seed");
+        GameRegistry.registerItem(artichokeSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 10, WBlocks.artichoke, WItems.artichoke)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "artichoke_seed")), "artichoke_seed");
         GameRegistry.registerItem(babbageSeed = ((new ItemWithLevel(40)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "babbage_seed")), "babbage_seed");
         GameRegistry.registerItem(beanSeed = ((new ItemWithLevel(45)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "bean_seed")), "bean_seed");
         GameRegistry.registerItem(blackberrySeed = ((new ItemWithLevel(160)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "blackberry_seed")), "blackberry_seed");
@@ -203,9 +211,9 @@ public class WItems extends Items {
         GameRegistry.registerItem(pumpkinSeed = ((new ItemWithLevel(30)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "pumpkin_seed")), "pumpkin_seed");
         GameRegistry.registerItem(ryeGrain = ((new ItemWithLevel(50)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "rye_grain")), "rye_grain");
         GameRegistry.registerItem(sunflowerSeed = ((new ItemWithLevel(80)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "sunflower_seed")), "sunflower_seed");
-        GameRegistry.registerItem(tuberbulbSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.tuberbulb)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tuberbulb_seed")), "tuberbulb_seed");
+        GameRegistry.registerItem(tuberbulbSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.tuberbulb, WItems.tuberbulb)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tuberbulb_seed")), "tuberbulb_seed");
         GameRegistry.registerItem(watermelonSeed = ((new ItemWithLevel(85)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "watermelon_seed")), "watermelon_seed");
-        GameRegistry.registerItem(wheatSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.wheat)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "wheat_grain")), "wheat_grain");
+        GameRegistry.registerItem(wheatSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.wheat, WItems.wheat)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "wheat_grain")), "wheat_grain");
 
         // ARMORS
         // -------------------------------

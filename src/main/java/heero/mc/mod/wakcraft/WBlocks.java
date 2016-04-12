@@ -96,9 +96,9 @@ public class WBlocks {
         registerBlock(vein4 = (BlockVein) new BlockVein4().setUnlocalizedName(MODID_ + "vein_4"), ItemBlockVein.class);
 
         // Farmer
-        registerBlock(wheat = (new BlockCrop(0, 100).setUnlocalizedName(MODID_ + "wheat")));
-        registerBlock(artichoke = (new BlockCrop(10, 100).setUnlocalizedName(MODID_ + "artichoke")));
-        registerBlock(tuberbulb = (new BlockCrop(0, 100).setUnlocalizedName(MODID_ + "tuberbulb")));
+        registerBlock(wheat = (new BlockCrop(0, 100).setUnlocalizedName(MODID_ + "crop_wheat")));
+        registerBlock(artichoke = (new BlockCrop(10, 100).setUnlocalizedName(MODID_ + "crop_artichoke")));
+        registerBlock(tuberbulb = (new BlockCrop(0, 100).setUnlocalizedName(MODID_ + "crop_tuberbulb")));
 
         // Fight Blocks
         registerBlock(fightDirection = (new BlockGenericTransparent(Material.ground).setUnlocalizedName(MODID_ + "fight_direction")));

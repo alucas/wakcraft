@@ -1,5 +1,7 @@
 package heero.mc.mod.wakcraft.block;
 
+import heero.mc.mod.wakcraft.WLog;
+import heero.mc.mod.wakcraft.item.ItemSeed;
 import heero.mc.mod.wakcraft.profession.ProfessionManager;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -7,6 +9,9 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
@@ -16,11 +21,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 public class BlockCrop extends BlockHarvesting {
-    protected static final int UPDATE_INTERVAL = 200;
+    protected static final int BREAKING_DURATION = 5; // seconds
+    protected static final int UPDATE_INTERVAL = 5; // seconds
     protected static final int AGE_MAX = 2;
 
     protected final int blockLevel;
     protected final int blockXP;
+    protected ItemSeed itemSeed;
+    protected Item itemResource;
 
     public static final PropertyInteger PROP_AGE = PropertyInteger.create("age", 0, AGE_MAX);
 
@@ -31,7 +39,7 @@ public class BlockCrop extends BlockHarvesting {
         this.blockXP = blockXP;
 
         setDefaultState(getDefaultState().withProperty(PROP_AGE, 0));
-        setHardness(6.66f); // 6.66 = 10s
+        setHardness(BREAKING_DURATION * 0.66F);
     }
 
     @Override
@@ -65,14 +73,14 @@ public class BlockCrop extends BlockHarvesting {
         }
 
         world.setBlockState(pos, state.withProperty(PROP_AGE, age + 1));
-        world.scheduleBlockUpdate(pos, this, UPDATE_INTERVAL, 0);
+        world.scheduleBlockUpdate(pos, this, UPDATE_INTERVAL * 20, 0);
     }
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
         super.onBlockAdded(worldIn, pos, state);
 
-        worldIn.scheduleBlockUpdate(pos, this, UPDATE_INTERVAL, 0);
+        worldIn.scheduleBlockUpdate(pos, this, UPDATE_INTERVAL * 20, 0);
     }
 
     @Override
@@ -81,9 +89,22 @@ public class BlockCrop extends BlockHarvesting {
     }
 
     @Override
-    public void onBlockHarvested(final World world, final BlockPos pos) {
+    public void onHarvestingAction(final World world, final BlockPos pos, final EntityPlayer player) {
+        final int nbItemDrop = 1 + RANDOM.nextInt(2);
+        final Item itemDrop = (player.getHeldItem() != null && (player.getHeldItem().getItem() instanceof ItemHoe)) ? itemResource : itemSeed;
+        if (itemDrop == null) {
+            WLog.error("ItemSeed or ItemResource not initialized for " + getLocalizedName());
+            return;
+        }
+
+        // dropBlockAsItemWithChance;
+        if (!world.isRemote && !world.restoringBlockSnapshots) {
+            for (int i = 0; i < nbItemDrop; i++) {
+                spawnAsEntity(world, pos, new ItemStack(itemDrop));
+            }
+        }
+
         world.setBlockToAir(pos);
-//        dropBlockAsItemWithChance(world, pos, state, 0.5f, 0);
     }
 
     @SideOnly(Side.CLIENT)
@@ -104,5 +125,13 @@ public class BlockCrop extends BlockHarvesting {
     @Override
     public int getProfessionExp(IBlockState state) {
         return blockXP;
+    }
+
+    public void setItemResource(final Item itemResource) {
+        this.itemResource = itemResource;
+    }
+
+    public void setItemSeed(final ItemSeed itemSeed) {
+        this.itemSeed = itemSeed;
     }
 }

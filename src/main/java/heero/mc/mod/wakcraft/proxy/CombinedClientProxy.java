@@ -231,6 +231,9 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemModel(WItems.gumgum);
         registerItemModel(WItems.polishedMoonstone);
         registerItemModel(WItems.shadowyBlue);
+        registerItemModel(WItems.wheat);
+        registerItemModel(WItems.tuberbulb);
+        registerItemModel(WItems.artichoke);
 
         Item[] ores = {WItems.ore1, WItems.ore2};
         for (int i = 0; i < ores.length; i++) {
