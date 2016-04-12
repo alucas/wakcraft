@@ -58,8 +58,6 @@ public class RenderEventHandler {
         int usageMaxDuration = itemInUse.getMaxItemUseDuration(player.getItemInUse());
         int usageDuration = player.getItemInUseDuration();
 
-        System.out.println((int) ((float) usageDuration / usageMaxDuration));
-
         mc.ingameGUI.drawTexturedModalRect(10, 10, 0, 0, 106, 12);
         mc.ingameGUI.drawTexturedModalRect(13, 13, 0, 12, (int) (((float) usageDuration / (float) usageMaxDuration) * 100), 6);
 
