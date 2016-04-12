@@ -10,8 +10,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockGeneric extends Block {
     protected boolean canBePlacedManually = true;
@@ -63,19 +61,6 @@ public class BlockGeneric extends Block {
     @Override
     public boolean isFullCube() {
         return fullCube;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public BlockGeneric setLayer(final EnumWorldBlockLayer layer) {
-        this.layer = layer;
-
-        return this;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public EnumWorldBlockLayer getBlockLayer() {
-        return layer;
     }
 
     public BlockGeneric setCanBePlacedManually(final boolean canBePlacedManually) {

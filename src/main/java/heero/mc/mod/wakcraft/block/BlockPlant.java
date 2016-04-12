@@ -19,7 +19,6 @@ public class BlockPlant extends BlockGenericTransparent {
         super(material, WCreativeTabs.tabBlock);
 
         setFullBlock(false);
-        setLayer(EnumWorldBlockLayer.CUTOUT);
         setDefaultState(blockState.getBaseState().withProperty(PRO_BOTTOM_POSITION, 0));
     }
 
@@ -45,5 +44,10 @@ public class BlockPlant extends BlockGenericTransparent {
     @Override
     public int getMetaFromState(IBlockState state) {
         return 0;
+    }
+
+    @Override
+    public EnumWorldBlockLayer getBlockLayer() {
+        return EnumWorldBlockLayer.CUTOUT;
     }
 }
