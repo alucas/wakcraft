@@ -9,7 +9,6 @@ import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.fight.FightManager;
-import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -111,7 +110,7 @@ public class FightUtil {
         return FightManager.INSTANCE.getCurrentFighter(world, fightId);
     }
 
-    public static List<List<FightBlockCoordinates>> getStartPositions(WorldClient world, int fightId) {
+    public static List<List<FightBlockCoordinates>> getStartPositions(World world, int fightId) {
         return FightManager.INSTANCE.getSartPositions(world, fightId);
     }
 

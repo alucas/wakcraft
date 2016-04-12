@@ -33,7 +33,7 @@ public class FightEventsHandler {
             return;
         }
 
-        if (FightUtil.isFighter((EntityLivingBase) event.entity)) {
+        if (FightUtil.isFighter(event.entity)) {
             event.entity.registerExtendedProperties(FightProperty.IDENTIFIER, new FightProperty());
             event.entity.registerExtendedProperties(FightCharacteristicsProperty.IDENTIFIER, new FightCharacteristicsProperty());
             event.entity.registerExtendedProperties(SpellsProperty.IDENTIFIER, new SpellsProperty());
