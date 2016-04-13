@@ -82,7 +82,8 @@ public class WBlocks {
             sufokiaWave2, sufokiaWave2EastSlab, sufokiaWave2NorthSlab, sufokiaWave2SouthSlab, sufokiaWave2WestSlab,
             sufokiaWave3, sufokiaWave3EastSlab, sufokiaWave3NorthSlab, sufokiaWave3SouthSlab, sufokiaWave3WestSlab,
             sufokiaWave4,
-            wood, woodNorthSlab, woodEastSlab, woodSouthSlab, woodWestSlab;
+            wood, woodNorthSlab, woodEastSlab, woodSouthSlab, woodWestSlab,
+            zaap;
 
     public static void registerBlocks() {
         // Debug Blocks
@@ -129,6 +130,7 @@ public class WBlocks {
         registerBlock(dragoExpress = (new BlockDragoExpress().setUnlocalizedName(MODID_ + "drago_express")));
         registerBlock(jobPolisher = (new BlockPolisher().setUnlocalizedName(MODID_ + "job_polisher")));
         registerBlock(phoenix = (new BlockPhoenix().setUnlocalizedName(MODID_ + "phoenix")));
+        registerBlock(zaap = (new BlockZaap().setUnlocalizedName(MODID_ + "zaap")));
 
         // Basic blocks
         registerBlock(box = (new BlockGeneric(Material.wood, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "box")));

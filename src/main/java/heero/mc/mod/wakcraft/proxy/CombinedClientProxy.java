@@ -179,6 +179,7 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.dragoExpress);
         registerItemBlockModel(WBlocks.jobPolisher);
         registerItemBlockModel(WBlocks.phoenix);
+        registerItemBlockModel(WBlocks.zaap);
 
         // Haven Bag
         registerItemBlockModel(WBlocks.havenbag);
@@ -432,6 +433,8 @@ public class CombinedClientProxy extends CommonProxy {
                 return new GUIWakcraft(guiId, new GUIProfession(player, PROFESSION.CHEF), player, world, pos);
             case SPELLS:
                 return new GUIWakcraft(guiId, new GUISpells(new ContainerSpells(player)), player, world, pos);
+            case ZAAPS:
+                return new GUIZaap(guiId, player, world, pos);
             default:
                 break;
         }

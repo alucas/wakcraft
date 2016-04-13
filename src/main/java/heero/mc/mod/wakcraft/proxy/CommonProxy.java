@@ -133,6 +133,7 @@ public class CommonProxy {
         packetPipeline.registerMessage(HandlerServerFightSelectPosition.class, PacketFightSelectPosition.class, 12, Side.SERVER);
         packetPipeline.registerMessage(HandlerClientFightStartTurn.class, PacketFightStartTurn.class, 13, Side.CLIENT);
         packetPipeline.registerMessage(HandlerServerFightCastSpell.class, PacketFightCastSpell.class, 14, Side.SERVER);
+        packetPipeline.registerMessage(HandlerServerZaapTeleportation.class, PacketZaapTeleportation.class, 15, Side.SERVER);
     }
 
     public Object getGui(GuiId guiId, EntityPlayer player, World world, BlockPos pos) {

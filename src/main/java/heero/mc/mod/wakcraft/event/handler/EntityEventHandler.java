@@ -15,6 +15,7 @@ public class EntityEventHandler {
             player.registerExtendedProperties(InventoryProperty.IDENTIFIER, new InventoryProperty());
             player.registerExtendedProperties(CharacterProperty.IDENTIFIER, new CharacterProperty());
             player.registerExtendedProperties(ItemInUseProperty.IDENTIFIER, new ItemInUseProperty());
+            player.registerExtendedProperties(ZaapProperty.IDENTIFIER, new ZaapProperty());
         }
     }
 }

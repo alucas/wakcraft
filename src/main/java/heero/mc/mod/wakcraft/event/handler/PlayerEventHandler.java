@@ -4,6 +4,7 @@ import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
+import heero.mc.mod.wakcraft.entity.property.ZaapProperty;
 import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.network.packet.PacketHavenBagProperties;
 import heero.mc.mod.wakcraft.network.packet.PacketProfession;
@@ -20,6 +21,7 @@ public class PlayerEventHandler {
             Wakcraft.packetPipeline.sendTo(new PacketProfession(event.player), playerMP);
             Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(event.player, HavenBagProperty.IDENTIFIER), playerMP);
             Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(event.player, SpellsProperty.IDENTIFIER), playerMP);
+            Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(event.player, ZaapProperty.IDENTIFIER), playerMP);
 
             HavenBagProperty properties = (HavenBagProperty) playerMP.getExtendedProperties(HavenBagProperty.IDENTIFIER);
             if (properties == null) {

@@ -16,5 +16,6 @@ public enum GuiId {
     HAVEN_GEM_WORKBENCH,
     POLISHER,
     PROFESSION,
-    SPELLS
+    SPELLS,
+    ZAAPS
 }
