@@ -92,11 +92,13 @@ public class ItemSeed extends ItemWithLevel {
 
     @Override
     public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-        MovingObjectPosition mop = player.rayTrace(10, 1.0F);
-        BlockPos previousPos = ItemInUseUtil.getCoords(player);
-        if (mop == null || mop.sideHit != EnumFacing.UP || !mop.getBlockPos().equals(previousPos)) {
-            player.stopUsingItem();
-            return;
+        if (player.worldObj.isRemote) {
+            MovingObjectPosition mop = player.rayTrace(10, 1.0F);
+            BlockPos previousPos = ItemInUseUtil.getCoords(player);
+            if (mop == null || mop.sideHit != EnumFacing.UP || !mop.getBlockPos().equals(previousPos)) {
+                player.stopUsingItem();
+                return;
+            }
         }
 
         if (player.motionX != 0 || Math.abs(player.motionY) > 0.1 || player.motionZ != 0) {
