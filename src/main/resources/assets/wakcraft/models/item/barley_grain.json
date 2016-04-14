@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "wakcraft:seed/grain_of_barley"
+    "layer0": "wakcraft:seed/barley_grain"
   },
   "display": {
     "thirdperson": {

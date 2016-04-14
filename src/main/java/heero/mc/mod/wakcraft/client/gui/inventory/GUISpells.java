@@ -20,9 +20,9 @@ public class GUISpells extends InventoryEffectRenderer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        fontRendererObj.drawString(StatCollector.translateToLocal("spell.elemental"), 10, 9, 0x404040);
-        fontRendererObj.drawString(StatCollector.translateToLocal("spell.specialities"), 10, 80, 0x404040);
-        fontRendererObj.drawString(StatCollector.translateToLocal("spell.shortcuts"), 10, 132, 0x404040);
+        fontRendererObj.drawString(StatCollector.translateToLocal("spell.category.elemental"), 10, 9, 0x404040);
+        fontRendererObj.drawString(StatCollector.translateToLocal("spell.category.speciality"), 10, 80, 0x404040);
+        fontRendererObj.drawString(StatCollector.translateToLocal("spell.category.shortcut"), 10, 132, 0x404040);
     }
 
     @Override

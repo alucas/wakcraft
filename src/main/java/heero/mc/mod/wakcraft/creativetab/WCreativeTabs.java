@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WCreativeTabs {
 
-    public static final CreativeTabs tabBlock = new CreativeTabs("buildingBlocks") {
+    public static final CreativeTabs tabBlock = new CreativeTabs("building_blocks") {
         @SideOnly(Side.CLIENT)
         @Override
         public Item getTabIconItem() {
@@ -18,7 +18,7 @@ public class WCreativeTabs {
         }
     };
 
-    public static final CreativeTabs tabSpecialBlock = new CreativeTabs("specialBlocks") {
+    public static final CreativeTabs tabSpecialBlock = new CreativeTabs("special_blocks") {
         @Override
         @SideOnly(Side.CLIENT)
         public Item getTabIconItem() {
@@ -26,7 +26,7 @@ public class WCreativeTabs {
         }
     };
 
-    public static final CreativeTabs tabOreBlock = new CreativeTabs("oreBlocks") {
+    public static final CreativeTabs tabOreBlock = new CreativeTabs("ore_blocks") {
         @Override
         @SideOnly(Side.CLIENT)
         public Item getTabIconItem() {

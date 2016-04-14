@@ -59,8 +59,8 @@ public class WItems extends Items {
             cornSeed,
             curarareSeed,
             desertTruffleSeed,
-            grainOfBarley,
-            grainOfVanillaRice,
+            barleyGrain,
+            vanillaRiceGrain,
             jollyflowerSeed,
             juteySeed,
             makoffeeSeed,
@@ -191,6 +191,7 @@ public class WItems extends Items {
         // Farmer Seed
         GameRegistry.registerItem(artichokeSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 10, WBlocks.artichoke, WItems.artichoke)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "artichoke_seed")), "artichoke_seed");
         GameRegistry.registerItem(babbageSeed = ((new ItemWithLevel(40)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "babbage_seed")), "babbage_seed");
+        GameRegistry.registerItem(barleyGrain = ((new ItemWithLevel(20)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "barley_grain")), "barley_grain");
         GameRegistry.registerItem(beanSeed = ((new ItemWithLevel(45)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "bean_seed")), "bean_seed");
         GameRegistry.registerItem(blackberrySeed = ((new ItemWithLevel(160)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "blackberry_seed")), "blackberry_seed");
         GameRegistry.registerItem(blackCawwotSeed = ((new ItemWithLevel(120)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "black_cawwot_seed")), "black_cawwot_seed");
@@ -199,8 +200,6 @@ public class WItems extends Items {
         GameRegistry.registerItem(cornSeed = ((new ItemWithLevel(70)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "corn_seed")), "corn_seed");
         GameRegistry.registerItem(curarareSeed = ((new ItemWithLevel(140)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "curarare_seed")), "curarare_seed");
         GameRegistry.registerItem(desertTruffleSeed = ((new ItemWithLevel(110)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "desert_truffle_seed")), "desert_truffle_seed");
-        GameRegistry.registerItem(grainOfBarley = ((new ItemWithLevel(20)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "grain_of_barley")), "grain_of_barley");
-        GameRegistry.registerItem(grainOfVanillaRice = ((new ItemWithLevel(55)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "grain_of_vanilla_rice")), "grain_of_vanilla_rice");
         GameRegistry.registerItem(jollyflowerSeed = ((new ItemWithLevel(65)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "jollyflower_seed")), "jollyflower_seed");
         GameRegistry.registerItem(juteySeed = ((new ItemWithLevel(60)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "jutey_seed")), "jutey_seed");
         GameRegistry.registerItem(makoffeeSeed = ((new ItemWithLevel(150)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "makoffee_seed")), "makoffee_seed");
@@ -212,6 +211,7 @@ public class WItems extends Items {
         GameRegistry.registerItem(ryeGrain = ((new ItemWithLevel(50)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "rye_grain")), "rye_grain");
         GameRegistry.registerItem(sunflowerSeed = ((new ItemWithLevel(80)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "sunflower_seed")), "sunflower_seed");
         GameRegistry.registerItem(tuberbulbSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.tuberbulb, WItems.tuberbulb)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tuberbulb_seed")), "tuberbulb_seed");
+        GameRegistry.registerItem(vanillaRiceGrain = ((new ItemWithLevel(55)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "vanilla_rice_grain")), "vanilla_rice_grain");
         GameRegistry.registerItem(watermelonSeed = ((new ItemWithLevel(85)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "watermelon_seed")), "watermelon_seed");
         GameRegistry.registerItem(wheatSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.wheat, WItems.wheat)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "wheat_grain")), "wheat_grain");
 

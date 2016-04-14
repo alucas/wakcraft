@@ -246,7 +246,7 @@ public class CombinedClientProxy extends CommonProxy {
         Item[] farmerSeeds = {
                 WItems.artichokeSeed, WItems.babbageSeed, WItems.beanSeed, WItems.blackberrySeed, WItems.blackCawwotSeed,
                 WItems.cawwotSeed, WItems.chiliSeed, WItems.cornSeed, WItems.curarareSeed, WItems.desertTruffleSeed,
-                WItems.grainOfBarley, WItems.grainOfVanillaRice, WItems.jollyflowerSeed, WItems.juteySeed, WItems.makoffeeSeed,
+                WItems.barleyGrain, WItems.vanillaRiceGrain, WItems.jollyflowerSeed, WItems.juteySeed, WItems.makoffeeSeed,
                 WItems.melonSeed, WItems.mushraySeed, WItems.oatGrain, WItems.palmCaneSeed, WItems.pumpkinSeed,
                 WItems.ryeGrain, WItems.sunflowerSeed, WItems.tuberbulbSeed, WItems.watermelonSeed, WItems.wheatSeed};
         registerItemModel(farmerSeeds);

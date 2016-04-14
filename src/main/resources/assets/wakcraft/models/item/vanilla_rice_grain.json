@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "wakcraft:seed/grain_of_vanilla_rice"
+    "layer0": "wakcraft:seed/vanilla_rice_grain"
   },
   "display": {
     "thirdperson": {
