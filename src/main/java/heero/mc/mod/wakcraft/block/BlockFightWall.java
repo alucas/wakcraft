@@ -51,9 +51,8 @@ public class BlockFightWall extends BlockGenericTransparent {
         return super.collisionRayTrace(world, pos, vec1, vec2);
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
-    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity entity) {
+    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity entity) {
         if (!FightUtil.isFighter(entity) || !FightUtil.isFighting(entity)) {
             return;
         }

@@ -51,7 +51,7 @@ public class BlockPhoenix extends BlockContainer {
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        EnumFacing yRotation = (EnumFacing) state.getValue(RotationUtil.PROP_Y_ROTATION);
+        EnumFacing yRotation = state.getValue(RotationUtil.PROP_Y_ROTATION);
 
         return RotationUtil.getMetadataFromYRotation(yRotation);
     }
@@ -81,9 +81,8 @@ public class BlockPhoenix extends BlockContainer {
      * boxes to the list if they intersect the mask.) Parameters: World, X, Y,
      * Z, mask, list, colliding entity
      */
-    @SuppressWarnings("rawtypes")
     @Override
-    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity entity) {
+    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity entity) {
         setBlockBounds(0F, 0F, 0F, 1F, 1.5F, 1F);
         super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
         setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
@@ -97,7 +96,7 @@ public class BlockPhoenix extends BlockContainer {
     public MovingObjectPosition collisionRayTrace(World world, BlockPos pos, Vec3 start, Vec3 end) {
         setBlockBounds(0F, 0F, 0F, 1F, 0.5F, 1F);
         MovingObjectPosition mop1 = super.collisionRayTrace(world, pos, start, end);
-        setBlockBounds(1F/16 * 3, 0.5F, 1F/16 * 3, 1F/16 * 13, 1F, 1F/16 * 13);
+        setBlockBounds(1F / 16 * 3, 0.5F, 1F / 16 * 3, 1F / 16 * 13, 1F, 1F / 16 * 13);
         MovingObjectPosition mop2 = super.collisionRayTrace(world, pos, start, end);
 
         double d1 = 0, d2 = 0;

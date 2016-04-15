@@ -2,7 +2,6 @@ package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -13,7 +12,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockPlant extends BlockGenericTransparent {
-    public static final IProperty PRO_BOTTOM_POSITION = PropertyInteger.create("bottom_position", 0, 3);
+    public static final PropertyInteger PRO_BOTTOM_POSITION = PropertyInteger.create("bottom_position", 0, 3);
 
     public BlockPlant(Material material) {
         super(material, WCreativeTabs.tabBlock);

@@ -3,7 +3,6 @@ package heero.mc.mod.wakcraft.block;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -13,8 +12,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 
 public class BlockCenterCorner extends BlockYRotation {
-    public static final IProperty PROP_CORNER = PropertyBool.create("propertyCorner");
-    public static final IProperty PROP_CENTER = PropertyBool.create("propertyCenter");
+    public static final PropertyBool PROP_CORNER = PropertyBool.create("propertyCorner");
+    public static final PropertyBool PROP_CENTER = PropertyBool.create("propertyCenter");
 
     public BlockCenterCorner(Material material, CreativeTabs tab) {
         super(material, tab);
@@ -49,7 +48,7 @@ public class BlockCenterCorner extends BlockYRotation {
             return state;
         }
 
-        EnumFacing yRotation = (EnumFacing) state.getValue(RotationUtil.PROP_Y_ROTATION);
+        EnumFacing yRotation = state.getValue(RotationUtil.PROP_Y_ROTATION);
         Boolean propertyCornerSouth = yRotation == EnumFacing.SOUTH && blockSouth != this && blockWest != this && blockNorth == this && blockEast == this;
         Boolean propertyCornerWest = yRotation == EnumFacing.WEST && blockSouth == this && blockWest != this && blockNorth != this && blockEast == this;
         Boolean propertyCornerNorth = yRotation == EnumFacing.NORTH && blockSouth == this && blockWest == this && blockNorth != this && blockEast != this;

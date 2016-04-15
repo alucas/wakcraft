@@ -111,9 +111,8 @@ public class BlockSlab extends BlockGeneric implements IBlockProvider {
      * boxes to the list if they intersect the mask.) Parameters: World, X, Y,
      * Z, mask, list, colliding entity
      */
-    @SuppressWarnings("rawtypes")
     @Override
-    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity collidingEntity) {
+    public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity) {
         setBlockBoundsBasedOnState(world, pos);
 
         super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
