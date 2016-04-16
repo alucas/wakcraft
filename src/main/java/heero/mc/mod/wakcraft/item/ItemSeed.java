@@ -9,7 +9,6 @@ import heero.mc.mod.wakcraft.network.packet.PacketProfession;
 import heero.mc.mod.wakcraft.profession.ProfessionManager;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import heero.mc.mod.wakcraft.util.ItemInUseUtil;
-import heero.mc.mod.wakcraft.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,10 +43,6 @@ public class ItemSeed extends ItemWithLevel {
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world,
                              BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (!WorldUtil.isMainWorld(world)) {
-            return false;
-        }
-
         if (side != EnumFacing.UP) {
             return false;
         }
@@ -78,7 +73,7 @@ public class ItemSeed extends ItemWithLevel {
 
     protected boolean canSowHere(final World world, final BlockPos pos) {
         final IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() != WBlocks.dirtSlab && state.getBlock() != WBlocks.dirt) {
+        if (state.getBlock() != WBlocks.dirtSlab && state.getBlock() != WBlocks.dirt && state.getBlock() != WBlocks.hbGarden) {
             return false;
         }
 
