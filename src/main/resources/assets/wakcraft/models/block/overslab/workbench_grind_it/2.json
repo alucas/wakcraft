@@ -1,0 +1,6 @@
+{
+  "parent": "wakcraft:block/overslab/template/2",
+  "textures": {
+    "all": "wakcraft:blocks/workbench_grind_it"
+  }
+}

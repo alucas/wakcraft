@@ -44,7 +44,7 @@ public class GUIWorkbench extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        fontRendererObj.drawString(StatCollector.translateToLocal("profession.miner"), 34, 10, 0xffffff);
+        fontRendererObj.drawString(StatCollector.translateToLocal("profession." + profession.toString().toLowerCase()), 34, 10, 0xffffff);
 
         List<IExtendedRecipe> recipes = CraftingManager.getInstance().getRecipeList(profession);
 

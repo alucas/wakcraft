@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "bottom_position=0": {"model": "wakcraft:overslab/workbench_grind_it/0"},
+    "bottom_position=1": {"model": "wakcraft:overslab/workbench_grind_it/1"},
+    "bottom_position=2": {"model": "wakcraft:overslab/workbench_grind_it/2"},
+    "bottom_position=3": {"model": "wakcraft:overslab/workbench_grind_it/3"}
+  }
+}

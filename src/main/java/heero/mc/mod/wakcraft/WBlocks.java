@@ -5,6 +5,7 @@ import heero.mc.mod.wakcraft.block.vein.*;
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.item.ItemBlockSlab;
 import heero.mc.mod.wakcraft.item.ItemBlockVein;
+import heero.mc.mod.wakcraft.profession.ProfessionManager;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -70,7 +71,7 @@ public class WBlocks {
             plank,
             plant,
             plant2,
-            jobGrindIt, jobPolisher,
+            workbenchGrindIt, workbenchPolisher,
             scree1,
             sufokiaColor,
             sufokiaGround, sufokiaGroundSlab,
@@ -128,8 +129,8 @@ public class WBlocks {
         // Special blocks
         registerBlock(classConsole = (new BlockClassConsole().setUnlocalizedName(MODID_ + "class_console")));
         registerBlock(dragoExpress = (new BlockDragoExpress().setUnlocalizedName(MODID_ + "drago_express")));
-        registerBlock(jobGrindIt = (new BlockPolisher().setUnlocalizedName(MODID_ + "job_grind_it")));
-        registerBlock(jobPolisher = (new BlockPolisher().setUnlocalizedName(MODID_ + "job_polisher")));
+        registerBlock(workbenchGrindIt = (new BlockWorkbench(ProfessionManager.PROFESSION.FARMER).setUnlocalizedName(MODID_ + "workbench_grind_it")));
+        registerBlock(workbenchPolisher = (new BlockWorkbench(ProfessionManager.PROFESSION.MINER).setUnlocalizedName(MODID_ + "workbench_polisher")));
         registerBlock(phoenix = (new BlockPhoenix().setUnlocalizedName(MODID_ + "phoenix")));
         registerBlock(zaap = (new BlockZaap().setUnlocalizedName(MODID_ + "zaap")));
 

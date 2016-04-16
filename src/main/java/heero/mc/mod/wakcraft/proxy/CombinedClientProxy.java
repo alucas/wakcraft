@@ -3,6 +3,7 @@ package heero.mc.mod.wakcraft.proxy;
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WItems;
+import heero.mc.mod.wakcraft.block.BlockWorkbench;
 import heero.mc.mod.wakcraft.block.vein.BlockVein;
 import heero.mc.mod.wakcraft.client.event.handler.GUIEventHandler;
 import heero.mc.mod.wakcraft.client.event.handler.KeyInputHandler;
@@ -37,6 +38,7 @@ import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import heero.mc.mod.wakcraft.tileentity.TileEntityPhoenix;
 import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -177,8 +179,8 @@ public class CombinedClientProxy extends CommonProxy {
         // Special
         registerItemBlockModel(WBlocks.classConsole);
         registerItemBlockModel(WBlocks.dragoExpress);
-        registerItemBlockModel(WBlocks.jobGrindIt);
-        registerItemBlockModel(WBlocks.jobPolisher);
+        registerItemBlockModel(WBlocks.workbenchGrindIt);
+        registerItemBlockModel(WBlocks.workbenchPolisher);
         registerItemBlockModel(WBlocks.phoenix);
         registerItemBlockModel(WBlocks.zaap);
 
@@ -404,8 +406,14 @@ public class CombinedClientProxy extends CommonProxy {
         TileEntity tileEntity;
 
         switch (guiId) {
-            case POLISHER:
-                return new GUIWorkbench(new ContainerWorkbench(player.inventory, world, PROFESSION.MINER), PROFESSION.MINER);
+            case WORKBENCH:
+                final IBlockState state = world.getBlockState(pos);
+                if (!(state.getBlock() instanceof BlockWorkbench)) {
+                    return null;
+                }
+
+                final BlockWorkbench block = (BlockWorkbench) state.getBlock();
+                return new GUIWorkbench(new ContainerWorkbench(player.inventory, world, block.getProfession()), block.getProfession());
             case INVENTORY:
                 return new GUIWakcraft(guiId, new GUIInventory(new ContainerPlayerInventory(player)), player, world, pos);
             case HAVEN_GEM_WORKBENCH:

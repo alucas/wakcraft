@@ -242,8 +242,8 @@ tile.wakcraft.vein_rugged_quartz.name=Rugged Quartz Block
 tile.wakcraft.vein_taroudium.name=Taroudium Block
 tile.wakcraft.vein_wholesome_zinc.name=Wholesome Zinc Block
 
-tile.wakcraft.job_grind_it.name=Grind-It
-tile.wakcraft.job_polisher.name=Polisher
+tile.wakcraft.workbench_grind_it.name=Grind-It
+tile.wakcraft.workbench_polisher.name=Polisher
 tile.wakcraft.tanner_workbench.name=Tanner Workbench
 
 tile.wakcraft.drago_express.name=Drago-Express

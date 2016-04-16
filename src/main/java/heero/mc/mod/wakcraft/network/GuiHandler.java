@@ -2,10 +2,11 @@ package heero.mc.mod.wakcraft.network;
 
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
+import heero.mc.mod.wakcraft.block.BlockWorkbench;
 import heero.mc.mod.wakcraft.inventory.*;
-import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -22,8 +23,14 @@ public class GuiHandler implements IGuiHandler {
         }
 
         switch (guiId) {
-            case POLISHER:
-                return new ContainerWorkbench(player.inventory, world, PROFESSION.MINER);
+            case WORKBENCH:
+                final IBlockState state = world.getBlockState(new BlockPos(x, y, z));
+                if (!(state.getBlock() instanceof BlockWorkbench)) {
+                    return null;
+                }
+
+                final BlockWorkbench block = (BlockWorkbench) state.getBlock();
+                return new ContainerWorkbench(player.inventory, world, block.getProfession());
             case INVENTORY:
                 return new ContainerPlayerInventory(player);
             case HAVEN_GEM_WORKBENCH:
