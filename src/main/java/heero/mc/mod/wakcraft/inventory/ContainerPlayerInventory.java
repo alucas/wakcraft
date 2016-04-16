@@ -20,8 +20,8 @@ public class ContainerPlayerInventory extends Container {
             return;
         }
 
-        for (int i = 0; i < properties.getInventoryArmors().getSizeInventory(); ++i) {
-            final SlotArmor slot = new SlotArmor(properties.getInventoryArmors(), i, 8 + (i / 4) * 18 + (i >= 4 ? 61 : 0), 8 + (i % 4) * 18);
+        for (int i = 0; i < properties.getArmorInventory().getSizeInventory(); ++i) {
+            final SlotArmor slot = new SlotArmor(properties.getArmorInventory(), i, 8 + (i / 4) * 18 + (i >= 4 ? 61 : 0), 8 + (i % 4) * 18);
             this.addSlotToContainer(slot);
         }
 

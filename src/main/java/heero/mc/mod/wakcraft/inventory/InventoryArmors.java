@@ -16,7 +16,7 @@ public class InventoryArmors extends InventoryBasic {
     protected Entity entity;
 
     public InventoryArmors(final Entity entity) {
-        super("Armors", false, 12);
+        super("Armors", false, types.length);
 
         this.entity = entity;
     }
