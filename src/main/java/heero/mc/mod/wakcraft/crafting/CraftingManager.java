@@ -23,6 +23,8 @@ public enum CraftingManager {
             recipes.put(profession, new ArrayList<IRecipeWithLevel>());
         }
 
+        addRecipe(PROFESSION.FARMER, 0, 100, new ItemStack(WItems.wheatFlour), new ItemStack(WItems.wheatGrain, 3));
+
         addRecipe(PROFESSION.MINER, 0, 100, new ItemStack(WItems.bomb), new ItemStack(WItems.canoonPowder), new ItemStack(WItems.clay, 3), new ItemStack(WItems.ore1, 3));
         addRecipe(PROFESSION.MINER, 0, 100, new ItemStack(WItems.fossil), new ItemStack(WItems.waterBucket, 2), new ItemStack(WItems.driedDung, 3));
         addRecipe(PROFESSION.MINER, 10, 100, new ItemStack(WItems.shamPearl), new ItemStack(WItems.pearl, 3), new ItemStack(WItems.waterBucket, 2));

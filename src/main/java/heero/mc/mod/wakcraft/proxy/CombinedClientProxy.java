@@ -237,6 +237,7 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemModel(WItems.verbalaSalt);
         registerItemModel(WItems.waterBucket);
         registerItemModel(WItems.wheat);
+        registerItemModel(WItems.wheatFlour);
         registerItemModel(WItems.woollyKey);
 
         Item[] ores = {WItems.ore1, WItems.ore2};
@@ -251,7 +252,7 @@ public class CombinedClientProxy extends CommonProxy {
                 WItems.cawwotSeed, WItems.chiliSeed, WItems.cornSeed, WItems.curarareSeed, WItems.desertTruffleSeed,
                 WItems.barleyGrain, WItems.vanillaRiceGrain, WItems.jollyflowerSeed, WItems.juteySeed, WItems.makoffeeSeed,
                 WItems.melonSeed, WItems.mushraySeed, WItems.oatGrain, WItems.palmCaneSeed, WItems.pumpkinSeed,
-                WItems.ryeGrain, WItems.sunflowerSeed, WItems.tuberbulbSeed, WItems.watermelonSeed, WItems.wheatSeed};
+                WItems.ryeGrain, WItems.sunflowerSeed, WItems.tuberbulbSeed, WItems.watermelonSeed, WItems.wheatGrain};
         registerItemModel(farmerSeeds);
 
         registerItemModel(WItems.gobballSeed);
