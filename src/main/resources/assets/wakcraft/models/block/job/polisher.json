@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "wakcraft:blocks/polisher"
+    "all": "wakcraft:blocks/job_polisher"
   }
 }
