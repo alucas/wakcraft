@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class HavenBagsManager extends WorldSavedData {
     // Constants
+    private static final String HAVANBAG_ID = "havenbags";
     private static final String TAG_HAVENBAGS = "Havenbags";
     private static final String TAG_UID = "UID";
     private static final String TAG_PROPERTIES = "Properties";
@@ -23,30 +24,36 @@ public class HavenBagsManager extends WorldSavedData {
     public static final String ACL_KEY_GUILD = "@guild";
 
     // Statics
-    private static HavenBagsManager instance;
+    private static HavenBagsManager _instance;
 
     // Parameters
     private Map<Integer, HavenBagProperties> havenbags;
+
+    public static HavenBagsManager getInstance() {
+        return _instance;
+    }
 
     // Static methods
     public static void setup() {
     }
 
     public static void teardown() {
-        instance = null;
+        _instance = null;
     }
 
     public static void init(World world) {
-        if (instance == null) {
-            instance = (HavenBagsManager) world.loadItemData(HavenBagsManager.class, "havenbags");
+        if (_instance == null) {
+            _instance = (HavenBagsManager) world.loadItemData(HavenBagsManager.class, HAVANBAG_ID);
 
-            if (instance == null) {
-                world.setItemData("havenbags", new HavenBagsManager("havenbags"));
+            if (_instance == null) {
+                _instance = new HavenBagsManager(HAVANBAG_ID);
+                world.setItemData(HAVANBAG_ID, _instance);
             }
         }
     }
 
     public static HavenBagProperties getProperties(int uid) {
+        HavenBagsManager instance = getInstance();
         HavenBagProperties properties = instance.havenbags.get(uid);
         if (properties == null) {
             properties = new HavenBagProperties();
@@ -57,11 +64,13 @@ public class HavenBagsManager extends WorldSavedData {
     }
 
     public static void setProperties(int uid, HavenBagProperties properties) {
+        HavenBagsManager instance = getInstance();
         instance.havenbags.put(uid, properties);
         instance.markDirty();
     }
 
     public static NBTTagCompound getHavenBagNBT(int uid) {
+        HavenBagsManager instance = getInstance();
         NBTTagCompound tagHavenBag = new NBTTagCompound();
 
         instance.writeHavenBagToNBT(tagHavenBag, uid);
@@ -70,6 +79,7 @@ public class HavenBagsManager extends WorldSavedData {
     }
 
     public static void setHavenBagNBT(NBTTagCompound tagHavenBag) {
+        HavenBagsManager instance = getInstance();
         instance.readHavenBagFromNBT(tagHavenBag);
     }
 
@@ -77,7 +87,7 @@ public class HavenBagsManager extends WorldSavedData {
     public HavenBagsManager(String name) {
         super(name);
 
-        havenbags = new HashMap<Integer, HavenBagProperties>();
+        havenbags = new HashMap<>();
     }
 
     @Override
