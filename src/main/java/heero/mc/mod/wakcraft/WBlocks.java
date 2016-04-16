@@ -70,7 +70,7 @@ public class WBlocks {
             plank,
             plant,
             plant2,
-            jobPolisher,
+            jobGrindIt, jobPolisher,
             scree1,
             sufokiaColor,
             sufokiaGround, sufokiaGroundSlab,
@@ -128,6 +128,7 @@ public class WBlocks {
         // Special blocks
         registerBlock(classConsole = (new BlockClassConsole().setUnlocalizedName(MODID_ + "class_console")));
         registerBlock(dragoExpress = (new BlockDragoExpress().setUnlocalizedName(MODID_ + "drago_express")));
+        registerBlock(jobGrindIt = (new BlockPolisher().setUnlocalizedName(MODID_ + "job_grind_it")));
         registerBlock(jobPolisher = (new BlockPolisher().setUnlocalizedName(MODID_ + "job_polisher")));
         registerBlock(phoenix = (new BlockPhoenix().setUnlocalizedName(MODID_ + "phoenix")));
         registerBlock(zaap = (new BlockZaap().setUnlocalizedName(MODID_ + "zaap")));

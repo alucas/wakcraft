@@ -177,6 +177,7 @@ public class CombinedClientProxy extends CommonProxy {
         // Special
         registerItemBlockModel(WBlocks.classConsole);
         registerItemBlockModel(WBlocks.dragoExpress);
+        registerItemBlockModel(WBlocks.jobGrindIt);
         registerItemBlockModel(WBlocks.jobPolisher);
         registerItemBlockModel(WBlocks.phoenix);
         registerItemBlockModel(WBlocks.zaap);

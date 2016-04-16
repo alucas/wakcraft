@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "wakcraft:job/grind_it"
+    }
+  }
+}
