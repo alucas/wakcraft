@@ -14,6 +14,7 @@ import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -113,7 +114,7 @@ public class BlockCrop extends BlockHarvesting {
     }
 
     @Override
-    public float getBlockHeight() {
+    public float getBlockHeight(final IBlockAccess worldIn, final BlockPos pos) {
         return 1;
     }
 

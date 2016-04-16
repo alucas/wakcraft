@@ -165,7 +165,7 @@ public abstract class BlockVein extends BlockHarvesting implements ILevelBlock {
     }
 
     @Override
-    public float getBlockHeight() {
+    public float getBlockHeight(final IBlockAccess worldIn, final BlockPos pos) {
         return (1F / 16) * 3;
     }
 

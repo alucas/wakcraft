@@ -6,6 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockPlant extends BlockOverSlab {
@@ -25,7 +26,7 @@ public class BlockPlant extends BlockOverSlab {
     }
 
     @Override
-    public float getBlockHeight() {
+    public float getBlockHeight(final IBlockAccess worldIn, final BlockPos pos) {
         return 1;
     }
 }

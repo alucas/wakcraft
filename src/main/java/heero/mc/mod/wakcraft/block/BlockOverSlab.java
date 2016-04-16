@@ -50,8 +50,8 @@ public abstract class BlockOverSlab extends BlockGeneric implements IOverSlab {
         final IBlockState state = getActualState(worldIn.getBlockState(pos), worldIn, pos);
         final int bottomPosition = state.getValue(BlockOverSlab.PROP_BOTTOM_POSITION);
 
-        this.setBlockBounds(0, (bottomPosition * -0.25F), 0, 1, (bottomPosition * -0.25F) + getBlockHeight(), 1);
+        this.setBlockBounds(0, (bottomPosition * -0.25F), 0, 1, (bottomPosition * -0.25F) + getBlockHeight(worldIn, pos), 1);
     }
 
-    public abstract float getBlockHeight();
+    public abstract float getBlockHeight(final IBlockAccess worldIn, final BlockPos pos);
 }
