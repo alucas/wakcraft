@@ -2,12 +2,12 @@ package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.WBlocks;
 import heero.mc.mod.wakcraft.WLog;
+import heero.mc.mod.wakcraft.block.material.WMaterial;
 import heero.mc.mod.wakcraft.entity.property.HavenBagProperty;
 import heero.mc.mod.wakcraft.havenbag.HavenBagProperties;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
 import heero.mc.mod.wakcraft.util.HavenBagUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +21,7 @@ import java.util.List;
 public class BlockHavenBagBarrier extends BlockGenericTransparent {
 
     public BlockHavenBagBarrier() {
-        super(Material.air);
+        super(WMaterial.invisible);
 
         setCanBePlacedManually(false);
         setRenderType(-1);

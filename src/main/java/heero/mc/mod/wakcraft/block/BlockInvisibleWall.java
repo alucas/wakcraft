@@ -1,18 +1,12 @@
 package heero.mc.mod.wakcraft.block;
 
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.MaterialTransparent;
+import heero.mc.mod.wakcraft.block.material.WMaterial;
 import net.minecraft.block.state.IBlockState;
 
 public class BlockInvisibleWall extends BlockGenericTransparent {
 
     public BlockInvisibleWall() {
-        super(new MaterialTransparent(MapColor.airColor) {
-            @Override
-            public boolean isReplaceable() {
-                return false;
-            }
-        });
+        super(WMaterial.invisible);
 
         setCanBePlacedManually(false);
         setRenderType(-1);
