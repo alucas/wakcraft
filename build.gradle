@@ -83,27 +83,38 @@ def getGitVersion() {
     def out = [:]
 
     // call git command.
-    def outStream = new ByteArrayOutputStream()
-    def result = exec {
+    def outStreamBranch = new ByteArrayOutputStream()
+    exec {
         executable = 'git'
-        args = ['describe', '--long', "--match=[^(jenkins)]*"]
-        standardOutput = outStream
+        args = ['rev-parse', '--abbrev-ref', 'HEAD']
+        standardOutput = outStreamBranch
     }
 
-    def fullVersion = outStream.toString().trim()
+    def outStreamVersion = new ByteArrayOutputStream()
+    exec {
+        executable = 'git'
+        args = ['describe', '--long', "--match=[^(jenkins)]*"]
+        standardOutput = outStreamVersion
+    }
+
+    def branch = outStreamBranch.toString().trim()
+
+    def fullVersion = outStreamVersion.toString().trim()
     def matcher = fullVersion =~ /(\d+).(\d+)-(\d+)-(.*)/
 
     def maj = matcher[0][1]
     def min = matcher[0][2]
     def rev = matcher[0][3]
+    def hash = matcher[0][4]
     def bn = System.getenv("BUILD_NUMBER") ?: "1"
 
+    out['Wakcraft.build.branch'] = branch.toString()
     out['Wakcraft.build.major.number'] = maj.toString()
     out['Wakcraft.build.minor.number'] = min.toString()
     out['Wakcraft.build.revision.number'] = rev.toString()
-    out['Wakcraft.build.githash'] = matcher[0][4].toString()
+    out['Wakcraft.build.githash'] = hash.toString()
     out['Wakcraft.build.number'] = bn.toString()
-    out['Wakcraft.version'] = "${maj}.${min}.${rev}.${bn}".toString()
+    out['Wakcraft.version'] = "${branch}.${maj}.${min}.${rev}.${bn}".toString()
 
     return out
 }
