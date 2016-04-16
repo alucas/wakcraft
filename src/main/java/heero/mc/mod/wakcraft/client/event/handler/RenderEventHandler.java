@@ -3,7 +3,6 @@ package heero.mc.mod.wakcraft.client.event.handler;
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.item.ItemSeed;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,37 +28,46 @@ public class RenderEventHandler {
             return;
         }
 
-        final Minecraft minecraft = Minecraft.getMinecraft();
-        final Entity entity = minecraft.getRenderViewEntity();
+        final Minecraft mc = Minecraft.getMinecraft();
+        final Entity entity = mc.getRenderViewEntity();
         if (!(entity instanceof EntityPlayer)) {
             return;
         }
 
         final EntityPlayer player = (EntityPlayer) entity;
-        if (!player.isUsingItem()) {
+
+        if (mc.playerController.getIsHittingBlock() && mc.playerController.curBlockDamageMP > 0) {
+            renderItemInUses(mc, mc.playerController.curBlockDamageMP);
             return;
         }
 
-        final Item itemInUse = player.getItemInUse().getItem();
-        if (!(itemInUse instanceof ItemSeed)) {
+        if (player.isUsingItem()) {
+            final Item itemInUse = player.getItemInUse().getItem();
+            if (!(itemInUse instanceof ItemSeed)) {
+                return;
+            }
+
+            renderItemInUses(mc, getProgression(player, itemInUse));
             return;
         }
-
-        renderItemInUses(minecraft, player, itemInUse, event.resolution);
     }
 
-    public void renderItemInUses(final Minecraft mc, final EntityPlayer player, final Item itemInUse, final ScaledResolution resolution) {
+    public float getProgression(final EntityPlayer player, final Item itemInUse) {
+        final int usageMaxDuration = itemInUse.getMaxItemUseDuration(player.getItemInUse());
+        final int usageDuration = player.getItemInUseDuration();
+
+        return (float) usageDuration / (float) usageMaxDuration;
+    }
+
+    public void renderItemInUses(final Minecraft mc, final float progression) {
         mc.mcProfiler.startSection("itemInUse");
 
         mc.getTextureManager().bindTexture(ITEM_IN_USE_BACKGROUND);
 
         GlStateManager.enableBlend();
 
-        int usageMaxDuration = itemInUse.getMaxItemUseDuration(player.getItemInUse());
-        int usageDuration = player.getItemInUseDuration();
-
         mc.ingameGUI.drawTexturedModalRect(10, 10, 0, 0, 106, 12);
-        mc.ingameGUI.drawTexturedModalRect(13, 13, 0, 12, (int) (((float) usageDuration / (float) usageMaxDuration) * 100), 6);
+        mc.ingameGUI.drawTexturedModalRect(13, 13, 0, 12, (int) (progression * 100), 6);
 
         GlStateManager.disableBlend();
 
