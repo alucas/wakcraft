@@ -2,7 +2,7 @@ package heero.mc.mod.wakcraft.client.gui.inventory;
 
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.crafting.CraftingManager;
-import heero.mc.mod.wakcraft.crafting.IExtendedRecipe;
+import heero.mc.mod.wakcraft.crafting.IRecipeWithLevel;
 import heero.mc.mod.wakcraft.crafting.RecipeWithLevel;
 import heero.mc.mod.wakcraft.profession.ProfessionManager;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
@@ -44,9 +44,11 @@ public class GUIWorkbench extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        fontRendererObj.drawString(StatCollector.translateToLocal("profession." + profession.toString().toLowerCase()), 34, 10, 0xffffff);
+        final int level = ProfessionManager.getLevel(mc.thePlayer, profession);
 
-        List<IExtendedRecipe> recipes = CraftingManager.getInstance().getRecipeList(profession);
+        fontRendererObj.drawString(StatCollector.translateToLocalFormatted("message.profession.level", profession.getDisplayName(), level), 34, 10, 0xffffff);
+
+        List<IRecipeWithLevel> recipes = CraftingManager.INSTANCE.getRecipeList(profession);
 
         for (int i = 0; i < NB_DISPLAYED_RECIPE; i++) {
             if (scrollIndex + i >= recipes.size()) {
@@ -56,7 +58,7 @@ public class GUIWorkbench extends GuiContainer {
             RecipeWithLevel recipe = (RecipeWithLevel) recipes.get(scrollIndex + i);
 
             // Recipe output name + Recipe level
-            fontRendererObj.drawString(I18n.format("message.itemAndLevel", recipe.getRecipeOutput().getDisplayName(), recipe.recipeLevel), xSize + 11, i * 40 - 5, 0xffffff);
+            fontRendererObj.drawString(I18n.format("message.itemAndLevel", recipe.getRecipeOutput().getDisplayName(), recipe.level), xSize + 11, i * 40 - 5, 0xffffff);
             // Draw a tiny "=" between the recipe output and the recipe elements
             fontRendererObj.drawString("=", xSize + 31, 15 + i * 40 - 5, 0xffffff);
         }
@@ -103,7 +105,7 @@ public class GUIWorkbench extends GuiContainer {
                 break;
             }
 
-            IExtendedRecipe recipe = recipes.get(scrollIndex + i);
+            IRecipeWithLevel recipe = recipes.get(scrollIndex + i);
             int x = guiLeft + xSize + 11;
             int y = guiTop + 5 + i * 40;
             if (mouseX >= x && mouseX < x + 16 && mouseY >= y && mouseY < y + 16) {
@@ -138,7 +140,7 @@ public class GUIWorkbench extends GuiContainer {
         // Profession Icon
         drawTexturedModalRect(guiLeft + 10, guiTop + 10, 0, ySize + 7, 16, 16);
 
-        final List<IExtendedRecipe> recipes = CraftingManager.getInstance().getRecipeList(profession);
+        final List<IRecipeWithLevel> recipes = CraftingManager.INSTANCE.getRecipeList(profession);
 
         GlStateManager.enableBlend();
 
@@ -147,7 +149,7 @@ public class GUIWorkbench extends GuiContainer {
                 break;
             }
 
-            IExtendedRecipe recipe = recipes.get(scrollIndex + i);
+            IRecipeWithLevel recipe = recipes.get(scrollIndex + i);
 
             // Recipe background
             drawTexturedModalRect(guiLeft + xSize + 5, guiTop - 10 + i * 40, 0, ySize + 39, 140, 35);
@@ -174,7 +176,7 @@ public class GUIWorkbench extends GuiContainer {
         int wheel = Mouse.getDWheel();
         if (wheel > 0 && scrollIndex > 0) {
             scrollIndex -= 1;
-        } else if (wheel < 0 && scrollIndex < CraftingManager.getInstance().getRecipeList(profession).size() - 1) {
+        } else if (wheel < 0 && scrollIndex < CraftingManager.INSTANCE.getRecipeList(profession).size() - 1) {
             scrollIndex += 1;
         }
     }

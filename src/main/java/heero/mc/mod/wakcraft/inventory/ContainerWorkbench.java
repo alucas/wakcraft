@@ -47,7 +47,7 @@ public class ContainerWorkbench extends Container {
     }
 
     public void onCraftMatrixChanged(IInventory par1IInventory) {
-        this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(profession, craftMatrix, worldObj));
+        this.craftResult.setInventorySlotContents(0, CraftingManager.INSTANCE.findMatchingRecipe(profession, craftMatrix, worldObj));
     }
 
     /**

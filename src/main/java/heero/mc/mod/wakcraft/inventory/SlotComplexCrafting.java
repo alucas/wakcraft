@@ -1,7 +1,9 @@
 package heero.mc.mod.wakcraft.inventory;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.crafting.CraftingManager;
-import heero.mc.mod.wakcraft.crafting.IExtendedRecipe;
+import heero.mc.mod.wakcraft.crafting.IRecipeWithLevel;
+import heero.mc.mod.wakcraft.profession.ProfessionManager;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -29,27 +31,32 @@ public class SlotComplexCrafting extends SlotCrafting {
         FMLCommonHandler.instance().firePlayerCraftingEvent(player, stack, inventoryCrafting);
         this.onCrafting(stack);
 
-        IExtendedRecipe recipe = CraftingManager.getInstance().getMatchingRecipe(profession, inventoryCrafting, world);
+        IRecipeWithLevel recipe = CraftingManager.INSTANCE.getMatchingRecipe(profession, inventoryCrafting, world);
         if (recipe == null) {
-            // Something is not right !
+            WLog.error("No recipe found");
             return;
         }
 
         ItemStack result = recipe.getCraftingResult(inventoryCrafting);
         if (result.getItem() != stack.getItem()) {
-            // Something is not right !
+            WLog.error("Invalid recipe result");
             return;
         }
 
-        for (int i = 0; i < this.inventoryCrafting.getSizeInventory(); ++i) {
-            ItemStack itemstack1 = this.inventoryCrafting.getStackInSlot(i);
+        final int xpAdded = ProfessionManager.addXpFromRecipe(player, profession, recipe);
 
-            if (itemstack1 != null) {
-                for (ItemStack recipeStack : recipe.getRecipeComponents()) {
-                    if (recipeStack.getItem() == itemstack1.getItem()) {
-                        this.inventoryCrafting.decrStackSize(i, recipeStack.stackSize);
-                    }
+        for (int i = 0; i < this.inventoryCrafting.getSizeInventory(); ++i) {
+            ItemStack craftStack = this.inventoryCrafting.getStackInSlot(i);
+            if (craftStack == null) {
+                continue;
+            }
+
+            for (ItemStack recipeStack : recipe.getRecipeComponents()) {
+                if (recipeStack.getItem() != craftStack.getItem()) {
+                    continue;
                 }
+
+                this.inventoryCrafting.decrStackSize(i, recipeStack.stackSize);
             }
         }
     }

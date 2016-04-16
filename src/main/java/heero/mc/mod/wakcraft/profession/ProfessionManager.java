@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.profession;
 
 import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.block.ILevelBlock;
+import heero.mc.mod.wakcraft.crafting.IRecipeWithLevel;
 import heero.mc.mod.wakcraft.entity.property.ProfessionProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,7 +35,16 @@ public class ProfessionManager {
         return ponderedXp;
     }
 
-    public static void addXp(EntityPlayer player, PROFESSION profession, int xpValue) {
+    public static int addXpFromRecipe(EntityPlayer player, PROFESSION profession, IRecipeWithLevel recipe) {
+        int playerProfessionLevel = getLevel(player, profession);
+        int ponderedXp = getPonderedXp(playerProfessionLevel, recipe.getLevel(), recipe.getXp());
+
+        addXp(player, profession, ponderedXp);
+
+        return ponderedXp;
+    }
+
+    private static void addXp(EntityPlayer player, PROFESSION profession, int xpValue) {
         setXp(player, profession, getXp(player, profession) + xpValue);
     }
 
@@ -105,6 +115,10 @@ public class ProfessionManager {
 
         public int getValue() {
             return this.value;
+        }
+
+        public String getDisplayName() {
+            return this.toString().toLowerCase();
         }
     }
 }

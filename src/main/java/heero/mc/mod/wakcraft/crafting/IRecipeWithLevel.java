@@ -5,6 +5,8 @@ import net.minecraft.item.crafting.IRecipe;
 
 import java.util.List;
 
-public interface IExtendedRecipe extends IRecipe {
+public interface IRecipeWithLevel extends IRecipe {
     public List<ItemStack> getRecipeComponents();
+    public int getXp();
+    public int getLevel();
 }

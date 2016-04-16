@@ -13,31 +13,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CraftingManager {
-    private static final CraftingManager instance = new CraftingManager();
+public enum CraftingManager {
+    INSTANCE;
 
-    private final Map<PROFESSION, List<IExtendedRecipe>> recipes = new HashMap<>();
-
+    private final Map<PROFESSION, List<IRecipeWithLevel>> recipes = new HashMap<>();
 
     private CraftingManager() {
         for (PROFESSION profession : PROFESSION.values()) {
-            recipes.put(profession, new ArrayList<IExtendedRecipe>());
+            recipes.put(profession, new ArrayList<IRecipeWithLevel>());
         }
 
-        addRecipe(PROFESSION.MINER, 0, new ItemStack(WItems.bomb), new ItemStack(WItems.canoonPowder), new ItemStack(WItems.clay, 3), new ItemStack(WItems.ore1, 3));
-        addRecipe(PROFESSION.MINER, 0, new ItemStack(WItems.fossil), new ItemStack(WItems.waterBucket, 2), new ItemStack(WItems.driedDung, 3));
-        addRecipe(PROFESSION.MINER, 10, new ItemStack(WItems.shamPearl), new ItemStack(WItems.pearl, 3), new ItemStack(WItems.waterBucket, 2));
-        addRecipe(PROFESSION.MINER, 15, new ItemStack(WItems.verbalaSalt), new ItemStack(WItems.ore1, 3, 2));
-        addRecipe(PROFESSION.MINER, 20, new ItemStack(WItems.gumgum), new ItemStack(WItems.ore1, 15, 3));
-        addRecipe(PROFESSION.MINER, 20, new ItemStack(WItems.polishedMoonstone), new ItemStack(WItems.waterBucket, 2), new ItemStack(WItems.moonstone, 3));
-        addRecipe(PROFESSION.MINER, 25, new ItemStack(WItems.shadowyBlue), new ItemStack(WItems.ore1, 3, 5));
+        addRecipe(PROFESSION.MINER, 0, 100, new ItemStack(WItems.bomb), new ItemStack(WItems.canoonPowder), new ItemStack(WItems.clay, 3), new ItemStack(WItems.ore1, 3));
+        addRecipe(PROFESSION.MINER, 0, 100, new ItemStack(WItems.fossil), new ItemStack(WItems.waterBucket, 2), new ItemStack(WItems.driedDung, 3));
+        addRecipe(PROFESSION.MINER, 10, 100, new ItemStack(WItems.shamPearl), new ItemStack(WItems.pearl, 3), new ItemStack(WItems.waterBucket, 2));
+        addRecipe(PROFESSION.MINER, 15, 100, new ItemStack(WItems.verbalaSalt), new ItemStack(WItems.ore1, 3, 2));
+        addRecipe(PROFESSION.MINER, 20, 100, new ItemStack(WItems.gumgum), new ItemStack(WItems.ore1, 15, 3));
+        addRecipe(PROFESSION.MINER, 20, 100, new ItemStack(WItems.polishedMoonstone), new ItemStack(WItems.waterBucket, 2), new ItemStack(WItems.moonstone, 3));
+        addRecipe(PROFESSION.MINER, 25, 100, new ItemStack(WItems.shadowyBlue), new ItemStack(WItems.ore1, 3, 5));
     }
 
-    public static CraftingManager getInstance() {
-        return instance;
-    }
-
-    public void addRecipe(PROFESSION profession, int level, ItemStack result, Object... recipe) {
+    public void addRecipe(final PROFESSION profession, final int level, final int xp, final ItemStack result, final Object... recipe) {
         final ArrayList<ItemStack> recipeList = new ArrayList<>();
 
         for (Object ingredient : recipe) {
@@ -48,15 +43,15 @@ public class CraftingManager {
             } else if (ingredient instanceof Block) {
                 recipeList.add(new ItemStack((Block) ingredient));
             } else {
-                throw new RuntimeException("Invalid shapeless recipe!");
+                throw new IllegalArgumentException("Invalid shapeless recipe!");
             }
         }
 
-        recipes.get(profession).add(new RecipeWithLevel(result, recipeList, level));
+        recipes.get(profession).add(new RecipeWithLevel(result, recipeList, level, xp));
     }
 
-    public ItemStack findMatchingRecipe(PROFESSION profession, InventoryCrafting inventory, World world) {
-        final IExtendedRecipe recipe = getMatchingRecipe(profession, inventory, world);
+    public ItemStack findMatchingRecipe(final PROFESSION profession, final InventoryCrafting inventory, final World world) {
+        final IRecipeWithLevel recipe = getMatchingRecipe(profession, inventory, world);
         if (recipe != null) {
             return recipe.getCraftingResult(inventory);
         }
@@ -64,18 +59,18 @@ public class CraftingManager {
         return null;
     }
 
-    public IExtendedRecipe getMatchingRecipe(PROFESSION profession, InventoryCrafting inventory, World world) {
-        final List<IExtendedRecipe> professionRecipes = getRecipeList(profession);
-        for (heero.mc.mod.wakcraft.crafting.IExtendedRecipe IExtendedRecipe : professionRecipes) {
-            if (IExtendedRecipe.matches(inventory, world)) {
-                return IExtendedRecipe;
+    public IRecipeWithLevel getMatchingRecipe(final PROFESSION profession, final InventoryCrafting inventory, final World world) {
+        final List<IRecipeWithLevel> professionRecipes = getRecipeList(profession);
+        for (IRecipeWithLevel recipe : professionRecipes) {
+            if (recipe.matches(inventory, world)) {
+                return recipe;
             }
         }
 
         return null;
     }
 
-    public List<IExtendedRecipe> getRecipeList(PROFESSION profession) {
+    public List<IRecipeWithLevel> getRecipeList(PROFESSION profession) {
         return recipes.get(profession);
     }
 }

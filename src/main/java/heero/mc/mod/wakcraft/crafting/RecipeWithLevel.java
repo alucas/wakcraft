@@ -7,15 +7,17 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeWithLevel implements IExtendedRecipe {
-    public final int recipeLevel;
-    public final ItemStack recipeResult;
-    public final List<ItemStack> recipeComponents;
+public class RecipeWithLevel implements IRecipeWithLevel {
+    public final int level;
+    public final int xp;
+    public final ItemStack result;
+    public final List<ItemStack> components;
 
-    public RecipeWithLevel(ItemStack result, List<ItemStack> components, int level) {
-        this.recipeLevel = level;
-        this.recipeResult = result;
-        this.recipeComponents = components;
+    public RecipeWithLevel(final ItemStack result, final List<ItemStack> components, final int level, final int xp) {
+        this.level = level;
+        this.result = result;
+        this.components = components;
+        this.xp = xp;
     }
 
     /**
@@ -23,7 +25,7 @@ public class RecipeWithLevel implements IExtendedRecipe {
      */
     @Override
     public boolean matches(InventoryCrafting inventory, World world) {
-        ArrayList<ItemStack> components = new ArrayList<ItemStack>(recipeComponents);
+        ArrayList<ItemStack> components = new ArrayList<ItemStack>(this.components);
 
         for (int i = 0; i < inventory.getSizeInventory(); ++i) {
             ItemStack itemstack = inventory.getStackInSlot(i);
@@ -55,7 +57,7 @@ public class RecipeWithLevel implements IExtendedRecipe {
      */
     @Override
     public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
-        return recipeResult.copy();
+        return result.copy();
     }
 
     /**
@@ -63,12 +65,12 @@ public class RecipeWithLevel implements IExtendedRecipe {
      */
     @Override
     public int getRecipeSize() {
-        return recipeComponents.size();
+        return components.size();
     }
 
     @Override
     public ItemStack getRecipeOutput() {
-        return recipeResult;
+        return result;
     }
 
     @Override
@@ -78,6 +80,16 @@ public class RecipeWithLevel implements IExtendedRecipe {
 
     @Override
     public List<ItemStack> getRecipeComponents() {
-        return recipeComponents;
+        return components;
+    }
+
+    @Override
+    public int getXp() {
+        return xp;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
     }
 }
