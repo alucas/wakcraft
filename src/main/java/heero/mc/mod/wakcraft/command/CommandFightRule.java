@@ -56,7 +56,7 @@ public class CommandFightRule extends CommandBase {
             default:
 
                 if (!category.containsKey(propertyName)) {
-                    throw new CommandException("commands.gamerule.norule", propertyName);
+                    throw new CommandException("Unknown fight rule : " + propertyName);
                 }
 
                 property = category.get(propertyName);
@@ -71,13 +71,14 @@ public class CommandFightRule extends CommandBase {
                         } catch (NumberFormatException e) {
                             throw new CommandException("Can't save property " + propertyName + " : " + propertyValue + " is not a number");
                         }
+                        break;
                     default:
                         throw new CommandException("Can't save property " + propertyName + " : Unimplemented format ");
                 }
 
                 saveFightRules();
 
-                notifyOperators(sender, this, "commands.gamerule.success");
+                notifyOperators(sender, this, "Fight rule " + propertyName + " set to " + propertyValue);
         }
     }
 

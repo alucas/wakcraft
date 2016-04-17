@@ -23,6 +23,11 @@ public class WConfig {
     public static void loadConfig(File configFile) {
         config = new Configuration(configFile);
         config.load();
+
+        getHavenBagDimensionId();
+        isWakfuFightEnable();
+        getWakfuFightPreFightDuration();
+        getWakfuFightTurnDuration();
     }
 
     public static int getHavenBagDimensionId() {
