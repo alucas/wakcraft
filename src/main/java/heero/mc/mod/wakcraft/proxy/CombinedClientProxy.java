@@ -8,7 +8,6 @@ import heero.mc.mod.wakcraft.block.vein.BlockVein;
 import heero.mc.mod.wakcraft.client.event.handler.GUIEventHandler;
 import heero.mc.mod.wakcraft.client.event.handler.KeyInputHandler;
 import heero.mc.mod.wakcraft.client.event.handler.RenderEventHandler;
-import heero.mc.mod.wakcraft.client.event.handler.TextureEventHandler;
 import heero.mc.mod.wakcraft.client.gui.*;
 import heero.mc.mod.wakcraft.client.gui.fight.GuiFightOverlay;
 import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
@@ -355,7 +354,6 @@ public class CombinedClientProxy extends CommonProxy {
         super.registerPreInitEvents();
 
         MinecraftForge.EVENT_BUS.register(new GUIEventHandler());
-        MinecraftForge.EVENT_BUS.register(new TextureEventHandler());
         MinecraftForge.EVENT_BUS.register(new RenderEventHandler());
     }
 
