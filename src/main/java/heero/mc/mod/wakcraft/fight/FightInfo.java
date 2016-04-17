@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.fight;
 
 
+import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.util.CharacteristicUtil;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,9 +10,6 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class FightInfo {
-    protected static final int PRE_FIGHT_DURATION = 60;
-    protected static final int FIGHT_TURN_DURATION = 60;
-
     public enum FightStage {
         UNKNOWN,
         PRE_FIGHT,
@@ -27,7 +25,7 @@ public class FightInfo {
     protected int timer;
 
     public FightInfo(List<List<EntityLivingBase>> fightersByTeam, @Nullable Set<FightBlockCoordinates> fightBlocks, List<List<FightBlockCoordinates>> startBlocks) {
-        this(fightersByTeam, fightBlocks, startBlocks, FightStage.PRE_FIGHT, PRE_FIGHT_DURATION);
+        this(fightersByTeam, fightBlocks, startBlocks, FightStage.PRE_FIGHT, WConfig.getWakfuFightPreFightDuration());
     }
 
     public FightInfo(List<List<EntityLivingBase>> fightersByTeam, @Nullable Set<FightBlockCoordinates> fightBlocks, List<List<FightBlockCoordinates>> startBlocks, FightStage stage, int timer) {

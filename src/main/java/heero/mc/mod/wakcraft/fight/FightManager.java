@@ -640,7 +640,7 @@ public enum FightManager {
                 initFightersDisplayName(fightInfo.getFightersByTeam());
 
                 updateFightStage(world, fightId, FightStage.FIGHT);
-                fightInfo.setStage(FightStage.FIGHT, WConfig.getWakfuFightPreFightDuration());
+                fightInfo.setStage(FightStage.FIGHT, WConfig.getWakfuFightTurnDuration());
 
                 startTurn(world, fightId, fightInfo.getCurrentFighter());
 

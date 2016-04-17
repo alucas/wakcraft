@@ -6,6 +6,7 @@ import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.characteristic.CharacteristicsEventsHandler;
 import heero.mc.mod.wakcraft.command.CommandJobLevel;
+import heero.mc.mod.wakcraft.command.CommandFightRule;
 import heero.mc.mod.wakcraft.entity.creature.gobball.*;
 import heero.mc.mod.wakcraft.entity.creature.meow.BowMeow;
 import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
@@ -138,6 +139,7 @@ public class CommonProxy {
     }
 
     public void registerCommand(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandFightRule());
         event.registerServerCommand(new CommandJobLevel());
     }
 }
