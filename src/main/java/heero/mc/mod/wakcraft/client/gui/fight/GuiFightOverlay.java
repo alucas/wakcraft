@@ -6,14 +6,14 @@ import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 public class GuiFightOverlay extends Gui {
     private static final ResourceLocation WIDGETS = new ResourceLocation("textures/gui/widgets.png");
@@ -27,38 +27,37 @@ public class GuiFightOverlay extends Gui {
         this.itemRenderer = minecraft.getRenderItem();
     }
 
-    public void renderFighterHotbar(final EntityLivingBase fighter, final ScaledResolution resolution, final float partialTicks) {
+    public void renderFighterHotbar(final EntityPlayer fighter, final ScaledResolution resolution, final float partialTicks) {
         minecraft.mcProfiler.startSection("actionBar");
 
         int width = resolution.getScaledWidth();
         int height = resolution.getScaledHeight();
 
-        // Render selected item overlay
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        minecraft.renderEngine.bindTexture(WIDGETS);
+        minecraft.getTextureManager().bindTexture(WIDGETS);
 
-        InventoryPlayer inventory = minecraft.thePlayer.inventory;
-        drawTexturedModalRect(width / 2 - 91, height - 22, 0, 0, 182, 22);
-        drawTexturedModalRect(width / 2 - 91 - 1 + inventory.currentItem * 20,
-                height - 22 - 1, 0, 22, 24, 22);
+        int centerX = width / 2;
+        float oldZLevel = this.zLevel;
+        this.zLevel = -90.0F;
+        this.drawTexturedModalRect(centerX - 91, height - 22, 0, 0, 182, 22);
+        this.drawTexturedModalRect(centerX - 91 - 1 + fighter.inventory.currentItem * 20, height - 22 - 1, 0, 22, 24, 22);
+        this.zLevel = oldZLevel;
 
-        GL11.glDisable(GL11.GL_BLEND);
-
-        // Render items
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        GlStateManager.enableRescaleNormal();
+        GlStateManager.enableBlend();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         RenderHelper.enableGUIStandardItemLighting();
 
         for (int i = 0; i < 9; ++i) {
-            int x = width / 2 - 90 + i * 20 + 2;
-            int z = height - 16 - 3;
-            renderInventorySlot(fighter, i + 25, x, z, partialTicks);
+            final int posX = width / 2 - 90 + i * 20 + 2;
+            final int posY = height - 16 - 3;
+            renderHotbarItem(25 + i, posX, posY, partialTicks, fighter);
         }
 
         RenderHelper.disableStandardItemLighting();
-        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        GlStateManager.disableRescaleNormal();
+        GlStateManager.disableBlend();
 
         minecraft.mcProfiler.endSection();
     }
@@ -67,30 +66,29 @@ public class GuiFightOverlay extends Gui {
      * Renders the specified item of the inventory slot at the specified
      * location. Args: slot, x, y, partialTick
      */
-    protected void renderInventorySlot(final EntityLivingBase fighter, final int slotId, final int x, final int y, final float partialTick) {
-        ItemStack itemstack = FightUtil.getSpellsInventory(fighter).getStackInSlot(slotId);
-//		ItemStack itemstack = this.minecraft.thePlayer.inventory.mainInventory[slotId];
-
-        if (itemstack != null) {
-            float f1 = (float) itemstack.animationsToGo - partialTick;
-
-            if (f1 > 0.0F) {
-                GL11.glPushMatrix();
-                float f2 = 1.0F + f1 / 5.0F;
-                GL11.glTranslatef((float) (x + 8), (float) (y + 12), 0.0F);
-                GL11.glScalef(1.0F / f2, (f2 + 1.0F) / 2.0F, 1.0F);
-                GL11.glTranslatef((float) (-(x + 8)),
-                        (float) (-(y + 12)), 0.0F);
-            }
-
-            itemRenderer.renderItemOverlays(this.minecraft.fontRendererObj, itemstack, x, y);
-
-            if (f1 > 0.0F) {
-                GL11.glPopMatrix();
-            }
-
-            itemRenderer.renderItemOverlays(this.minecraft.fontRendererObj, itemstack, x, y);
+    protected void renderHotbarItem(int index, int xPos, int yPos, float partialTicks, EntityPlayer fighter) {
+        ItemStack itemstack = FightUtil.getSpellsInventory(fighter).getStackInSlot(index);
+        if (itemstack == null) {
+            return;
         }
+
+        float f = (float) itemstack.animationsToGo - partialTicks;
+
+        if (f > 0.0F) {
+            GlStateManager.pushMatrix();
+            float f1 = 1.0F + f / 5.0F;
+            GlStateManager.translate((float) (xPos + 8), (float) (yPos + 12), 0.0F);
+            GlStateManager.scale(1.0F / f1, (f1 + 1.0F) / 2.0F, 1.0F);
+            GlStateManager.translate((float) (-(xPos + 8)), (float) (-(yPos + 12)), 0.0F);
+        }
+
+        this.itemRenderer.renderItemAndEffectIntoGUI(itemstack, xPos, yPos);
+
+        if (f > 0.0F) {
+            GlStateManager.popMatrix();
+        }
+
+        this.itemRenderer.renderItemOverlays(minecraft.fontRendererObj, itemstack, xPos, yPos);
     }
 
     public void renderCharacteristics(final EntityLivingBase fighter, final ScaledResolution resolution) {
@@ -99,9 +97,9 @@ public class GuiFightOverlay extends Gui {
         int width = resolution.getScaledWidth();
         int height = resolution.getScaledHeight();
 
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         minecraft.renderEngine.bindTexture(CHARACTERISTICS);
 
@@ -115,7 +113,7 @@ public class GuiFightOverlay extends Gui {
         drawString(minecraft.fontRendererObj, Integer.toString(pointMP), width / 2 - 101, height - 32, 0xBBBBBB);
         drawString(minecraft.fontRendererObj, Integer.toString(pointWP), width / 2 - 107, height - 17, 0xBBBBBB);
 
-        GL11.glDisable(GL11.GL_BLEND);
+        GlStateManager.disableBlend();
 
         minecraft.mcProfiler.endSection();
     }

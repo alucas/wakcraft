@@ -9,13 +9,13 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class FightInfo {
-    protected static final int PREFIGHT_DURATION = 60;
-    protected static final int FIGHTTURN_DURATION = 60;
+    protected static final int PRE_FIGHT_DURATION = 60;
+    protected static final int FIGHT_TURN_DURATION = 60;
 
     public enum FightStage {
-        UNKNOW,
-        PREFIGHT,
-        FIGHT;
+        UNKNOWN,
+        PRE_FIGHT,
+        FIGHT
     }
 
     protected List<List<EntityLivingBase>> fightersByTeam;
@@ -27,7 +27,7 @@ public class FightInfo {
     protected int timer;
 
     public FightInfo(List<List<EntityLivingBase>> fightersByTeam, @Nullable Set<FightBlockCoordinates> fightBlocks, List<List<FightBlockCoordinates>> startBlocks) {
-        this(fightersByTeam, fightBlocks, startBlocks, FightStage.PREFIGHT, PREFIGHT_DURATION);
+        this(fightersByTeam, fightBlocks, startBlocks, FightStage.PRE_FIGHT, PRE_FIGHT_DURATION);
     }
 
     public FightInfo(List<List<EntityLivingBase>> fightersByTeam, @Nullable Set<FightBlockCoordinates> fightBlocks, List<List<FightBlockCoordinates>> startBlocks, FightStage stage, int timer) {
@@ -117,9 +117,9 @@ public class FightInfo {
     }
 
     protected static List<EntityLivingBase> getFightersByFightOrder(List<List<EntityLivingBase>> fighters) {
-        List<List<EntityLivingBase>> fightersTmp = new ArrayList<List<EntityLivingBase>>();
+        List<List<EntityLivingBase>> fightersTmp = new ArrayList<>();
         for (List<EntityLivingBase> team : fighters) {
-            fightersTmp.add(new ArrayList<EntityLivingBase>(team));
+            fightersTmp.add(new ArrayList<>(team));
         }
 
         for (List<EntityLivingBase> team : fightersTmp) {
@@ -142,13 +142,13 @@ public class FightInfo {
             }
         });
 
-        List<EntityLivingBase> fightersSorted = new ArrayList<EntityLivingBase>();
-        List<Iterator<EntityLivingBase>> iterators = new ArrayList<Iterator<EntityLivingBase>>();
+        List<EntityLivingBase> fightersSorted = new ArrayList<>();
+        List<Iterator<EntityLivingBase>> iterators = new ArrayList<>();
         for (List<EntityLivingBase> team : fighters) {
             iterators.add(team.iterator());
         }
 
-        int previousListSize = 0;
+        int previousListSize;
         do {
             previousListSize = fightersSorted.size();
 

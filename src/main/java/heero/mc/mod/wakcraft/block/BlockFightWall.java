@@ -25,7 +25,6 @@ public class BlockFightWall extends BlockGenericTransparent {
             }
         });
 
-        setBlockUnbreakable();
         setCanBePlacedManually(false);
     }
 

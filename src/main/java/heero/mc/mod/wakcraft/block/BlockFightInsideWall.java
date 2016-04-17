@@ -20,6 +20,7 @@ public class BlockFightInsideWall extends BlockGenericTransparent {
         super(Material.air);
 
         setCanBePlacedManually(false);
+        setRenderType(-1);
     }
 
     /**
@@ -39,7 +40,7 @@ public class BlockFightInsideWall extends BlockGenericTransparent {
 
         int fightId = FightUtil.getFightId(entity);
         switch (FightUtil.getFightStage(world, fightId)) {
-            case PREFIGHT:
+            case PRE_FIGHT:
                 BlockPos startPosition = FightUtil.getStartPosition(entity);
                 if (startPosition == null || (startPosition.getX() == pos.getX() && startPosition.getZ() == pos.getZ() && (startPosition.getY() == pos.getY() || startPosition.getY() == pos.getY() - 1))) {
                     return;

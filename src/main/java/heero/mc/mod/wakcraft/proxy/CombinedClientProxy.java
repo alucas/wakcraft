@@ -103,9 +103,11 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.dirt);
         registerItemBlockModel(WBlocks.dirtSlab);
         registerItemBlockModel(WBlocks.fightDirection);
+        registerItemBlockModel(WBlocks.fightInsideWall);
         registerItemBlockModel(WBlocks.fightMovement);
         registerItemBlockModel(WBlocks.fightStart);
         registerItemBlockModel(WBlocks.fightStart2);
+        registerItemBlockModel(WBlocks.fightWall);
         registerItemBlockModel(WBlocks.grass);
         registerItemBlockModel(WBlocks.grassSlab);
         registerItemBlockModel(WBlocks.ground);

@@ -48,7 +48,7 @@ public class FightEventsHandler {
      */
     @SubscribeEvent
     public void onAttackEntityEvent(AttackEntityEvent event) {
-        World world = event.entityPlayer.worldObj;
+        final World world = event.entityPlayer.worldObj;
 
         if (!WConfig.isWakfuFightEnable()) {
             return;
@@ -58,54 +58,45 @@ public class FightEventsHandler {
             return;
         }
 
-        if (!FightUtil.isFighter(event.entityPlayer)) {
+        if (!FightUtil.isFighter(event.entityPlayer) || !FightUtil.isFighter(event.target)) {
             return;
         }
 
-        if (!FightUtil.isFighter(event.target) || !(event.target instanceof EntityLivingBase) || !(event.target instanceof IFighter)) {
-            return;
-        }
+        event.setCanceled(true);
 
-        EntityPlayerMP player = (EntityPlayerMP) event.entityPlayer;
-        EntityLivingBase target = (EntityLivingBase) event.target;
-        IFighter targetFighter = (IFighter) event.target;
+        final EntityPlayerMP player = (EntityPlayerMP) event.entityPlayer;
+        final EntityLivingBase target = (EntityLivingBase) event.target;
+        final IFighter targetFighter = (IFighter) event.target;
         if (!target.isEntityAlive()) {
-            event.setCanceled(true);
             return;
         }
 
         if (!FightUtil.isFighting(player) && !FightUtil.isFighting(target)) {
             FightManager.INSTANCE.startServerFight(world, player, target);
 
-            event.setCanceled(true);
             return;
         }
 
         int fightId = FightUtil.getFightId(player);
         if (fightId != FightUtil.getFightId(target)) {
-            event.setCanceled(true);
             return;
         }
 
         if (FightUtil.getFightStage(world, fightId) != FightStage.FIGHT) {
-            event.setCanceled(true);
             return;
         }
 
         if (FightUtil.getCurrentFighter(world, fightId) != player) {
-            event.setCanceled(true);
             return;
         }
 
         BlockPos playerPosition = FightUtil.getCurrentPosition(player);
         BlockPos targetPosition = FightUtil.getCurrentPosition(target);
         if (MathHelper.abs(playerPosition.getX() - targetPosition.getX()) + MathHelper.abs(playerPosition.getZ() - targetPosition.getZ()) > 1) {
-            event.setCanceled(true);
             return;
         }
 
         targetFighter.onAttacked(player, FightUtil.getCurrentSpell(player));
-        event.setCanceled(true);
     }
 
     /**

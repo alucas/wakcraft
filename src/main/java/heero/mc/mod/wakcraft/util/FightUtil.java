@@ -9,6 +9,7 @@ import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.fight.FightManager;
+import heero.mc.mod.wakcraft.spell.IActiveSpell;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -31,7 +32,7 @@ public class FightUtil {
     }
 
     public static boolean isFighter(Entity entity) {
-        return (entity instanceof IFighter) || (entity instanceof EntityPlayer);
+        return (entity instanceof IFighter && entity instanceof EntityLivingBase) || (entity instanceof EntityPlayer);
     }
 
     public static boolean isAutonomousFighter(Entity entity) {
@@ -86,6 +87,10 @@ public class FightUtil {
 
     public static ItemStack getCurrentSpell(EntityPlayer entity) {
         return ((SpellsProperty) entity.getExtendedProperties(SpellsProperty.IDENTIFIER)).getSpellsInventory().getStackInSlot(25 + entity.inventory.currentItem);
+    }
+
+    public static boolean isActiveSpell(ItemStack spellStack) {
+        return spellStack != null && spellStack.getItem() instanceof IActiveSpell;
     }
 
     public static void updateDisplayName(Entity entity) {

@@ -30,7 +30,7 @@ public abstract class RendererWCreature<T extends EntityLivingBase> extends Rend
 
         if (FightUtil.isFighter(entity)
                 && FightUtil.isFighting(entity)
-                && FightUtil.getFightStage(entity.worldObj, FightUtil.getFightId(entity)) == FightStage.PREFIGHT) {
+                && FightUtil.getFightStage(entity.worldObj, FightUtil.getFightId(entity)) == FightStage.PRE_FIGHT) {
             doRenderFightArrow(entity, relativeX, relativeY, relativeZ, partialTickTime);
         }
     }

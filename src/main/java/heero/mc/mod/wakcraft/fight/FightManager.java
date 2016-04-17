@@ -63,7 +63,7 @@ public enum FightManager {
 
         Map<Integer, FightInfo> worldFights = fights.get(world);
         if (worldFights == null) {
-            worldFights = new HashMap<Integer, FightInfo>();
+            worldFights = new HashMap<>();
             fights.put(world, worldFights);
         }
 
@@ -102,7 +102,7 @@ public enum FightManager {
 
         Map<Integer, FightInfo> worldFights = fights.get(world);
         if (worldFights == null) {
-            worldFights = new HashMap<Integer, FightInfo>();
+            worldFights = new HashMap<>();
             fights.put(world, worldFights);
         }
 
@@ -632,7 +632,7 @@ public enum FightManager {
         }
 
         switch (fightInfo.getStage()) {
-            case PREFIGHT:
+            case PRE_FIGHT:
                 setStartPositionOfRemainingFighters(fightInfo.getFightersByTeam(), fightInfo.getStartBlocks());
                 moveFighterToStartPosition(fightInfo.getFightersByTeam());
                 initFightersCurrentPosition(fightInfo.getFightersByTeam());
@@ -656,6 +656,7 @@ public enum FightManager {
                     return;
                 }
 
+                WLog.info("Start new turn for : " + nextFighter.getName());
 
                 fightInfo.setCurrentFighter(nextFighter);
                 fightInfo.updateStageDuration(WConfig.getWakfuFightTurnDuration());
@@ -714,13 +715,13 @@ public enum FightManager {
         Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
         if (fightsOfWorld == null) {
             WLog.warning("Trying to get the stage of a fight that does not exist (wrong world)");
-            return FightStage.UNKNOW;
+            return FightStage.UNKNOWN;
         }
 
         FightInfo fight = fightsOfWorld.get(fightId);
         if (fight == null) {
             WLog.warning("Trying to get the stage of a fight that does not exist (wrong id)");
-            return FightStage.UNKNOW;
+            return FightStage.UNKNOWN;
         }
 
         return fight.getStage();
@@ -903,7 +904,6 @@ public enum FightManager {
             if (remainingMovementPoint < 0) {
                 WLog.warning("Fighter " + fighter + " used more movement point that disponible");
                 remainingMovementPoint = 0;
-                ;
             }
 
             FightUtil.setFightCharacteristic(fighter, Characteristic.MOVEMENT, remainingMovementPoint);

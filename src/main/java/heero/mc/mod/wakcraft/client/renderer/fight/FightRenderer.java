@@ -30,7 +30,7 @@ public class FightRenderer extends IRenderHandler {
         int fightId = FightUtil.getFightId(player);
         FightStage fightStage = FightUtil.getFightStage(world, fightId);
 
-        if (fightStage == FightStage.PREFIGHT) {
+        if (fightStage == FightStage.PRE_FIGHT) {
             List<List<FightBlockCoordinates>> startBlocks = FightUtil.getStartPositions(world, fightId);
             if (startBlocks != null) {
                 //renderStartPosition(partialTicks, world, mc, player, startBlocks);

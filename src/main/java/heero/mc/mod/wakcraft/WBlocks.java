@@ -104,11 +104,11 @@ public class WBlocks {
 
         // Fight Blocks
         registerBlock(fightDirection = (new BlockGenericTransparent(Material.ground).setUnlocalizedName(MODID_ + "fight_direction")));
-//        GameRegistry.registerBlock(fightInsideWall = (new BlockFightInsideWall()), "blockFightInsideWall");
+        registerBlock(fightInsideWall = (new BlockFightInsideWall().setUnlocalizedName(MODID_ + "fight_inside_wall")));
         registerBlock(fightMovement = (new BlockGenericTransparent(Material.ground).setUnlocalizedName(MODID_ + "fight_movement")));
         registerBlock(fightStart = (new BlockFightStart().setUnlocalizedName(MODID_ + "fight_start")));
         registerBlock(fightStart2 = (new BlockFightStart().setUnlocalizedName(MODID_ + "fight_start_2")));
-//        GameRegistry.registerBlock(fightWall = (new BlockFightWall()), "blockFightWall");
+        registerBlock(fightWall = (new BlockFightWall().setUnlocalizedName(MODID_ + "fight_wall")));
         registerBlock(invisibleWall = (new BlockInvisibleWall().setUnlocalizedName(MODID_ + "invisible_wall")));
 
         // HavenBag
