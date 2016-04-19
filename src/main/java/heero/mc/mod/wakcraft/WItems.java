@@ -94,6 +94,7 @@ public class WItems extends Items {
             gobballHeadgear,
             gobboots,
             helmetofu,
+            theOne,
             tofuAmulet,
             tofuBelt,
             tofuBoots,
@@ -220,6 +221,8 @@ public class WItems extends Items {
         // ARMORS
         // -------------------------------
 
+        GameRegistry.registerItem(theOne = (new ItemWArmor(ItemWArmor.TYPE.RING, 1000).setCharacteristic(Characteristic.ACTION, 25).setUnlocalizedName(modid_ + "the_one")), "the_one");
+
         // Goball Armors
         GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(ItemWArmor.TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 15).setCharacteristic(Characteristic.INITIATIVE, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName(modid_ + "gobball_breastplate")), "gobball_breastplate");
         GameRegistry.registerItem(gobboots = (new ItemWArmor(ItemWArmor.TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 10).setCharacteristic(Characteristic.LOCK, 8).setCharacteristic(Characteristic.INITIATIVE, 6).setUnlocalizedName(modid_ + "gobboots")), "gobboots");
@@ -237,7 +240,7 @@ public class WItems extends Items {
         GameRegistry.registerItem(tofuEpaulettes = (new ItemWArmor(ItemWArmor.TYPE.EPAULET, 14).setCharacteristic(Characteristic.DODGE, 5).setCharacteristic(Characteristic.WATER_ATT, 2).setCharacteristic(Characteristic.AIR_ATT, 2).setUnlocalizedName(modid_ + "tofu_epaulettes")), "tofu_epaulettes");
         GameRegistry.registerItem(tofuBelt = (new ItemWArmor(ItemWArmor.TYPE.BELT, 13).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName(modid_ + "tofu_belt")), "tofu_belt");
         GameRegistry.registerItem(tofuAmulet = (new ItemWArmor(ItemWArmor.TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.DODGE, 5).setUnlocalizedName(modid_ + "tofu_amulet")), "tofu_amulet");
-        GameRegistry.registerItem(tofuRing = (new ItemWArmor(ItemWArmor.TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.INITIATIVE, 3).setCharacteristic(Characteristic.ACTION, 25).setUnlocalizedName(modid_ + "tofu_ring")), "tofu_ring");
+        GameRegistry.registerItem(tofuRing = (new ItemWArmor(ItemWArmor.TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.INITIATIVE, 3).setUnlocalizedName(modid_ + "tofu_ring")), "tofu_ring");
         GameRegistry.registerItem(tofuBoots = (new ItemWArmor(ItemWArmor.TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.DODGE, 7).setCharacteristic(Characteristic.INITIATIVE, 8).setUnlocalizedName(modid_ + "tofu_boots")), "tofu_boots");
 
         // SPELLS

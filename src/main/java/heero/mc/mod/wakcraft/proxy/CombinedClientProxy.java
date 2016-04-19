@@ -270,6 +270,8 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemModel(WItems.ikiakitKit);
         registerItemModel(WItems.ikiakitSmall);
 
+        registerItemModel(WItems.theOne);
+
         registerItemModel(WItems.bouzeLiteYeahsRing);
         registerItemModel(WItems.gobballAmulet);
         registerItemModel(WItems.gobballBelt);
