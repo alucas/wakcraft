@@ -1,5 +1,5 @@
 {
-  "parent": "wakcraft:block/overslab/workbench_grind_it/0",
+  "parent": "wakcraft:block/workbench_grind_it",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

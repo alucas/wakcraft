@@ -16,6 +16,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.property.ExtendedBlockState;
+import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -45,11 +47,12 @@ public class BlockCrop extends BlockHarvesting {
 
     @Override
     protected BlockState createBlockState() {
-        final BlockState state = super.createBlockState();
+        final ExtendedBlockState state = (ExtendedBlockState) super.createBlockState();
+        final IUnlistedProperty[] unlistedProperties = state.getUnlistedProperties().toArray(new IUnlistedProperty[state.getUnlistedProperties().size()]);
         final IProperty[] properties = state.getProperties().toArray(new IProperty[state.getProperties().size() + 1]);
         properties[properties.length - 1] = PROP_AGE;
 
-        return new BlockState(this, properties);
+        return new ExtendedBlockState(this, properties, unlistedProperties);
     }
 
     @Override

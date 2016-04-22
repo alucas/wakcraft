@@ -20,6 +20,8 @@ import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.property.ExtendedBlockState;
+import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -59,12 +61,13 @@ public abstract class BlockVein extends BlockHarvesting implements ILevelBlock {
 
     @Override
     protected BlockState createBlockState() {
-        final BlockState state = super.createBlockState();
+        final ExtendedBlockState state = (ExtendedBlockState) super.createBlockState();
+        final IUnlistedProperty[] unlistedProperties = state.getUnlistedProperties().toArray(new IUnlistedProperty[state.getUnlistedProperties().size()]);
         final IProperty[] properties = state.getProperties().toArray(new IProperty[state.getProperties().size() + 2]);
         properties[properties.length - 2] = getPropExtractable();
         properties[properties.length - 1] = getPropOre();
 
-        return new BlockState(this, properties);
+        return new ExtendedBlockState(this, properties, unlistedProperties);
     }
 
     @Override

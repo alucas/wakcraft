@@ -1,0 +1,6 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "wakcraft:blocks/crop/wheat_stage_1"
+  }
+}

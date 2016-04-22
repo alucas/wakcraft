@@ -1,5 +1,5 @@
 {
-  "parent": "wakcraft:block/crop/artichoke/b0a2",
+  "parent": "wakcraft:block/crop/artichoke/2",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

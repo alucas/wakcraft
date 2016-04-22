@@ -1,8 +1,7 @@
 package heero.mc.mod.wakcraft.block;
 
+import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,15 +11,36 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public abstract class BlockContainerOverSlab extends BlockContainerGeneric implements IOverSlab {
-    public static final PropertyInteger PROP_BOTTOM_POSITION = PropertyInteger.create("bottom_position", 0, 3);
+    protected BlockOverSlab blockOverSlab;
 
+    private static class BlockOverSlabWrapper extends BlockOverSlab {
+        public final BlockContainerOverSlab container;
+
+        public BlockOverSlabWrapper(final BlockContainerOverSlab container) {
+            super(Material.ground, WCreativeTabs.tabOther);
+
+            this.container = container;
+        }
+
+        @Override
+        public float getBlockHeight(IBlockAccess worldIn, BlockPos pos) {
+            return container.getBlockHeight(worldIn, pos);
+        }
+    }
 
     public BlockContainerOverSlab(final Material material, final CreativeTabs tab) {
         super(material, tab);
 
         setRenderType(3);
         setFullCube(false);
-        setDefaultState(blockState.getBaseState().withProperty(PROP_BOTTOM_POSITION, 0));
+    }
+
+    protected BlockOverSlab getBlockOverSlab() {
+        if (blockOverSlab == null) {
+            blockOverSlab = new BlockOverSlabWrapper(this);
+        }
+
+        return blockOverSlab;
     }
 
     public boolean isOpaqueCube() {
@@ -29,46 +49,34 @@ public abstract class BlockContainerOverSlab extends BlockContainerGeneric imple
 
     @Override
     protected BlockState createBlockState() {
-        IProperty[] properties = new IProperty[]{PROP_BOTTOM_POSITION};
-
-        return new BlockState(this, properties);
+        return getBlockOverSlab().createBlockState(this);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return 0;
+        return getBlockOverSlab().getMetaFromState(state);
     }
 
     @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-        IBlockState stateDown = world.getBlockState(pos.down());
-        if (!(stateDown.getBlock() instanceof BlockSlab)) {
-            return state.withProperty(PROP_BOTTOM_POSITION, 0);
-        }
-
-        return state.withProperty(PROP_BOTTOM_POSITION, 4 - BlockSlab.getTopPosition(stateDown));
+    public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return getBlockOverSlab().getExtendedState(state, world, pos);
     }
 
     public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
-        IBlockState blockStateDown = worldIn.getBlockState(pos.down());
-        if (!(blockStateDown.getBlock() instanceof BlockSlab)) {
-            super.setBlockBounds(0, 0, 0, 1, 1, 1);
-            return;
-        }
+        getBlockOverSlab().setBlockBoundsBasedOnState(worldIn, pos);
 
-        switch (BlockSlab.getTopPosition(blockStateDown)) {
-            case 1:
-                this.setBlockBounds(0, -0.75F, 0, 1, 0.25F, 1);
-                break;
-            case 2:
-                this.setBlockBounds(0, -0.5F, 0, 1, 0.5F, 1);
-                break;
-            case 3:
-                this.setBlockBounds(0, -0.25F, 0, 1, 0.75F, 1);
-                break;
-            default:
-                this.setBlockBounds(0, 0, 0, 1, 1, 1);
-        }
+        final float minX = (float) getBlockOverSlab().getBlockBoundsMinX();
+        final float minY = (float) getBlockOverSlab().getBlockBoundsMinY();
+        final float minZ = (float) getBlockOverSlab().getBlockBoundsMinZ();
+        final float maxX = (float) getBlockOverSlab().getBlockBoundsMaxX();
+        final float maxY = (float) getBlockOverSlab().getBlockBoundsMaxY();
+        final float maxZ = (float) getBlockOverSlab().getBlockBoundsMaxZ();
+
+        this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+    }
+
+    public float getBlockHeight(final IBlockAccess worldIn, final BlockPos pos) {
+        return 1;
     }
 
     @Override

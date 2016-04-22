@@ -1,8 +1,10 @@
 package heero.mc.mod.wakcraft;
 
+import heero.mc.mod.wakcraft.client.model.loader.OverSlabModelLoader;
 import heero.mc.mod.wakcraft.fight.FightManager;
 import heero.mc.mod.wakcraft.havenbag.HavenBagsManager;
 import heero.mc.mod.wakcraft.proxy.CommonProxy;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -28,6 +30,8 @@ public class Wakcraft {
         event.getModMetadata().version = Version.fullVersionString();
 
         WConfig.loadConfig(event.getSuggestedConfigurationFile());
+
+        ModelLoaderRegistry.registerLoader(new OverSlabModelLoader());
 
         proxy.registerPreInitEvents();
         proxy.registerBlocks();

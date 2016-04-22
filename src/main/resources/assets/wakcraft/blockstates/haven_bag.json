@@ -1,8 +1,5 @@
 {
   "variants": {
-    "bottom_position=0": {"model": "wakcraft:overslab/haven_bag/0"},
-    "bottom_position=1": {"model": "wakcraft:overslab/haven_bag/1"},
-    "bottom_position=2": {"model": "wakcraft:overslab/haven_bag/2"},
-    "bottom_position=3": {"model": "wakcraft:overslab/haven_bag/3"}
+    "normal": {"model": "wakcraft:overslab/haven_bag"}
   }
 }

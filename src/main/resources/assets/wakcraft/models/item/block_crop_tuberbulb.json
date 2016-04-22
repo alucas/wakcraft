@@ -1,5 +1,5 @@
 {
-  "parent": "wakcraft:block/crop/tuberbulb/b0a2",
+  "parent": "wakcraft:block/crop/tuberbulb/2",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

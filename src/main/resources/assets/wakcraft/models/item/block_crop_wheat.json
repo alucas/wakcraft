@@ -1,5 +1,5 @@
 {
-  "parent": "wakcraft:block/crop/wheat/b0a2",
+  "parent": "wakcraft:block/crop/wheat/2",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

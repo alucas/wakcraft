@@ -1,16 +1,7 @@
 {
     "variants": {
-        "age=0,bottom_position=0": { "model": "wakcraft:crop/artichoke/b0a0" },
-        "age=1,bottom_position=0": { "model": "wakcraft:crop/artichoke/b0a1" },
-        "age=2,bottom_position=0": { "model": "wakcraft:crop/artichoke/b0a2" },
-        "age=0,bottom_position=1": { "model": "wakcraft:crop/artichoke/b1a0" },
-        "age=1,bottom_position=1": { "model": "wakcraft:crop/artichoke/b1a1" },
-        "age=2,bottom_position=1": { "model": "wakcraft:crop/artichoke/b1a2" },
-        "age=0,bottom_position=2": { "model": "wakcraft:crop/artichoke/b2a0" },
-        "age=1,bottom_position=2": { "model": "wakcraft:crop/artichoke/b2a1" },
-        "age=2,bottom_position=2": { "model": "wakcraft:crop/artichoke/b2a2" },
-        "age=0,bottom_position=3": { "model": "wakcraft:crop/artichoke/b3a0" },
-        "age=1,bottom_position=3": { "model": "wakcraft:crop/artichoke/b3a1" },
-        "age=2,bottom_position=3": { "model": "wakcraft:crop/artichoke/b3a2" }
+        "age=0": { "model": "wakcraft:overslab/crop/artichoke/0" },
+        "age=1": { "model": "wakcraft:overslab/crop/artichoke/1" },
+        "age=2": { "model": "wakcraft:overslab/crop/artichoke/2" }
     }
 }
