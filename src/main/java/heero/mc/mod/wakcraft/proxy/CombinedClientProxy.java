@@ -93,86 +93,38 @@ public class CombinedClientProxy extends CommonProxy {
         }
 
         registerItemBlockModel(WBlocks.box);
-        registerItemBlockModel(WBlocks.carpet);
-        registerItemBlockModel(WBlocks.carpetEastSlab);
-        registerItemBlockModel(WBlocks.carpetNorthSlab);
-        registerItemBlockModel(WBlocks.carpetSouthSlab);
-        registerItemBlockModel(WBlocks.carpetWestSlab);
-        registerItemBlockModel(WBlocks.debug);
-        registerItemBlockModel(WBlocks.debugSlab);
-        registerItemBlockModel(WBlocks.dirt);
-        registerItemBlockModel(WBlocks.dirtSlab);
+        registerItemBlockModel(WBlocks.carpet, WBlocks.carpetEastSlab, WBlocks.carpetNorthSlab, WBlocks.carpetSouthSlab, WBlocks.carpetWestSlab);
+        registerItemBlockModel(WBlocks.debug, WBlocks.debugSlab);
+        registerItemBlockModel(WBlocks.dirt, WBlocks.dirtSlab);
         registerItemBlockModel(WBlocks.fightDirection);
         registerItemBlockModel(WBlocks.fightInsideWall);
         registerItemBlockModel(WBlocks.fightMovement);
-        registerItemBlockModel(WBlocks.fightStart);
-        registerItemBlockModel(WBlocks.fightStart2);
+        registerItemBlockModel(WBlocks.fightStart, WBlocks.fightStart2);
         registerItemBlockModel(WBlocks.fightWall);
-        registerItemBlockModel(WBlocks.grass);
-        registerItemBlockModel(WBlocks.grassSlab);
-        registerItemBlockModel(WBlocks.ground);
-        registerItemBlockModel(WBlocks.groundEastSlab);
-        registerItemBlockModel(WBlocks.groundNorthSlab);
-        registerItemBlockModel(WBlocks.groundSouthSlab);
-        registerItemBlockModel(WBlocks.groundWestSlab);
-        registerItemBlockModel(WBlocks.ground2);
-        registerItemBlockModel(WBlocks.ground2EastSlab);
-        registerItemBlockModel(WBlocks.ground2NorthSlab);
-        registerItemBlockModel(WBlocks.ground2SouthSlab);
-        registerItemBlockModel(WBlocks.ground2WestSlab);
-        registerItemBlockModel(WBlocks.ground3);
-        registerItemBlockModel(WBlocks.ground3Slab);
-        registerItemBlockModel(WBlocks.ground3Stair);
-        registerItemBlockModel(WBlocks.ground4);
-        registerItemBlockModel(WBlocks.ground4Slab);
-        registerItemBlockModel(WBlocks.ground11);
+        registerItemBlockModel(WBlocks.grass, WBlocks.grassSlab);
+        registerItemBlockModel(WBlocks.ground, WBlocks.groundEastSlab, WBlocks.groundNorthSlab, WBlocks.groundSouthSlab, WBlocks.groundWestSlab);
+        registerItemBlockModel(WBlocks.ground2, WBlocks.ground2EastSlab, WBlocks.ground2NorthSlab, WBlocks.ground2SouthSlab, WBlocks.ground2WestSlab);
+        registerItemBlockModel(WBlocks.ground3, WBlocks.ground3Slab, WBlocks.ground3Stair, WBlocks.ground4, WBlocks.ground4Slab, WBlocks.ground11);
         registerItemBlockModel(WBlocks.ground11Slab);
-        registerItemBlockModel(WBlocks.ground12);
-        registerItemBlockModel(WBlocks.ground12Slab);
-        registerItemBlockModel(WBlocks.ground13);
-        registerItemBlockModel(WBlocks.ground13Slab);
-        registerItemBlockModel(WBlocks.ground14);
-        registerItemBlockModel(WBlocks.ground14Slab);
-        registerItemBlockModel(WBlocks.hbStand);
-        registerItemBlockModel(WBlocks.hbStandSlab);
+        registerItemBlockModel(WBlocks.ground12, WBlocks.ground12Slab);
+        registerItemBlockModel(WBlocks.ground13, WBlocks.ground13Slab);
+        registerItemBlockModel(WBlocks.ground14, WBlocks.ground14Slab);
+        registerItemBlockModel(WBlocks.hbStand, WBlocks.hbStandSlab);
         registerItemBlockModel(WBlocks.invisibleWall);
-        registerItemBlockModel(WBlocks.pillar);
-        registerItemBlockModel(WBlocks.pillarSlab);
+        registerItemBlockModel(WBlocks.pillar, WBlocks.pillarSlab);
         registerItemBlockModel(WBlocks.plank);
         registerItemBlockModel(WBlocks.plant);
         registerItemBlockModel(WBlocks.plant2);
-        registerItemBlockModel(WBlocks.sufokiaColor);
-        registerItemBlockModel(WBlocks.sufokiaColorSlab);
-        registerItemBlockModel(WBlocks.sufokiaColorStair);
-        registerItemBlockModel(WBlocks.sufokiaGround);
-        registerItemBlockModel(WBlocks.sufokiaGroundSlab);
-        registerItemBlockModel(WBlocks.sufokiaGround2);
-        registerItemBlockModel(WBlocks.sufokiaGround2Slab);
-        registerItemBlockModel(WBlocks.sufokiaSand);
-        registerItemBlockModel(WBlocks.sufokiaSandSlab);
-        registerItemBlockModel(WBlocks.sufokiaSun);
-        registerItemBlockModel(WBlocks.sufokiaSunSlab);
-        registerItemBlockModel(WBlocks.sufokiaWave);
-        registerItemBlockModel(WBlocks.sufokiaWaveEastSlab);
-        registerItemBlockModel(WBlocks.sufokiaWaveNorthSlab);
-        registerItemBlockModel(WBlocks.sufokiaWaveSouthSlab);
-        registerItemBlockModel(WBlocks.sufokiaWaveWestSlab);
-        registerItemBlockModel(WBlocks.sufokiaWave2);
-        registerItemBlockModel(WBlocks.sufokiaWave2EastSlab);
-        registerItemBlockModel(WBlocks.sufokiaWave2NorthSlab);
-        registerItemBlockModel(WBlocks.sufokiaWave2SouthSlab);
-        registerItemBlockModel(WBlocks.sufokiaWave2WestSlab);
-        registerItemBlockModel(WBlocks.sufokiaWave3);
-        registerItemBlockModel(WBlocks.sufokiaWave3EastSlab);
-        registerItemBlockModel(WBlocks.sufokiaWave3NorthSlab);
-        registerItemBlockModel(WBlocks.sufokiaWave3SouthSlab);
-        registerItemBlockModel(WBlocks.sufokiaWave3WestSlab);
+        registerItemBlockModel(WBlocks.sufokiaColor, WBlocks.sufokiaColorSlab, WBlocks.sufokiaColorStair);
+        registerItemBlockModel(WBlocks.sufokiaGround, WBlocks.sufokiaGroundSlab);
+        registerItemBlockModel(WBlocks.sufokiaGround2, WBlocks.sufokiaGround2Slab);
+        registerItemBlockModel(WBlocks.sufokiaSand, WBlocks.sufokiaSandSlab);
+        registerItemBlockModel(WBlocks.sufokiaSun, WBlocks.sufokiaSunSlab);
+        registerItemBlockModel(WBlocks.sufokiaWave, WBlocks.sufokiaWaveEastSlab, WBlocks.sufokiaWaveNorthSlab, WBlocks.sufokiaWaveSouthSlab, WBlocks.sufokiaWaveWestSlab);
+        registerItemBlockModel(WBlocks.sufokiaWave2, WBlocks.sufokiaWave2EastSlab, WBlocks.sufokiaWave2NorthSlab, WBlocks.sufokiaWave2SouthSlab, WBlocks.sufokiaWave2WestSlab);
+        registerItemBlockModel(WBlocks.sufokiaWave3, WBlocks.sufokiaWave3EastSlab, WBlocks.sufokiaWave3NorthSlab, WBlocks.sufokiaWave3SouthSlab, WBlocks.sufokiaWave3WestSlab);
         registerItemBlockModel(WBlocks.sufokiaWave4);
-        registerItemBlockModel(WBlocks.wood);
-        registerItemBlockModel(WBlocks.woodEastSlab);
-        registerItemBlockModel(WBlocks.woodNorthSlab);
-        registerItemBlockModel(WBlocks.woodSouthSlab);
-        registerItemBlockModel(WBlocks.woodWestSlab);
+        registerItemBlockModel(WBlocks.wood, WBlocks.woodEastSlab, WBlocks.woodNorthSlab, WBlocks.woodSouthSlab, WBlocks.woodWestSlab);
 
         // Crop
         registerItemBlockModel(WBlocks.artichoke);
@@ -250,13 +202,13 @@ public class CombinedClientProxy extends CommonProxy {
             }
         }
 
-        Item[] farmerSeeds = {
+        registerItemModel(
                 WItems.artichokeSeed, WItems.babbageSeed, WItems.beanSeed, WItems.blackberrySeed, WItems.blackCawwotSeed,
                 WItems.cawwotSeed, WItems.chiliSeed, WItems.cornSeed, WItems.curarareSeed, WItems.desertTruffleSeed,
                 WItems.barleyGrain, WItems.vanillaRiceGrain, WItems.jollyflowerSeed, WItems.juteySeed, WItems.makoffeeSeed,
                 WItems.melonSeed, WItems.mushraySeed, WItems.oatGrain, WItems.palmCaneSeed, WItems.pumpkinSeed,
-                WItems.ryeGrain, WItems.sunflowerSeed, WItems.tuberbulbSeed, WItems.watermelonSeed, WItems.wheatGrain};
-        registerItemModel(farmerSeeds);
+                WItems.ryeGrain, WItems.sunflowerSeed, WItems.tuberbulbSeed, WItems.watermelonSeed, WItems.wheatGrain
+        );
 
         registerItemModel(WItems.gobballSeed);
 
@@ -321,8 +273,10 @@ public class CombinedClientProxy extends CommonProxy {
         registerSpellModel(WItems.spellLockingPro);
     }
 
-    protected void registerItemBlockModel(final Block block) {
-        registerItemBlockModel(Item.getItemFromBlock(block));
+    protected void registerItemBlockModel(final Block... blocks) {
+        for (Block block : blocks) {
+            registerItemBlockModel(Item.getItemFromBlock(block));
+        }
     }
 
     protected void registerItemBlockModel(final Block block, final int metadata, final String name) {
@@ -337,14 +291,10 @@ public class CombinedClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(itemBlock, metadata, new ModelResourceLocation(name, "inventory"));
     }
 
-    protected void registerItemModel(final Item[] items) {
+    protected void registerItemModel(final Item... items) {
         for (Item item : items) {
-            registerItemModel(item);
+            registerItemModel(item, 0, item.getUnlocalizedName().substring(5).replace('.', ':'));
         }
-    }
-
-    protected void registerItemModel(final Item item) {
-        registerItemModel(item, 0, item.getUnlocalizedName().substring(5).replace('.', ':'));
     }
 
     protected void registerItemModel(final Item item, final int metadata, final String name) {
