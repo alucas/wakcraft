@@ -11,6 +11,7 @@ public class BlockStairs2 extends BlockStairs {
 
         this.setCreativeTab(WCreativeTabs.tabBlock);
         this.setBlockUnbreakable();
+        this.setResistance(6000000);
         this.useNeighborBrightness = true;
     }
 }

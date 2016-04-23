@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "bottom_position=0,size=1": [
+      {"model": "wakcraft:slab/sufokia_color/b0s0"},
+      {"model": "wakcraft:slab/sufokia_color_2/b0s0"}],
+    "bottom_position=0,size=2": [
+      {"model": "wakcraft:slab/sufokia_color/b0s1"},
+      {"model": "wakcraft:slab/sufokia_color_2/b0s1"}],
+    "bottom_position=0,size=3": [
+      {"model": "wakcraft:slab/sufokia_color/b0s2"},
+      {"model": "wakcraft:slab/sufokia_color_2/b0s2"}],
+    "bottom_position=1,size=1": [
+      {"model": "wakcraft:slab/sufokia_color/b1s0"},
+      {"model": "wakcraft:slab/sufokia_color_2/b1s0"}],
+    "bottom_position=1,size=2": [
+      {"model": "wakcraft:slab/sufokia_color/b1s1"},
+      {"model": "wakcraft:slab/sufokia_color_2/b1s1"}],
+    "bottom_position=1,size=3": [
+      {"model": "wakcraft:slab/sufokia_color/b1s2"},
+      {"model": "wakcraft:slab/sufokia_color_2/b1s2"}],
+    "bottom_position=2,size=1": [
+      {"model": "wakcraft:slab/sufokia_color/b2s0"},
+      {"model": "wakcraft:slab/sufokia_color_2/b2s0"}],
+    "bottom_position=2,size=2": [
+      {"model": "wakcraft:slab/sufokia_color/b2s1"},
+      {"model": "wakcraft:slab/sufokia_color_2/b2s1"}],
+    "bottom_position=2,size=3": {"model": "wakcraft:sufokia_color"},
+    "bottom_position=3,size=1": [
+      {"model": "wakcraft:slab/sufokia_color/b3s0"},
+      {"model": "wakcraft:slab/sufokia_color_2/b3s0"}],
+    "bottom_position=3,size=2": {"model": "wakcraft:sufokia_color"},
+    "bottom_position=3,size=3": {"model": "wakcraft:sufokia_color"}
+  }
+}

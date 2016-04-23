@@ -122,6 +122,7 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.ground2WestSlab);
         registerItemBlockModel(WBlocks.ground3);
         registerItemBlockModel(WBlocks.ground3Slab);
+        registerItemBlockModel(WBlocks.ground3Stair);
         registerItemBlockModel(WBlocks.ground4);
         registerItemBlockModel(WBlocks.ground4Slab);
         registerItemBlockModel(WBlocks.ground11);
@@ -141,13 +142,14 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.plant);
         registerItemBlockModel(WBlocks.plant2);
         registerItemBlockModel(WBlocks.sufokiaColor);
+        registerItemBlockModel(WBlocks.sufokiaColorSlab);
+        registerItemBlockModel(WBlocks.sufokiaColorStair);
         registerItemBlockModel(WBlocks.sufokiaGround);
         registerItemBlockModel(WBlocks.sufokiaGroundSlab);
         registerItemBlockModel(WBlocks.sufokiaGround2);
         registerItemBlockModel(WBlocks.sufokiaGround2Slab);
         registerItemBlockModel(WBlocks.sufokiaSand);
         registerItemBlockModel(WBlocks.sufokiaSandSlab);
-        registerItemBlockModel(WBlocks.sufokiaStair);
         registerItemBlockModel(WBlocks.sufokiaSun);
         registerItemBlockModel(WBlocks.sufokiaSunSlab);
         registerItemBlockModel(WBlocks.sufokiaWave);

@@ -1,5 +1,5 @@
 {
-  "parent": "wakcraft:block/stair/sufokia/normal",
+  "parent": "wakcraft:block/stair/ground_3/normal",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],
