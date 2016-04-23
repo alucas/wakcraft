@@ -42,51 +42,37 @@ public class ContainerSpells extends Container {
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
-        ItemStack oldStack = null;
-        ItemStack mergedStack = null;
-
-        Slot slot = (Slot) this.inventorySlots.get(slotId);
-        if (slot != null && slot.getHasStack()) {
-            oldStack = slot.getStack();
-            mergedStack = oldStack.copy();
-
-            if (slotId >= 0 && slotId < 25) {
-                if (!this.mergeItemStack(mergedStack, 25, 34, false)) {
-                    return null;
-                }
-
-                mergedStack.stackSize = 1;
-            } else {
-                mergedStack.stackSize = 0;
-            }
-
-            if (mergedStack.stackSize == 0) {
-                slot.putStack((ItemStack) null);
-            } else {
-                slot.onSlotChanged();
-            }
-
-            if (mergedStack.stackSize == oldStack.stackSize) {
-                return null;
-            }
-
-            slot.onPickupFromSlot(player, mergedStack);
-        }
-
-        return oldStack;
-    }
-
-    @Override
-    public ItemStack slotClick(int slotId, int button, int mode, EntityPlayer player) {
-        // 0 = Click
-        // 1 = Shift + Click
-        // 4 = Drop item
-        // -999 = Unknown slot id
-        if (mode == 4 || ((mode == 0 || mode == 1) && slotId == -999)) {
+        Slot slot = this.inventorySlots.get(slotId);
+        if (slot == null || !slot.getHasStack()) {
             return null;
         }
 
-        return super.slotClick(slotId, button, mode, player);
+        final ItemStack oldStack = slot.getStack();
+        final ItemStack mergedStack = oldStack.copy();
+
+        if (slotId >= 0 && slotId < 25) {
+            if (!this.mergeItemStack(mergedStack, 25, 34, false)) {
+                return null;
+            }
+
+            mergedStack.stackSize = 1;
+        } else {
+            mergedStack.stackSize = 0;
+        }
+
+        if (mergedStack.stackSize == 0) {
+            slot.putStack(null);
+        } else {
+            slot.onSlotChanged();
+        }
+
+        if (mergedStack.stackSize == oldStack.stackSize) {
+            return null;
+        }
+
+        slot.onPickupFromSlot(player, mergedStack);
+
+        return oldStack;
     }
 
     protected class SlotInfinite extends Slot {
@@ -106,7 +92,7 @@ public class ContainerSpells extends Container {
 
         @Override
         public ItemStack decrStackSize(int par1) {
-            return getStack();
+            return super.getStack().copy();
         }
 
         @Override
