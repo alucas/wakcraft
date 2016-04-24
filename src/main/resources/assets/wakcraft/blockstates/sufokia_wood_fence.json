@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,west=false": { "model": "wakcraft:fence/sufokia_wood/post" },
+    "east=false,north=true,south=false,west=false": { "model": "wakcraft:fence/sufokia_wood/n", "uvlock": true },
+    "east=true,north=false,south=false,west=false": { "model": "wakcraft:fence/sufokia_wood/n", "y": 90, "uvlock": true },
+    "east=false,north=false,south=true,west=false": { "model": "wakcraft:fence/sufokia_wood/n", "y": 180, "uvlock": true },
+    "east=false,north=false,south=false,west=true": { "model": "wakcraft:fence/sufokia_wood/n", "y": 270, "uvlock": true },
+    "east=true,north=true,south=false,west=false": { "model": "wakcraft:fence/sufokia_wood/ne", "uvlock": true },
+    "east=true,north=false,south=true,west=false": { "model": "wakcraft:fence/sufokia_wood/ne", "y": 90, "uvlock": true },
+    "east=false,north=false,south=true,west=true": { "model": "wakcraft:fence/sufokia_wood/ne", "y": 180, "uvlock": true },
+    "east=false,north=true,south=false,west=true": { "model": "wakcraft:fence/sufokia_wood/ne", "y": 270, "uvlock": true },
+    "east=false,north=true,south=true,west=false": { "model": "wakcraft:fence/sufokia_wood/ns", "uvlock": true },
+    "east=true,north=false,south=false,west=true": { "model": "wakcraft:fence/sufokia_wood/ns", "y": 90, "uvlock": true },
+    "east=true,north=true,south=true,west=false": { "model": "wakcraft:fence/sufokia_wood/nse", "uvlock": true },
+    "east=true,north=false,south=true,west=true": { "model": "wakcraft:fence/sufokia_wood/nse", "y": 90, "uvlock": true },
+    "east=false,north=true,south=true,west=true": { "model": "wakcraft:fence/sufokia_wood/nse", "y": 180, "uvlock": true },
+    "east=true,north=true,south=false,west=true": { "model": "wakcraft:fence/sufokia_wood/nse", "y": 270, "uvlock": true },
+    "east=true,north=true,south=true,west=true": { "model": "wakcraft:fence/sufokia_wood/nsew", "uvlock": true }
+  }
+}

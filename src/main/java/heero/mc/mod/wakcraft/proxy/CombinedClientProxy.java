@@ -115,7 +115,8 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.plank);
         registerItemBlockModel(WBlocks.plant);
         registerItemBlockModel(WBlocks.plant2);
-        registerItemBlockModel(WBlocks.sufokiaColor, WBlocks.sufokiaColorSlab, WBlocks.sufokiaColorStair);
+        registerItemBlockModel(WBlocks.sufokiaCloth);
+        registerItemBlockModel(WBlocks.sufokiaColor, WBlocks.sufokiaColorFence, WBlocks.sufokiaColorSlab, WBlocks.sufokiaColorStair);
         registerItemBlockModel(WBlocks.sufokiaGround, WBlocks.sufokiaGroundSlab);
         registerItemBlockModel(WBlocks.sufokiaGround2, WBlocks.sufokiaGround2Slab);
         registerItemBlockModel(WBlocks.sufokiaSand, WBlocks.sufokiaSandSlab);
@@ -124,6 +125,7 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.sufokiaWave2, WBlocks.sufokiaWave2EastSlab, WBlocks.sufokiaWave2NorthSlab, WBlocks.sufokiaWave2SouthSlab, WBlocks.sufokiaWave2WestSlab);
         registerItemBlockModel(WBlocks.sufokiaWave3, WBlocks.sufokiaWave3EastSlab, WBlocks.sufokiaWave3NorthSlab, WBlocks.sufokiaWave3SouthSlab, WBlocks.sufokiaWave3WestSlab);
         registerItemBlockModel(WBlocks.sufokiaWave4);
+        registerItemBlockModel(WBlocks.sufokiaWoodFence);
         registerItemBlockModel(WBlocks.wood, WBlocks.woodEastSlab, WBlocks.woodNorthSlab, WBlocks.woodSouthSlab, WBlocks.woodWestSlab);
 
         // Crop
@@ -162,9 +164,6 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WItems.sufokiaWave2);
         registerItemBlockModel(WItems.sufokiaWave3);
         registerItemBlockModel(WItems.wood);
-
-        // Fences
-        registerItemBlockModel(WBlocks.fence);
 
         // Palisade
         registerItemBlockModel(WBlocks.palisade);

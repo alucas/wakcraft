@@ -4,12 +4,13 @@ import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 
-public class BlockWFence extends BlockFence {
+public class BlockFenceGeneric extends BlockFence {
 
-    public BlockWFence(Material material) {
+    public BlockFenceGeneric(Material material) {
         super(material);
 
         setCreativeTab(WCreativeTabs.tabBlock);
+        setResistance(600000);
         setBlockUnbreakable();
     }
 }

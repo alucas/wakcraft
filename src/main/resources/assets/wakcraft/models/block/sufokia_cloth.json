@@ -1,0 +1,6 @@
+{
+  "parent": "block/carpet",
+  "textures": {
+    "wool": "wakcraft:blocks/sufokia_cloth_1"
+  }
+}
