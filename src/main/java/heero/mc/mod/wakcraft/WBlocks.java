@@ -82,7 +82,7 @@ public class WBlocks {
             sufokiaWave2, sufokiaWave2EastSlab, sufokiaWave2NorthSlab, sufokiaWave2SouthSlab, sufokiaWave2WestSlab,
             sufokiaWave3, sufokiaWave3EastSlab, sufokiaWave3NorthSlab, sufokiaWave3SouthSlab, sufokiaWave3WestSlab,
             sufokiaWave4,
-            sufokiaWoodFence,
+            sufokiaWood, sufokiaWoodFence, sufokiaWoodSlab,
             wood, woodNorthSlab, woodEastSlab, woodSouthSlab, woodWestSlab,
             zaap;
 
@@ -209,7 +209,9 @@ public class WBlocks {
         registerBlock(sufokiaWave3SouthSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave3.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH)).setUnlocalizedName(MODID_ + "sufokia_wave_3_south_slab")), ItemBlockSlab.class);
         registerBlock(sufokiaWave3WestSlab = (new BlockSlab(Material.ground, WBlocks.sufokiaWave3.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(MODID_ + "sufokia_wave_3_west_slab")), ItemBlockSlab.class);
         registerBlock(sufokiaWave4 = (new BlockGeneric(Material.sand, WCreativeTabs.tabBlock).setUnlocalizedName(MODID_ + "sufokia_wave_4")));
+        registerBlock(sufokiaWood = (new BlockGeneric(Material.wood).setUnlocalizedName(MODID_ + "sufokia_wood")));
         registerBlock(sufokiaWoodFence = (new BlockFenceGeneric(Material.wood).setUnlocalizedName(MODID_ + "sufokia_wood_fence")));
+        registerBlock(sufokiaWoodSlab = (new BlockSlab(Material.wood, WBlocks.sufokiaWood.getDefaultState()).setUnlocalizedName(MODID_ + "sufokia_wood_slab")), ItemBlockSlab.class);
         registerBlock(wood = (new BlockYRotation(Material.wood).setUnlocalizedName(MODID_ + "wood")));
         registerBlock(woodEastSlab = (new BlockSlab(Material.wood, WBlocks.wood.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(MODID_ + "wood_east_slab")), ItemBlockSlab.class);
         registerBlock(woodNorthSlab = (new BlockSlab(Material.wood, WBlocks.wood.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.NORTH)).setUnlocalizedName(MODID_ + "wood_north_slab")), ItemBlockSlab.class);

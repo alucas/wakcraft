@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "bottom_position=0,size=1": {"model": "wakcraft:slab/sufokia_wood/b0s0"},
+    "bottom_position=0,size=2": {"model": "wakcraft:slab/sufokia_wood/b0s1"},
+    "bottom_position=0,size=3": {"model": "wakcraft:slab/sufokia_wood/b0s2"},
+    "bottom_position=1,size=1": {"model": "wakcraft:slab/sufokia_wood/b1s0"},
+    "bottom_position=1,size=2": {"model": "wakcraft:slab/sufokia_wood/b1s1"},
+    "bottom_position=1,size=3": {"model": "wakcraft:slab/sufokia_wood/b1s2"},
+    "bottom_position=2,size=1": {"model": "wakcraft:slab/sufokia_wood/b2s0"},
+    "bottom_position=2,size=2": {"model": "wakcraft:slab/sufokia_wood/b2s1"},
+    "bottom_position=2,size=3": {"model": "wakcraft:sufokia_wood"},
+    "bottom_position=3,size=1": {"model": "wakcraft:slab/sufokia_wood/b3s0"},
+    "bottom_position=3,size=2": {"model": "wakcraft:sufokia_wood"},
+    "bottom_position=3,size=3": {"model": "wakcraft:sufokia_wood"}
+  }
+}
