@@ -7,6 +7,9 @@ entity.wakcraft.BowMeow.name=Bow Meow
 entity.wakcraft.BabyTofu.name=Baby Tofu
 entity.wakcraft.Tofurby.name=Tofurby
 
+# NPCs
+entity.wakcraft.hugo_tydal.name=Hugo Tydal
+
 # Item
 item.wakcraft.adventurer_ikiakit.name=Adventurer Ikiakit
 item.wakcraft.artichoke.name=Artichoke

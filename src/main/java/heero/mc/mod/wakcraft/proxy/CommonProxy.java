@@ -5,14 +5,15 @@ import heero.mc.mod.wakcraft.WConfig;
 import heero.mc.mod.wakcraft.WItems;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.characteristic.CharacteristicsEventsHandler;
-import heero.mc.mod.wakcraft.command.CommandJobLevel;
 import heero.mc.mod.wakcraft.command.CommandFightRule;
+import heero.mc.mod.wakcraft.command.CommandJobLevel;
 import heero.mc.mod.wakcraft.entity.creature.gobball.*;
 import heero.mc.mod.wakcraft.entity.creature.meow.BowMeow;
 import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
 import heero.mc.mod.wakcraft.entity.creature.tofu.Tofurby;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
+import heero.mc.mod.wakcraft.entity.npc.NPCHugoTydal;
 import heero.mc.mod.wakcraft.event.handler.EntityEventHandler;
 import heero.mc.mod.wakcraft.event.handler.PlayerEventHandler;
 import heero.mc.mod.wakcraft.event.handler.WorldEventHandler;
@@ -85,6 +86,8 @@ public class CommonProxy {
         EntityRegistry.registerModEntity(BabyTofu.class, "BabyTofu", 1006, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xffa500);
         EntityRegistry.registerModEntity(Tofurby.class, "Tofurby", 1007, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xffa500);
 
+        // npcS
+        EntityRegistry.registerModEntity(NPCHugoTydal.class, "hugo_tydal", 2000, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xffa500);
     }
 
     public void registerGui(Wakcraft wc) {

@@ -26,6 +26,7 @@ import heero.mc.mod.wakcraft.entity.creature.tofu.BabyTofu;
 import heero.mc.mod.wakcraft.entity.creature.tofu.Tofurby;
 import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
+import heero.mc.mod.wakcraft.entity.npc.NPCHugoTydal;
 import heero.mc.mod.wakcraft.fight.FightClientEventsHandler;
 import heero.mc.mod.wakcraft.inventory.*;
 import heero.mc.mod.wakcraft.item.EnumOre;
@@ -59,6 +60,7 @@ public class CombinedClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
+        // Monsters
         RenderingRegistry.registerEntityRenderingHandler(Gobball.class, new Gobball.RenderFactoryGobball());
         RenderingRegistry.registerEntityRenderingHandler(Gobbette.class, new Gobbette.RenderFactoryGobbette());
         RenderingRegistry.registerEntityRenderingHandler(BlackGobbly.class, new BlackGobbly.RenderFactoryBlackGobbly());
@@ -68,6 +70,10 @@ public class CombinedClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(BabyTofu.class, new BabyTofu.RenderFactoryBabyTofu());
         RenderingRegistry.registerEntityRenderingHandler(Tofurby.class, new Tofurby.RenderFactoryTofurby());
 
+        // NPCs
+        RenderingRegistry.registerEntityRenderingHandler(NPCHugoTydal.class, new NPCHugoTydal.RenderFactoryHugoTydal());
+
+        // Others
         RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new EntityTextPopup.RenderFactoryTextPopup());
         RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new EntitySeedsPile.RenderFactorySeedPile());
 
