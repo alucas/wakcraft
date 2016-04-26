@@ -374,7 +374,7 @@ message.cropSeed.cantUseHere=Can't use here
 message.profession.level=%s (lvl. %d)
 message.profession.unknown=Unknown profession : %s
 message.profession.notANumber=%s is not a number
-message.zaap.register=New zaap registered
+message.zaap.registered=New zaap registered
 
 profession.herbalist=Herbalist
 profession.lumberjack=Lumberjack
