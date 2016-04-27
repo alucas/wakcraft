@@ -145,7 +145,7 @@ public class WBlocks {
         registerBlock(carpetWestSlab = (new BlockSlab(Material.cloth, WBlocks.carpet.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.WEST)).setUnlocalizedName(MODID_ + "carpet_west_slab")), ItemBlockSlab.class);
         registerBlock(dirt = (new BlockGeneric(Material.ground).setUnlocalizedName(MODID_ + "dirt")));
         registerBlock(dirtSlab = (new BlockSlab(Material.ground, WBlocks.dirt.getDefaultState()).setUnlocalizedName(MODID_ + "dirt_slab")), ItemBlockSlab.class);
-        registerBlock(grass = (new BlockGeneric(Material.grass).setUnlocalizedName(MODID_ + "grass")));
+        registerBlock(grass = (new BlockGrass().setUnlocalizedName(MODID_ + "grass")));
         registerBlock(grassSlab = (new BlockSlab(Material.grass, WBlocks.grass.getDefaultState()).setUnlocalizedName(MODID_ + "grass_slab")), ItemBlockSlab.class);
         registerBlock(ground = (new BlockYRotation(Material.ground).setUnlocalizedName(MODID_ + "ground")));
         registerBlock(groundEastSlab = (new BlockSlab(Material.ground, WBlocks.ground.getDefaultState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.EAST)).setUnlocalizedName(MODID_ + "ground_east_slab")), ItemBlockSlab.class);

@@ -1,7 +1,6 @@
 {
   "variants": {
-    "normal": {
-      "model": "wakcraft:grass"
-    }
+    "covered=true": {"model": "wakcraft:grass_covered"},
+    "covered=false": {"model": "wakcraft:grass"}
   }
 }
