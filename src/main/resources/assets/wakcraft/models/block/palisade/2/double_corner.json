@@ -1,0 +1,6 @@
+{
+  "parent": "wakcraft:block/palisade/template/double_corner",
+  "textures": {
+    "all": "wakcraft:blocks/palisade_2"
+  }
+}

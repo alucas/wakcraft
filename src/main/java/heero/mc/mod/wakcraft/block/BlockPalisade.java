@@ -20,7 +20,8 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class BlockPalisade extends BlockGenericTransparent {
-    public static final IProperty PROP_CORNER = PropertyBool.create("propertyCorner");
+    public static final IProperty PROP_CORNER_LEFT = PropertyBool.create("corner_left");
+    public static final IProperty PROP_CORNER_RIGHT = PropertyBool.create("corner_right");
 
     public BlockPalisade(Material material) {
         super(material, WCreativeTabs.tabBlock);
@@ -44,7 +45,28 @@ public class BlockPalisade extends BlockGenericTransparent {
 
     @Override
     protected BlockState createBlockState() {
-        return new BlockState(this, RotationUtil.PROP_Y_ROTATION, PROP_CORNER);
+        return new BlockState(this, RotationUtil.PROP_Y_ROTATION, PROP_CORNER_LEFT, PROP_CORNER_RIGHT);
+    }
+
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        final EnumFacing face = state.getValue(RotationUtil.PROP_Y_ROTATION);
+        final BlockPos posFront = pos.offset(face.getOpposite());
+        final BlockPos posFrontLeft = posFront.offset(face.rotateY());
+        final BlockPos posFrontRight = posFront.offset(face.rotateYCCW());
+
+        final IBlockState stateFront = worldIn.getBlockState(posFront);
+        final IBlockState stateFrontLeft = worldIn.getBlockState(posFrontLeft);
+        final IBlockState stateFrontRight = worldIn.getBlockState(posFrontRight);
+
+        final boolean isPalisadeFront = stateFront.getBlock() instanceof BlockPalisade;
+        final boolean isPalisadeFrontLeft = stateFrontLeft.getBlock() instanceof BlockPalisade;
+        final boolean isPalisadeFrontRight = stateFrontRight.getBlock() instanceof BlockPalisade;
+
+        final boolean cornerLeft = (isPalisadeFrontLeft && stateFrontLeft.getValue(RotationUtil.PROP_Y_ROTATION) == face) || (isPalisadeFront && stateFront.getValue(RotationUtil.PROP_Y_ROTATION) == face.rotateY());
+        final boolean cornerRight = (isPalisadeFrontRight && stateFrontRight.getValue(RotationUtil.PROP_Y_ROTATION) == face) || (isPalisadeFront && stateFront.getValue(RotationUtil.PROP_Y_ROTATION) == face.rotateYCCW());
+
+        return state.withProperty(PROP_CORNER_LEFT, cornerLeft).withProperty(PROP_CORNER_RIGHT, cornerRight);
     }
 
     @Override
