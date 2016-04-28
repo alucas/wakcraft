@@ -74,7 +74,6 @@ public class CommonProxy {
     public void registerEntities() {
         EntityRegistry.registerModEntity(EntityTextPopup.class, "TextPopup", 1, Wakcraft.instance, 10, 1, false);
         EntityRegistry.registerModEntity(EntitySeedsPile.class, "SeedPile", 2, Wakcraft.instance, 24, 3, false);
-        EntityRegistry.registerModEntity(EntitySeedsPile.class, "HavenBag", 3, Wakcraft.instance, 24, 30, false);
 
         // Monsters
         EntityRegistry.registerModEntity(Gobball.class, "Gobball", 1000, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xc99a03);
@@ -87,7 +86,7 @@ public class CommonProxy {
         EntityRegistry.registerModEntity(Tofurby.class, "Tofurby", 1007, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xffa500);
 
         // npcS
-        EntityRegistry.registerModEntity(NPCHugoTydal.class, "hugo_tydal", 2000, Wakcraft.instance, 64, 3, true, 0xeaeaea, 0xffa500);
+        EntityRegistry.registerModEntity(NPCHugoTydal.class, "hugo_tydal", 2000, Wakcraft.instance, 64, 20, true, 0xeaeaea, 0xffa500);
     }
 
     public void registerGui(Wakcraft wc) {
