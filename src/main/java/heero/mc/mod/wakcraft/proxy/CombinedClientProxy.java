@@ -60,6 +60,9 @@ public class CombinedClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
+        // ENTITIES
+        //=========
+
         // Monsters
         RenderingRegistry.registerEntityRenderingHandler(Gobball.class, new Gobball.RenderFactoryGobball());
         RenderingRegistry.registerEntityRenderingHandler(Gobbette.class, new Gobbette.RenderFactoryGobbette());
@@ -73,19 +76,16 @@ public class CombinedClientProxy extends CommonProxy {
         // NPCs
         RenderingRegistry.registerEntityRenderingHandler(NPCHugoTydal.class, new NPCHugoTydal.RenderFactoryHugoTydal());
 
-        // Others
+        // Entities
         RenderingRegistry.registerEntityRenderingHandler(EntityTextPopup.class, new EntityTextPopup.RenderFactoryTextPopup());
         RenderingRegistry.registerEntityRenderingHandler(EntitySeedsPile.class, new EntitySeedsPile.RenderFactorySeedPile());
 
+        // TileEntities
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDragoExpress.class, new RendererDragoExpress());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhoenix.class, new RendererPhoenix());
-//        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHavenBagChest.class, new RendererHavenBagChest());
 
-//		RenderingRegistry.registerBlockHandler(new RendererBlockRotation(RenderingRegistry.getNextAvailableRenderId()));
-//		RenderingRegistry.registerBlockHandler(new RendererBlockPalisade(RenderingRegistry.getNextAvailableRenderId()));
-//		RenderingRegistry.registerBlockHandler(new RendererBlockPlant(RenderingRegistry.getNextAvailableRenderId()));
-//		RenderingRegistry.registerBlockHandler(new RendererBlockScree(RenderingRegistry.getNextAvailableRenderId()));
-//		RenderingRegistry.registerBlockHandler(new RendererBlockFence(RenderingRegistry.getNextAvailableRenderId()));
+        // BLOCKS
+        //=======
 
         BlockVein[] blockOres = {WBlocks.vein1, WBlocks.vein2, WBlocks.vein3, WBlocks.vein4};
         List<ItemStack> stacks = new ArrayList<>(8);
@@ -175,7 +175,9 @@ public class CombinedClientProxy extends CommonProxy {
         registerItemBlockModel(WBlocks.palisade);
         registerItemBlockModel(WBlocks.palisade2);
 
-        // Items
+        // ITEMS
+        //======
+
         registerItemModel(WItems.artichoke);
         registerItemModel(WItems.bomb);
         registerItemModel(WItems.canoonPowder);
