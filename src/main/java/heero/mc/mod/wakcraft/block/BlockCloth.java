@@ -11,4 +11,9 @@ public class BlockCloth extends BlockYRotation {
         setFullBlock(false);
         setBlockBounds(0, 0, 0, 1, 1 / 16F, 1);
     }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
 }
