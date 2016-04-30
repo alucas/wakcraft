@@ -3,7 +3,6 @@ package heero.mc.mod.wakcraft.block;
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.util.RotationUtil;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -19,8 +18,8 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class BlockPalisade extends BlockGenericTransparent {
-    public static final IProperty PROP_CORNER_LEFT = PropertyBool.create("corner_left");
-    public static final IProperty PROP_CORNER_RIGHT = PropertyBool.create("corner_right");
+    public static final PropertyBool PROP_CORNER_LEFT = PropertyBool.create("corner_left");
+    public static final PropertyBool PROP_CORNER_RIGHT = PropertyBool.create("corner_right");
 
     public BlockPalisade(Material material) {
         super(material, WCreativeTabs.tabBlock);
