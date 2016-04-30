@@ -1,7 +1,9 @@
 {
   "variants": {
-    "normal": {
-      "model": "wakcraft:ground_3"
-    }
+    "normal": [
+      { "model": "wakcraft:ground_3" },
+      { "model": "wakcraft:ground_3_2" },
+      { "model": "wakcraft:ground_3_3" }
+    ]
   }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "wakcraft:blocks/ground_3_2"
+  }
+}

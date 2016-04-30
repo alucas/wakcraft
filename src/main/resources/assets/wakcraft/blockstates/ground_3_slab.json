@@ -1,15 +1,51 @@
 {
   "variants": {
-    "bottom_position=0,size=1": {"model": "wakcraft:slab/ground_3/b0s0"},
-    "bottom_position=0,size=2": {"model": "wakcraft:slab/ground_3/b0s1"},
-    "bottom_position=0,size=3": {"model": "wakcraft:slab/ground_3/b0s2"},
-    "bottom_position=1,size=1": {"model": "wakcraft:slab/ground_3/b1s0"},
-    "bottom_position=1,size=2": {"model": "wakcraft:slab/ground_3/b1s1"},
-    "bottom_position=1,size=3": {"model": "wakcraft:slab/ground_3/b1s2"},
-    "bottom_position=2,size=1": {"model": "wakcraft:slab/ground_3/b2s0"},
-    "bottom_position=2,size=2": {"model": "wakcraft:slab/ground_3/b2s1"},
+    "bottom_position=0,size=1": [
+      {"model": "wakcraft:slab/ground_3/b0s0"},
+      {"model": "wakcraft:slab/ground_3_2/b0s0"},
+      {"model": "wakcraft:slab/ground_3_3/b0s0"}
+    ],
+    "bottom_position=0,size=2": [
+      {"model": "wakcraft:slab/ground_3/b0s1"},
+      {"model": "wakcraft:slab/ground_3_2/b0s1"},
+      {"model": "wakcraft:slab/ground_3_3/b0s1"}
+    ],
+    "bottom_position=0,size=3": [
+      {"model": "wakcraft:slab/ground_3/b0s2"},
+      {"model": "wakcraft:slab/ground_3_2/b0s2"},
+      {"model": "wakcraft:slab/ground_3_3/b0s2"}
+    ],
+    "bottom_position=1,size=1": [
+      {"model": "wakcraft:slab/ground_3/b1s0"},
+      {"model": "wakcraft:slab/ground_3_2/b1s0"},
+      {"model": "wakcraft:slab/ground_3_3/b1s0"}
+    ],
+    "bottom_position=1,size=2": [
+      {"model": "wakcraft:slab/ground_3/b1s1"},
+      {"model": "wakcraft:slab/ground_3_2/b1s1"},
+      {"model": "wakcraft:slab/ground_3_3/b1s1"}
+    ],
+    "bottom_position=1,size=3": [
+      {"model": "wakcraft:slab/ground_3/b1s2"},
+      {"model": "wakcraft:slab/ground_3_2/b1s2"},
+      {"model": "wakcraft:slab/ground_3_3/b1s2"}
+    ],
+    "bottom_position=2,size=1": [
+      {"model": "wakcraft:slab/ground_3/b2s0"},
+      {"model": "wakcraft:slab/ground_3_2/b2s0"},
+      {"model": "wakcraft:slab/ground_3_3/b2s0"}
+    ],
+    "bottom_position=2,size=2": [
+      {"model": "wakcraft:slab/ground_3/b2s1"},
+      {"model": "wakcraft:slab/ground_3_2/b2s1"},
+      {"model": "wakcraft:slab/ground_3_3/b2s1"}
+    ],
     "bottom_position=2,size=3": {"model": "wakcraft:ground_3"},
-    "bottom_position=3,size=1": {"model": "wakcraft:slab/ground_3/b3s0"},
+    "bottom_position=3,size=1": [
+      {"model": "wakcraft:slab/ground_3/b3s0"},
+      {"model": "wakcraft:slab/ground_3_2/b3s0"},
+      {"model": "wakcraft:slab/ground_3_3/b3s0"}
+    ],
     "bottom_position=3,size=2": {"model": "wakcraft:ground_3"},
     "bottom_position=3,size=3": {"model": "wakcraft:ground_3"}
   }
