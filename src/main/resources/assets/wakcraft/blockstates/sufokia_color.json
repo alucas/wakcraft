@@ -2,7 +2,8 @@
   "variants": {
     "normal": [
       {"model": "wakcraft:sufokia_color"},
-      {"model": "wakcraft:sufokia_color_2"}
+      {"model": "wakcraft:sufokia_color_2"},
+      {"model": "wakcraft:sufokia_color_3"}
     ]
   }
 }
