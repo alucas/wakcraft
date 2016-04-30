@@ -2,7 +2,6 @@ package heero.mc.mod.wakcraft.block;
 
 import heero.mc.mod.wakcraft.creativetab.WCreativeTabs;
 import heero.mc.mod.wakcraft.util.RotationUtil;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -25,6 +24,8 @@ public class BlockPalisade extends BlockGenericTransparent {
 
     public BlockPalisade(Material material) {
         super(material, WCreativeTabs.tabBlock);
+
+        setFullCube(false);
 
         setDefaultState(blockState.getBaseState().withProperty(RotationUtil.PROP_Y_ROTATION, EnumFacing.SOUTH));
     }
@@ -71,49 +72,25 @@ public class BlockPalisade extends BlockGenericTransparent {
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos) {
-        super.setBlockBoundsBasedOnState(world, pos);
+        final IBlockState state = getActualState(world.getBlockState(pos), world, pos);
+        final EnumFacing face = RotationUtil.getYRotationFromState(state);
 
-        IBlockState state = world.getBlockState(pos);
-        IBlockState stateE = world.getBlockState(pos.east());
-        IBlockState stateW = world.getBlockState(pos.west());
-        IBlockState stateN = world.getBlockState(pos.north());
-        IBlockState stateS = world.getBlockState(pos.south());
+        setBlockBoundsFromFace(face);
+    }
 
-        Block block = state.getBlock();
-        boolean tE = stateE.getBlock() == block;
-        boolean tW = stateW.getBlock() == block;
-        boolean tN = stateN.getBlock() == block;
-        boolean tS = stateS.getBlock() == block;
-
-        EnumFacing f = RotationUtil.getYRotationFromState(state);
-        EnumFacing fE = RotationUtil.getYRotationFromState(stateE);
-        EnumFacing fW = RotationUtil.getYRotationFromState(stateW);
-        EnumFacing fN = RotationUtil.getYRotationFromState(stateN);
-        EnumFacing fS = RotationUtil.getYRotationFromState(stateS);
-
-        if ((tN && f == EnumFacing.SOUTH && fN == EnumFacing.NORTH)
-                || (tE && f == EnumFacing.WEST && fE == EnumFacing.NORTH)
-                || (tS && f == EnumFacing.EAST && fS == EnumFacing.SOUTH)
-                || (tW && f == EnumFacing.NORTH && fW == EnumFacing.SOUTH)
-                || (tN && f == EnumFacing.SOUTH && fN == EnumFacing.EAST)
-                || (tE && f == EnumFacing.WEST && fE == EnumFacing.EAST)
-                || (tS && f == EnumFacing.EAST && fS == EnumFacing.WEST)
-                || (tW && f == EnumFacing.NORTH && fW == EnumFacing.WEST)) {
-            block.setBlockBounds(0, 0, 0, 1, 1, 1);
-        } else {
-            switch (f) {
-                case NORTH:
-                    block.setBlockBounds(0, 0, 0, 1, 1, 0.1875f);
-                    break;
-                case SOUTH:
-                    block.setBlockBounds(0, 0, 0.8125f, 1, 1, 1);
-                    break;
-                case WEST:
-                    block.setBlockBounds(0, 0, 0, 0.1875f, 1, 1);
-                    break;
-                default:
-                    block.setBlockBounds(0.8125f, 0, 0, 1, 1, 1);
-            }
+    public void setBlockBoundsFromFace(final EnumFacing face) {
+        switch (face) {
+            case NORTH:
+                setBlockBounds(0, 0, 0, 1, 1, 0.1875f);
+                break;
+            case SOUTH:
+                setBlockBounds(0, 0, 0.8125f, 1, 1, 1);
+                break;
+            case WEST:
+                setBlockBounds(0, 0, 0, 0.1875f, 1, 1);
+                break;
+            default:
+                setBlockBounds(0.8125f, 0, 0, 1, 1, 1);
         }
     }
 
@@ -131,8 +108,20 @@ public class BlockPalisade extends BlockGenericTransparent {
      */
     @Override
     public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity entity) {
-        setBlockBoundsBasedOnState(world, pos);
+        final IBlockState actualState = getActualState(state, world, pos);
+        final EnumFacing face = RotationUtil.getYRotationFromState(state);
 
+        setBlockBoundsFromFace(face);
         super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
+
+        if ((Boolean) actualState.getValue(PROP_CORNER_LEFT)) {
+            setBlockBoundsFromFace(face.rotateY());
+            super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
+        }
+
+        if ((Boolean) actualState.getValue(PROP_CORNER_RIGHT)) {
+            setBlockBoundsFromFace(face.rotateYCCW());
+            super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
+        }
     }
 }
