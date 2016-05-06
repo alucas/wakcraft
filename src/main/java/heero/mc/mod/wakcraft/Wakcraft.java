@@ -42,6 +42,7 @@ public class Wakcraft {
         proxy.registerGui(this);
         proxy.registerDimensions();
         proxy.registerPackets(packetPipeline);
+        proxy.loadQuests();
     }
 
     @EventHandler

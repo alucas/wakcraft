@@ -16,6 +16,7 @@ public enum GuiId {
     HAVEN_GEM_WORKBENCH,
     WORKBENCH,
     PROFESSION,
+    QUEST,
     SPELLS,
     ZAAPS
 }

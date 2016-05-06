@@ -1,5 +1,6 @@
 package heero.mc.mod.wakcraft.event.handler;
 
+import heero.mc.mod.wakcraft.entity.npc.EntityWNPC;
 import heero.mc.mod.wakcraft.entity.property.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
@@ -16,6 +17,11 @@ public class EntityEventHandler {
             player.registerExtendedProperties(CharacterProperty.IDENTIFIER, new CharacterProperty());
             player.registerExtendedProperties(ItemInUseProperty.IDENTIFIER, new ItemInUseProperty());
             player.registerExtendedProperties(ZaapProperty.IDENTIFIER, new ZaapProperty());
+            player.registerExtendedProperties(QuestInstanceProperty.IDENTIFIER, new QuestInstanceProperty());
+        }
+
+        if (event.entity instanceof EntityWNPC) {
+            event.entity.registerExtendedProperties(QuestProperty.IDENTIFIER, new QuestProperty());
         }
     }
 }

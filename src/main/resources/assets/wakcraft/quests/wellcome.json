@@ -1,0 +1,54 @@
+{
+  "id": 0,
+  "name": "Wellcome",
+  "by": "wakcraft.hugo_tydal",
+  "tasks": [
+    {
+      "action": "talk",
+      "description": "Aller se présenter auprès de Hugo Tydal",
+      "to": "wakcraft.hugo_tydal",
+      "dialog": [
+        "Bonjour aventurier! Tu tombes bien, j'ai besoin de toi.",
+        "Ma canne à pêche s'est brisé ce matin, il me faut du [primitive_iron] pour la réparer.",
+        "Peut tu m'aider ?"
+      ]
+    },
+    {
+      "action": "talk",
+      "description": "Parler à Hugo Tydal",
+      "to": "wakcraft.hugo_tydal",
+      "dialog": [
+        "Woah, tu me sauve, un Sufokien sans canne, c'est comme un eleveur de bouftou sans son baton!",
+        "Tiens, en passant, aurais tu quelques [piwi_feather] pour me créer des ameçons ?"
+      ]
+    },
+    {
+      "action": "give",
+      "description": "Approter 3x[piwi_feather] à Hugo Tydal",
+      "to": "wakcraft.hugo_tydal",
+      "dialog": [
+        "J'aimerai quelques [piwi_feather] pour ma canne pêche"
+      ],
+      "what": [
+        {
+          "name": "piwi_feather",
+          "quantity": 3
+        }
+      ]
+    },
+    {
+      "action": "talk",
+      "description": "Parler à Hugo Tydal",
+      "to": "wakcraft.hugo_tydal",
+      "dialog": [
+        "Merci pour l'aide, tien j'ai trouvé ça, ça te sera peut être utile"
+      ],
+      "rewards": [
+        {
+          "type": "item",
+          "name": "gobball_helmet"
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,6 @@
 package heero.mc.mod.wakcraft.proxy;
 
-import heero.mc.mod.wakcraft.WBlocks;
-import heero.mc.mod.wakcraft.WConfig;
-import heero.mc.mod.wakcraft.WItems;
-import heero.mc.mod.wakcraft.Wakcraft;
+import heero.mc.mod.wakcraft.*;
 import heero.mc.mod.wakcraft.characteristic.CharacteristicsEventsHandler;
 import heero.mc.mod.wakcraft.command.CommandFightRule;
 import heero.mc.mod.wakcraft.command.CommandJobLevel;
@@ -24,6 +21,7 @@ import heero.mc.mod.wakcraft.network.handler.*;
 import heero.mc.mod.wakcraft.network.handler.fight.*;
 import heero.mc.mod.wakcraft.network.packet.*;
 import heero.mc.mod.wakcraft.network.packet.fight.*;
+import heero.mc.mod.wakcraft.quest.QuestManager;
 import heero.mc.mod.wakcraft.tileentity.*;
 import heero.mc.mod.wakcraft.world.WorldProviderHavenBag;
 import heero.mc.mod.wakcraft.world.gen.WorldGenHavenBag;
@@ -143,5 +141,9 @@ public class CommonProxy {
     public void registerCommand(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandFightRule());
         event.registerServerCommand(new CommandJobLevel());
+    }
+
+    public void loadQuests() {
+        QuestManager.INSTANCE.load("assets/" + Reference.MODID + "/quests/");
     }
 }

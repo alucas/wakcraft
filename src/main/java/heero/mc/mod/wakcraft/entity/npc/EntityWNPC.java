@@ -1,11 +1,15 @@
 package heero.mc.mod.wakcraft.entity.npc;
 
+import heero.mc.mod.wakcraft.quest.Quest;
+import heero.mc.mod.wakcraft.quest.Task;
+import heero.mc.mod.wakcraft.util.QuestUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -48,7 +52,34 @@ public abstract class EntityWNPC extends EntityLiving {
 
     @Override
     protected boolean interact(EntityPlayer player) {
-        return super.interact(player);
+        if (player.getEntityWorld().isRemote) {
+            return false;
+        }
+
+        Quest quest = QuestUtil.getCurrentQuest(player, this);
+        if (quest == null) {
+            quest = QuestUtil.getNewQuest(player, this);
+            if (quest == null) {
+                return false;
+            }
+
+            player.addChatMessage(new ChatComponentText("Start new Quest : " + quest.name));
+        }
+
+        final Task task = QuestUtil.getLastTask(player, quest);
+        if (task == null) {
+            return false;
+        }
+
+        for (final String dialog : task.getDialog()) {
+            player.addChatMessage(new ChatComponentText(dialog));
+        }
+
+        if (task.action.equals("talk")) {
+            QuestUtil.advance(player, quest);
+        }
+
+        return true;
     }
 
     @Override

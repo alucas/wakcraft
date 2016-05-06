@@ -402,6 +402,8 @@ public class CombinedClientProxy extends CommonProxy {
                 return new GUIWakcraft(guiId, new GUIAbilities(player), player, world, pos);
             case PROFESSION:
                 return new GUIWakcraft(guiId, new GUIProfession(player, PROFESSION.CHEF), player, world, pos);
+            case QUEST:
+                return new GUIWakcraft(guiId, new GUIQuest(player), player, world, pos);
             case SPELLS:
                 return new GUIWakcraft(guiId, new GUISpells(new ContainerSpells(player)), player, world, pos);
             case ZAAPS:
