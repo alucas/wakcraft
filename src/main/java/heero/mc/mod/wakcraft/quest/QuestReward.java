@@ -1,6 +1,6 @@
 package heero.mc.mod.wakcraft.quest;
 
-public class Item {
+public class QuestReward {
+    public String type;
     public String name;
-    public Integer quantity;
 }

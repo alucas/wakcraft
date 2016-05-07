@@ -1,12 +1,17 @@
 package heero.mc.mod.wakcraft.entity.npc;
 
+import heero.mc.mod.wakcraft.Wakcraft;
+import heero.mc.mod.wakcraft.entity.property.QuestInstanceProperty;
+import heero.mc.mod.wakcraft.network.GuiId;
+import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.quest.Quest;
-import heero.mc.mod.wakcraft.quest.Task;
+import heero.mc.mod.wakcraft.quest.QuestTask;
 import heero.mc.mod.wakcraft.util.QuestUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
@@ -63,10 +68,13 @@ public abstract class EntityWNPC extends EntityLiving {
                 return false;
             }
 
+            QuestUtil.startNewQuest(player, quest);
+            Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(player, QuestInstanceProperty.IDENTIFIER), (EntityPlayerMP) player);
+
             player.addChatMessage(new ChatComponentText("Start new Quest : " + quest.name));
         }
 
-        final Task task = QuestUtil.getLastTask(player, quest);
+        final QuestTask task = QuestUtil.getCurrentTask(player, quest);
         if (task == null) {
             return false;
         }
@@ -77,6 +85,9 @@ public abstract class EntityWNPC extends EntityLiving {
 
         if (task.action.equals("talk")) {
             QuestUtil.advance(player, quest);
+            Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(player, QuestInstanceProperty.IDENTIFIER), (EntityPlayerMP) player);
+        } else if (task.action.equals("give")) {
+            player.openGui(Wakcraft.instance, GuiId.NPC_GIVE.ordinal(), worldObj, quest.id, 0, 0);
         }
 
         return true;

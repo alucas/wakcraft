@@ -5,7 +5,7 @@ import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.entity.npc.EntityWNPC;
 import heero.mc.mod.wakcraft.quest.Quest;
 import heero.mc.mod.wakcraft.quest.QuestManager;
-import heero.mc.mod.wakcraft.quest.Task;
+import heero.mc.mod.wakcraft.quest.QuestTask;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.nbt.NBTTagCompound;
@@ -67,6 +67,15 @@ public class QuestInstanceProperty implements IExtendedEntityProperties, ISynchP
         return quests;
     }
 
+    public Quest getQuest(final Integer questId) {
+        if (!lastTasks.containsKey(questId)) {
+            WLog.warning("The player doesn't know the quest with id : " + questId);
+            return null;
+        }
+
+        return QuestManager.INSTANCE.getQuests().get(questId);
+    }
+
     public Quest getCurrentQuest(final EntityWNPC npc) {
         final String npcId = EntityList.getEntityString(npc);
         if (npcId == null || npcId.trim().isEmpty()) {
@@ -81,7 +90,7 @@ public class QuestInstanceProperty implements IExtendedEntityProperties, ISynchP
             }
 
             final Quest quest = allQuests.get(questId);
-            final Task task = getLastTask(quest);
+            final QuestTask task = getLastTask(quest);
             if (task == null) {
                 return null;
             }
@@ -94,8 +103,8 @@ public class QuestInstanceProperty implements IExtendedEntityProperties, ISynchP
         return null;
     }
 
-    public Task getLastTask(final Quest quest) {
-        final Task task = quest.getTask(lastTasks.get(quest.id));
+    public QuestTask getLastTask(final Quest quest) {
+        final QuestTask task = quest.getTask(lastTasks.get(quest.id));
         if (task == null) {
             WLog.warning("Last task not found for quest : " + quest.name);
             return null;
@@ -122,12 +131,14 @@ public class QuestInstanceProperty implements IExtendedEntityProperties, ISynchP
                 continue;
             }
 
-            lastTasks.put(questId, 0);
-
             return quest;
         }
 
         return null;
+    }
+
+    public void startNewQuest(final Quest quest) {
+        lastTasks.put(quest.id, 0);
     }
 
     public void advance(final Quest quest) {
@@ -147,5 +158,4 @@ public class QuestInstanceProperty implements IExtendedEntityProperties, ISynchP
     public void onClientPacket(NBTTagCompound tagRoot) {
         loadNBTData(tagRoot);
     }
-
 }

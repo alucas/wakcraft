@@ -18,6 +18,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.Map;
 
 public class WItems extends Items {
+    protected final static String MODID_ = Reference.MODID + ".";
+
     // Resource
     public static Item
             artichoke,
@@ -135,113 +137,111 @@ public class WItems extends Items {
             spellShowOff, spellLockingPro;
 
     public static void registerItems() {
-        final String modid_ = Reference.MODID.toLowerCase() + ".";
-
-        GameRegistry.registerItem(artichoke = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "artichoke")), "artichoke");
-        GameRegistry.registerItem(bomb = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "bomb")), "bom");
-        GameRegistry.registerItem(canoonPowder = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "canoon_powder")), "canoon_powder");
-        GameRegistry.registerItem(clay = ((new ItemWithLevel(4)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "clay")), "clay");
-        GameRegistry.registerItem(driedDung = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "dried_dung")), "dried_dung");
-        GameRegistry.registerItem(fossil = ((new ItemWithLevel(5)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "fossil")), "fossil");
-        GameRegistry.registerItem(gobballHorn = ((new ItemWithLevel(15)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "gobball_horn")), "gobball_horn");
-        GameRegistry.registerItem(gobballSkin = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "gobball_skin")), "gobball_skin");
-        GameRegistry.registerItem(gobballWool = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "gobball_wool")), "gobball_wool");
-        GameRegistry.registerItem(gumgum = ((new ItemWithLevel(15)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "gum_gum")), "gum_gum");
-        GameRegistry.registerItem(moonstone = ((new ItemWithLevel(20)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "moonstone")), "moonstone");
+        GameRegistry.registerItem(artichoke = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "artichoke")), "artichoke");
+        GameRegistry.registerItem(bomb = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "bomb")), "bom");
+        GameRegistry.registerItem(canoonPowder = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "canoon_powder")), "canoon_powder");
+        GameRegistry.registerItem(clay = ((new ItemWithLevel(4)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "clay")), "clay");
+        GameRegistry.registerItem(driedDung = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "dried_dung")), "dried_dung");
+        GameRegistry.registerItem(fossil = ((new ItemWithLevel(5)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "fossil")), "fossil");
+        GameRegistry.registerItem(gobballHorn = ((new ItemWithLevel(15)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "gobball_horn")), "gobball_horn");
+        GameRegistry.registerItem(gobballSkin = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "gobball_skin")), "gobball_skin");
+        GameRegistry.registerItem(gobballWool = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "gobball_wool")), "gobball_wool");
+        GameRegistry.registerItem(gumgum = ((new ItemWithLevel(15)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "gum_gum")), "gum_gum");
+        GameRegistry.registerItem(moonstone = ((new ItemWithLevel(20)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "moonstone")), "moonstone");
         GameRegistry.registerItem(ore1 = (new ItemOre(0)), "ore");
         GameRegistry.registerItem(ore2 = (new ItemOre(1)), "ore_2");
-        GameRegistry.registerItem(pearl = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "pearl")), "pearl");
-        GameRegistry.registerItem(polishedMoonstone = ((new ItemWithLevel(20)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "polished_moonstone")), "polished_moonstone");
-        GameRegistry.registerItem(shadowyBlue = ((new ItemWithLevel(25)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "shadowy_blue")), "shadowy_blue");
-        GameRegistry.registerItem(shamPearl = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "sham_pearl")), "sham_pearl");
-        GameRegistry.registerItem(tofuBlood = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tofu_blood")), "tofu_blood");
-        GameRegistry.registerItem(tofuFeather = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tofu_feather")), "tofu_feather");
-        GameRegistry.registerItem(tuberbulb = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tuberbulb")), "tuberbulb");
-        GameRegistry.registerItem(verbalaSalt = ((new ItemWithLevel(15)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "verbala_salt")), "verbala_salt");
-        GameRegistry.registerItem(waterBucket = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "water_bucket")), "water_bucket");
-        GameRegistry.registerItem(wheat = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "wheat")), "wheat");
-        GameRegistry.registerItem(wheatFlour = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "wheat_flour")), "wheat_flour");
-        GameRegistry.registerItem(woollyKey = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "woolly_key")), "woolly_key");
+        GameRegistry.registerItem(pearl = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "pearl")), "pearl");
+        GameRegistry.registerItem(polishedMoonstone = ((new ItemWithLevel(20)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "polished_moonstone")), "polished_moonstone");
+        GameRegistry.registerItem(shadowyBlue = ((new ItemWithLevel(25)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "shadowy_blue")), "shadowy_blue");
+        GameRegistry.registerItem(shamPearl = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "sham_pearl")), "sham_pearl");
+        GameRegistry.registerItem(tofuBlood = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "tofu_blood")), "tofu_blood");
+        GameRegistry.registerItem(tofuFeather = ((new ItemWithLevel(10)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "tofu_feather")), "tofu_feather");
+        GameRegistry.registerItem(tuberbulb = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "tuberbulb")), "tuberbulb");
+        GameRegistry.registerItem(verbalaSalt = ((new ItemWithLevel(15)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "verbala_salt")), "verbala_salt");
+        GameRegistry.registerItem(waterBucket = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "water_bucket")), "water_bucket");
+        GameRegistry.registerItem(wheat = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "wheat")), "wheat");
+        GameRegistry.registerItem(wheatFlour = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "wheat_flour")), "wheat_flour");
+        GameRegistry.registerItem(woollyKey = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "woolly_key")), "woolly_key");
 
         // Monster Seed
-        GameRegistry.registerItem(gobballSeed = new ItemWCreatureSeeds(0).addCreature('G', Gobball.class).addCreature('B', BlackGobbly.class).addCreature('W', WhiteGobbly.class).addCreature('E', Gobbette.class).addCreature('C', GobballWC.class).addPatern("EWB", 0.5F).setUnlocalizedName(modid_ + "gobball_seed"), "gobball_seed");
+        GameRegistry.registerItem(gobballSeed = new ItemWCreatureSeeds(0).addCreature('G', Gobball.class).addCreature('B', BlackGobbly.class).addCreature('W', WhiteGobbly.class).addCreature('E', Gobbette.class).addCreature('C', GobballWC.class).addPatern("EWB", 0.5F).setUnlocalizedName(MODID_ + "gobball_seed"), "gobball_seed");
 
         // HG
-        GameRegistry.registerItem(craftHG = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "hg_craft").setMaxStackSize(1)), "hg_craft");
-        GameRegistry.registerItem(decoHG = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "hg_deco").setMaxStackSize(1)), "hg_deco");
-        GameRegistry.registerItem(gardenHG = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "hg_garden").setMaxStackSize(1)), "hg_garden");
-        GameRegistry.registerItem(merchantHG = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "hg_merchant").setMaxStackSize(1)), "hg_merchant");
+        GameRegistry.registerItem(craftHG = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "hg_craft").setMaxStackSize(1)), "hg_craft");
+        GameRegistry.registerItem(decoHG = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "hg_deco").setMaxStackSize(1)), "hg_deco");
+        GameRegistry.registerItem(gardenHG = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "hg_garden").setMaxStackSize(1)), "hg_garden");
+        GameRegistry.registerItem(merchantHG = ((new ItemWithLevel(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "hg_merchant").setMaxStackSize(1)), "hg_merchant");
 
         // Ikiakit
-        GameRegistry.registerItem(ikiakitEmerald = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "emerald_ikiakit"), "emerald_ikiakit");
-        GameRegistry.registerItem(ikiakitSmall = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "small_ikiakit"), "small_ikiakit");
-        GameRegistry.registerItem(ikiakitGolden = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "golden_ikiakit"), "golden_ikiakit");
-        GameRegistry.registerItem(ikiakitKit = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "kit_ikiakit"), "kit_ikiakit");
-        GameRegistry.registerItem(ikiakitAdventurer = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "adventurer_ikiakit"), "adventurer_ikiakit");
-        GameRegistry.registerItem(ikiakitCollector = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "collector_ikiakit"), "collector_ikiakit");
+        GameRegistry.registerItem(ikiakitEmerald = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "emerald_ikiakit"), "emerald_ikiakit");
+        GameRegistry.registerItem(ikiakitSmall = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "small_ikiakit"), "small_ikiakit");
+        GameRegistry.registerItem(ikiakitGolden = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "golden_ikiakit"), "golden_ikiakit");
+        GameRegistry.registerItem(ikiakitKit = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "kit_ikiakit"), "kit_ikiakit");
+        GameRegistry.registerItem(ikiakitAdventurer = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "adventurer_ikiakit"), "adventurer_ikiakit");
+        GameRegistry.registerItem(ikiakitCollector = (ItemIkiakit) (new ItemIkiakit(1)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "collector_ikiakit"), "collector_ikiakit");
 
         // ItemBlock
-        GameRegistry.registerItem(carpet = new ItemBlockYRotation(WBlocks.carpetNorthSlab, WBlocks.carpetEastSlab, WBlocks.carpetSouthSlab, WBlocks.carpetWestSlab).setUnlocalizedName(modid_ + "carpet_slab"), "block_carpet_slab");
-        GameRegistry.registerItem(groundSlab = new ItemBlockYRotation(WBlocks.groundNorthSlab, WBlocks.groundEastSlab, WBlocks.groundSouthSlab, WBlocks.groundWestSlab).setUnlocalizedName(modid_ + "ground_slab"), "block_ground_slab");
-        GameRegistry.registerItem(ground2Slab = new ItemBlockYRotation(WBlocks.ground2NorthSlab, WBlocks.ground2EastSlab, WBlocks.ground2SouthSlab, WBlocks.ground2WestSlab).setUnlocalizedName(modid_ + "ground_2_slab"), "block_ground_2_slab");
-        GameRegistry.registerItem(sufokiaWave = new ItemBlockYRotation(WBlocks.sufokiaWaveNorthSlab, WBlocks.sufokiaWaveEastSlab, WBlocks.sufokiaWaveSouthSlab, WBlocks.sufokiaWaveWestSlab).setUnlocalizedName(modid_ + "sufokia_wave_slab"), "block_sufokia_wave_slab");
-        GameRegistry.registerItem(sufokiaWave2 = new ItemBlockYRotation(WBlocks.sufokiaWave2NorthSlab, WBlocks.sufokiaWave2EastSlab, WBlocks.sufokiaWave2SouthSlab, WBlocks.sufokiaWave2WestSlab).setUnlocalizedName(modid_ + "sufokia_wave_2_slab"), "block_sufokia_wave_2_slab");
-        GameRegistry.registerItem(sufokiaWave3 = new ItemBlockYRotation(WBlocks.sufokiaWave3NorthSlab, WBlocks.sufokiaWave3EastSlab, WBlocks.sufokiaWave3SouthSlab, WBlocks.sufokiaWave3WestSlab).setUnlocalizedName(modid_ + "sufokia_wave_3_slab"), "block_sufokia_wave_3_slab");
-        GameRegistry.registerItem(wood = new ItemBlockYRotation(WBlocks.woodNorthSlab, WBlocks.woodEastSlab, WBlocks.woodSouthSlab, WBlocks.woodWestSlab).setUnlocalizedName(modid_ + "wood_slab"), "block_wood_slab");
+        GameRegistry.registerItem(carpet = new ItemBlockYRotation(WBlocks.carpetNorthSlab, WBlocks.carpetEastSlab, WBlocks.carpetSouthSlab, WBlocks.carpetWestSlab).setUnlocalizedName(MODID_ + "carpet_slab"), "block_carpet_slab");
+        GameRegistry.registerItem(groundSlab = new ItemBlockYRotation(WBlocks.groundNorthSlab, WBlocks.groundEastSlab, WBlocks.groundSouthSlab, WBlocks.groundWestSlab).setUnlocalizedName(MODID_ + "ground_slab"), "block_ground_slab");
+        GameRegistry.registerItem(ground2Slab = new ItemBlockYRotation(WBlocks.ground2NorthSlab, WBlocks.ground2EastSlab, WBlocks.ground2SouthSlab, WBlocks.ground2WestSlab).setUnlocalizedName(MODID_ + "ground_2_slab"), "block_ground_2_slab");
+        GameRegistry.registerItem(sufokiaWave = new ItemBlockYRotation(WBlocks.sufokiaWaveNorthSlab, WBlocks.sufokiaWaveEastSlab, WBlocks.sufokiaWaveSouthSlab, WBlocks.sufokiaWaveWestSlab).setUnlocalizedName(MODID_ + "sufokia_wave_slab"), "block_sufokia_wave_slab");
+        GameRegistry.registerItem(sufokiaWave2 = new ItemBlockYRotation(WBlocks.sufokiaWave2NorthSlab, WBlocks.sufokiaWave2EastSlab, WBlocks.sufokiaWave2SouthSlab, WBlocks.sufokiaWave2WestSlab).setUnlocalizedName(MODID_ + "sufokia_wave_2_slab"), "block_sufokia_wave_2_slab");
+        GameRegistry.registerItem(sufokiaWave3 = new ItemBlockYRotation(WBlocks.sufokiaWave3NorthSlab, WBlocks.sufokiaWave3EastSlab, WBlocks.sufokiaWave3SouthSlab, WBlocks.sufokiaWave3WestSlab).setUnlocalizedName(MODID_ + "sufokia_wave_3_slab"), "block_sufokia_wave_3_slab");
+        GameRegistry.registerItem(wood = new ItemBlockYRotation(WBlocks.woodNorthSlab, WBlocks.woodEastSlab, WBlocks.woodSouthSlab, WBlocks.woodWestSlab).setUnlocalizedName(MODID_ + "wood_slab"), "block_wood_slab");
 
         // JOBS
 
         // Farmer Seed
-        GameRegistry.registerItem(artichokeSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 10, WBlocks.artichoke, WItems.artichoke)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "artichoke_seed")), "artichoke_seed");
-        GameRegistry.registerItem(babbageSeed = ((new ItemWithLevel(40)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "babbage_seed")), "babbage_seed");
-        GameRegistry.registerItem(barleyGrain = ((new ItemWithLevel(20)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "barley_grain")), "barley_grain");
-        GameRegistry.registerItem(beanSeed = ((new ItemWithLevel(45)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "bean_seed")), "bean_seed");
-        GameRegistry.registerItem(blackberrySeed = ((new ItemWithLevel(160)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "blackberry_seed")), "blackberry_seed");
-        GameRegistry.registerItem(blackCawwotSeed = ((new ItemWithLevel(120)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "black_cawwot_seed")), "black_cawwot_seed");
-        GameRegistry.registerItem(cawwotSeed = ((new ItemWithLevel(25)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "cawwot_seed")), "cawwot_seed");
-        GameRegistry.registerItem(chiliSeed = ((new ItemWithLevel(90)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "chili_seed")), "chili_seed");
-        GameRegistry.registerItem(cornSeed = ((new ItemWithLevel(70)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "corn_seed")), "corn_seed");
-        GameRegistry.registerItem(curarareSeed = ((new ItemWithLevel(140)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "curarare_seed")), "curarare_seed");
-        GameRegistry.registerItem(desertTruffleSeed = ((new ItemWithLevel(110)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "desert_truffle_seed")), "desert_truffle_seed");
-        GameRegistry.registerItem(jollyflowerSeed = ((new ItemWithLevel(65)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "jollyflower_seed")), "jollyflower_seed");
-        GameRegistry.registerItem(juteySeed = ((new ItemWithLevel(60)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "jutey_seed")), "jutey_seed");
-        GameRegistry.registerItem(makoffeeSeed = ((new ItemWithLevel(150)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "makoffee_seed")), "makoffee_seed");
-        GameRegistry.registerItem(melonSeed = ((new ItemWithLevel(75)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "melon_seed")), "melon_seed");
-        GameRegistry.registerItem(mushraySeed = ((new ItemWithLevel(120)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "mushray_seed")), "mushray_seed");
-        GameRegistry.registerItem(oatGrain = ((new ItemWithLevel(35)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "oat_grain")), "oat_grain");
-        GameRegistry.registerItem(palmCaneSeed = ((new ItemWithLevel(170)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "palm_cane_seed")), "palm_cane_seed");
-        GameRegistry.registerItem(pumpkinSeed = ((new ItemWithLevel(30)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "pumpkin_seed")), "pumpkin_seed");
-        GameRegistry.registerItem(ryeGrain = ((new ItemWithLevel(50)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "rye_grain")), "rye_grain");
-        GameRegistry.registerItem(sunflowerSeed = ((new ItemWithLevel(80)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "sunflower_seed")), "sunflower_seed");
-        GameRegistry.registerItem(tuberbulbSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.tuberbulb, WItems.tuberbulb)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "tuberbulb_seed")), "tuberbulb_seed");
-        GameRegistry.registerItem(vanillaRiceGrain = ((new ItemWithLevel(55)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "vanilla_rice_grain")), "vanilla_rice_grain");
-        GameRegistry.registerItem(watermelonSeed = ((new ItemWithLevel(85)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "watermelon_seed")), "watermelon_seed");
-        GameRegistry.registerItem(wheatGrain = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.wheat, WItems.wheat)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(modid_ + "wheat_grain")), "wheat_grain");
+        GameRegistry.registerItem(artichokeSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 10, WBlocks.artichoke, WItems.artichoke)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "artichoke_seed")), "artichoke_seed");
+        GameRegistry.registerItem(babbageSeed = ((new ItemWithLevel(40)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "babbage_seed")), "babbage_seed");
+        GameRegistry.registerItem(barleyGrain = ((new ItemWithLevel(20)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "barley_grain")), "barley_grain");
+        GameRegistry.registerItem(beanSeed = ((new ItemWithLevel(45)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "bean_seed")), "bean_seed");
+        GameRegistry.registerItem(blackberrySeed = ((new ItemWithLevel(160)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "blackberry_seed")), "blackberry_seed");
+        GameRegistry.registerItem(blackCawwotSeed = ((new ItemWithLevel(120)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "black_cawwot_seed")), "black_cawwot_seed");
+        GameRegistry.registerItem(cawwotSeed = ((new ItemWithLevel(25)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "cawwot_seed")), "cawwot_seed");
+        GameRegistry.registerItem(chiliSeed = ((new ItemWithLevel(90)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "chili_seed")), "chili_seed");
+        GameRegistry.registerItem(cornSeed = ((new ItemWithLevel(70)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "corn_seed")), "corn_seed");
+        GameRegistry.registerItem(curarareSeed = ((new ItemWithLevel(140)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "curarare_seed")), "curarare_seed");
+        GameRegistry.registerItem(desertTruffleSeed = ((new ItemWithLevel(110)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "desert_truffle_seed")), "desert_truffle_seed");
+        GameRegistry.registerItem(jollyflowerSeed = ((new ItemWithLevel(65)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "jollyflower_seed")), "jollyflower_seed");
+        GameRegistry.registerItem(juteySeed = ((new ItemWithLevel(60)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "jutey_seed")), "jutey_seed");
+        GameRegistry.registerItem(makoffeeSeed = ((new ItemWithLevel(150)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "makoffee_seed")), "makoffee_seed");
+        GameRegistry.registerItem(melonSeed = ((new ItemWithLevel(75)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "melon_seed")), "melon_seed");
+        GameRegistry.registerItem(mushraySeed = ((new ItemWithLevel(120)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "mushray_seed")), "mushray_seed");
+        GameRegistry.registerItem(oatGrain = ((new ItemWithLevel(35)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "oat_grain")), "oat_grain");
+        GameRegistry.registerItem(palmCaneSeed = ((new ItemWithLevel(170)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "palm_cane_seed")), "palm_cane_seed");
+        GameRegistry.registerItem(pumpkinSeed = ((new ItemWithLevel(30)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "pumpkin_seed")), "pumpkin_seed");
+        GameRegistry.registerItem(ryeGrain = ((new ItemWithLevel(50)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "rye_grain")), "rye_grain");
+        GameRegistry.registerItem(sunflowerSeed = ((new ItemWithLevel(80)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "sunflower_seed")), "sunflower_seed");
+        GameRegistry.registerItem(tuberbulbSeed = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.tuberbulb, WItems.tuberbulb)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "tuberbulb_seed")), "tuberbulb_seed");
+        GameRegistry.registerItem(vanillaRiceGrain = ((new ItemWithLevel(55)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "vanilla_rice_grain")), "vanilla_rice_grain");
+        GameRegistry.registerItem(watermelonSeed = ((new ItemWithLevel(85)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "watermelon_seed")), "watermelon_seed");
+        GameRegistry.registerItem(wheatGrain = ((new ItemSeed(ProfessionManager.PROFESSION.FARMER, 0, WBlocks.wheat, WItems.wheat)).setCreativeTab(WCreativeTabs.tabResource).setUnlocalizedName(MODID_ + "wheat_grain")), "wheat_grain");
 
         // ARMORS
         // -------------------------------
 
-        GameRegistry.registerItem(theOne = (new ItemWArmor(ItemWArmor.TYPE.RING, 1000).setCharacteristic(Characteristic.ACTION, 25).setUnlocalizedName(modid_ + "the_one")), "the_one");
+        GameRegistry.registerItem(theOne = (new ItemWArmor(ItemWArmor.TYPE.RING, 1000).setCharacteristic(Characteristic.ACTION, 25).setUnlocalizedName(MODID_ + "the_one")), "the_one");
 
         // Goball Armors
-        GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(ItemWArmor.TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 15).setCharacteristic(Characteristic.INITIATIVE, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName(modid_ + "gobball_breastplate")), "gobball_breastplate");
-        GameRegistry.registerItem(gobboots = (new ItemWArmor(ItemWArmor.TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 10).setCharacteristic(Characteristic.LOCK, 8).setCharacteristic(Characteristic.INITIATIVE, 6).setUnlocalizedName(modid_ + "gobboots")), "gobboots");
-        GameRegistry.registerItem(gobballEpaulettes = (new ItemWArmor(ItemWArmor.TYPE.EPAULET, 14).setCharacteristic(Characteristic.LOCK, 5).setCharacteristic(Characteristic.FIRE_ATT, 2).setCharacteristic(Characteristic.EARTH_ATT, 2).setUnlocalizedName(modid_ + "gobball_epaulettes")), "gobball_epaulettes");
-        GameRegistry.registerItem(gobballCape = (new ItemWArmor(ItemWArmor.TYPE.CAPE, 14).setCharacteristic(Characteristic.HEALTH, 12).setCharacteristic(Characteristic.LOCK, 8).setCharacteristic(Characteristic.FIRE_ATT, 2).setCharacteristic(Characteristic.EARTH_ATT, 2).setUnlocalizedName(modid_ + "gobball_cape")), "gobball_cape");
-        GameRegistry.registerItem(gobballBelt = (new ItemWArmor(ItemWArmor.TYPE.BELT, 13).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName(modid_ + "gobball_belt")), "gobball_belt");
-        GameRegistry.registerItem(gobballHeadgear = (new ItemWArmor(ItemWArmor.TYPE.HELMET, 13).setCharacteristic(Characteristic.HEALTH, 13).setCharacteristic(Characteristic.LOCK, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName(modid_ + "gobball_headgear")), "gobball_headgear");
-        GameRegistry.registerItem(gobballAmulet = (new ItemWArmor(ItemWArmor.TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.LOCK, 5).setUnlocalizedName(modid_ + "gobball_amulet")), "gobball_amulet");
-        GameRegistry.registerItem(bouzeLiteYeahsRing = (new ItemWArmor(ItemWArmor.TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 6).setCharacteristic(Characteristic.INITIATIVE, 4).setUnlocalizedName(modid_ + "bouze_lite_yeahs_ring")), "bouze_lite_yeahs_ring");
+        GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(ItemWArmor.TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 15).setCharacteristic(Characteristic.INITIATIVE, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName(MODID_ + "gobball_breastplate")), "gobball_breastplate");
+        GameRegistry.registerItem(gobboots = (new ItemWArmor(ItemWArmor.TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 10).setCharacteristic(Characteristic.LOCK, 8).setCharacteristic(Characteristic.INITIATIVE, 6).setUnlocalizedName(MODID_ + "gobboots")), "gobboots");
+        GameRegistry.registerItem(gobballEpaulettes = (new ItemWArmor(ItemWArmor.TYPE.EPAULET, 14).setCharacteristic(Characteristic.LOCK, 5).setCharacteristic(Characteristic.FIRE_ATT, 2).setCharacteristic(Characteristic.EARTH_ATT, 2).setUnlocalizedName(MODID_ + "gobball_epaulettes")), "gobball_epaulettes");
+        GameRegistry.registerItem(gobballCape = (new ItemWArmor(ItemWArmor.TYPE.CAPE, 14).setCharacteristic(Characteristic.HEALTH, 12).setCharacteristic(Characteristic.LOCK, 8).setCharacteristic(Characteristic.FIRE_ATT, 2).setCharacteristic(Characteristic.EARTH_ATT, 2).setUnlocalizedName(MODID_ + "gobball_cape")), "gobball_cape");
+        GameRegistry.registerItem(gobballBelt = (new ItemWArmor(ItemWArmor.TYPE.BELT, 13).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName(MODID_ + "gobball_belt")), "gobball_belt");
+        GameRegistry.registerItem(gobballHeadgear = (new ItemWArmor(ItemWArmor.TYPE.HELMET, 13).setCharacteristic(Characteristic.HEALTH, 13).setCharacteristic(Characteristic.LOCK, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName(MODID_ + "gobball_headgear")), "gobball_headgear");
+        GameRegistry.registerItem(gobballAmulet = (new ItemWArmor(ItemWArmor.TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.LOCK, 5).setUnlocalizedName(MODID_ + "gobball_amulet")), "gobball_amulet");
+        GameRegistry.registerItem(bouzeLiteYeahsRing = (new ItemWArmor(ItemWArmor.TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 6).setCharacteristic(Characteristic.INITIATIVE, 4).setUnlocalizedName(MODID_ + "bouze_lite_yeahs_ring")), "bouze_lite_yeahs_ring");
 
         // Tofu Armors
-        GameRegistry.registerItem(helmetofu = (new ItemWArmor(ItemWArmor.TYPE.HELMET, 13).setCharacteristic(Characteristic.HEALTH, 9).setCharacteristic(Characteristic.INITIATIVE, 3).setCharacteristic(Characteristic.WATER_ATT, 4).setCharacteristic(Characteristic.AIR_ATT, 4).setUnlocalizedName(modid_ + "helmetofu")), "helmetofu");
-        GameRegistry.registerItem(tofuBreastplate = (new ItemWArmor(ItemWArmor.TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 13).setCharacteristic(Characteristic.INITIATIVE, 6).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName(modid_ + "tofu_breastplate")), "tofu_breastplate");
-        GameRegistry.registerItem(tofuCloak = (new ItemWArmor(ItemWArmor.TYPE.CAPE, 14).setCharacteristic(Characteristic.HEALTH, 12).setCharacteristic(Characteristic.DODGE, 4).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName(modid_ + "tofu_cloak")), "tofu_cloak");
-        GameRegistry.registerItem(tofuEpaulettes = (new ItemWArmor(ItemWArmor.TYPE.EPAULET, 14).setCharacteristic(Characteristic.DODGE, 5).setCharacteristic(Characteristic.WATER_ATT, 2).setCharacteristic(Characteristic.AIR_ATT, 2).setUnlocalizedName(modid_ + "tofu_epaulettes")), "tofu_epaulettes");
-        GameRegistry.registerItem(tofuBelt = (new ItemWArmor(ItemWArmor.TYPE.BELT, 13).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName(modid_ + "tofu_belt")), "tofu_belt");
-        GameRegistry.registerItem(tofuAmulet = (new ItemWArmor(ItemWArmor.TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.DODGE, 5).setUnlocalizedName(modid_ + "tofu_amulet")), "tofu_amulet");
-        GameRegistry.registerItem(tofuRing = (new ItemWArmor(ItemWArmor.TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.INITIATIVE, 3).setUnlocalizedName(modid_ + "tofu_ring")), "tofu_ring");
-        GameRegistry.registerItem(tofuBoots = (new ItemWArmor(ItemWArmor.TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.DODGE, 7).setCharacteristic(Characteristic.INITIATIVE, 8).setUnlocalizedName(modid_ + "tofu_boots")), "tofu_boots");
+        GameRegistry.registerItem(helmetofu = (new ItemWArmor(ItemWArmor.TYPE.HELMET, 13).setCharacteristic(Characteristic.HEALTH, 9).setCharacteristic(Characteristic.INITIATIVE, 3).setCharacteristic(Characteristic.WATER_ATT, 4).setCharacteristic(Characteristic.AIR_ATT, 4).setUnlocalizedName(MODID_ + "helmetofu")), "helmetofu");
+        GameRegistry.registerItem(tofuBreastplate = (new ItemWArmor(ItemWArmor.TYPE.CHESTPLATE, 15).setCharacteristic(Characteristic.HEALTH, 13).setCharacteristic(Characteristic.INITIATIVE, 6).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName(MODID_ + "tofu_breastplate")), "tofu_breastplate");
+        GameRegistry.registerItem(tofuCloak = (new ItemWArmor(ItemWArmor.TYPE.CAPE, 14).setCharacteristic(Characteristic.HEALTH, 12).setCharacteristic(Characteristic.DODGE, 4).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName(MODID_ + "tofu_cloak")), "tofu_cloak");
+        GameRegistry.registerItem(tofuEpaulettes = (new ItemWArmor(ItemWArmor.TYPE.EPAULET, 14).setCharacteristic(Characteristic.DODGE, 5).setCharacteristic(Characteristic.WATER_ATT, 2).setCharacteristic(Characteristic.AIR_ATT, 2).setUnlocalizedName(MODID_ + "tofu_epaulettes")), "tofu_epaulettes");
+        GameRegistry.registerItem(tofuBelt = (new ItemWArmor(ItemWArmor.TYPE.BELT, 13).setCharacteristic(Characteristic.WATER_ATT, 3).setCharacteristic(Characteristic.AIR_ATT, 3).setUnlocalizedName(MODID_ + "tofu_belt")), "tofu_belt");
+        GameRegistry.registerItem(tofuAmulet = (new ItemWArmor(ItemWArmor.TYPE.AMULET, 12).setCharacteristic(Characteristic.HEALTH, 7).setCharacteristic(Characteristic.DODGE, 5).setUnlocalizedName(MODID_ + "tofu_amulet")), "tofu_amulet");
+        GameRegistry.registerItem(tofuRing = (new ItemWArmor(ItemWArmor.TYPE.RING, 12).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.INITIATIVE, 3).setUnlocalizedName(MODID_ + "tofu_ring")), "tofu_ring");
+        GameRegistry.registerItem(tofuBoots = (new ItemWArmor(ItemWArmor.TYPE.BOOTS, 15).setCharacteristic(Characteristic.HEALTH, 8).setCharacteristic(Characteristic.DODGE, 7).setCharacteristic(Characteristic.INITIATIVE, 8).setUnlocalizedName(MODID_ + "tofu_boots")), "tofu_boots");
 
         // SPELLS
         // Iop spells

@@ -18,7 +18,7 @@ public class PacketOpenWindow implements IMessage {
     public void fromBytes(ByteBuf buffer) {
         int index = buffer.readInt();
         if (index < 0 || index > GuiId.values().length) {
-            this.windowId = GuiId.UNKNOW;
+            this.windowId = GuiId.UNKNOWN;
             return;
         }
 

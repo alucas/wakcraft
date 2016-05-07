@@ -76,13 +76,13 @@ public enum QuestManager {
         return quests;
     }
 
-    public Task getTask(final Integer questId, final Integer taskId) {
+    public QuestTask getTask(final Integer questId, final Integer taskId) {
         final Quest quest = quests.get(questId);
         if (quest == null) {
             return null;
         }
 
-        final Task task = quest.getTask(taskId);
+        final QuestTask task = quest.getTask(taskId);
         if (task == null) {
             return null;
         }

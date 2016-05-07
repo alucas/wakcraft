@@ -10,10 +10,7 @@ import heero.mc.mod.wakcraft.client.event.handler.KeyInputHandler;
 import heero.mc.mod.wakcraft.client.event.handler.RenderEventHandler;
 import heero.mc.mod.wakcraft.client.gui.*;
 import heero.mc.mod.wakcraft.client.gui.fight.GuiFightOverlay;
-import heero.mc.mod.wakcraft.client.gui.inventory.GUIHavenGemWorkbench;
-import heero.mc.mod.wakcraft.client.gui.inventory.GUIInventory;
-import heero.mc.mod.wakcraft.client.gui.inventory.GUISpells;
-import heero.mc.mod.wakcraft.client.gui.inventory.GUIWorkbench;
+import heero.mc.mod.wakcraft.client.gui.inventory.*;
 import heero.mc.mod.wakcraft.client.renderer.fight.FightRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.FighterRenderer;
 import heero.mc.mod.wakcraft.client.renderer.fight.SpellRenderer;
@@ -32,11 +29,14 @@ import heero.mc.mod.wakcraft.inventory.*;
 import heero.mc.mod.wakcraft.item.EnumOre;
 import heero.mc.mod.wakcraft.network.GuiId;
 import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
+import heero.mc.mod.wakcraft.quest.Quest;
+import heero.mc.mod.wakcraft.quest.QuestTask;
 import heero.mc.mod.wakcraft.tileentity.TileEntityDragoExpress;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
 import heero.mc.mod.wakcraft.tileentity.TileEntityPhoenix;
 import heero.mc.mod.wakcraft.util.HavenBagUtil;
+import heero.mc.mod.wakcraft.util.QuestUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -368,6 +368,48 @@ public class CombinedClientProxy extends CommonProxy {
         TileEntity tileEntity;
 
         switch (guiId) {
+            case ABILITIES:
+                return new GUIWakcraft(guiId, new GUIAbilities(player), player, world, pos);
+            case HAVEN_BAG_CHEST_ADVENTURER:
+            case HAVEN_BAG_CHEST_COLLECTOR:
+            case HAVEN_BAG_CHEST_EMERALD:
+            case HAVEN_BAG_CHEST_GOLDEN:
+            case HAVEN_BAG_CHEST_KIT:
+            case HAVEN_BAG_CHEST_NORMAL:
+            case HAVEN_BAG_CHEST_SMALL:
+                tileEntity = world.getTileEntity(pos);
+                if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagChest)) {
+                    return null;
+                }
+
+                return new GUIHavenBagChests(guiId, new ContainerHavenBagChest(player.inventory, (TileEntityHavenBagChest) tileEntity, player), player, world, pos);
+            case HAVEN_GEM_WORKBENCH:
+                tileEntity = world.getTileEntity(pos);
+                if (tileEntity == null || !(tileEntity instanceof TileEntityHavenGemWorkbench)) {
+                    return null;
+                }
+
+                return new GUIHavenGemWorkbench(new ContainerHavenGemWorkbench(player.inventory, (IInventory) tileEntity));
+            case INVENTORY:
+                return new GUIWakcraft(guiId, new GUIInventory(new ContainerPlayerInventory(player)), player, world, pos);
+            case NPC_GIVE:
+                final Quest quest = QuestUtil.getQuest(player, pos.getX());
+                if (quest == null) {
+                    return null;
+                }
+
+                final QuestTask task = QuestUtil.getCurrentTask(player, quest);
+                if (task == null) {
+                    return null;
+                }
+
+                return new GUINPCGive(new ContainerNPCGive(player.inventory, world), task);
+            case PROFESSION:
+                return new GUIWakcraft(guiId, new GUIProfession(player, PROFESSION.CHEF), player, world, pos);
+            case QUEST:
+                return new GUIWakcraft(guiId, new GUIQuest(player), player, world, pos);
+            case SPELLS:
+                return new GUIWakcraft(guiId, new GUISpells(new ContainerSpells(player)), player, world, pos);
             case WORKBENCH:
                 final IBlockState state = world.getBlockState(pos);
                 if (!(state.getBlock() instanceof BlockWorkbench)) {
@@ -376,36 +418,6 @@ public class CombinedClientProxy extends CommonProxy {
 
                 final BlockWorkbench block = (BlockWorkbench) state.getBlock();
                 return new GUIWorkbench(new ContainerWorkbench(player.inventory, world, block.getProfession()), block.getProfession());
-            case INVENTORY:
-                return new GUIWakcraft(guiId, new GUIInventory(new ContainerPlayerInventory(player)), player, world, pos);
-            case HAVEN_GEM_WORKBENCH:
-                tileEntity = world.getTileEntity(pos);
-                if (tileEntity == null || !(tileEntity instanceof TileEntityHavenGemWorkbench)) {
-                    return null;
-                }
-
-                return new GUIHavenGemWorkbench(new ContainerHavenGemWorkbench(player.inventory, (IInventory) tileEntity));
-            case HAVEN_BAG_CHEST_NORMAL:
-            case HAVEN_BAG_CHEST_SMALL:
-            case HAVEN_BAG_CHEST_ADVENTURER:
-            case HAVEN_BAG_CHEST_KIT:
-            case HAVEN_BAG_CHEST_COLLECTOR:
-            case HAVEN_BAG_CHEST_GOLDEN:
-            case HAVEN_BAG_CHEST_EMERALD:
-                tileEntity = world.getTileEntity(pos);
-                if (tileEntity == null || !(tileEntity instanceof TileEntityHavenBagChest)) {
-                    return null;
-                }
-
-                return new GUIHavenBagChests(guiId, new ContainerHavenBagChest(player.inventory, (TileEntityHavenBagChest) tileEntity, player), player, world, pos);
-            case ABILITIES:
-                return new GUIWakcraft(guiId, new GUIAbilities(player), player, world, pos);
-            case PROFESSION:
-                return new GUIWakcraft(guiId, new GUIProfession(player, PROFESSION.CHEF), player, world, pos);
-            case QUEST:
-                return new GUIWakcraft(guiId, new GUIQuest(player), player, world, pos);
-            case SPELLS:
-                return new GUIWakcraft(guiId, new GUISpells(new ContainerSpells(player)), player, world, pos);
             case ZAAPS:
                 return new GUIZaap(guiId, player, world, pos);
             default:

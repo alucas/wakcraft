@@ -31,8 +31,16 @@
       ],
       "what": [
         {
-          "name": "piwi_feather",
+          "name": "ore",
           "quantity": 3
+        },
+        {
+          "name": "wheat",
+          "quantity": 20
+        },
+        {
+          "name": "wheat",
+          "quantity": 15
         }
       ]
     },

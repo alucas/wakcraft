@@ -1,10 +1,9 @@
 package heero.mc.mod.wakcraft.client.gui;
 
 import heero.mc.mod.wakcraft.Reference;
-import heero.mc.mod.wakcraft.profession.ProfessionManager.PROFESSION;
 import heero.mc.mod.wakcraft.quest.Quest;
+import heero.mc.mod.wakcraft.quest.QuestTask;
 import heero.mc.mod.wakcraft.util.QuestUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -65,9 +64,31 @@ public class GUIQuest extends GuiScreen {
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, guiWidth, guiHeight);
 
         if (quests == null || quests.isEmpty()) {
-            drawCenteredString(fontRendererObj, I18n.format("Empty"), guiLeft + (guiWidth / 2), guiTop + 10, 0xFFFFFF);
-        } else {
-            drawCenteredString(fontRendererObj, I18n.format(quests.get(0).name), guiLeft + (guiWidth / 2), guiTop + 10, 0xFFFFFF);
+            drawCenteredString(fontRendererObj, I18n.format("No Quest"), guiLeft + (guiWidth / 2), guiTop + 10, 0xFFFFFF);
+
+            super.drawScreen(mouseX, mouseY, renderPartialTicks);
+
+            return;
+        }
+
+        final Quest quest = quests.get(questIndex);
+        final QuestTask currentTask = QuestUtil.getCurrentTask(player, quest);
+
+        drawCenteredString(fontRendererObj, I18n.format(quest.name), guiLeft + (guiWidth / 2), guiTop + 10, 0xFFFFFF);
+
+        for (int i = 0; i < quest.tasks.length; i++) {
+            final QuestTask task = quest.tasks[i];
+            if (task == currentTask) {
+                break;
+            }
+
+            drawString(fontRendererObj, "X", guiLeft + 10, guiTop + 15 * i + 30, 0x22EEAA);
+        }
+
+        for (int i = 0; i < quest.tasks.length; i++) {
+            final QuestTask task = quest.tasks[i];
+
+            drawString(fontRendererObj, I18n.format(task.description), guiLeft + 20, guiTop + 15 * i + 30, 0xFFFFFF);
         }
 
         super.drawScreen(mouseX, mouseY, renderPartialTicks);
@@ -82,22 +103,6 @@ public class GUIQuest extends GuiScreen {
                 questIndex = (questIndex >= quests.size() - 1) ? quests.size() - 1 : questIndex + 1;
                 break;
             default:
-        }
-    }
-
-    private class ProfessionButton extends GuiButton {
-        public final PROFESSION profession;
-
-        public ProfessionButton(PROFESSION profession, int x, int y) {
-            super(profession.getValue(), x, y, 16, 16, "");
-
-            this.profession = profession;
-        }
-
-        /**
-         * Draws this button to the screen.
-         */
-        public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         }
     }
 }

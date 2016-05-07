@@ -4,10 +4,10 @@ public class Quest {
     public Integer id;
     public String name;
     public String by;
-    public Condition[] conditions;
-    public Task[] tasks;
+    public QuestCondition[] conditions;
+    public QuestTask[] tasks;
 
-    public Task getTask(final Integer taskId) {
+    public QuestTask getTask(final Integer taskId) {
         if (taskId < 0 || taskId >= tasks.length) {
             return null;
         }

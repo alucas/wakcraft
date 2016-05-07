@@ -23,6 +23,32 @@ public class GuiHandler implements IGuiHandler {
         }
 
         switch (guiId) {
+            case HAVEN_BAG_CHEST_ADVENTURER:
+            case HAVEN_BAG_CHEST_COLLECTOR:
+            case HAVEN_BAG_CHEST_EMERALD:
+            case HAVEN_BAG_CHEST_GOLDEN:
+            case HAVEN_BAG_CHEST_KIT:
+            case HAVEN_BAG_CHEST_NORMAL:
+            case HAVEN_BAG_CHEST_SMALL:
+                final TileEntity tileEntityChest = world.getTileEntity(new BlockPos(x, y, z));
+                if (tileEntityChest == null || !(tileEntityChest instanceof TileEntityHavenBagChest)) {
+                    return null;
+                }
+
+                return new ContainerHavenBagChest(player.inventory, (TileEntityHavenBagChest) tileEntityChest, player);
+            case HAVEN_GEM_WORKBENCH:
+                final TileEntity tileEntityWorkbench = world.getTileEntity(new BlockPos(x, y, z));
+                if (tileEntityWorkbench == null || !(tileEntityWorkbench instanceof TileEntityHavenGemWorkbench)) {
+                    return null;
+                }
+
+                return new ContainerHavenGemWorkbench(player.inventory, (TileEntityHavenGemWorkbench) tileEntityWorkbench);
+            case INVENTORY:
+                return new ContainerPlayerInventory(player);
+            case NPC_GIVE:
+                return new ContainerNPCGive(player.inventory, world);
+            case SPELLS:
+                return new ContainerSpells(player);
             case WORKBENCH:
                 final IBlockState state = world.getBlockState(new BlockPos(x, y, z));
                 if (!(state.getBlock() instanceof BlockWorkbench)) {
@@ -31,30 +57,6 @@ public class GuiHandler implements IGuiHandler {
 
                 final BlockWorkbench block = (BlockWorkbench) state.getBlock();
                 return new ContainerWorkbench(player.inventory, world, block.getProfession());
-            case INVENTORY:
-                return new ContainerPlayerInventory(player);
-            case HAVEN_GEM_WORKBENCH:
-                final TileEntity tileEntityWorkbench = world.getTileEntity(new BlockPos(x, y, z));
-                if (tileEntityWorkbench == null || !(tileEntityWorkbench instanceof TileEntityHavenGemWorkbench)) {
-                    return null;
-                }
-
-                return new ContainerHavenGemWorkbench(player.inventory, (TileEntityHavenGemWorkbench) tileEntityWorkbench);
-            case HAVEN_BAG_CHEST_NORMAL:
-            case HAVEN_BAG_CHEST_SMALL:
-            case HAVEN_BAG_CHEST_ADVENTURER:
-            case HAVEN_BAG_CHEST_KIT:
-            case HAVEN_BAG_CHEST_COLLECTOR:
-            case HAVEN_BAG_CHEST_GOLDEN:
-            case HAVEN_BAG_CHEST_EMERALD:
-                final TileEntity tileEntityChest = world.getTileEntity(new BlockPos(x, y, z));
-                if (tileEntityChest == null || !(tileEntityChest instanceof TileEntityHavenBagChest)) {
-                    return null;
-                }
-
-                return new ContainerHavenBagChest(player.inventory, (TileEntityHavenBagChest) tileEntityChest, player);
-            case SPELLS:
-                return new ContainerSpells(player);
             default:
                 break;
         }
