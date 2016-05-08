@@ -72,13 +72,14 @@ public class GUIQuest extends GuiScreen {
         }
 
         final Quest quest = quests.get(questIndex);
-        final QuestTask currentTask = QuestUtil.getCurrentTask(player, quest);
+        final boolean isQuestTerminated = QuestUtil.isQuestTerminated(player, quest);
+        final QuestTask currentTask = isQuestTerminated ? null : QuestUtil.getCurrentTask(player, quest);
 
         drawCenteredString(fontRendererObj, I18n.format(quest.name), guiLeft + (guiWidth / 2), guiTop + 10, 0xFFFFFF);
 
         for (int i = 0; i < quest.tasks.length; i++) {
             final QuestTask task = quest.tasks[i];
-            if (task == currentTask) {
+            if (!isQuestTerminated && task == currentTask) {
                 break;
             }
 

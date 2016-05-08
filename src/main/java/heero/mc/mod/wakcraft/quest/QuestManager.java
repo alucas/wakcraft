@@ -76,6 +76,15 @@ public enum QuestManager {
         return quests;
     }
 
+    public Quest getQuest(final Integer questId) {
+        if (!quests.containsKey(questId)) {
+            WLog.warning("Quest not found for ID : " + questId);
+            return null;
+        }
+
+        return quests.get(questId);
+    }
+
     public QuestTask getTask(final Integer questId, final Integer taskId) {
         final Quest quest = quests.get(questId);
         if (quest == null) {

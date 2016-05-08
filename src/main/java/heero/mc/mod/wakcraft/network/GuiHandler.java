@@ -4,8 +4,11 @@ import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.block.BlockWorkbench;
 import heero.mc.mod.wakcraft.inventory.*;
+import heero.mc.mod.wakcraft.quest.Quest;
+import heero.mc.mod.wakcraft.quest.QuestTask;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenBagChest;
 import heero.mc.mod.wakcraft.tileentity.TileEntityHavenGemWorkbench;
+import heero.mc.mod.wakcraft.util.QuestUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -46,7 +49,21 @@ public class GuiHandler implements IGuiHandler {
             case INVENTORY:
                 return new ContainerPlayerInventory(player);
             case NPC_GIVE:
-                return new ContainerNPCGive(player.inventory, world);
+                final Quest quest = QuestUtil.getQuest(player, x);
+                if (quest == null) {
+                    return null;
+                }
+
+                final QuestTask task = QuestUtil.getCurrentTask(player, quest);
+                if (task == null) {
+                    return null;
+                }
+
+                if (!"give".equals(task.action)) {
+                    return null;
+                }
+
+                return new ContainerNPCGive(player, quest, task);
             case SPELLS:
                 return new ContainerSpells(player);
             case WORKBENCH:

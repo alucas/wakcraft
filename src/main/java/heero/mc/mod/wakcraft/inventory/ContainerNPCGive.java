@@ -1,25 +1,37 @@
 package heero.mc.mod.wakcraft.inventory;
 
+import heero.mc.mod.wakcraft.quest.Quest;
+import heero.mc.mod.wakcraft.quest.QuestTask;
+import heero.mc.mod.wakcraft.util.QuestUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class ContainerNPCGive extends Container {
-    public InventoryCrafting craftMatrix = new InventoryCrafting(this, 5, 1);
-    private World worldObj;
+    protected final InventoryCrafting craftMatrix;
+    protected final Quest quest;
+    protected final QuestTask task;
+    protected final EntityPlayer player;
+    protected boolean isTaskDone;
 
-    public ContainerNPCGive(InventoryPlayer inventory, World world) {
-        this.worldObj = world;
+    public ContainerNPCGive(final EntityPlayer player, final Quest quest, final QuestTask task) {
+        this.player = player;
+        this.quest = quest;
+        this.task = task;
+        this.isTaskDone = false;
 
-        for (int i = 0; i < 5; ++i) {
-            this.addSlotToContainer(new Slot(this.craftMatrix, i, 25 + 20 * i, 42));
+        final int sizeRecipe = task.what.length;
+        this.craftMatrix = new InventoryCrafting(this, sizeRecipe, 1);
+
+        final int left = 176 / 2 - sizeRecipe * 20 / 2;
+        for (int i = 0; i < craftMatrix.getSizeInventory(); ++i) {
+            this.addSlotToContainer(new Slot(this.craftMatrix, i, left + 20 * i, 42));
         }
 
-        bindPlayerInventory(inventory);
+        bindPlayerInventory(player.inventory);
     }
 
     @Override
@@ -47,7 +59,7 @@ public class ContainerNPCGive extends Container {
     public void onContainerClosed(EntityPlayer player) {
         super.onContainerClosed(player);
 
-        if (!this.worldObj.isRemote) {
+        if (!player.worldObj.isRemote) {
             for (int i = 0; i < this.craftMatrix.getSizeInventory(); ++i) {
                 ItemStack itemstack = this.craftMatrix.removeStackFromSlot(i);
 
@@ -59,56 +71,75 @@ public class ContainerNPCGive extends Container {
     }
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slot_index) {
-        ItemStack stack = null;
-
-        Slot slot_object = this.inventorySlots.get(slot_index);
-        if (slot_object != null && slot_object.getHasStack()) {
-            ItemStack stack_in_slot = slot_object.getStack();
-            stack = stack_in_slot.copy();
-
-            if (slot_index == 0) {
-                if (!this.mergeItemStack(stack_in_slot, 6, 42, true)) {
-                    return null;
-                }
-
-                slot_object.onSlotChange(stack_in_slot, stack);
-            } else if (slot_index >= 6 && slot_index < 42) {
-                if (!this.mergeItemStack(stack_in_slot, 1, 6, false)) {
-                    return null;
-                }
-            } else if (!this.mergeItemStack(stack_in_slot, 6, 42, false)) {
-                return null;
-            }
-
-            if (stack_in_slot.stackSize == 0) {
-                slot_object.putStack(null);
-            } else {
-                slot_object.onSlotChanged();
-            }
-
-            if (stack_in_slot.stackSize == stack.stackSize) {
-                return null;
-            }
-
-            slot_object.onPickupFromSlot(player, stack_in_slot);
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+        final Slot slot = this.inventorySlots.get(slotId);
+        if (slot == null || !slot.getHasStack()) {
+            return null;
         }
+
+        final int sizeRecipe = task.what.length;
+        final ItemStack stackInSlot = slot.getStack();
+        final ItemStack stackInSlotCopy = stackInSlot.copy();
+
+        if (slotId == 0) {
+            if (!this.mergeItemStack(stackInSlot, 6, 42, true)) {
+                return null;
+            }
+
+            slot.onSlotChange(stackInSlot, stackInSlotCopy);
+        } else if (slotId >= 6 && slotId < 42) {
+            if (!this.mergeItemStack(stackInSlot, 1, 6, false)) {
+                return null;
+            }
+        } else if (!this.mergeItemStack(stackInSlot, 6, 42, false)) {
+            return null;
+        }
+
+        if (stackInSlot.stackSize == 0) {
+            slot.putStack(null);
+        } else {
+            slot.onSlotChanged();
+        }
+
+        if (stackInSlot.stackSize == stackInSlotCopy.stackSize) {
+            return null;
+        }
+
+        slot.onPickupFromSlot(player, stackInSlot);
+
+        return stackInSlotCopy;
+    }
+
+    @Override
+    public ItemStack slotClick(int slotId, int clickedButton, int mode, EntityPlayer playerIn) {
+        final ItemStack stack = super.slotClick(slotId, clickedButton, mode, playerIn);
+        if (!testRecipe()) {
+            return stack;
+        }
+
+        QuestUtil.advance(player, quest);
+        QuestUtil.sendAdvancementToClient(player);
+
+        craftMatrix.clear();
+
+        this.isTaskDone = true;
 
         return stack;
     }
 
-    @Override
-    /**
-     * @param slotId Index of the slot
-     * @buttonId 0 = left click, 1 = right click, 2 = wheel click
-     * @specialKey 3 = pick block, 1 = shift key
-     * @return
-     */
-    public ItemStack slotClick(int slotId, int buttonId, int specialKey, EntityPlayer player) {
-        ItemStack stack = super.slotClick(slotId, buttonId, specialKey, player);
+    public boolean testRecipe() {
+        for (int i = 0; i < craftMatrix.getSizeInventory(); ++i) {
+            final ItemStack stack = craftMatrix.getStackInSlot(i);
+            final ItemStack questStack = task.what[i].toItemStack();
+            if (stack == null || questStack == null || !ItemStack.areItemStacksEqual(stack, questStack)) {
+                return false;
+            }
+        }
 
-        onCraftMatrixChanged(this.craftMatrix);
+        return true;
+    }
 
-        return stack;
+    public boolean isTaskDone() {
+        return isTaskDone;
     }
 }

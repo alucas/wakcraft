@@ -18,7 +18,5 @@ public class QuestProperty implements IExtendedEntityProperties {
     }
 
     @Override
-    public void init(Entity entity, World world) {
-        System.out.println("INIT QUEST PROPERTY: " + world.isRemote);
-    }
+    public void init(Entity entity, World world) {}
 }

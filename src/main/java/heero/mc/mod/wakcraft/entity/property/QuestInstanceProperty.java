@@ -25,15 +25,15 @@ public class QuestInstanceProperty implements IExtendedEntityProperties, ISynchP
     protected static final String TAG_QUEST_ID = "QuestId";
     protected static final String TAG_TASK_ID = "Task";
 
-    protected Map<Integer, Integer> lastTasks;
+    protected Map<Integer, Integer> currentTasksId;
 
     @Override
     public void saveNBTData(NBTTagCompound compound) {
         final NBTTagList tagQuests = new NBTTagList();
-        for (final Integer questId : lastTasks.keySet()) {
+        for (final Integer questId : currentTasksId.keySet()) {
             final NBTTagCompound tagQuest = new NBTTagCompound();
             tagQuest.setInteger(TAG_QUEST_ID, questId);
-            tagQuest.setInteger(TAG_TASK_ID, lastTasks.get(questId));
+            tagQuest.setInteger(TAG_TASK_ID, currentTasksId.get(questId));
 
             tagQuests.appendTag(tagQuest);
         }
@@ -49,48 +49,51 @@ public class QuestInstanceProperty implements IExtendedEntityProperties, ISynchP
             final Integer questId = tagQuest.getInteger(TAG_QUEST_ID);
             final Integer taskId = tagQuest.getInteger(TAG_TASK_ID);
 
-            lastTasks.put(questId, taskId);
+            currentTasksId.put(questId, taskId);
         }
     }
 
     @Override
     public void init(Entity entity, World world) {
-        lastTasks = new HashMap<>();
+        currentTasksId = new HashMap<>();
     }
 
     public List<Quest> getQuests() {
         final List<Quest> quests = new ArrayList<>();
-        for (final Integer questId : lastTasks.keySet()) {
-            quests.add(QuestManager.INSTANCE.getQuests().get(questId));
+        for (final Integer questId : currentTasksId.keySet()) {
+            quests.add(QuestManager.INSTANCE.getQuest(questId));
         }
 
         return quests;
     }
 
     public Quest getQuest(final Integer questId) {
-        if (!lastTasks.containsKey(questId)) {
+        if (!currentTasksId.containsKey(questId)) {
             WLog.warning("The player doesn't know the quest with id : " + questId);
             return null;
         }
 
-        return QuestManager.INSTANCE.getQuests().get(questId);
+        return QuestManager.INSTANCE.getQuest(questId);
     }
 
-    public Quest getCurrentQuest(final EntityWNPC npc) {
+    public Quest getOnGoingQuest(final EntityWNPC npc) {
         final String npcId = EntityList.getEntityString(npc);
         if (npcId == null || npcId.trim().isEmpty()) {
             WLog.warning("Id not found for NPC : " + npc.getName());
             return null;
         }
 
-        final Map<Integer, Quest> allQuests = QuestManager.INSTANCE.getQuests();
-        for (final Integer questId : allQuests.keySet()) {
-            if (!lastTasks.containsKey(questId)) {
+        for (final Integer questId : currentTasksId.keySet()) {
+            final Quest quest = QuestManager.INSTANCE.getQuest(questId);
+            if (quest == null) {
+                return null;
+            }
+
+            if (isQuestTerminated(quest)) {
                 continue;
             }
 
-            final Quest quest = allQuests.get(questId);
-            final QuestTask task = getLastTask(quest);
+            final QuestTask task = getCurrentTask(quest);
             if (task == null) {
                 return null;
             }
@@ -103,10 +106,14 @@ public class QuestInstanceProperty implements IExtendedEntityProperties, ISynchP
         return null;
     }
 
-    public QuestTask getLastTask(final Quest quest) {
-        final QuestTask task = quest.getTask(lastTasks.get(quest.id));
+    public boolean isQuestTerminated(final Quest quest) {
+        return currentTasksId.get(quest.id) >= quest.tasks.length;
+    }
+
+    public QuestTask getCurrentTask(final Quest quest) {
+        final QuestTask task = quest.getTask(currentTasksId.get(quest.id));
         if (task == null) {
-            WLog.warning("Last task not found for quest : " + quest.name);
+            WLog.warning("Current task not found for quest : " + quest.name);
             return null;
         }
 
@@ -122,7 +129,7 @@ public class QuestInstanceProperty implements IExtendedEntityProperties, ISynchP
 
         final Map<Integer, Quest> allQuests = QuestManager.INSTANCE.getQuests();
         for (final Integer questId : allQuests.keySet()) {
-            if (lastTasks.containsKey(questId)) {
+            if (currentTasksId.containsKey(questId)) {
                 continue;
             }
 
@@ -138,11 +145,11 @@ public class QuestInstanceProperty implements IExtendedEntityProperties, ISynchP
     }
 
     public void startNewQuest(final Quest quest) {
-        lastTasks.put(quest.id, 0);
+        currentTasksId.put(quest.id, 0);
     }
 
     public void advance(final Quest quest) {
-        lastTasks.put(quest.id, lastTasks.get(quest.id) + 1);
+        currentTasksId.put(quest.id, currentTasksId.get(quest.id) + 1);
     }
 
     @Override

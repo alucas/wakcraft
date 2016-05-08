@@ -1,11 +1,14 @@
 package heero.mc.mod.wakcraft.util;
 
 import heero.mc.mod.wakcraft.WLog;
+import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.entity.npc.EntityWNPC;
 import heero.mc.mod.wakcraft.entity.property.QuestInstanceProperty;
+import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.quest.Quest;
 import heero.mc.mod.wakcraft.quest.QuestTask;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 
 import java.util.List;
 
@@ -38,13 +41,22 @@ public class QuestUtil {
         property.startNewQuest(quest);
     }
 
-    public static Quest getCurrentQuest(final EntityPlayer player, final EntityWNPC npc) {
+    public static Quest getOnGoingQuest(final EntityPlayer player, final EntityWNPC npc) {
         final QuestInstanceProperty property = getQuestInstanceProperty(player);
         if (property == null) {
             return null;
         }
 
-        return property.getCurrentQuest(npc);
+        return property.getOnGoingQuest(npc);
+    }
+
+    public static boolean isQuestTerminated(EntityPlayer player, Quest quest) {
+        final QuestInstanceProperty property = getQuestInstanceProperty(player);
+        if (property == null) {
+            return true;
+        }
+
+        return property.isQuestTerminated(quest);
     }
 
     public static QuestTask getCurrentTask(EntityPlayer player, Quest quest) {
@@ -53,7 +65,7 @@ public class QuestUtil {
             return null;
         }
 
-        return property.getLastTask(quest);
+        return property.getCurrentTask(quest);
     }
 
     public static void advance(final EntityPlayer player, final Quest quest) {
@@ -81,5 +93,13 @@ public class QuestUtil {
         }
 
         return property.getQuest(questId);
+    }
+
+    public static void sendAdvancementToClient(final EntityPlayer player) {
+        if (player.worldObj.isRemote) {
+            return;
+        }
+
+        Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(player, QuestInstanceProperty.IDENTIFIER), (EntityPlayerMP) player);
     }
 }

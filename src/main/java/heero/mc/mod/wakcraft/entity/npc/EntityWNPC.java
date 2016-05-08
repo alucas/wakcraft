@@ -1,9 +1,7 @@
 package heero.mc.mod.wakcraft.entity.npc;
 
 import heero.mc.mod.wakcraft.Wakcraft;
-import heero.mc.mod.wakcraft.entity.property.QuestInstanceProperty;
 import heero.mc.mod.wakcraft.network.GuiId;
-import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.quest.Quest;
 import heero.mc.mod.wakcraft.quest.QuestTask;
 import heero.mc.mod.wakcraft.util.QuestUtil;
@@ -11,7 +9,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
@@ -61,7 +58,7 @@ public abstract class EntityWNPC extends EntityLiving {
             return false;
         }
 
-        Quest quest = QuestUtil.getCurrentQuest(player, this);
+        Quest quest = QuestUtil.getOnGoingQuest(player, this);
         if (quest == null) {
             quest = QuestUtil.getNewQuest(player, this);
             if (quest == null) {
@@ -69,9 +66,11 @@ public abstract class EntityWNPC extends EntityLiving {
             }
 
             QuestUtil.startNewQuest(player, quest);
-            Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(player, QuestInstanceProperty.IDENTIFIER), (EntityPlayerMP) player);
+            QuestUtil.sendAdvancementToClient(player);
 
             player.addChatMessage(new ChatComponentText("Start new Quest : " + quest.name));
+
+            return true;
         }
 
         final QuestTask task = QuestUtil.getCurrentTask(player, quest);
@@ -85,7 +84,7 @@ public abstract class EntityWNPC extends EntityLiving {
 
         if (task.action.equals("talk")) {
             QuestUtil.advance(player, quest);
-            Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(player, QuestInstanceProperty.IDENTIFIER), (EntityPlayerMP) player);
+            QuestUtil.sendAdvancementToClient(player);
         } else if (task.action.equals("give")) {
             player.openGui(Wakcraft.instance, GuiId.NPC_GIVE.ordinal(), worldObj, quest.id, 0, 0);
         }

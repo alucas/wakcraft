@@ -21,14 +21,15 @@
     },
     {
       "action": "give",
-      "description": "Approter 10x[primitive_iron] à Hugo Tydal",
+      "description": "Approter 10x[ore:1] à Hugo Tydal",
       "to": "wakcraft.hugo_tydal",
       "dialog": [
-        "J'ai besoin de [primitive_iron] pour ma canne pêche"
+        "J'ai besoin de [ore:1] pour ma canne pêche"
       ],
       "what": [
         {
-          "name": "primitive_iron",
+          "name": "ore",
+          "meta": 0,
           "quantity": 10
         }
       ]

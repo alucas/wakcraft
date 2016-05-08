@@ -5,7 +5,7 @@ public class QuestTask {
     public String description;
     public String to;
     private String[] dialog;
-    public QuestItem[] what;
+    public QuestStack[] what;
     public QuestReward[] rewards;
 
     public void setDialog(String dialog) {

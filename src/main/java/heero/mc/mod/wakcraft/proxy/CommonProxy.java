@@ -37,7 +37,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class CommonProxy {
+public abstract class CommonProxy {
 
     public void registerRenderers() {
     }
@@ -145,5 +145,8 @@ public class CommonProxy {
 
     public void loadQuests() {
         QuestManager.INSTANCE.load("assets/" + Reference.MODID + "/quests/");
+    }
+
+    public void closeGUI() {
     }
 }

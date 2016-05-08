@@ -403,7 +403,11 @@ public class CombinedClientProxy extends CommonProxy {
                     return null;
                 }
 
-                return new GUINPCGive(new ContainerNPCGive(player.inventory, world), task);
+                if (!"give".equals(task.action)) {
+                    return null;
+                }
+
+                return new GUINPCGive(new ContainerNPCGive(player, quest, task), quest, task);
             case PROFESSION:
                 return new GUIWakcraft(guiId, new GUIProfession(player, PROFESSION.CHEF), player, world, pos);
             case QUEST:
@@ -425,5 +429,10 @@ public class CombinedClientProxy extends CommonProxy {
         }
 
         return null;
+    }
+
+    @Override
+    public void closeGUI() {
+        Minecraft.getMinecraft().thePlayer.closeScreen();
     }
 }
