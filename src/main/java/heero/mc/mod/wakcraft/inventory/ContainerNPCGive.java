@@ -113,7 +113,7 @@ public class ContainerNPCGive extends Container {
     @Override
     public ItemStack slotClick(int slotId, int clickedButton, int mode, EntityPlayer playerIn) {
         final ItemStack stack = super.slotClick(slotId, clickedButton, mode, playerIn);
-        if (!testRecipe()) {
+        if (isTaskDone || !testRecipe()) {
             return stack;
         }
 
