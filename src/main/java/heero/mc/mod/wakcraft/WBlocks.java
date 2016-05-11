@@ -29,6 +29,7 @@ public class WBlocks {
             fightDirection,
             fightInsideWall,
             fightMovement,
+            fightRange,
             fightStart,
             fightStart2,
             fightWall,
@@ -106,6 +107,7 @@ public class WBlocks {
         registerBlock(fightDirection = (new BlockGenericTransparent(Material.ground).setUnlocalizedName(MODID_ + "fight_direction")));
         registerBlock(fightInsideWall = (new BlockFightInsideWall().setUnlocalizedName(MODID_ + "fight_inside_wall")));
         registerBlock(fightMovement = (new BlockGenericTransparent(Material.ground).setUnlocalizedName(MODID_ + "fight_movement")));
+        registerBlock(fightRange = (new BlockGenericTransparent(Material.ground).setUnlocalizedName(MODID_ + "fight_range")));
         registerBlock(fightStart = (new BlockFightStart().setUnlocalizedName(MODID_ + "fight_start")));
         registerBlock(fightStart2 = (new BlockFightStart().setUnlocalizedName(MODID_ + "fight_start_2")));
         registerBlock(fightWall = (new BlockFightWall().setUnlocalizedName(MODID_ + "fight_wall")));

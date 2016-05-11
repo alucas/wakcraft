@@ -62,7 +62,7 @@ public class FightRenderer extends IRenderHandler {
             }
 
             renderMovement(partialTicks, world, mc, player);
-            renderDirection(partialTicks, world, mc, player);
+//            renderDirection(partialTicks, world, mc, player);
             renderSpellRange(partialTicks, world, mc, player);
         }
     }
@@ -198,9 +198,9 @@ public class FightRenderer extends IRenderHandler {
         }
 
         if (rangeMode == RangeMode.LINE) {
-            displayBlockCross(blockRendererDispatcher, WBlocks.fightMovement, world, worldRenderer, currentPosition.getX(), currentPosition.getY(), currentPosition.getZ(), rangeMin, rangeMax);
+            displayBlockCross(blockRendererDispatcher, WBlocks.fightRange, world, worldRenderer, currentPosition.getX(), currentPosition.getY(), currentPosition.getZ(), rangeMin, rangeMax);
         } else {
-            displayBlocksArea(blockRendererDispatcher, WBlocks.fightMovement, world, worldRenderer, currentPosition.getX(), currentPosition.getY(), currentPosition.getZ(), rangeMin, rangeMax);
+            displayBlocksArea(blockRendererDispatcher, WBlocks.fightRange, world, worldRenderer, currentPosition.getX(), currentPosition.getY(), currentPosition.getZ(), rangeMin, rangeMax);
         }
 
         MovingObjectPosition target = player.rayTrace(rangeMax + 2, partialTicks);
