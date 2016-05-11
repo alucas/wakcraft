@@ -12,6 +12,7 @@ import heero.mc.mod.wakcraft.entity.misc.EntitySeedsPile;
 import heero.mc.mod.wakcraft.entity.misc.EntityTextPopup;
 import heero.mc.mod.wakcraft.entity.npc.NPCHugoTydal;
 import heero.mc.mod.wakcraft.event.handler.EntityEventHandler;
+import heero.mc.mod.wakcraft.event.handler.ItemTossEventHandler;
 import heero.mc.mod.wakcraft.event.handler.PlayerEventHandler;
 import heero.mc.mod.wakcraft.event.handler.WorldEventHandler;
 import heero.mc.mod.wakcraft.fight.FightEventsHandler;
@@ -46,6 +47,7 @@ public abstract class CommonProxy {
         MinecraftForge.EVENT_BUS.register(new CharacteristicsEventsHandler());
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
         MinecraftForge.EVENT_BUS.register(new FightEventsHandler());
+        MinecraftForge.EVENT_BUS.register(new ItemTossEventHandler());
         MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
     }
