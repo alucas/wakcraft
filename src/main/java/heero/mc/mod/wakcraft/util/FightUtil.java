@@ -46,6 +46,16 @@ public class FightUtil {
         return properties;
     }
 
+    protected static SpellsProperty getSpellsProperty(final Entity entity) {
+        final SpellsProperty properties = (SpellsProperty) entity.getExtendedProperties(SpellsProperty.IDENTIFIER);
+        if (properties == null) {
+            WLog.warning("Error while loading the entity's spell properties (%s)", entity.getDisplayName());
+            return null;
+        }
+
+        return properties;
+    }
+
     public static boolean isFighting(Entity entity) {
         return ((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).getFightId() != -1;
     }
@@ -123,11 +133,11 @@ public class FightUtil {
     }
 
     public static IInventory getSpellsInventory(Entity entity) {
-        return ((SpellsProperty) entity.getExtendedProperties(SpellsProperty.IDENTIFIER)).getSpellsInventory();
+        return getSpellsProperty(entity).getSpellsInventory();
     }
 
-    public static ItemStack getCurrentSpell(EntityPlayer entity) {
-        return ((SpellsProperty) entity.getExtendedProperties(SpellsProperty.IDENTIFIER)).getSpellsInventory().getStackInSlot(25 + entity.inventory.currentItem);
+    public static ItemStack getCurrentSpell(final EntityPlayer entity) {
+        return getSpellsInventory(entity).getStackInSlot(25 + entity.inventory.currentItem);
     }
 
     public static boolean isActiveSpell(ItemStack spellStack) {

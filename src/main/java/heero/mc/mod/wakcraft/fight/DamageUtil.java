@@ -6,12 +6,10 @@ import heero.mc.mod.wakcraft.spell.effect.EffectElement;
 import heero.mc.mod.wakcraft.spell.effect.IEffectDamage;
 import heero.mc.mod.wakcraft.spell.effect.IEffectElement;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class DamageUtil {
-    private DamageUtil() {
-    }
-
     public static int computeDamage(final EntityLivingBase attacker, final EntityLivingBase target, final ItemStack stackSpell, final IEffectDamage effect) {
         if (!(stackSpell.getItem() instanceof ISpell)) {
             WLog.warning("The stackSpell parameter is not a spell stack");

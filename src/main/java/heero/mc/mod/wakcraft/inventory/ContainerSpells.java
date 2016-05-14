@@ -1,8 +1,7 @@
 package heero.mc.mod.wakcraft.inventory;
 
-import heero.mc.mod.wakcraft.WLog;
-import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 import heero.mc.mod.wakcraft.spell.ISpell;
+import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -12,26 +11,20 @@ import net.minecraft.item.ItemStack;
 public class ContainerSpells extends Container {
 
     public ContainerSpells(EntityPlayer player) {
-        SpellsProperty properties = (SpellsProperty) player.getExtendedProperties(SpellsProperty.IDENTIFIER);
-        if (properties == null) {
-            WLog.warning("Error while loading the spells of player " + player.getDisplayName());
-            return;
-        }
-
         for (int line = 0; line < 3; line++) {
             for (int column = 0; column < 5; column++) {
-                this.addSlotToContainer(new SlotInfinite(properties.getSpellsInventory(), column + line * 5, column * 20 + 60, line * 20 + 20));
+                this.addSlotToContainer(new SlotInfinite(FightUtil.getSpellsInventory(player), column + line * 5, column * 20 + 60, line * 20 + 20));
             }
         }
 
         for (int line = 0; line < 2; line++) {
             for (int column = 0; column < 5; column++) {
-                this.addSlotToContainer(new SlotInfinite(properties.getSpellsInventory(), column + line * 5 + 15, column * 20 + 60, line * 20 + 91));
+                this.addSlotToContainer(new SlotInfinite(FightUtil.getSpellsInventory(player), column + line * 5 + 15, column * 20 + 60, line * 20 + 91));
             }
         }
 
         for (int line = 0; line < 9; line++) {
-            this.addSlotToContainer(new Slot(properties.getSpellsInventory(), line + 25, 8 + line * 18, 143));
+            this.addSlotToContainer(new Slot(FightUtil.getSpellsInventory(player), line + 25, 8 + line * 18, 143));
         }
     }
 
