@@ -14,8 +14,8 @@ public interface ISpell {
     /**
      * Returns the level of the spell.
      *
-     * @param metadata Value used to retrieve the spell's level.
+     * @param xp Value used to retrieve the spell's level.
      * @return The level of the spell.
      */
-    public int getLevel(final int metadata);
+    public int getLevel(final int xp);
 }

@@ -88,9 +88,8 @@ public class ElementalSpell extends Item implements IActiveSpell {
     }
 
     @Override
-    public int getLevel(int metadata) {
-        // metadata = xp
-        return SpellUtil.getLevelFromXp(metadata);
+    public int getLevel(final int xp) {
+        return SpellUtil.getLevelFromXp(xp);
     }
 
     @Override

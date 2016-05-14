@@ -83,12 +83,12 @@ public class ActiveSpecialitySpell extends Item implements IActiveSpell {
     }
 
     @Override
-    public int getLevel(int metadata) {
-        if (metadata > 9) {
-            throw new IllegalArgumentException("The metadata of a Passive Speciality Spell must be lower than 10 (lvl = metadata)");
+    public int getLevel(final int xp) {
+        if (xp > 9) {
+            throw new IllegalArgumentException("The level of a Passive Speciality Spell must be lower than 10 (1 xp = 1 level)");
         }
 
-        return metadata;
+        return xp;
     }
 
     @Override

@@ -23,7 +23,7 @@ public class Spell implements ISpell {
     }
 
     @Override
-    public int getLevel(final int metadata) {
+    public int getLevel(final int xp) {
         return 0;
     }
 }

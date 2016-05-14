@@ -189,7 +189,7 @@ public class FightHelper {
                         }
 
                         if (effect instanceof IEffectDamage) {
-                            characteristicValue = DamageUtil.computeDamage(fighter, targetFighter, spellStack, (IEffectDamage) effect);
+                            characteristicValue = DamageUtil.computeDamage(fighter, targetFighter, spell, spellStack.getItemDamage(), (IEffectDamage) effect);
                         }
 
                         final Integer oldValue = FightUtil.getFightCharacteristic(targetFighter, characteristicType);

@@ -42,12 +42,12 @@ public class PassiveSpecialitySpell extends Item implements IPassiveSpell {
     }
 
     @Override
-    public int getLevel(final int metadata) {
-        if (metadata > 20) {
-            throw new IllegalArgumentException("The metadata of a Passive Speciality Spell must be lower than 21 (lvl = metadata)");
+    public int getLevel(final int xp) {
+        if (xp > 20) {
+            throw new IllegalArgumentException("The level of a Passive Speciality Spell must be lower than 21 (1 xp = 1 level)");
         }
 
-        return metadata;
+        return xp;
     }
 
     @Override
