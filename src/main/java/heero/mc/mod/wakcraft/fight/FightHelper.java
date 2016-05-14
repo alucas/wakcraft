@@ -12,6 +12,7 @@ import heero.mc.mod.wakcraft.spell.effect.IEffectDamage;
 import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
@@ -205,5 +206,7 @@ public class FightHelper {
                 }
             }
         }
+
+        FightUtil.sendFightCharacteristicToClient((EntityPlayerMP) fighter, fighter);
     }
 }

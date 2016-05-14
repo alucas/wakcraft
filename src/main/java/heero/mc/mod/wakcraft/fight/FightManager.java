@@ -6,11 +6,9 @@ import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.entity.creature.IFighter;
-import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
 import heero.mc.mod.wakcraft.event.FightEvent;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates.TYPE;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
-import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.network.packet.fight.*;
 import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.block.Block;
@@ -842,7 +840,7 @@ public enum FightManager {
         for (List<EntityLivingBase> team : fightersByTeam) {
             for (EntityLivingBase fighter : team) {
                 if (fighter instanceof EntityPlayerMP) {
-                    Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(currentFighter, FightCharacteristicsProperty.IDENTIFIER), (EntityPlayerMP) fighter);
+                    FightUtil.sendFightCharacteristicToClient((EntityPlayerMP) fighter, currentFighter);
                 }
             }
         }
@@ -855,8 +853,7 @@ public enum FightManager {
         for (List<EntityLivingBase> team : fightersByTeam) {
             for (EntityLivingBase fighter : team) {
                 if (fighter instanceof EntityPlayerMP) {
-                    // TODO : Don't send all characteristics
-                    Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(currentFighter, FightCharacteristicsProperty.IDENTIFIER), (EntityPlayerMP) fighter);
+                    FightUtil.sendFightCharacteristicToClient((EntityPlayerMP) fighter, currentFighter);
                 }
             }
         }
@@ -899,6 +896,10 @@ public enum FightManager {
         }
 
         final BlockPos currentPosition = new BlockPos(MathHelper.floor_double(fighter.posX), MathHelper.floor_double(fighter.posY), MathHelper.floor_double(fighter.posZ));
+        if (currentPosition.getX() == previousPosition.getX() && currentPosition.getZ() == previousPosition.getZ()) {
+            return;
+        }
+
         final int usedMovementPoint = MathHelper.abs_int(currentPosition.getX() - previousPosition.getX()) + MathHelper.abs_int(currentPosition.getZ() - previousPosition.getZ());
         final Integer movementPoint = FightUtil.getFightCharacteristic(fighter, Characteristic.MOVEMENT);
         if (movementPoint == null) {
@@ -907,12 +908,16 @@ public enum FightManager {
 
         int remainingMovementPoint = movementPoint - usedMovementPoint;
         if (remainingMovementPoint < 0) {
-            WLog.warning("Fighter " + fighter + " used more movement point that disponible");
+            WLog.warning("Fighter " + fighter + " used more movement point than available");
             remainingMovementPoint = 0;
         }
 
         FightUtil.setFightCharacteristic(fighter, Characteristic.MOVEMENT, remainingMovementPoint);
         FightUtil.setCurrentPosition(fighter, currentPosition);
+
+        if (!fighter.worldObj.isRemote) {
+            FightUtil.sendFightCharacteristicToClient((EntityPlayerMP) fighter, fighter);
+        }
     }
 
     public boolean isThereFighterInAABB(World world, int fightId, AxisAlignedBB boundingBox) {

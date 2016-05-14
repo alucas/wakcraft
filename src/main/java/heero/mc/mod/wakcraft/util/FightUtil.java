@@ -1,6 +1,7 @@
 package heero.mc.mod.wakcraft.util;
 
 import heero.mc.mod.wakcraft.WLog;
+import heero.mc.mod.wakcraft.Wakcraft;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.entity.creature.IFighter;
 import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
@@ -9,11 +10,13 @@ import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
 import heero.mc.mod.wakcraft.fight.FightBlockCoordinates;
 import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.fight.FightManager;
+import heero.mc.mod.wakcraft.network.packet.PacketExtendedEntityProperty;
 import heero.mc.mod.wakcraft.spell.IActiveSpell;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
@@ -105,6 +108,10 @@ public class FightUtil {
         }
 
         setFightCharacteristic(entity, characteristic, normalValue);
+    }
+
+    public static void sendFightCharacteristicToClient(final EntityPlayerMP player, final Entity fighter) {
+        Wakcraft.packetPipeline.sendTo(new PacketExtendedEntityProperty(fighter, FightCharacteristicsProperty.IDENTIFIER), player);
     }
 
     public static void setCurrentPosition(Entity entity, @Nullable BlockPos startPosition) {
