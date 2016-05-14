@@ -221,7 +221,7 @@ public class WItems extends Items {
         // ARMORS
         // -------------------------------
 
-        GameRegistry.registerItem(theOne = (new ItemWArmor(ItemWArmor.TYPE.RING, 1000).setCharacteristic(Characteristic.ACTION, 25).setUnlocalizedName(MODID_ + "the_one")), "the_one");
+        GameRegistry.registerItem(theOne = (new ItemWArmor(ItemWArmor.TYPE.RING, 1000).setCharacteristic(Characteristic.ACTION, 6).setCharacteristic(Characteristic.MOVEMENT, 3).setCharacteristic(Characteristic.HEALTH, 10000).setCharacteristic(Characteristic.EARTH_ATT, 1000).setCharacteristic(Characteristic.FIRE_ATT, 1000).setCharacteristic(Characteristic.WATER_ATT, 1000).setCharacteristic(Characteristic.AIR_ATT, 1000).setUnlocalizedName(MODID_ + "the_one")), "the_one");
 
         // Goball Armors
         GameRegistry.registerItem(gobballBreastplate = (new ItemWArmor(ItemWArmor.TYPE.CHEST_PLATE, 15).setCharacteristic(Characteristic.HEALTH, 15).setCharacteristic(Characteristic.INITIATIVE, 5).setCharacteristic(Characteristic.FIRE_ATT, 3).setCharacteristic(Characteristic.EARTH_ATT, 3).setUnlocalizedName(MODID_ + "gobball_breastplate")), "gobball_breastplate");
