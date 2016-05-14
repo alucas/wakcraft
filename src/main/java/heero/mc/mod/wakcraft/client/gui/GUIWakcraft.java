@@ -20,7 +20,7 @@ public class GUIWakcraft extends GUITabs {
 
     static {
         guis.add(GuiId.INVENTORY);
-        guis.add(GuiId.ABILITIES);
+        guis.add(GuiId.CHARACTERISTIC);
         guis.add(GuiId.PROFESSION);
         guis.add(GuiId.SPELLS);
         guis.add(GuiId.QUEST);

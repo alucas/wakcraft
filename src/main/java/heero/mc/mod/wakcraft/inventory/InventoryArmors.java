@@ -1,6 +1,5 @@
 package heero.mc.mod.wakcraft.inventory;
 
-import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager;
 import heero.mc.mod.wakcraft.item.ItemWArmor;
 import heero.mc.mod.wakcraft.item.ItemWArmor.TYPE;
 import net.minecraft.entity.Entity;
@@ -9,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public class InventoryArmors extends InventoryBasic {
     protected static TYPE[] types = new TYPE[]{
-            TYPE.HELMET, TYPE.CHESTPLATE, TYPE.BELT, TYPE.BOOTS,
+            TYPE.HELMET, TYPE.CHEST_PLATE, TYPE.BELT, TYPE.BOOTS,
             TYPE.AMULET, TYPE.CAPE, TYPE.RING, TYPE.WEAPON,
             TYPE.EPAULET, TYPE.PET, TYPE.RING, TYPE.WEAPON};
 
@@ -54,19 +53,6 @@ public class InventoryArmors extends InventoryBasic {
     public void setInventorySlotContents(final int slotId, final ItemStack stack) {
         if (stack != null && !(stack.getItem() instanceof ItemWArmor)) {
             return;
-        }
-
-        ItemStack oldStack = getStackInSlot(slotId);
-        if (oldStack != null) {
-            final ItemWArmor item = (ItemWArmor) oldStack.getItem();
-
-            CharacteristicsManager.unequipItem(entity, item);
-        }
-
-        if (stack != null) {
-            final ItemWArmor item = (ItemWArmor) stack.getItem();
-
-            CharacteristicsManager.equipItem(entity, item);
         }
 
         super.setInventorySlotContents(slotId, stack);

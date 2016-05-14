@@ -369,8 +369,8 @@ public class CombinedClientProxy extends CommonProxy {
         TileEntity tileEntity;
 
         switch (guiId) {
-            case ABILITIES:
-                return new GUIWakcraft(guiId, new GUIAbilities(player), player, world, pos);
+            case CHARACTERISTIC:
+                return new GUIWakcraft(guiId, new GUICharacteristic(player), player, world, pos);
             case HAVEN_BAG_CHEST_ADVENTURER:
             case HAVEN_BAG_CHEST_COLLECTOR:
             case HAVEN_BAG_CHEST_EMERALD:

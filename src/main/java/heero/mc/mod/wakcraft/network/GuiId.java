@@ -3,7 +3,7 @@ package heero.mc.mod.wakcraft.network;
 public enum GuiId {
     UNKNOWN,
 
-    ABILITIES,
+    CHARACTERISTIC,
     HAVEN_BAG_CHEST_ADVENTURER,
     HAVEN_BAG_CHEST_COLLECTOR,
     HAVEN_BAG_CHEST_EMERALD,

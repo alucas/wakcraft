@@ -20,7 +20,7 @@ public class ItemWArmor extends ItemWithLevel {
         HELMET,
         AMULET,
         EPAULET,
-        CHESTPLATE,
+        CHEST_PLATE,
         CAPE,
         RING,
         BELT,
@@ -58,8 +58,8 @@ public class ItemWArmor extends ItemWithLevel {
         return this;
     }
 
-    public Integer getCharacteristic(final Characteristic ability) {
-        return characteristics.get(ability);
+    public Integer getCharacteristic(final Characteristic characteristic) {
+        return characteristics.get(characteristic);
     }
 
     public Set<Characteristic> getCharacteristics() {

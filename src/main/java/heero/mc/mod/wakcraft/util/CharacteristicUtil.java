@@ -7,8 +7,11 @@ import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 public class CharacteristicUtil {
-    public static boolean hasCharacteristics(Entity entity) {
+    public static boolean hasCharacteristics(final Entity entity) {
         return (entity instanceof EntityPlayer || entity instanceof IEntityWithCharacteristics);
     }
 
@@ -26,7 +29,7 @@ public class CharacteristicUtil {
         return properties;
     }
 
-    public static Integer getCharacteristic(final Entity entity, final Characteristic characteristic) {
+    public static Integer getBaseCharacteristic(final Entity entity, final Characteristic characteristic) {
         final CharacteristicsProperty properties = getCharacteristicsProperty(entity);
         if (properties == null) {
             return null;
@@ -35,7 +38,17 @@ public class CharacteristicUtil {
         return properties.get(characteristic);
     }
 
-    public static void setCharacteristic(final Entity entity, final Characteristic characteristic, final Integer value) {
+    public static Integer getCharacteristic(final Entity entity, final Characteristic characteristic) {
+        final Integer baseCharacteristic = getBaseCharacteristic(entity, characteristic);
+        final Integer armorsCharacteristic = ArmorUtil.hasArmor(entity) ? ArmorUtil.getArmorsCharacteristic(entity, characteristic) : Integer.valueOf(0);
+        if (baseCharacteristic == null || armorsCharacteristic == null) {
+            return null;
+        }
+
+        return baseCharacteristic + armorsCharacteristic;
+    }
+
+    public static void setBaseCharacteristic(final Entity entity, final Characteristic characteristic, final Integer value) {
         final CharacteristicsProperty properties = getCharacteristicsProperty(entity);
         if (properties == null) {
             return;
@@ -64,5 +77,16 @@ public class CharacteristicUtil {
             properties.set(Characteristic.WAKFU, 6);
             properties.set(Characteristic.CONTROL, 1);
         }
+    }
+
+    protected static Set<Characteristic> customizableCharacteristics = EnumSet
+            .of(Characteristic.STRENGTH, Characteristic.INTELLIGENCE, Characteristic.AGILITY,
+                    Characteristic.CHANCE, Characteristic.BLOCK, Characteristic.RANGE,
+                    Characteristic.ACTION, Characteristic.MOVEMENT, Characteristic.CRITICAL,
+                    Characteristic.KIT, Characteristic.LOCK, Characteristic.DODGE,
+                    Characteristic.INITIATIVE, Characteristic.HEALTH);
+
+    public static boolean isCustomizable(Characteristic characteristics) {
+        return customizableCharacteristics.contains(characteristics);
     }
 }

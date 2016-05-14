@@ -2,7 +2,6 @@ package heero.mc.mod.wakcraft.client.gui;
 
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
-import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager;
 import heero.mc.mod.wakcraft.util.CharacteristicUtil;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -13,7 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GUIAbilities extends GuiScreen {
+public class GUICharacteristic extends GuiScreen {
     private static final ResourceLocation background = new ResourceLocation(
             Reference.MODID.toLowerCase(), "textures/gui/ability.png");
 
@@ -30,7 +29,7 @@ public class GUIAbilities extends GuiScreen {
     protected EntityPlayer player;
     protected int scroll;
 
-    public GUIAbilities(EntityPlayer player) {
+    public GUICharacteristic(EntityPlayer player) {
         super();
 
         this.player = player;
@@ -51,8 +50,8 @@ public class GUIAbilities extends GuiScreen {
         buttonList.add(new GuiButton(BUTTON_UP, guiLeft + (guiWidth / 2) + 5, guiTop + 140, 20, 20, ">"));
 
         for (int i = 0; i < NB_LINE; i++) {
-            GuiButton buttonRemove = new GuiButton(100 + i * 2, guiLeft + 110, guiTop + 20 + i * 20, 20, 20, "-");
-            GuiButton buttonAdd = new GuiButton(100 + i * 2 + 1, guiLeft + 150, guiTop + 20 + i * 20, 20, 20, "+");
+            final GuiButton buttonRemove = new GuiButton(100 + i * 2, guiLeft + 110, guiTop + 20 + i * 20, 20, 20, "-");
+            final GuiButton buttonAdd = new GuiButton(100 + i * 2 + 1, guiLeft + 150, guiTop + 20 + i * 20, 20, 20, "+");
 
             buttonList.add(buttonRemove);
             buttonList.add(buttonAdd);
@@ -110,11 +109,12 @@ public class GUIAbilities extends GuiScreen {
     }
 
     protected void updateButtons() {
-        Characteristic[] abilities = Characteristic.values();
+        final Characteristic[] abilities = Characteristic.values();
         for (int i = 0; i < NB_LINE; i++) {
-            Boolean enabled = CharacteristicsManager.isCustomizable(abilities[scroll + i]);
-            ((GuiButton) (buttonList.get(2 + i * 2))).visible = enabled;
-            ((GuiButton) (buttonList.get(2 + i * 2 + 1))).visible = enabled;
+            final Boolean isCustomizable = CharacteristicUtil.isCustomizable(abilities[scroll + i]);
+
+            (buttonList.get(2 + i * 2)).visible = isCustomizable;
+            (buttonList.get(2 + i * 2 + 1)).visible = isCustomizable;
         }
     }
 }
