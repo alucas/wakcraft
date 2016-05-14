@@ -2,6 +2,7 @@ package heero.mc.mod.wakcraft.client.event.handler;
 
 import heero.mc.mod.wakcraft.Reference;
 import heero.mc.mod.wakcraft.item.ItemSeed;
+import heero.mc.mod.wakcraft.item.ItemWCreatureSeeds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
@@ -43,7 +44,7 @@ public class RenderEventHandler {
 
         if (player.isUsingItem()) {
             final Item itemInUse = player.getItemInUse().getItem();
-            if (!(itemInUse instanceof ItemSeed)) {
+            if (!(itemInUse instanceof ItemSeed) && !(itemInUse instanceof ItemWCreatureSeeds)) {
                 return;
             }
 
