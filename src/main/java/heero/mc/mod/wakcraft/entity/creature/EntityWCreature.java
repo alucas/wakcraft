@@ -61,7 +61,10 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 
     @Override
     public void onAttacked(final EntityLivingBase attacker, final ItemStack stack) {
-        int health = FightUtil.getFightCharacteristic(this, Characteristic.HEALTH);
+        final Integer health = FightUtil.getFightCharacteristic(this, Characteristic.HEALTH);
+        if (health == null) {
+            return;
+        }
 
         if (health > 0) {
             FightUtil.updateDisplayName(this);

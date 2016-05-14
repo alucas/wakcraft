@@ -1,8 +1,7 @@
 package heero.mc.mod.wakcraft.characteristic;
 
-import heero.mc.mod.wakcraft.WLog;
-import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import heero.mc.mod.wakcraft.item.ItemWArmor;
+import heero.mc.mod.wakcraft.util.CharacteristicUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -21,35 +20,35 @@ public class CharacteristicsManager {
         return customizableCharacteristics.contains(characteristics);
     }
 
-    public static void equipItem(Entity entity, ItemWArmor item) {
+    public static void equipItem(final Entity entity, final ItemWArmor item) {
         if (!(entity instanceof EntityPlayer)) {
             return;
         }
 
-        CharacteristicsProperty properties = (CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
-        if (properties == null) {
-            WLog.warning("Error while loading the characteristics properties of player : " + entity.getDisplayName());
-            return;
-        }
+        for (final Characteristic characteristic : item.getCharacteristics()) {
+            final Integer characteristicValue = item.getCharacteristic(characteristic);
+            final Integer entityCharacteristicValue = CharacteristicUtil.getCharacteristic(entity, characteristic);
+            if (characteristicValue == null || entityCharacteristicValue == null) {
+                continue;
+            }
 
-        for (Characteristic characteristic : item.getCharacteristics()) {
-            properties.set(characteristic, properties.get(characteristic) + item.getCharacteristic(characteristic));
+            CharacteristicUtil.setCharacteristic(entity, characteristic, entityCharacteristicValue + characteristicValue);
         }
     }
 
-    public static void unequipItem(Entity entity, ItemWArmor item) {
+    public static void unequipItem(final Entity entity, final ItemWArmor item) {
         if (!(entity instanceof EntityPlayer)) {
             return;
         }
 
-        CharacteristicsProperty properties = (CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
-        if (properties == null) {
-            WLog.warning("Error while loading the characteristics properties of player : " + entity.getDisplayName());
-            return;
-        }
+        for (final Characteristic characteristic : item.getCharacteristics()) {
+            final Integer characteristicValue = item.getCharacteristic(characteristic);
+            final Integer entityCharacteristicValue = CharacteristicUtil.getCharacteristic(entity, characteristic);
+            if (characteristicValue == null || entityCharacteristicValue == null) {
+                continue;
+            }
 
-        for (Characteristic characteristic : item.getCharacteristics()) {
-            properties.set(characteristic, properties.get(characteristic) - item.getCharacteristic(characteristic));
+            CharacteristicUtil.setCharacteristic(entity, characteristic, entityCharacteristicValue - characteristicValue);
         }
     }
 }

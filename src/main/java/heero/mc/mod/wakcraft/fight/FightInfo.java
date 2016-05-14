@@ -124,9 +124,10 @@ public class FightInfo {
             Collections.sort(team, new Comparator<EntityLivingBase>() {
                 @Override
                 public int compare(EntityLivingBase a, EntityLivingBase b) {
-                    int initiativeA = CharacteristicUtil.getCharacteristic(a, Characteristic.INITIATIVE);
-                    int initiativeB = CharacteristicUtil.getCharacteristic(b, Characteristic.INITIATIVE);
-                    return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
+                    final Integer initiativeA = CharacteristicUtil.getCharacteristic(a, Characteristic.INITIATIVE);
+                    final Integer initiativeB = CharacteristicUtil.getCharacteristic(b, Characteristic.INITIATIVE);
+
+                    return (initiativeA == null || initiativeB == null || initiativeA.equals(initiativeB)) ? 0 : initiativeA > initiativeB ? -1 : 1;
                 }
             });
         }
@@ -134,9 +135,10 @@ public class FightInfo {
         Collections.sort(fightersTmp, new Comparator<List<EntityLivingBase>>() {
             @Override
             public int compare(List<EntityLivingBase> a, List<EntityLivingBase> b) {
-                int initiativeA = CharacteristicUtil.getCharacteristic(a.get(0), Characteristic.INITIATIVE);
-                int initiativeB = CharacteristicUtil.getCharacteristic(b.get(0), Characteristic.INITIATIVE);
-                return initiativeA == initiativeB ? 0 : initiativeA > initiativeB ? -1 : 1;
+                final Integer initiativeA = CharacteristicUtil.getCharacteristic(a.get(0), Characteristic.INITIATIVE);
+                final Integer initiativeB = CharacteristicUtil.getCharacteristic(b.get(0), Characteristic.INITIATIVE);
+
+                return (initiativeA == null || initiativeB == null || initiativeA.equals(initiativeB)) ? 0 : initiativeA > initiativeB ? -1 : 1;
             }
         });
 

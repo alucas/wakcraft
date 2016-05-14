@@ -891,24 +891,28 @@ public enum FightManager {
         }
     }
 
-    public void updateFights(EntityLivingBase fighter) {
-        BlockPos previousPosition = FightUtil.getCurrentPosition(fighter);
-        double distance = fighter.getDistance(previousPosition.getX() + 0.5, fighter.posY, previousPosition.getZ() + 0.5);
-
-        if (distance > MathHelper.sqrt_double(2) / 2 + 0.1) {
-            BlockPos currentPosition = new BlockPos(MathHelper.floor_double(fighter.posX), MathHelper.floor_double(fighter.posY), MathHelper.floor_double(fighter.posZ));
-            int usedMovementPoint = MathHelper.abs_int(currentPosition.getX() - previousPosition.getX()) + MathHelper.abs_int(currentPosition.getZ() - previousPosition.getZ());
-            int movementPoint = FightUtil.getFightCharacteristic(fighter, Characteristic.MOVEMENT);
-
-            int remainingMovementPoint = movementPoint - usedMovementPoint;
-            if (remainingMovementPoint < 0) {
-                WLog.warning("Fighter " + fighter + " used more movement point that disponible");
-                remainingMovementPoint = 0;
-            }
-
-            FightUtil.setFightCharacteristic(fighter, Characteristic.MOVEMENT, remainingMovementPoint);
-            FightUtil.setCurrentPosition(fighter, currentPosition);
+    public void updateFights(final EntityLivingBase fighter) {
+        final BlockPos previousPosition = FightUtil.getCurrentPosition(fighter);
+        final double distance = fighter.getDistance(previousPosition.getX() + 0.5, fighter.posY, previousPosition.getZ() + 0.5);
+        if (distance < MathHelper.sqrt_double(2) / 2 + 0.1) {
+            return;
         }
+
+        final BlockPos currentPosition = new BlockPos(MathHelper.floor_double(fighter.posX), MathHelper.floor_double(fighter.posY), MathHelper.floor_double(fighter.posZ));
+        final int usedMovementPoint = MathHelper.abs_int(currentPosition.getX() - previousPosition.getX()) + MathHelper.abs_int(currentPosition.getZ() - previousPosition.getZ());
+        final Integer movementPoint = FightUtil.getFightCharacteristic(fighter, Characteristic.MOVEMENT);
+        if (movementPoint == null) {
+            return;
+        }
+
+        int remainingMovementPoint = movementPoint - usedMovementPoint;
+        if (remainingMovementPoint < 0) {
+            WLog.warning("Fighter " + fighter + " used more movement point that disponible");
+            remainingMovementPoint = 0;
+        }
+
+        FightUtil.setFightCharacteristic(fighter, Characteristic.MOVEMENT, remainingMovementPoint);
+        FightUtil.setCurrentPosition(fighter, currentPosition);
     }
 
     public boolean isThereFighterInAABB(World world, int fightId, AxisAlignedBB boundingBox) {

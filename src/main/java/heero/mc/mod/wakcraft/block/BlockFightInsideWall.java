@@ -30,15 +30,15 @@ public class BlockFightInsideWall extends BlockGenericTransparent {
      */
     @Override
     public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity entity) {
-        if (FightUtil.isAutonomousFighter(entity)) {
-            return;
-        }
-
         if (!FightUtil.isFighter(entity) || !FightUtil.isFighting(entity)) {
             return;
         }
 
-        int fightId = FightUtil.getFightId(entity);
+        if (FightUtil.isAutonomousFighter(entity)) {
+            return;
+        }
+
+        final int fightId = FightUtil.getFightId(entity);
         switch (FightUtil.getFightStage(world, fightId)) {
             case PRE_FIGHT:
                 BlockPos startPosition = FightUtil.getStartPosition(entity);
@@ -48,10 +48,13 @@ public class BlockFightInsideWall extends BlockGenericTransparent {
 
                 break;
             case FIGHT:
-                BlockPos currentPosition = FightUtil.getCurrentPosition(entity);
-                EntityLivingBase currentFighter = FightUtil.getCurrentFighter(world, fightId);
-                int movementPoint = (currentFighter == entity) ? FightUtil.getFightCharacteristic(entity, Characteristic.MOVEMENT) : 0;
-                int distance = MathHelper.abs_int(currentPosition.getX() - pos.getX()) + MathHelper.abs_int(currentPosition.getZ() - pos.getZ());
+                final BlockPos currentPosition = FightUtil.getCurrentPosition(entity);
+                final EntityLivingBase currentFighter = FightUtil.getCurrentFighter(world, fightId);
+                final int distance = MathHelper.abs_int(currentPosition.getX() - pos.getX()) + MathHelper.abs_int(currentPosition.getZ() - pos.getZ());
+                final Integer movementPoint = (currentFighter == entity) ? FightUtil.getFightCharacteristic(entity, Characteristic.MOVEMENT) : Integer.valueOf(0);
+                if (movementPoint == null) {
+                    break;
+                }
 
                 if (movementPoint < distance) {
                     break;

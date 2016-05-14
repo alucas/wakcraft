@@ -87,9 +87,12 @@ public class FightHelper {
     }
 
     public static boolean isSpellCostAvailable(final EntityPlayer fighter, final ItemStack spellStack) {
-        int wakfuPoint = FightUtil.getFightCharacteristic(fighter, Characteristic.WAKFU);
-        int movementPoint = FightUtil.getFightCharacteristic(fighter, Characteristic.MOVEMENT);
-        int actionPoint = FightUtil.getFightCharacteristic(fighter, Characteristic.ACTION);
+        final Integer wakfuPoint = FightUtil.getFightCharacteristic(fighter, Characteristic.WAKFU);
+        final Integer movementPoint = FightUtil.getFightCharacteristic(fighter, Characteristic.MOVEMENT);
+        final Integer actionPoint = FightUtil.getFightCharacteristic(fighter, Characteristic.ACTION);
+        if (wakfuPoint == null || movementPoint == null || actionPoint == null) {
+            return false;
+        }
 
         int wakfuCost = getSpellWakfuCost(spellStack);
         int movementCost = getSpellMovementCost(spellStack);
@@ -150,7 +153,7 @@ public class FightHelper {
 
         BlockPos fighterPosition = FightUtil.getCurrentPosition(fighter);
         ItemStack spellStack = FightUtil.getCurrentSpell(fighter);
-        List<List<EntityLivingBase>> fighters = FightUtil.getFighers(fighter.worldObj, FightUtil.getFightId(fighter));
+        List<List<EntityLivingBase>> fighters = FightUtil.getFighters(fighter.worldObj, FightUtil.getFightId(fighter));
 
         FightUtil.setFightCharacteristic(fighter, Characteristic.WAKFU, FightUtil.getFightCharacteristic(fighter, Characteristic.WAKFU) - getSpellWakfuCost(spellStack));
         FightUtil.setFightCharacteristic(fighter, Characteristic.MOVEMENT, FightUtil.getFightCharacteristic(fighter, Characteristic.MOVEMENT) - getSpellMovementCost(spellStack));
@@ -188,7 +191,11 @@ public class FightHelper {
                             characteristicValue = DamageUtil.computeDamage(fighter, targetFighter, spellStack, (IEffectDamage) effect);
                         }
 
-                        int oldValue = FightUtil.getFightCharacteristic(targetFighter, characteristicType);
+                        final Integer oldValue = FightUtil.getFightCharacteristic(targetFighter, characteristicType);
+                        if (oldValue == null) {
+                            return;
+                        }
+
                         FightUtil.setFightCharacteristic(targetFighter, characteristicType, oldValue + characteristicValue);
 
                         if (targetFighter instanceof IFighter) {

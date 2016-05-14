@@ -113,12 +113,16 @@ public class FightRenderer extends IRenderHandler {
         closeWorldRenderer();
     }
 
-    public void renderMovement(float partialTicks, WorldClient world, Minecraft mc, EntityPlayer player) {
-        WorldRenderer worldRenderer = initWorldRenderer(partialTicks, mc, player);
-        BlockRendererDispatcher blockRendererDispatcher = mc.getBlockRendererDispatcher();
+    public void renderMovement(final float partialTicks, final WorldClient world, final Minecraft mc, final EntityPlayer player) {
+        final WorldRenderer worldRenderer = initWorldRenderer(partialTicks, mc, player);
+        final BlockRendererDispatcher blockRendererDispatcher = mc.getBlockRendererDispatcher();
 
-        BlockPos currentPosition = FightUtil.getCurrentPosition(player);
-        int movement = FightUtil.getFightCharacteristic(player, Characteristic.MOVEMENT);
+        final BlockPos currentPosition = FightUtil.getCurrentPosition(player);
+        final Integer movement = FightUtil.getFightCharacteristic(player, Characteristic.MOVEMENT);
+        if (movement == null) {
+            return;
+        }
+
         for (int x = currentPosition.getX() - movement; x <= currentPosition.getX() + movement; x++) {
             for (int z = currentPosition.getZ() - movement; z <= currentPosition.getZ() + movement; z++) {
                 if (Math.abs(currentPosition.getX() - x) + Math.abs(currentPosition.getZ() - z) > movement) continue;

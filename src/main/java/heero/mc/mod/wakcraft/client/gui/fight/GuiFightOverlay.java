@@ -105,13 +105,14 @@ public class GuiFightOverlay extends Gui {
 
         drawTexturedModalRect(width / 2 - 114, height - 44, 0, 0, 100, 100);
 
-        int pointAP = FightUtil.getFightCharacteristic(fighter, Characteristic.ACTION);
-        int pointMP = FightUtil.getFightCharacteristic(fighter, Characteristic.MOVEMENT);
-        int pointWP = FightUtil.getFightCharacteristic(fighter, Characteristic.WAKFU);
-
-        drawString(minecraft.fontRendererObj, Integer.toString(pointAP), width / 2 - 86, height - 38, 0xBBBBBB);
-        drawString(minecraft.fontRendererObj, Integer.toString(pointMP), width / 2 - 101, height - 32, 0xBBBBBB);
-        drawString(minecraft.fontRendererObj, Integer.toString(pointWP), width / 2 - 107, height - 17, 0xBBBBBB);
+        final Integer pointAP = FightUtil.getFightCharacteristic(fighter, Characteristic.ACTION);
+        final Integer pointMP = FightUtil.getFightCharacteristic(fighter, Characteristic.MOVEMENT);
+        final Integer pointWP = FightUtil.getFightCharacteristic(fighter, Characteristic.WAKFU);
+        if (pointAP != null && pointMP != null && pointWP != null) {
+            drawString(minecraft.fontRendererObj, Integer.toString(pointAP), width / 2 - 86, height - 38, 0xBBBBBB);
+            drawString(minecraft.fontRendererObj, Integer.toString(pointMP), width / 2 - 101, height - 32, 0xBBBBBB);
+            drawString(minecraft.fontRendererObj, Integer.toString(pointWP), width / 2 - 107, height - 17, 0xBBBBBB);
+        }
 
         GlStateManager.disableBlend();
 

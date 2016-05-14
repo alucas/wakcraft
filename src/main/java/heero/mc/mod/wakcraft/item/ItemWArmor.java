@@ -52,19 +52,14 @@ public class ItemWArmor extends ItemWithLevel {
         return type;
     }
 
-    public ItemWArmor setCharacteristic(Characteristic ability, int value) {
+    public ItemWArmor setCharacteristic(final Characteristic ability, final int value) {
         characteristics.put(ability, value);
 
         return this;
     }
 
-    public int getCharacteristic(Characteristic ability) {
-        Integer value = characteristics.get(ability);
-        if (value == null) {
-            return 0;
-        }
-
-        return value;
+    public Integer getCharacteristic(final Characteristic ability) {
+        return characteristics.get(ability);
     }
 
     public Set<Characteristic> getCharacteristics() {

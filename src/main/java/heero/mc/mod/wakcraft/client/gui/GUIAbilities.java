@@ -1,10 +1,9 @@
 package heero.mc.mod.wakcraft.client.gui;
 
 import heero.mc.mod.wakcraft.Reference;
-import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.characteristic.CharacteristicsManager;
-import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
+import heero.mc.mod.wakcraft.util.CharacteristicUtil;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -29,7 +28,6 @@ public class GUIAbilities extends GuiScreen {
     protected int guiTop;
 
     protected EntityPlayer player;
-    protected CharacteristicsProperty abilitiesManager;
     protected int scroll;
 
     public GUIAbilities(EntityPlayer player) {
@@ -37,11 +35,6 @@ public class GUIAbilities extends GuiScreen {
 
         this.player = player;
         this.scroll = 0;
-        this.abilitiesManager = (CharacteristicsProperty) player.getExtendedProperties(CharacteristicsProperty.IDENTIFIER);
-
-        if (this.abilitiesManager == null) {
-            WLog.warning("Error while loading the player's abilities (%s)", player.getDisplayName());
-        }
     }
 
     /**
@@ -80,13 +73,13 @@ public class GUIAbilities extends GuiScreen {
         // Background
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, guiWidth, guiHeight);
 
-        // Profession levels
-        Characteristic[] abilities = Characteristic.values();
+        final Characteristic[] abilities = Characteristic.values();
         for (int i = scroll; i < scroll + NB_LINE && i >= 0 && i < abilities.length; i++) {
             drawString(fontRendererObj, I18n.format("abilities." + abilities[i]), guiLeft + 5, guiTop + 25 + (i - scroll) * 20, 0xFFFFFF);
 
-            if (abilitiesManager != null) {
-                drawCenteredString(fontRendererObj, Integer.toString(abilitiesManager.get(abilities[i])), guiLeft + 140, guiTop + 25 + (i - scroll) * 20, 0xFFFFFF);
+            final Integer characteristicValue = CharacteristicUtil.getCharacteristic(player, abilities[i]);
+            if (characteristicValue != null) {
+                drawCenteredString(fontRendererObj, Integer.toString(characteristicValue), guiLeft + 140, guiTop + 25 + (i - scroll) * 20, 0xFFFFFF);
             }
         }
 

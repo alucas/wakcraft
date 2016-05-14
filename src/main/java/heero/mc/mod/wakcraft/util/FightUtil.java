@@ -1,8 +1,8 @@
 package heero.mc.mod.wakcraft.util;
 
+import heero.mc.mod.wakcraft.WLog;
 import heero.mc.mod.wakcraft.characteristic.Characteristic;
 import heero.mc.mod.wakcraft.entity.creature.IFighter;
-import heero.mc.mod.wakcraft.entity.property.CharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightCharacteristicsProperty;
 import heero.mc.mod.wakcraft.entity.property.FightProperty;
 import heero.mc.mod.wakcraft.entity.property.SpellsProperty;
@@ -23,6 +23,26 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class FightUtil {
+    protected static FightProperty getFightProperty(final Entity entity) {
+        final FightProperty properties = (FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER);
+        if (properties == null) {
+            WLog.warning("Error while loading the entity's fight properties (%s)", entity.getDisplayName());
+            return null;
+        }
+
+        return properties;
+    }
+
+    protected static FightCharacteristicsProperty getFightCharacteristicsProperty(final Entity entity) {
+        final FightCharacteristicsProperty properties = (FightCharacteristicsProperty) entity.getExtendedProperties(FightCharacteristicsProperty.IDENTIFIER);
+        if (properties == null) {
+            WLog.warning("Error while loading the entity's fight characteristics properties (%s)", entity.getDisplayName());
+            return null;
+        }
+
+        return properties;
+    }
+
     public static boolean isFighting(Entity entity) {
         return ((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).getFightId() != -1;
     }
@@ -60,17 +80,31 @@ public class FightUtil {
         ((FightProperty) entity.getExtendedProperties(FightProperty.IDENTIFIER)).resetProperties();
     }
 
-    public static int getFightCharacteristic(Entity entity, Characteristic characteristic) {
-        return ((FightCharacteristicsProperty) entity.getExtendedProperties(FightCharacteristicsProperty.IDENTIFIER)).get(characteristic);
+    public static Integer getFightCharacteristic(final Entity entity, final Characteristic characteristic) {
+        final FightCharacteristicsProperty properties = getFightCharacteristicsProperty(entity);
+        if (properties == null) {
+            return null;
+        }
+
+        return properties.get(characteristic);
     }
 
-    public static void setFightCharacteristic(Entity entity, Characteristic characteristic, int value) {
-        ((FightCharacteristicsProperty) entity.getExtendedProperties(FightCharacteristicsProperty.IDENTIFIER)).set(characteristic, value);
+    public static void setFightCharacteristic(final Entity entity, final Characteristic characteristic, int value) {
+        final FightCharacteristicsProperty properties = getFightCharacteristicsProperty(entity);
+        if (properties == null) {
+            return;
+        }
+
+        properties.set(characteristic, value);
     }
 
-    public static void resetFightCharacteristic(Entity entity, Characteristic characteristic) {
-        int value = ((CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER)).get(characteristic);
-        ((FightCharacteristicsProperty) entity.getExtendedProperties(FightCharacteristicsProperty.IDENTIFIER)).set(characteristic, value);
+    public static void resetFightCharacteristic(final Entity entity, final Characteristic characteristic) {
+        final Integer normalValue = CharacteristicUtil.getCharacteristic(entity, characteristic);
+        if (normalValue == null) {
+            return;
+        }
+
+        setFightCharacteristic(entity, characteristic, normalValue);
     }
 
     public static void setCurrentPosition(Entity entity, @Nullable BlockPos startPosition) {
@@ -93,21 +127,34 @@ public class FightUtil {
         return spellStack != null && spellStack.getItem() instanceof IActiveSpell;
     }
 
-    public static void updateDisplayName(Entity entity) {
-        int maxHealth = ((CharacteristicsProperty) entity.getExtendedProperties(CharacteristicsProperty.IDENTIFIER)).get(Characteristic.HEALTH);
-        if (entity instanceof EntityLiving)
-            entity.setCustomNameTag(getFightCharacteristic(entity, Characteristic.HEALTH) + " / " + maxHealth);
+    public static void updateDisplayName(final Entity entity) {
+        if (!(entity instanceof EntityLiving)) {
+            return;
+        }
+
+        final Integer fullHealth = CharacteristicUtil.getCharacteristic(entity, Characteristic.HEALTH);
+        final Integer fightHealth = getFightCharacteristic(entity, Characteristic.HEALTH);
+        if (fullHealth == null || fightHealth == null) {
+            entity.setCustomNameTag("? / ?");
+            return;
+        }
+
+        entity.setCustomNameTag(fightHealth + " / " + fullHealth);
     }
 
-    public static void resetDisplayName(Entity entity) {
-        if (entity instanceof EntityLiving) entity.setCustomNameTag("");
+    public static void resetDisplayName(final Entity entity) {
+        if (!(entity instanceof EntityLiving)) {
+            return;
+        }
+
+        entity.setCustomNameTag("");
     }
 
     public static FightStage getFightStage(World world, int fightId) {
         return FightManager.INSTANCE.getFightStage(world, fightId);
     }
 
-    public static List<List<EntityLivingBase>> getFighers(World world, int fightId) {
+    public static List<List<EntityLivingBase>> getFighters(World world, int fightId) {
         return FightManager.INSTANCE.getFighters(world, fightId);
     }
 
