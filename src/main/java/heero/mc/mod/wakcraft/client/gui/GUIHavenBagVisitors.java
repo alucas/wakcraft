@@ -27,27 +27,27 @@ public class GUIHavenBagVisitors extends GuiScreen {
         for (String name : properties.getRightKeys()) {
             int right = properties.getRight(name);
             if (name == HavenBagProperties.ACL_KEY_ALL) {
-                buttonList.add(new GUICheck(0, name, (right & 0x1) != 0, 100, 30));
-                buttonList.add(new GUICheck(1, name, (right & 0x2) != 0, 130, 30));
-                buttonList.add(new GUICheck(2, name, (right & 0x4) != 0, 160, 30));
-                buttonList.add(new GUICheck(3, name, (right & 0x8) != 0, 190, 30));
+                buttonList.add(new GUICheckButton(0, name, (right & 0x1) != 0, 100, 30));
+                buttonList.add(new GUICheckButton(1, name, (right & 0x2) != 0, 130, 30));
+                buttonList.add(new GUICheckButton(2, name, (right & 0x4) != 0, 160, 30));
+                buttonList.add(new GUICheckButton(3, name, (right & 0x8) != 0, 190, 30));
 
                 continue;
             }
 
             if (name == HavenBagProperties.ACL_KEY_GUILD) {
-                buttonList.add(new GUICheck(4, name, (right & 0x1) != 0, 100, 60));
-                buttonList.add(new GUICheck(5, name, (right & 0x2) != 0, 130, 60));
-                buttonList.add(new GUICheck(6, name, (right & 0x4) != 0, 160, 60));
-                buttonList.add(new GUICheck(7, name, (right & 0x8) != 0, 190, 60));
+                buttonList.add(new GUICheckButton(4, name, (right & 0x1) != 0, 100, 60));
+                buttonList.add(new GUICheckButton(5, name, (right & 0x2) != 0, 130, 60));
+                buttonList.add(new GUICheckButton(6, name, (right & 0x4) != 0, 160, 60));
+                buttonList.add(new GUICheckButton(7, name, (right & 0x8) != 0, 190, 60));
 
                 continue;
             }
 
-            buttonList.add(new GUICheck(aclIndex * 4 + 0, name, (right & 0x1) != 0, 100, 30 + aclIndex * 30));
-            buttonList.add(new GUICheck(aclIndex * 4 + 1, name, (right & 0x2) != 0, 130, 30 + aclIndex * 30));
-            buttonList.add(new GUICheck(aclIndex * 4 + 2, name, (right & 0x4) != 0, 160, 30 + aclIndex * 30));
-            buttonList.add(new GUICheck(aclIndex * 4 + 3, name, (right & 0x8) != 0, 190, 30 + aclIndex * 30));
+            buttonList.add(new GUICheckButton(aclIndex * 4 + 0, name, (right & 0x1) != 0, 100, 30 + aclIndex * 30));
+            buttonList.add(new GUICheckButton(aclIndex * 4 + 1, name, (right & 0x2) != 0, 130, 30 + aclIndex * 30));
+            buttonList.add(new GUICheckButton(aclIndex * 4 + 2, name, (right & 0x4) != 0, 160, 30 + aclIndex * 30));
+            buttonList.add(new GUICheckButton(aclIndex * 4 + 3, name, (right & 0x8) != 0, 190, 30 + aclIndex * 30));
 
             ++aclIndex;
         }
@@ -79,8 +79,8 @@ public class GUIHavenBagVisitors extends GuiScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) {
-        if (button instanceof GUICheck) {
-            GUICheck buttonCheck = (GUICheck) button;
+        if (button instanceof GUICheckButton) {
+            GUICheckButton buttonCheck = (GUICheckButton) button;
 
             buttonCheck.state = !buttonCheck.state;
 
