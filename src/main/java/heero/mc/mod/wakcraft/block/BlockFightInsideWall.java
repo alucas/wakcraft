@@ -60,7 +60,7 @@ public class BlockFightInsideWall extends BlockGenericTransparent {
                     break;
                 }
 
-                if (FightManager.INSTANCE.isThereFighterInAABB(world, fightId, AxisAlignedBB.fromBounds(pos.getX(), pos.getY() - 1, pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1))) {
+                if (FightManager.INSTANCE.isThereFighterInAABB(world, fightId, entity, AxisAlignedBB.fromBounds(pos.getX(), pos.getY() - 1, pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1))) {
                     break;
                 }
 

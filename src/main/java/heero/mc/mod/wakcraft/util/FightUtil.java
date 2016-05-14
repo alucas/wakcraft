@@ -180,7 +180,7 @@ public class FightUtil {
     }
 
     public static List<List<FightBlockCoordinates>> getStartPositions(World world, int fightId) {
-        return FightManager.INSTANCE.getSartPositions(world, fightId);
+        return FightManager.INSTANCE.getStartPositions(world, fightId);
     }
 
     public static void selectPosition(EntityLivingBase entity, @Nullable BlockPos position) {

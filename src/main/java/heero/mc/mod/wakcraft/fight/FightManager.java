@@ -12,6 +12,7 @@ import heero.mc.mod.wakcraft.fight.FightInfo.FightStage;
 import heero.mc.mod.wakcraft.network.packet.fight.*;
 import heero.mc.mod.wakcraft.util.FightUtil;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -30,7 +31,7 @@ public enum FightManager {
 
     protected static final int offsetX[] = new int[]{-1, 1, 0, 0};
     protected static final int offsetZ[] = new int[]{0, 0, -1, 1};
-    protected Map<World, Map<Integer, FightInfo>> fights = new HashMap<World, Map<Integer, FightInfo>>();
+    protected Map<World, Map<Integer, FightInfo>> _fights = new HashMap<World, Map<Integer, FightInfo>>();
 
     /**
      * Initialize the fight manager.
@@ -45,6 +46,32 @@ public enum FightManager {
         stopFights();
     }
 
+    protected Map<Integer, FightInfo> getFightsOfWorld(final World world) {
+        final Map<Integer, FightInfo> fightsOfWorld = _fights.get(world);
+
+        if (fightsOfWorld == null) {
+            WLog.warning("Trying to get the fights for a world with no fights");
+            return null;
+        }
+
+        return fightsOfWorld;
+    }
+
+    protected FightInfo getFightInfo(final World world, final Integer fightId) {
+        final Map<Integer, FightInfo> fightsOfWorld = getFightsOfWorld(world);
+        if (fightsOfWorld == null) {
+            return null;
+        }
+
+        final FightInfo fight = fightsOfWorld.get(fightId);
+        if (fight == null) {
+            WLog.warning("Trying to get the fight information for a fight that does not exist (wrong id : " + fightId + ")");
+            return null;
+        }
+
+        return fight;
+    }
+
     /**
      * Create a fight (Client side)
      *
@@ -54,15 +81,15 @@ public enum FightManager {
      * @param startBlocks
      * @return
      */
-    public void startClientFight(World world, int fightId, List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
+    public void startClientFight(final World world, final int fightId, final List<List<EntityLivingBase>> fighters, final List<List<FightBlockCoordinates>> startBlocks) {
         initializeFight(fightId, world, fighters, startBlocks);
 
         addFightersToFight(fighters, fightId);
 
-        Map<Integer, FightInfo> worldFights = fights.get(world);
+        Map<Integer, FightInfo> worldFights = _fights.get(world);
         if (worldFights == null) {
             worldFights = new HashMap<>();
-            fights.put(world, worldFights);
+            _fights.put(world, worldFights);
         }
 
         worldFights.put(fightId, new FightInfo(fighters, null, startBlocks));
@@ -76,21 +103,21 @@ public enum FightManager {
      * @param target
      * @return False if the creation failed
      */
-    public boolean startServerFight(World world, EntityPlayerMP player, EntityLivingBase target) {
-        int posX = MathHelper.floor_double(player.posX);
-        int posY = MathHelper.floor_double(player.posY);
-        int posZ = MathHelper.floor_double(player.posZ);
-        Set<FightBlockCoordinates> fightBlocks = getFightBlocks(world, new BlockPos(posX, posY, posZ), 10);
+    public boolean startServerFight(final World world, final EntityPlayerMP player, final EntityLivingBase target) {
+        final int posY = MathHelper.floor_double(player.posY);
+        final int posX = MathHelper.floor_double(player.posX);
+        final int posZ = MathHelper.floor_double(player.posZ);
+        final Set<FightBlockCoordinates> fightBlocks = getFightBlocks(world, new BlockPos(posX, posY, posZ), 10);
 
         if (fightBlocks.size() < 100) {
             player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("cantFightHere")));
             return false;
         }
 
-        int fightId = world.getUniqueDataId("fightId");
+        final int fightId = world.getUniqueDataId("fightId");
 
-        List<List<FightBlockCoordinates>> startBlocks = getSartPositions(fightBlocks);
-        List<List<EntityLivingBase>> fighters = createTeams(fightId, player, target);
+        final List<List<FightBlockCoordinates>> startBlocks = getStartPositions(fightBlocks);
+        final List<List<EntityLivingBase>> fighters = createTeams(fightId, player, target);
 
         initializeFight(fightId, world, fighters, startBlocks);
 
@@ -98,10 +125,10 @@ public enum FightManager {
 
         createFightMap(world, fightBlocks);
 
-        Map<Integer, FightInfo> worldFights = fights.get(world);
+        Map<Integer, FightInfo> worldFights = _fights.get(world);
         if (worldFights == null) {
             worldFights = new HashMap<>();
-            fights.put(world, worldFights);
+            _fights.put(world, worldFights);
         }
 
         worldFights.put(fightId, new FightInfo(fighters, fightBlocks, startBlocks));
@@ -120,8 +147,8 @@ public enum FightManager {
      * @return The selected fight blocks.
      */
     protected Set<FightBlockCoordinates> getFightBlocks(final World world, final BlockPos blockPos, final int radius) {
-        Set<FightBlockCoordinates> fightBlocks = new HashSet<FightBlockCoordinates>();
-        ChunkCache chunks = new ChunkCache(world, blockPos.add(-radius, -radius, -radius), blockPos.add(radius, radius, radius), 2);
+        final Set<FightBlockCoordinates> fightBlocks = new HashSet<>();
+        final ChunkCache chunks = new ChunkCache(world, blockPos.add(-radius, -radius, -radius), blockPos.add(radius, radius, radius), 2);
 
         BlockPos tmpBlockPos = blockPos;
         while (chunks.getBlockState(tmpBlockPos).equals(Blocks.air) && tmpBlockPos.getY() > 0) {
@@ -267,7 +294,7 @@ public enum FightManager {
         }
     }
 
-    protected final int hashCoords(int x, int y, int z) {
+    protected final int hashCoords(final int x, final int y, final int z) {
         return ((y & 0xFF) << 16) + ((x & 0xFF) << 8) + (z & 0xFF);
     }
 
@@ -277,26 +304,26 @@ public enum FightManager {
      * @param fightBlocks Fight blocks.
      * @return
      */
-    protected List<List<FightBlockCoordinates>> getSartPositions(Set<FightBlockCoordinates> fightBlocks) {
-        List<FightBlockCoordinates> fightBlocksList = new ArrayList<FightBlockCoordinates>(fightBlocks);
+    protected List<List<FightBlockCoordinates>> getStartPositions(final Set<FightBlockCoordinates> fightBlocks) {
+        final List<FightBlockCoordinates> fightBlocksList = new ArrayList<>(fightBlocks);
 
-        List<List<FightBlockCoordinates>> startBlocks = new ArrayList<List<FightBlockCoordinates>>();
+        final List<List<FightBlockCoordinates>> startBlocks = new ArrayList<>();
         startBlocks.add(new ArrayList<FightBlockCoordinates>());
         startBlocks.add(new ArrayList<FightBlockCoordinates>());
 
-        Random random = new Random();
+        final Random random = new Random();
 
-        int maxStartBlock = 6;
-        for (List<FightBlockCoordinates> startBlocksOfTeam : startBlocks) {
+        final int maxStartBlock = 6;
+        for (final List<FightBlockCoordinates> startBlocksOfTeam : startBlocks) {
             while (startBlocksOfTeam.size() < maxStartBlock) {
-                int index = random.nextInt(fightBlocks.size());
-                FightBlockCoordinates coords = fightBlocksList.get(index);
+                final int index = random.nextInt(fightBlocks.size());
+                final FightBlockCoordinates coords = fightBlocksList.get(index);
 
                 if (coords.getType() != TYPE.NORMAL) {
                     continue;
                 }
 
-                for (List<FightBlockCoordinates> startBlocksOfTeamTmp : startBlocks) {
+                for (final List<FightBlockCoordinates> startBlocksOfTeamTmp : startBlocks) {
                     if (startBlocksOfTeamTmp.contains(coords)) {
                         continue;
                     }
@@ -313,13 +340,8 @@ public enum FightManager {
         return startBlocks;
     }
 
-    public List<List<FightBlockCoordinates>> getSartPositions(World world, int FightId) {
-        Map<Integer, FightInfo> worldFights = fights.get(world);
-        if (worldFights == null) {
-            return null;
-        }
-
-        FightInfo fightInfo = worldFights.get(FightId);
+    public List<List<FightBlockCoordinates>> getStartPositions(final World world, final int fightId) {
+        final FightInfo fightInfo = getFightInfo(world, fightId);
         if (fightInfo == null) {
             return null;
         }
@@ -333,8 +355,8 @@ public enum FightManager {
      * @param world       The world of the fight.
      * @param fightBlocks The block coordinates list.
      */
-    protected void createFightMap(World world, Set<FightBlockCoordinates> fightBlocks) {
-        for (FightBlockCoordinates block : fightBlocks) {
+    protected void createFightMap(final World world, final Set<FightBlockCoordinates> fightBlocks) {
+        for (final FightBlockCoordinates block : fightBlocks) {
             if (!world.getBlockState(block).getBlock().equals(Blocks.air)) {
                 WLog.warning("Trying to replace a block different from Air");
                 continue;
@@ -359,13 +381,13 @@ public enum FightManager {
      * @param world       The world of the fight.
      * @param fightBlocks The block coordinates list.
      */
-    protected void destroyFightMap(World world, Set<FightBlockCoordinates> fightBlocks) {
+    protected void destroyFightMap(final World world, final Set<FightBlockCoordinates> fightBlocks) {
         if (fightBlocks == null) {
             return;
         }
 
-        for (FightBlockCoordinates blockCoords : fightBlocks) {
-            Block block = world.getBlockState(blockCoords).getBlock();
+        for (final FightBlockCoordinates blockCoords : fightBlocks) {
+            final Block block = world.getBlockState(blockCoords).getBlock();
             if (!block.equals(WBlocks.fightWall) && !block.equals(WBlocks.fightInsideWall) && !block.equals(WBlocks.fightStart) && !block.equals(WBlocks.fightStart2)) {
                 WLog.warning("Trying to restore a block different of fight blocks");
                 continue;
@@ -383,22 +405,22 @@ public enum FightManager {
      * @param opponent
      * @return
      */
-    protected List<List<EntityLivingBase>> createTeams(int fightId, EntityPlayerMP player, EntityLivingBase opponent) {
-        ArrayList<List<EntityLivingBase>> fighters = new ArrayList<List<EntityLivingBase>>();
+    protected List<List<EntityLivingBase>> createTeams(final int fightId, final EntityPlayerMP player, final EntityLivingBase opponent) {
+        final ArrayList<List<EntityLivingBase>> fighters = new ArrayList<>();
 
-        ArrayList<EntityLivingBase> fighters1 = new ArrayList<EntityLivingBase>();
-        ArrayList<EntityLivingBase> fighters2 = new ArrayList<EntityLivingBase>();
+        final ArrayList<EntityLivingBase> fighters1 = new ArrayList<>();
+        final ArrayList<EntityLivingBase> fighters2 = new ArrayList<>();
 
         fighters1.add(player);
 
         if (opponent instanceof IFighter) {
-            Set<UUID> group = ((IFighter) opponent).getGroup();
+            final Set<UUID> group = ((IFighter) opponent).getGroup();
             if (group == null) {
                 fighters2.add(opponent);
             } else {
-                for (UUID fighterUUID : group) {
-                    for (Object entity : opponent.worldObj.loadedEntityList) {
-                        if (entity instanceof IFighter && ((EntityLivingBase) entity).getUniqueID().equals(fighterUUID)) {
+                for (final UUID fighterUUID : group) {
+                    for (final Entity entity : opponent.worldObj.loadedEntityList) {
+                        if (entity instanceof IFighter && entity.getUniqueID().equals(fighterUUID)) {
                             fighters2.add((EntityLivingBase) entity);
                         }
                     }
@@ -423,15 +445,13 @@ public enum FightManager {
      * @param startBlocks The stat blocks list.
      * @return The fighter list.
      */
-    protected void initializeFight(int fightId, World world, List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
+    protected void initializeFight(final int fightId, final World world, final List<List<EntityLivingBase>> fighters, final List<List<FightBlockCoordinates>> startBlocks) {
         MinecraftForge.EVENT_BUS.post(new FightEvent.FightStartEvent(world, fightId, fighters, startBlocks));
 
-        for (int teamId = 0; teamId < 2; teamId++) {
-            List<EntityLivingBase> team = fighters.get(teamId);
-
-            for (EntityLivingBase entity : team) {
-                if (entity instanceof EntityPlayerMP) {
-                    Wakcraft.packetPipeline.sendTo(new PacketFightStart(fightId, fighters, startBlocks), (EntityPlayerMP) entity);
+        for (final List<EntityLivingBase> team : fighters) {
+            for (final EntityLivingBase fighter : team) {
+                if (fighter instanceof EntityPlayerMP) {
+                    Wakcraft.packetPipeline.sendTo(new PacketFightStart(fightId, fighters, startBlocks), (EntityPlayerMP) fighter);
                 }
             }
         }
@@ -444,41 +464,40 @@ public enum FightManager {
      * @param world    World of the fight.
      * @param fighters The fighters list.
      */
-    protected void terminateFight(int fightId, World world, List<List<EntityLivingBase>> fighters) {
+    protected void terminateFight(final World world, final int fightId, final List<List<EntityLivingBase>> fighters) {
         MinecraftForge.EVENT_BUS.post(new FightEvent.FightStopEvent(world, fightId, fighters));
 
-        for (int teamId = 0; teamId < 2; teamId++) {
-            List<EntityLivingBase> team = fighters.get(teamId);
-
-            for (EntityLivingBase entity : team) {
-                if (entity instanceof EntityPlayerMP) {
-                    Wakcraft.packetPipeline.sendTo(new PacketFightStop(fightId), (EntityPlayerMP) entity);
+        for (final List<EntityLivingBase> team : fighters) {
+            for (final EntityLivingBase fighter : team) {
+                if (fighter instanceof EntityPlayerMP) {
+                    Wakcraft.packetPipeline.sendTo(new PacketFightStop(fightId), (EntityPlayerMP) fighter);
                 }
             }
         }
     }
 
-    protected void setStartPositionOfAutonomousFighters(List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
-        for (int j = 0; j < fighters.size(); j++) {
-            List<EntityLivingBase> team = fighters.get(j);
+    protected void setStartPositionOfAutonomousFighters(final List<List<EntityLivingBase>> fighters, final List<List<FightBlockCoordinates>> startBlocks) {
+        for (int teamId = 0; teamId < fighters.size(); teamId++) {
+            final List<EntityLivingBase> team = fighters.get(teamId);
 
-            for (int i = 0; i < team.size(); i++) {
-                if (!FightUtil.isAutonomousFighter(team.get(i))) {
+            for (int fighterId = 0; fighterId < team.size(); fighterId++) {
+                final EntityLivingBase fighter = team.get(fighterId);
+                if (!FightUtil.isAutonomousFighter(fighter)) {
                     continue;
                 }
 
-                selectPosition(team.get(i), startBlocks.get(j).get(i));
+                selectPosition(fighter, startBlocks.get(teamId).get(fighterId));
             }
         }
     }
 
-    protected void setStartPositionOfRemainingFighters(List<List<EntityLivingBase>> fighters, List<List<FightBlockCoordinates>> startBlocks) {
-        for (int j = 0; j < fighters.size(); j++) {
-            List<EntityLivingBase> team = fighters.get(j);
+    protected void setStartPositionOfRemainingFighters(final List<List<EntityLivingBase>> fighters, final List<List<FightBlockCoordinates>> startBlocks) {
+        for (int teamId = 0; teamId < fighters.size(); teamId++) {
+            final List<EntityLivingBase> team = fighters.get(teamId);
 
-            List<BlockPos> availablePositions = new ArrayList<BlockPos>(startBlocks.get(j));
-            for (EntityLivingBase fighter : team) {
-                BlockPos startPosition = FightUtil.getStartPosition(fighter);
+            final List<BlockPos> availablePositions = new ArrayList<BlockPos>(startBlocks.get(teamId));
+            for (final EntityLivingBase fighter : team) {
+                final BlockPos startPosition = FightUtil.getStartPosition(fighter);
                 if (startPosition == null) {
                     continue;
                 }
@@ -486,8 +505,8 @@ public enum FightManager {
                 availablePositions.remove(startPosition);
             }
 
-            Iterator<BlockPos> iterator = availablePositions.iterator();
-            for (EntityLivingBase fighter : team) {
+            final Iterator<BlockPos> iterator = availablePositions.iterator();
+            for (final EntityLivingBase fighter : team) {
                 if (FightUtil.getStartPosition(fighter) != null) {
                     continue;
                 }
@@ -497,18 +516,16 @@ public enum FightManager {
         }
     }
 
-    protected void moveFighterToStartPosition(List<List<EntityLivingBase>> fighters) {
-        for (int j = 0; j < fighters.size(); j++) {
-            List<EntityLivingBase> team = fighters.get(j);
-
-            for (int i = 0; i < team.size(); i++) {
-                BlockPos startPosition = FightUtil.getStartPosition(team.get(i));
+    protected void moveFighterToStartPosition(final List<List<EntityLivingBase>> fighters) {
+        for (final List<EntityLivingBase> team : fighters) {
+            for (final EntityLivingBase fighter : team) {
+                final BlockPos startPosition = FightUtil.getStartPosition(fighter);
                 if (startPosition == null) {
-                    WLog.warning("The fighter " + team.get(i) + " doesn't have a starting position");
+                    WLog.warning("The fighter " + fighter + " doesn't have a starting position");
                     continue;
                 }
 
-                team.get(i).setPositionAndUpdate(startPosition.getX() + 0.5, startPosition.getY(), startPosition.getZ() + 0.5);
+                fighter.setPositionAndUpdate(startPosition.getX() + 0.5, startPosition.getY(), startPosition.getZ() + 0.5);
             }
         }
     }
@@ -521,14 +538,18 @@ public enum FightManager {
      * @return Return the defeated team, -1 if an error occurred, 0 if there is
      * no defeated team yet.
      */
-    public int getDefeatedTeam(World world, int fightId) {
-        FightInfo fight = fights.get(world).get(fightId);
+    public int getDefeatedTeam(final World world, final int fightId) {
+        final FightInfo fight = getFightInfo(world, fightId);
+        if (fight == null) {
+            return -1;
+        }
 
-        for (int teamId = 1; teamId <= 2; teamId++) {
-            List<EntityLivingBase> team = fight.getFightersByTeam().get(teamId - 1);
+        final List<List<EntityLivingBase>> fighters = fight.getFightersByTeam();
+        for (int teamId = 0; teamId < fighters.size(); teamId++) {
+            final List<EntityLivingBase> team = fighters.get(teamId);
 
             boolean living = false;
-            for (EntityLivingBase entity : team) {
+            for (final EntityLivingBase entity : team) {
                 if (!entity.isEntityAlive()) {
                     continue;
                 }
@@ -537,7 +558,7 @@ public enum FightManager {
             }
 
             if (!living) {
-                return teamId;
+                return teamId + 1;
             }
         }
 
@@ -550,20 +571,19 @@ public enum FightManager {
      * @param world   World of the fight.
      * @param fightId Identifier of the fight.
      */
-    public void stopFight(World world, int fightId) {
-        Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
+    public void stopFight(final World world, final int fightId) {
+        final Map<Integer, FightInfo> fightsOfWorld = getFightsOfWorld(world);
         if (fightsOfWorld == null) {
-            WLog.warning("Trying to stop a fight that does not exist (wrong world)");
             return;
         }
 
-        FightInfo fight = fightsOfWorld.remove(fightId);
+        final FightInfo fight = fightsOfWorld.remove(fightId);
         if (fight == null) {
             WLog.warning("Trying to stop a fight that does not exist (wrong id)");
             return;
         }
 
-        terminateFight(fightId, world, fight.getFightersByTeam());
+        terminateFight(world, fightId, fight.getFightersByTeam());
         destroyFightMap(world, fight.getFightBlocks());
         removeFightersFromFight(fight.getFightersByTeam());
     }
@@ -572,8 +592,8 @@ public enum FightManager {
      * Stop all the fight of the world.
      */
     public void stopFights() {
-        for (World world : fights.keySet()) {
-            for (int fightId : fights.get(world).keySet()) {
+        for (final World world : _fights.keySet()) {
+            for (final int fightId : getFightsOfWorld(world).keySet()) {
                 stopFight(world, fightId);
             }
         }
@@ -582,15 +602,12 @@ public enum FightManager {
     /**
      * Inform fighters of their entering in a fight.
      *
-     * @param fighters The fighters list.
-     * @param fightId  Identifier of the fight.
+     * @param fightersByTeam The fighters list.
+     * @param fightId        Identifier of the fight.
      */
-    public void addFightersToFight(List<List<EntityLivingBase>> fighters, int fightId) {
-        for (int teamId = 0; teamId < fighters.size(); teamId++) {
-            Iterator<EntityLivingBase> entities = fighters.get(teamId).iterator();
-            while (entities.hasNext()) {
-                EntityLivingBase entity = entities.next();
-
+    public void addFightersToFight(final List<List<EntityLivingBase>> fightersByTeam, final int fightId) {
+        for (int teamId = 0; teamId < fightersByTeam.size(); teamId++) {
+            for (final EntityLivingBase entity : fightersByTeam.get(teamId)) {
                 FightUtil.setProperties(entity, fightId, teamId);
             }
         }
@@ -601,9 +618,9 @@ public enum FightManager {
      *
      * @param fightersByTeam Fighters list.
      */
-    public void removeFightersFromFight(List<List<EntityLivingBase>> fightersByTeam) {
-        for (List<EntityLivingBase> team : fightersByTeam) {
-            for (EntityLivingBase fighter : team) {
+    public void removeFightersFromFight(final List<List<EntityLivingBase>> fightersByTeam) {
+        for (final List<EntityLivingBase> team : fightersByTeam) {
+            for (final EntityLivingBase fighter : team) {
                 FightUtil.resetProperties(fighter);
                 FightUtil.setStartPosition(fighter, null);
                 FightUtil.resetDisplayName(fighter);
@@ -611,21 +628,21 @@ public enum FightManager {
         }
     }
 
-    public void updateFights(int tickCounter) {
-        for (World world : fights.keySet()) {
+    public void updateFights(final int tickCounter) {
+        for (final World world : _fights.keySet()) {
             if (world.isRemote) {
                 continue;
             }
 
-            for (int fightId : fights.get(world).keySet()) {
+            for (final int fightId : getFightsOfWorld(world).keySet()) {
                 updateFight(world, fightId, tickCounter);
             }
         }
     }
 
-    protected void updateFight(World world, int fightId, int tickCounter) {
-        FightInfo fightInfo = fights.get(world).get(fightId);
-        if (!fightInfo.tick()) {
+    protected void updateFight(final World world, final int fightId, final int tickCounter) {
+        final FightInfo fightInfo = getFightInfo(world, fightId);
+        if (fightInfo == null || !fightInfo.tick()) {
             return;
         }
 
@@ -647,7 +664,7 @@ public enum FightManager {
             case FIGHT:
                 resetFighterCharacteristics(fightInfo.fightersByTeam, fightInfo.getCurrentFighter());
 
-                EntityLivingBase nextFighter = getNextAvailableFighter(fightInfo);
+                final EntityLivingBase nextFighter = getNextAvailableFighter(fightInfo);
                 if (nextFighter == null) {
                     WLog.warning("Can't find a living fighter for the next turn");
                     stopFight(fightInfo.getCurrentFighter().worldObj, FightUtil.getFightId(fightInfo.getCurrentFighter()));
@@ -668,16 +685,9 @@ public enum FightManager {
         }
     }
 
-    public void changeFightStage(World world, int fightId, FightStage stage) {
-        Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
-        if (fightsOfWorld == null) {
-            WLog.warning("Trying update the stage of a fight that does not exist (wrong world)");
-            return;
-        }
-
-        FightInfo fight = fightsOfWorld.get(fightId);
+    public void changeFightStage(final World world, final int fightId, final FightStage stage) {
+        final FightInfo fight = getFightInfo(world, fightId);
         if (fight == null) {
-            WLog.warning("Trying to update the stage of a fight that does not exist (wrong id)");
             return;
         }
 
@@ -694,14 +704,14 @@ public enum FightManager {
         fight.setStage(stage);
     }
 
-    protected void updateFightStage(World world, int fightId, FightStage stage) {
+    protected void updateFightStage(final World world, final int fightId, final FightStage stage) {
         MinecraftForge.EVENT_BUS.post(new FightEvent.FightChangeStageEvent(world, fightId, stage));
 
-        List<List<EntityLivingBase>> fighters = fights.get(world).get(fightId).getFightersByTeam();
+        final List<List<EntityLivingBase>> fighters = getFighters(world, fightId);
         for (int teamId = 0; teamId < 2; teamId++) {
-            List<EntityLivingBase> team = fighters.get(teamId);
+            final List<EntityLivingBase> team = fighters.get(teamId);
 
-            for (EntityLivingBase entity : team) {
+            for (final EntityLivingBase entity : team) {
                 if (entity instanceof EntityPlayerMP) {
                     Wakcraft.packetPipeline.sendTo(new PacketFightChangeStage(fightId, stage), (EntityPlayerMP) entity);
                 }
@@ -709,32 +719,18 @@ public enum FightManager {
         }
     }
 
-    public FightStage getFightStage(World world, int fightId) {
-        Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
-        if (fightsOfWorld == null) {
-            WLog.warning("Trying to get the stage of a fight that does not exist (wrong world)");
-            return FightStage.UNKNOWN;
-        }
-
-        FightInfo fight = fightsOfWorld.get(fightId);
+    public FightStage getFightStage(final World world, final int fightId) {
+        final FightInfo fight = getFightInfo(world, fightId);
         if (fight == null) {
-            WLog.warning("Trying to get the stage of a fight that does not exist (wrong id)");
             return FightStage.UNKNOWN;
         }
 
         return fight.getStage();
     }
 
-    public EntityLivingBase getCurrentFighter(World world, int fightId) {
-        Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
-        if (fightsOfWorld == null) {
-            WLog.warning("Trying to get the current fighter of a fight that does not exist (wrong world)");
-            return null;
-        }
-
-        FightInfo fight = fightsOfWorld.get(fightId);
+    public EntityLivingBase getCurrentFighter(final World world, final int fightId) {
+        final FightInfo fight = getFightInfo(world, fightId);
         if (fight == null) {
-            WLog.warning("Trying to get the current fighter of a fight that does not exist (wrong id)");
             return null;
         }
 
@@ -746,16 +742,9 @@ public enum FightManager {
         return fight.getCurrentFighter();
     }
 
-    public void setCurrentFighter(World world, int fightId, EntityLivingBase fighter) {
-        Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
-        if (fightsOfWorld == null) {
-            WLog.warning("Trying to set the current fighter of a fight that does not exist (wrong world)");
-            return;
-        }
-
-        FightInfo fight = fightsOfWorld.get(fightId);
+    public void setCurrentFighter(final World world, final int fightId, final EntityLivingBase fighter) {
+        final FightInfo fight = getFightInfo(world, fightId);
         if (fight == null) {
-            WLog.warning("Trying to set the current fighter of a fight that does not exist (wrong id)");
             return;
         }
 
@@ -768,10 +757,10 @@ public enum FightManager {
         fight.setCurrentFighter(fighter);
     }
 
-    public void selectPosition(EntityLivingBase entity, @Nullable BlockPos position) {
-        int teamId = FightUtil.getTeam(entity);
-        int fightId = FightUtil.getFightId(entity);
-        List<List<EntityLivingBase>> fightersByTeam = fights.get(entity.worldObj).get(fightId).getFightersByTeam();
+    public void selectPosition(final EntityLivingBase entity, @Nullable final BlockPos position) {
+        final int teamId = FightUtil.getTeam(entity);
+        final int fightId = FightUtil.getFightId(entity);
+        final List<List<EntityLivingBase>> fightersByTeam = getFighters(entity.worldObj, fightId);
 
         if (position != null && !isStartPositionAvailable(entity.worldObj, fightId, teamId, fightersByTeam.get(teamId), position)) {
             return;
@@ -782,9 +771,9 @@ public enum FightManager {
         } else {
             FightUtil.setStartPosition(entity, position);
 
-            IMessage packet = new PacketFightSelectPosition(fightId, entity, position);
-            for (List<EntityLivingBase> team : fightersByTeam) {
-                for (EntityLivingBase fighter : team) {
+            final IMessage packet = new PacketFightSelectPosition(fightId, entity, position);
+            for (final List<EntityLivingBase> team : fightersByTeam) {
+                for (final EntityLivingBase fighter : team) {
                     if (fighter instanceof EntityPlayerMP) {
                         Wakcraft.packetPipeline.sendTo(packet, (EntityPlayerMP) fighter);
                     }
@@ -793,15 +782,15 @@ public enum FightManager {
         }
     }
 
-    protected boolean isStartPositionAvailable(World world, int fightId, int teamId, List<EntityLivingBase> fighters, BlockPos position) {
+    protected boolean isStartPositionAvailable(final World world, final int fightId, final int teamId, final List<EntityLivingBase> fighters, final BlockPos position) {
         // Not a valid start position
-        List<List<FightBlockCoordinates>> startPositions = getSartPositions(world, fightId);
+        final List<List<FightBlockCoordinates>> startPositions = getStartPositions(world, fightId);
         if (startPositions == null || !startPositions.get(teamId).contains(position)) {
             return false;
         }
 
         // Already reserved position
-        for (EntityLivingBase fighter : fighters) {
+        for (final EntityLivingBase fighter : fighters) {
             if (position.equals(FightUtil.getStartPosition(fighter))) {
                 return false;
             }
@@ -810,10 +799,10 @@ public enum FightManager {
         return true;
     }
 
-    protected EntityLivingBase getNextAvailableFighter(FightInfo fightInfo) {
-        int nbFighter = fightInfo.getFightersCount();
+    protected EntityLivingBase getNextAvailableFighter(final FightInfo fightInfo) {
+        final int nbFighter = fightInfo.getFightersCount();
         for (int i = 1; i <= nbFighter; i++) {
-            EntityLivingBase fighter = fightInfo.getNextFighter(i);
+            final EntityLivingBase fighter = fightInfo.getNextFighter(i);
             if (!fighter.isEntityAlive()) {
                 continue;
             }
@@ -824,21 +813,21 @@ public enum FightManager {
         return null;
     }
 
-    protected void initFightersCharacteristics(List<List<EntityLivingBase>> fightersByTeam) {
-        for (List<EntityLivingBase> team : fightersByTeam) {
-            for (EntityLivingBase fighter : team) {
+    protected void initFightersCharacteristics(final List<List<EntityLivingBase>> fightersByTeam) {
+        for (final List<EntityLivingBase> team : fightersByTeam) {
+            for (final EntityLivingBase fighter : team) {
                 initFighterCharacteristics(fightersByTeam, fighter);
             }
         }
     }
 
-    protected void initFighterCharacteristics(List<List<EntityLivingBase>> fightersByTeam, EntityLivingBase currentFighter) {
-        for (Characteristic characteristic : Characteristic.values()) {
+    protected void initFighterCharacteristics(final List<List<EntityLivingBase>> fightersByTeam, final EntityLivingBase currentFighter) {
+        for (final Characteristic characteristic : Characteristic.values()) {
             FightUtil.resetFightCharacteristic(currentFighter, characteristic);
         }
 
-        for (List<EntityLivingBase> team : fightersByTeam) {
-            for (EntityLivingBase fighter : team) {
+        for (final List<EntityLivingBase> team : fightersByTeam) {
+            for (final EntityLivingBase fighter : team) {
                 if (fighter instanceof EntityPlayerMP) {
                     FightUtil.sendFightCharacteristicToClient((EntityPlayerMP) fighter, currentFighter);
                 }
@@ -846,12 +835,12 @@ public enum FightManager {
         }
     }
 
-    protected void resetFighterCharacteristics(List<List<EntityLivingBase>> fightersByTeam, EntityLivingBase currentFighter) {
+    protected void resetFighterCharacteristics(final List<List<EntityLivingBase>> fightersByTeam, final EntityLivingBase currentFighter) {
         FightUtil.resetFightCharacteristic(currentFighter, Characteristic.ACTION);
         FightUtil.resetFightCharacteristic(currentFighter, Characteristic.MOVEMENT);
 
-        for (List<EntityLivingBase> team : fightersByTeam) {
-            for (EntityLivingBase fighter : team) {
+        for (final List<EntityLivingBase> team : fightersByTeam) {
+            for (final EntityLivingBase fighter : team) {
                 if (fighter instanceof EntityPlayerMP) {
                     FightUtil.sendFightCharacteristicToClient((EntityPlayerMP) fighter, currentFighter);
                 }
@@ -859,28 +848,28 @@ public enum FightManager {
         }
     }
 
-    protected void initFightersDisplayName(List<List<EntityLivingBase>> fightersByTeam) {
-        for (List<EntityLivingBase> team : fightersByTeam) {
-            for (EntityLivingBase fighter : team) {
+    protected void initFightersDisplayName(final List<List<EntityLivingBase>> fightersByTeam) {
+        for (final List<EntityLivingBase> team : fightersByTeam) {
+            for (final EntityLivingBase fighter : team) {
                 FightUtil.updateDisplayName(fighter);
             }
         }
     }
 
-    protected void initFightersCurrentPosition(List<List<EntityLivingBase>> fightersByTeam) {
-        for (List<EntityLivingBase> team : fightersByTeam) {
-            for (EntityLivingBase fighter : team) {
+    protected void initFightersCurrentPosition(final List<List<EntityLivingBase>> fightersByTeam) {
+        for (final List<EntityLivingBase> team : fightersByTeam) {
+            for (final EntityLivingBase fighter : team) {
                 FightUtil.setCurrentPosition(fighter, FightUtil.getStartPosition(fighter));
             }
         }
     }
 
-    public void startTurn(World world, int fightId, EntityLivingBase fighter) {
+    public void startTurn(final World world, final int fightId, final EntityLivingBase fighter) {
         MinecraftForge.EVENT_BUS.post(new FightEvent.FightStartTurnEvent(world, fightId, fighter));
 
-        List<List<EntityLivingBase>> fightersByTeam = fights.get(world).get(fightId).getFightersByTeam();
-        for (List<EntityLivingBase> team : fightersByTeam) {
-            for (EntityLivingBase entity : team) {
+        final List<List<EntityLivingBase>> fightersByTeam = getFightsOfWorld(world).get(fightId).getFightersByTeam();
+        for (final List<EntityLivingBase> team : fightersByTeam) {
+            for (final EntityLivingBase entity : team) {
                 if (entity instanceof EntityPlayerMP) {
                     Wakcraft.packetPipeline.sendTo(new PacketFightStartTurn(fightId, fighter), (EntityPlayerMP) entity);
                 }
@@ -920,22 +909,19 @@ public enum FightManager {
         }
     }
 
-    public boolean isThereFighterInAABB(World world, int fightId, AxisAlignedBB boundingBox) {
-        Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
-        if (fightsOfWorld == null) {
-            WLog.warning("Trying to get the fighters of a fight that does not exist (wrong world)");
-            return true;
-        }
-
-        FightInfo fight = fightsOfWorld.get(fightId);
+    public boolean isThereFighterInAABB(final World world, final int fightId, final Entity currentFighter, final AxisAlignedBB boundingBox) {
+        final FightInfo fight = getFightInfo(world, fightId);
         if (fight == null) {
-            WLog.warning("Trying to get the fighters of a fight that does not exist (wrong id)");
             return true;
         }
 
-        for (List<EntityLivingBase> team : fight.fightersByTeam) {
-            for (EntityLivingBase fighter : team) {
-                BlockPos position = FightUtil.getCurrentPosition(fighter);
+        for (final List<EntityLivingBase> team : fight.fightersByTeam) {
+            for (final EntityLivingBase fighter : team) {
+                if (fighter == currentFighter) {
+                    continue;
+                }
+
+                final BlockPos position = FightUtil.getCurrentPosition(fighter);
                 if (position.getX() + 1 > boundingBox.minX && position.getX() < boundingBox.maxX && position.getY() + 1 > boundingBox.minY && position.getY() < boundingBox.maxY && position.getZ() + 1 > boundingBox.minZ && position.getZ() < boundingBox.maxZ) {
                     return true;
                 }
@@ -952,16 +938,9 @@ public enum FightManager {
      * @param fightId The id of the fight.
      * @return The fighters list, null if the fight is not found.
      */
-    public List<List<EntityLivingBase>> getFighters(World world, int fightId) {
-        Map<Integer, FightInfo> fightsOfWorld = fights.get(world);
-        if (fightsOfWorld == null) {
-            WLog.warning("Trying to get the fighters of a fight that does not exist (wrong world)");
-            return null;
-        }
-
-        FightInfo fight = fightsOfWorld.get(fightId);
+    public List<List<EntityLivingBase>> getFighters(final World world, final int fightId) {
+        final FightInfo fight = getFightInfo(world, fightId);
         if (fight == null) {
-            WLog.warning("Trying to get the fighters of a fight that does not exist (wrong id)");
             return null;
         }
 
