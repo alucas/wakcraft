@@ -85,9 +85,6 @@ public abstract class EntityWCreature extends EntityCreature implements IWMob, I
 //        for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
 //            System.out.println(element);
 //        }
-
-
-        System.out.println("Set health " + health);
         super.setHealth(health);
     }
 
