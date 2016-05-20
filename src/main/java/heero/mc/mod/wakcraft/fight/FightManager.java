@@ -29,9 +29,11 @@ import java.util.*;
 public enum FightManager {
     INSTANCE;
 
-    protected static final int offsetX[] = new int[]{-1, 1, 0, 0};
-    protected static final int offsetZ[] = new int[]{0, 0, -1, 1};
-    protected Map<World, Map<Integer, FightInfo>> _fights = new HashMap<World, Map<Integer, FightInfo>>();
+    protected static final int NBR_START_BLOCK = 6;
+    protected static final int OFFSET_X[] = new int[]{-1, 1, 0, 0};
+    protected static final int OFFSET_Z[] = new int[]{0, 0, -1, 1};
+
+    protected final Map<World, Map<Integer, FightInfo>> _fights = new HashMap<>();
 
     /**
      * Initialize the fight manager.
@@ -75,11 +77,10 @@ public enum FightManager {
     /**
      * Create a fight (Client side)
      *
-     * @param world
-     * @param fightId
-     * @param fighters
-     * @param startBlocks
-     * @return
+     * @param world       The world where the fight is
+     * @param fightId     The fight id
+     * @param fighters    The fighters, by team
+     * @param startBlocks The start positions, by team
      */
     public void startClientFight(final World world, final int fightId, final List<List<EntityLivingBase>> fighters, final List<List<FightBlockCoordinates>> startBlocks) {
         initializeFight(fightId, world, fighters, startBlocks);
@@ -98,9 +99,9 @@ public enum FightManager {
     /**
      * Create a fight (Server side)
      *
-     * @param world
-     * @param player
-     * @param target
+     * @param world  The world where the fight is
+     * @param player The player who launched the fight
+     * @param target The attacked target
      * @return False if the creation failed
      */
     public boolean startServerFight(final World world, final EntityPlayerMP player, final EntityLivingBase target) {
@@ -186,7 +187,7 @@ public enum FightManager {
         // |X
         // X?
         if (!world.getBlockState(new BlockPos(centerPos.getX() + offsetX, centerPos.getY() + offsetY + 1, centerPos.getZ() + offsetZ)).getBlock().equals(Blocks.air)) {
-            // too hight
+            // too high
             //
             // ??
             // oX
@@ -288,8 +289,8 @@ public enum FightManager {
 
         offsetY += direction;
         for (int i = 0; i < 4; i++) {
-            if (!visited.get(hashCoords(offsetX + FightManager.offsetX[i], offsetY, offsetZ + FightManager.offsetZ[i]))) {
-                getMapAtPos_rec(world, centerPos, offsetX + FightManager.offsetX[i], offsetY, offsetZ + FightManager.offsetZ[i], fightBlocks, visited, radius2);
+            if (!visited.get(hashCoords(offsetX + FightManager.OFFSET_X[i], offsetY, offsetZ + FightManager.OFFSET_Z[i]))) {
+                getMapAtPos_rec(world, centerPos, offsetX + FightManager.OFFSET_X[i], offsetY, offsetZ + FightManager.OFFSET_Z[i], fightBlocks, visited, radius2);
             }
         }
     }
@@ -302,7 +303,7 @@ public enum FightManager {
      * Select the starting position among the fight blocks.
      *
      * @param fightBlocks Fight blocks.
-     * @return
+     * @return The start positions, by team
      */
     protected List<List<FightBlockCoordinates>> getStartPositions(final Set<FightBlockCoordinates> fightBlocks) {
         final List<FightBlockCoordinates> fightBlocksList = new ArrayList<>(fightBlocks);
@@ -313,9 +314,9 @@ public enum FightManager {
 
         final Random random = new Random();
 
-        final int maxStartBlock = 6;
         for (final List<FightBlockCoordinates> startBlocksOfTeam : startBlocks) {
-            while (startBlocksOfTeam.size() < maxStartBlock) {
+            LOOP:
+            while (startBlocksOfTeam.size() < NBR_START_BLOCK) {
                 final int index = random.nextInt(fightBlocks.size());
                 final FightBlockCoordinates coords = fightBlocksList.get(index);
 
@@ -325,7 +326,7 @@ public enum FightManager {
 
                 for (final List<FightBlockCoordinates> startBlocksOfTeamTmp : startBlocks) {
                     if (startBlocksOfTeamTmp.contains(coords)) {
-                        continue;
+                        continue LOOP;
                     }
                 }
 
